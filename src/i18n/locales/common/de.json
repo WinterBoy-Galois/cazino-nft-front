@@ -1,0 +1,17 @@
+{
+  "games": {
+    "dices": "Dice",
+    "clam": "Clams",
+    "mines": "Mines",
+    "goal": "Goals"
+  },
+  "play": "SPIEL",
+  "languages": {
+    "de": {
+      "label": "Deutsch"
+    },
+    "en": {
+      "label": "English"
+    }
+  }
+}

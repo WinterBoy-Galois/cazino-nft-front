@@ -1,0 +1,32 @@
+{
+  "links": {
+    "games": {
+      "headline": "Spiele"
+    },
+    "about": {
+      "headline": "Über",
+      "howToPlay": "Spielanleitung",
+      "bonuses": "Prämien",
+      "affiliates": "Partnerprogramm",
+      "fairness": "Fairness",
+      "news": "Neuigkeiten"
+    },
+    "support": {
+      "headline": "Hilfe",
+      "contact": "Kontakt",
+      "faq": "F.A.Q."
+    },
+    "legal": {
+      "headline": "Rechtliches",
+      "privacyPolicy": "Datenschutz",
+      "termsOfUse": "AGBs"
+    },
+    "social": {
+      "twitter": "Twitter",
+      "facebook": "Facebook",
+      "telegram": "Telegram",
+      "bitcoinTalk": "BitcoinTalk",
+      "instagram": "Instagram"
+    }
+  }
+}

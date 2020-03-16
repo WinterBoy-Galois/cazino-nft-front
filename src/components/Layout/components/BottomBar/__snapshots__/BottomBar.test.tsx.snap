@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BottomBar should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container-fluid h-100"
+      >
+        <div
+          class="row h-100"
+        >
+          <div
+            class="col-12 container"
+          >
+            <div>
+              <div
+                class="container"
+              >
+                <div
+                  class="menu"
+                >
+                  Burger Menu
+                </div>
+                <div
+                  class="item"
+                >
+                  <svg
+                    class="item__icon"
+                    viewBox="0 0 34.45 34.81"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      data-name="Layer 2"
+                      id="Layer_2"
+                    >
+                      <g
+                        data-name="Слой 5"
+                        id="Слой_5"
+                      >
+                        <path
+                          d="M34.43 16.07l-.49-3.34a1.77 1.77 0 00-1.76-1.53h-10v6.9h10.5a1.78 1.78 0 001.75-2.03zM.5 12.73L0 16.07a1.78 1.78 0 001.76 2h10.5V11.2h-10A1.78 1.78 0 00.5 12.73zM31.94 33V19.47h-9.77v15.34h7.9A1.87 1.87 0 0031.94 33zM2.51 19.47V33a1.86 1.86 0 001.86 1.86h7.91V19.47z"
+                        />
+                        <rect
+                          height="23.61"
+                          rx="1.29"
+                          width="7.19"
+                          x="13.63"
+                          y="11.2"
+                        />
+                        <path
+                          d="M26.47 5.66c-1.75-2.51-5.26.26-7 2.19a4 4 0 00-.67-.49C22.28 3.23 29.05-3.51 33 2.2c2.43 3.49-.38 7.4-11.67 8.11a3.76 3.76 0 00-.1-.66c4.77-.51 6.38-2.35 5.24-3.99z"
+                        />
+                        <path
+                          d="M13 10.31a4.19 4.19 0 018.34 0z"
+                        />
+                        <path
+                          d="M8 5.66c1.75-2.51 5.26.26 7 2.19a4 4 0 01.67-.49C12.16 3.23 5.38-3.51 1.4 2.2c-2.4 3.49.38 7.4 11.67 8.11a3.76 3.76 0 01.1-.66C8.45 9.14 6.83 7.3 8 5.66z"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                  <div
+                    class="item__badge"
+                  >
+                    <div
+                      class="badge"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="balance"
+            >
+              <div
+                class="wrapper"
+              >
+                <div
+                  class="container"
+                >
+                  <div
+                    class="border"
+                  />
+                  <div
+                    class="value"
+                  >
+                    <svg
+                      class="icon"
+                      viewBox="0 0 64 64"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g
+                        transform="translate(0.00630876,-0.00301984)"
+                      >
+                        <path
+                          d="m63.033,39.744c-4.274,17.143-21.637,27.576-38.782,23.301-17.138-4.274-27.571-21.638-23.295-38.78,4.272-17.145,21.635-27.579,38.775-23.305,17.144,4.274,27.576,21.64,23.302,38.784z"
+                        />
+                        <path
+                          class="icon__inner"
+                          d="m46.103,27.444c0.637-4.258-2.605-6.547-7.038-8.074l1.438-5.768-3.511-0.875-1.4,5.616c-0.923-0.23-1.871-0.447-2.813-0.662l1.41-5.653-3.509-0.875-1.439,5.766c-0.764-0.174-1.514-0.346-2.242-0.527l0.004-0.018-4.842-1.209-0.934,3.75s2.605,0.597,2.55,0.634c1.422,0.355,1.679,1.296,1.636,2.042l-1.638,6.571c0.098,0.025,0.225,0.061,0.365,0.117-0.117-0.029-0.242-0.061-0.371-0.092l-2.296,9.205c-0.174,0.432-0.615,1.08-1.609,0.834,0.035,0.051-2.552-0.637-2.552-0.637l-1.743,4.019,4.569,1.139c0.85,0.213,1.683,0.436,2.503,0.646l-1.453,5.834,3.507,0.875,1.439-5.772c0.958,0.26,1.888,0.5,2.798,0.726l-1.434,5.745,3.511,0.875,1.453-5.823c5.987,1.133,10.489,0.676,12.384-4.739,1.527-4.36-0.076-6.875-3.226-8.515,2.294-0.529,4.022-2.038,4.483-5.155zm-8.022,11.249c-1.085,4.36-8.426,2.003-10.806,1.412l1.928-7.729c2.38,0.594,10.012,1.77,8.878,6.317zm1.086-11.312c-0.99,3.966-7.1,1.951-9.082,1.457l1.748-7.01c1.982,0.494,8.365,1.416,7.334,5.553z"
+                        />
+                      </g>
+                    </svg>
+                    <span>
+                      0.00000000
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container-fluid h-100"
+    >
+      <div
+        class="row h-100"
+      >
+        <div
+          class="col-12 container"
+        >
+          <div>
+            <div
+              class="container"
+            >
+              <div
+                class="menu"
+              >
+                Burger Menu
+              </div>
+              <div
+                class="item"
+              >
+                <svg
+                  class="item__icon"
+                  viewBox="0 0 34.45 34.81"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    data-name="Layer 2"
+                    id="Layer_2"
+                  >
+                    <g
+                      data-name="Слой 5"
+                      id="Слой_5"
+                    >
+                      <path
+                        d="M34.43 16.07l-.49-3.34a1.77 1.77 0 00-1.76-1.53h-10v6.9h10.5a1.78 1.78 0 001.75-2.03zM.5 12.73L0 16.07a1.78 1.78 0 001.76 2h10.5V11.2h-10A1.78 1.78 0 00.5 12.73zM31.94 33V19.47h-9.77v15.34h7.9A1.87 1.87 0 0031.94 33zM2.51 19.47V33a1.86 1.86 0 001.86 1.86h7.91V19.47z"
+                      />
+                      <rect
+                        height="23.61"
+                        rx="1.29"
+                        width="7.19"
+                        x="13.63"
+                        y="11.2"
+                      />
+                      <path
+                        d="M26.47 5.66c-1.75-2.51-5.26.26-7 2.19a4 4 0 00-.67-.49C22.28 3.23 29.05-3.51 33 2.2c2.43 3.49-.38 7.4-11.67 8.11a3.76 3.76 0 00-.1-.66c4.77-.51 6.38-2.35 5.24-3.99z"
+                      />
+                      <path
+                        d="M13 10.31a4.19 4.19 0 018.34 0z"
+                      />
+                      <path
+                        d="M8 5.66c1.75-2.51 5.26.26 7 2.19a4 4 0 01.67-.49C12.16 3.23 5.38-3.51 1.4 2.2c-2.4 3.49.38 7.4 11.67 8.11a3.76 3.76 0 01.1-.66C8.45 9.14 6.83 7.3 8 5.66z"
+                      />
+                    </g>
+                  </g>
+                </svg>
+                <div
+                  class="item__badge"
+                >
+                  <div
+                    class="badge"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="balance"
+          >
+            <div
+              class="wrapper"
+            >
+              <div
+                class="container"
+              >
+                <div
+                  class="border"
+                />
+                <div
+                  class="value"
+                >
+                  <svg
+                    class="icon"
+                    viewBox="0 0 64 64"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      transform="translate(0.00630876,-0.00301984)"
+                    >
+                      <path
+                        d="m63.033,39.744c-4.274,17.143-21.637,27.576-38.782,23.301-17.138-4.274-27.571-21.638-23.295-38.78,4.272-17.145,21.635-27.579,38.775-23.305,17.144,4.274,27.576,21.64,23.302,38.784z"
+                      />
+                      <path
+                        class="icon__inner"
+                        d="m46.103,27.444c0.637-4.258-2.605-6.547-7.038-8.074l1.438-5.768-3.511-0.875-1.4,5.616c-0.923-0.23-1.871-0.447-2.813-0.662l1.41-5.653-3.509-0.875-1.439,5.766c-0.764-0.174-1.514-0.346-2.242-0.527l0.004-0.018-4.842-1.209-0.934,3.75s2.605,0.597,2.55,0.634c1.422,0.355,1.679,1.296,1.636,2.042l-1.638,6.571c0.098,0.025,0.225,0.061,0.365,0.117-0.117-0.029-0.242-0.061-0.371-0.092l-2.296,9.205c-0.174,0.432-0.615,1.08-1.609,0.834,0.035,0.051-2.552-0.637-2.552-0.637l-1.743,4.019,4.569,1.139c0.85,0.213,1.683,0.436,2.503,0.646l-1.453,5.834,3.507,0.875,1.439-5.772c0.958,0.26,1.888,0.5,2.798,0.726l-1.434,5.745,3.511,0.875,1.453-5.823c5.987,1.133,10.489,0.676,12.384-4.739,1.527-4.36-0.076-6.875-3.226-8.515,2.294-0.529,4.022-2.038,4.483-5.155zm-8.022,11.249c-1.085,4.36-8.426,2.003-10.806,1.412l1.928-7.729c2.38,0.594,10.012,1.77,8.878,6.317zm1.086-11.312c-0.99,3.966-7.1,1.951-9.082,1.457l1.748-7.01c1.982,0.494,8.365,1.416,7.334,5.553z"
+                      />
+                    </g>
+                  </svg>
+                  <span>
+                    0.00000000
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

@@ -1,0 +1,13 @@
+@import '../../styles/shared.scss';
+
+.spacing--right {
+  @include media-breakpoint-up(xl) {
+    padding-right: 3rem;
+  }
+}
+
+.spacing--left {
+  @include media-breakpoint-up(xl) {
+    padding-left: 3rem;
+  }
+}

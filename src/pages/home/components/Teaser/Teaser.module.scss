@@ -1,0 +1,52 @@
+@import '../../../../styles/shared.scss';
+
+.container {
+  margin-top: 0.5rem;
+  font-size: 18px;
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 2rem;
+    font-size: 30px;
+  }
+}
+
+.teaser {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 4rem;
+    align-items: flex-start;
+  }
+
+  &:first-of-type {
+    @include media-breakpoint-up(xl) {
+      padding-right: 3rem;
+    }
+  }
+
+  &:last-of-type {
+    @include media-breakpoint-up(xl) {
+      padding-left: 3rem;
+    }
+  }
+}
+
+.highlight {
+  font-weight: 600;
+  color: $orange;
+}
+
+.dot {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  background-color: $orange;
+  flex-shrink: 0;
+  margin: 0 1rem;
+
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}

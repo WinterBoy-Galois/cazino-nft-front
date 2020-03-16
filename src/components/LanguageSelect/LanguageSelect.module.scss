@@ -1,0 +1,61 @@
+@import '../../styles/shared';
+
+.container {
+  display: inline-block;
+}
+
+.menu {
+  background-color: $blue;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  position: absolute;
+  width: 200px;
+  bottom: 51px;
+  left: -6px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    &__item {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $footer-blue;
+      }
+    }
+  }
+
+  &__arrow {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid $blue;
+    position: absolute;
+    bottom: -15px;
+    left: 10px;
+  }
+
+  &__label {
+    font-size: 14px;
+    margin-left: 1rem;
+  }
+}
+
+.flag {
+  position: relative;
+  display: inline-block;
+
+  &__image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid $orange;
+    cursor: pointer;
+  }
+}

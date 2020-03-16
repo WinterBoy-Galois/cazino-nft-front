@@ -1,0 +1,9 @@
+$body-color: $white;
+$body-bg: $dark-blue;
+
+// stylelint-disable value-keyword-case
+$font-family-sans-serif: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue',
+  Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+// stylelint-enable value-keyword-case
+$font-family-base: $font-family-sans-serif;

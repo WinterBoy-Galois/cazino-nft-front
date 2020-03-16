@@ -1,0 +1,52 @@
+@import '../../styles/shared';
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  background-color: $dark-blue;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+
+  &__top-bar {
+    width: 100%;
+    height: $bar-height;
+    background-color: $blue;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    @include media-breakpoint-up(lg) {
+      height: $bar-height-lg;
+    }
+  }
+
+  &__content {
+    margin: $bar-height 0;
+    padding: 1rem 0 0 0;
+
+    @include media-breakpoint-up(lg) {
+      margin: $bar-height-lg 0;
+    }
+  }
+
+  &__bottom-bar {
+    width: 100%;
+    height: $bar-height;
+    background-color: $blue;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    @include media-breakpoint-up(lg) {
+      height: $bar-height-lg;
+    }
+  }
+}
+
+.live-updates {
+  display: none;
+}

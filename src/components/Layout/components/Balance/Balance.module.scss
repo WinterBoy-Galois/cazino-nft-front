@@ -1,0 +1,74 @@
+@import '../../../../styles/shared';
+
+$border: 4px;
+
+.container {
+  height: $bar-height;
+  position: relative;
+
+  @include media-breakpoint-up(lg) {
+    height: $bar-height-lg;
+  }
+}
+
+.wrapper {
+  margin-top: -$border;
+  height: calc(#{$bar-height} + (#{$border} * 2));
+  width: 190px;
+  overflow: hidden;
+
+  @include media-breakpoint-up(lg) {
+    height: calc(#{$bar-height-lg} + (#{$border} * 2));
+    width: 310px;
+  }
+}
+
+.border {
+  height: calc(#{$bar-height} + (#{$border} * 2));
+  width: 100%;
+  border: $border solid $yellow;
+  border-right: 0;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  margin-top: -$border;
+  background-color: $light-blue;
+
+  @include media-breakpoint-up(lg) {
+    height: calc(#{$bar-height-lg} + (#{$border} * 2));
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+  }
+}
+
+.value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: $border;
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 38px;
+  }
+}
+
+.icon {
+  width: 18px;
+  margin: 0 0.9rem 0 1rem;
+  fill: $bitcoinYellow;
+
+  &__inner {
+    fill: $light-blue;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 31px;
+    margin: 0 1rem 0 1.5rem;
+  }
+}

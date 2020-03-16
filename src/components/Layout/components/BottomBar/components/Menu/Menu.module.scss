@@ -1,0 +1,41 @@
+@import '../../../../../../styles/shared';
+
+.container {
+  display: flex;
+}
+
+.menu {
+  display: none;
+}
+
+.item {
+  width: 40px;
+  padding: 8px 10px 8px 0;
+  cursor: pointer;
+  position: relative;
+
+  @include media-breakpoint-up(lg) {
+    width: 53px;
+    padding: 12px 12px 12px 0;
+  }
+
+  &__icon {
+    width: 100%;
+    fill: $orange;
+  }
+
+  &__badge {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 5px;
+    right: 6px;
+
+    @include media-breakpoint-up(lg) {
+      width: 18px;
+      height: 18px;
+      bottom: 8px;
+      right: 7px;
+    }
+  }
+}

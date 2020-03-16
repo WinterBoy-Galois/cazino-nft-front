@@ -1,0 +1,36 @@
+// @import '../src/index.scss';
+
+// @import '../src/styles/base.scss';
+
+// @import 'font';
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), url('/fonts/Roboto-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('RobotoLight'),
+    url('/fonts/Roboto-Light.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Roboto Bold'), local('RobotoBold'), url('/fonts/Roboto-Bold.ttf') format('truetype');
+  font-display: swap;
+}
+
+@import '../src/styles/variables';
+@import '../src/styles/bootstrap/base';
+@import '../src/styles/helpers';
+
+@import '../src/components/Carousel/Carousel.scss';

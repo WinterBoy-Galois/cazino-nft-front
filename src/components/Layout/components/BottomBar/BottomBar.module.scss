@@ -1,0 +1,13 @@
+@import '../../../../styles/shared.scss';
+
+.container {
+  border-top: 4px solid $light-blue;
+  height: 100%;
+  position: relative;
+}
+
+.balance {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
