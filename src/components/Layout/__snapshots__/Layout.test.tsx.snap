@@ -9,10 +9,10 @@ Object {
         class="wrapper"
       >
         <div
-          class="main"
+          class="main "
         >
           <div
-            class="main__top-bar"
+            class="main__top-bar "
           >
             <div
               class="container-fluid h-100"
@@ -576,7 +576,7 @@ Object {
             </div>
           </div>
           <div
-            class="main__bottom-bar"
+            class="main__bottom-bar "
           >
             <div
               class="container-fluid h-100"
@@ -745,10 +745,10 @@ Object {
       class="wrapper"
     >
       <div
-        class="main"
+        class="main "
       >
         <div
-          class="main__top-bar"
+          class="main__top-bar "
         >
           <div
             class="container-fluid h-100"
@@ -1312,7 +1312,7 @@ Object {
           </div>
         </div>
         <div
-          class="main__bottom-bar"
+          class="main__bottom-bar "
         >
           <div
             class="container-fluid h-100"

@@ -6,12 +6,12 @@
   right: 0;
   width: 100%;
   height: calc(100% - #{$bar-height});
-  background-color: $dark-blue;
+  background-color: #0d253b;
   z-index: 2;
 
   @include media-breakpoint-up(lg) {
-    position: relative;
-    width: 33%;
+    position: fixed;
+    width: $sidebar-width;
     height: 100%;
   }
 }
