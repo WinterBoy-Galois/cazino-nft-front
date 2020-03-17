@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './SideBar.module.scss';
 import { useStateValue } from '../../../../state';
 import { CSSTransition } from 'react-transition-group';
