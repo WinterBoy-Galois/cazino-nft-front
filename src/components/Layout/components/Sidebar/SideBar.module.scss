@@ -3,7 +3,7 @@
 .container {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: calc(100% - #{$bar-height});
   background-color: $dark-blue;
@@ -13,5 +13,18 @@
     position: relative;
     width: 33%;
     height: 100%;
+  }
+}
+
+.slide {
+  transition: all 200ms ease-in-out;
+  right: -100%;
+
+  &--enter {
+    right: 0;
+  }
+
+  &--exit {
+    right: -100%;
   }
 }

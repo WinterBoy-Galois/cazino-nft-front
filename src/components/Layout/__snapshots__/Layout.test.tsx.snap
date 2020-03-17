@@ -646,6 +646,15 @@ Object {
             </div>
           </div>
         </div>
+        <div
+          class="container slide"
+        >
+          Sidebar
+           
+          <button>
+            Open
+          </button>
+        </div>
       </div>
     </div>
   </body>,
@@ -1290,6 +1299,15 @@ Object {
             </div>
           </div>
         </div>
+      </div>
+      <div
+        class="container slide"
+      >
+        Sidebar
+         
+        <button>
+          Open
+        </button>
       </div>
     </div>
   </div>,
