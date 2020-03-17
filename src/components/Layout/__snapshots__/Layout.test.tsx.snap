@@ -21,7 +21,7 @@ Object {
                 class="row h-100"
               >
                 <div
-                  class="col-12 center"
+                  class="col-6 center"
                 >
                   <a
                     href="/"
@@ -66,6 +66,13 @@ Object {
                       </g>
                     </svg>
                   </a>
+                </div>
+                <div
+                  class="col-6 center"
+                >
+                  <button>
+                    Sidebar
+                  </button>
                 </div>
               </div>
             </div>
@@ -639,15 +646,6 @@ Object {
             </div>
           </div>
         </div>
-        <div
-          class="container"
-        >
-          Sidebar
-           
-          <button>
-            Open
-          </button>
-        </div>
       </div>
     </div>
   </body>,
@@ -668,7 +666,7 @@ Object {
               class="row h-100"
             >
               <div
-                class="col-12 center"
+                class="col-6 center"
               >
                 <a
                   href="/"
@@ -713,6 +711,13 @@ Object {
                     </g>
                   </svg>
                 </a>
+              </div>
+              <div
+                class="col-6 center"
+              >
+                <button>
+                  Sidebar
+                </button>
               </div>
             </div>
           </div>
@@ -1285,15 +1290,6 @@ Object {
             </div>
           </div>
         </div>
-      </div>
-      <div
-        class="container"
-      >
-        Sidebar
-         
-        <button>
-          Open
-        </button>
       </div>
     </div>
   </div>,

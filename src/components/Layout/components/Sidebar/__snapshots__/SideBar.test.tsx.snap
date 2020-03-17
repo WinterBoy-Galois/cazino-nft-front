@@ -4,29 +4,9 @@ exports[`SideBar should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div>
-      <div
-        class="container"
-      >
-        Sidebar
-         
-        <button>
-          Open
-        </button>
-      </div>
-    </div>
+    <div />
   </body>,
-  "container": <div>
-    <div
-      class="container"
-    >
-      Sidebar
-       
-      <button>
-        Open
-      </button>
-    </div>
-  </div>,
+  "container": <div />,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],
