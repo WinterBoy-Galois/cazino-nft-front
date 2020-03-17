@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './SideBar.module.scss';
 import { useStateValue } from '../../../../state';
 import { CSSTransition } from 'react-transition-group';
+import SidebarToggle from '../SidebarToggle';
 
 const SideBar: React.SFC = () => {
-  const [{ sidebar }, dispatch] = useStateValue();
+  const [{ sidebar }] = useStateValue();
 
   return (
     <CSSTransition
@@ -18,10 +19,7 @@ const SideBar: React.SFC = () => {
       }}
     >
       <div className={`${styles.container} ${styles.slide}`}>
-        Sidebar{' '}
-        <button onClick={() => dispatch({ type: 'TOGGLE_SIDEBAR' })}>
-          {sidebar.isOpen ? 'Close' : 'Open'}
-        </button>
+        <SidebarToggle />
       </div>
     </CSSTransition>
   );

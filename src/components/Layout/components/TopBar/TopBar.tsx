@@ -1,11 +1,9 @@
 import React from 'react';
 import styles from './TopBar.module.scss';
 import Logo from '../../../icons/Logo';
-import { useStateValue } from '../../../../state';
+import SidebarToggle from '../SidebarToggle';
 
 const TopBar: React.SFC = () => {
-  const [_, dispatch] = useStateValue();
-
   return (
     <div className={`container-fluid h-100`}>
       <div className={`row h-100`}>
@@ -14,8 +12,8 @@ const TopBar: React.SFC = () => {
             <Logo className={styles.logo__size} fillClassName={styles.logo__color} />
           </a>
         </div>
-        <div className={`col-6 ${styles.center}`}>
-          <button onClick={() => dispatch({ type: 'TOGGLE_SIDEBAR' })}>Sidebar</button>
+        <div className={`col-6 ${styles.center} ${styles.right}`}>
+          <SidebarToggle />
         </div>
       </div>
     </div>

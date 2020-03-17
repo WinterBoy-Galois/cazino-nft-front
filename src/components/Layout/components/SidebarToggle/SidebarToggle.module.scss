@@ -1,0 +1,14 @@
+@import '../../../../styles/shared.scss';
+
+.button {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #80a2cc;
+  border: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.icon {
+  width: 10px;
+}
