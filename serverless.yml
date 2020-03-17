@@ -1,0 +1,120 @@
+service:
+  name: cazzzino-webapp
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+  stage: ${opt:stage, 'dev'}
+  stackName: ${self:service.name}-${self:provider.stage}
+  environment:
+    accountId: '#{AWS::AccountId}'
+    region: '#{AWS::Region}'
+    stage: ${self:provider.stage}
+  tags:
+    Application: CaZZZino
+    Name: ${self:service.name}
+
+plugins:
+  - serverless-s3-sync
+
+custom:
+  siteName: ${self:provider.stage}.cazzzino
+  aliasHostedZoneId: Z2FDTNDATAQYW2
+  s3Sync:
+    - bucketName: ${self:custom.siteName}
+      localDir: build
+
+resources:
+  Resources:
+    WebAppS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: Private
+        BucketName: ${self:custom.siteName}
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - Authorization
+                - Content-Length
+              AllowedMethods:
+                - GET
+              AllowedOrigins:
+                - '*'
+              MaxAge: 3000
+    WebAppBucketOriginAccessIdentity:
+      Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+      Properties:
+        CloudFrontOriginAccessIdentityConfig:
+          Comment: 'CloudFrontOriginAccessIdentity for ${self:provider.stage}-${self:service}'
+    WebAppS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: ${self:custom.siteName}
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Action:
+                - s3:GetObject
+              Resource:
+                - 'arn:aws:s3:::${self:custom.siteName}/*'
+              Principal:
+                AWS:
+                  {
+                    'Fn::Join':
+                      [
+                        ' ',
+                        [
+                          'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity',
+                          { Ref: WebAppBucketOriginAccessIdentity },
+                        ],
+                      ],
+                  }
+    WebAppCloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Comment: CaZZZino App (${self:custom.siteName}) CloudFront Distribution
+          DefaultRootObject: index.html
+          CustomErrorResponses:
+            - ErrorCode: 404
+              ResponseCode: 200
+              ResponsePagePath: /index.html
+          DefaultCacheBehavior:
+            TargetOriginId: ${self:custom.siteName}-S3
+            ViewerProtocolPolicy: 'redirect-to-https'
+            DefaultTTL: 30
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: none
+            Compress: True
+            LambdaFunctionAssociations:
+              - EventType: viewer-request
+                LambdaFunctionARN: 'arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onViewerRequest:7'
+          HttpVersion: http2
+          Enabled: true
+          Origins:
+            - Id: ${self:custom.siteName}-S3
+              DomainName: ${self:custom.siteName}.s3.amazonaws.com
+              S3OriginConfig:
+                OriginAccessIdentity:
+                  {
+                    'Fn::Join':
+                      [
+                        '',
+                        [
+                          'origin-access-identity/cloudfront/',
+                          { Ref: WebAppBucketOriginAccessIdentity },
+                        ],
+                      ],
+                  }
+
+  Outputs:
+    WebAppCloudFrontDistributionOutput:
+      Value:
+        'Fn::GetAtt': [WebAppCloudFrontDistribution, DomainName]

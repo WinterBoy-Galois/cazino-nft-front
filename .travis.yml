@@ -1,0 +1,36 @@
+language: node_js
+node_js:
+  - stable
+matrix:
+  include:
+    - if: branch =~ /^(develop)
+      env:
+        - AWS_REGION="eu-central-1"
+        - secure: VpWTBG1642/ibjBWIbzqMdUWGoXtDGG9NX7d8q/2U3gOMQvuyyhZCusnUj2PPw3yumpexrebxnS4pFjylfwaxAVEMcAnKoY6lklHMO//D3b6X2cIDXur+dfDMdeeCMEqHQkzIqGhKwzJ6RVYwmj7vtsttpbUMNUBlMPb5RDtkUx7U+acktNv9JUWs2H1P/JVWdTgPz5YDVpu8oLuxoRxXBfsztcbqJOPP5lheDbDU0tTa/VGVHpg8zu2uk/lAaCC7LY6p80yFlooY306GxwSMAapjlko6PMJVhSKmdV25zBJ3WzJIRcQLdynCV0ranEhfD4fcaj1i7AjRVJ+tQ9necFpF83p5OF5nPklPKCew5pL11Q15axwynHFstHkInBc+QoTtoVZ81fE50MYGtmmI9L6ORTTbBYU6llNUbXsfERuMvjJB9qVxIJ5fz0ihlpSscRFnKxZMG8YNV6YNTyrmmSCbFQicFQf92J0gFVELVXvZnkbUJS++DK/FpDmbwpByEmI66WtydpDbEoWO1PO15ENX+Xbgn+bxlF8733YvFJfYM6/aL5sxGJJljup3oV5ANkJmBtpj61Q5evcG2kkLaMnRlLxXZ2MsaGXpZVkotAO6/I7LnV4NBgYd/ElLCdtWeFYT66lCpeANXO1D00s+qNvFXrbDzxHvfMRloS3uq8=
+    - if: branch =~ /^(master)
+      env:
+        - AWS_REGION="eu-central-1"
+        - secure: VpWTBG1642/ibjBWIbzqMdUWGoXtDGG9NX7d8q/2U3gOMQvuyyhZCusnUj2PPw3yumpexrebxnS4pFjylfwaxAVEMcAnKoY6lklHMO//D3b6X2cIDXur+dfDMdeeCMEqHQkzIqGhKwzJ6RVYwmj7vtsttpbUMNUBlMPb5RDtkUx7U+acktNv9JUWs2H1P/JVWdTgPz5YDVpu8oLuxoRxXBfsztcbqJOPP5lheDbDU0tTa/VGVHpg8zu2uk/lAaCC7LY6p80yFlooY306GxwSMAapjlko6PMJVhSKmdV25zBJ3WzJIRcQLdynCV0ranEhfD4fcaj1i7AjRVJ+tQ9necFpF83p5OF5nPklPKCew5pL11Q15axwynHFstHkInBc+QoTtoVZ81fE50MYGtmmI9L6ORTTbBYU6llNUbXsfERuMvjJB9qVxIJ5fz0ihlpSscRFnKxZMG8YNV6YNTyrmmSCbFQicFQf92J0gFVELVXvZnkbUJS++DK/FpDmbwpByEmI66WtydpDbEoWO1PO15ENX+Xbgn+bxlF8733YvFJfYM6/aL5sxGJJljup3oV5ANkJmBtpj61Q5evcG2kkLaMnRlLxXZ2MsaGXpZVkotAO6/I7LnV4NBgYd/ElLCdtWeFYT66lCpeANXO1D00s+qNvFXrbDzxHvfMRloS3uq8=
+cache: yarn
+script:
+  - yarn global add serverless
+  - yarn build
+  - yarn test:single
+  - yarn build-storybook
+  - mv storybook-static storybook
+  - mv storybook build
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script:
+      - sls deploy -v -s test
+    on:
+      branch: develop
+  - provider: script
+    skip_cleanup: true
+    script:
+      - sls deploy -v -s prod
+    on:
+      branch: master
+notifications:
+  slack: egonoid:23TedcDBLMUXPg7huAq6AT2G
