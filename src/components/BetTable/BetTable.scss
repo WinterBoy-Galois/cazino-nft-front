@@ -1,0 +1,138 @@
+@import '../../styles/variables.scss';
+
+$radius: 10px;
+
+.bet-table {
+  min-width: 100%;
+  color: $white;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  td {
+    padding: 0;
+  }
+
+  &__header {
+    background-color: $lightBlue;
+    text-transform: uppercase;
+    color: $ultraLightBlue;
+    font-size: 15px;
+    text-align: left;
+    width: 100%;
+
+    th {
+      font-weight: 300;
+      padding: 0.5rem;
+    }
+
+    th:first-child {
+      border-top-left-radius: $radius;
+      padding-left: 1rem;
+
+      @media all and (min-width: $mediumBreakpoint) {
+        padding-left: 2rem;
+      }
+    }
+
+    th:last-child {
+      border-top-right-radius: $radius;
+    }
+  }
+
+  &__body {
+    background-color: $darkBlue;
+    font-size: 13px;
+
+    td div {
+      padding: 0.7rem 0.5rem;
+    }
+
+    tr td:first-child div {
+      padding-left: 1rem;
+
+      @media all and (min-width: $mediumBreakpoint) {
+        padding-left: 2rem;
+      }
+    }
+
+    tr td:last-child div {
+      padding-right: 1rem;
+
+      @media all and (min-width: $mediumBreakpoint) {
+        padding-right: 2rem;
+      }
+    }
+
+    tr:first-child td div {
+      padding-top: 0.5rem;
+
+      @media all and (min-width: $mediumBreakpoint) {
+        padding-top: 1rem;
+      }
+    }
+
+    tr:last-child td div {
+      padding-bottom: 0.5rem;
+
+      @media all and (min-width: $mediumBreakpoint) {
+        padding-bottom: 1rem;
+      }
+    }
+
+    tr:last-child td:first-child {
+      border-bottom-left-radius: $radius;
+    }
+
+    tr:last-child td:last-child {
+      border-bottom-right-radius: $radius;
+    }
+  }
+
+  &__wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    height: 419px;
+    background-color: $darkBlue;
+    border-radius: $radius;
+    width: 100%;
+
+    @media all and (min-width: $mediumBreakpoint) {
+      height: 435px;
+    }
+  }
+}
+
+/* stylelint-disable-next-line */
+.fade-enter td div {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  transition: max-height 500ms linear, opacity 500ms ease-in, padding 500ms linear;
+}
+
+/* stylelint-disable-next-line */
+.fade-enter-active td div {
+  max-height: 15px;
+  opacity: 1;
+  padding: 0.7rem 0.5rem;
+}
+
+/* stylelint-disable-next-line */
+.fade-exit td div {
+  max-height: 15px;
+  opacity: 1;
+  transition: max-height 500ms linear, opacity 500ms ease-out, padding 500ms linear;
+  overflow: hidden;
+}
+
+/* stylelint-disable-next-line */
+.fade-exit-active td div {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}

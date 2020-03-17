@@ -1,0 +1,21 @@
+@import '../../../../styles/variables.scss';
+
+.bet-row {
+  &__icon {
+    width: 11px;
+    height: 11px;
+    margin-right: 4px;
+  }
+
+  &__bold {
+    font-weight: 900;
+  }
+
+  &__red {
+    color: $lightRed;
+  }
+
+  &__green {
+    color: $lightGreen;
+  }
+}
