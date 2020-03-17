@@ -9,6 +9,10 @@ Object {
         class="container"
       >
         Sidebar
+         
+        <button>
+          Open
+        </button>
       </div>
     </div>
   </body>,
@@ -17,6 +21,10 @@ Object {
       class="container"
     >
       Sidebar
+       
+      <button>
+        Open
+      </button>
     </div>
   </div>,
   "debug": [Function],

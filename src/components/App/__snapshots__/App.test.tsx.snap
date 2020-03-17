@@ -1020,6 +1020,10 @@ Object {
           class="container"
         >
           Sidebar
+           
+          <button>
+            Open
+          </button>
         </div>
       </div>
     </div>
@@ -2040,6 +2044,10 @@ Object {
         class="container"
       >
         Sidebar
+         
+        <button>
+          Open
+        </button>
       </div>
     </div>
   </div>,
