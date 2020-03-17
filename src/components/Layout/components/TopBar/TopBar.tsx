@@ -13,7 +13,7 @@ const TopBar: React.SFC = () => {
           </a>
         </div>
         <div className={`col-6 ${styles.center} ${styles.right}`}>
-          <SidebarToggle />
+          <SidebarToggle arrowLeft={true} />
         </div>
       </div>
     </div>
