@@ -3,11 +3,11 @@ import styles from './SideBar.module.scss';
 import { useStateValue } from '../../../../state';
 import { CSSTransition } from 'react-transition-group';
 import SidebarToggle from '../SidebarToggle';
-import { useLockScroll } from '../../../../hooks/useLockScroll.hooks';
+import { useScrollLock } from '../../../../hooks/useScrollLock.hooks';
 
 const SideBar: React.SFC = () => {
   const [{ sidebar }] = useStateValue();
-  useLockScroll(sidebar.isOpen);
+  useScrollLock(sidebar.isOpen);
 
   return (
     <CSSTransition
