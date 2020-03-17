@@ -15,9 +15,7 @@ const BetTable: React.SFC = () => {
       document: BET_ADDED,
       updateQuery: (prev: any, { subscriptionData }: any) =>
         subscriptionData.data
-          ? Object.assign({}, prev, {
-              bets: [(subscriptionData.data as any).betAdded, ...prev.bets.slice(0, 9)],
-            })
+          ? { ...prev, bets: [(subscriptionData.data as any).betAdded, ...prev.bets.slice(0, 9)] }
           : prev,
     });
   }, [subscribeToMore]);
@@ -48,7 +46,7 @@ const BetTable: React.SFC = () => {
                   enter: 500,
                   exit: 500,
                 }}
-                mountOnEnter
+                mountOnEnter={true}
               >
                 <BetRow bet={b} />
               </CSSTransition>
