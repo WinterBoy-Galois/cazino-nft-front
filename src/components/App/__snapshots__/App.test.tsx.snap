@@ -1017,9 +1017,9 @@ Object {
           </div>
         </div>
         <div
-          class="live-updates"
+          class="container"
         >
-          live updates
+          Sidebar
         </div>
       </div>
     </div>
@@ -2037,9 +2037,9 @@ Object {
         </div>
       </div>
       <div
-        class="live-updates"
+        class="container"
       >
-        live updates
+        Sidebar
       </div>
     </div>
   </div>,

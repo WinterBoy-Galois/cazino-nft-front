@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Layout.module.scss';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
+import Sidebar from './components/Sidebar';
 import Footer from '../Footer';
 
 const Layout: React.SFC = ({ children }) => {
@@ -19,7 +20,8 @@ const Layout: React.SFC = ({ children }) => {
           <BottomBar />
         </div>
       </div>
-      <div className={styles['live-updates']}>live updates</div>
+
+      <Sidebar />
     </div>
   );
 };

@@ -1,0 +1,17 @@
+@import '../../../../styles/shared';
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - #{$bar-height});
+  background-color: $dark-blue;
+  z-index: 2;
+
+  @include media-breakpoint-up(lg) {
+    position: relative;
+    width: 33%;
+    height: 100%;
+  }
+}
