@@ -30,6 +30,9 @@ export const BET_ADDED = gql`
     betAdded {
       id
       time
+      userid
+      username
+      gameid
       bet
       profit
     }
