@@ -2,31 +2,48 @@ import React from 'react';
 import GameButton from './components/GameButton';
 import { useNavigate } from '@reach/router';
 import styles from './GameButtonList.module.scss';
+import { useStateValue } from '../../state';
 
 const GameButtonList: React.SFC = () => {
   const navigate = useNavigate();
-
-  const navigateToGoal = () => navigate('/games/goal');
-  const navigateToMines = () => navigate('/games/mines');
-  const navigateToClam = () => navigate('/games/clam');
-  const navigateToDice = () => navigate('/games/dice');
+  const [
+    {
+      sidebar: { isOpen },
+    },
+  ] = useStateValue();
 
   return (
     <>
       <div className="row">
-        <div className={`col-12 col-md-6 ${styles['spacing--right']}`}>
-          <GameButton game="GOAL" onClick={navigateToGoal} />
+        <div
+          className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 ${
+            styles['spacing--right']
+          }`}
+        >
+          <GameButton game="GOAL" onClick={() => navigate('/games/goal')} />
         </div>
-        <div className={`col-12 col-md-6 ${styles['spacing--left']}`}>
-          <GameButton game="MINES" onClick={navigateToMines} />
+        <div
+          className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 ${
+            styles['spacing--left']
+          }`}
+        >
+          <GameButton game="MINES" onClick={() => navigate('/games/mines')} />
         </div>
       </div>
       <div className="row">
-        <div className={`col-12 col-md-6 ${styles['spacing--right']}`}>
-          <GameButton game="CLAM" onClick={navigateToClam} />
+        <div
+          className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 ${
+            styles['spacing--right']
+          }`}
+        >
+          <GameButton game="CLAM" onClick={() => navigate('/games/clam')} />
         </div>
-        <div className={`col-12 col-md-6 ${styles['spacing--left']}`}>
-          <GameButton game="DICES" onClick={navigateToDice} />
+        <div
+          className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 ${
+            styles['spacing--left']
+          }`}
+        >
+          <GameButton game="DICES" onClick={() => navigate('/games/dice')} />
         </div>
       </div>
     </>

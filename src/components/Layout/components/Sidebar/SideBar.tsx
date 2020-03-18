@@ -39,7 +39,6 @@ const activateScrollLock = (breakpoint: Breakpoint): boolean => {
   switch (breakpoint) {
     case 'xs':
     case 'sm':
-    case 'md':
       return true;
 
     default:

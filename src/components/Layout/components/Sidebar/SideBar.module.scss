@@ -9,7 +9,7 @@
   background-color: #0d253b;
   z-index: 2;
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(md) {
     position: fixed;
     width: $sidebar-width;
     height: 100%;
@@ -42,5 +42,6 @@
   &__headline {
     margin: 0 0 0 1rem;
     color: $live-updates-light-blue;
+    font-size: 25px;
   }
 }

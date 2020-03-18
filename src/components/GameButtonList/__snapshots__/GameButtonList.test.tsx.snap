@@ -9,7 +9,7 @@ Object {
         class="row"
       >
         <div
-          class="col-12 col-md-6 spacing--right"
+          class="col-12 col-md-6 col-xl-6 spacing--right"
         >
           <div
             class="container container__goal"
@@ -35,7 +35,7 @@ Object {
           </div>
         </div>
         <div
-          class="col-12 col-md-6 spacing--left"
+          class="col-12 col-md-6 col-md-6 col-xl-6 spacing--left"
         >
           <div
             class="container container__mines"
@@ -65,7 +65,7 @@ Object {
         class="row"
       >
         <div
-          class="col-12 col-md-6 spacing--right"
+          class="col-12 col-md-6 col-md-6 col-xl-6 spacing--right"
         >
           <div
             class="container container__clam"
@@ -91,7 +91,7 @@ Object {
           </div>
         </div>
         <div
-          class="col-12 col-md-6 spacing--left"
+          class="col-12 col-md-6 col-md-6 col-xl-6 spacing--left"
         >
           <div
             class="container container__dices"
@@ -124,7 +124,7 @@ Object {
       class="row"
     >
       <div
-        class="col-12 col-md-6 spacing--right"
+        class="col-12 col-md-6 col-xl-6 spacing--right"
       >
         <div
           class="container container__goal"
@@ -150,7 +150,7 @@ Object {
         </div>
       </div>
       <div
-        class="col-12 col-md-6 spacing--left"
+        class="col-12 col-md-6 col-md-6 col-xl-6 spacing--left"
       >
         <div
           class="container container__mines"
@@ -180,7 +180,7 @@ Object {
       class="row"
     >
       <div
-        class="col-12 col-md-6 spacing--right"
+        class="col-12 col-md-6 col-md-6 col-xl-6 spacing--right"
       >
         <div
           class="container container__clam"
@@ -206,7 +206,7 @@ Object {
         </div>
       </div>
       <div
-        class="col-12 col-md-6 spacing--left"
+        class="col-12 col-md-6 col-md-6 col-xl-6 spacing--left"
       >
         <div
           class="container container__dices"
