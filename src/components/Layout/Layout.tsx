@@ -10,30 +10,31 @@ const Layout: React.SFC = ({ children }) => {
   const [{ sidebar }] = useStateValue();
 
   return (
-    <div className={styles.wrapper}>
-      <div className={`${styles.main} ${sidebar.isOpen ? styles['main--sidebar-open'] : ''}`}>
-        <div
-          className={`${styles['main__top-bar']} ${
-            sidebar.isOpen ? styles['main--sidebar-open'] : ''
-          }`}
-        >
-          <TopBar />
-        </div>
-        <div className={styles.main__content}>
-          {children}
-          <Footer />
-        </div>
-        <div
-          className={`${styles['main__bottom-bar']} ${
-            sidebar.isOpen ? styles['main--sidebar-open'] : ''
-          }`}
-        >
-          <BottomBar />
+    <>
+      <div className={styles.wrapper}>
+        <div className={`${styles.main} ${sidebar.isOpen ? styles['main--sidebar-open'] : ''}`}>
+          <div
+            className={`${styles['main__top-bar']} ${
+              sidebar.isOpen ? styles['main--sidebar-open'] : ''
+            }`}
+          >
+            <TopBar />
+          </div>
+          <div className={styles.main__content}>
+            {children}
+            <Footer />
+          </div>
+          <div
+            className={`${styles['main__bottom-bar']} ${
+              sidebar.isOpen ? styles['main--sidebar-open'] : ''
+            }`}
+          >
+            <BottomBar />
+          </div>
         </div>
       </div>
-
       <Sidebar />
-    </div>
+    </>
   );
 };
 

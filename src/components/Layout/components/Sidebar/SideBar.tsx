@@ -3,11 +3,13 @@ import styles from './SideBar.module.scss';
 import { useStateValue } from '../../../../state';
 import { CSSTransition } from 'react-transition-group';
 import SidebarToggle from '../SidebarToggle';
-import { useScrollLock } from '../../../../hooks/useScrollLock.hooks';
+import { useScrollLock } from '../../../../hooks/useScrollLock.hook';
+import { Breakpoint, useBreakpoint } from '../../../../hooks/useBreakpoint.hook';
 
 const SideBar: React.SFC = () => {
   const [{ sidebar }] = useStateValue();
-  useScrollLock(sidebar.isOpen);
+  const breakpoint = useBreakpoint();
+  useScrollLock(sidebar.isOpen && activateScrollLock(breakpoint));
 
   return (
     <CSSTransition
@@ -28,3 +30,15 @@ const SideBar: React.SFC = () => {
 };
 
 export default SideBar;
+
+const activateScrollLock = (breakpoint: Breakpoint): boolean => {
+  switch (breakpoint) {
+    case 'xs':
+    case 'sm':
+    case 'md':
+      return true;
+
+    default:
+      return false;
+  }
+};
