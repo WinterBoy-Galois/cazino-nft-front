@@ -1,119 +1,32 @@
 import React, { useEffect } from 'react';
 import './BetTable.scss';
 import { useQuery } from '@apollo/react-hooks';
-import Bet, { GameTypes } from '../../models/bet';
+import Bet from '../../models/bet';
 import { BET_ADDED, LATEST_BETS } from '../../graphql/queries';
 import BetRow from './components/BetRow';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import SpacerRow from './components/SpacerRow';
 
-const BetTable: React.SFC = () => {
-  const { subscribeToMore, loading, error, data } = useQuery<{ bets: Bet[] }>(LATEST_BETS);
+interface IProps {
+  bets: Bet[];
+  isLoading: boolean;
+  error: boolean;
+}
 
-  useEffect(() => {
-    return subscribeToMore({
-      document: BET_ADDED,
-      updateQuery: (prev: any, { subscriptionData }: any) =>
-        subscriptionData.data
-          ? { ...prev, bets: [(subscriptionData.data as any).betAdded, ...prev.bets.slice(0, 9)] }
-          : prev,
-    });
-  }, [subscribeToMore]);
+const BetTable: React.FC<IProps> = ({ bets, isLoading, error }) => {
+  // const { subscribeToMore, loading, error, data } = useQuery<{ bets: Bet[] }>(LATEST_BETS);
 
-  if (loading) return <p>Loading...</p>;
+  // useEffect(() => {
+  //   return subscribeToMore({
+  //     document: BET_ADDED,
+  //     updateQuery: (prev: any, { subscriptionData }: any) =>
+  //       subscriptionData.data
+  //         ? { ...prev, bets: [(subscriptionData.data as any).betAdded, ...prev.bets.slice(0, 9)] }
+  //         : prev,
+  //   });
+  // }, [subscribeToMore]);
 
-  const errorBets: Bet[] = [
-    {
-      id: '1',
-      time: 1582093459133,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.DICE,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-    {
-      id: '1',
-      time: 1582093456676,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.CLAMS,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-    {
-      id: '1',
-      time: 1582093456676,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.GOALS,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-    {
-      id: '1',
-      time: 1582093456676,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.MINES,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-    {
-      id: '1',
-      time: 1582093459133,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.DICE,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-    {
-      id: '1',
-      time: 1582093456676,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.CLAMS,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-    {
-      id: '1',
-      time: 1582093456676,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.GOALS,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-    {
-      id: '1',
-      time: 1582093456676,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.MINES,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-    {
-      id: '1',
-      time: 1582093459133,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.DICE,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-    {
-      id: '1',
-      time: 1582093456676,
-      userid: 27,
-      username: 'HaykFootball',
-      gameid: GameTypes.CLAMS,
-      bet: 48.85313,
-      profit: 48.85313,
-    },
-  ];
+  // if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="bet-table__wrapper">
@@ -127,21 +40,21 @@ const BetTable: React.SFC = () => {
             <th>Profit</th>
           </tr>
         </thead>
-        {error ? (
-          // <p>Error </p>
+        {error || isLoading ? (
           <tbody className="bet-table__body">
             <SpacerRow />
-            {errorBets.map((bet: Bet) => (
-              <BetRow key={bet.id} bet={bet} />
-            ))}
+            {error && <p>Error</p>}
+            {isLoading && <p>Loading...</p>}
             <SpacerRow />
           </tbody>
         ) : (
           <tbody className="bet-table__body">
             <SpacerRow />
-
-            <TransitionGroup component={null}>
-              {data?.bets.map(b => (
+            {bets.length > 0 ? (
+              bets.map((bet: Bet) => <BetRow key={bet.id} bet={bet} />)
+            ) : (
+              /* <TransitionGroup component={null}>
+              {bets.map(b => (
                 <CSSTransition
                   key={b.id}
                   classNames="fade"
@@ -154,8 +67,10 @@ const BetTable: React.SFC = () => {
                   <BetRow bet={b} />
                 </CSSTransition>
               ))}
-            </TransitionGroup>
-
+            </TransitionGroup> */ <p>
+                No Data
+              </p>
+            )}
             <SpacerRow />
           </tbody>
         )}
