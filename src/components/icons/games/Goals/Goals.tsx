@@ -7,14 +7,17 @@ interface IProps {
 
 const Goals: React.SFC<IProps> = ({ className, innerClassName }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.61 44.34" className={className}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="7 6 35 35" className={className}>
       <defs>
         <clipPath id="clip-path" transform="translate(6.72 5.85)">
-          <circle id="SVGID" cx="17.5" cy="17.5" r="15.5" fill="none" />
+          <circle id="SVGID" cx="17.5" cy="17.5" r="15.5" fill="#fff" />
         </clipPath>
-        <style>
-          {/* .cls-4{fill:none}.cls-2{fill:#fff}.cls-3{fill:#091b33}.cls-4{stroke:#091b33;stroke-miterlimit:10;stroke-width:.72px} */}
-        </style>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+      .cls-4{fill:none}.cls-2{fill:#fff}.cls-3{fill:#091b33}.cls-4{stroke:#091b33;stroke-miterlimit:10;stroke-width:.72px}`,
+          }}
+        />
       </defs>
       <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_4" data-name="Layer 4">
