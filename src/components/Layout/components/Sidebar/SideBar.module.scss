@@ -28,3 +28,19 @@
     right: -100%;
   }
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  height: $bar-height;
+  padding: 0 1rem;
+
+  @include media-breakpoint-up(lg) {
+    height: $bar-height-lg;
+  }
+
+  &__headline {
+    margin: 0 0 0 1rem;
+    color: $live-updates-light-blue;
+  }
+}

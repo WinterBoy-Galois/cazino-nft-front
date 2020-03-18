@@ -23,7 +23,11 @@ const SideBar: React.SFC = () => {
       }}
     >
       <div className={`${styles.container} ${styles.slide}`}>
-        <SidebarToggle />
+        <div className={styles.header}>
+          <SidebarToggle />
+          <h1 className={styles['header__headline']}>LIVE UPDATES</h1>
+        </div>
+        <div className={styles['tab-select']} />
       </div>
     </CSSTransition>
   );
