@@ -1,9 +1,16 @@
 export default interface Bet {
   id: string;
   time: number;
-  name: string;
-  game: string;
+  userid: number;
+  username: string;
+  gameid: GameTypes;
   bet: number;
-  payout: number;
   profit: number;
+}
+
+export enum GameTypes {
+  DICE,
+  GOALS,
+  MINES,
+  CLAMS,
 }

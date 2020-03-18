@@ -6,6 +6,8 @@ import client from '../../graphql/client';
 
 storiesOf('Components/BetTable', module).add('default', () => (
   <ApolloProvider client={client}>
-    <BetTable />
+    <div style={{ margin: '1rem' }}>
+      <BetTable />
+    </div>
   </ApolloProvider>
 ));

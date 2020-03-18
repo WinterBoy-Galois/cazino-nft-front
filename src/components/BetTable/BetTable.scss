@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import '../../styles/shared';
 
 $radius: 10px;
 
@@ -42,6 +42,10 @@ $radius: 10px;
   &__body {
     background-color: $darkBlue;
     font-size: 13px;
+
+    @include media-breakpoint-up(xs) {
+      font-size: 13px;
+    }
 
     td div {
       padding: 0.7rem 0.5rem;
