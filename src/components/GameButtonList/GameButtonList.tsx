@@ -13,40 +13,20 @@ const GameButtonList: React.SFC = () => {
   ] = useStateValue();
 
   return (
-    <>
-      <div className="row">
-        <div
-          className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 ${
-            styles['spacing--right']
-          }`}
-        >
-          <GameButton game="GOAL" onClick={() => navigate('/games/goal')} />
-        </div>
-        <div
-          className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 ${
-            styles['spacing--left']
-          }`}
-        >
-          <GameButton game="MINES" onClick={() => navigate('/games/mines')} />
-        </div>
+    <div className="row">
+      <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+        <GameButton game="GOAL" onClick={() => navigate('/games/goal')} />
       </div>
-      <div className="row">
-        <div
-          className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 ${
-            styles['spacing--right']
-          }`}
-        >
-          <GameButton game="CLAM" onClick={() => navigate('/games/clam')} />
-        </div>
-        <div
-          className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 ${
-            styles['spacing--left']
-          }`}
-        >
-          <GameButton game="DICES" onClick={() => navigate('/games/dice')} />
-        </div>
+      <div className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+        <GameButton game="MINES" onClick={() => navigate('/games/mines')} />
       </div>
-    </>
+      <div className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+        <GameButton game="CLAM" onClick={() => navigate('/games/clam')} />
+      </div>
+      <div className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+        <GameButton game="DICES" onClick={() => navigate('/games/dice')} />
+      </div>
+    </div>
   );
 };
 
