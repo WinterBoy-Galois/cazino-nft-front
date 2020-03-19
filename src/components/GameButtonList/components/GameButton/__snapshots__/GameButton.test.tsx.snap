@@ -26,6 +26,11 @@ Object {
             src="clam-pearl.svg"
           />
         </div>
+        <img
+          alt="Clam"
+          class="character"
+          src="clams-character-home-button.svg"
+        />
       </div>
     </div>
   </body>,
@@ -51,6 +56,11 @@ Object {
           src="clam-pearl.svg"
         />
       </div>
+      <img
+        alt="Clam"
+        class="character"
+        src="clams-character-home-button.svg"
+      />
     </div>
   </div>,
   "debug": [Function],

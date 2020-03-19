@@ -1,7 +1,6 @@
 import React from 'react';
 import GameButton from './components/GameButton';
 import { useNavigate } from '@reach/router';
-import styles from './GameButtonList.module.scss';
 import { useStateValue } from '../../state';
 
 const GameButtonList: React.SFC = () => {
@@ -17,13 +16,13 @@ const GameButtonList: React.SFC = () => {
       <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
         <GameButton game="GOAL" onClick={() => navigate('/games/goal')} />
       </div>
-      <div className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+      <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
         <GameButton game="MINES" onClick={() => navigate('/games/mines')} />
       </div>
-      <div className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+      <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
         <GameButton game="CLAM" onClick={() => navigate('/games/clam')} />
       </div>
-      <div className={`col-12 col-md-6 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+      <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
         <GameButton game="DICES" onClick={() => navigate('/games/dice')} />
       </div>
     </div>

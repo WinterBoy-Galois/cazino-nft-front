@@ -29,26 +29,6 @@
     padding: 1.5rem;
   }
 
-  &__goal {
-    background-image: url('../../../../assets/images/gameButtons/goal-gamebutton.svg');
-  }
-
-  &__mines {
-    background-image: url('../../../../assets/images/gameButtons/mines-gamebutton.svg');
-  }
-
-  &__clam {
-    background-image: url('../../../../assets/images/gameButtons/clam-gamebutton.svg');
-
-    @include media-breakpoint-only(xs) {
-      background-image: url('../../../../assets/images/gameButtons/clam-gamebutton_xs.svg');
-    }
-  }
-
-  &__dices {
-    background-image: url('../../../../assets/images/gameButtons/dices-gamebutton.svg');
-  }
-
   .animated {
     &__ball {
       position: absolute;
@@ -254,4 +234,11 @@
     font-size: 16px;
     letter-spacing: 12px;
   }
+}
+
+.character {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  width: 50%;
 }

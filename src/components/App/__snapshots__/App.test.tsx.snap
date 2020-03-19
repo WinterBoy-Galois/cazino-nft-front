@@ -295,7 +295,7 @@ Object {
                   class="row"
                 >
                   <div
-                    class="col-12 col-md-6 col-xl-6 spacing--right"
+                    class="col-12 col-md-6 col-xl-6 "
                   >
                     <div
                       class="container container__goal"
@@ -317,11 +317,20 @@ Object {
                           alt="Ball"
                           src="goal-ball.svg"
                         />
+                        <img
+                          alt="Field"
+                          src="goal-field-home-button.svg"
+                        />
                       </div>
+                      <img
+                        alt="Goal Keeper"
+                        class="character"
+                        src="goal-character-home-button.svg"
+                      />
                     </div>
                   </div>
                   <div
-                    class="col-12 col-md-6 col-md-6 col-xl-6 spacing--left"
+                    class="col-12 col-md-6 col-xl-6 "
                   >
                     <div
                       class="container container__mines"
@@ -343,15 +352,20 @@ Object {
                           alt="Bomb"
                           src="mines-bomb.svg"
                         />
+                        <img
+                          alt="Field"
+                          src="mines-shadow-home-button.svg"
+                        />
                       </div>
+                      <img
+                        alt="Soldier"
+                        class="character"
+                        src="mines-character-home-button.svg"
+                      />
                     </div>
                   </div>
-                </div>
-                <div
-                  class="row"
-                >
                   <div
-                    class="col-12 col-md-6 col-md-6 col-xl-6 spacing--right"
+                    class="col-12 col-md-6 col-xl-6 "
                   >
                     <div
                       class="container container__clam"
@@ -374,10 +388,15 @@ Object {
                           src="clam-pearl.svg"
                         />
                       </div>
+                      <img
+                        alt="Clam"
+                        class="character"
+                        src="clams-character-home-button.svg"
+                      />
                     </div>
                   </div>
                   <div
-                    class="col-12 col-md-6 col-md-6 col-xl-6 spacing--left"
+                    class="col-12 col-md-6 col-xl-6 "
                   >
                     <div
                       class="container container__dices"
@@ -399,7 +418,16 @@ Object {
                           alt="Dices"
                           src="dices-dices.svg"
                         />
+                        <img
+                          alt="Field"
+                          src="dice-shadow-button.svg"
+                        />
                       </div>
+                      <img
+                        alt="Dice Character"
+                        class="character"
+                        src="dice-character-home-button.svg"
+                      />
                     </div>
                   </div>
                 </div>
@@ -1420,7 +1448,7 @@ Object {
                 class="row"
               >
                 <div
-                  class="col-12 col-md-6 col-xl-6 spacing--right"
+                  class="col-12 col-md-6 col-xl-6 "
                 >
                   <div
                     class="container container__goal"
@@ -1442,11 +1470,20 @@ Object {
                         alt="Ball"
                         src="goal-ball.svg"
                       />
+                      <img
+                        alt="Field"
+                        src="goal-field-home-button.svg"
+                      />
                     </div>
+                    <img
+                      alt="Goal Keeper"
+                      class="character"
+                      src="goal-character-home-button.svg"
+                    />
                   </div>
                 </div>
                 <div
-                  class="col-12 col-md-6 col-md-6 col-xl-6 spacing--left"
+                  class="col-12 col-md-6 col-xl-6 "
                 >
                   <div
                     class="container container__mines"
@@ -1468,15 +1505,20 @@ Object {
                         alt="Bomb"
                         src="mines-bomb.svg"
                       />
+                      <img
+                        alt="Field"
+                        src="mines-shadow-home-button.svg"
+                      />
                     </div>
+                    <img
+                      alt="Soldier"
+                      class="character"
+                      src="mines-character-home-button.svg"
+                    />
                   </div>
                 </div>
-              </div>
-              <div
-                class="row"
-              >
                 <div
-                  class="col-12 col-md-6 col-md-6 col-xl-6 spacing--right"
+                  class="col-12 col-md-6 col-xl-6 "
                 >
                   <div
                     class="container container__clam"
@@ -1499,10 +1541,15 @@ Object {
                         src="clam-pearl.svg"
                       />
                     </div>
+                    <img
+                      alt="Clam"
+                      class="character"
+                      src="clams-character-home-button.svg"
+                    />
                   </div>
                 </div>
                 <div
-                  class="col-12 col-md-6 col-md-6 col-xl-6 spacing--left"
+                  class="col-12 col-md-6 col-xl-6 "
                 >
                   <div
                     class="container container__dices"
@@ -1524,7 +1571,16 @@ Object {
                         alt="Dices"
                         src="dices-dices.svg"
                       />
+                      <img
+                        alt="Field"
+                        src="dice-shadow-button.svg"
+                      />
                     </div>
+                    <img
+                      alt="Dice Character"
+                      class="character"
+                      src="dice-character-home-button.svg"
+                    />
                   </div>
                 </div>
               </div>
