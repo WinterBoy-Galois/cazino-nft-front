@@ -1,5 +1,5 @@
 import React from 'react';
-import GameButton from './components/GameButton';
+import GoalGameButton from './components/GoalGameButton';
 import { useNavigate } from '@reach/router';
 import { useStateValue } from '../../state';
 
@@ -14,16 +14,16 @@ const GameButtonList: React.SFC = () => {
   return (
     <div className="row">
       <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
-        <GameButton game="GOAL" onClick={() => navigate('/games/goal')} />
+        <GoalGameButton onClick={() => navigate('/games/goal')} />
       </div>
       <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
-        <GameButton game="MINES" onClick={() => navigate('/games/mines')} />
+        <GoalGameButton onClick={() => navigate('/games/goal')} />
       </div>
       <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
-        <GameButton game="CLAM" onClick={() => navigate('/games/clam')} />
+        <GoalGameButton onClick={() => navigate('/games/goal')} />
       </div>
       <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
-        <GameButton game="DICES" onClick={() => navigate('/games/dice')} />
+        <GoalGameButton onClick={() => navigate('/games/goal')} />
       </div>
     </div>
   );
