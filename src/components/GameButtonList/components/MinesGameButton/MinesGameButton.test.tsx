@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import GoalGameButton from './GoalGameButton';
+import MinesGameButton from './MinesGameButton';
 
-describe('GoalGameButton', () => {
+describe('MinesGameButton', () => {
   it('should match snapshot', () => {
     // Arrange
 
     // Act
-    const container = render(<GoalGameButton />);
+    const container = render(<MinesGameButton />);
 
     // Assert
     expect(container).toMatchSnapshot();

@@ -12,7 +12,7 @@ const GameButton: React.SFC<IProps> = ({ onClick, children, headline, className 
   const { t } = useTranslation();
 
   return (
-    <div className={className} onClick={onClick}>
+    <div className={`${styles.container} ${className}`} onClick={onClick}>
       <h2 className={styles.headline}>{headline}</h2>
       <span className={styles.subline}>{t('play')}</span>
       {children}

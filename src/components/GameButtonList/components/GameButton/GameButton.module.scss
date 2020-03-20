@@ -1,5 +1,36 @@
 @import '../../../../styles/shared.scss';
 
+.container {
+  width: 100%;
+  max-width: 400px;
+  height: 175px;
+  margin: 1rem auto;
+  border-radius: 15px;
+  padding: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  background-color: $game-button-blue;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+
+  @include media-breakpoint-only(sm) {
+    height: 220px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: 210px;
+    padding: 1.5rem;
+    max-width: 480px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    height: 225px;
+    padding: 1.5rem;
+  }
+}
+
 .headline {
   font-size: 20px;
   text-transform: uppercase;

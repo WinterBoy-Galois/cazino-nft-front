@@ -11,8 +11,8 @@
     align-items: center;
 
     &__animated {
-      width: 59%;
-      transform: translateY(25px);
+      width: 54%;
+      transform: translateY(11px) translateX(-11px);
       transition: transform 200ms ease-in-out;
     }
   }
@@ -23,14 +23,14 @@
 
   &:hover .highlight {
     &__animated {
-      transform: translateY(0) scale(1.1);
+      transform: translateY(-6px) translateX(-11px) scale(1.1);
     }
   }
 }
 
 .character {
   position: absolute;
-  top: -10px;
+  top: -5px;
   right: -5px;
-  width: 50%;
+  width: 54%;
 }
