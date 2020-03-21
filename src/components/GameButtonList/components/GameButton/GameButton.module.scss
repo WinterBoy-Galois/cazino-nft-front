@@ -16,7 +16,7 @@
   overflow: hidden;
 
   @include media-breakpoint-only(sm) {
-    height: 220px;
+    height: 190px;
   }
 
   @include media-breakpoint-up(lg) {

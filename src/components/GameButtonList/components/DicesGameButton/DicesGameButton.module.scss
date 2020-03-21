@@ -1,0 +1,36 @@
+@import '../../../../styles/shared.scss';
+
+.container {
+  .highlight {
+    position: absolute;
+    left: 1rem;
+    bottom: 12px;
+    width: 43%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__animated {
+      width: 54%;
+      transform: translateY(7px);
+      transition: transform 200ms ease-in-out;
+    }
+  }
+
+  &:hover {
+    background-color: $footer-blue;
+  }
+
+  &:hover .highlight {
+    &__animated {
+      transform: translateY(-10px) scale(1.1);
+    }
+  }
+}
+
+.character {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 48%;
+}
