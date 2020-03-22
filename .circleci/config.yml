@@ -11,8 +11,11 @@ jobs:
           steps:
             - run: yarn install
             - run: yarn test
+      - run:
+          command: |
+            mkdir /home/circleci/test-results
       - store_test_results:
-          path: test-results
+          path: /home/circleci/test-results
 workflows:
     build-and-test:
       jobs:
