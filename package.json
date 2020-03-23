@@ -27,9 +27,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "TZ=UTC react-scripts test",
     "eject": "react-scripts eject",
-    "test:single": "CI=true react-scripts test --watchAll=false",
+    "test:single": "TZ=UTC CI=true react-scripts test --watchAll=false",
     "lint": "concurrently \"yarn run lint:ts\" \"yarn run lint:scss\"",
     "lint:ts": "tslint --project .",
     "lint:scss": "stylelint \"src/**/*.scss\"",
