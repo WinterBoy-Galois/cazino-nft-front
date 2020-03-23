@@ -38,6 +38,11 @@
   align-items: center;
   height: $bar-height;
   padding: 0 1rem;
+  background-color: $blue;
+
+  @include media-breakpoint-up(md) {
+    background-color: unset;
+  }
 
   @include media-breakpoint-up(lg) {
     height: $bar-height-lg;
