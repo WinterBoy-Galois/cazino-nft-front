@@ -1,27 +1,13 @@
 @import '../../styles/shared';
 
 .container {
-  // height: 82px;
   margin: auto;
   width: 100%;
   overflow: auto;
 
   @include media-breakpoint-up(md) {
     width: 80%;
-    // height: 180px;
   }
-}
-
-.slider {
-  // // height: 82px;
-  // margin: auto;
-  // width: 100%;
-  // overflow: auto;
-
-  // @include media-breakpoint-up(md) {
-  //   width: 80%;
-  //   // height: 180px;
-  // }
 }
 
 .slide {
@@ -38,7 +24,6 @@
 
   @include media-breakpoint-up(lg) {
     height: 180px;
-    // background-size: auto 180px;
   }
 }
 
