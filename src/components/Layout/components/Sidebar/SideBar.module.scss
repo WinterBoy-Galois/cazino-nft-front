@@ -4,15 +4,19 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 100%;
+  width: $sidebar-width;
   height: calc(100% - #{$bar-height});
   background-color: #0d253b;
   z-index: 2;
 
   @include media-breakpoint-up(md) {
     position: fixed;
-    width: $sidebar-width;
+    width: $sidebar-width-md;
     height: 100%;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: $sidebar-width-xl;
   }
 }
 
