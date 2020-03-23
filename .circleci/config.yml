@@ -16,6 +16,11 @@ jobs:
             mkdir /home/circleci/test-results
       - store_test_results:
           path: /home/circleci/test-results
+
+      - run:
+          name: add rsync
+          command: sudo apt update && sudo apt install rsync -y
+          
       - run:
           name: Sync sources
           command: |
