@@ -16,6 +16,16 @@ jobs:
             mkdir /home/circleci/test-results
       - store_test_results:
           path: /home/circleci/test-results
+      - run:
+          name: Sync sources
+          command: |
+            rsync -avce "ssh \
+            -oStrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+            --progress /home/circleci/project/ \
+            $DROPLET_USER@$DROPLET_IP:/var/www/staging.gambilife.com/
+      - add_ssh_keys:
+          fingerprints:
+            - "7e:96:cd:75:de:bd:66:8b:e3:aa:50:77:5d:58:25:9c"
 workflows:
     build-and-test:
       jobs:
