@@ -13,16 +13,22 @@ import CryptoGamblingFoundationLogo2x from '../../assets/images/footer/crypto-ga
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
 import LanguageSelect from '../LanguageSelect';
+import { useStateValue } from '../../state';
 
 const Footer: React.SFC = () => {
   const { t } = useTranslation(['footer']);
   const year = new Date().getFullYear();
+  const [
+    {
+      sidebar: { isOpen },
+    },
+  ] = useStateValue();
 
   return (
     <div className={styles.container}>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-12 col-lg-2">
+          <div className={`col-12 ${!isOpen ? 'col-lg-2' : 'col-xl-2'}`}>
             <div className={styles['language-select']}>
               <LanguageSelect />
             </div>
@@ -32,10 +38,10 @@ const Footer: React.SFC = () => {
             <div className={styles.copyright}>&copy; {year} cazzzino.com</div>
           </div>
 
-          {renderFooterLinks(getFooterData(t))}
+          {renderFooterLinks(getFooterData(t), isOpen)}
 
-          <div className="col-6 col-lg-2">
-            <ul className={styles.list}>
+          <div className={`col-6 ${!isOpen ? 'col-lg-2' : 'col-xl-2'}`}>
+            <ul className={`${styles.list} ${isOpen && styles['list--spacing']}`}>
               <li className={styles['list__item--headline']}>Social</li>
               <li className={styles.list__item}>
                 <a
@@ -43,7 +49,7 @@ const Footer: React.SFC = () => {
                   className={`${styles.list__item__link} ${styles.social__link}`}
                 >
                   <Twitter className={styles.social__icon} />
-                  <span>{t('links.social.twitter')}</span>
+                  <span className={styles.social__label}>{t('links.social.twitter')}</span>
                 </a>
               </li>
               <li className={styles.list__item}>
@@ -52,7 +58,7 @@ const Footer: React.SFC = () => {
                   className={`${styles.list__item__link} ${styles.social__link}`}
                 >
                   <Facebook className={styles.social__icon} />
-                  {t('links.social.facebook')}
+                  <span className={styles.social__label}>{t('links.social.facebook')}</span>
                 </a>
               </li>
               <li className={styles.list__item}>
@@ -61,7 +67,7 @@ const Footer: React.SFC = () => {
                   className={`${styles.list__item__link} ${styles.social__link}`}
                 >
                   <Telegram className={styles.social__icon} />
-                  {t('links.social.telegram')}
+                  <span className={styles.social__label}>{t('links.social.telegram')}</span>
                 </a>
               </li>
               <li className={styles.list__item}>
@@ -73,7 +79,7 @@ const Footer: React.SFC = () => {
                     className={styles.social__icon}
                     innerClassName={styles.social__icon__inner}
                   />
-                  {t('links.social.bitcoinTalk')}
+                  <span className={styles.social__label}>{t('links.social.bitcoinTalk')}</span>
                 </a>
               </li>
               <li className={styles.list__item}>
@@ -82,7 +88,7 @@ const Footer: React.SFC = () => {
                   className={`${styles.list__item__link} ${styles.social__link}`}
                 >
                   <Instagram className={styles.social__icon} />
-                  {t('links.social.instagram')}
+                  <span className={styles.social__label}>{t('links.social.instagram')}</span>
                 </a>
               </li>
             </ul>
@@ -109,10 +115,10 @@ const Footer: React.SFC = () => {
 
 export default Footer;
 
-const renderFooterLinks = (footer: FooterList[]) =>
+const renderFooterLinks = (footer: FooterList[], isSidebarOpen: boolean) =>
   footer.map((f, i) => (
-    <div className="col-6 col-lg-2" key={`footer-list-${i}`}>
-      <ul className={styles.list}>
+    <div className={`col-6 ${!isSidebarOpen ? 'col-lg-2' : 'col-xl-2'}`} key={`footer-list-${i}`}>
+      <ul className={`${styles.list} ${isSidebarOpen && styles['list--spacing']}`}>
         <li className={styles['list__item--headline']}>{f.headline}</li>
         {f.items.map((item, j) => (
           <li className={styles.list__item} key={`footer-list-item-${j}`}>

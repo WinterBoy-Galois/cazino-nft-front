@@ -174,10 +174,10 @@ Object {
           class="row"
         >
           <div
-            class="col-12 col-md-6 spacing--right"
+            class="col-12 col-md-6 col-xl-6 "
           >
             <div
-              class="container container__goal"
+              class="container container"
             >
               <h2
                 class="headline"
@@ -190,20 +190,31 @@ Object {
                 Play
               </span>
               <div
-                class="animated__ball"
+                class="highlight"
               >
                 <img
                   alt="Ball"
+                  class="highlight__animated"
                   src="goal-ball.svg"
                 />
+                <img
+                  alt="Field"
+                  class="highlight__static"
+                  src="goal-field-home-button.svg"
+                />
               </div>
+              <img
+                alt="Goal Keeper"
+                class="character"
+                src="goal-character-home-button.svg"
+              />
             </div>
           </div>
           <div
-            class="col-12 col-md-6 spacing--left"
+            class="col-12 col-md-6 col-xl-6 "
           >
             <div
-              class="container container__mines"
+              class="container container"
             >
               <h2
                 class="headline"
@@ -216,24 +227,31 @@ Object {
                 Play
               </span>
               <div
-                class="animated__mines"
+                class="highlight"
               >
                 <img
                   alt="Bomb"
+                  class="highlight__animated"
                   src="mines-bomb.svg"
                 />
+                <img
+                  alt="Shadow"
+                  class="highlight__static"
+                  src="mines-shadow-home-button.svg"
+                />
               </div>
+              <img
+                alt="Soldier"
+                class="character"
+                src="mines-character-home-button.svg"
+              />
             </div>
           </div>
-        </div>
-        <div
-          class="row"
-        >
           <div
-            class="col-12 col-md-6 spacing--right"
+            class="col-12 col-md-6 col-xl-6 "
           >
             <div
-              class="container container__clam"
+              class="container container"
             >
               <h2
                 class="headline"
@@ -246,20 +264,26 @@ Object {
                 Play
               </span>
               <div
-                class="animated__clam"
+                class="highlight"
               >
                 <img
-                  alt="Pear"
+                  alt="Pearl"
+                  class="highlight__animated"
                   src="clam-pearl.svg"
                 />
               </div>
+              <img
+                alt="Clam"
+                class="character"
+                src="clams-character-home-button.svg"
+              />
             </div>
           </div>
           <div
-            class="col-12 col-md-6 spacing--left"
+            class="col-12 col-md-6 col-xl-6 "
           >
             <div
-              class="container container__dices"
+              class="container container"
             >
               <h2
                 class="headline"
@@ -272,13 +296,24 @@ Object {
                 Play
               </span>
               <div
-                class="animated__dices"
+                class="highlight"
               >
                 <img
-                  alt="Dices"
+                  alt="Bomb"
+                  class="highlight__animated"
                   src="dices-dices.svg"
                 />
+                <img
+                  alt="Shadow"
+                  class="highlight__static"
+                  src="dice-shadow-button.svg"
+                />
               </div>
+              <img
+                alt="Soldier"
+                class="character"
+                src="dice-character-home-button.svg"
+              />
             </div>
           </div>
         </div>
@@ -549,10 +584,10 @@ Object {
         class="row"
       >
         <div
-          class="col-12 col-md-6 spacing--right"
+          class="col-12 col-md-6 col-xl-6 "
         >
           <div
-            class="container container__goal"
+            class="container container"
           >
             <h2
               class="headline"
@@ -565,20 +600,31 @@ Object {
               Play
             </span>
             <div
-              class="animated__ball"
+              class="highlight"
             >
               <img
                 alt="Ball"
+                class="highlight__animated"
                 src="goal-ball.svg"
               />
+              <img
+                alt="Field"
+                class="highlight__static"
+                src="goal-field-home-button.svg"
+              />
             </div>
+            <img
+              alt="Goal Keeper"
+              class="character"
+              src="goal-character-home-button.svg"
+            />
           </div>
         </div>
         <div
-          class="col-12 col-md-6 spacing--left"
+          class="col-12 col-md-6 col-xl-6 "
         >
           <div
-            class="container container__mines"
+            class="container container"
           >
             <h2
               class="headline"
@@ -591,24 +637,31 @@ Object {
               Play
             </span>
             <div
-              class="animated__mines"
+              class="highlight"
             >
               <img
                 alt="Bomb"
+                class="highlight__animated"
                 src="mines-bomb.svg"
               />
+              <img
+                alt="Shadow"
+                class="highlight__static"
+                src="mines-shadow-home-button.svg"
+              />
             </div>
+            <img
+              alt="Soldier"
+              class="character"
+              src="mines-character-home-button.svg"
+            />
           </div>
         </div>
-      </div>
-      <div
-        class="row"
-      >
         <div
-          class="col-12 col-md-6 spacing--right"
+          class="col-12 col-md-6 col-xl-6 "
         >
           <div
-            class="container container__clam"
+            class="container container"
           >
             <h2
               class="headline"
@@ -621,20 +674,26 @@ Object {
               Play
             </span>
             <div
-              class="animated__clam"
+              class="highlight"
             >
               <img
-                alt="Pear"
+                alt="Pearl"
+                class="highlight__animated"
                 src="clam-pearl.svg"
               />
             </div>
+            <img
+              alt="Clam"
+              class="character"
+              src="clams-character-home-button.svg"
+            />
           </div>
         </div>
         <div
-          class="col-12 col-md-6 spacing--left"
+          class="col-12 col-md-6 col-xl-6 "
         >
           <div
-            class="container container__dices"
+            class="container container"
           >
             <h2
               class="headline"
@@ -647,13 +706,24 @@ Object {
               Play
             </span>
             <div
-              class="animated__dices"
+              class="highlight"
             >
               <img
-                alt="Dices"
+                alt="Bomb"
+                class="highlight__animated"
                 src="dices-dices.svg"
               />
+              <img
+                alt="Shadow"
+                class="highlight__static"
+                src="dice-shadow-button.svg"
+              />
             </div>
+            <img
+              alt="Soldier"
+              class="character"
+              src="dice-character-home-button.svg"
+            />
           </div>
         </div>
       </div>

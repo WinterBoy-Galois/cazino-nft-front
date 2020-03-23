@@ -5,7 +5,8 @@
     "prettier": true,
     "no-implicit-dependencies": [true, "dev"],
     "no-submodule-imports": [true, "swiper", "react-id-swiper"],
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "no-string-literal": false
   },
   "linterOptions": {
     "exclude": ["build", "src/serviceWorker.ts", "src/setupTests.ts"]

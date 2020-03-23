@@ -9,10 +9,10 @@ Object {
         class="wrapper"
       >
         <div
-          class="main"
+          class="main main--sidebar-open"
         >
           <div
-            class="main__top-bar"
+            class="main__top-bar main--sidebar-open"
           >
             <div
               class="container-fluid h-100"
@@ -21,7 +21,7 @@ Object {
                 class="row h-100"
               >
                 <div
-                  class="col-12 center"
+                  class="col-6 center"
                 >
                   <a
                     href="/"
@@ -67,6 +67,9 @@ Object {
                     </svg>
                   </a>
                 </div>
+                <div
+                  class="col-6 center right"
+                />
               </div>
             </div>
           </div>
@@ -246,10 +249,10 @@ Object {
                   class="row"
                 >
                   <div
-                    class="col-12 col-md-6 spacing--right"
+                    class="col-12 col-md-12 col-xl-6 "
                   >
                     <div
-                      class="container container__goal"
+                      class="container container"
                     >
                       <h2
                         class="headline"
@@ -262,20 +265,31 @@ Object {
                         Play
                       </span>
                       <div
-                        class="animated__ball"
+                        class="highlight"
                       >
                         <img
                           alt="Ball"
+                          class="highlight__animated"
                           src="goal-ball.svg"
                         />
+                        <img
+                          alt="Field"
+                          class="highlight__static"
+                          src="goal-field-home-button.svg"
+                        />
                       </div>
+                      <img
+                        alt="Goal Keeper"
+                        class="character"
+                        src="goal-character-home-button.svg"
+                      />
                     </div>
                   </div>
                   <div
-                    class="col-12 col-md-6 spacing--left"
+                    class="col-12 col-md-12 col-xl-6 "
                   >
                     <div
-                      class="container container__mines"
+                      class="container container"
                     >
                       <h2
                         class="headline"
@@ -288,24 +302,31 @@ Object {
                         Play
                       </span>
                       <div
-                        class="animated__mines"
+                        class="highlight"
                       >
                         <img
                           alt="Bomb"
+                          class="highlight__animated"
                           src="mines-bomb.svg"
                         />
+                        <img
+                          alt="Shadow"
+                          class="highlight__static"
+                          src="mines-shadow-home-button.svg"
+                        />
                       </div>
+                      <img
+                        alt="Soldier"
+                        class="character"
+                        src="mines-character-home-button.svg"
+                      />
                     </div>
                   </div>
-                </div>
-                <div
-                  class="row"
-                >
                   <div
-                    class="col-12 col-md-6 spacing--right"
+                    class="col-12 col-md-12 col-xl-6 "
                   >
                     <div
-                      class="container container__clam"
+                      class="container container"
                     >
                       <h2
                         class="headline"
@@ -318,20 +339,26 @@ Object {
                         Play
                       </span>
                       <div
-                        class="animated__clam"
+                        class="highlight"
                       >
                         <img
-                          alt="Pear"
+                          alt="Pearl"
+                          class="highlight__animated"
                           src="clam-pearl.svg"
                         />
                       </div>
+                      <img
+                        alt="Clam"
+                        class="character"
+                        src="clams-character-home-button.svg"
+                      />
                     </div>
                   </div>
                   <div
-                    class="col-12 col-md-6 spacing--left"
+                    class="col-12 col-md-12 col-xl-6 "
                   >
                     <div
-                      class="container container__dices"
+                      class="container container"
                     >
                       <h2
                         class="headline"
@@ -344,13 +371,24 @@ Object {
                         Play
                       </span>
                       <div
-                        class="animated__dices"
+                        class="highlight"
                       >
                         <img
-                          alt="Dices"
+                          alt="Bomb"
+                          class="highlight__animated"
                           src="dices-dices.svg"
                         />
+                        <img
+                          alt="Shadow"
+                          class="highlight__static"
+                          src="dice-shadow-button.svg"
+                        />
                       </div>
+                      <img
+                        alt="Soldier"
+                        class="character"
+                        src="dice-character-home-button.svg"
+                      />
                     </div>
                   </div>
                 </div>
@@ -460,7 +498,7 @@ Object {
                   class="row"
                 >
                   <div
-                    class="col-12 col-lg-2"
+                    class="col-12 col-xl-2"
                   >
                     <div
                       class="language-select"
@@ -555,10 +593,10 @@ Object {
                     </div>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -608,10 +646,10 @@ Object {
                     </ul>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -676,10 +714,10 @@ Object {
                     </ul>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -711,10 +749,10 @@ Object {
                     </ul>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -746,10 +784,10 @@ Object {
                     </ul>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -772,7 +810,9 @@ Object {
                               d="M512 97.248c-19.04 8.352-39.328 13.888-60.48 16.576 21.76-12.992 38.368-33.408 46.176-58.016-20.288 12.096-42.688 20.64-66.56 25.408C411.872 60.704 384.416 48 354.464 48c-58.112 0-104.896 47.168-104.896 104.992 0 8.32.704 16.32 2.432 23.936-87.264-4.256-164.48-46.08-216.352-109.792-9.056 15.712-14.368 33.696-14.368 53.056 0 36.352 18.72 68.576 46.624 87.232-16.864-.32-33.408-5.216-47.424-12.928v1.152c0 51.008 36.384 93.376 84.096 103.136-8.544 2.336-17.856 3.456-27.52 3.456-6.72 0-13.504-.384-19.872-1.792 13.6 41.568 52.192 72.128 98.08 73.12-35.712 27.936-81.056 44.768-130.144 44.768-8.608 0-16.864-.384-25.12-1.44C46.496 446.88 101.6 464 161.024 464c193.152 0 298.752-160 298.752-298.688 0-4.64-.16-9.12-.384-13.568 20.832-14.784 38.336-33.248 52.608-54.496z"
                             />
                           </svg>
-                          <span>
+                          <span
+                            class="social__label"
+                          >
                             Twitter
                           </span>
                         </a>
@@ -793,7 +833,11 @@ Object {
                               d="M83.829.349C37.532.349 0 37.881 0 84.178c0 41.523 30.222 75.911 69.848 82.57v-65.081H49.626v-23.42h20.222V60.978c0-20.037 12.238-30.956 30.115-30.956 8.562 0 15.92.638 18.056.919v20.944l-12.399.006c-9.72 0-11.594 4.618-11.594 11.397v14.947h23.193l-3.025 23.42H94.026v65.653c41.476-5.048 73.631-40.312 73.631-83.154 0-46.273-37.532-83.805-83.828-83.805z"
                             />
                           </svg>
-                          Facebook
+                          <span
+                            class="social__label"
+                          >
+                            Facebook
+                          </span>
                         </a>
                       </li>
                       <li
@@ -812,7 +856,11 @@ Object {
                               d="M9.417 15.181l-.397 5.584c.568 0 .814-.244 1.109-.537l2.663-2.545 5.518 4.041c1.012.564 1.725.267 1.998-.931L23.93 3.821l.001-.001c.321-1.496-.541-2.081-1.527-1.714l-21.29 8.151c-1.453.564-1.431 1.374-.247 1.741l5.443 1.693L18.953 5.78c.595-.394 1.136-.176.691.218z"
                             />
                           </svg>
-                          Telegram
+                          <span
+                            class="social__label"
+                          >
+                            Telegram
+                          </span>
                         </a>
                       </li>
                       <li
@@ -839,7 +887,11 @@ Object {
                               />
                             </g>
                           </svg>
-                          BitcoinTalk
+                          <span
+                            class="social__label"
+                          >
+                            BitcoinTalk
+                          </span>
                         </a>
                       </li>
                       <li
@@ -866,7 +918,11 @@ Object {
                               r="1.439"
                             />
                           </svg>
-                          Instagram
+                          <span
+                            class="social__label"
+                          >
+                            Instagram
+                          </span>
                         </a>
                       </li>
                     </ul>
@@ -904,7 +960,7 @@ Object {
             </div>
           </div>
           <div
-            class="main__bottom-bar"
+            class="main__bottom-bar main--sidebar-open"
           >
             <div
               class="container-fluid h-100"
@@ -1016,10 +1072,85 @@ Object {
             </div>
           </div>
         </div>
+      </div>
+      <div
+        class="container slide"
+      >
         <div
-          class="live-updates"
+          class="header"
         >
-          live updates
+          <button
+            class="button"
+            style="transform: rotate(0deg);"
+          >
+            <svg
+              class="icon"
+              viewBox="0 0 12 26"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <style>
+                  .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+                </style>
+              </defs>
+              <g
+                data-name="Layer 2"
+                id="Layer_2"
+              >
+                <g
+                  data-name="Layer 1"
+                  id="Layer_1-2"
+                >
+                  <g
+                    data-name="Group 197"
+                    id="Group_197"
+                  >
+                    <path
+                      class="cls-1"
+                      d="M1.5 24.5l9-11"
+                      data-name="Line 23"
+                      id="Line_23"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M1.5 1.5l9 12"
+                      data-name="Line 24"
+                      id="Line_24"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button>
+          <h1
+            class="header__headline"
+          >
+            LIVE UPDATES
+          </h1>
+        </div>
+        <div
+          class="tab-select"
+        >
+          <button
+            class="button button--active"
+          >
+            Latest Bets
+          </button>
+          <button
+            class="button false"
+          >
+            My Bets
+          </button>
+          <button
+            class="button false"
+          >
+            Leaderboards
+          </button>
+        </div>
+        <div>
+          <div>
+            Latest bets
+          </div>
         </div>
       </div>
     </div>
@@ -1029,10 +1160,10 @@ Object {
       class="wrapper"
     >
       <div
-        class="main"
+        class="main main--sidebar-open"
       >
         <div
-          class="main__top-bar"
+          class="main__top-bar main--sidebar-open"
         >
           <div
             class="container-fluid h-100"
@@ -1041,7 +1172,7 @@ Object {
               class="row h-100"
             >
               <div
-                class="col-12 center"
+                class="col-6 center"
               >
                 <a
                   href="/"
@@ -1087,6 +1218,9 @@ Object {
                   </svg>
                 </a>
               </div>
+              <div
+                class="col-6 center right"
+              />
             </div>
           </div>
         </div>
@@ -1266,10 +1400,10 @@ Object {
                 class="row"
               >
                 <div
-                  class="col-12 col-md-6 spacing--right"
+                  class="col-12 col-md-12 col-xl-6 "
                 >
                   <div
-                    class="container container__goal"
+                    class="container container"
                   >
                     <h2
                       class="headline"
@@ -1282,20 +1416,31 @@ Object {
                       Play
                     </span>
                     <div
-                      class="animated__ball"
+                      class="highlight"
                     >
                       <img
                         alt="Ball"
+                        class="highlight__animated"
                         src="goal-ball.svg"
                       />
+                      <img
+                        alt="Field"
+                        class="highlight__static"
+                        src="goal-field-home-button.svg"
+                      />
                     </div>
+                    <img
+                      alt="Goal Keeper"
+                      class="character"
+                      src="goal-character-home-button.svg"
+                    />
                   </div>
                 </div>
                 <div
-                  class="col-12 col-md-6 spacing--left"
+                  class="col-12 col-md-12 col-xl-6 "
                 >
                   <div
-                    class="container container__mines"
+                    class="container container"
                   >
                     <h2
                       class="headline"
@@ -1308,24 +1453,31 @@ Object {
                       Play
                     </span>
                     <div
-                      class="animated__mines"
+                      class="highlight"
                     >
                       <img
                         alt="Bomb"
+                        class="highlight__animated"
                         src="mines-bomb.svg"
                       />
+                      <img
+                        alt="Shadow"
+                        class="highlight__static"
+                        src="mines-shadow-home-button.svg"
+                      />
                     </div>
+                    <img
+                      alt="Soldier"
+                      class="character"
+                      src="mines-character-home-button.svg"
+                    />
                   </div>
                 </div>
-              </div>
-              <div
-                class="row"
-              >
                 <div
-                  class="col-12 col-md-6 spacing--right"
+                  class="col-12 col-md-12 col-xl-6 "
                 >
                   <div
-                    class="container container__clam"
+                    class="container container"
                   >
                     <h2
                       class="headline"
@@ -1338,20 +1490,26 @@ Object {
                       Play
                     </span>
                     <div
-                      class="animated__clam"
+                      class="highlight"
                     >
                       <img
-                        alt="Pear"
+                        alt="Pearl"
+                        class="highlight__animated"
                         src="clam-pearl.svg"
                       />
                     </div>
+                    <img
+                      alt="Clam"
+                      class="character"
+                      src="clams-character-home-button.svg"
+                    />
                   </div>
                 </div>
                 <div
-                  class="col-12 col-md-6 spacing--left"
+                  class="col-12 col-md-12 col-xl-6 "
                 >
                   <div
-                    class="container container__dices"
+                    class="container container"
                   >
                     <h2
                       class="headline"
@@ -1364,13 +1522,24 @@ Object {
                       Play
                     </span>
                     <div
-                      class="animated__dices"
+                      class="highlight"
                     >
                       <img
-                        alt="Dices"
+                        alt="Bomb"
+                        class="highlight__animated"
                         src="dices-dices.svg"
                       />
+                      <img
+                        alt="Shadow"
+                        class="highlight__static"
+                        src="dice-shadow-button.svg"
+                      />
                     </div>
+                    <img
+                      alt="Soldier"
+                      class="character"
+                      src="dice-character-home-button.svg"
+                    />
                   </div>
                 </div>
               </div>
@@ -1480,7 +1649,7 @@ Object {
                 class="row"
               >
                 <div
-                  class="col-12 col-lg-2"
+                  class="col-12 col-xl-2"
                 >
                   <div
                     class="language-select"
@@ -1575,10 +1744,10 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -1628,10 +1797,10 @@ Object {
                   </ul>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -1696,10 +1865,10 @@ Object {
                   </ul>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -1731,10 +1900,10 @@ Object {
                   </ul>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -1766,10 +1935,10 @@ Object {
                   </ul>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -1792,7 +1961,9 @@ Object {
                             d="M512 97.248c-19.04 8.352-39.328 13.888-60.48 16.576 21.76-12.992 38.368-33.408 46.176-58.016-20.288 12.096-42.688 20.64-66.56 25.408C411.872 60.704 384.416 48 354.464 48c-58.112 0-104.896 47.168-104.896 104.992 0 8.32.704 16.32 2.432 23.936-87.264-4.256-164.48-46.08-216.352-109.792-9.056 15.712-14.368 33.696-14.368 53.056 0 36.352 18.72 68.576 46.624 87.232-16.864-.32-33.408-5.216-47.424-12.928v1.152c0 51.008 36.384 93.376 84.096 103.136-8.544 2.336-17.856 3.456-27.52 3.456-6.72 0-13.504-.384-19.872-1.792 13.6 41.568 52.192 72.128 98.08 73.12-35.712 27.936-81.056 44.768-130.144 44.768-8.608 0-16.864-.384-25.12-1.44C46.496 446.88 101.6 464 161.024 464c193.152 0 298.752-160 298.752-298.688 0-4.64-.16-9.12-.384-13.568 20.832-14.784 38.336-33.248 52.608-54.496z"
                           />
                         </svg>
-                        <span>
+                        <span
+                          class="social__label"
+                        >
                           Twitter
                         </span>
                       </a>
@@ -1813,7 +1984,11 @@ Object {
                             d="M83.829.349C37.532.349 0 37.881 0 84.178c0 41.523 30.222 75.911 69.848 82.57v-65.081H49.626v-23.42h20.222V60.978c0-20.037 12.238-30.956 30.115-30.956 8.562 0 15.92.638 18.056.919v20.944l-12.399.006c-9.72 0-11.594 4.618-11.594 11.397v14.947h23.193l-3.025 23.42H94.026v65.653c41.476-5.048 73.631-40.312 73.631-83.154 0-46.273-37.532-83.805-83.828-83.805z"
                           />
                         </svg>
-                        Facebook
+                        <span
+                          class="social__label"
+                        >
+                          Facebook
+                        </span>
                       </a>
                     </li>
                     <li
@@ -1832,7 +2007,11 @@ Object {
                             d="M9.417 15.181l-.397 5.584c.568 0 .814-.244 1.109-.537l2.663-2.545 5.518 4.041c1.012.564 1.725.267 1.998-.931L23.93 3.821l.001-.001c.321-1.496-.541-2.081-1.527-1.714l-21.29 8.151c-1.453.564-1.431 1.374-.247 1.741l5.443 1.693L18.953 5.78c.595-.394 1.136-.176.691.218z"
                           />
                         </svg>
-                        Telegram
+                        <span
+                          class="social__label"
+                        >
+                          Telegram
+                        </span>
                       </a>
                     </li>
                     <li
@@ -1859,7 +2038,11 @@ Object {
                             />
                           </g>
                         </svg>
-                        BitcoinTalk
+                        <span
+                          class="social__label"
+                        >
+                          BitcoinTalk
+                        </span>
                       </a>
                     </li>
                     <li
@@ -1886,7 +2069,11 @@ Object {
                             r="1.439"
                           />
                         </svg>
-                        Instagram
+                        <span
+                          class="social__label"
+                        >
+                          Instagram
+                        </span>
                       </a>
                     </li>
                   </ul>
@@ -1924,7 +2111,7 @@ Object {
           </div>
         </div>
         <div
-          class="main__bottom-bar"
+          class="main__bottom-bar main--sidebar-open"
         >
           <div
             class="container-fluid h-100"
@@ -2036,10 +2223,85 @@ Object {
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="container slide"
+    >
       <div
-        class="live-updates"
+        class="header"
       >
-        live updates
+        <button
+          class="button"
+          style="transform: rotate(0deg);"
+        >
+          <svg
+            class="icon"
+            viewBox="0 0 12 26"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <style>
+                .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+              </style>
+            </defs>
+            <g
+              data-name="Layer 2"
+              id="Layer_2"
+            >
+              <g
+                data-name="Layer 1"
+                id="Layer_1-2"
+              >
+                <g
+                  data-name="Group 197"
+                  id="Group_197"
+                >
+                  <path
+                    class="cls-1"
+                    d="M1.5 24.5l9-11"
+                    data-name="Line 23"
+                    id="Line_23"
+                  />
+                  <path
+                    class="cls-1"
+                    d="M1.5 1.5l9 12"
+                    data-name="Line 24"
+                    id="Line_24"
+                  />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </button>
+        <h1
+          class="header__headline"
+        >
+          LIVE UPDATES
+        </h1>
+      </div>
+      <div
+        class="tab-select"
+      >
+        <button
+          class="button button--active"
+        >
+          Latest Bets
+        </button>
+        <button
+          class="button false"
+        >
+          My Bets
+        </button>
+        <button
+          class="button false"
+        >
+          Leaderboards
+        </button>
+      </div>
+      <div>
+        <div>
+          Latest bets
+        </div>
       </div>
     </div>
   </div>,

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Balance.module.scss';
-import Bitcoin from '../../../icons/social/Bitcoin';
+import Bitcoin from '../../../../../icons/social/Bitcoin';
 
 interface IProps {
   value: string;
