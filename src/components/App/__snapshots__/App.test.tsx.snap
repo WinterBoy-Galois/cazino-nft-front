@@ -9,10 +9,10 @@ Object {
         class="wrapper"
       >
         <div
-          class="main "
+          class="main main--sidebar-open"
         >
           <div
-            class="main__top-bar "
+            class="main__top-bar main--sidebar-open"
           >
             <div
               class="container-fluid h-100"
@@ -69,51 +69,7 @@ Object {
                 </div>
                 <div
                   class="col-6 center right"
-                >
-                  <button
-                    class="button"
-                    style="transform: rotate(180deg);"
-                  >
-                    <svg
-                      class="icon"
-                      viewBox="0 0 12 26"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <defs>
-                        <style>
-                          .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
-                        </style>
-                      </defs>
-                      <g
-                        data-name="Layer 2"
-                        id="Layer_2"
-                      >
-                        <g
-                          data-name="Layer 1"
-                          id="Layer_1-2"
-                        >
-                          <g
-                            data-name="Group 197"
-                            id="Group_197"
-                          >
-                            <path
-                              class="cls-1"
-                              d="M1.5 24.5l9-11"
-                              data-name="Line 23"
-                              id="Line_23"
-                            />
-                            <path
-                              class="cls-1"
-                              d="M1.5 1.5l9 12"
-                              data-name="Line 24"
-                              id="Line_24"
-                            />
-                          </g>
-                        </g>
-                      </g>
-                    </svg>
-                  </button>
-                </div>
+                />
               </div>
             </div>
           </div>
@@ -293,7 +249,7 @@ Object {
                   class="row"
                 >
                   <div
-                    class="col-12 col-md-6 col-xl-6 "
+                    class="col-12 col-md-12 col-xl-6 "
                   >
                     <div
                       class="container container"
@@ -330,7 +286,7 @@ Object {
                     </div>
                   </div>
                   <div
-                    class="col-12 col-md-6 col-xl-6 "
+                    class="col-12 col-md-12 col-xl-6 "
                   >
                     <div
                       class="container container"
@@ -367,7 +323,7 @@ Object {
                     </div>
                   </div>
                   <div
-                    class="col-12 col-md-6 col-xl-6 "
+                    class="col-12 col-md-12 col-xl-6 "
                   >
                     <div
                       class="container container"
@@ -399,7 +355,7 @@ Object {
                     </div>
                   </div>
                   <div
-                    class="col-12 col-md-6 col-xl-6 "
+                    class="col-12 col-md-12 col-xl-6 "
                   >
                     <div
                       class="container container"
@@ -542,7 +498,7 @@ Object {
                   class="row"
                 >
                   <div
-                    class="col-12 col-lg-2"
+                    class="col-12 col-xl-2"
                   >
                     <div
                       class="language-select"
@@ -637,10 +593,10 @@ Object {
                     </div>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list false"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -690,10 +646,10 @@ Object {
                     </ul>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list false"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -758,10 +714,10 @@ Object {
                     </ul>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list false"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -793,10 +749,10 @@ Object {
                     </ul>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list false"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -828,10 +784,10 @@ Object {
                     </ul>
                   </div>
                   <div
-                    class="col-6 col-lg-2"
+                    class="col-6 col-xl-2"
                   >
                     <ul
-                      class="list false"
+                      class="list list--spacing"
                     >
                       <li
                         class="list__item--headline"
@@ -1004,7 +960,7 @@ Object {
             </div>
           </div>
           <div
-            class="main__bottom-bar "
+            class="main__bottom-bar main--sidebar-open"
           >
             <div
               class="container-fluid h-100"
@@ -1204,10 +1160,10 @@ Object {
       class="wrapper"
     >
       <div
-        class="main "
+        class="main main--sidebar-open"
       >
         <div
-          class="main__top-bar "
+          class="main__top-bar main--sidebar-open"
         >
           <div
             class="container-fluid h-100"
@@ -1264,51 +1220,7 @@ Object {
               </div>
               <div
                 class="col-6 center right"
-              >
-                <button
-                  class="button"
-                  style="transform: rotate(180deg);"
-                >
-                  <svg
-                    class="icon"
-                    viewBox="0 0 12 26"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <defs>
-                      <style>
-                        .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
-                      </style>
-                    </defs>
-                    <g
-                      data-name="Layer 2"
-                      id="Layer_2"
-                    >
-                      <g
-                        data-name="Layer 1"
-                        id="Layer_1-2"
-                      >
-                        <g
-                          data-name="Group 197"
-                          id="Group_197"
-                        >
-                          <path
-                            class="cls-1"
-                            d="M1.5 24.5l9-11"
-                            data-name="Line 23"
-                            id="Line_23"
-                          />
-                          <path
-                            class="cls-1"
-                            d="M1.5 1.5l9 12"
-                            data-name="Line 24"
-                            id="Line_24"
-                          />
-                        </g>
-                      </g>
-                    </g>
-                  </svg>
-                </button>
-              </div>
+              />
             </div>
           </div>
         </div>
@@ -1488,7 +1400,7 @@ Object {
                 class="row"
               >
                 <div
-                  class="col-12 col-md-6 col-xl-6 "
+                  class="col-12 col-md-12 col-xl-6 "
                 >
                   <div
                     class="container container"
@@ -1525,7 +1437,7 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="col-12 col-md-6 col-xl-6 "
+                  class="col-12 col-md-12 col-xl-6 "
                 >
                   <div
                     class="container container"
@@ -1562,7 +1474,7 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="col-12 col-md-6 col-xl-6 "
+                  class="col-12 col-md-12 col-xl-6 "
                 >
                   <div
                     class="container container"
@@ -1594,7 +1506,7 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="col-12 col-md-6 col-xl-6 "
+                  class="col-12 col-md-12 col-xl-6 "
                 >
                   <div
                     class="container container"
@@ -1737,7 +1649,7 @@ Object {
                 class="row"
               >
                 <div
-                  class="col-12 col-lg-2"
+                  class="col-12 col-xl-2"
                 >
                   <div
                     class="language-select"
@@ -1832,10 +1744,10 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list false"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -1885,10 +1797,10 @@ Object {
                   </ul>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list false"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -1953,10 +1865,10 @@ Object {
                   </ul>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list false"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -1988,10 +1900,10 @@ Object {
                   </ul>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list false"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -2023,10 +1935,10 @@ Object {
                   </ul>
                 </div>
                 <div
-                  class="col-6 col-lg-2"
+                  class="col-6 col-xl-2"
                 >
                   <ul
-                    class="list false"
+                    class="list list--spacing"
                   >
                     <li
                       class="list__item--headline"
@@ -2199,7 +2111,7 @@ Object {
           </div>
         </div>
         <div
-          class="main__bottom-bar "
+          class="main__bottom-bar main--sidebar-open"
         >
           <div
             class="container-fluid h-100"

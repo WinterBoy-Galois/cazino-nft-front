@@ -27,6 +27,7 @@ const SideBar: React.SFC = () => {
         exit: styles['slide--exit'],
         exitDone: styles['slide--exit'],
       }}
+      appear={true}
     >
       <div className={`${styles.container} ${styles.slide}`}>
         <div className={styles.header}>

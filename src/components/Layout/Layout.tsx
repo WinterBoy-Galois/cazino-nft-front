@@ -12,11 +12,10 @@ const Layout: React.SFC = ({ children }) => {
   return (
     <>
       <div className={styles.wrapper}>
-        <div className={`${styles.main} ${sidebar.isOpen ? styles['main--sidebar-open'] : ''}`}>
+        <div className={`${styles.main} ${sidebar.isOpen && styles['main--sidebar-open']}`}>
           <div
-            className={`${styles['main__top-bar']} ${
-              sidebar.isOpen ? styles['main--sidebar-open'] : ''
-            }`}
+            className={`${styles['main__top-bar']} ${sidebar.isOpen &&
+              styles['main--sidebar-open']}`}
           >
             <TopBar />
           </div>
@@ -25,9 +24,8 @@ const Layout: React.SFC = ({ children }) => {
             <Footer />
           </div>
           <div
-            className={`${styles['main__bottom-bar']} ${
-              sidebar.isOpen ? styles['main--sidebar-open'] : ''
-            }`}
+            className={`${styles['main__bottom-bar']} ${sidebar.isOpen &&
+              styles['main--sidebar-open']}`}
           >
             <BottomBar />
           </div>
