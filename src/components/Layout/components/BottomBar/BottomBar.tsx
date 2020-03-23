@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './BottomBar.module.scss';
-import Balance from '../Balance';
+import Balance from './components/Balance';
 import BottomBarMenu from './components/Menu';
 
 const BottomBar: React.SFC = () => {

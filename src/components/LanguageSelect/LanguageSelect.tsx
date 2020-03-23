@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import deFlag from '../../assets/images/flags/de.svg';
 import gbFlag from '../../assets/images/flags/gb.svg';
 import { TFunction } from 'i18next';
-import { useClickOutside } from '../../hooks/useClickOutside.hooks';
+import { useClickOutside } from '../../hooks/useClickOutside.hook';
 
 const LanguageSelect: React.SFC = () => {
   const wrapperRef = useRef(null);

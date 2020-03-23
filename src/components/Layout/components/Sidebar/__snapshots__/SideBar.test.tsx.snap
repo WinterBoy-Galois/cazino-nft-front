@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideBar should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container slide"
+      >
+        <div
+          class="header"
+        >
+          <button
+            class="button"
+            style="transform: rotate(0deg);"
+          >
+            <svg
+              class="icon"
+              viewBox="0 0 12 26"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <style>
+                  .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+                </style>
+              </defs>
+              <g
+                data-name="Layer 2"
+                id="Layer_2"
+              >
+                <g
+                  data-name="Layer 1"
+                  id="Layer_1-2"
+                >
+                  <g
+                    data-name="Group 197"
+                    id="Group_197"
+                  >
+                    <path
+                      class="cls-1"
+                      d="M1.5 24.5l9-11"
+                      data-name="Line 23"
+                      id="Line_23"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M1.5 1.5l9 12"
+                      data-name="Line 24"
+                      id="Line_24"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button>
+          <h1
+            class="header__headline"
+          >
+            LIVE UPDATES
+          </h1>
+        </div>
+        <div
+          class="tab-select"
+        >
+          <button
+            class="button button--active"
+          >
+            Latest Bets
+          </button>
+          <button
+            class="button false"
+          >
+            My Bets
+          </button>
+          <button
+            class="button false"
+          >
+            Leaderboards
+          </button>
+        </div>
+        <div>
+          <div>
+            Latest bets
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container slide"
+    >
+      <div
+        class="header"
+      >
+        <button
+          class="button"
+          style="transform: rotate(0deg);"
+        >
+          <svg
+            class="icon"
+            viewBox="0 0 12 26"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <style>
+                .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+              </style>
+            </defs>
+            <g
+              data-name="Layer 2"
+              id="Layer_2"
+            >
+              <g
+                data-name="Layer 1"
+                id="Layer_1-2"
+              >
+                <g
+                  data-name="Group 197"
+                  id="Group_197"
+                >
+                  <path
+                    class="cls-1"
+                    d="M1.5 24.5l9-11"
+                    data-name="Line 23"
+                    id="Line_23"
+                  />
+                  <path
+                    class="cls-1"
+                    d="M1.5 1.5l9 12"
+                    data-name="Line 24"
+                    id="Line_24"
+                  />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </button>
+        <h1
+          class="header__headline"
+        >
+          LIVE UPDATES
+        </h1>
+      </div>
+      <div
+        class="tab-select"
+      >
+        <button
+          class="button button--active"
+        >
+          Latest Bets
+        </button>
+        <button
+          class="button false"
+        >
+          My Bets
+        </button>
+        <button
+          class="button false"
+        >
+          Leaderboards
+        </button>
+      </div>
+      <div>
+        <div>
+          Latest bets
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

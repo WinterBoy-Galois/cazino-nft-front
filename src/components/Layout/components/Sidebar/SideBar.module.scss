@@ -1,0 +1,68 @@
+@import '../../../../styles/shared';
+
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: $sidebar-width;
+  height: calc(100% - #{$bar-height});
+  background-color: #0d253b;
+  z-index: 2;
+
+  @include media-breakpoint-up(md) {
+    position: fixed;
+    width: $sidebar-width-md;
+    height: 100%;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: $sidebar-width-xl;
+  }
+}
+
+.slide {
+  transition: all 200ms ease-in-out;
+  right: -100%;
+
+  &--enter {
+    right: 0;
+  }
+
+  &--exit {
+    right: -100%;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: $bar-height;
+  padding: 0 1rem;
+  background-color: $blue;
+
+  @include media-breakpoint-up(md) {
+    background-color: unset;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: $bar-height-lg;
+  }
+
+  &__headline {
+    margin: 0 0 0 1rem;
+    color: $live-updates-light-blue;
+    font-size: 24px;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 32px;
+    }
+  }
+}
+
+.tab-select {
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+}
