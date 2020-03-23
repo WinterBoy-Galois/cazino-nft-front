@@ -74,46 +74,44 @@ Object {
                     class="button"
                     style="transform: rotate(180deg);"
                   >
-                    <div>
-                      <svg
-                        class="icon"
-                        viewBox="0 0 12 26"
-                        xmlns="http://www.w3.org/2000/svg"
+                    <svg
+                      class="icon"
+                      viewBox="0 0 12 26"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <defs>
+                        <style>
+                          .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+                        </style>
+                      </defs>
+                      <g
+                        data-name="Layer 2"
+                        id="Layer_2"
                       >
-                        <defs>
-                          <style>
-                            .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
-                          </style>
-                        </defs>
                         <g
-                          data-name="Layer 2"
-                          id="Layer_2"
+                          data-name="Layer 1"
+                          id="Layer_1-2"
                         >
                           <g
-                            data-name="Layer 1"
-                            id="Layer_1-2"
+                            data-name="Group 197"
+                            id="Group_197"
                           >
-                            <g
-                              data-name="Group 197"
-                              id="Group_197"
-                            >
-                              <path
-                                class="cls-1"
-                                d="M1.5 24.5l9-11"
-                                data-name="Line 23"
-                                id="Line_23"
-                              />
-                              <path
-                                class="cls-1"
-                                d="M1.5 1.5l9 12"
-                                data-name="Line 24"
-                                id="Line_24"
-                              />
-                            </g>
+                            <path
+                              class="cls-1"
+                              d="M1.5 24.5l9-11"
+                              data-name="Line 23"
+                              id="Line_23"
+                            />
+                            <path
+                              class="cls-1"
+                              d="M1.5 1.5l9 12"
+                              data-name="Line 24"
+                              id="Line_24"
+                            />
                           </g>
                         </g>
-                      </svg>
-                    </div>
+                      </g>
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -1129,46 +1127,44 @@ Object {
             class="button"
             style="transform: rotate(0deg);"
           >
-            <div>
-              <svg
-                class="icon"
-                viewBox="0 0 12 26"
-                xmlns="http://www.w3.org/2000/svg"
+            <svg
+              class="icon"
+              viewBox="0 0 12 26"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <style>
+                  .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+                </style>
+              </defs>
+              <g
+                data-name="Layer 2"
+                id="Layer_2"
               >
-                <defs>
-                  <style>
-                    .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
-                  </style>
-                </defs>
                 <g
-                  data-name="Layer 2"
-                  id="Layer_2"
+                  data-name="Layer 1"
+                  id="Layer_1-2"
                 >
                   <g
-                    data-name="Layer 1"
-                    id="Layer_1-2"
+                    data-name="Group 197"
+                    id="Group_197"
                   >
-                    <g
-                      data-name="Group 197"
-                      id="Group_197"
-                    >
-                      <path
-                        class="cls-1"
-                        d="M1.5 24.5l9-11"
-                        data-name="Line 23"
-                        id="Line_23"
-                      />
-                      <path
-                        class="cls-1"
-                        d="M1.5 1.5l9 12"
-                        data-name="Line 24"
-                        id="Line_24"
-                      />
-                    </g>
+                    <path
+                      class="cls-1"
+                      d="M1.5 24.5l9-11"
+                      data-name="Line 23"
+                      id="Line_23"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M1.5 1.5l9 12"
+                      data-name="Line 24"
+                      id="Line_24"
+                    />
                   </g>
                 </g>
-              </svg>
-            </div>
+              </g>
+            </svg>
           </button>
           <h1
             class="header__headline"
@@ -1252,46 +1248,44 @@ Object {
                   class="button"
                   style="transform: rotate(180deg);"
                 >
-                  <div>
-                    <svg
-                      class="icon"
-                      viewBox="0 0 12 26"
-                      xmlns="http://www.w3.org/2000/svg"
+                  <svg
+                    class="icon"
+                    viewBox="0 0 12 26"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <style>
+                        .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+                      </style>
+                    </defs>
+                    <g
+                      data-name="Layer 2"
+                      id="Layer_2"
                     >
-                      <defs>
-                        <style>
-                          .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
-                        </style>
-                      </defs>
                       <g
-                        data-name="Layer 2"
-                        id="Layer_2"
+                        data-name="Layer 1"
+                        id="Layer_1-2"
                       >
                         <g
-                          data-name="Layer 1"
-                          id="Layer_1-2"
+                          data-name="Group 197"
+                          id="Group_197"
                         >
-                          <g
-                            data-name="Group 197"
-                            id="Group_197"
-                          >
-                            <path
-                              class="cls-1"
-                              d="M1.5 24.5l9-11"
-                              data-name="Line 23"
-                              id="Line_23"
-                            />
-                            <path
-                              class="cls-1"
-                              d="M1.5 1.5l9 12"
-                              data-name="Line 24"
-                              id="Line_24"
-                            />
-                          </g>
+                          <path
+                            class="cls-1"
+                            d="M1.5 24.5l9-11"
+                            data-name="Line 23"
+                            id="Line_23"
+                          />
+                          <path
+                            class="cls-1"
+                            d="M1.5 1.5l9 12"
+                            data-name="Line 24"
+                            id="Line_24"
+                          />
                         </g>
                       </g>
-                    </svg>
-                  </div>
+                    </g>
+                  </svg>
                 </button>
               </div>
             </div>
@@ -2307,46 +2301,44 @@ Object {
           class="button"
           style="transform: rotate(0deg);"
         >
-          <div>
-            <svg
-              class="icon"
-              viewBox="0 0 12 26"
-              xmlns="http://www.w3.org/2000/svg"
+          <svg
+            class="icon"
+            viewBox="0 0 12 26"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <style>
+                .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+              </style>
+            </defs>
+            <g
+              data-name="Layer 2"
+              id="Layer_2"
             >
-              <defs>
-                <style>
-                  .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
-                </style>
-              </defs>
               <g
-                data-name="Layer 2"
-                id="Layer_2"
+                data-name="Layer 1"
+                id="Layer_1-2"
               >
                 <g
-                  data-name="Layer 1"
-                  id="Layer_1-2"
+                  data-name="Group 197"
+                  id="Group_197"
                 >
-                  <g
-                    data-name="Group 197"
-                    id="Group_197"
-                  >
-                    <path
-                      class="cls-1"
-                      d="M1.5 24.5l9-11"
-                      data-name="Line 23"
-                      id="Line_23"
-                    />
-                    <path
-                      class="cls-1"
-                      d="M1.5 1.5l9 12"
-                      data-name="Line 24"
-                      id="Line_24"
-                    />
-                  </g>
+                  <path
+                    class="cls-1"
+                    d="M1.5 24.5l9-11"
+                    data-name="Line 23"
+                    id="Line_23"
+                  />
+                  <path
+                    class="cls-1"
+                    d="M1.5 1.5l9 12"
+                    data-name="Line 24"
+                    id="Line_24"
+                  />
                 </g>
               </g>
-            </svg>
-          </div>
+            </g>
+          </svg>
         </button>
         <h1
           class="header__headline"

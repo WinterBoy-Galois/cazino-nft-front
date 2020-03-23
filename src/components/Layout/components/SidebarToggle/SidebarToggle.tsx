@@ -16,9 +16,7 @@ const SidebarToggle: React.SFC<IProps> = ({ arrowLeft }) => {
       onClick={() => dispatch({ type: 'TOGGLE_SIDEBAR' })}
       style={{ transform: arrowLeft ? 'rotate(180deg)' : 'rotate(0deg)' }}
     >
-      <div>
-        <Arrow className={styles.icon} />
-      </div>
+      <Arrow className={styles.icon} />
     </button>
   );
 };
