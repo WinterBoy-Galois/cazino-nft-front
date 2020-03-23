@@ -16,7 +16,7 @@ import LanguageSelect from '../LanguageSelect';
 import { useStateValue } from '../../state';
 import preval from 'preval.macro';
 
-const buildDate = preval`module.exports = new Date()`;
+const buildDate = preval`module.exports = Date.now()`;
 
 const Footer: React.SFC = () => {
   const { t } = useTranslation(['footer']);
@@ -109,9 +109,13 @@ const Footer: React.SFC = () => {
               <div className={styles['age-disclaimer__age']}>18+</div>
               <div className={styles['age-disclaimer__label']}>Responsible Gambling</div>
             </div>
-            <small className={styles.build}>{`Build: ${new Date(
-              buildDate
-            ).toLocaleDateString()} ${new Date(buildDate).toLocaleTimeString()}`}</small>
+            <small className={styles.build}>{`Build: ${new Intl.DateTimeFormat('de-DE', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            }).format(buildDate)}`}</small>
           </div>
         </div>
       </div>
