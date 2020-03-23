@@ -4,7 +4,8 @@
   .highlight {
     position: absolute;
     left: 1rem;
-    bottom: 0;
+    right: 0;
+    bottom: 16px;
     width: 37%;
     display: flex;
     flex-direction: column;
@@ -12,8 +13,12 @@
 
     &__animated {
       width: 59%;
-      transform: translateY(25px);
+      transform: translateY(18%);
       transition: transform 200ms ease-in-out;
+    }
+
+    &__static {
+      width: 100%;
     }
   }
 
@@ -23,7 +28,7 @@
 
   &:hover .highlight {
     &__animated {
-      transform: translateY(0) scale(1.1);
+      transform: translateY(-8%) scale(1.1);
     }
   }
 }

@@ -4,7 +4,7 @@
   .highlight {
     position: absolute;
     left: 1rem;
-    bottom: 12px;
+    bottom: 16px;
     width: 43%;
     display: flex;
     flex-direction: column;
@@ -12,8 +12,12 @@
 
     &__animated {
       width: 54%;
-      transform: translateY(7px);
+      transform: translateY(6%);
       transition: transform 200ms ease-in-out;
+    }
+
+    &__static {
+      width: 100%;
     }
   }
 
