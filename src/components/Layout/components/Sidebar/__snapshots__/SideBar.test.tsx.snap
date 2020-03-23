@@ -62,7 +62,28 @@ Object {
         </div>
         <div
           class="tab-select"
-        />
+        >
+          <button
+            class="button button--active"
+          >
+            Latest Bets
+          </button>
+          <button
+            class="button false"
+          >
+            My Bets
+          </button>
+          <button
+            class="button false"
+          >
+            Leaderboards
+          </button>
+        </div>
+        <div>
+          <div>
+            Latest bets
+          </div>
+        </div>
       </div>
     </div>
   </body>,
@@ -124,7 +145,28 @@ Object {
       </div>
       <div
         class="tab-select"
-      />
+      >
+        <button
+          class="button button--active"
+        >
+          Latest Bets
+        </button>
+        <button
+          class="button false"
+        >
+          My Bets
+        </button>
+        <button
+          class="button false"
+        >
+          Leaderboards
+        </button>
+      </div>
+      <div>
+        <div>
+          Latest bets
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

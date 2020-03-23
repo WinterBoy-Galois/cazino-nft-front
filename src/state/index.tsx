@@ -6,6 +6,8 @@ import { Action } from './actions';
 const initialState: State = {
   sidebar: {
     isOpen: false,
+    selectedTab: 'LATEST_BETS',
+    selectedLeaderboardAggregation: 'DAILY',
   },
 };
 

@@ -5,15 +5,21 @@ import { CSSTransition } from 'react-transition-group';
 import SidebarToggle from '../SidebarToggle';
 import { useScrollLock } from '../../../../hooks/useScrollLock.hook';
 import { Breakpoint, useBreakpoint } from '../../../../hooks/useBreakpoint.hook';
+import { SidebarTab } from '../../../../state/models/sidebar.model';
+import TabSelect from './components/TabSelect/TabSelect';
 
 const SideBar: React.SFC = () => {
-  const [{ sidebar }] = useStateValue();
+  const [
+    {
+      sidebar: { isOpen, selectedTab },
+    },
+  ] = useStateValue();
   const breakpoint = useBreakpoint();
-  useScrollLock(sidebar.isOpen && activateScrollLock(breakpoint));
+  useScrollLock(isOpen && activateScrollLock(breakpoint));
 
   return (
     <CSSTransition
-      in={sidebar.isOpen}
+      in={isOpen}
       timeout={200}
       classNames={{
         enter: styles['slide--enter'],
@@ -27,7 +33,10 @@ const SideBar: React.SFC = () => {
           <SidebarToggle />
           <h1 className={styles['header__headline']}>LIVE UPDATES</h1>
         </div>
-        <div className={styles['tab-select']} />
+        <div className={styles['tab-select']}>
+          <TabSelect />
+        </div>
+        <div>{renderTab(selectedTab)}</div>
       </div>
     </CSSTransition>
   );
@@ -43,5 +52,16 @@ const activateScrollLock = (breakpoint: Breakpoint): boolean => {
 
     default:
       return false;
+  }
+};
+
+const renderTab = (tab: SidebarTab) => {
+  switch (tab) {
+    case 'LATEST_BETS':
+      return <div>Latest bets</div>;
+    case 'MY_BETS':
+      return <div>My bets</div>;
+    case 'LEADERBOARDS':
+      return <div>Leaderboards</div>;
   }
 };
