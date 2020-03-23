@@ -7,9 +7,9 @@ describe('Footer', () => {
     // Arrange
 
     // Act
-    render(<Footer />);
+    const container = render(<Footer />);
 
     // Assert
-    // expect(container).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });

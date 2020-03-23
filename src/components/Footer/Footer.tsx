@@ -14,9 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
 import LanguageSelect from '../LanguageSelect';
 import { useStateValue } from '../../state';
-import preval from 'preval.macro';
-
-const buildDate = preval`module.exports = Date.now()`;
+import { buildDate } from '../../common/util';
 
 const Footer: React.SFC = () => {
   const { t } = useTranslation(['footer']);

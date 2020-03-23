@@ -4,3 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 import './i18n';
+
+jest.mock('./common/util', () => ({
+  buildDate: new Date(1584989935418),
+}));
