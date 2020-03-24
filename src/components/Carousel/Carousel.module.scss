@@ -6,7 +6,15 @@
   overflow: auto;
 
   @include media-breakpoint-up(md) {
-    width: 80%;
+    width: 400px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 600px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: 800px;
   }
 }
 
@@ -24,6 +32,7 @@
 
   @include media-breakpoint-up(lg) {
     height: 180px;
+    background-position: right -123px top;
   }
 }
 
@@ -54,6 +63,7 @@
 
     @include media-breakpoint-up(lg) {
       padding: 30px;
+      width: 60%;
     }
   }
 
