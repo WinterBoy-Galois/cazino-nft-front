@@ -95,8 +95,8 @@ const Footer: React.SFC = () => {
             </ul>
           </div>
         </div>
-        <div className="row">
-          <div className={`col-12 ${styles.seals}`}>
+        <div className={`row`}>
+          <div className={`col-12 col-lg-9 ${styles.seals}`}>
             <img
               className={styles.seals__item}
               src={CryptoGamblingFoundationLogo}
@@ -107,13 +107,17 @@ const Footer: React.SFC = () => {
               <div className={styles['age-disclaimer__age']}>18+</div>
               <div className={styles['age-disclaimer__label']}>Responsible Gambling</div>
             </div>
-            <small className={styles.build}>{`Build: ${new Intl.DateTimeFormat('de-DE', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            }).format(buildDate)}`}</small>
+          </div>
+          <div className={`col-12 col-lg-3 ${styles.build}`}>
+            <small>
+              {`Last build: ${new Intl.DateTimeFormat('de-DE', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              }).format(buildDate)}`}
+            </small>
           </div>
         </div>
       </div>

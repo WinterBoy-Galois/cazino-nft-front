@@ -449,7 +449,7 @@ Object {
             class="row"
           >
             <div
-              class="col-12 seals"
+              class="col-12 col-lg-9 seals"
             >
               <img
                 alt="Crypto Gambling Foundation"
@@ -471,10 +471,12 @@ Object {
                   Responsible Gambling
                 </div>
               </div>
-              <small
-                class="build"
-              >
-                Build: 23.03.2020, 18:58
+            </div>
+            <div
+              class="col-12 col-lg-3 build"
+            >
+              <small>
+                Last build: 23.03.2020, 18:58
               </small>
             </div>
           </div>
@@ -927,7 +929,7 @@ Object {
           class="row"
         >
           <div
-            class="col-12 seals"
+            class="col-12 col-lg-9 seals"
           >
             <img
               alt="Crypto Gambling Foundation"
@@ -949,10 +951,12 @@ Object {
                 Responsible Gambling
               </div>
             </div>
-            <small
-              class="build"
-            >
-              Build: 23.03.2020, 18:58
+          </div>
+          <div
+            class="col-12 col-lg-3 build"
+          >
+            <small>
+              Last build: 23.03.2020, 18:58
             </small>
           </div>
         </div>
