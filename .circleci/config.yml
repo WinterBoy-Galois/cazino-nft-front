@@ -30,8 +30,7 @@ jobs:
             $DROPLET_USER@$DROPLET_IP:/home/circleci/cc-front/
       - add_ssh_keys:
           fingerprints:
-            # - "7e:96:cd:75:de:bd:66:8b:e3:aa:50:77:5d:58:25:9c"
-            - "2a:02:5f:16:7d:2c:c3:ca:6f:e2:1a:86:c7:14:80:47"
+            - "84:b5:3d:c3:05:c9:c6:16:77:04:a2:e5:84:1c:3d:71"
 workflows:
     build-and-test:
       jobs:
