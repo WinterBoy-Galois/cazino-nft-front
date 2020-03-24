@@ -7,6 +7,7 @@ import { useScrollLock } from '../../../../hooks/useScrollLock.hook';
 import { Breakpoint, useBreakpoint } from '../../../../hooks/useBreakpoint.hook';
 import { SidebarTab } from '../../../../state/models/sidebar.model';
 import TabSelect from './components/TabSelect/TabSelect';
+import BetTable from '../../../BetTable';
 
 const SideBar: React.SFC = () => {
   const [
@@ -59,7 +60,11 @@ const activateScrollLock = (breakpoint: Breakpoint): boolean => {
 const renderTab = (tab: SidebarTab) => {
   switch (tab) {
     case 'LATEST_BETS':
-      return <div>Latest bets</div>;
+      return (
+        <div className="container">
+          <BetTable bets={[]} isLoading={false} error={false} />
+        </div>
+      );
     case 'MY_BETS':
       return <div>My bets</div>;
     case 'LEADERBOARDS':
