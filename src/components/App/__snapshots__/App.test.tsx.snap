@@ -1153,8 +1153,76 @@ Object {
           </button>
         </div>
         <div>
-          <div>
-            Latest bets
+          <div
+            class="container"
+          >
+            <div
+              class="bet-table__wrapper"
+            >
+              <table
+                class="bet-table"
+              >
+                <thead
+                  class="bet-table__header"
+                >
+                  <tr>
+                    <th />
+                    <th>
+                      Time
+                    </th>
+                    <th>
+                      User
+                    </th>
+                    <th>
+                      Profit
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="bet-table__body"
+                >
+                  <tr>
+                    <td>
+                      <div />
+                    </td>
+                    <td
+                      class="hide--small hide--medium"
+                    >
+                      <div />
+                    </td>
+                    <td
+                      class="hide--small hide--medium"
+                    >
+                      <div />
+                    </td>
+                    <td>
+                      <div />
+                    </td>
+                  </tr>
+                  <p>
+                    No Data
+                  </p>
+                  <tr>
+                    <td>
+                      <div />
+                    </td>
+                    <td
+                      class="hide--small hide--medium"
+                    >
+                      <div />
+                    </td>
+                    <td
+                      class="hide--small hide--medium"
+                    >
+                      <div />
+                    </td>
+                    <td>
+                      <div />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -2309,8 +2377,76 @@ Object {
         </button>
       </div>
       <div>
-        <div>
-          Latest bets
+        <div
+          class="container"
+        >
+          <div
+            class="bet-table__wrapper"
+          >
+            <table
+              class="bet-table"
+            >
+              <thead
+                class="bet-table__header"
+              >
+                <tr>
+                  <th />
+                  <th>
+                    Time
+                  </th>
+                  <th>
+                    User
+                  </th>
+                  <th>
+                    Profit
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="bet-table__body"
+              >
+                <tr>
+                  <td>
+                    <div />
+                  </td>
+                  <td
+                    class="hide--small hide--medium"
+                  >
+                    <div />
+                  </td>
+                  <td
+                    class="hide--small hide--medium"
+                  >
+                    <div />
+                  </td>
+                  <td>
+                    <div />
+                  </td>
+                </tr>
+                <p>
+                  No Data
+                </p>
+                <tr>
+                  <td>
+                    <div />
+                  </td>
+                  <td
+                    class="hide--small hide--medium"
+                  >
+                    <div />
+                  </td>
+                  <td
+                    class="hide--small hide--medium"
+                  >
+                    <div />
+                  </td>
+                  <td>
+                    <div />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
