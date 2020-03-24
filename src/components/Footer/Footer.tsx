@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
 import LanguageSelect from '../LanguageSelect';
 import { useStateValue } from '../../state';
+import { buildDate } from '../../common/util';
 
 const Footer: React.SFC = () => {
   const { t } = useTranslation(['footer']);
@@ -106,6 +107,13 @@ const Footer: React.SFC = () => {
               <div className={styles['age-disclaimer__age']}>18+</div>
               <div className={styles['age-disclaimer__label']}>Responsible Gambling</div>
             </div>
+            <small className={styles.build}>{`Build: ${new Intl.DateTimeFormat('de-DE', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            }).format(buildDate)}`}</small>
           </div>
         </div>
       </div>

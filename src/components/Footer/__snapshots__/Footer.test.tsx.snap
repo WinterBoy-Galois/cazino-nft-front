@@ -471,6 +471,11 @@ Object {
                   Responsible Gambling
                 </div>
               </div>
+              <small
+                class="build"
+              >
+                Build: 23.03.2020, 18:58
+              </small>
             </div>
           </div>
         </div>
@@ -944,6 +949,11 @@ Object {
                 Responsible Gambling
               </div>
             </div>
+            <small
+              class="build"
+            >
+              Build: 23.03.2020, 18:58
+            </small>
           </div>
         </div>
       </div>
