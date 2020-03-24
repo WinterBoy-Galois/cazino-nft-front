@@ -30,8 +30,11 @@
   overflow: hidden;
   user-select: none;
 
-  @include media-breakpoint-only(lg) {
+  @include media-breakpoint-up(lg) {
     height: 180px;
+  }
+
+  @include media-breakpoint-only(lg) {
     background-position: right -123px top;
   }
 }
