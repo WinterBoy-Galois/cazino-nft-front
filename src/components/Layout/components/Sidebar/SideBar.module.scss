@@ -11,8 +11,12 @@
 
   @include media-breakpoint-up(md) {
     position: fixed;
-    width: $sidebar-width-md;
     height: 100%;
+    width: $sidebar-width-md;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: $sidebar-width-lg;
   }
 
   @include media-breakpoint-up(xl) {

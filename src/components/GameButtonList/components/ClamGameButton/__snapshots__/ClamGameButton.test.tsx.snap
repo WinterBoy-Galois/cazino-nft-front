@@ -29,7 +29,7 @@ Object {
         </div>
         <img
           alt="Clam"
-          class="character"
+          class="character "
           src="clams-character-home-button.svg"
         />
       </div>
@@ -60,7 +60,7 @@ Object {
       </div>
       <img
         alt="Clam"
-        class="character"
+        class="character "
         src="clams-character-home-button.svg"
       />
     </div>

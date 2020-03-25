@@ -37,4 +37,10 @@
   top: -1px;
   right: -1px;
   width: 48%;
+
+  &--with-sidebar {
+    @include media-breakpoint-only(xl) {
+      width: 56%;
+    }
+  }
 }

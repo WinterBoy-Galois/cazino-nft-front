@@ -205,7 +205,7 @@ Object {
               </div>
               <img
                 alt="Goal Keeper"
-                class="character"
+                class="character "
                 src="goal-character-home-button.svg"
               />
             </div>
@@ -242,7 +242,7 @@ Object {
               </div>
               <img
                 alt="Soldier"
-                class="character"
+                class="character "
                 src="mines-character-home-button.svg"
               />
             </div>
@@ -274,7 +274,7 @@ Object {
               </div>
               <img
                 alt="Clam"
-                class="character"
+                class="character "
                 src="clams-character-home-button.svg"
               />
             </div>
@@ -311,7 +311,7 @@ Object {
               </div>
               <img
                 alt="Soldier"
-                class="character"
+                class="character "
                 src="dice-character-home-button.svg"
               />
             </div>
@@ -615,7 +615,7 @@ Object {
             </div>
             <img
               alt="Goal Keeper"
-              class="character"
+              class="character "
               src="goal-character-home-button.svg"
             />
           </div>
@@ -652,7 +652,7 @@ Object {
             </div>
             <img
               alt="Soldier"
-              class="character"
+              class="character "
               src="mines-character-home-button.svg"
             />
           </div>
@@ -684,7 +684,7 @@ Object {
             </div>
             <img
               alt="Clam"
-              class="character"
+              class="character "
               src="clams-character-home-button.svg"
             />
           </div>
@@ -721,7 +721,7 @@ Object {
             </div>
             <img
               alt="Soldier"
-              class="character"
+              class="character "
               src="dice-character-home-button.svg"
             />
           </div>
