@@ -26,14 +26,45 @@
 
 .slide {
   transition: all 200ms ease-in-out;
-  right: -100%;
 
   &--enter {
+    right: -$sidebar-width;
+
+    @include media-breakpoint-up(md) {
+      right: -$sidebar-width-md;
+    }
+
+    @include media-breakpoint-up(lg) {
+      right: -$sidebar-width-lg;
+    }
+
+    @include media-breakpoint-up(xl) {
+      right: -$sidebar-width-xl;
+    }
+  }
+
+  &--enter-active {
     right: 0;
   }
 
   &--exit {
-    right: -100%;
+    right: 0;
+  }
+
+  &--exit-active {
+    right: -$sidebar-width;
+
+    @include media-breakpoint-up(md) {
+      right: -$sidebar-width-md;
+    }
+
+    @include media-breakpoint-up(lg) {
+      right: -$sidebar-width-lg;
+    }
+
+    @include media-breakpoint-up(xl) {
+      right: -$sidebar-width-xl;
+    }
   }
 }
 

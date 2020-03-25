@@ -1087,7 +1087,7 @@ Object {
           class="header"
         >
           <button
-            class="button"
+            class="button fade"
             style="transform: rotate(0deg);"
           >
             <svg
@@ -2245,7 +2245,7 @@ Object {
         class="header"
       >
         <button
-          class="button"
+          class="button fade"
           style="transform: rotate(0deg);"
         >
           <svg

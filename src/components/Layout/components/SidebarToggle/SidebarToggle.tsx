@@ -17,15 +17,15 @@ const SidebarToggle: React.SFC<IProps> = ({ show, arrowLeft }) => {
       in={show}
       timeout={200}
       classNames={{
-        enter: `${styles.fade} ${styles['fade--enter']}`,
-        enterActive: `${styles.fade} ${styles['fade--enter-active']}`,
-        exit: `${styles.fade} ${styles['fade--exit']}`,
-        exitActive: `${styles.fade} ${styles['fade--exit-active']}`,
+        enter: styles['fade--enter'],
+        enterActive: styles['fade--enter-active'],
+        exit: styles['fade--exit'],
+        exitActive: styles['fade--exit-active'],
       }}
       unmountOnExit={true}
     >
       <button
-        className={styles.button}
+        className={`${styles.button} ${styles.fade}`}
         onClick={() => dispatch({ type: 'TOGGLE_SIDEBAR' })}
         style={{ transform: arrowLeft ? 'rotate(180deg)' : 'rotate(0deg)' }}
       >

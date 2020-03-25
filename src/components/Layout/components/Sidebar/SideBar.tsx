@@ -20,14 +20,15 @@ const SideBar: React.SFC = () => {
   return (
     <CSSTransition
       in={isOpen}
-      timeout={200}
+      timeout={1000}
       classNames={{
         enter: styles['slide--enter'],
-        enterDone: styles['slide--enter'],
+        enterActive: styles['slide--enter-active'],
+        enterDone: styles['slide--enter-active'],
         exit: styles['slide--exit'],
-        exitDone: styles['slide--exit'],
+        exitActive: styles['slide--exit-active'],
+        exitDone: styles['slide--exit-active'],
       }}
-      appear={true}
     >
       <div className={`${styles.container} ${styles.slide}`}>
         <div className={styles.header}>
