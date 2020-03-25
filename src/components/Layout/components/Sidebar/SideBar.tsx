@@ -31,7 +31,7 @@ const SideBar: React.SFC = () => {
     >
       <div className={`${styles.container} ${styles.slide}`}>
         <div className={styles.header}>
-          <SidebarToggle />
+          <SidebarToggle show={true} />
           <h1 className={styles['header__headline']}>LIVE UPDATES</h1>
         </div>
         <div className={styles['tab-select']}>
