@@ -38,6 +38,7 @@
   top: -10px;
   right: -5px;
   width: 50%;
+  transition: width 200ms ease-in-out;
 
   &--with-sidebar {
     @include media-breakpoint-only(xl) {
