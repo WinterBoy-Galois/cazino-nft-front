@@ -30,15 +30,7 @@
   will-change: transform;
 
   @include media-breakpoint-up(md) {
-    transform: translateX($sidebar-width-md);
-  }
-
-  @include media-breakpoint-up(lg) {
-    transform: translateX($sidebar-width-lg);
-  }
-
-  @include media-breakpoint-up(xl) {
-    transform: translateX($sidebar-width-xl);
+    transform: translateX(0);
   }
 
   &--enter {
