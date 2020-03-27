@@ -20,7 +20,7 @@ const SideBar: React.SFC = () => {
   return (
     <CSSTransition
       in={isOpen}
-      timeout={1000}
+      timeout={200}
       classNames={{
         enter: styles['slide--enter'],
         enterActive: styles['slide--enter-active'],
