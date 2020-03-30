@@ -36,13 +36,13 @@ Object {
         </div>
       </div>
       <div
-        class="bet-table__wrapper"
+        class="leaderboard-table__wrapper"
       >
         <table
-          class="bet-table"
+          class="leaderboard-table"
         >
           <thead
-            class="bet-table__header"
+            class="leaderboard-table__header"
           >
             <tr>
               <th>
@@ -60,45 +60,8 @@ Object {
             </tr>
           </thead>
           <tbody
-            class="bet-table__body"
-          >
-            <tr>
-              <td>
-                <div />
-              </td>
-              <td
-                class="hide--small hide--medium"
-              >
-                <div />
-              </td>
-              <td
-                class="hide--small hide--medium"
-              >
-                <div />
-              </td>
-              <td>
-                <div />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div />
-              </td>
-              <td
-                class="hide--small hide--medium"
-              >
-                <div />
-              </td>
-              <td
-                class="hide--small hide--medium"
-              >
-                <div />
-              </td>
-              <td>
-                <div />
-              </td>
-            </tr>
-          </tbody>
+            class="leaderboard-table__body"
+          />
         </table>
       </div>
     </div>
@@ -135,13 +98,13 @@ Object {
       </div>
     </div>
     <div
-      class="bet-table__wrapper"
+      class="leaderboard-table__wrapper"
     >
       <table
-        class="bet-table"
+        class="leaderboard-table"
       >
         <thead
-          class="bet-table__header"
+          class="leaderboard-table__header"
         >
           <tr>
             <th>
@@ -159,45 +122,8 @@ Object {
           </tr>
         </thead>
         <tbody
-          class="bet-table__body"
-        >
-          <tr>
-            <td>
-              <div />
-            </td>
-            <td
-              class="hide--small hide--medium"
-            >
-              <div />
-            </td>
-            <td
-              class="hide--small hide--medium"
-            >
-              <div />
-            </td>
-            <td>
-              <div />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div />
-            </td>
-            <td
-              class="hide--small hide--medium"
-            >
-              <div />
-            </td>
-            <td
-              class="hide--small hide--medium"
-            >
-              <div />
-            </td>
-            <td>
-              <div />
-            </td>
-          </tr>
-        </tbody>
+          class="leaderboard-table__body"
+        />
       </table>
     </div>
   </div>,
