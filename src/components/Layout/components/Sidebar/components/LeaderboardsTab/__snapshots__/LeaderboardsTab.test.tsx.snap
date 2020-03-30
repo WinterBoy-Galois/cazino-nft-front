@@ -5,7 +5,9 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div>
+      <div
+        class="time-select"
+      >
         <div
           class="container"
         >
@@ -33,10 +35,78 @@ Object {
           </span>
         </div>
       </div>
+      <div
+        class="bet-table__wrapper"
+      >
+        <table
+          class="bet-table"
+        >
+          <thead
+            class="bet-table__header"
+          >
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                User
+              </th>
+              <th>
+                Wagered
+              </th>
+              <th>
+                bonus
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="bet-table__body"
+          >
+            <tr>
+              <td>
+                <div />
+              </td>
+              <td
+                class="hide--small hide--medium"
+              >
+                <div />
+              </td>
+              <td
+                class="hide--small hide--medium"
+              >
+                <div />
+              </td>
+              <td>
+                <div />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div />
+              </td>
+              <td
+                class="hide--small hide--medium"
+              >
+                <div />
+              </td>
+              <td
+                class="hide--small hide--medium"
+              >
+                <div />
+              </td>
+              <td>
+                <div />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <div>
+    <div
+      class="time-select"
+    >
       <div
         class="container"
       >
@@ -63,6 +133,72 @@ Object {
           Monthly
         </span>
       </div>
+    </div>
+    <div
+      class="bet-table__wrapper"
+    >
+      <table
+        class="bet-table"
+      >
+        <thead
+          class="bet-table__header"
+        >
+          <tr>
+            <th>
+              #
+            </th>
+            <th>
+              User
+            </th>
+            <th>
+              Wagered
+            </th>
+            <th>
+              bonus
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="bet-table__body"
+        >
+          <tr>
+            <td>
+              <div />
+            </td>
+            <td
+              class="hide--small hide--medium"
+            >
+              <div />
+            </td>
+            <td
+              class="hide--small hide--medium"
+            >
+              <div />
+            </td>
+            <td>
+              <div />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div />
+            </td>
+            <td
+              class="hide--small hide--medium"
+            >
+              <div />
+            </td>
+            <td
+              class="hide--small hide--medium"
+            >
+              <div />
+            </td>
+            <td>
+              <div />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>,
   "debug": [Function],

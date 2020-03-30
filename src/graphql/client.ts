@@ -11,7 +11,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://dev.gambilife.com/graphql`,
+  uri: `wss://dev.gambilife.com/graphql`,
   options: {
     reconnect: true,
   },
