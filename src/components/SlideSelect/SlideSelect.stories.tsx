@@ -12,7 +12,6 @@ storiesOf('Components/SlideSelect', module)
           { label: 'Weekly', onClick: action('weekly selected') },
           { label: 'Monthly', onClick: action('monthly selected') },
         ]}
-        selectedItemIndex={0}
       />
     </div>
   ))
@@ -23,7 +22,6 @@ storiesOf('Components/SlideSelect', module)
           { label: 'Deposit', onClick: action('deposit selected') },
           { label: 'Withdraw', onClick: action('withdraw selected') },
         ]}
-        selectedItemIndex={0}
       />
     </div>
   ));

@@ -6,12 +6,11 @@ interface IProps {
     label: string;
     onClick: () => void;
   }[];
-  selectedItemIndex: number;
 }
 
-const SlideSelect: React.SFC<IProps> = ({ selectItems, selectedItemIndex }) => {
+const SlideSelect: React.SFC<IProps> = ({ selectItems }) => {
   const [tabWidth, setTabWidth] = useState<string>();
-  const [tabSelectedTranslate, setTabSelectedTranslate] = useState<string>();
+  const [tabSelectedTranslate, setTabSelectedTranslate] = useState<string>('0');
 
   const handleSelect = (index: number) => {
     setTabSelectedTranslate(`${(index * 100).toString()}%`);
@@ -19,7 +18,6 @@ const SlideSelect: React.SFC<IProps> = ({ selectItems, selectedItemIndex }) => {
 
   useEffect(() => {
     setTabWidth(`${(100 / selectItems.length).toString()}%`);
-    handleSelect(selectedItemIndex);
   }, [selectItems]);
 
   return (

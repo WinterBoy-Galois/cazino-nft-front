@@ -1,28 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SlideSelect should match snapshot 1`] = `
+exports[`LeaderboardsTab should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
+    <div>
+      <div>
+        <div
+          class="container"
+        >
+          <span
+            class="tab tab--selected"
+            style="transform: translateX(0); width: 33.333333333333336%;"
+          />
+          <span
+            class="tab"
+            style="width: 33.333333333333336%;"
+          >
+            Daily
+          </span>
+          <span
+            class="tab"
+            style="width: 33.333333333333336%;"
+          >
+            Weekly
+          </span>
+          <span
+            class="tab"
+            style="width: 33.333333333333336%;"
+          >
+            Monthly
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
     <div>
       <div
         class="container"
       >
         <span
           class="tab tab--selected"
-          style="transform: translateX(0);"
+          style="transform: translateX(0); width: 33.333333333333336%;"
         />
+        <span
+          class="tab"
+          style="width: 33.333333333333336%;"
+        >
+          Daily
+        </span>
+        <span
+          class="tab"
+          style="width: 33.333333333333336%;"
+        >
+          Weekly
+        </span>
+        <span
+          class="tab"
+          style="width: 33.333333333333336%;"
+        >
+          Monthly
+        </span>
       </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="container"
-    >
-      <span
-        class="tab tab--selected"
-        style="transform: translateX(0);"
-      />
     </div>
   </div>,
   "debug": [Function],
