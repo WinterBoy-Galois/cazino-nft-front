@@ -6,6 +6,7 @@ import goalBall from '../../../../assets/images/gameButtons/goal-ball.svg';
 
 import { useTranslation } from 'react-i18next';
 import GameButton from '../GameButton';
+import { useStateValue } from '../../../../state';
 
 interface IProps {
   onClick?: () => void;
@@ -13,6 +14,11 @@ interface IProps {
 
 const GoalGameButton: React.SFC<IProps> = ({ onClick }) => {
   const { t } = useTranslation();
+  const [
+    {
+      sidebar: { isOpen },
+    },
+  ] = useStateValue();
 
   return (
     <GameButton headline={t(`games.goal`)} onClick={onClick} className={styles.container}>
@@ -20,7 +26,11 @@ const GoalGameButton: React.SFC<IProps> = ({ onClick }) => {
         <img src={goalBall} alt="Ball" className={styles.highlight__animated} />
         <img src={goalField} alt="Field" className={styles.highlight__static} />
       </div>
-      <img src={goalCharacter} className={styles.character} alt="Goal Keeper" />
+      <img
+        src={goalCharacter}
+        className={`${styles.character} ${isOpen ? styles['character--with-sidebar'] : ''}`}
+        alt="Goal Keeper"
+      />
     </GameButton>
   );
 };

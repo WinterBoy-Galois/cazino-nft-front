@@ -138,6 +138,12 @@
 }
 
 .build {
-  margin-left: auto;
-  align-self: flex-end;
+  justify-content: center;
+  display: flex;
+  margin-top: 1rem;
+
+  @include media-breakpoint-up(lg) {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
 }

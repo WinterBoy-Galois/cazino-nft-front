@@ -11,8 +11,12 @@
 
   @include media-breakpoint-up(md) {
     position: fixed;
-    width: $sidebar-width-md;
     height: 100%;
+    width: $sidebar-width-md;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: $sidebar-width-lg;
   }
 
   @include media-breakpoint-up(xl) {
@@ -21,15 +25,52 @@
 }
 
 .slide {
-  transition: all 200ms ease-in-out;
-  right: -100%;
+  transition: transform 200ms ease-in-out;
+  transform: translateX($sidebar-width);
+  will-change: transform;
+
+  @include media-breakpoint-up(md) {
+    transform: translateX(0);
+  }
 
   &--enter {
-    right: 0;
+    transform: translateX($sidebar-width);
+
+    @include media-breakpoint-up(md) {
+      transform: translateX($sidebar-width-md);
+    }
+
+    @include media-breakpoint-up(lg) {
+      transform: translateX($sidebar-width-lg);
+    }
+
+    @include media-breakpoint-up(xl) {
+      transform: translateX($sidebar-width-xl);
+    }
+  }
+
+  &--enter-active {
+    transform: translateX(0);
   }
 
   &--exit {
-    right: -100%;
+    transform: translateX(0);
+  }
+
+  &--exit-active {
+    transform: translateX($sidebar-width);
+
+    @include media-breakpoint-up(md) {
+      transform: translateX($sidebar-width-md);
+    }
+
+    @include media-breakpoint-up(lg) {
+      transform: translateX($sidebar-width-lg);
+    }
+
+    @include media-breakpoint-up(xl) {
+      transform: translateX($sidebar-width-xl);
+    }
   }
 }
 

@@ -24,15 +24,16 @@ const SideBar: React.SFC = () => {
       timeout={200}
       classNames={{
         enter: styles['slide--enter'],
-        enterDone: styles['slide--enter'],
+        enterActive: styles['slide--enter-active'],
+        enterDone: styles['slide--enter-active'],
         exit: styles['slide--exit'],
-        exitDone: styles['slide--exit'],
+        exitActive: styles['slide--exit-active'],
+        exitDone: styles['slide--exit-active'],
       }}
-      appear={true}
     >
       <div className={`${styles.container} ${styles.slide}`}>
         <div className={styles.header}>
-          <SidebarToggle />
+          <SidebarToggle show={true} />
           <h1 className={styles['header__headline']}>LIVE UPDATES</h1>
         </div>
         <div className={styles['tab-select']}>

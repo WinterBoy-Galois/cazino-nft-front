@@ -16,7 +16,7 @@ const TopBar: React.SFC = () => {
           </a>
         </div>
         <div className={`col-6 ${styles.center} ${styles.right}`}>
-          {!sidebar.isOpen && <SidebarToggle arrowLeft={true} />}
+          <SidebarToggle arrowLeft={true} show={!sidebar.isOpen} />
         </div>
       </div>
     </div>

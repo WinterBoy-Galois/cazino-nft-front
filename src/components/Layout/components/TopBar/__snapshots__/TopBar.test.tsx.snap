@@ -62,7 +62,7 @@ Object {
             class="col-6 center right"
           >
             <button
-              class="button"
+              class="button fade"
               style="transform: rotate(180deg);"
             >
               <svg
@@ -167,7 +167,7 @@ Object {
           class="col-6 center right"
         >
           <button
-            class="button"
+            class="button fade"
             style="transform: rotate(180deg);"
           >
             <svg
