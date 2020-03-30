@@ -1,0 +1,15 @@
+@import '../../../../styles/variables.scss';
+
+.leaderboard-row {
+  &__icon {
+    width: 11px;
+    height: 11px;
+    margin-right: 4px;
+    vertical-align: baseline;
+    fill: $bitcoinYellow;
+
+    &__inner {
+      fill: $dark-blue;
+    }
+  }
+}

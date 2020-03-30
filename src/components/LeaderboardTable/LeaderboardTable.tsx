@@ -1,7 +1,8 @@
 import React from 'react';
-import './LeaderboardTable.scss';
+import styles from './LeaderboardTable.module.scss';
 import SpacerRow from './components/SpacerRow';
 import { Leader } from '../../models/leader.model';
+import LeaderboardRow from './components/LeaderboardRow';
 
 interface IProps {
   leaderboard: Leader[];
@@ -11,9 +12,9 @@ interface IProps {
 
 const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error }) => {
   return (
-    <div className="bet-table__wrapper">
-      <table className="bet-table">
-        <thead className="bet-table__header">
+    <div className={styles['leaderboard-table__wrapper']}>
+      <table className={styles['leaderboard-table']}>
+        <thead className={styles['leaderboard-table__header']}>
           <tr>
             <th>#</th>
             <th>User</th>
@@ -27,16 +28,12 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error }) =
             {isLoading && <p>Loading...</p>}
           </div>
         ) : (
-          <tbody className="bet-table__body">
-            <SpacerRow />
+          <tbody className={styles['leaderboard-table__body']}>
             {leaderboard.length > 0
               ? leaderboard.map((l: Leader, i) => (
-                  <tr key={i}>
-                    <td>{l.username}</td>
-                  </tr>
+                  <LeaderboardRow key={i} leader={l} place={i + 1} />
                 ))
               : null}
-            <SpacerRow />
           </tbody>
         )}
       </table>

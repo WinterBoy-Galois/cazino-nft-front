@@ -2,7 +2,7 @@
 
 $radius: 10px;
 
-.bet-table {
+.leaderboard-table {
   min-width: 100%;
   color: $white;
   border-spacing: 0;
@@ -28,10 +28,6 @@ $radius: 10px;
     th:first-child {
       border-top-left-radius: $radius;
       padding-left: 1rem;
-
-      @media all and (min-width: $mediumBreakpoint) {
-        padding-left: 2rem;
-      }
     }
 
     th:last-child {
@@ -53,18 +49,10 @@ $radius: 10px;
 
     tr td:first-child div {
       padding-left: 1rem;
-
-      @media all and (min-width: $mediumBreakpoint) {
-        padding-left: 2rem;
-      }
     }
 
     tr td:last-child div {
       padding-right: 1rem;
-
-      @media all and (min-width: $mediumBreakpoint) {
-        padding-right: 2rem;
-      }
     }
 
     tr:first-child td div {
@@ -93,50 +81,12 @@ $radius: 10px;
   }
 
   &__wrapper {
+    height: 458px;
+    width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    height: 419px;
     background-color: $darkBlue;
     border-radius: $radius;
-    width: 100%;
-
-    @media all and (min-width: $mediumBreakpoint) {
-      height: 435px;
-    }
   }
-}
-
-/* stylelint-disable-next-line */
-.fade-enter td div {
-  opacity: 0;
-  max-height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  overflow: hidden;
-  transition: max-height 500ms linear, opacity 500ms ease-in, padding 500ms linear;
-}
-
-/* stylelint-disable-next-line */
-.fade-enter-active td div {
-  max-height: 15px;
-  opacity: 1;
-  padding: 0.7rem 0.5rem;
-}
-
-/* stylelint-disable-next-line */
-.fade-exit td div {
-  max-height: 15px;
-  opacity: 1;
-  transition: max-height 500ms linear, opacity 500ms ease-out, padding 500ms linear;
-  overflow: hidden;
-}
-
-/* stylelint-disable-next-line */
-.fade-exit-active td div {
-  max-height: 0;
-  opacity: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  overflow: hidden;
 }
