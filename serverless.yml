@@ -79,6 +79,9 @@ resources:
       Properties:
         DistributionConfig:
           Comment: CaZZZino App (${self:custom.siteName}) CloudFront Distribution
+          Aliases:
+            - cazzzino.test.egonoid.net
+            - cazzzino2.test.egonoid.net
           DefaultRootObject: index.html
           CustomErrorResponses:
             - ErrorCode: 404
