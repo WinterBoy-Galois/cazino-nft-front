@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './LeaderboardTable.module.scss';
-import SpacerRow from './components/SpacerRow';
 import { Leader } from '../../models/leader.model';
 import LeaderboardRow from './components/LeaderboardRow';
 
