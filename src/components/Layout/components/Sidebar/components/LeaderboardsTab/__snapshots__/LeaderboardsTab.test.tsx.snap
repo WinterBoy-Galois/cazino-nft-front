@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="time-select"
+        class="mb-4 mb-md-6"
       >
         <div
           class="container"
@@ -54,7 +54,9 @@ Object {
               <th>
                 Wagered
               </th>
-              <th>
+              <th
+                class="d-none d-lg-block"
+              >
                 bonus
               </th>
             </tr>
@@ -68,7 +70,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="time-select"
+      class="mb-4 mb-md-6"
     >
       <div
         class="container"
@@ -116,7 +118,9 @@ Object {
             <th>
               Wagered
             </th>
-            <th>
+            <th
+              class="d-none d-lg-block"
+            >
               bonus
             </th>
           </tr>

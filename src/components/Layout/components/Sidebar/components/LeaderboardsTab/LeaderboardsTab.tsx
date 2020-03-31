@@ -13,7 +13,7 @@ const LeaderboardsTab: React.SFC = () => {
 
   return (
     <>
-      <div className={styles['time-select']}>
+      <div className="mb-4 mb-md-6">
         <SlideSelect
           selectItems={[
             { label: 'Daily', onClick: () => setSelectedTime('daily') },

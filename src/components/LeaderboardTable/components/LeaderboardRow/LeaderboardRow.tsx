@@ -29,7 +29,7 @@ const LeaderboardRow: React.FC<IProps> = ({ leader, place }) => {
         </div>
       </td>
 
-      <td className={'bold'}>
+      <td className={'bold d-none d-lg-block'}>
         <div>
           <Bitcoin
             className={styles['leaderboard-row__icon']}

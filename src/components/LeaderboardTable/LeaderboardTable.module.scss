@@ -44,7 +44,17 @@ $radius: 10px;
     }
 
     td div {
-      padding: 0.7rem 0.5rem;
+      padding: 0.5rem 0.5rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 130px;
+      text-align: center;
+
+      @include media-breakpoint-up(md) {
+        max-width: 118px;
+        padding: 0.7rem 0.5rem;
+      }
     }
 
     tr td:first-child div {
@@ -56,19 +66,11 @@ $radius: 10px;
     }
 
     tr:first-child td div {
-      padding-top: 0.5rem;
-
-      @media all and (min-width: $mediumBreakpoint) {
-        padding-top: 1rem;
-      }
+      padding-top: 1rem;
     }
 
     tr:last-child td div {
-      padding-bottom: 0.5rem;
-
-      @media all and (min-width: $mediumBreakpoint) {
-        padding-bottom: 1rem;
-      }
+      padding-bottom: 1rem;
     }
 
     tr:last-child td:first-child {
@@ -81,12 +83,16 @@ $radius: 10px;
   }
 
   &__wrapper {
-    height: 458px;
+    height: 404px;
     width: 100%;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: hidden;
     white-space: nowrap;
     background-color: $darkBlue;
     border-radius: $radius;
+
+    @include media-breakpoint-up(md) {
+      height: 458px;
+    }
   }
 }

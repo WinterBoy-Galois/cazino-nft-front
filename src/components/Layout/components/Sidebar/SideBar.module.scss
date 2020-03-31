@@ -102,8 +102,12 @@
 
 .tab-select {
   width: 100%;
-  margin: 2rem auto;
+  margin: 1.5rem auto;
   padding: 0 1rem;
   display: flex;
   justify-content: center;
+
+  @include media-breakpoint-up(md) {
+    margin: 2rem auto;
+  }
 }

@@ -18,7 +18,7 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error }) =
             <th>#</th>
             <th>User</th>
             <th>Wagered</th>
-            <th>bonus</th>
+            <th className="d-none d-lg-block">bonus</th>
           </tr>
         </thead>
         {error || isLoading ? (
