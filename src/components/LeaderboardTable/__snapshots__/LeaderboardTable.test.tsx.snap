@@ -21,9 +21,7 @@ exports[`renders 1`] = `
           <th>
             Wagered
           </th>
-          <th
-            class="d-none d-lg-block"
-          >
+          <th>
             bonus
           </th>
         </tr>

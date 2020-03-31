@@ -13,16 +13,16 @@ $radius: 10px;
   }
 
   &__header {
-    background-color: $lightBlue;
-    text-transform: uppercase;
-    color: $ultraLightBlue;
-    font-size: 15px;
-    text-align: left;
-    width: 100%;
-
     th {
+      position: sticky;
+      top: 0;
       font-weight: 300;
       padding: 0.5rem;
+      background-color: $lightBlue;
+      text-transform: uppercase;
+      color: $ultraLightBlue;
+      font-size: 15px;
+      text-align: left;
     }
 
     th:first-child {
@@ -32,6 +32,7 @@ $radius: 10px;
 
     th:last-child {
       border-top-right-radius: $radius;
+      padding-right: 1rem;
     }
   }
 
@@ -83,16 +84,16 @@ $radius: 10px;
   }
 
   &__wrapper {
-    height: 404px;
+    max-height: 404px;
+    height: 100%;
     width: 100%;
     overflow-x: hidden;
-    overflow-y: hidden;
     white-space: nowrap;
     background-color: $darkBlue;
     border-radius: $radius;
 
     @include media-breakpoint-up(md) {
-      height: 458px;
+      max-height: 458px;
     }
   }
 }

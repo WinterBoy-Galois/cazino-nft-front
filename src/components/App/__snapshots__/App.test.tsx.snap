@@ -1155,7 +1155,7 @@ Object {
           </button>
         </div>
         <div
-          class="container"
+          class="container tab-container"
         >
           <div
             class="bet-table__wrapper"
@@ -2379,7 +2379,7 @@ Object {
         </button>
       </div>
       <div
-        class="container"
+        class="container tab-container"
       >
         <div
           class="bet-table__wrapper"

@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="mb-4 mb-md-6"
+        class="time-select"
       >
         <div
           class="container"
@@ -36,41 +36,43 @@ Object {
         </div>
       </div>
       <div
-        class="leaderboard-table__wrapper"
+        class="table"
       >
-        <table
-          class="leaderboard-table"
+        <div
+          class="leaderboard-table__wrapper"
         >
-          <thead
-            class="leaderboard-table__header"
+          <table
+            class="leaderboard-table"
           >
-            <tr>
-              <th>
-                #
-              </th>
-              <th>
-                User
-              </th>
-              <th>
-                Wagered
-              </th>
-              <th
-                class="d-none d-lg-block"
-              >
-                bonus
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            class="leaderboard-table__body"
-          />
-        </table>
+            <thead
+              class="leaderboard-table__header"
+            >
+              <tr>
+                <th>
+                  #
+                </th>
+                <th>
+                  User
+                </th>
+                <th>
+                  Wagered
+                </th>
+                <th>
+                  bonus
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="leaderboard-table__body"
+            />
+          </table>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="mb-4 mb-md-6"
+      class="time-select"
     >
       <div
         class="container"
@@ -100,35 +102,37 @@ Object {
       </div>
     </div>
     <div
-      class="leaderboard-table__wrapper"
+      class="table"
     >
-      <table
-        class="leaderboard-table"
+      <div
+        class="leaderboard-table__wrapper"
       >
-        <thead
-          class="leaderboard-table__header"
+        <table
+          class="leaderboard-table"
         >
-          <tr>
-            <th>
-              #
-            </th>
-            <th>
-              User
-            </th>
-            <th>
-              Wagered
-            </th>
-            <th
-              class="d-none d-lg-block"
-            >
-              bonus
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="leaderboard-table__body"
-        />
-      </table>
+          <thead
+            class="leaderboard-table__header"
+          >
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                User
+              </th>
+              <th>
+                Wagered
+              </th>
+              <th>
+                bonus
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="leaderboard-table__body"
+          />
+        </table>
+      </div>
     </div>
   </div>,
   "debug": [Function],

@@ -40,7 +40,7 @@ const SideBar: React.SFC = () => {
         <div className={styles['tab-select']}>
           <TabSelect />
         </div>
-        <div className="container">{renderTab(selectedTab)}</div>
+        <div className={`container ${styles['tab-container']}`}>{renderTab(selectedTab)}</div>
       </div>
     </CSSTransition>
   );

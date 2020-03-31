@@ -13,7 +13,7 @@ const LeaderboardsTab: React.SFC = () => {
 
   return (
     <>
-      <div className="mb-4 mb-md-6">
+      <div className={styles['time-select']}>
         <SlideSelect
           selectItems={[
             { label: 'Daily', onClick: () => setSelectedTime('daily') },
@@ -22,11 +22,13 @@ const LeaderboardsTab: React.SFC = () => {
           ]}
         />
       </div>
-      <LeaderboardTable
-        leaderboard={data ? data.leaderboardChanged[selectedTime] : []}
-        isLoading={loading}
-        error={error ? true : false}
-      />
+      <div className={styles.table}>
+        <LeaderboardTable
+          leaderboard={data ? data.leaderboardChanged[selectedTime] : []}
+          isLoading={loading}
+          error={error ? true : false}
+        />
+      </div>
     </>
   );
 };
