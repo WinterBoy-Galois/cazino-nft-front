@@ -26,12 +26,12 @@ deploy:
       - sls deploy -v -s test
     on:
       branch: develop
-  - provider: script
-    skip_cleanup: true
-    script:
-      - sls deploy -v -s prod
-    on:
-      branch: master
+  # - provider: script
+  #   skip_cleanup: true
+  #   script:
+  #     - sls deploy -v -s prod
+  #   on:
+  #     branch: master
 notifications:
   slack:
     secure: f+43Ef1MLk0b1ao44FNcmAfpFuqb27PPGXVSec3sV/7hiNxnjxBaO2x/zfSJklhsWGfK7d7A79x3rqhnFCq3vh/VPcxT0v4480TDyANHOwbaREbH6sDOYH3eDo28UzybsVM1i1sTa0cp9OxxlS7zDMzkj1/6Pd4FkyF402FCxPGpJWih7vZVVfEbd8ZtUgDEYqvWC9lzXWgTqI+CogX1spDCkTC5z6pzAM1LdoScTge+7o7bp6ZvaRkRmQ/d/J5TJbt2yK0NbhgFWmrIaySMKdhN+O++/5e23Rodf/jYPm6yVGkP+es2UrO8nq9NwcmgPO7iHXbtzlF9FUez6kKNY2sQcIrijpQazy19N10kOVJkyT4tEBHlyLadzihr4kTaRbyB4uBw19fuHi1iy8v76Wf7UdVwgqaKJC3u1y2WqTwhJDuDmbytj32oKOutQQcVov8Z17rPwwxndltkoEwMb+cHcy/wZXH37wE552IOSMJiuubXMST0RJbthYjJjwk0v2ZfHlqZE8kKu5VLeny3Tmxgdeh/lc/RFXywwZ2pptwWOb3mlDKVHzMcCX9HkRrThVmQdX97XxtLGZ8wQboZebf2//2R2eWKRhk3VCtoXFT8oHqi9ICr2UTGwr+iODiKtalpq0VUyaLQFsZ5c+1hbC+ktHmgQvHGO0tH+H1MrNA=
