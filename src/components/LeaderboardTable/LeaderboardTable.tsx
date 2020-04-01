@@ -32,15 +32,10 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error }) =
             <th>#</th>
             <th>User</th>
             <th>Wagered</th>
-            {renderBonusColumn() ? <th>bonus</th> : null}
+            {renderBonusColumn() && <th>bonus</th>}
           </tr>
         </thead>
-        {error || isLoading ? (
-          <div>
-            {error && <p>Error</p>}
-            {isLoading && <p>Loading...</p>}
-          </div>
-        ) : (
+        {!error && !isLoading && (
           <tbody className={styles['leaderboard-table__body']}>
             {leaderboard.length > 0
               ? leaderboard.map((l: Leader, i) => (
@@ -50,6 +45,13 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error }) =
           </tbody>
         )}
       </table>
+      {error ||
+        (isLoading && (
+          <div>
+            {error && <p>Error</p>}
+            {isLoading && <p>Loading...</p>}
+          </div>
+        ))}
     </div>
   );
 };

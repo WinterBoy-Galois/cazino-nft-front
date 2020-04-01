@@ -52,7 +52,7 @@ $radius: 10px;
       max-width: 130px;
       text-align: center;
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(lg) {
         max-width: 118px;
         padding: 0.7rem 0.5rem;
       }
