@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.scss';
+@import '../../../../styles/shared.scss';
 
 .leaderboard-row {
   &__icon {
@@ -10,6 +10,14 @@
 
     &__inner {
       fill: $dark-blue;
+    }
+  }
+
+  &__bonus {
+    display: none;
+
+    @include media-breakpoint-up(lg) {
+      display: unset;
     }
   }
 }
