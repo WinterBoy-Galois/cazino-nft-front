@@ -1,19 +1,22 @@
 import { useEffect } from 'react';
 
-export function useScrollLock(lock: boolean) {
+export function useScrollLock(lock: boolean, lockTouch: boolean = true) {
   useEffect(() => {
     if (lock) {
       document.body.style.overflow = 'hidden';
-      // document.ontouchmove = e => {
-      //   e.preventDefault();
-      // };
+    }
+
+    if (lockTouch) {
+      document.ontouchmove = e => {
+        e.preventDefault();
+      };
     }
 
     return () => {
       document.body.style.overflow = 'unset';
-      // document.ontouchmove = () => {
-      //   return true;
-      // };
+      document.ontouchmove = () => {
+        return true;
+      };
     };
-  }, [lock]);
+  }, [lock, lockTouch]);
 }

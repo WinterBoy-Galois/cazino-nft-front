@@ -17,7 +17,7 @@ const SideBar: React.SFC = () => {
     },
   ] = useStateValue();
   const breakpoint = useBreakpoint();
-  useScrollLock(isOpen && activateScrollLock(breakpoint));
+  useScrollLock(isOpen && activateScrollLock(breakpoint), false);
 
   return (
     <CSSTransition
