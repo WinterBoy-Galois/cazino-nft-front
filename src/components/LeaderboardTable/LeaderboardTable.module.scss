@@ -50,7 +50,6 @@ $radius: 10px;
       text-overflow: ellipsis;
       overflow: hidden;
       max-width: 130px;
-      text-align: center;
 
       @include media-breakpoint-up(lg) {
         max-width: 118px;
