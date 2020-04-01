@@ -3,6 +3,7 @@ import styles from './LeaderboardTable.module.scss';
 import { Leader } from '../../models/leader.model';
 import LeaderboardRow from './components/LeaderboardRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
 interface IProps {
   leaderboard: Leader[];
@@ -35,15 +36,26 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error }) =
             {renderBonusColumn() && <th>bonus</th>}
           </tr>
         </thead>
-        {!error && !isLoading && (
-          <tbody className={styles['leaderboard-table__body']}>
-            {leaderboard.length > 0
-              ? leaderboard.map((l: Leader, i) => (
-                  <LeaderboardRow key={i} leader={l} place={i + 1} />
-                ))
-              : null}
-          </tbody>
-        )}
+        <tbody className={styles['leaderboard-table__body']}>
+          {leaderboard && leaderboard.length > 0
+            ? leaderboard.map((l: Leader, i) => (
+                <SwitchTransition key={i} mode="out-in">
+                  <CSSTransition
+                    key={`${l.userid}`}
+                    classNames={{
+                      enter: styles['fade-enter'],
+                      enterActive: styles['fade-enter-active'],
+                      exit: styles['fade-exit'],
+                      exitActive: styles['fade-exit-active'],
+                    }}
+                    timeout={500}
+                  >
+                    <LeaderboardRow leader={l} place={i + 1} />
+                  </CSSTransition>
+                </SwitchTransition>
+              ))
+            : null}
+        </tbody>
       </table>
       {error ||
         (isLoading && (

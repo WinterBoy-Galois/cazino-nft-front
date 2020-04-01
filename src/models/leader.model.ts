@@ -1,6 +1,6 @@
 export interface Leader {
   username: string;
-  userId: string;
+  userid: string;
   wager: number;
   bonus: number;
 }
