@@ -9,9 +9,10 @@ interface IProps {
   leaderboard: Leader[];
   isLoading: boolean;
   error: boolean;
+  signInUserId: string;
 }
 
-const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error }) => {
+const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, signInUserId }) => {
   const breakpoint = useBreakpoint();
 
   const renderBonusColumn = () => {
@@ -50,7 +51,11 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error }) =
                     }}
                     timeout={500}
                   >
-                    <LeaderboardRow leader={l} place={i + 1} />
+                    <LeaderboardRow
+                      leader={l}
+                      place={i + 1}
+                      highlight={l.userid === signInUserId}
+                    />
                   </CSSTransition>
                 </SwitchTransition>
               ))

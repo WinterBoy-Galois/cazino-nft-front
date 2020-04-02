@@ -59,7 +59,12 @@ const Wrapper = () => {
 
   return (
     <>
-      <LeaderboardTable error={false} isLoading={false} leaderboard={leaderboard} />
+      <LeaderboardTable
+        error={false}
+        isLoading={false}
+        leaderboard={leaderboard}
+        signInUserId="5"
+      />
       <button onClick={() => setLeaderboard(shuffle(data))}>shuffle</button>
     </>
   );

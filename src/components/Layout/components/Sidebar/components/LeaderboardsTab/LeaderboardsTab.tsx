@@ -27,6 +27,7 @@ const LeaderboardsTab: React.SFC = () => {
           leaderboard={data ? data.leaderboardChanged[selectedTime] : []}
           isLoading={loading}
           error={error ? true : false}
+          signInUserId="15"
         />
       </div>
     </>

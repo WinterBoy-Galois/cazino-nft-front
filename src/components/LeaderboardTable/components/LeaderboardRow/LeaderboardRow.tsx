@@ -6,11 +6,12 @@ import { Leader } from '../../../../models/leader.model';
 interface IProps {
   leader: Leader;
   place: number;
+  highlight: boolean;
 }
 
-const LeaderboardRow: React.FC<IProps> = ({ leader, place }) => {
+const LeaderboardRow: React.FC<IProps> = ({ leader, place, highlight }) => {
   return (
-    <tr>
+    <tr className={`${highlight ? styles.highlight : ''}`}>
       <td>
         <div>{place}</div>
       </td>
