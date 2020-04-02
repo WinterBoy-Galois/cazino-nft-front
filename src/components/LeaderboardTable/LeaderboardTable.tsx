@@ -4,6 +4,7 @@ import { Leader } from '../../models/leader.model';
 import LeaderboardRow from './components/LeaderboardRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import SpacerRow from './components/SpacerRow';
 
 interface IProps {
   leaderboard: Leader[];
@@ -38,8 +39,10 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, sig
           </tr>
         </thead>
         <tbody className={styles['leaderboard-table__body']}>
-          {leaderboard && leaderboard.length > 0
-            ? leaderboard.map((l: Leader, i) => (
+          {leaderboard && leaderboard.length > 0 ? (
+            <>
+              <SpacerRow />
+              {leaderboard.map((l: Leader, i) => (
                 <SwitchTransition key={i} mode="out-in">
                   <CSSTransition
                     key={`${l.userid}`}
@@ -58,8 +61,10 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, sig
                     />
                   </CSSTransition>
                 </SwitchTransition>
-              ))
-            : null}
+              ))}
+              <SpacerRow />
+            </>
+          ) : null}
         </tbody>
       </table>
       {error ||

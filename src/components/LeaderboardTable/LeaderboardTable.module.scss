@@ -52,8 +52,8 @@ $radius: 10px;
       max-width: 130px;
 
       @include media-breakpoint-up(lg) {
-        max-width: 118px;
-        padding: 0.7rem 0.5rem;
+        max-width: 129px;
+        padding: 0.6rem 0.5rem;
       }
     }
 
@@ -63,14 +63,6 @@ $radius: 10px;
 
     tr td:last-child div {
       padding-right: 1rem;
-    }
-
-    tr:first-child td div {
-      padding-top: 1rem;
-    }
-
-    tr:last-child td div {
-      padding-bottom: 1rem;
     }
 
     tr:last-child td:first-child {
@@ -92,7 +84,7 @@ $radius: 10px;
     border-radius: $radius;
 
     @include media-breakpoint-up(lg) {
-      max-height: 458px;
+      max-height: 438px;
     }
   }
 }
@@ -114,7 +106,7 @@ $radius: 10px;
 
 .fade-exit-active {
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(50%);
 }
 
 .fade-enter-active,

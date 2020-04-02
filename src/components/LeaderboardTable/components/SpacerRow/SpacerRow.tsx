@@ -1,7 +1,8 @@
 import React from 'react';
+import styles from './SpacerRow.module.scss';
 
 const SpacerRow: React.FC = () => (
-  <tr>
+  <tr className={styles.spacer}>
     <td>
       <div />
     </td>
