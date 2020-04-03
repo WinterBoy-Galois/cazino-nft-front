@@ -52,9 +52,21 @@ const data = [
     wager: 0.12345678,
     bonus: 0.321321401,
   },
+  {
+    username: 'dailychampion7',
+    userid: '9',
+    wager: 0.12345678,
+    bonus: 0.321321401,
+  },
+  {
+    username: 'dailychampion8',
+    userid: '10',
+    wager: 0.12345678,
+    bonus: 0.321321401,
+  },
 ];
 
-const Wrapper = () => {
+const LeaderboardTableWrapper = () => {
   const [leaderboard, setLeaderboard] = useState(data);
 
   return (
@@ -70,8 +82,30 @@ const Wrapper = () => {
   );
 };
 
-storiesOf('Components/LeaderboardTable', module).add('default', () => (
-  <div className="container">
-    <Wrapper />
-  </div>
-));
+storiesOf('Components/LeaderboardTable', module)
+  .add('default', () => (
+    <LeaderboardTable error={false} isLoading={false} leaderboard={data} signInUserId="5" />
+  ))
+  .add('shuffle data', () => <LeaderboardTableWrapper />)
+  .add('empty', () => (
+    <LeaderboardTable error={false} isLoading={false} leaderboard={[]} signInUserId="5" />
+  ))
+  .add('loading', () => (
+    <LeaderboardTable error={false} isLoading={true} leaderboard={[]} signInUserId="5" />
+  ))
+  .add('error', () => (
+    <LeaderboardTable error={true} isLoading={false} leaderboard={[]} signInUserId="5" />
+  ))
+  .add('signed in user not in leaderboard', () => (
+    <LeaderboardTable error={false} isLoading={false} leaderboard={data} signInUserId="-1" />
+  ))
+  .add('scrolling', () => (
+    <div style={{ height: '250px' }}>
+      <LeaderboardTable error={false} isLoading={false} leaderboard={data} signInUserId="5" />
+    </div>
+  ))
+  .addDecorator(storyFn => (
+    <div className="container" style={{ height: '500px' }}>
+      {storyFn()}
+    </div>
+  ));

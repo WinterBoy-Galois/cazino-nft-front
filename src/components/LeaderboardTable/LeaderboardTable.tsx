@@ -67,13 +67,17 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, sig
           ) : null}
         </tbody>
       </table>
-      {error ||
-        (isLoading && (
-          <div>
-            {error && <p>Error</p>}
-            {isLoading && <p>Loading...</p>}
-          </div>
-        ))}
+      {(error || isLoading) && (
+        <div>
+          {error && <p>Error</p>}
+          {isLoading && <p>Loading...</p>}
+        </div>
+      )}
+      {!error && !isLoading && leaderboard.length <= 0 && (
+        <div>
+          <p>No data</p>
+        </div>
+      )}
     </div>
   );
 };
