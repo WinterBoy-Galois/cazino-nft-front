@@ -6,15 +6,6 @@ const SpacerRow: React.FC = () => (
     <td>
       <div />
     </td>
-    <td className="hide--small hide--medium">
-      <div />
-    </td>
-    <td className="hide--small hide--medium">
-      <div />
-    </td>
-    <td>
-      <div />
-    </td>
   </tr>
 );
 
