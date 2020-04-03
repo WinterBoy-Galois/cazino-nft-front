@@ -1,7 +1,20 @@
 {
+  "headline": "Live Updates",
   "tabs": {
     "latestBets": "Letzte Wetten",
     "myBets": "Meine Wetten",
     "leaderboards": "Bestenliste"
+  },
+  "leaderboards": {
+    "times": {
+      "daily": "Tag",
+      "weekly": "Woche",
+      "monthly": "Monat"
+    },
+    "table": {
+      "user": "Nutzer",
+      "wagered": "Gewettet",
+      "bonus": "Bonus"
+    }
   }
 }

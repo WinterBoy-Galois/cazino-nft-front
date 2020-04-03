@@ -8,6 +8,7 @@ import SpacerRow from './components/SpacerRow';
 import Loading from './components/Loading';
 import Empty from './components/Empty';
 import Error from './components/Error';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   leaderboard: Leader[];
@@ -18,6 +19,7 @@ interface IProps {
 
 const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, signInUserId }) => {
   const breakpoint = useBreakpoint();
+  const { t } = useTranslation(['sidebar']);
 
   const renderBonusColumn = () => {
     switch (breakpoint) {
@@ -36,9 +38,9 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, sig
         <thead className={styles['leaderboard-table__header']}>
           <tr>
             <th>#</th>
-            <th>User</th>
-            <th>Wagered</th>
-            {renderBonusColumn() && <th>bonus</th>}
+            <th>{t('leaderboards.table.user')}</th>
+            <th>{t('leaderboards.table.wagered')}</th>
+            {renderBonusColumn() && <th>{t('leaderboards.table.bonus')}</th>}
           </tr>
         </thead>
         <tbody className={styles['leaderboard-table__body']}>

@@ -58,7 +58,7 @@ Object {
                   Wagered
                 </th>
                 <th>
-                  bonus
+                  Bonus
                 </th>
               </tr>
             </thead>
@@ -129,7 +129,7 @@ Object {
                 Wagered
               </th>
               <th>
-                bonus
+                Bonus
               </th>
             </tr>
           </thead>

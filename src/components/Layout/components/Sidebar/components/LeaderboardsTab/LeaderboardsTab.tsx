@@ -16,9 +16,9 @@ const LeaderboardsTab: React.SFC = () => {
       <div className={styles['time-select']}>
         <SlideSelect
           selectItems={[
-            { label: 'Daily', onClick: () => setSelectedTime('daily') },
-            { label: 'Weekly', onClick: () => setSelectedTime('weekly') },
-            { label: 'Monthly', onClick: () => setSelectedTime('monthly') },
+            { label: t('leaderboards.times.daily'), onClick: () => setSelectedTime('daily') },
+            { label: t('leaderboards.times.weekly'), onClick: () => setSelectedTime('weekly') },
+            { label: t('leaderboards.times.monthly'), onClick: () => setSelectedTime('monthly') },
           ]}
         />
       </div>

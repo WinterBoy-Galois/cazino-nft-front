@@ -80,6 +80,7 @@
   height: $bar-height;
   padding: 0 1rem;
   background-color: $blue;
+  text-transform: uppercase;
 
   @include media-breakpoint-up(md) {
     background-color: unset;
