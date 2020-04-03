@@ -30,6 +30,11 @@ exports[`renders 1`] = `
         class="leaderboard-table__body"
       />
     </table>
+    <div
+      class="container"
+    >
+      Sorry, received no data.
+    </div>
   </div>
 </div>
 `;
