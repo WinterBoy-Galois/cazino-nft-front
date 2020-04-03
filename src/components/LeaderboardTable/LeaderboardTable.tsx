@@ -5,6 +5,7 @@ import LeaderboardRow from './components/LeaderboardRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import SpacerRow from './components/SpacerRow';
+import Loading from './components/Loading';
 
 interface IProps {
   leaderboard: Leader[];
@@ -68,10 +69,10 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, sig
         </tbody>
       </table>
       {(error || isLoading) && (
-        <div>
+        <>
           {error && <p>Error</p>}
-          {isLoading && <p>Loading...</p>}
-        </div>
+          <Loading />
+        </>
       )}
       {!error && !isLoading && leaderboard.length <= 0 && (
         <div>

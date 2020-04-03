@@ -1,0 +1,15 @@
+@import '../../../../styles/shared.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 38px);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.5rem;
+}
