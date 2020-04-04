@@ -3,7 +3,7 @@ import styles from './LeaderboardsTab.module.scss';
 import { useTranslation } from 'react-i18next';
 import SlideSelect from '../../../../../SlideSelect';
 import LeaderboardTable from '../../../../../LeaderboardTable';
-import { useSubscription, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { LEADERBOARDS_SUBSCRIPTION } from '../../../../../../graphql/subscriptions';
 import { LEADERBOARDS } from '../../../../../../graphql/queries';
 
