@@ -24,3 +24,17 @@ export const LEADERBOARDS_SUBSCRIPTION = gql`
     }
   }
 `;
+
+export const BET_ADDED = gql`
+  subscription onBetAdded {
+    betAdded {
+      id
+      time
+      userid
+      username
+      gameid
+      bet
+      profit
+    }
+  }
+`;
