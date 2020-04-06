@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './LeaderboardRow.module.scss';
 import Bitcoin from '../../../icons/social/Bitcoin';
 import { Leader } from '../../../../models/leader.model';
+import { useStateValue } from '../../../../state';
 
 interface IProps {
   leader: Leader;
@@ -10,6 +11,8 @@ interface IProps {
 }
 
 const LeaderboardRow: React.FC<IProps> = ({ leader, place, highlight }) => {
+  const [, dispatch] = useStateValue();
+
   return (
     <tr className={`${highlight ? styles.highlight : ''}`}>
       <td>
@@ -17,7 +20,9 @@ const LeaderboardRow: React.FC<IProps> = ({ leader, place, highlight }) => {
       </td>
 
       <td>
-        <div>{leader.username}</div>
+        <div onClick={() => dispatch({ type: 'SHOW_MODAL', payload: { type: 'USER_INFO_MODAL' } })}>
+          {leader.username}
+        </div>
       </td>
 
       <td className={'bold'}>

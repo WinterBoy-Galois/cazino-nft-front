@@ -10,6 +10,9 @@ const getInitialState = (isSidebarOpen: boolean): State => ({
     selectedTab: 'LATEST_BETS',
     selectedLeaderboardAggregation: 'DAILY',
   },
+  modal: {
+    type: 'NONE',
+  },
 });
 
 export const StateContext = createContext<[State, Dispatch<Action>]>([

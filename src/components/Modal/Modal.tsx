@@ -11,34 +11,33 @@ interface IProps {
   onClose?: () => void;
 }
 
-const Modal: React.SFC<IProps> = ({ title = '', show: initialShow, children, onClose }) => {
-  const [show, setShow] = useState(initialShow);
-
+const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose }) => {
   useScrollLock(show);
 
   const handleClose = () => {
-    setShow(false);
     if (onClose) {
       onClose();
     }
   };
 
   return (
-    <CSSTransition in={show} timeout={200} classNames="modal__fade" unmountOnExit={true}>
-      <div className="modal">
-        <CSSTransition timeout={200} classNames="modal__scale">
-          <div className="modal__container">
-            <div className="modal__header">
-              <div className="modal__headline">{title}</div>
-              <div onClick={handleClose}>
-                <Close className="modal__icon modal__icon__close" />
+    <div>
+      <CSSTransition in={show} timeout={200} classNames="modal__fade" unmountOnExit={true}>
+        <div className="modal">
+          <CSSTransition timeout={200} classNames="modal__scale">
+            <div className="modal__container">
+              <div className="modal__header">
+                <div className="modal__headline">{title}</div>
+                <div onClick={handleClose}>
+                  <Close className="modal__icon modal__icon__close" />
+                </div>
               </div>
+              <div className="modal__main">{children}</div>
             </div>
-            <div className="modal__main">{children}</div>
-          </div>
-        </CSSTransition>
-      </div>
-    </CSSTransition>
+          </CSSTransition>
+        </div>
+      </CSSTransition>
+    </div>
   );
 };
 
