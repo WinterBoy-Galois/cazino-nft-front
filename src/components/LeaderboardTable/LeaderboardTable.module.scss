@@ -1,0 +1,117 @@
+@import '../../styles/shared';
+
+$radius: 10px;
+
+.leaderboard-table {
+  min-width: 100%;
+  color: $white;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  td {
+    padding: 0;
+  }
+
+  &__header {
+    th {
+      position: sticky;
+      top: 0;
+      font-weight: 300;
+      padding: 0.5rem;
+      background-color: $lightBlue;
+      text-transform: uppercase;
+      color: $ultraLightBlue;
+      font-size: 15px;
+      text-align: left;
+      z-index: 1;
+    }
+
+    th:first-child {
+      border-top-left-radius: $radius;
+      padding-left: 1rem;
+    }
+
+    th:last-child {
+      border-top-right-radius: $radius;
+      padding-right: 1rem;
+    }
+  }
+
+  &__body {
+    background-color: $darkBlue;
+    font-size: 13px;
+
+    @include media-breakpoint-up(xs) {
+      font-size: 13px;
+    }
+
+    td div {
+      padding: 0.5rem 0.5rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 130px;
+
+      @include media-breakpoint-up(lg) {
+        max-width: 129px;
+        padding: 0.6rem 0.5rem;
+      }
+    }
+
+    tr td:first-child div {
+      padding-left: 1rem;
+    }
+
+    tr td:last-child div {
+      padding-right: 1rem;
+    }
+
+    tr:last-child td:first-child {
+      border-bottom-left-radius: $radius;
+    }
+
+    tr:last-child td:last-child {
+      border-bottom-right-radius: $radius;
+    }
+  }
+
+  &__wrapper {
+    max-height: 404px;
+    min-height: 200px;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    white-space: nowrap;
+    background-color: $darkBlue;
+    border-radius: $radius;
+
+    @include media-breakpoint-up(lg) {
+      max-height: 438px;
+    }
+  }
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(50%);
+}
+
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 500ms, transform 500ms;
+}

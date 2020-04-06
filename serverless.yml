@@ -7,6 +7,7 @@ provider:
   region: eu-central-1
   stage: ${opt:stage, 'dev'}
   stackName: ${self:service.name}-${self:provider.stage}
+  profile: ${self:custom.profiles.${self:provider.stage}}
   environment:
     accountId: '#{AWS::AccountId}'
     region: '#{AWS::Region}'
@@ -19,11 +20,20 @@ plugins:
   - serverless-s3-sync
 
 custom:
-  siteName: ${self:provider.stage}.cazzzino
+  siteName: cazzzino.${self:provider.stage}.egonoid.net
+  certificate:
+    dev: arn:aws:acm:us-east-1:329426105556:certificate/73a6f5c8-3e39-416a-85e4-cb6b52eb0d94
+    test: arn:aws:acm:us-east-1:662809561885:certificate/c2e7a9c9-0cbb-4934-9fcc-9488a0297ef6
   aliasHostedZoneId: Z2FDTNDATAQYW2
   s3Sync:
     - bucketName: ${self:custom.siteName}
       localDir: build
+  profiles:
+    dev: cazzzino-dev
+    test: cazzzino-test
+  basicAuthFunction:
+    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-basic-auth-dev-onViewerRequest:1
+    test: arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onViewerRequest:7
 
 resources:
   Resources:
@@ -86,6 +96,11 @@ resources:
             - ErrorCode: 404
               ResponseCode: 200
               ResponsePagePath: /index.html
+          Aliases:
+            - ${self:custom.siteName}
+          ViewerCertificate:
+            AcmCertificateArn: ${self:custom.certificate.${self:provider.stage}}
+            SslSupportMethod: sni-only
           DefaultCacheBehavior:
             TargetOriginId: ${self:custom.siteName}-S3
             ViewerProtocolPolicy: 'redirect-to-https'
@@ -97,7 +112,7 @@ resources:
             Compress: True
             LambdaFunctionAssociations:
               - EventType: viewer-request
-                LambdaFunctionARN: 'arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onViewerRequest:7'
+                LambdaFunctionARN: ${self:custom.basicAuthFunction.${self:provider.stage}}
           HttpVersion: http2
           ViewerCertificate:
             AcmCertificateArn: arn:aws:acm:us-east-1:662809561885:certificate/c2e7a9c9-0cbb-4934-9fcc-9488a0297ef6
