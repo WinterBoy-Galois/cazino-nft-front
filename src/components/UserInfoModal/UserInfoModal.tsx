@@ -8,7 +8,7 @@ interface IProps {
 
 const UserInfoModal: React.SFC<IProps> = ({ show, onClose }) => {
   return (
-    <Modal show={show} onClose={onClose}>
+    <Modal show={show} onClose={onClose} title="User Info">
       User Info
     </Modal>
   );

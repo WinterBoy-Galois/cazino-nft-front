@@ -1226,7 +1226,6 @@ Object {
           </div>
         </div>
       </div>
-      <div />
     </div>
   </body>,
   "container": <div>
@@ -2451,7 +2450,6 @@ Object {
         </div>
       </div>
     </div>
-    <div />
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
