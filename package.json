@@ -29,7 +29,7 @@
     "react-dom": "^16.13.0",
     "react-i18next": "^11.3.3",
     "react-id-swiper": "^3.0.0",
-    "react-scripts": "3.4.0",
+    "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0",
     "subscriptions-transport-ws": "^0.9.16",
     "swiper": "^5.3.6",
@@ -61,7 +61,8 @@
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "Edge 18"
     ]
   },
   "jest": {

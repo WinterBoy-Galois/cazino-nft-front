@@ -76,9 +76,9 @@ $radius: 10px;
   }
 
   &__wrapper {
-    max-height: 404px;
+    max-height: calc(100% - 0.5rem);
     min-height: 200px;
-    height: 100%;
+    height: auto;
     width: 100%;
     overflow-x: hidden;
     white-space: nowrap;
@@ -86,7 +86,7 @@ $radius: 10px;
     border-radius: $radius;
 
     @include media-breakpoint-up(lg) {
-      max-height: 438px;
+      max-height: calc(100% - 1.5rem);
     }
   }
 }
