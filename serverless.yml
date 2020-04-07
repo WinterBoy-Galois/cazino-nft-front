@@ -98,6 +98,8 @@ resources:
             LambdaFunctionAssociations:
               - EventType: viewer-request
                 LambdaFunctionARN: 'arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onViewerRequest:7'
+              - EventType: origin-request
+                LambdaFunctionARN: 'arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onOriginRequest:1'
           HttpVersion: http2
           ViewerCertificate:
             AcmCertificateArn: arn:aws:acm:us-east-1:662809561885:certificate/c2e7a9c9-0cbb-4934-9fcc-9488a0297ef6
