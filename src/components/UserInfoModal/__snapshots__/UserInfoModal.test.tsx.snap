@@ -16,7 +16,9 @@ exports[`render 1`] = `
         >
           User Info
         </div>
-        <div>
+        <div
+          class="modal__header__close"
+        >
           <svg
             class="icon icon__close"
             viewBox="0 0 365.696 365.696"

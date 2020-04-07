@@ -37,13 +37,13 @@
     font-weight: 600;
     color: #fff;
     font-size: 1rem;
-    padding: 0 1rem;
+    padding: 0 0 0 1rem;
     text-transform: uppercase;
 
     @include media-breakpoint-up(md) {
       font-size: 1.2rem;
       height: 70px;
-      padding: 0 1.5rem;
+      padding: 0 0 0 1.5rem;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
     }
@@ -51,6 +51,23 @@
     &__headline {
       display: flex;
       align-items: center;
+    }
+
+    &__close {
+      cursor: pointer;
+      padding: 1rem;
+
+      @include media-breakpoint-up(md) {
+        padding: 1.5rem;
+      }
+    }
+  }
+
+  &__main {
+    padding: 1rem;
+
+    @include media-breakpoint-up(md) {
+      padding: 1.5rem;
     }
   }
 }
@@ -61,8 +78,6 @@
 
   &__close {
     width: 20px;
-    cursor: pointer;
-    margin-left: -2rem;
 
     @include media-breakpoint-up(md) {
       width: 23px;

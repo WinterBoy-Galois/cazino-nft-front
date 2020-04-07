@@ -47,7 +47,7 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose }) => {
           <div className={styles.modal}>
             <div className={styles.modal__header}>
               <div className={styles.modal__header__headline}>{title}</div>
-              <div onClick={handleClose}>
+              <div className={styles.modal__header__close} onClick={handleClose}>
                 <Close className={`${styles.icon} ${styles.icon__close}`} />
               </div>
             </div>
