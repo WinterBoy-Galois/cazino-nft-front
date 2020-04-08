@@ -1,0 +1,28 @@
+@import '../../styles/shared';
+
+.details {
+  border-radius: 8px;
+  background-color: $user-info-main-blue;
+  padding: 1rem;
+
+  &__item {
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+
+    &:first-of-type {
+      margin: 0;
+    }
+
+    &__label {
+      width: 50%;
+      color: $user-info-label-blue;
+      text-transform: uppercase;
+    }
+
+    &__value {
+      width: 50%;
+      text-align: right;
+    }
+  }
+}

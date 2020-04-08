@@ -20,7 +20,14 @@ const LeaderboardRow: React.FC<IProps> = ({ leader, place, highlight }) => {
       </td>
 
       <td>
-        <div onClick={() => dispatch({ type: 'SHOW_MODAL', payload: { type: 'USER_INFO_MODAL' } })}>
+        <div
+          onClick={() =>
+            dispatch({
+              type: 'SHOW_MODAL',
+              payload: { type: 'USER_INFO_MODAL', data: { userId: leader.userid } },
+            })
+          }
+        >
           {leader.username}
         </div>
       </td>

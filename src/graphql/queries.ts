@@ -49,3 +49,20 @@ export const LEADERBOARDS = gql`
     }
   }
 `;
+
+export const USER_INFO = gql`
+  query UserInfo($userId: ID) {
+    userInfo(id: $userId) {
+      ... on PublicUser {
+        id
+        username
+        avatarUrl
+        totalWager
+        totalProfit
+        mostPlayed
+        totalBets
+        luckyBets
+      }
+    }
+  }
+`;

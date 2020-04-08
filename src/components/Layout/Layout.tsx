@@ -49,6 +49,7 @@ const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
     <UserInfoModal
       show={modal.type === 'USER_INFO_MODAL'}
       onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      {...modal.data}
     />
   </>
 );
