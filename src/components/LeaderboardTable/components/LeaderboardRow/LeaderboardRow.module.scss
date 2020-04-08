@@ -1,6 +1,14 @@
 @import '../../../../styles/shared.scss';
 
 .leaderboard-row {
+  &__username {
+    width: 130px;
+
+    @include media-breakpoint-up(lg) {
+      width: 129px;
+    }
+  }
+
   &__icon {
     width: 11px;
     height: 11px;

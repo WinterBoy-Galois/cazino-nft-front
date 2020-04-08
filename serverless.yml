@@ -90,14 +90,12 @@ resources:
         DistributionConfig:
           Comment: CaZZZino App (${self:custom.siteName}) CloudFront Distribution
           Aliases:
-            - 'cazzzino.${self:provider.stage}.egonoid.net'
+            - ${self:custom.siteName}
           DefaultRootObject: index.html
           CustomErrorResponses:
             - ErrorCode: 404
               ResponseCode: 200
               ResponsePagePath: /index.html
-          Aliases:
-            - ${self:custom.siteName}
           ViewerCertificate:
             AcmCertificateArn: ${self:custom.certificate.${self:provider.stage}}
             SslSupportMethod: sni-only
@@ -113,10 +111,9 @@ resources:
             LambdaFunctionAssociations:
               - EventType: viewer-request
                 LambdaFunctionARN: ${self:custom.basicAuthFunction.${self:provider.stage}}
+              - EventType: origin-request
+                LambdaFunctionARN: 'arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onOriginRequest:1'
           HttpVersion: http2
-          ViewerCertificate:
-            AcmCertificateArn: arn:aws:acm:us-east-1:662809561885:certificate/c2e7a9c9-0cbb-4934-9fcc-9488a0297ef6
-            SslSupportMethod: sni-only
           Enabled: true
           Origins:
             - Id: ${self:custom.siteName}-S3
