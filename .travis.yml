@@ -7,10 +7,10 @@ matrix:
       env:
         - AWS_REGION="eu-central-1"
         - secure: Bu47Xuavz/05K9ngd+CjJ+Z1w/1nR1MgyTbTQHZNh+ZRu4SmD3MLpxUuMIQ9jT5viOb94KNQXz8WNprewpqkTAHLQxOPczRxqeXcEZuw5MH4rm+wcMHZ7ObNoLF2KTbf4tEEClSOZHfVDyI79EZETY2yut+cCyqagg3mXkzhx6KwT4LJoMhHPFeSSNBplDWROWD/0O9Q3gEzUhN/ujgp+SdqzIH8LHrLaYpHLzA4XP/r9u1CIO9Q31kZCUqhcwZtWAi3dafKZHPX7toC7vObrHjswo8trjsgrb4VsqEj+TDWn4YFuUUFfX+2PbXcg+JHROaMccKqspclzAjjhZCaOoXI9xP3NIo3AtEV12UhF71VxDUfeBlbZ97UQGPFfyjDeipWcFYDnqZ1FabrtYaWYxKb6xydCHJTbeY9UvexY/o0GA1PnVf9hrxDCvRnnoAt5P/EGWxgs8X9nHdys/hWQwSNUVoODmIfc3LiiFdFXntlAz5l7xC74gRKgB9BZt1LUJkESVU0wfuVZVTf8pVQr/ow8o/7/pswzVMIDdMNzNgrARLpSqahaPjO+cVm6th57cm3aGf/r2+dh0V7lADmxKhQDtfdDL0zvcSqAy4HEDysMQp+ODC8rd3gkufB6UX8gZZIBBIOLXLr2u4Y2gQSVaAxOc7Bj3pvwTbPz61Ci8c=
-    - if: branch =~ /^(master)
-      env:
-        - AWS_REGION="eu-central-1"
-        - secure: Bu47Xuavz/05K9ngd+CjJ+Z1w/1nR1MgyTbTQHZNh+ZRu4SmD3MLpxUuMIQ9jT5viOb94KNQXz8WNprewpqkTAHLQxOPczRxqeXcEZuw5MH4rm+wcMHZ7ObNoLF2KTbf4tEEClSOZHfVDyI79EZETY2yut+cCyqagg3mXkzhx6KwT4LJoMhHPFeSSNBplDWROWD/0O9Q3gEzUhN/ujgp+SdqzIH8LHrLaYpHLzA4XP/r9u1CIO9Q31kZCUqhcwZtWAi3dafKZHPX7toC7vObrHjswo8trjsgrb4VsqEj+TDWn4YFuUUFfX+2PbXcg+JHROaMccKqspclzAjjhZCaOoXI9xP3NIo3AtEV12UhF71VxDUfeBlbZ97UQGPFfyjDeipWcFYDnqZ1FabrtYaWYxKb6xydCHJTbeY9UvexY/o0GA1PnVf9hrxDCvRnnoAt5P/EGWxgs8X9nHdys/hWQwSNUVoODmIfc3LiiFdFXntlAz5l7xC74gRKgB9BZt1LUJkESVU0wfuVZVTf8pVQr/ow8o/7/pswzVMIDdMNzNgrARLpSqahaPjO+cVm6th57cm3aGf/r2+dh0V7lADmxKhQDtfdDL0zvcSqAy4HEDysMQp+ODC8rd3gkufB6UX8gZZIBBIOLXLr2u4Y2gQSVaAxOc7Bj3pvwTbPz61Ci8c=
+    # - if: branch =~ /^(master)
+    #   env:
+    #     - AWS_REGION="eu-central-1"
+    #     - secure: Bu47Xuavz/05K9ngd+CjJ+Z1w/1nR1MgyTbTQHZNh+ZRu4SmD3MLpxUuMIQ9jT5viOb94KNQXz8WNprewpqkTAHLQxOPczRxqeXcEZuw5MH4rm+wcMHZ7ObNoLF2KTbf4tEEClSOZHfVDyI79EZETY2yut+cCyqagg3mXkzhx6KwT4LJoMhHPFeSSNBplDWROWD/0O9Q3gEzUhN/ujgp+SdqzIH8LHrLaYpHLzA4XP/r9u1CIO9Q31kZCUqhcwZtWAi3dafKZHPX7toC7vObrHjswo8trjsgrb4VsqEj+TDWn4YFuUUFfX+2PbXcg+JHROaMccKqspclzAjjhZCaOoXI9xP3NIo3AtEV12UhF71VxDUfeBlbZ97UQGPFfyjDeipWcFYDnqZ1FabrtYaWYxKb6xydCHJTbeY9UvexY/o0GA1PnVf9hrxDCvRnnoAt5P/EGWxgs8X9nHdys/hWQwSNUVoODmIfc3LiiFdFXntlAz5l7xC74gRKgB9BZt1LUJkESVU0wfuVZVTf8pVQr/ow8o/7/pswzVMIDdMNzNgrARLpSqahaPjO+cVm6th57cm3aGf/r2+dh0V7lADmxKhQDtfdDL0zvcSqAy4HEDysMQp+ODC8rd3gkufB6UX8gZZIBBIOLXLr2u4Y2gQSVaAxOc7Bj3pvwTbPz61Ci8c=
 cache: yarn
 script:
   - yarn build
