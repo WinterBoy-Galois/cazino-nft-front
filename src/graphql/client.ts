@@ -5,7 +5,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { split } from 'apollo-link';
 
-const cache = new InMemoryCache({ dataIdFromObject: o => o.id });
+const cache = new InMemoryCache({ dataIdFromObject: o => o.id, addTypename: true });
 const httpLink = new HttpLink({
   uri: 'https://dev.gambilife.com/graphql/',
 });
