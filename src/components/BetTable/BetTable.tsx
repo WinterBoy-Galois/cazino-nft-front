@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './BetTable.scss';
-import { useQuery } from '@apollo/react-hooks';
 import Bet from '../../models/bet';
-import { LATEST_BETS } from '../../graphql/queries';
 import BetRow from './components/BetRow';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import SpacerRow from './components/SpacerRow';
 
 interface IProps {
