@@ -85,6 +85,8 @@ $radius: 10px;
     white-space: nowrap;
     background-color: $darkBlue;
     border-radius: $radius;
+    display: flex;
+    flex-direction: column;
 
     @include media-breakpoint-up(md) {
       overflow-y: hidden;
