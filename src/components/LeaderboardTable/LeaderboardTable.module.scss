@@ -27,12 +27,20 @@ $radius: 10px;
     }
 
     th:first-child {
-      border-top-left-radius: $radius;
+      // Fixes Safari iOS border radius
+      @supports (-webkit-touch-callout: none) {
+        border-radius: $radius 0 0 0;
+      }
+
       padding-left: 1rem;
     }
 
     th:last-child {
-      border-top-right-radius: $radius;
+      // Fixes Safari iOS border radius
+      @supports (-webkit-touch-callout: none) {
+        border-radius: 0 $radius 0 0;
+      }
+
       padding-right: 1rem;
     }
   }
@@ -65,14 +73,6 @@ $radius: 10px;
     tr td:last-child div {
       padding-right: 1rem;
     }
-
-    tr:last-child td:first-child {
-      border-bottom-left-radius: $radius;
-    }
-
-    tr:last-child td:last-child {
-      border-bottom-right-radius: $radius;
-    }
   }
 
   &__wrapper {
@@ -81,9 +81,14 @@ $radius: 10px;
     height: auto;
     width: 100%;
     overflow-x: hidden;
+    overflow-y: auto;
     white-space: nowrap;
     background-color: $darkBlue;
     border-radius: $radius;
+
+    @include media-breakpoint-up(md) {
+      overflow-y: hidden;
+    }
 
     @include media-breakpoint-up(lg) {
       max-height: calc(100% - 1.5rem);
