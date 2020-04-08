@@ -1,0 +1,14 @@
+@import '../../../../../../styles/shared';
+
+.table {
+  height: calc(100% - #{$sidebar-time-select-height});
+  padding-bottom: 1rem;
+}
+
+.time-select {
+  margin-bottom: 1.5rem;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 2rem;
+  }
+}

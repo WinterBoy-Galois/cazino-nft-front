@@ -1,7 +1,20 @@
 {
+  "headline": "Live Updates",
   "tabs": {
     "latestBets": "Latest Bets",
     "myBets": "My Bets",
     "leaderboards": "Leaderboards"
+  },
+  "leaderboards": {
+    "times": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "table": {
+      "user": "User",
+      "wagered": "Wagered",
+      "bonus": "Bonus"
+    }
   }
 }

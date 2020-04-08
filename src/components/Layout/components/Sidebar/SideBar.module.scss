@@ -80,6 +80,7 @@
   height: $bar-height;
   padding: 0 1rem;
   background-color: $blue;
+  text-transform: uppercase;
 
   @include media-breakpoint-up(md) {
     background-color: unset;
@@ -102,8 +103,16 @@
 
 .tab-select {
   width: 100%;
-  margin: 2rem auto;
+  margin: 1.5rem auto;
   padding: 0 1rem;
   display: flex;
   justify-content: center;
+
+  @include media-breakpoint-up(md) {
+    margin: 2rem auto;
+  }
+}
+
+.tab-container {
+  height: calc(100% - #{$sidebar-tab-select-height});
 }
