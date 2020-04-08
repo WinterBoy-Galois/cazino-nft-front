@@ -21,19 +21,19 @@ script:
 before_deploy:
   - yarn global add serverless
   - pip install awscli --upgrade --user
-  - aws configure set aws_access_key_id ${!AWS_ACCESS_KEY_ID} --profile cazzzino-test
-  - aws configure set aws_secret_access_key ${!AWS_SECRET_ACCESS_KEY} --profile cazzzino-test
+  - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile cazzzino-test
+  - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile cazzzino-test
 deploy:
   - provider: script
     skip_cleanup: true
     script:
-      - sls deploy -v -s test
+      - sls deploy -v -s test --conceal
     on:
       branch: develop
   # - provider: script
   #   skip_cleanup: true
   #   script:
-  #     - sls deploy -v -s prod
+  #     - sls deploy -v -s prod --conceal
   #   on:
   #     branch: master
 notifications:
