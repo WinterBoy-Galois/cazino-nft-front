@@ -17,7 +17,7 @@ const LeaderboardRow: React.FC<IProps> = ({ leader, place, highlight }) => {
       </td>
 
       <td>
-        <div>{leader.username}</div>
+        <div className={styles['leaderboard-row__username']}>{leader.username}</div>
       </td>
 
       <td className={'bold'}>
