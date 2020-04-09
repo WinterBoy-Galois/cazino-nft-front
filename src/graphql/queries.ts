@@ -63,6 +63,13 @@ export const USER_INFO = gql`
         totalBets
         luckyBets
       }
+      ... on GenericErrorArray {
+        errors {
+          type
+          field
+          messageKey
+        }
+      }
     }
   }
 `;

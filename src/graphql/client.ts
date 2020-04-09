@@ -1,11 +1,26 @@
 import { ApolloClient } from 'apollo-client';
-import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import {
+  InMemoryCache,
+  NormalizedCacheObject,
+  IntrospectionFragmentMatcher,
+} from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { split } from 'apollo-link';
+import introspectionQueryResultData from './fragmentTypes.json';
 
-const cache = new InMemoryCache({ dataIdFromObject: o => o.id, addTypename: true });
+// https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData,
+});
+
+const cache = new InMemoryCache({
+  dataIdFromObject: o => o.id,
+  addTypename: true,
+  fragmentMatcher,
+});
+
 const httpLink = new HttpLink({
   uri: 'https://dev.gambilife.com/graphql/',
 });
