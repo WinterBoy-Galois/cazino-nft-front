@@ -21,12 +21,27 @@
     }
 
     &__value {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       width: 50%;
-      text-align: right;
+      font-weight: 300;
     }
   }
 }
 
 .username {
   margin: 1rem 0 2rem;
+}
+
+.game-icon {
+  width: 14px;
+  height: 14px;
+  fill: $white;
+  vertical-align: middle;
+  margin-right: 5px;
+
+  &__inner {
+    fill: $user-info-main-blue;
+  }
 }

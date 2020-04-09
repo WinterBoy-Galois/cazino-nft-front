@@ -28,7 +28,7 @@ mockClient.setRequestHandler(USER_INFO, () =>
         avatarUrl: 'https://dev.gambilife.com/ava/m2.svg',
         totalWager: 0,
         totalProfit: 0,
-        mostPlayed: 'DICE',
+        mostPlayed: 'CLAMS',
         totalBets: 0,
         luckyBets: 0,
       },

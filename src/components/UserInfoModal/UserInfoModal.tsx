@@ -4,6 +4,9 @@ import styles from './UserInfoModal.module.scss';
 import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
 import Username from './components/Username';
+import BitcoinValue from '../BitcoinValue';
+import { formatProfit, formatBitcoin } from '../../lib/format.extensions';
+import GameIcon from '../GameIcon';
 
 interface IProps {
   show: boolean;
@@ -28,15 +31,26 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
           <div className={styles.details}>
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Total Wager</div>
-              <div className={styles.details__item__value}>{data.userInfo.totalWager}</div>
+              <div className={styles.details__item__value}>
+                <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />
+              </div>
             </div>
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Total Profit</div>
-              <div className={styles.details__item__value}>{data.userInfo.totalProfit}</div>
+              <div className={styles.details__item__value}>
+                <BitcoinValue value={formatProfit(data.userInfo.totalProfit)} />
+              </div>
             </div>
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Most Played</div>
-              <div className={styles.details__item__value}>{data.userInfo.mostPlayed}</div>
+              <div className={styles.details__item__value}>
+                <GameIcon
+                  game={data.userInfo.mostPlayed}
+                  className={styles['game-icon']}
+                  innerClassName={styles['game-icon__inner']}
+                />
+                {data.userInfo.mostPlayed}
+              </div>
             </div>
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Total Bets</div>

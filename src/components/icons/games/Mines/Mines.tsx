@@ -7,7 +7,7 @@ interface IProps {
 
 const Mines: React.SFC<IProps> = ({ className, innerClassName }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" className={className}>
       <defs>
         <style
           dangerouslySetInnerHTML={{
