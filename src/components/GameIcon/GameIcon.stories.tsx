@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Modal from '.';
+import GameIcon from '.';
 
-storiesOf('Components/Modal', module).add('default', () => (
-  <Modal show={true} title="Modal Title">
-    Hi, I'm a Modal!
-  </Modal>
-));
+storiesOf('Components/GameIcon', module)
+  .add('Clams', () => <GameIcon game="CLAMS" />)
+  .add('Goals', () => <GameIcon game="GOALS" />)
+  .add('Dice', () => <GameIcon game="DICE" />)
+  .add('Mines', () => <GameIcon game="MINES" />);
