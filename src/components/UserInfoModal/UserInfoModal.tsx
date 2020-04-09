@@ -3,6 +3,7 @@ import Modal from '../Modal';
 import styles from './UserInfoModal.module.scss';
 import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
+import Username from './components/Username';
 
 interface IProps {
   show: boolean;
@@ -19,7 +20,11 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
       {error || data?.userInfo?.errors ? 'Error' : null}
       {data?.userInfo && !data?.userInfo?.errors ? (
         <div>
-          {data.userInfo.username}
+          <Username
+            className={styles.username}
+            username={data.userInfo.username}
+            avatarUrl={data.userInfo.avatarUrl}
+          />
           <div className={styles.details}>
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Total Wager</div>
