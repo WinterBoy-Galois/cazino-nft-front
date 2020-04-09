@@ -7,6 +7,7 @@ import Username from './components/Username';
 import BitcoinValue from '../BitcoinValue';
 import { formatProfit, formatBitcoin } from '../../lib/format.extensions';
 import GameIcon from '../GameIcon';
+import Button from '../Button';
 
 interface IProps {
   show: boolean;
@@ -60,6 +61,10 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
               <div className={styles.details__item__label}>Won Bets</div>
               <div className={styles.details__item__value}>{data.userInfo.luckyBets}</div>
             </div>
+          </div>
+
+          <div className={styles.button}>
+            <Button onClick={onClose}>Back</Button>
           </div>
         </div>
       ) : null}

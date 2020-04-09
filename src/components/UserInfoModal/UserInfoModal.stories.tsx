@@ -6,6 +6,7 @@ import { USER_INFO } from '../../graphql/queries';
 import { ApolloProvider } from '@apollo/react-hooks';
 import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
+import { action } from '@storybook/addon-actions';
 
 // https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -48,7 +49,7 @@ errorMockClient.setRequestHandler(USER_INFO, () => Promise.reject());
 storiesOf('Components/UserInfoModal', module)
   .add('default', () => (
     <ApolloProvider client={mockClient}>
-      <UserInfoModal show={true} userId="1" />
+      <UserInfoModal show={true} userId="1" onClose={action('close modal')} />
     </ApolloProvider>
   ))
   .add('User not found', () => (
