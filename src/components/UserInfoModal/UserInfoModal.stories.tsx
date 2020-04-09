@@ -4,15 +4,28 @@ import UserInfoModal from '.';
 import { createMockClient } from 'mock-apollo-client';
 import { USER_INFO } from '../../graphql/queries';
 import { ApolloProvider } from '@apollo/react-hooks';
+import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
+import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 
-const mockClient = createMockClient();
+// https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData,
+});
+
+const cache = new InMemoryCache({
+  addTypename: false,
+  fragmentMatcher,
+});
+
+const mockClient = createMockClient({ cache });
 mockClient.setRequestHandler(USER_INFO, () =>
   Promise.resolve({
     data: {
       userInfo: {
+        __typename: 'PublicUser',
         id: '1',
-        username: 'NIDHjQ',
-        avatarUrl: 'https://dev.gambilife.com/ava/m1.svg',
+        username: 'AuYHKS',
+        avatarUrl: 'https://dev.gambilife.com/ava/m2.svg',
         totalWager: 0,
         totalProfit: 0,
         mostPlayed: 'DICE',
@@ -26,8 +39,8 @@ mockClient.setRequestHandler(USER_INFO, () =>
 const loadingMockClient = createMockClient();
 loadingMockClient.setRequestHandler(USER_INFO, () => new Promise(() => null));
 
-const emptyMockClient = createMockClient();
-emptyMockClient.setRequestHandler(USER_INFO, () => Promise.resolve({ data: {} }));
+const emptyMockClient = createMockClient({ cache });
+emptyMockClient.setRequestHandler(USER_INFO, () => Promise.resolve({ data: { userInfo: {} } }));
 
 const errorMockClient = createMockClient();
 errorMockClient.setRequestHandler(USER_INFO, () => Promise.reject());

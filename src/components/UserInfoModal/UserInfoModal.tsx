@@ -16,8 +16,8 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
   return (
     <Modal show={show} onClose={onClose} title="User Info">
       {loading ? 'Loading' : null}
-      {error ? 'Error' : null}
-      {data?.userInfo ? (
+      {error || data?.userInfo?.errors ? 'Error' : null}
+      {data?.userInfo && !data?.userInfo?.errors ? (
         <div>
           {data.userInfo.username}
           <div className={styles.details}>
