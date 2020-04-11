@@ -34,7 +34,7 @@
 
   &__header {
     background-color: $blue;
-    height: 50px;
+    height: $modal-header-height;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -69,6 +69,7 @@
 
   &__main {
     padding: 1rem;
+    height: calc(100% - #{$modal-header-height});
 
     @include media-breakpoint-up(md) {
       padding: 1.5rem;

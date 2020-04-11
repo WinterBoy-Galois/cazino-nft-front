@@ -1,10 +1,11 @@
-@import '../../../../styles/shared.scss';
+@import '../../styles/shared.scss';
 
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
   flex-grow: 1;
 }
 

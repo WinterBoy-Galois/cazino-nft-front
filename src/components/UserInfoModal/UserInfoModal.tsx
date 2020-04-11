@@ -8,6 +8,8 @@ import BitcoinValue from '../BitcoinValue';
 import { formatProfit, formatBitcoin } from '../../lib/format.extensions';
 import GameIcon from '../GameIcon';
 import Button from '../Button';
+import Loading from '../Loading';
+import Error from '../Error';
 
 interface IProps {
   show: boolean;
@@ -20,8 +22,10 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
 
   return (
     <Modal show={show} onClose={onClose} title="User Info">
-      {loading ? 'Loading' : null}
-      {error || data?.userInfo?.errors ? 'Error' : null}
+      {loading ? <Loading /> : null}
+      {error || data?.userInfo?.errors || data?.errors ? (
+        <Error>Could not load user info.</Error>
+      ) : null}
       {data?.userInfo && !data?.userInfo?.errors ? (
         <div>
           <Username
