@@ -8,7 +8,6 @@ import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 import { action } from '@storybook/addon-actions';
 
-// https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 });
