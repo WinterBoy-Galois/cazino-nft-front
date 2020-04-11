@@ -5,6 +5,11 @@
   background-color: $user-info-main-blue;
   padding: 1rem;
 
+  @include media-breakpoint-up(md) {
+    width: 80%;
+    margin: 0 auto;
+  }
+
   &__item {
     display: flex;
     width: 100%;
@@ -18,6 +23,11 @@
       width: 50%;
       color: $user-info-label-blue;
       text-transform: uppercase;
+
+      @include media-breakpoint-up(md) {
+        text-align: right;
+        margin-right: 1rem;
+      }
     }
 
     &__value {
@@ -26,12 +36,36 @@
       align-items: center;
       width: 50%;
       font-weight: 300;
+
+      @include media-breakpoint-up(md) {
+        justify-content: flex-start;
+      }
     }
   }
 }
 
 .username {
   margin: 1rem 0 2rem;
+
+  @include media-breakpoint-up(md) {
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 1rem;
+  }
+
+  &--mobile {
+    @include media-breakpoint-up(md) {
+      display: none !important;
+    }
+  }
+
+  &--desktop {
+    display: none !important;
+
+    @include media-breakpoint-up(md) {
+      display: flex !important;
+    }
+  }
 }
 
 .game-icon {
@@ -48,5 +82,6 @@
 
 .button {
   width: 66%;
-  margin: 4rem auto 0;
+  max-width: 220px;
+  margin: 3rem auto 0;
 }

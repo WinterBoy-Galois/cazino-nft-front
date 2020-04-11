@@ -29,11 +29,16 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
       {data?.userInfo && !data?.userInfo?.errors ? (
         <div>
           <Username
-            className={styles.username}
+            className={`${styles.username} ${styles['username--mobile']}`}
             username={data.userInfo.username}
             avatarUrl={data.userInfo.avatarUrl}
           />
           <div className={styles.details}>
+            <Username
+              className={`${styles.username} ${styles['username--desktop']}`}
+              username={data.userInfo.username}
+              avatarUrl={data.userInfo.avatarUrl}
+            />
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Total Wager</div>
               <div className={styles.details__item__value}>
