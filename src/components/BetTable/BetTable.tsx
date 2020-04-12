@@ -3,6 +3,7 @@ import './BetTable.scss';
 import Bet from '../../models/bet';
 import BetRow from './components/BetRow';
 import SpacerRow from './components/SpacerRow';
+import { Empty, Loading, Error } from '../LeaderboardTable';
 
 interface IProps {
   bets: Bet[];
@@ -40,8 +41,8 @@ const BetTable: React.FC<IProps> = ({ bets, isLoading, error }) => {
         {error || isLoading ? (
           <tbody className="bet-table__body">
             <SpacerRow />
-            {error && <p>Error</p>}
-            {isLoading && <p>Loading...</p>}
+            {error && <Error />}
+            {isLoading && <Loading />}
             <SpacerRow />
           </tbody>
         ) : (
@@ -64,9 +65,7 @@ const BetTable: React.FC<IProps> = ({ bets, isLoading, error }) => {
                   <BetRow bet={b} />
                 </CSSTransition>
               ))}
-            </TransitionGroup> */ <p>
-                No Data
-              </p>
+            </TransitionGroup> */ <Empty />
             )}
             <SpacerRow />
           </tbody>
