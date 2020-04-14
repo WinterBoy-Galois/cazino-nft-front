@@ -36,7 +36,7 @@ const LeaderboardRow: React.FC<IProps> = ({
       </td>
 
       <td>
-        <div>
+        <div className={styles.username}>
           <span className={styles.link} onClick={handleClickUsername}>
             {leader.username}
           </span>
