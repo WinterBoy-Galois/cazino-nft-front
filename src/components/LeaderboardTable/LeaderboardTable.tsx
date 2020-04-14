@@ -14,9 +14,18 @@ interface IProps {
   isLoading: boolean;
   error: boolean;
   signInUserId: string;
+  onRowClicked?: () => void;
+  onUsernameClicked?: (userId: string) => void;
 }
 
-const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, signInUserId }) => {
+const LeaderboardTable: React.FC<IProps> = ({
+  leaderboard,
+  isLoading,
+  error,
+  signInUserId,
+  onRowClicked,
+  onUsernameClicked,
+}) => {
   const breakpoint = useBreakpoint();
   const { t } = useTranslation(['sidebar']);
 
@@ -62,6 +71,8 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, sig
                       leader={l}
                       place={i + 1}
                       highlight={l.userid === signInUserId}
+                      onRowClicked={onRowClicked}
+                      onUsernameClicked={onUsernameClicked}
                     />
                   </CSSTransition>
                 </SwitchTransition>

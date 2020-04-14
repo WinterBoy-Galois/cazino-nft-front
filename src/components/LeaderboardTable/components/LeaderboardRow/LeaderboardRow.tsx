@@ -2,34 +2,42 @@ import React from 'react';
 import styles from './LeaderboardRow.module.scss';
 import Bitcoin from '../../../icons/social/Bitcoin';
 import { Leader } from '../../../../models/leader.model';
-import { useStateValue } from '../../../../state';
 
 interface IProps {
   leader: Leader;
   place: number;
   highlight: boolean;
+  onRowClicked?: () => void;
+  onUsernameClicked?: (userId: string) => void;
 }
 
-const LeaderboardRow: React.FC<IProps> = ({ leader, place, highlight }) => {
-  const [, dispatch] = useStateValue();
+const LeaderboardRow: React.FC<IProps> = ({
+  leader,
+  place,
+  highlight,
+  onRowClicked,
+  onUsernameClicked,
+}) => {
+  const handleClickUsername: React.MouseEventHandler = event => {
+    if (onUsernameClicked) {
+      onUsernameClicked(leader.userid);
+    }
+
+    event.stopPropagation();
+  };
 
   return (
-    <tr className={`${highlight ? styles.highlight : ''}`}>
+    <tr
+      className={`${styles.row} ${highlight ? styles['row--highlight'] : ''}`}
+      onClick={onRowClicked}
+    >
       <td>
         <div>{place}</div>
       </td>
 
       <td>
         <div>
-          <span
-            className={styles.link}
-            onClick={() =>
-              dispatch({
-                type: 'SHOW_MODAL',
-                payload: { type: 'USER_INFO_MODAL', data: { userId: leader.userid } },
-              })
-            }
-          >
+          <span className={styles.link} onClick={handleClickUsername}>
             {leader.username}
           </span>
         </div>

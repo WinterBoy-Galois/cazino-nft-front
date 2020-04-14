@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import LeaderboardTable from '.';
 import { shuffle } from '../../common/util';
+import { action } from '@storybook/addon-actions';
 
 const data = [
   {
@@ -84,11 +85,25 @@ const LeaderboardTableWrapper = () => {
 
 storiesOf('Components/LeaderboardTable', module)
   .add('default', () => (
-    <LeaderboardTable error={false} isLoading={false} leaderboard={data} signInUserId="5" />
+    <LeaderboardTable
+      error={false}
+      isLoading={false}
+      leaderboard={data}
+      signInUserId="5"
+      onRowClicked={action('Row clicked')}
+      onUsernameClicked={action('Username clicked')}
+    />
   ))
   .add('shuffle data', () => <LeaderboardTableWrapper />)
   .add('empty', () => (
-    <LeaderboardTable error={false} isLoading={false} leaderboard={[]} signInUserId="5" />
+    <LeaderboardTable
+      error={false}
+      isLoading={false}
+      leaderboard={[]}
+      signInUserId="5"
+      onRowClicked={action('Row clicked')}
+      onUsernameClicked={action('Username clicked')}
+    />
   ))
   .add('loading', () => (
     <LeaderboardTable error={false} isLoading={true} leaderboard={[]} signInUserId="5" />
@@ -97,11 +112,25 @@ storiesOf('Components/LeaderboardTable', module)
     <LeaderboardTable error={true} isLoading={false} leaderboard={[]} signInUserId="5" />
   ))
   .add('signed in user not in leaderboard', () => (
-    <LeaderboardTable error={false} isLoading={false} leaderboard={data} signInUserId="-1" />
+    <LeaderboardTable
+      error={false}
+      isLoading={false}
+      leaderboard={data}
+      signInUserId="-1"
+      onRowClicked={action('Row clicked')}
+      onUsernameClicked={action('Username clicked')}
+    />
   ))
   .add('scrolling', () => (
     <div style={{ height: '250px' }}>
-      <LeaderboardTable error={false} isLoading={false} leaderboard={data} signInUserId="5" />
+      <LeaderboardTable
+        error={false}
+        isLoading={false}
+        leaderboard={data}
+        signInUserId="5"
+        onRowClicked={action('Row clicked')}
+        onUsernameClicked={action('Username clicked')}
+      />
     </div>
   ))
   .addDecorator(storyFn => (
