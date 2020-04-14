@@ -20,34 +20,31 @@ const LeaderboardRow: React.FC<IProps> = ({ leader, place, highlight }) => {
       </td>
 
       <td>
-        <div
-          onClick={() =>
-            dispatch({
-              type: 'SHOW_MODAL',
-              payload: { type: 'USER_INFO_MODAL', data: { userId: leader.userid } },
-            })
-          }
-        >
-          {leader.username}
+        <div>
+          <span
+            className={styles.link}
+            onClick={() =>
+              dispatch({
+                type: 'SHOW_MODAL',
+                payload: { type: 'USER_INFO_MODAL', data: { userId: leader.userid } },
+              })
+            }
+          >
+            {leader.username}
+          </span>
         </div>
       </td>
 
       <td className={'bold'}>
         <div>
-          <Bitcoin
-            className={styles['leaderboard-row__icon']}
-            innerClassName={styles['leaderboard-row__icon__inner']}
-          />
+          <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
           {leader.wager}
         </div>
       </td>
 
-      <td className={`bold ${styles['leaderboard-row__bonus']}`}>
+      <td className={`bold ${styles.bonus}`}>
         <div>
-          <Bitcoin
-            className={styles['leaderboard-row__icon']}
-            innerClassName={styles['leaderboard-row__icon__inner']}
-          />
+          <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
           {leader.bonus}
         </div>
       </td>

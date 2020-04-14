@@ -1,32 +1,30 @@
 @import '../../../../styles/shared.scss';
 
-.leaderboard-row {
-  &__username {
-    width: 130px;
+.link {
+  cursor: pointer;
 
-    @include media-breakpoint-up(lg) {
-      width: 129px;
-    }
+  &:hover {
+    color: lighten($table-ultra-light-blue, 15);
   }
+}
 
-  &__icon {
-    width: 11px;
-    height: 11px;
-    margin-right: 4px;
-    vertical-align: baseline;
-    fill: $bitcoinYellow;
+.icon {
+  width: 11px;
+  height: 11px;
+  margin-right: 4px;
+  vertical-align: baseline;
+  fill: $bitcoinYellow;
 
-    &__inner {
-      fill: $dark-blue;
-    }
+  &__inner {
+    fill: $dark-blue;
   }
+}
 
-  &__bonus {
-    display: none;
+.bonus {
+  display: none;
 
-    @include media-breakpoint-up(lg) {
-      display: unset;
-    }
+  @include media-breakpoint-up(lg) {
+    display: unset;
   }
 }
 
