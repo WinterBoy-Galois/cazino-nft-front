@@ -1200,9 +1200,6 @@ Object {
                     <div />
                   </td>
                 </tr>
-                <p>
-                  No Data
-                </p>
                 <tr>
                   <td>
                     <div />
@@ -1223,6 +1220,11 @@ Object {
                 </tr>
               </tbody>
             </table>
+            <div
+              class="container"
+            >
+              Sorry, received no data.
+            </div>
           </div>
         </div>
       </div>
@@ -2424,9 +2426,6 @@ Object {
                   <div />
                 </td>
               </tr>
-              <p>
-                No Data
-              </p>
               <tr>
                 <td>
                   <div />
@@ -2447,6 +2446,11 @@ Object {
               </tr>
             </tbody>
           </table>
+          <div
+            class="container"
+          >
+            Sorry, received no data.
+          </div>
         </div>
       </div>
     </div>

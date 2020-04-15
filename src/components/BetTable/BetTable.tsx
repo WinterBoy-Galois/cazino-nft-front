@@ -6,12 +6,12 @@ import SpacerRow from './components/SpacerRow';
 import { Empty, Loading, Error } from '../LeaderboardTable';
 
 interface IProps {
-  bets: Bet[];
-  isLoading: boolean;
-  error: boolean;
+  bets?: Bet[];
+  isLoading?: boolean;
+  error?: boolean;
 }
 
-const BetTable: React.FC<IProps> = ({ bets, isLoading, error }) => {
+const BetTable: React.FC<IProps> = ({ bets = [], isLoading = false, error = false }) => {
   // const { subscribeToMore, loading, error, data } = useQuery<{ bets: Bet[] }>(LATEST_BETS);
 
   // useEffect(() => {
@@ -38,39 +38,30 @@ const BetTable: React.FC<IProps> = ({ bets, isLoading, error }) => {
             <th>Profit</th>
           </tr>
         </thead>
-        {error || isLoading ? (
-          <tbody className="bet-table__body">
-            <SpacerRow />
-            {error && <Error />}
-            {isLoading && <Loading />}
-            <SpacerRow />
-          </tbody>
-        ) : (
-          <tbody className="bet-table__body">
-            <SpacerRow />
-            {bets.length > 0 ? (
-              bets.map((bet: Bet) => <BetRow key={bet.id} bet={bet} />)
-            ) : (
-              /* <TransitionGroup component={null}>
-              {bets.map(b => (
-                <CSSTransition
-                  key={b.id}
-                  classNames="fade"
-                  timeout={{
-                    enter: 500,
-                    exit: 500,
-                  }}
-                  mountOnEnter={true}
-                >
-                  <BetRow bet={b} />
-                </CSSTransition>
-              ))}
-            </TransitionGroup> */ <Empty />
-            )}
-            <SpacerRow />
-          </tbody>
-        )}
+        <tbody className="bet-table__body">
+          <SpacerRow />
+          {bets.length > 0 && bets.map((bet: Bet) => <BetRow key={bet.id} bet={bet} />)}
+          {/* <TransitionGroup component={null}>
+            {bets.map(b => (
+              <CSSTransition
+                key={b.id}
+                classNames="fade"
+                timeout={{
+                  enter: 500,
+                  exit: 500,
+                }}
+                mountOnEnter={true}
+              >
+                <BetRow bet={b} />
+              </CSSTransition>
+            ))}
+          </TransitionGroup> */}
+          <SpacerRow />
+        </tbody>
       </table>
+      {!error && isLoading && (bets.length <= 0 || !bets) && <Loading />}
+      {error && !isLoading && (bets.length <= 0 || !bets) && <Error />}
+      {!error && !isLoading && (bets.length <= 0 || !bets) && <Empty />}
     </div>
   );
 };
