@@ -832,9 +832,6 @@ Object {
                     <div />
                   </td>
                 </tr>
-                <p>
-                  No Data
-                </p>
                 <tr>
                   <td>
                     <div />
@@ -855,6 +852,11 @@ Object {
                 </tr>
               </tbody>
             </table>
+            <div
+              class="container"
+            >
+              No Data
+            </div>
           </div>
         </div>
       </div>
@@ -1688,9 +1690,6 @@ Object {
                   <div />
                 </td>
               </tr>
-              <p>
-                No Data
-              </p>
               <tr>
                 <td>
                   <div />
@@ -1711,6 +1710,11 @@ Object {
               </tr>
             </tbody>
           </table>
+          <div
+            class="container"
+          >
+            No Data
+          </div>
         </div>
       </div>
     </div>

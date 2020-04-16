@@ -12,13 +12,13 @@ const Mines: React.SFC<IProps> = ({ className, innerClassName }) => {
         <style
           dangerouslySetInnerHTML={{
             __html: `
-      .cls-2{fill:#fff}`,
+      .cls-2{fill:#091b33}`,
           }}
         />
       </defs>
       <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_5" data-name="Layer 5">
-          <circle cx="17.5" cy="17.5" r="17.5" fill="#091b33" />
+          <circle cx="17.5" cy="17.5" r="17.5" fill="#fff" />
           <path className="cls-2" d="M19.43 13.66l-5.18 3.12-3.12-5.17 5.18-3.12 3.12 5.17z" />
           <path className="cls-2" d="M19.43 13.66l-5.18 3.12-3.12-5.17 5.18-3.12 3.12 5.17z" />
           <path
@@ -33,7 +33,7 @@ const Mines: React.SFC<IProps> = ({ className, innerClassName }) => {
           <path
             d="M29.58 19.39a11.13 11.13 0 00-5.4-5.84"
             fill="none"
-            stroke="#091b33"
+            stroke="#fff"
             stroke-miterlimit="10"
             stroke-width="1.07"
           />

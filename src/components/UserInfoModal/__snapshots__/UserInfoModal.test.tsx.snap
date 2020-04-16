@@ -160,6 +160,11 @@ Object {
                       viewBox="0 0 35 35"
                       xmlns="http://www.w3.org/2000/svg"
                     >
+                      <defs>
+                        <style>
+                          .cls-1{fill:#fff}
+                        </style>
+                      </defs>
                       <g
                         data-name="Layer 2"
                         id="Layer_2"
@@ -169,12 +174,13 @@ Object {
                           id="Layer_3"
                         >
                           <circle
-                            class="game-icon__inner"
+                            class="cls-1"
                             cx="17.5"
                             cy="17.5"
                             r="17.5"
                           />
                           <rect
+                            fill="#091b33"
                             height="24"
                             rx="2.09"
                             width="24"
@@ -182,25 +188,25 @@ Object {
                             y="5.5"
                           />
                           <circle
-                            class="game-icon__inner"
+                            class="cls-1"
                             cx="11.94"
                             cy="11.94"
                             r="2.68"
                           />
                           <circle
-                            class="game-icon__inner"
+                            class="cls-1"
                             cx="23.06"
                             cy="11.94"
                             r="2.68"
                           />
                           <circle
-                            class="game-icon__inner"
+                            class="cls-1"
                             cx="11.94"
                             cy="23.06"
                             r="2.68"
                           />
                           <circle
-                            class="game-icon__inner"
+                            class="cls-1"
                             cx="23.06"
                             cy="23.06"
                             r="2.68"
@@ -410,6 +416,11 @@ Object {
                     viewBox="0 0 35 35"
                     xmlns="http://www.w3.org/2000/svg"
                   >
+                    <defs>
+                      <style>
+                        .cls-1{fill:#fff}
+                      </style>
+                    </defs>
                     <g
                       data-name="Layer 2"
                       id="Layer_2"
@@ -419,12 +430,13 @@ Object {
                         id="Layer_3"
                       >
                         <circle
-                          class="game-icon__inner"
+                          class="cls-1"
                           cx="17.5"
                           cy="17.5"
                           r="17.5"
                         />
                         <rect
+                          fill="#091b33"
                           height="24"
                           rx="2.09"
                           width="24"
@@ -432,25 +444,25 @@ Object {
                           y="5.5"
                         />
                         <circle
-                          class="game-icon__inner"
+                          class="cls-1"
                           cx="11.94"
                           cy="11.94"
                           r="2.68"
                         />
                         <circle
-                          class="game-icon__inner"
+                          class="cls-1"
                           cx="23.06"
                           cy="11.94"
                           r="2.68"
                         />
                         <circle
-                          class="game-icon__inner"
+                          class="cls-1"
                           cx="11.94"
                           cy="23.06"
                           r="2.68"
                         />
                         <circle
-                          class="game-icon__inner"
+                          class="cls-1"
                           cx="23.06"
                           cy="23.06"
                           r="2.68"

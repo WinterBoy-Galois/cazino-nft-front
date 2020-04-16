@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, wait, act } from '@testing-library/react';
+import { render, waitForDomChange } from '@testing-library/react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { createMockClient } from 'mock-apollo-client';
 import UserInfoModal from './UserInfoModal';
@@ -44,7 +44,7 @@ describe('LeaderboardsTab', () => {
       </ApolloProvider>
     );
 
-    await act(wait);
+    await waitForDomChange();
 
     // Assert
     expect(container).toMatchSnapshot();
