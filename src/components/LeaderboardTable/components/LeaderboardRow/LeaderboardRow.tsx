@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './LeaderboardRow.module.scss';
-import Bitcoin from '../../../icons/social/Bitcoin';
 import { Leader } from '../../../../models/leader.model';
+import { formatBitcoin } from '../../../../common/util/format.util';
+import BitcoinValue from '../../../BitcoinValue';
 
 interface IProps {
   leader: Leader;
@@ -43,18 +44,12 @@ const LeaderboardRow: React.FC<IProps> = ({
         </div>
       </td>
 
-      <td className={'text--bold'}>
-        <div>
-          <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
-          {leader.wager}
-        </div>
+      <td>
+        <BitcoinValue className="text--bold" value={formatBitcoin(leader.wager)} />
       </td>
 
-      <td className={`text--bold ${styles.bonus}`}>
-        <div>
-          <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
-          {leader.bonus}
-        </div>
+      <td className={`${styles.bonus}`}>
+        <BitcoinValue className="text--bold" value={formatBitcoin(leader.bonus)} />
       </td>
     </tr>
   );
