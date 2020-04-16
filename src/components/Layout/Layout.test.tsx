@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 import Layout from './Layout';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
@@ -8,7 +8,7 @@ import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 
 describe('Layout', () => {
-  it('should match snapshot', () => {
+  it('should match snapshot', async () => {
     // Arrange
     const fragmentMatcher = new IntrospectionFragmentMatcher({
       introspectionQueryResultData,
@@ -45,5 +45,7 @@ describe('Layout', () => {
 
     // Assert
     expect(container).toMatchSnapshot();
+
+    await wait();
   });
 });
