@@ -16,7 +16,7 @@
   }
 
   @include media-breakpoint-up(lg) {
-    height: calc(100vh - #{$bar-height-lg});
+    height: 100vh;
   }
 }
 
