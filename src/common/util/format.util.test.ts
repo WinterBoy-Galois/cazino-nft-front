@@ -4,12 +4,12 @@ import {
   formatProfit,
   formatBitcoin,
   formatBitcoinSmart,
-} from './format.extensions';
+} from './format.util';
 
 describe('formatBitcoin', () => {
   it('should return valid format', () => {
     // Arrange
-    const value = '0.425';
+    const value = 0.425;
 
     // Act
     const actual = formatBitcoin(value);
@@ -51,7 +51,7 @@ describe('formatBitcoinSmart', () => {
 describe('formatBet', () => {
   it('should return valid format', () => {
     // Arrange
-    const value = '425';
+    const value = 425;
 
     // Act
     const actual = formatBet(value);
@@ -66,7 +66,7 @@ describe('formatBet', () => {
 describe('formatMultiplier', () => {
   it('should return valid format', () => {
     // Arrange
-    const value = '3';
+    const value = 3;
 
     // Act
     const actual = formatMultiplier(value);
@@ -81,7 +81,7 @@ describe('formatMultiplier', () => {
 describe('formatProfit', () => {
   it('should return valid positive format', () => {
     // Arrange
-    const value = '581';
+    const value = 581;
 
     // Act
     const actual = formatProfit(value);
@@ -91,9 +91,10 @@ describe('formatProfit', () => {
 
     expect(actual).toEqual(expected);
   });
+
   it('should return valid negative format', () => {
     // Arrange
-    const value = '-130';
+    const value = -130;
 
     // Act
     const actual = formatProfit(value);

@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
 import Username from './components/Username';
 import BitcoinValue from '../BitcoinValue';
-import { formatProfit, formatBitcoin } from '../../lib/format.extensions';
+import { formatProfit, formatBitcoin } from '../../common/util/format.util';
 import GameIcon from '../GameIcon';
 import Button from '../Button';
 import Loading from '../Loading';
@@ -19,6 +19,16 @@ interface IProps {
 
 const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
+
+  const profitClassName = () => {
+    if (data?.userInfo.totalProfit === 0) {
+      return '';
+    } else if (data?.userInfo.totalProfit < 0) {
+      return 'text--negative';
+    } else if (data?.userInfo.totalProfit > 0) {
+      return 'text--positive';
+    }
+  };
 
   return (
     <Modal show={show} onClose={onClose} title="User Info">
@@ -48,7 +58,10 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Total Profit</div>
               <div className={styles.details__item__value}>
-                <BitcoinValue value={formatProfit(data.userInfo.totalProfit)} />
+                <BitcoinValue
+                  className={profitClassName()}
+                  value={formatProfit(data.userInfo.totalProfit)}
+                />
               </div>
             </div>
             <div className={styles.details__item}>

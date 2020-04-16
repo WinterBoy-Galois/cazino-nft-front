@@ -1,4 +1,4 @@
-import { dateFromEpoch, timeFromEpoch, datetimeFromEpoch } from './date.extensions';
+import { dateFromEpoch, timeFromEpoch, datetimeFromEpoch } from './date.util';
 
 describe('dateFromEpoch', () => {
   it('should return formatted date', () => {

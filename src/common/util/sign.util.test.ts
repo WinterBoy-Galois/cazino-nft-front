@@ -1,4 +1,4 @@
-import { isPositive, isNegative } from './sign.extensions';
+import { isPositive, isNegative } from './sign.util';
 
 describe('isPositive', () => {
   it('should return true on string that starts with +', () => {

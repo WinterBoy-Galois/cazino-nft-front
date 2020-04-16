@@ -5,15 +5,14 @@
  */
 const formatBitcoinSmart = (value: string) => {
   if (value.includes('.')) {
-    return formatBitcoin(value);
+    return formatBitcoin(parseFloat(value));
   }
 
   return formatBet(parseFloat(value));
 };
 
-const formatBitcoin = (value: string) => {
-  const result = parseFloat(value);
-  return `${result.toFixed(8)}`;
+const formatBitcoin = (value: number) => {
+  return `${value.toFixed(8)}`;
 };
 
 const formatBet = (value: number) => {

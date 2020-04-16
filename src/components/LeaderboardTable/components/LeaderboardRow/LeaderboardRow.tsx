@@ -43,14 +43,14 @@ const LeaderboardRow: React.FC<IProps> = ({
         </div>
       </td>
 
-      <td className={'bold'}>
+      <td className={'text--bold'}>
         <div>
           <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
           {leader.wager}
         </div>
       </td>
 
-      <td className={`bold ${styles.bonus}`}>
+      <td className={`text--bold ${styles.bonus}`}>
         <div>
           <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
           {leader.bonus}
