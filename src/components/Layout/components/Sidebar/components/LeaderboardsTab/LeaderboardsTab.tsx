@@ -6,11 +6,13 @@ import LeaderboardTable from '../../../../../LeaderboardTable';
 import { useQuery } from '@apollo/react-hooks';
 import { LEADERBOARDS_SUBSCRIPTION } from '../../../../../../graphql/subscriptions';
 import { LEADERBOARDS } from '../../../../../../graphql/queries';
+import { useStateValue } from '../../../../../../state';
 
 const LeaderboardsTab: React.SFC = () => {
   const [selectedTime, setSelectedTime] = useState<TimeAggregation>('daily');
   const { t } = useTranslation(['sidebar']);
   const { loading, error, data, subscribeToMore } = useQuery(LEADERBOARDS);
+  const [, dispatch] = useStateValue();
 
   useEffect(() => {
     return subscribeToMore({
@@ -39,6 +41,12 @@ const LeaderboardsTab: React.SFC = () => {
           isLoading={loading}
           error={error ? true : false}
           signInUserId="15"
+          onUsernameClicked={userId =>
+            dispatch({
+              type: 'SHOW_MODAL',
+              payload: { type: 'USER_INFO_MODAL', data: { userId } },
+            })
+          }
         />
       </div>
     </>

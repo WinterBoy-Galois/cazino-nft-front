@@ -1,9 +1,9 @@
 import React from 'react';
 import './BetRow.scss';
-import { timeFromEpoch } from '../../../../lib/date.extensions';
+import { timeFromEpoch } from '../../../../common/util/date.util';
 import Bitcoin from '../../../icons/social/Bitcoin';
-import { formatProfit } from '../../../../lib/format.extensions';
-import { isPositive } from '../../../../lib/sign.extensions';
+import { formatProfit } from '../../../../common/util/format.util';
+import { isPositive } from '../../../../common/util/sign.util';
 import Bet, { GameTypes } from '../../../../models/bet';
 import Dice from '../../../icons/games/Dice';
 import Clams from '../../../icons/games/Clams';

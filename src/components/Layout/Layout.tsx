@@ -5,9 +5,12 @@ import BottomBar from './components/BottomBar';
 import Sidebar from './components/Sidebar';
 import Footer from '../Footer';
 import { useStateValue } from '../../state';
+import UserInfoModal from '../UserInfoModal';
+import { ModalState } from '../../state/models/modal.model';
+import { Action } from '../../state/actions';
 
 const Layout: React.SFC = ({ children }) => {
-  const [{ sidebar }] = useStateValue();
+  const [{ sidebar, modal }, dispatch] = useStateValue();
 
   return (
     <>
@@ -31,9 +34,22 @@ const Layout: React.SFC = ({ children }) => {
           </div>
         </div>
       </div>
+
       <Sidebar />
+
+      {renderModals(modal, dispatch)}
     </>
   );
 };
 
 export default Layout;
+
+const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
+  <>
+    <UserInfoModal
+      show={modal.type === 'USER_INFO_MODAL'}
+      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      {...modal.data}
+    />
+  </>
+);

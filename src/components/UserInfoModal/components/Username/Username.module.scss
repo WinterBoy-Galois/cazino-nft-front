@@ -1,0 +1,16 @@
+@import '../../../../styles/shared';
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  margin-right: 0.5rem;
+}
+
+.username {
+  font-size: 19px;
+}

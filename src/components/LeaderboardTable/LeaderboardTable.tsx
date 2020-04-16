@@ -5,9 +5,8 @@ import LeaderboardRow from './components/LeaderboardRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import SpacerRow from './components/SpacerRow';
-import Loading from './components/Loading';
-import Empty from './components/Empty';
-import Error from './components/Error';
+import Loading from '../Loading';
+import Error from '../Error';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
@@ -15,9 +14,18 @@ interface IProps {
   isLoading: boolean;
   error: boolean;
   signInUserId: string;
+  onRowClicked?: () => void;
+  onUsernameClicked?: (userId: string) => void;
 }
 
-const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, signInUserId }) => {
+const LeaderboardTable: React.FC<IProps> = ({
+  leaderboard,
+  isLoading,
+  error,
+  signInUserId,
+  onRowClicked,
+  onUsernameClicked,
+}) => {
   const breakpoint = useBreakpoint();
   const { t } = useTranslation(['sidebar']);
 
@@ -63,6 +71,8 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, sig
                       leader={l}
                       place={i + 1}
                       highlight={l.userid === signInUserId}
+                      onRowClicked={onRowClicked}
+                      onUsernameClicked={onUsernameClicked}
                     />
                   </CSSTransition>
                 </SwitchTransition>
@@ -73,8 +83,12 @@ const LeaderboardTable: React.FC<IProps> = ({ leaderboard, isLoading, error, sig
         </tbody>
       </table>
       {!error && isLoading && (leaderboard.length <= 0 || !leaderboard) && <Loading />}
-      {error && !isLoading && (leaderboard.length <= 0 || !leaderboard) && <Error />}
-      {!error && !isLoading && (leaderboard.length <= 0 || !leaderboard) && <Empty />}
+      {error && !isLoading && (leaderboard.length <= 0 || !leaderboard) && (
+        <Error>Sorry, there was an unexpected error.</Error>
+      )}
+      {!error && !isLoading && (leaderboard.length <= 0 || !leaderboard) && (
+        <Error>Sorry, received no data.</Error>
+      )}
     </div>
   );
 };

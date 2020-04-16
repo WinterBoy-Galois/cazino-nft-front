@@ -18,9 +18,9 @@ $radius: 10px;
       top: 0;
       font-weight: 300;
       padding: 0.5rem;
-      background-color: $lightBlue;
+      background-color: $table-light-blue;
       text-transform: uppercase;
-      color: $ultraLightBlue;
+      color: $table-ultra-light-blue;
       font-size: 15px;
       text-align: left;
       z-index: 1;
@@ -46,7 +46,7 @@ $radius: 10px;
   }
 
   &__body {
-    background-color: $darkBlue;
+    background-color: $table-dark-blue;
     font-size: 13px;
 
     @include media-breakpoint-up(xs) {
@@ -83,7 +83,7 @@ $radius: 10px;
     overflow-x: hidden;
     overflow-y: auto;
     white-space: nowrap;
-    background-color: $darkBlue;
+    background-color: $table-dark-blue;
     border-radius: $radius;
     display: flex;
     flex-direction: column;

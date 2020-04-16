@@ -148,7 +148,7 @@ Object {
             <div
               class="container"
             >
-              Sorry, received no data.
+              No Data
             </div>
           </div>
         </div>
@@ -299,7 +299,7 @@ Object {
           <div
             class="container"
           >
-            Sorry, received no data.
+            No Data
           </div>
         </div>
       </div>

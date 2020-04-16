@@ -1,7 +1,17 @@
-.bold {
-  font-weight: 900;
-}
+.text {
+  &--bold {
+    font-weight: 900;
+  }
 
-.light {
-  font-weight: 300;
+  &--light {
+    font-weight: 300;
+  }
+
+  &--negative {
+    color: $negative;
+  }
+
+  &--positive {
+    color: $positive;
+  }
 }
