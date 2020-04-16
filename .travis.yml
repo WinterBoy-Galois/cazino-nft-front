@@ -16,8 +16,6 @@ script:
   - yarn build
   - yarn test:single
   - yarn build-storybook
-  - mv storybook-static storybook
-  - mv storybook build
 before_deploy:
   - yarn global add serverless
   - pip install awscli --upgrade --user

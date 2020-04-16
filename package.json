@@ -46,7 +46,7 @@
     "lint:scss": "stylelint \"src/**/*.scss\"",
     "format": "prettier --write './**/*.{ts,tsx,scss,md,json,js}'",
     "storybook": "start-storybook -p 9009 -s .storybook/public",
-    "build-storybook": "build-storybook -s .storybook/public",
+    "build-storybook": "build-storybook -s .storybook/public -o build/storybook",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
