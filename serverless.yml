@@ -31,9 +31,12 @@ custom:
   profiles:
     dev: cazzzino-dev
     test: cazzzino-test
-  basicAuthFunction:
-    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-basic-auth-dev-onViewerRequest:1
-    test: arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onViewerRequest:7
+  onViewerRequest:
+    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-dev-onViewerRequest:2
+    test: arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onViewerRequest:8
+  onOriginRequest:
+    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-dev-onOriginRequest:2
+    test: arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onOriginRequest:1
 
 resources:
   Resources:
@@ -110,9 +113,9 @@ resources:
             Compress: True
             LambdaFunctionAssociations:
               - EventType: viewer-request
-                LambdaFunctionARN: ${self:custom.basicAuthFunction.${self:provider.stage}}
+                LambdaFunctionARN: ${self:custom.onViewerRequest.${self:provider.stage}}
               - EventType: origin-request
-                LambdaFunctionARN: 'arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onOriginRequest:1'
+                LambdaFunctionARN: ${self:custom.onOriginRequest.${self:provider.stage}}
           HttpVersion: http2
           Enabled: true
           Origins:
