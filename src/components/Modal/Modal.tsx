@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './Modal.module.scss';
 import Close from '../icons/Close';
 import { CSSTransition } from 'react-transition-group';
 import { useScrollLock } from '../../hooks/useScrollLock.hook';
+import { useClickOutside } from '../../hooks/useClickOutside.hook';
 
 interface IProps {
   children: React.ReactNode;
@@ -19,6 +20,9 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose }) => {
       onClose();
     }
   };
+
+  const modalRef = useRef(null);
+  useClickOutside(modalRef, handleClose);
 
   return (
     <CSSTransition
@@ -44,7 +48,7 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose }) => {
           }}
           appear={true}
         >
-          <div className={styles.modal}>
+          <div className={styles.modal} ref={modalRef}>
             <div className={styles.modal__header}>
               <div className={styles.modal__header__headline}>{title}</div>
               <div className={styles.modal__header__close} onClick={handleClose}>
