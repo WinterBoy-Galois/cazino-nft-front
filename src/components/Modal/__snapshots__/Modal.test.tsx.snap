@@ -11,7 +11,9 @@ Object {
         class="container"
       >
         <div
+          aria-modal="true"
           class="modal scale--enter scale--enter-active"
+          role="dialog"
         >
           <div
             class="modal__header"
@@ -47,7 +49,9 @@ Object {
       class="container"
     >
       <div
+        aria-modal="true"
         class="modal scale--enter scale--enter-active"
+        role="dialog"
       >
         <div
           class="modal__header"

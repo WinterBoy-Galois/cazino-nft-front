@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './Modal.module.scss';
 import Close from '../icons/Close';
 import { CSSTransition } from 'react-transition-group';
@@ -24,6 +24,18 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose }) => {
   const modalRef = useRef(null);
   useClickOutside(modalRef, handleClose);
 
+  useEffect(() => {
+    const handleEscKeydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27) {
+        handleClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKeydown);
+
+    return () => document.removeEventListener('keydown', handleEscKeydown);
+  });
+
   return (
     <CSSTransition
       in={show}
@@ -48,7 +60,7 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose }) => {
           }}
           appear={true}
         >
-          <div className={styles.modal} ref={modalRef}>
+          <div role="dialog" aria-modal="true" className={styles.modal} ref={modalRef}>
             <div className={styles.modal__header}>
               <div className={styles.modal__header__headline}>{title}</div>
               <div className={styles.modal__header__close} onClick={handleClose}>
