@@ -15,15 +15,11 @@ $slide-transition: all 200ms ease-in-out;
 
   &--sidebar-open {
     @include media-breakpoint-up(md) {
-      width: calc(100% - #{$sidebar-width-md}) !important;
+      width: calc(100% - #{$sidebar-width-md});
     }
 
     @include media-breakpoint-up(lg) {
-      width: calc(100% - #{$sidebar-width-lg}) !important;
-    }
-
-    @include media-breakpoint-up(xl) {
-      width: calc(100% - #{$sidebar-width-xl}) !important;
+      width: calc(100% - #{$sidebar-width-lg});
     }
   }
 
@@ -39,6 +35,16 @@ $slide-transition: all 200ms ease-in-out;
 
     @include media-breakpoint-up(lg) {
       height: $bar-height-lg;
+    }
+
+    &--sidebar-open {
+      @include media-breakpoint-up(md) {
+        width: calc(100% - #{$sidebar-width-md});
+      }
+
+      @include media-breakpoint-up(lg) {
+        width: calc(100% - #{$sidebar-width-lg});
+      }
     }
   }
 
@@ -63,6 +69,16 @@ $slide-transition: all 200ms ease-in-out;
 
     @include media-breakpoint-up(lg) {
       height: $bar-height-lg;
+    }
+
+    &--sidebar-open {
+      @include media-breakpoint-up(md) {
+        width: calc(100% - #{$sidebar-width-md});
+      }
+
+      @include media-breakpoint-up(lg) {
+        width: calc(100% - #{$sidebar-width-lg});
+      }
     }
   }
 }

@@ -1,8 +1,15 @@
 import { useEffect } from 'react';
+import { useScrollbarWidth } from './useScrollbarWidth.hook';
 
 export function useScrollLock(lock: boolean, lockTouch: boolean = true) {
+  const scrollbarWidth = useScrollbarWidth();
+
   useEffect(() => {
     if (lock) {
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+
       document.body.style.overflow = 'hidden';
     }
 
@@ -13,10 +20,11 @@ export function useScrollLock(lock: boolean, lockTouch: boolean = true) {
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.paddingRight = '';
+      document.body.style.overflow = '';
       document.ontouchmove = () => {
         return true;
       };
     };
-  }, [lock, lockTouch]);
+  }, [lock, lockTouch, scrollbarWidth]);
 }

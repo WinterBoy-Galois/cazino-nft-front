@@ -10,9 +10,10 @@ Object {
       >
         <div
           class="main main--sidebar-open"
+          id="main"
         >
           <div
-            class="main__top-bar main--sidebar-open"
+            class="main__top-bar main__top-bar--sidebar-open"
           >
             <div
               class="container-fluid h-100"
@@ -967,7 +968,7 @@ Object {
             </div>
           </div>
           <div
-            class="main__bottom-bar main--sidebar-open"
+            class="main__bottom-bar main__bottom-bar--sidebar-open"
           >
             <div
               class="container-fluid h-100"
@@ -1236,9 +1237,10 @@ Object {
     >
       <div
         class="main main--sidebar-open"
+        id="main"
       >
         <div
-          class="main__top-bar main--sidebar-open"
+          class="main__top-bar main__top-bar--sidebar-open"
         >
           <div
             class="container-fluid h-100"
@@ -2193,7 +2195,7 @@ Object {
           </div>
         </div>
         <div
-          class="main__bottom-bar main--sidebar-open"
+          class="main__bottom-bar main__bottom-bar--sidebar-open"
         >
           <div
             class="container-fluid h-100"

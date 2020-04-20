@@ -11,15 +11,20 @@ import { Action } from '../../state/actions';
 
 const Layout: React.SFC = ({ children }) => {
   const [{ sidebar, modal }, dispatch] = useStateValue();
+  const mainWidth = document.getElementById('main')?.clientWidth;
 
   return (
     <>
       <div className={styles.wrapper}>
-        <div className={`${styles.main} ${sidebar.isOpen && styles['main--sidebar-open']}`}>
+        <div
+          id="main"
+          className={`${styles.main} ${sidebar.isOpen && styles['main--sidebar-open']}`}
+        >
           <div
             className={`${styles['main__top-bar']} ${
-              sidebar.isOpen && styles['main--sidebar-open']
+              sidebar.isOpen && styles['main__top-bar--sidebar-open']
             }`}
+            style={{ width: modal.type !== 'NONE' ? `${mainWidth}px` : '' }}
           >
             <TopBar />
           </div>
@@ -29,8 +34,12 @@ const Layout: React.SFC = ({ children }) => {
           </div>
           <div
             className={`${styles['main__bottom-bar']} ${
-              sidebar.isOpen && styles['main--sidebar-open']
+              sidebar.isOpen && styles['main__bottom-bar--sidebar-open']
             }`}
+            style={{
+              width: modal.type !== 'NONE' ? `${mainWidth}px` : '',
+              transition: modal.type !== 'NONE' ? 'none' : '',
+            }}
           >
             <BottomBar />
           </div>

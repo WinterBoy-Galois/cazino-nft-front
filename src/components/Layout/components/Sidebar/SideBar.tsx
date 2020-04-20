@@ -10,16 +10,19 @@ import TabSelect from './components/TabSelect/TabSelect';
 import BetTable from '../../../BetTable';
 import LeaderboardsTab from './components/LeaderboardsTab';
 import { useTranslation } from 'react-i18next';
+import { useScrollbarWidth } from '../../../../hooks/useScrollbarWidth.hook';
 
 const SideBar: React.SFC = () => {
   const [
     {
       sidebar: { isOpen, selectedTab },
+      modal: { type: modalType },
     },
   ] = useStateValue();
   const breakpoint = useBreakpoint();
   useScrollLock(isOpen && activateScrollLock(breakpoint), false);
   const { t } = useTranslation(['sidebar']);
+  const scrollbarWidth = useScrollbarWidth();
 
   return (
     <CSSTransition
@@ -34,7 +37,10 @@ const SideBar: React.SFC = () => {
         exitDone: styles['slide--exit-active'],
       }}
     >
-      <div className={`${styles.container} ${styles.slide}`}>
+      <div
+        className={`${styles.container} ${styles.slide}`}
+        style={{ right: `${modalType !== 'NONE' ? `${scrollbarWidth}px` : ''}` }}
+      >
         <div className={styles.header}>
           <SidebarToggle show={true} />
           <h1 className={styles['header__headline']}>{t('headline')}</h1>

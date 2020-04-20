@@ -10,6 +10,7 @@ Object {
       >
         <div
           class="main false"
+          id="main"
         >
           <div
             class="main__top-bar false"
@@ -868,6 +869,7 @@ Object {
     >
       <div
         class="main false"
+        id="main"
       >
         <div
           class="main__top-bar false"

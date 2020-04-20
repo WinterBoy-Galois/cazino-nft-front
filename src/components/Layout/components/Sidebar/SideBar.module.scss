@@ -18,10 +18,6 @@
   @include media-breakpoint-up(lg) {
     width: $sidebar-width-lg;
   }
-
-  @include media-breakpoint-up(xl) {
-    width: $sidebar-width-xl;
-  }
 }
 
 .slide {
@@ -43,10 +39,6 @@
     @include media-breakpoint-up(lg) {
       transform: translateX($sidebar-width-lg);
     }
-
-    @include media-breakpoint-up(xl) {
-      transform: translateX($sidebar-width-xl);
-    }
   }
 
   &--enter-active {
@@ -66,10 +58,6 @@
 
     @include media-breakpoint-up(lg) {
       transform: translateX($sidebar-width-lg);
-    }
-
-    @include media-breakpoint-up(xl) {
-      transform: translateX($sidebar-width-xl);
     }
   }
 }
