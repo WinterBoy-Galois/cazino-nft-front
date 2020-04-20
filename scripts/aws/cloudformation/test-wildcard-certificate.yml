@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Creates an CaZZZino DEV Wildcard SSL-Certificate
+Description: Creates an CaZZZino TEST Wildcard SSL-Certificate
 Parameters:
   domainName:
     Type: String
@@ -9,7 +9,7 @@ Parameters:
     Default: CaZZZino App
   environmentValue:
     Type: String
-    Default: DEV
+    Default: TEST
 Resources:
   mycert:
     Type: AWS::CertificateManager::Certificate
@@ -19,8 +19,8 @@ Resources:
         - DomainName: !Ref domainName
           ValidationDomain: !Ref domainName
       SubjectAlternativeNames:
-        - !Sub 'cazzzino.dev.${domainName}'
-        - !Sub '*.cazzzino.dev.${domainName}'
+        - !Sub 'cazzzino.test.${domainName}'
+        - !Sub '*.cazzzino.test.${domainName}'
       Tags:
         - Key: Application
           Value: !Ref applicationValue
