@@ -23,7 +23,7 @@ custom:
   siteName: cazzzino.${self:provider.stage}.egonoid.net
   certificate:
     dev: arn:aws:acm:us-east-1:329426105556:certificate/73a6f5c8-3e39-416a-85e4-cb6b52eb0d94
-    test: arn:aws:acm:us-east-1:662809561885:certificate/c2e7a9c9-0cbb-4934-9fcc-9488a0297ef6
+    test: arn:aws:acm:us-east-1:538894534293:certificate/4da14c1d-cb2c-4226-9e25-5861a08500bb
   aliasHostedZoneId: Z2FDTNDATAQYW2
   s3Sync:
     - bucketName: ${self:custom.siteName}
@@ -33,10 +33,10 @@ custom:
     test: cazzzino-test
   onViewerRequest:
     dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-dev-onViewerRequest:2
-    test: arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onViewerRequest:8
+    test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onViewerRequest:3
   onOriginRequest:
     dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-dev-onOriginRequest:2
-    test: arn:aws:lambda:us-east-1:662809561885:function:cazzzino-basic-auth-dev-onOriginRequest:1
+    test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onOriginRequest:3
 
 resources:
   Resources:
