@@ -23,7 +23,7 @@ custom:
   siteName: cazzzino.${self:provider.stage}.egonoid.net
   certificate:
     dev: arn:aws:acm:us-east-1:329426105556:certificate/73a6f5c8-3e39-416a-85e4-cb6b52eb0d94
-    test: arn:aws:acm:us-east-1:538894534293:certificate/4da14c1d-cb2c-4226-9e25-5861a08500bb
+    test: arn:aws:acm:us-east-1:538894534293:certificate/34cd1f0f-7519-4396-b7fd-cbe7fdfd18cb
   aliasHostedZoneId: Z2FDTNDATAQYW2
   s3Sync:
     - bucketName: ${self:custom.siteName}
