@@ -22,9 +22,7 @@ export function useScrollLock(lock: boolean, lockTouch: boolean = true) {
     return () => {
       document.body.style.paddingRight = '';
       document.body.style.overflow = '';
-      document.ontouchmove = () => {
-        return true;
-      };
+      document.ontouchmove = null;
     };
   }, [lock, lockTouch, scrollbarWidth]);
 }

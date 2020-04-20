@@ -4,7 +4,6 @@ import Close from '../icons/Close';
 import { CSSTransition } from 'react-transition-group';
 import { useScrollLock } from '../../hooks/useScrollLock.hook';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
-import { useScrollbarWidth } from '../../hooks/useScrollbarWidth.hook';
 
 interface IProps {
   children: React.ReactNode;
