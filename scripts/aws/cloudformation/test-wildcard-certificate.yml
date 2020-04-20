@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Creates an CaZZZino DEV Wildcard SSL-Certificate
+Parameters:
+  domainName:
+    Type: String
+    Default: egonoid.net
+  applicationValue:
+    Type: String
+    Default: CaZZZino App
+  environmentValue:
+    Type: String
+    Default: DEV
+Resources:
+  mycert:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref domainName
+      DomainValidationOptions:
+        - DomainName: !Ref domainName
+          ValidationDomain: !Ref domainName
+      SubjectAlternativeNames:
+        - !Sub 'cazzzino.dev.${domainName}'
+        - !Sub '*.cazzzino.dev.${domainName}'
+      Tags:
+        - Key: Application
+          Value: !Ref applicationValue
+        - Key: Environment
+          Value: !Ref environmentValue
