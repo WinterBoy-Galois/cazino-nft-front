@@ -6,7 +6,7 @@ matrix:
     - if: branch =~ /^(develop)
       env:
         - AWS_REGION="eu-central-1"
-        - secure: Bu47Xuavz/05K9ngd+CjJ+Z1w/1nR1MgyTbTQHZNh+ZRu4SmD3MLpxUuMIQ9jT5viOb94KNQXz8WNprewpqkTAHLQxOPczRxqeXcEZuw5MH4rm+wcMHZ7ObNoLF2KTbf4tEEClSOZHfVDyI79EZETY2yut+cCyqagg3mXkzhx6KwT4LJoMhHPFeSSNBplDWROWD/0O9Q3gEzUhN/ujgp+SdqzIH8LHrLaYpHLzA4XP/r9u1CIO9Q31kZCUqhcwZtWAi3dafKZHPX7toC7vObrHjswo8trjsgrb4VsqEj+TDWn4YFuUUFfX+2PbXcg+JHROaMccKqspclzAjjhZCaOoXI9xP3NIo3AtEV12UhF71VxDUfeBlbZ97UQGPFfyjDeipWcFYDnqZ1FabrtYaWYxKb6xydCHJTbeY9UvexY/o0GA1PnVf9hrxDCvRnnoAt5P/EGWxgs8X9nHdys/hWQwSNUVoODmIfc3LiiFdFXntlAz5l7xC74gRKgB9BZt1LUJkESVU0wfuVZVTf8pVQr/ow8o/7/pswzVMIDdMNzNgrARLpSqahaPjO+cVm6th57cm3aGf/r2+dh0V7lADmxKhQDtfdDL0zvcSqAy4HEDysMQp+ODC8rd3gkufB6UX8gZZIBBIOLXLr2u4Y2gQSVaAxOc7Bj3pvwTbPz61Ci8c=
+        - secure: rl1wWZNNcMskYtPDfzQ0cjWiN1RMfQ3is+aB3+LEoKsv7m3HaZ/ZAzHXAYB3vyoUSod1OmUDFP8TU//6hynF7Mkl33Z7elao0N3il2H5lhCyoOtP7niunMOCvS02dRjuIXwIoutrYwYp8Jtb1YrJPu9JzXmr9APC6Re0xG7kIpXztJDdK4O8zIPfz87ICbEBsEgDRikvf8RUiqZkSyaJmJjNwAAPX9l8xr44HSg1uAAlelC5mOwTnCVX6c4Dj42cLbaJGQLzUplSNWC0PONj7AiLudiGe+PixhxkruFCayz+U9z1ZmY565z2dwKgxeNE9zMRmqwemGQHOgZQnKqbBGbr6KOn6XgfYMQ/mf6yGq0sDICZeWSWVMjGK/arznADSCiMgKFdJltRxVKR3I0I1GvrpMBecAHIkk1g/keqRNVlTnzs2oyYn0oF6KtMP9BkJQ0fHS3iA6WfqSlkP5vDfotU9JnyvDFHHzNRG1zwBnlRKpE7tRor4+/kl0WQcrrZjVPAYKpJN3zj5SfWiUu5Zjegyz4bXEhxR1L/Q/zAOh1GFhudID+U6vGJxMN6ci126vAZnEGJFp9sIZQLgT/GezjkpvyfZg3YoVOKE+RyJBJiTSXd9kuilsiada4q4YdKFj5liT3hY1YX0aUJPlMv/hphCKLufFqzjBV+7UXrnPQ=
     # - if: branch =~ /^(master)
     #   env:
     #     - AWS_REGION="eu-central-1"
