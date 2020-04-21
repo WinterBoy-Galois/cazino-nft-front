@@ -251,12 +251,9 @@ Object {
               <div
                 class="button"
               >
-                <button
-                  class=" button"
-                  type="button"
-                >
-                  Back
-                </button>
+                <div
+                  class="button__spacer"
+                />
               </div>
             </div>
           </div>
@@ -509,12 +506,9 @@ Object {
             <div
               class="button"
             >
-              <button
-                class=" button"
-                type="button"
-              >
-                Back
-              </button>
+              <div
+                class="button__spacer"
+              />
             </div>
           </div>
         </div>

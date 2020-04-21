@@ -88,4 +88,8 @@
   @include media-breakpoint-up(md) {
     margin: 2rem auto 0.5rem;
   }
+
+  &__spacer {
+    height: 40px;
+  }
 }

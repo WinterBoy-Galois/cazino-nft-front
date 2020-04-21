@@ -15,9 +15,10 @@ interface IProps {
   show: boolean;
   userId: string;
   onClose?: () => void;
+  onBack?: () => void;
 }
 
-const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
+const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => {
   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
 
   const profitClassName = () => {
@@ -86,7 +87,11 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId }) => {
           </div>
 
           <div className={styles.button}>
-            <Button onClick={onClose}>Back</Button>
+            {onBack ? (
+              <Button onClick={onClose}>Back</Button>
+            ) : (
+              <div className={styles.button__spacer} />
+            )}
           </div>
         </div>
       ) : null}
