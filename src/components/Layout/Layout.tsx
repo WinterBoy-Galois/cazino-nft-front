@@ -8,10 +8,23 @@ import { useStateValue } from '../../state';
 import UserInfoModal from '../UserInfoModal';
 import { ModalState } from '../../state/models/modal.model';
 import { Action } from '../../state/actions';
+import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 
 const Layout: React.SFC = ({ children }) => {
   const [{ sidebar, modal }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
+  const breakpoint = useBreakpoint();
+
+  const hideContent = (): boolean => {
+    switch (breakpoint) {
+      case 'xs':
+      case 'sm':
+        return sidebar.isOpen || modal.type !== 'NONE';
+
+      default:
+        return false;
+    }
+  };
 
   return (
     <>
@@ -28,7 +41,10 @@ const Layout: React.SFC = ({ children }) => {
           >
             <TopBar />
           </div>
-          <div className={styles.main__content}>
+          <div
+            className={styles.main__content}
+            style={{ display: hideContent() ? 'none' : 'block' }}
+          >
             {children}
             <Footer />
           </div>
