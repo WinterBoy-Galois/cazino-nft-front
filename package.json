@@ -38,7 +38,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:all": "yarn build && yarn build-storybook && mv storybook-static/ build/storybook",
+    "build:all": "yarn build && yarn build-storybook",
     "test": "TZ=UTC react-scripts test",
     "eject": "react-scripts eject",
     "test:single": "TZ=UTC CI=true react-scripts test --watchAll=false",

@@ -120,6 +120,7 @@ Object {
           </div>
           <div
             class="main__content"
+            style="display: block;"
           >
             <div
               class="container"
@@ -979,6 +980,7 @@ Object {
         </div>
         <div
           class="main__content"
+          style="display: block;"
         >
           <div
             class="container"

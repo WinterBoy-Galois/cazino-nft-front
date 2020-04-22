@@ -76,6 +76,7 @@ Object {
           </div>
           <div
             class="main__content"
+            style="display: block;"
           >
             <div
               style="outline: none;"
@@ -1303,6 +1304,7 @@ Object {
         </div>
         <div
           class="main__content"
+          style="display: block;"
         >
           <div
             style="outline: none;"
