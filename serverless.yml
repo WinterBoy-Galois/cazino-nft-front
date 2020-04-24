@@ -32,11 +32,11 @@ custom:
     dev: cazzzino-dev
     test: cazzzino-test
   onViewerRequest:
-    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-dev-onViewerRequest:2
-    test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onViewerRequest:3
+    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-extensions-dev-onViewerRequest:6
+    test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onViewerRequest:4
   onOriginRequest:
-    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-dev-onOriginRequest:2
-    test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onOriginRequest:3
+    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-extensions-dev-onOriginRequest:6
+    test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onOriginRequest:4
 
 resources:
   Resources:
