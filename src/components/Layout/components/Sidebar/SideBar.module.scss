@@ -21,12 +21,7 @@
 
 .slide {
   transition: transform 200ms ease-in-out;
-  transform: translateX($sidebar-width);
   will-change: transform;
-
-  @include media-breakpoint-up(md) {
-    transform: translateX(0);
-  }
 
   &--enter {
     transform: translateX($sidebar-width);

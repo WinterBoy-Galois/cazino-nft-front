@@ -36,6 +36,7 @@ const SideBar: React.SFC = () => {
         exitActive: styles['slide--exit-active'],
         exitDone: styles['slide--exit-active'],
       }}
+      mountOnEnter={true}
     >
       <div
         className={`${styles.container} ${styles.slide}`}
