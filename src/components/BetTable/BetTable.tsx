@@ -5,6 +5,7 @@ import BetRow from './components/BetRow';
 import SpacerRow from './components/SpacerRow';
 import Loading from '../Loading';
 import Error from '../Error';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 interface IProps {
   bets?: Bet[];
@@ -41,8 +42,8 @@ const BetTable: React.FC<IProps> = ({ bets = [], isLoading = false, error = fals
         </thead>
         <tbody className="bet-table__body">
           <SpacerRow />
-          {bets.length > 0 && bets.map((bet: Bet) => <BetRow key={bet.id} bet={bet} />)}
-          {/* <TransitionGroup component={null}>
+          {/* {bets.length > 0 && bets.map((bet: Bet) => <BetRow key={bet.id} bet={bet} />)} */}
+          <TransitionGroup component={null}>
             {bets.map(b => (
               <CSSTransition
                 key={b.id}
@@ -56,7 +57,7 @@ const BetTable: React.FC<IProps> = ({ bets = [], isLoading = false, error = fals
                 <BetRow bet={b} />
               </CSSTransition>
             ))}
-          </TransitionGroup> */}
+          </TransitionGroup>
           <SpacerRow />
         </tbody>
       </table>
