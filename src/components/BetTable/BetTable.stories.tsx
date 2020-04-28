@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { storiesOf } from '@storybook/react';
+import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
+
 import BetTable from '.';
 import Bet, { GameTypes } from '../../models/bet';
 
@@ -169,26 +171,77 @@ const generateRandomBet = (id: number) => {
   return result;
 };
 
-storiesOf('Components/BetTable', module).add('default', () => {
+interface IProps {
+  bets?: Bet[];
+  active?: boolean;
+  speed?: number;
+  children?: ReactNode;
+  onBetAdded?: (bet: Bet) => void;
+}
+
+const RandomBetsGenerator: React.FC<IProps> = ({
+  bets = [],
+  active = false,
+  speed = 1,
+  children,
+  onBetAdded,
+}: IProps) => {
   const [counter, setCounter] = useState(11);
-  const [bets, setBets] = useState<Bet[]>(initialBets);
 
   useEffect(() => {
     setTimeout(() => {
-      const newCounter = counter + 1;
-      const betAdded = generateRandomBet(counter);
-      const newBets = [betAdded, ...bets.slice(0, 9)];
-      setBets(newBets);
-      setCounter(newCounter);
-    }, 1000);
-  }, [counter]);
+      if (active) {
+        const newCounter = counter + 1;
+        const betAdded = generateRandomBet(counter);
+        // bets = [betAdded, ...bets.slice(0, 9)];
+        if (onBetAdded) {
+          onBetAdded(betAdded);
+        }
+        setCounter(newCounter);
+      }
+    }, 1000 / speed);
+  }, [counter, onBetAdded, active, speed]);
 
-  return (
-    <div style={{ margin: '1rem' }}>
-      <BetTable bets={bets} isLoading={false} error={false} />
-    </div>
-  );
-});
+  return <>{children}</>;
+};
+storiesOf('Components/BetTable', module)
+  .addDecorator(withKnobs)
+  .add('default', () => {
+    const [bets, setBets] = useState<Bet[]>(initialBets);
+
+    const handleBetAdded = (betAdded: Bet) => {
+      const newBets = [betAdded, ...bets.slice(0, 9)];
+      // console.log('newBets?', newBets);
+      setBets(newBets);
+    };
+
+    const userDict = users.reduce(
+      (acc: any, cur: any) => ({
+        ...acc,
+        [cur.name]: cur.id,
+      }),
+      {}
+    );
+
+    return (
+      <div style={{ margin: '1rem' }}>
+        <RandomBetsGenerator
+          bets={bets}
+          active={boolean('Generate Data', true)}
+          speed={number('Generation Speed', 1, { range: true, min: 1, max: 10, step: 1 })}
+          onBetAdded={handleBetAdded}
+        >
+          <BetTable
+            bets={bets}
+            speed={number('Max animated Bets', 1, { range: true, min: 1, max: 4, step: 1 })}
+            currentUserId={select('Current User', userDict, 197)}
+            isLoading={false}
+            error={false}
+          />
+        </RandomBetsGenerator>
+      </div>
+    );
+  });
 
 storiesOf('Components/BetTable', module).add('empty', () => (
   <div style={{ margin: '1rem' }}>
