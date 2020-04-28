@@ -172,16 +172,14 @@ const generateRandomBet = (id: number) => {
 };
 
 interface IProps {
-  bets?: Bet[];
-  active?: boolean;
+  isActive?: boolean;
   speed?: number;
   children?: ReactNode;
   onBetAdded?: (bet: Bet) => void;
 }
 
 const RandomBetsGenerator: React.FC<IProps> = ({
-  bets = [],
-  active = false,
+  isActive = false,
   speed = 1,
   children,
   onBetAdded,
@@ -189,18 +187,21 @@ const RandomBetsGenerator: React.FC<IProps> = ({
   const [counter, setCounter] = useState(11);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (active) {
+    let interval: NodeJS.Timeout;
+
+    if (isActive) {
+      interval = setInterval(() => {
         const newCounter = counter + 1;
         const betAdded = generateRandomBet(counter);
-        // bets = [betAdded, ...bets.slice(0, 9)];
         if (onBetAdded) {
           onBetAdded(betAdded);
         }
         setCounter(newCounter);
-      }
-    }, 1000 / speed);
-  }, [counter, onBetAdded, active, speed]);
+      }, 1000 / speed);
+    }
+
+    return () => clearInterval(interval);
+  });
 
   return <>{children}</>;
 };
@@ -211,7 +212,6 @@ storiesOf('Components/BetTable', module)
 
     const handleBetAdded = (betAdded: Bet) => {
       const newBets = [betAdded, ...bets.slice(0, 9)];
-      // console.log('newBets?', newBets);
       setBets(newBets);
     };
 
@@ -226,8 +226,7 @@ storiesOf('Components/BetTable', module)
     return (
       <div style={{ margin: '1rem' }}>
         <RandomBetsGenerator
-          bets={bets}
-          active={boolean('Generate Data', true)}
+          isActive={boolean('Generate Data', true)}
           speed={number('Generation Speed', 1, { range: true, min: 1, max: 10, step: 1 })}
           onBetAdded={handleBetAdded}
         >
