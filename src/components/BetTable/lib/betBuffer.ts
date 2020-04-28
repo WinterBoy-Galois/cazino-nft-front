@@ -8,9 +8,9 @@ const addToArray = (buffer: Bet[], elements: Bet[]) => {
 };
 
 const countCurrentUserBets = (buffer: Bet[], userId: number) => {
-  const result = buffer.filter(item => {
-    return item.userid === userId;
-  }).length;
+  const result = buffer.reduce((counter, { userid }) => {
+    return userid === userId ? counter + 1 : counter;
+  }, 0);
 
   return result;
 };
