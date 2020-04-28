@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 
 import BetTable from '.';
 import Bet, { GameTypes } from '../../models/bet';
@@ -175,14 +176,18 @@ interface IProps {
   isActive?: boolean;
   speed?: number;
   children?: ReactNode;
+  currentUserId?: number;
   onBetAdded?: (bet: Bet) => void;
+  onBetAddedForCurrentUser?: (bet: Bet) => void;
 }
 
 const RandomBetsGenerator: React.FC<IProps> = ({
   isActive = false,
   speed = 1,
+  currentUserId,
   children,
   onBetAdded,
+  onBetAddedForCurrentUser,
 }: IProps) => {
   const [counter, setCounter] = useState(11);
 
@@ -195,6 +200,10 @@ const RandomBetsGenerator: React.FC<IProps> = ({
         const betAdded = generateRandomBet(counter);
         if (onBetAdded) {
           onBetAdded(betAdded);
+
+          if (betAdded.userid === currentUserId && onBetAddedForCurrentUser) {
+            onBetAddedForCurrentUser(betAdded);
+          }
         }
         setCounter(newCounter);
       }, 1000 / speed);
@@ -205,6 +214,7 @@ const RandomBetsGenerator: React.FC<IProps> = ({
 
   return <>{children}</>;
 };
+
 storiesOf('Components/BetTable', module)
   .addDecorator(withKnobs)
   .add('default', () => {
@@ -228,12 +238,13 @@ storiesOf('Components/BetTable', module)
         <RandomBetsGenerator
           isActive={boolean('Generate Data', true)}
           speed={number('Generation Speed', 1, { range: true, min: 1, max: 10, step: 1 })}
+          currentUserId={select('Current User', userDict, 197)}
           onBetAdded={handleBetAdded}
+          onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
         >
           <BetTable
             bets={bets}
             speed={number('Max animated Bets', 1, { range: true, min: 1, max: 4, step: 1 })}
-            currentUserId={select('Current User', userDict, 197)}
             isLoading={false}
             error={false}
           />

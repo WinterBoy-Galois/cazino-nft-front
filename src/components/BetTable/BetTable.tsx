@@ -12,7 +12,6 @@ interface IProps {
   isLoading?: boolean;
   error?: boolean;
   speed?: number;
-  currentUserId?: number;
 }
 
 const BetTable: React.FC<IProps> = ({ bets = [], isLoading = false, error = false }) => {
