@@ -4,101 +4,8 @@ import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import BetTable from '.';
-import Bet, { GameTypes } from '../../models/bet';
-import { useBetGenerator } from './lib/useBetGenerator.hook';
-
-const initialBets: Bet[] = [
-  {
-    id: '1',
-    time: 1582093459133,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.DICE,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-  {
-    id: '2',
-    time: 1582093456676,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.CLAMS,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-  {
-    id: '3',
-    time: 1582093456676,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.GOALS,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-  {
-    id: '4',
-    time: 1582093456676,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.MINES,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-  {
-    id: '5',
-    time: 1582093459133,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.DICE,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-  {
-    id: '6',
-    time: 1582093456676,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.CLAMS,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-  {
-    id: '7',
-    time: 1582093456676,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.GOALS,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-  {
-    id: '8',
-    time: 1582093456676,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.MINES,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-  {
-    id: '9',
-    time: 1582093459133,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.DICE,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-  {
-    id: '10',
-    time: 1582093456676,
-    userid: 27,
-    username: 'HaykFootball',
-    gameid: GameTypes.CLAMS,
-    bet: 48.85313,
-    profit: 48.85313,
-  },
-];
+import Bet from '../../models/bet';
+import { useBetGenerator, generateRandomBets } from './lib/useBetGenerator.hook';
 
 const users: any = [
   {
@@ -142,6 +49,8 @@ const users: any = [
     name: 'johnstanley',
   },
 ];
+
+const initialBets: Bet[] = generateRandomBets(1, 10, users);
 
 interface IProps {
   isActive?: boolean;

@@ -15,10 +15,10 @@ function randomNumber(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
 
-const generateRandomBet = (id: number, users: any[]) => {
+const generateRandomBet = (id: number, users?: any[]) => {
   const randomGame = randomEnum(GameTypes);
   const randomUser =
-    users.length > 0
+    users && users.length > 0
       ? users[Math.floor(Math.random() * users.length)]
       : { id: 27, name: 'John Doe' };
 
@@ -33,6 +33,16 @@ const generateRandomBet = (id: number, users: any[]) => {
   };
 
   return result;
+};
+
+export const generateRandomBets = (startId: number, count: number, users?: any[]) => {
+  const bets: Bet[] = [];
+
+  for (let _i = startId; _i < startId + count; _i++) {
+    bets.push(generateRandomBet(_i, users));
+  }
+
+  return bets;
 };
 
 interface Settings {
