@@ -1,10 +1,11 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, ReactNode } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import BetTable from '.';
 import Bet, { GameTypes } from '../../models/bet';
+import { useBetGenerator } from './lib/useBetGenerator.hook';
 
 const initialBets: Bet[] = [
   {
@@ -142,36 +143,6 @@ const users: any = [
   },
 ];
 
-const randomEnum = <T extends any>(anEnum: T): T[keyof T] => {
-  const enumValues = (Object.keys(anEnum)
-    .map(n => Number.parseInt(n, 10))
-    .filter(n => !Number.isNaN(n)) as unknown) as T[keyof T][];
-  const randomIndex = Math.floor(Math.random() * enumValues.length);
-  const randomEnumValue = enumValues[randomIndex];
-  return randomEnumValue;
-};
-
-function randomNumber(min: number, max: number) {
-  return Math.random() * (max - min) + min;
-}
-
-const generateRandomBet = (id: number) => {
-  const randomGame = randomEnum(GameTypes);
-  const randomUser = users[Math.floor(Math.random() * users.length)];
-
-  const result: Bet = {
-    id: id.toString(),
-    time: new Date().getTime(),
-    userid: randomUser.id,
-    username: randomUser.name,
-    gameid: randomGame,
-    bet: randomNumber(0.01, 0.02),
-    profit: randomNumber(-0.02, 0.02),
-  };
-
-  return result;
-};
-
 interface IProps {
   isActive?: boolean;
   speed?: number;
@@ -181,36 +152,13 @@ interface IProps {
   onBetAddedForCurrentUser?: (bet: Bet) => void;
 }
 
-const RandomBetsGenerator: React.FC<IProps> = ({
+const RandomBetsConfiguration: React.FC<IProps> = ({
   isActive = false,
   speed = 1,
-  currentUserId,
   children,
   onBetAdded,
-  onBetAddedForCurrentUser,
 }: IProps) => {
-  const [counter, setCounter] = useState(11);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-
-    if (isActive) {
-      interval = setInterval(() => {
-        const newCounter = counter + 1;
-        const betAdded = generateRandomBet(counter);
-        if (onBetAdded) {
-          onBetAdded(betAdded);
-
-          if (betAdded.userid === currentUserId && onBetAddedForCurrentUser) {
-            onBetAddedForCurrentUser(betAdded);
-          }
-        }
-        setCounter(newCounter);
-      }, 1000 / speed);
-    }
-
-    return () => clearInterval(interval);
-  });
+  useBetGenerator({ isActive, speed, users, onBetGenerated: onBetAdded });
 
   return <>{children}</>;
 };
@@ -235,7 +183,7 @@ storiesOf('Components/BetTable', module)
 
     return (
       <div style={{ margin: '1rem' }}>
-        <RandomBetsGenerator
+        <RandomBetsConfiguration
           isActive={boolean('Generate Data', true)}
           speed={number('Generation Speed', 1, { range: true, min: 1, max: 10, step: 1 })}
           currentUserId={select('Current User', userDict, 197)}
@@ -248,7 +196,7 @@ storiesOf('Components/BetTable', module)
             isLoading={false}
             error={false}
           />
-        </RandomBetsGenerator>
+        </RandomBetsConfiguration>
       </div>
     );
   });
