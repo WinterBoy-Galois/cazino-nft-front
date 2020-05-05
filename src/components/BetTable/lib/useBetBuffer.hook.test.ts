@@ -114,6 +114,7 @@ describe('useBetBuffer hook', () => {
     const { result } = renderHook(() =>
       useBetBuffer({
         bufferSize: 3,
+        currentUserId: 121,
         onBetAddedForCurrentUser: mockCallback,
       })
     );
