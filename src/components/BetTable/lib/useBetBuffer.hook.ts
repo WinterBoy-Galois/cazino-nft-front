@@ -1,18 +1,44 @@
 import Bet from '../../../models/bet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+export enum DispatchSpeedType {
+  AUTO,
+  NORMAL,
+  FAST,
+  VERY_FAST,
+}
 
 interface IProps {
   bufferSize?: number;
+  dispatchSpeed?: DispatchSpeedType;
+  onBetDispatched?: (bet: Bet) => void;
   currentUserId?: number;
   onBetAddedForCurrentUser?: (bet: Bet) => void;
 }
 
 export const useBetBuffer = ({
   bufferSize = 100,
+  dispatchSpeed = DispatchSpeedType.NORMAL,
+  onBetDispatched,
   currentUserId,
   onBetAddedForCurrentUser,
 }: IProps) => {
   const [bets, setBets] = useState<Bet[]>([]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    interval = setInterval(() => {
+      if (bets.length > 0) {
+        const betToDispatch = bets.shift();
+        if (onBetDispatched && betToDispatch) {
+          onBetDispatched(betToDispatch);
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  });
 
   const addBets = (addedBets: Bet[]) => {
     if (currentUserId && onBetAddedForCurrentUser) {
