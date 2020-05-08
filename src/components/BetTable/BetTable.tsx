@@ -6,12 +6,13 @@ import SpacerRow from './components/SpacerRow';
 import Loading from '../Loading';
 import Error from '../Error';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { DispatchSpeed } from './lib/useBetBuffer.hook';
 
 interface IProps {
   bets?: Bet[];
   isLoading?: boolean;
   error?: boolean;
-  speed?: number;
+  speed?: DispatchSpeed;
 }
 
 const BetTable: React.FC<IProps> = ({ bets = [], isLoading = false, error = false }) => {

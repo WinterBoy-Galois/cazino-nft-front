@@ -6,6 +6,103 @@ import { action } from '@storybook/addon-actions';
 import BetTable from '.';
 import Bet from '../../models/bet';
 import { useBetGenerator, generateRandomBets } from './lib/useBetGenerator.hook';
+import { DispatchSpeed } from './lib/useBetBuffer.hook';
+
+interface IProps {
+  isActive?: boolean;
+  speed?: number;
+  amount?: number;
+  children?: ReactNode;
+  currentUserId?: number;
+  dispatchSpeed?: DispatchSpeed;
+  bufferSize?: number;
+  onBetAdded?: (bet: Bet) => void;
+  onBetAddedForCurrentUser?: (bet: Bet) => void;
+}
+
+const RandomBetsConfiguration: React.FC<IProps> = ({
+  isActive = false,
+  speed = 1,
+  amount = 1,
+  children,
+  dispatchSpeed = DispatchSpeed.NORMAL,
+  bufferSize = 100,
+  onBetAdded,
+}: IProps) => {
+  useBetGenerator({ isActive, speed, users, onBetGenerated: onBetAdded });
+
+  return <>{children}</>;
+};
+
+storiesOf('Components/BetTable', module)
+  .addDecorator(withKnobs)
+  .add('default', () => (
+    <div style={{ margin: '1rem' }}>
+      <BetTable bets={initialBets} isLoading={false} error={false} />
+    </div>
+  ))
+  .add('empty', () => (
+    <div style={{ margin: '1rem' }}>
+      <BetTable bets={[]} isLoading={false} error={false} />
+    </div>
+  ))
+  .add('error', () => (
+    <div style={{ margin: '1rem' }}>
+      <BetTable bets={[]} isLoading={false} error={true} />
+    </div>
+  ))
+  .add('loading', () => (
+    <div style={{ margin: '1rem' }}>
+      <BetTable bets={[]} isLoading={true} error={false} />
+    </div>
+  ))
+  .add('custom', () => {
+    const [bets, setBets] = useState<Bet[]>(initialBets);
+
+    const handleBetAdded = (betAdded: Bet) => {
+      const newBets = [betAdded, ...bets.slice(0, 9)];
+      setBets(newBets);
+    };
+
+    const userDict = users.reduce(
+      (acc: any, cur: any) => ({
+        ...acc,
+        [cur.name]: cur.id,
+      }),
+      {}
+    );
+
+    return (
+      <div style={{ margin: '1rem' }}>
+        <RandomBetsConfiguration
+          isActive={boolean('Generate Data', true)}
+          speed={number('Generation Speed (ms)', 1000, {
+            range: true,
+            min: 250,
+            max: 5000,
+            step: 250,
+          })}
+          amount={number('No of bets', 1, { range: true, min: 1, max: 20, step: 1 })}
+          dispatchSpeed={select(
+            'Animation speed',
+            {
+              Auto: DispatchSpeed.AUTO,
+              Normal: DispatchSpeed.NORMAL,
+              Fast: DispatchSpeed.FAST,
+              'Very fast': DispatchSpeed.VERY_FAST,
+            },
+            DispatchSpeed.NORMAL
+          )}
+          currentUserId={select('Current User', userDict, 197)}
+          bufferSize={number('Buffer Size', 100, { range: true, min: 1, max: 240, step: 1 })}
+          onBetAdded={handleBetAdded}
+          onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
+        >
+          <BetTable bets={bets} speed={DispatchSpeed.NORMAL} isLoading={false} error={false} />
+        </RandomBetsConfiguration>
+      </div>
+    );
+  });
 
 const users: any = [
   {
@@ -51,79 +148,3 @@ const users: any = [
 ];
 
 const initialBets: Bet[] = generateRandomBets(1, 10, users);
-
-interface IProps {
-  isActive?: boolean;
-  speed?: number;
-  children?: ReactNode;
-  currentUserId?: number;
-  onBetAdded?: (bet: Bet) => void;
-  onBetAddedForCurrentUser?: (bet: Bet) => void;
-}
-
-const RandomBetsConfiguration: React.FC<IProps> = ({
-  isActive = false,
-  speed = 1,
-  children,
-  onBetAdded,
-}: IProps) => {
-  useBetGenerator({ isActive, speed, users, onBetGenerated: onBetAdded });
-
-  return <>{children}</>;
-};
-
-storiesOf('Components/BetTable', module)
-  .addDecorator(withKnobs)
-  .add('default', () => {
-    const [bets, setBets] = useState<Bet[]>(initialBets);
-
-    const handleBetAdded = (betAdded: Bet) => {
-      const newBets = [betAdded, ...bets.slice(0, 9)];
-      setBets(newBets);
-    };
-
-    const userDict = users.reduce(
-      (acc: any, cur: any) => ({
-        ...acc,
-        [cur.name]: cur.id,
-      }),
-      {}
-    );
-
-    return (
-      <div style={{ margin: '1rem' }}>
-        <RandomBetsConfiguration
-          isActive={boolean('Generate Data', true)}
-          speed={number('Generation Speed', 1, { range: true, min: 1, max: 10, step: 1 })}
-          currentUserId={select('Current User', userDict, 197)}
-          onBetAdded={handleBetAdded}
-          onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
-        >
-          <BetTable
-            bets={bets}
-            speed={number('Max animated Bets', 1, { range: true, min: 1, max: 4, step: 1 })}
-            isLoading={false}
-            error={false}
-          />
-        </RandomBetsConfiguration>
-      </div>
-    );
-  });
-
-storiesOf('Components/BetTable', module).add('empty', () => (
-  <div style={{ margin: '1rem' }}>
-    <BetTable bets={[]} isLoading={false} error={false} />
-  </div>
-));
-
-storiesOf('Components/BetTable', module).add('error', () => (
-  <div style={{ margin: '1rem' }}>
-    <BetTable bets={[]} isLoading={false} error={true} />
-  </div>
-));
-
-storiesOf('Components/BetTable', module).add('loading', () => (
-  <div style={{ margin: '1rem' }}>
-    <BetTable bets={[]} isLoading={true} error={false} />
-  </div>
-));

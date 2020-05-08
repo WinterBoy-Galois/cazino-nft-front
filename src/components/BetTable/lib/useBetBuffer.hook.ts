@@ -1,7 +1,7 @@
 import Bet from '../../../models/bet';
 import { useState, useEffect } from 'react';
 
-export enum DispatchSpeedType {
+export enum DispatchSpeed {
   AUTO,
   NORMAL,
   FAST,
@@ -10,7 +10,7 @@ export enum DispatchSpeedType {
 
 interface IProps {
   bufferSize?: number;
-  dispatchSpeed?: DispatchSpeedType;
+  dispatchSpeed?: DispatchSpeed;
   onBetDispatched?: (bet: Bet) => void;
   currentUserId?: number;
   onBetAddedForCurrentUser?: (bet: Bet) => void;
@@ -18,7 +18,7 @@ interface IProps {
 
 export const useBetBuffer = ({
   bufferSize = 100,
-  dispatchSpeed = DispatchSpeedType.NORMAL,
+  dispatchSpeed = DispatchSpeed.NORMAL,
   onBetDispatched,
   currentUserId,
   onBetAddedForCurrentUser,

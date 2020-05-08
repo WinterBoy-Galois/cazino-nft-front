@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 
-import { useBetBuffer, DispatchSpeedType } from './useBetBuffer.hook';
+import { useBetBuffer, DispatchSpeed } from './useBetBuffer.hook';
 import Bet from '../../../models/bet';
 
 describe('useBetBuffer hook', () => {
@@ -170,7 +170,7 @@ describe('useBetBuffer hook', () => {
       const { result } = renderHook(() =>
         useBetBuffer({
           bufferSize: 10,
-          dispatchSpeed: DispatchSpeedType.NORMAL,
+          dispatchSpeed: DispatchSpeed.NORMAL,
           onBetDispatched: mockCallback,
         })
       );

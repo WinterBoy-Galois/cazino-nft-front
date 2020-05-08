@@ -54,7 +54,7 @@ interface Settings {
 
 export const useBetGenerator = ({
   isActive = false,
-  speed = 1,
+  speed = 1000,
   users = [],
   onBetGenerated,
 }: Settings) => {
@@ -71,7 +71,7 @@ export const useBetGenerator = ({
           onBetGenerated(betAdded);
         }
         setCounter(newCounter);
-      }, 1000 / speed);
+      }, speed);
     }
 
     return () => clearInterval(interval);
