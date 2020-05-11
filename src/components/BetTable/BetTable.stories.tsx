@@ -7,7 +7,6 @@ import BetTable from '.';
 import Bet from '../../models/bet';
 import { useBetGenerator, generateRandomBets } from './lib/useBetGenerator.hook';
 import { DispatchSpeed, useBetBuffer } from './lib/useBetBuffer.hook';
-import { BETS } from '../../graphql/queries';
 
 interface IProps {
   isActive?: boolean;
@@ -39,7 +38,7 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
     onBetDispatched: onBetAdded,
     currentUserId,
     onBetAddedForCurrentUser: () => {
-      setBetsAddedForCurrentUserCounter(betsAddedForCurrentUserCounter + 1);
+      setBetsAddedForCurrentUserCounter(counter => counter + 1);
     },
   });
 
