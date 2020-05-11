@@ -6,12 +6,13 @@ import { action } from '@storybook/addon-actions';
 import BetTable from '.';
 import Bet from '../../models/bet';
 import { useBetGenerator, generateRandomBets } from './lib/useBetGenerator.hook';
-import { DispatchSpeed } from './lib/useBetBuffer.hook';
+import { DispatchSpeed, useBetBuffer } from './lib/useBetBuffer.hook';
+import { BETS } from '../../graphql/queries';
 
 interface IProps {
   isActive?: boolean;
   speed?: number;
-  amount?: number;
+  betsPerBatch?: number;
   children?: ReactNode;
   currentUserId?: number;
   dispatchSpeed?: DispatchSpeed;
@@ -23,15 +24,38 @@ interface IProps {
 const RandomBetsConfiguration: React.FC<IProps> = ({
   isActive = false,
   speed = 1,
-  amount = 1,
+  betsPerBatch = 1,
   children,
+  currentUserId,
   dispatchSpeed = DispatchSpeed.NORMAL,
   bufferSize = 100,
   onBetAdded,
 }: IProps) => {
-  useBetGenerator({ isActive, speed, users, onBetGenerated: onBetAdded });
+  const [betsAddedForCurrentUserCounter, setBetsAddedForCurrentUserCounter] = useState(0);
 
-  return <>{children}</>;
+  const { bets, addBets } = useBetBuffer({
+    bufferSize,
+    dispatchSpeed,
+    onBetDispatched: onBetAdded,
+    currentUserId,
+    onBetAddedForCurrentUser: () => {
+      setBetsAddedForCurrentUserCounter(betsAddedForCurrentUserCounter + 1);
+    },
+  });
+
+  useBetGenerator({ isActive, speed, betsPerBatch, users, onBetsGenerated: addBets });
+
+  return (
+    <>
+      {children}
+      <div style={{ marginTop: '12px' }}>
+        <div>
+          Buffered: {bets.length} / {bufferSize}
+        </div>
+        <div>Bets for current user: {betsAddedForCurrentUserCounter}</div>
+      </div>
+    </>
+  );
 };
 
 storiesOf('Components/BetTable', module)
@@ -82,7 +106,7 @@ storiesOf('Components/BetTable', module)
             max: 5000,
             step: 250,
           })}
-          amount={number('No of bets', 1, { range: true, min: 1, max: 20, step: 1 })}
+          betsPerBatch={number('No of bets', 1, { range: true, min: 1, max: 20, step: 1 })}
           dispatchSpeed={select(
             'Animation speed',
             {

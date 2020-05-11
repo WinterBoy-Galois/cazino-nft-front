@@ -48,15 +48,17 @@ export const generateRandomBets = (startId: number, count: number, users?: any[]
 interface Settings {
   isActive?: boolean;
   speed?: number;
+  betsPerBatch?: number;
   users?: any[];
-  onBetGenerated?: (bet: Bet) => void;
+  onBetsGenerated?: (bets: Bet[]) => void;
 }
 
 export const useBetGenerator = ({
   isActive = false,
   speed = 1000,
+  betsPerBatch = 1,
   users = [],
-  onBetGenerated,
+  onBetsGenerated,
 }: Settings) => {
   const [counter, setCounter] = useState(11);
 
@@ -66,9 +68,9 @@ export const useBetGenerator = ({
     if (isActive) {
       interval = setInterval(() => {
         const newCounter = counter + 1;
-        const betAdded = generateRandomBet(counter, users);
-        if (onBetGenerated) {
-          onBetGenerated(betAdded);
+        const betsAdded = generateRandomBets(counter, betsPerBatch, users);
+        if (onBetsGenerated) {
+          onBetsGenerated(betsAdded);
         }
         setCounter(newCounter);
       }, speed);
