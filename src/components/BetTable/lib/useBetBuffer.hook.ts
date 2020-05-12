@@ -1,5 +1,6 @@
 import Bet from '../../../models/bet';
 import { useState, useEffect } from 'react';
+import { useInterval } from '../../../hooks/useInterval';
 
 export enum DispatchSpeed {
   AUTO,
@@ -25,32 +26,26 @@ export const useBetBuffer = ({
 }: IProps) => {
   const [bets, setBets] = useState<Bet[]>([]);
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
+  const calculateSpeed = () => {
+    switch (dispatchSpeed) {
+      case DispatchSpeed.FAST ||
+        (DispatchSpeed.AUTO && bets.length > bufferSize / 10 && bets.length < bufferSize / 2):
+        return 500;
+      case DispatchSpeed.VERY_FAST || (DispatchSpeed.AUTO && bets.length > bufferSize / 2):
+        return 250;
+      default:
+        return 1000;
+    }
+  };
 
-    const calculateSpeed = () => {
-      switch (dispatchSpeed) {
-        case DispatchSpeed.FAST ||
-          (DispatchSpeed.AUTO && bets.length > bufferSize / 10 && bets.length < bufferSize / 2):
-          return 500;
-        case DispatchSpeed.VERY_FAST || (DispatchSpeed.AUTO && bets.length > bufferSize / 2):
-          return 250;
-        default:
-          return 1000;
+  useInterval(() => {
+    if (bets.length > 0) {
+      const betToDispatch = bets.shift();
+      if (onBetDispatched && betToDispatch) {
+        onBetDispatched(betToDispatch);
       }
-    };
-
-    interval = setInterval(() => {
-      if (bets.length > 0) {
-        const betToDispatch = bets.shift();
-        if (onBetDispatched && betToDispatch) {
-          onBetDispatched(betToDispatch);
-        }
-      }
-    }, calculateSpeed());
-
-    return () => clearInterval(interval);
-  });
+    }
+  }, calculateSpeed());
 
   const addBets = (addedBets: Bet[]) => {
     if (currentUserId && onBetAddedForCurrentUser) {

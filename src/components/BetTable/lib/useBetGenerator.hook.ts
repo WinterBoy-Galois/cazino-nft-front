@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Bet, { GameTypes } from '../../../models/bet';
+import { useInterval } from '../../../hooks/useInterval';
 
 const randomEnum = <T extends any>(anEnum: T): T[keyof T] => {
   const enumValues = (Object.keys(anEnum)
@@ -62,22 +63,17 @@ export const useBetGenerator = ({
 }: Settings) => {
   const [counter, setCounter] = useState(11);
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-
-    if (isActive) {
-      interval = setInterval(() => {
-        const newCounter = counter + 1;
-        const betsAdded = generateRandomBets(counter, betsPerBatch, users);
-        if (onBetsGenerated) {
-          onBetsGenerated(betsAdded);
-        }
-        setCounter(newCounter);
-      }, speed);
-    }
-
-    return () => clearInterval(interval);
-  });
+  useInterval(
+    () => {
+      const newCounter = counter + 1;
+      const betsAdded = generateRandomBets(counter, betsPerBatch, users);
+      if (onBetsGenerated) {
+        onBetsGenerated(betsAdded);
+      }
+      setCounter(newCounter);
+    },
+    isActive ? speed : null
+  );
 
   return;
 };
