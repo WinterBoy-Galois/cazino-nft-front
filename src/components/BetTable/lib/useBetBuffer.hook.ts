@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 
 export enum DispatchSpeed {
   AUTO,
-  NORMAL,
-  FAST,
-  VERY_FAST,
+  NORMAL = 1000,
+  FAST = 500,
+  VERY_FAST = 250,
 }
 
 interface IProps {
@@ -28,6 +28,18 @@ export const useBetBuffer = ({
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
+    const calculateSpeed = () => {
+      switch (dispatchSpeed) {
+        case DispatchSpeed.FAST ||
+          (DispatchSpeed.AUTO && bets.length > bufferSize / 10 && bets.length < bufferSize / 2):
+          return 500;
+        case DispatchSpeed.VERY_FAST || (DispatchSpeed.AUTO && bets.length > bufferSize / 2):
+          return 250;
+        default:
+          return 1000;
+      }
+    };
+
     interval = setInterval(() => {
       if (bets.length > 0) {
         const betToDispatch = bets.shift();
@@ -35,7 +47,7 @@ export const useBetBuffer = ({
           onBetDispatched(betToDispatch);
         }
       }
-    }, 1000);
+    }, calculateSpeed());
 
     return () => clearInterval(interval);
   });

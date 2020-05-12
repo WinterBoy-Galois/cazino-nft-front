@@ -12,10 +12,25 @@ interface IProps {
   bets?: Bet[];
   isLoading?: boolean;
   error?: boolean;
-  speed?: DispatchSpeed;
+  animationSpeed?: DispatchSpeed;
 }
 
-const BetTable: React.FC<IProps> = ({ bets = [], isLoading = false, error = false }) => {
+const BetTable: React.FC<IProps> = ({
+  bets = [],
+  isLoading = false,
+  error = false,
+  animationSpeed = DispatchSpeed.NORMAL,
+}) => {
+  let speed = 1000;
+
+  if (animationSpeed === DispatchSpeed.FAST) {
+    speed = 500;
+  }
+
+  if (animationSpeed === DispatchSpeed.VERY_FAST) {
+    speed = 250;
+  }
+
   // const { subscribeToMore, loading, error, data } = useQuery<{ bets: Bet[] }>(LATEST_BETS);
 
   // useEffect(() => {
@@ -49,10 +64,10 @@ const BetTable: React.FC<IProps> = ({ bets = [], isLoading = false, error = fals
             {bets.map(b => (
               <CSSTransition
                 key={b.id}
-                classNames="fade"
+                classNames={`fade${speed}`}
                 timeout={{
-                  enter: 500,
-                  exit: 500,
+                  enter: speed / 2,
+                  exit: speed / 2,
                 }}
                 mountOnEnter={true}
               >

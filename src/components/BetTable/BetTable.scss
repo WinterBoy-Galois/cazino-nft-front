@@ -108,7 +108,7 @@ $radius: 10px;
 }
 
 /* stylelint-disable-next-line */
-.fade-enter td div {
+.fade1000-enter td div {
   opacity: 0;
   max-height: 0;
   padding-top: 0;
@@ -118,22 +118,90 @@ $radius: 10px;
 }
 
 /* stylelint-disable-next-line */
-.fade-enter-active td div {
-  max-height: 15px;
+.fade1000-enter-active td div {
+  max-height: 50px;
   opacity: 1;
-  padding: 0.7rem 0.5rem;
+  padding: 6px 8px;
 }
 
 /* stylelint-disable-next-line */
-.fade-exit td div {
-  max-height: 15px;
+.fade1000-exit td div {
+  max-height: 50px;
   opacity: 1;
   transition: max-height 500ms linear, opacity 500ms ease-out, padding 500ms linear;
   overflow: hidden;
 }
 
 /* stylelint-disable-next-line */
-.fade-exit-active td div {
+.fade1000-exit-active td div {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+/* stylelint-disable-next-line */
+.fade500-enter td div {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  transition: max-height 250ms linear, opacity 250ms ease-in, padding 250ms linear;
+}
+
+/* stylelint-disable-next-line */
+.fade500-enter-active td div {
+  max-height: 50px;
+  opacity: 1;
+  padding: 6px 8px;
+}
+
+/* stylelint-disable-next-line */
+.fade500-exit td div {
+  max-height: 50px;
+  opacity: 1;
+  transition: max-height 250ms linear, opacity 250ms ease-out, padding 250ms linear;
+  overflow: hidden;
+}
+
+/* stylelint-disable-next-line */
+.fade500-exit-active td div {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+/* stylelint-disable-next-line */
+.fade250-enter td div {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  transition: max-height 125ms linear, opacity 125ms ease-in, padding 125ms linear;
+}
+
+/* stylelint-disable-next-line */
+.fade250-enter-active td div {
+  max-height: 50px;
+  opacity: 1;
+  padding: 6px 8px;
+}
+
+/* stylelint-disable-next-line */
+.fade250-exit td div {
+  max-height: 50px;
+  opacity: 1;
+  transition: max-height 125ms linear, opacity 125ms ease-out, padding 125ms linear;
+  overflow: hidden;
+}
+
+/* stylelint-disable-next-line */
+.fade250-exit-active td div {
   max-height: 0;
   opacity: 0;
   padding-top: 0;

@@ -42,7 +42,11 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
     },
   });
 
-  useBetGenerator({ isActive, speed, betsPerBatch, users, onBetsGenerated: addBets });
+  const handleOnBetsGenerated = (generatedBets: Bet[]) => {
+    addBets(generatedBets);
+  };
+
+  useBetGenerator({ isActive, speed, betsPerBatch, users, onBetsGenerated: handleOnBetsGenerated });
 
   return (
     <>
@@ -107,7 +111,7 @@ storiesOf('Components/BetTable', module)
           })}
           betsPerBatch={number('No of bets', 1, { range: true, min: 1, max: 20, step: 1 })}
           dispatchSpeed={select(
-            'Animation speed',
+            'Dispatch speed',
             {
               Auto: DispatchSpeed.AUTO,
               Normal: DispatchSpeed.NORMAL,
@@ -121,7 +125,21 @@ storiesOf('Components/BetTable', module)
           onBetAdded={handleBetAdded}
           onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
         >
-          <BetTable bets={bets} speed={DispatchSpeed.NORMAL} isLoading={false} error={false} />
+          <BetTable
+            bets={bets}
+            animationSpeed={select(
+              'Animation speed',
+              {
+                Auto: DispatchSpeed.AUTO,
+                Normal: DispatchSpeed.NORMAL,
+                Fast: DispatchSpeed.FAST,
+                'Very fast': DispatchSpeed.VERY_FAST,
+              },
+              DispatchSpeed.NORMAL
+            )}
+            isLoading={false}
+            error={false}
+          />
         </RandomBetsConfiguration>
       </div>
     );
