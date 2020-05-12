@@ -231,7 +231,7 @@ describe('useBetBuffer hook', () => {
       // Assert
       expect(result.current.bets.length).toEqual(5);
       expect(mockCallback).not.toBeCalled();
-      expect(setInterval).toHaveBeenCalledTimes(2);
+      expect(setInterval).toHaveBeenCalledTimes(1);
 
       jest.runOnlyPendingTimers();
       expect(result.current.bets.length).toEqual(4);
@@ -328,7 +328,7 @@ describe('useBetBuffer hook', () => {
       // Assert
       expect(result.current.bets.length).toEqual(5);
       expect(mockCallback).not.toBeCalled();
-      expect(setInterval).toHaveBeenCalledTimes(2);
+      expect(setInterval).toHaveBeenCalledTimes(1);
 
       jest.runOnlyPendingTimers();
       expect(result.current.bets.length).toEqual(4);

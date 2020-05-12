@@ -1,5 +1,5 @@
 import Bet from '../../../models/bet';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useInterval } from '../../../hooks/useInterval';
 
 export enum DispatchSpeed {
@@ -27,14 +27,20 @@ export const useBetBuffer = ({
   const [bets, setBets] = useState<Bet[]>([]);
 
   const calculateSpeed = () => {
-    switch (dispatchSpeed) {
-      case DispatchSpeed.FAST ||
-        (DispatchSpeed.AUTO && bets.length > bufferSize / 10 && bets.length < bufferSize / 2):
+    switch (true) {
+      case dispatchSpeed === DispatchSpeed.FAST:
+      case dispatchSpeed === DispatchSpeed.AUTO &&
+        bets.length > bufferSize / 20 &&
+        bets.length <= bufferSize / 2: {
         return 500;
-      case DispatchSpeed.VERY_FAST || (DispatchSpeed.AUTO && bets.length > bufferSize / 2):
+      }
+      case dispatchSpeed === DispatchSpeed.VERY_FAST:
+      case dispatchSpeed === DispatchSpeed.AUTO && bets.length >= bufferSize / 2: {
         return 250;
-      default:
+      }
+      default: {
         return 1000;
+      }
     }
   };
 
