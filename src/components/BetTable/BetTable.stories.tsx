@@ -118,7 +118,7 @@ storiesOf('Components/BetTable', module)
               Fast: DispatchSpeed.FAST,
               'Very fast': DispatchSpeed.VERY_FAST,
             },
-            DispatchSpeed.NORMAL
+            DispatchSpeed.AUTO
           )}
           currentUserId={select('Current User', userDict, 197)}
           bufferSize={number('Buffer Size', 100, { range: true, min: 1, max: 240, step: 1 })}
