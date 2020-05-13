@@ -7,10 +7,11 @@ import { useScrollLock } from '../../../../hooks/useScrollLock.hook';
 import { Breakpoint, useBreakpoint } from '../../../../hooks/useBreakpoint.hook';
 import { SidebarTab } from '../../../../state/models/sidebar.model';
 import TabSelect from './components/TabSelect/TabSelect';
-import BetTable from '../../../BetTable';
 import LeaderboardsTab from './components/LeaderboardsTab';
 import { useTranslation } from 'react-i18next';
 import { useScrollbarWidth } from '../../../../hooks/useScrollbarWidth.hook';
+import LatestBetsTab from './components/LatestBetsTab';
+import MyBetsTab from './components/MyBetsTab';
 
 const SideBar: React.SFC = () => {
   const [
@@ -71,9 +72,9 @@ const activateScrollLock = (breakpoint: Breakpoint): boolean => {
 const renderTab = (tab: SidebarTab) => {
   switch (tab) {
     case 'LATEST_BETS':
-      return <BetTable bets={[]} isLoading={false} error={false} />;
+      return <LatestBetsTab />;
     case 'MY_BETS':
-      return <div>My bets</div>;
+      return <MyBetsTab />;
     case 'LEADERBOARDS':
       return <LeaderboardsTab />;
   }
