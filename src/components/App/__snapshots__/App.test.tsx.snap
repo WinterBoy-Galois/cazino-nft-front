@@ -1225,7 +1225,13 @@ Object {
             <div
               class="container"
             >
-              No Data
+              <div
+                class="spinner"
+              >
+                <span
+                  class="spinner spinner--white"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -2453,7 +2459,13 @@ Object {
           <div
             class="container"
           >
-            No Data
+            <div
+              class="spinner"
+            >
+              <span
+                class="spinner spinner--white"
+              />
+            </div>
           </div>
         </div>
       </div>
