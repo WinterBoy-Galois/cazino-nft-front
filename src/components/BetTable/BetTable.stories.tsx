@@ -188,4 +188,4 @@ const users: any = [
   },
 ];
 
-const initialBets: Bet[] = generateRandomBets(1, 10, users);
+const initialBets: Bet[] = generateRandomBets(10, users);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Bet, { GameTypes } from '../../../models/bet';
 import { useInterval } from '../../../hooks/useInterval';
@@ -16,7 +16,7 @@ function randomNumber(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
 
-const generateRandomBet = (id: number, users?: any[]) => {
+const generateRandomBet = (users?: any[]) => {
   const randomGame = randomEnum(GameTypes);
   const randomUser =
     users && users.length > 0
@@ -24,7 +24,7 @@ const generateRandomBet = (id: number, users?: any[]) => {
       : { id: 27, name: 'John Doe' };
 
   const result: Bet = {
-    id: id.toString(),
+    id: uuidv4(),
     time: new Date().getTime(),
     userid: randomUser.id,
     username: randomUser.name,
@@ -36,11 +36,11 @@ const generateRandomBet = (id: number, users?: any[]) => {
   return result;
 };
 
-export const generateRandomBets = (startId: number, count: number, users?: any[]) => {
+export const generateRandomBets = (count: number, users?: any[]) => {
   const bets: Bet[] = [];
 
-  for (let _i = startId; _i < startId + count; _i++) {
-    bets.push(generateRandomBet(_i, users));
+  for (let _i = 0; _i < count; _i++) {
+    bets.push(generateRandomBet(users));
   }
 
   return bets;
@@ -61,16 +61,12 @@ export const useBetGenerator = ({
   users = [],
   onBetsGenerated,
 }: Settings) => {
-  const [counter, setCounter] = useState(11);
-
   useInterval(
     () => {
-      const newCounter = counter + 1;
-      const betsAdded = generateRandomBets(counter, betsPerBatch, users);
+      const betsAdded = generateRandomBets(betsPerBatch, users);
       if (onBetsGenerated) {
         onBetsGenerated(betsAdded);
       }
-      setCounter(newCounter);
     },
     isActive ? speed : null
   );
