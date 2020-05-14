@@ -1,7 +1,5 @@
 import React from 'react';
-import './BetRow.scss';
 import { timeFromEpoch } from '../../../../common/util/date.util';
-import Bitcoin from '../../../icons/social/Bitcoin';
 import { formatProfit } from '../../../../common/util/format.util';
 import { isPositive } from '../../../../common/util/sign.util';
 import Bet, { GameTypes } from '../../../../models/bet';
@@ -10,39 +8,43 @@ import Clams from '../../../icons/games/Clams';
 import Goals from '../../../icons/games/Goals';
 import Mines from '../../../icons/games/Mines';
 
+import styles from './BetRow.module.scss';
+import BitcoinValue from '../../../BitcoinValue';
+
 interface IProps {
   bet: Bet;
+  highlight?: boolean;
 }
 
-const BetRow: React.FC<IProps> = ({ bet }) => {
+const BetRow: React.FC<IProps> = ({ bet, highlight = false }) => {
   let gameIcon;
 
   switch (bet.gameid) {
     case GameTypes.CLAMS:
-      gameIcon = <Clams className="bet-row__game" innerClassName="bet-row__game__inner" />;
+      gameIcon = <Clams className={styles.icon} innerClassName={styles.icon__inner} />;
       break;
     case GameTypes.DICE:
-      gameIcon = <Dice className="bet-row__game" innerClassName="bet-row__game__inner" />;
+      gameIcon = <Dice className={styles.icon} innerClassName={styles.icon__inner} />;
       break;
     case GameTypes.GOALS:
-      gameIcon = <Goals className="bet-row__game" innerClassName="bet-row__game__inner" />;
+      gameIcon = <Goals className={styles.icon} innerClassName={styles.icon__inner} />;
       break;
     case GameTypes.MINES:
-      gameIcon = <Mines className="bet-row__game" innerClassName="bet-row__game__inner" />;
+      gameIcon = <Mines className={styles.icon} innerClassName={styles.icon__inner} />;
       break;
   }
 
   return (
-    <tr key={bet.id}>
+    <tr key={bet.id} className={`${highlight ? styles['row--highlight'] : ''}`}>
       <td>
-        <div className="bet-row__cell">{gameIcon}</div>
+        <div>{gameIcon}</div>
       </td>
       <td>
-        <div className="bet-row__cell">{timeFromEpoch(bet.time)}</div>
+        <div>{timeFromEpoch(bet.time)}</div>
       </td>
 
       <td>
-        <div className="bet-row__cell">{bet.username}</div>
+        <div className={styles.username}>{bet.username}</div>
       </td>
 
       {/* <td className="bet-row__bold hide--small hide--medium">
@@ -53,14 +55,11 @@ const BetRow: React.FC<IProps> = ({ bet }) => {
       </td> */}
 
       <td
-        className={`bet-row__bold ${
-          isPositive(formatProfit(bet.profit)) ? 'bet-row__green' : 'bet-row__red'
+        className={`${
+          isPositive(formatProfit(bet.profit)) ? styles['row--green'] : styles['row--red']
         }`}
       >
-        <div className="bet-row__cell">
-          <Bitcoin className="bet-row__icon" innerClassName="bet-row__icon__inner" />
-          {formatProfit(bet.profit)}
-        </div>
+        <BitcoinValue className="text--bold" value={formatProfit(bet.profit)} />
       </td>
     </tr>
   );

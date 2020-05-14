@@ -1,16 +1,8 @@
 import React from 'react';
+import styles from './SpacerRow.module.scss';
 
 const SpacerRow: React.FC = () => (
-  <tr>
-    <td>
-      <div />
-    </td>
-    <td className="hide--small hide--medium">
-      <div />
-    </td>
-    <td className="hide--small hide--medium">
-      <div />
-    </td>
+  <tr className={styles.spacer}>
     <td>
       <div />
     </td>

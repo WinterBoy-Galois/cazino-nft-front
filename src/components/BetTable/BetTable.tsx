@@ -1,18 +1,20 @@
 import React from 'react';
-import './BetTable.scss';
 import Bet from '../../models/bet';
 import BetRow from './components/BetRow';
-import SpacerRow from './components/SpacerRow';
 import Loading from '../Loading';
 import Error from '../Error';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { DispatchSpeed } from './lib/useBetBuffer.hook';
+
+import styles from './BetTable.module.scss';
+import SpacerRow from './components/SpacerRow';
 
 interface IProps {
   bets?: Bet[];
   isLoading?: boolean;
   error?: boolean;
   animationSpeed?: DispatchSpeed;
+  signInUserId?: string;
 }
 
 const BetTable: React.FC<IProps> = ({
@@ -20,6 +22,7 @@ const BetTable: React.FC<IProps> = ({
   isLoading = false,
   error = false,
   animationSpeed = DispatchSpeed.NORMAL,
+  signInUserId,
 }) => {
   let speed = 1000;
 
@@ -32,38 +35,43 @@ const BetTable: React.FC<IProps> = ({
   }
 
   return (
-    <div className="bet-table__wrapper">
-      <table className="bet-table">
-        <thead className="bet-table__header">
+    <div className={styles['bet-table__wrapper']}>
+      <table className={styles['bet-table']}>
+        <thead className={styles['bet-table__header']}>
           <tr>
             <th />
             <th>Time</th>
             <th>User</th>
-            {/* <th className="hide--small hide--medium">Bet</th> */}
             <th>Profit</th>
           </tr>
         </thead>
-        <tbody className="bet-table__body">
-          <SpacerRow />
-          {/* {bets.length > 0 && bets.map((bet: Bet) => <BetRow key={bet.id} bet={bet} />)} */}
-          {bets.length && (
-            <TransitionGroup component={null}>
-              {bets.map(b => (
-                <CSSTransition
-                  key={b.id}
-                  classNames={`fade${speed}`}
-                  timeout={{
-                    enter: speed / 2,
-                    exit: speed / 2,
-                  }}
-                  mountOnEnter={true}
-                >
-                  <BetRow bet={b} />
-                </CSSTransition>
-              ))}
-            </TransitionGroup>
-          )}
-          <SpacerRow />
+        <tbody className={styles['bet-table__body']}>
+          {bets && bets.length > 0 ? (
+            <>
+              <SpacerRow />
+              <TransitionGroup component={null}>
+                {bets.map(b => (
+                  <CSSTransition
+                    key={b.id}
+                    classNames={{
+                      enter: styles[`fade${speed}-enter`],
+                      enterActive: styles[`fade${speed}-enter-active`],
+                      exit: styles[`fade${speed}-exit`],
+                      exitActive: styles[`fade${speed}-exit-active`],
+                    }}
+                    timeout={speed / 2}
+                    mountOnEnter={true}
+                  >
+                    <BetRow
+                      bet={b}
+                      highlight={signInUserId ? b.userid.toString() === signInUserId : false}
+                    />
+                  </CSSTransition>
+                ))}
+              </TransitionGroup>
+              <SpacerRow />
+            </>
+          ) : null}
         </tbody>
       </table>
       {!error && isLoading && (bets.length <= 0 || !bets) && <Loading />}

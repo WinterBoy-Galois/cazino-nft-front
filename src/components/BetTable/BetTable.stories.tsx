@@ -63,26 +63,10 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
 
 storiesOf('Components/BetTable', module)
   .addDecorator(withKnobs)
-  .add('default', () => (
-    <div style={{ margin: '1rem' }}>
-      <BetTable bets={initialBets} isLoading={false} error={false} />
-    </div>
-  ))
-  .add('empty', () => (
-    <div style={{ margin: '1rem' }}>
-      <BetTable bets={[]} isLoading={false} error={false} />
-    </div>
-  ))
-  .add('error', () => (
-    <div style={{ margin: '1rem' }}>
-      <BetTable bets={[]} isLoading={false} error={true} />
-    </div>
-  ))
-  .add('loading', () => (
-    <div style={{ margin: '1rem' }}>
-      <BetTable bets={[]} isLoading={true} error={false} />
-    </div>
-  ))
+  .add('default', () => <BetTable bets={initialBets} isLoading={false} error={false} />)
+  .add('empty', () => <BetTable bets={[]} isLoading={false} error={false} />)
+  .add('error', () => <BetTable bets={[]} isLoading={false} error={true} />)
+  .add('loading', () => <BetTable bets={[]} isLoading={true} error={false} />)
   .add('custom', () => {
     const [bets, setBets] = useState<Bet[]>(initialBets);
 
@@ -100,48 +84,47 @@ storiesOf('Components/BetTable', module)
     );
 
     return (
-      <div style={{ margin: '1rem' }}>
-        <RandomBetsConfiguration
-          isActive={boolean('Generate Data', true)}
-          speed={number('Generation Speed (ms)', 1000, {
-            range: true,
-            min: 250,
-            max: 5000,
-            step: 250,
-          })}
-          betsPerBatch={number('No of bets', 1, { range: true, min: 1, max: 20, step: 1 })}
-          dispatchSpeed={select(
-            'Dispatch speed',
+      <RandomBetsConfiguration
+        isActive={boolean('Generate Data', true)}
+        speed={number('Generation Speed (ms)', 1000, {
+          range: true,
+          min: 250,
+          max: 5000,
+          step: 250,
+        })}
+        betsPerBatch={number('No of bets', 1, { range: true, min: 1, max: 20, step: 1 })}
+        dispatchSpeed={select(
+          'Dispatch speed',
+          {
+            Auto: DispatchSpeed.AUTO,
+            Normal: DispatchSpeed.NORMAL,
+            Fast: DispatchSpeed.FAST,
+            'Very fast': DispatchSpeed.VERY_FAST,
+          },
+          DispatchSpeed.AUTO
+        )}
+        currentUserId={select('Current User', userDict, 197)}
+        bufferSize={number('Buffer Size', 100, { range: true, min: 1, max: 240, step: 1 })}
+        onBetAdded={handleBetAdded}
+        onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
+      >
+        <BetTable
+          bets={bets}
+          animationSpeed={select(
+            'Animation speed',
             {
               Auto: DispatchSpeed.AUTO,
               Normal: DispatchSpeed.NORMAL,
               Fast: DispatchSpeed.FAST,
               'Very fast': DispatchSpeed.VERY_FAST,
             },
-            DispatchSpeed.AUTO
+            DispatchSpeed.NORMAL
           )}
-          currentUserId={select('Current User', userDict, 197)}
-          bufferSize={number('Buffer Size', 100, { range: true, min: 1, max: 240, step: 1 })}
-          onBetAdded={handleBetAdded}
-          onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
-        >
-          <BetTable
-            bets={bets}
-            animationSpeed={select(
-              'Animation speed',
-              {
-                Auto: DispatchSpeed.AUTO,
-                Normal: DispatchSpeed.NORMAL,
-                Fast: DispatchSpeed.FAST,
-                'Very fast': DispatchSpeed.VERY_FAST,
-              },
-              DispatchSpeed.NORMAL
-            )}
-            isLoading={false}
-            error={false}
-          />
-        </RandomBetsConfiguration>
-      </div>
+          isLoading={false}
+          error={false}
+          signInUserId={'197'}
+        />
+      </RandomBetsConfiguration>
     );
   });
 

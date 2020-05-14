@@ -4,7 +4,9 @@ import { useQuery, useSubscription } from '@apollo/react-hooks';
 import { LATEST_BETS } from '../../../../../../graphql/queries';
 import { BET_ADDED } from '../../../../../../graphql/subscriptions';
 import { useBetBuffer, DispatchSpeed } from '../../../../../BetTable/lib/useBetBuffer.hook';
-import Bet from '../../../../../../models/bet';
+import Bet, { GameTypes } from '../../../../../../models/bet';
+
+import styles from './LatestBetsTab.module.scss';
 
 const LatestBetsTab: React.SFC = () => {
   const [bets, setBets] = useState<Bet[]>([]);
@@ -23,10 +25,18 @@ const LatestBetsTab: React.SFC = () => {
 
   useSubscription(BET_ADDED, {
     onSubscriptionData: data => {
-      const betAdded = data?.subscriptionData?.data?.betAdded;
+      const betAdded: Bet = data?.subscriptionData?.data?.betAdded;
       if (betAdded) {
+        // DICE
+        const games: { [key: string]: GameTypes } = {
+          DICE: GameTypes.DICE,
+          GOALS: GameTypes.GOALS,
+          MINES: GameTypes.MINES,
+          CLAMS: GameTypes.CLAMS,
+        };
+        const game: GameTypes = games[betAdded.gameid];
         // console.log('onSubscriptionData?', data.subscriptionData.data.betAdded);
-        addBets([betAdded]);
+        addBets([{ ...betAdded, gameid: game }]);
       }
     },
   });
@@ -60,7 +70,9 @@ const LatestBetsTab: React.SFC = () => {
 
   return (
     <>
-      <BetTable bets={bets} isLoading={loading} error={error ? true : false} />
+      <div className={styles.table}>
+        <BetTable bets={bets} isLoading={loading} error={error ? true : false} signInUserId="15" />
+      </div>
     </>
   );
 };

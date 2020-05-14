@@ -46,7 +46,7 @@ $radius: 10px;
   }
 
   &__body {
-    background-color: $darkBlue;
+    background-color: $table-dark-blue;
     font-size: 13px;
 
     @include media-breakpoint-up(xs) {
@@ -62,7 +62,7 @@ $radius: 10px;
 
       @include media-breakpoint-up(lg) {
         max-width: 129px;
-        padding: 0.6rem 0.5rem;
+        padding: 0.46rem 0.5rem;
       }
     }
 
@@ -199,3 +199,37 @@ $radius: 10px;
   padding-bottom: 0;
   overflow: hidden;
 }
+
+// /* stylelint-disable-next-line */
+// .fade-enter td div {
+//   opacity: 0;
+//   max-height: 0;
+//   padding-top: 0;
+//   padding-bottom: 0;
+//   overflow: hidden;
+//   transition: max-height 500ms linear, opacity 500ms ease-in, padding 500ms linear;
+// }
+
+// /* stylelint-disable-next-line */
+// .fade-enter-active td div {
+//   max-height: 50px;
+//   opacity: 1;
+//   padding: 6px 8px;
+// }
+
+// /* stylelint-disable-next-line */
+// .fade-exit td div {
+//   max-height: 50px;
+//   opacity: 1;
+//   transition: max-height 500ms linear, opacity 500ms ease-out, padding 500ms linear;
+//   overflow: hidden;
+// }
+
+// /* stylelint-disable-next-line */
+// .fade-exit-active td div {
+//   max-height: 0;
+//   opacity: 0;
+//   padding-top: 0;
+//   padding-bottom: 0;
+//   overflow: hidden;
+// }
