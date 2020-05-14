@@ -3,16 +3,14 @@ import { render, wait, act } from '@testing-library/react';
 import LatestBetsTab from '.';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { createMockClient } from 'mock-apollo-client';
-import { LEADERBOARDS_SUBSCRIPTION } from '../../../../../../graphql/subscriptions';
+import { BET_ADDED } from '../../../../../../graphql/subscriptions';
 
 describe('LatestBetsTab', () => {
   it('should match snapshot', async () => {
     // Arrange
     const mockClient = createMockClient();
-    const queryHandler = jest
-      .fn()
-      .mockResolvedValue({ data: { leaderboardChanged: { daily: [], weekly: [], monthly: [] } } });
-    mockClient.setRequestHandler(LEADERBOARDS_SUBSCRIPTION, queryHandler);
+    const queryHandler = jest.fn().mockResolvedValue({ data: { betAdded: {} } });
+    mockClient.setRequestHandler(BET_ADDED, queryHandler);
 
     // Act
     const container = render(
