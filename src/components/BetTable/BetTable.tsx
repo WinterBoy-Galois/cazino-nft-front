@@ -31,20 +31,6 @@ const BetTable: React.FC<IProps> = ({
     speed = 250;
   }
 
-  // const { subscribeToMore, loading, error, data } = useQuery<{ bets: Bet[] }>(LATEST_BETS);
-
-  // useEffect(() => {
-  //   return subscribeToMore({
-  //     document: BET_ADDED,
-  //     updateQuery: (prev: any, { subscriptionData }: any) =>
-  //       subscriptionData.data
-  //         ? { ...prev, bets: [(subscriptionData.data as any).betAdded, ...prev.bets.slice(0, 9)] }
-  //         : prev,
-  //   });
-  // }, [subscribeToMore]);
-
-  // if (isLoading) return <p>Loading...</p>;
-
   return (
     <div className="bet-table__wrapper">
       <table className="bet-table">
@@ -60,21 +46,23 @@ const BetTable: React.FC<IProps> = ({
         <tbody className="bet-table__body">
           <SpacerRow />
           {/* {bets.length > 0 && bets.map((bet: Bet) => <BetRow key={bet.id} bet={bet} />)} */}
-          <TransitionGroup component={null}>
-            {bets.map(b => (
-              <CSSTransition
-                key={b.id}
-                classNames={`fade${speed}`}
-                timeout={{
-                  enter: speed / 2,
-                  exit: speed / 2,
-                }}
-                mountOnEnter={true}
-              >
-                <BetRow bet={b} />
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
+          {bets.length && (
+            <TransitionGroup component={null}>
+              {bets.map(b => (
+                <CSSTransition
+                  key={b.id}
+                  classNames={`fade${speed}`}
+                  timeout={{
+                    enter: speed / 2,
+                    exit: speed / 2,
+                  }}
+                  mountOnEnter={true}
+                >
+                  <BetRow bet={b} />
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
+          )}
           <SpacerRow />
         </tbody>
       </table>
