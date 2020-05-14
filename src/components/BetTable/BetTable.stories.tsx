@@ -123,6 +123,7 @@ storiesOf('Components/BetTable', module)
           isLoading={false}
           error={false}
           signInUserId={'197'}
+          reduceMotion={boolean('Reduce Motion', false)}
         />
       </RandomBetsConfiguration>
     );

@@ -15,6 +15,7 @@ interface IProps {
   error?: boolean;
   animationSpeed?: DispatchSpeed;
   signInUserId?: string;
+  reduceMotion?: boolean;
 }
 
 const BetTable: React.FC<IProps> = ({
@@ -23,6 +24,7 @@ const BetTable: React.FC<IProps> = ({
   error = false,
   animationSpeed = DispatchSpeed.NORMAL,
   signInUserId,
+  reduceMotion = false,
 }) => {
   let speed = 1000;
 
@@ -49,26 +51,36 @@ const BetTable: React.FC<IProps> = ({
           {bets && bets.length > 0 ? (
             <>
               <SpacerRow />
-              <TransitionGroup component={null}>
-                {bets.map(b => (
-                  <CSSTransition
+              {reduceMotion ? (
+                bets.map(b => (
+                  <BetRow
                     key={b.id}
-                    classNames={{
-                      enter: styles[`fade${speed}-enter`],
-                      enterActive: styles[`fade${speed}-enter-active`],
-                      exit: styles[`fade${speed}-exit`],
-                      exitActive: styles[`fade${speed}-exit-active`],
-                    }}
-                    timeout={speed / 2}
-                    mountOnEnter={true}
-                  >
-                    <BetRow
-                      bet={b}
-                      highlight={signInUserId ? b.userid.toString() === signInUserId : false}
-                    />
-                  </CSSTransition>
-                ))}
-              </TransitionGroup>
+                    bet={b}
+                    highlight={signInUserId ? b.userid.toString() === signInUserId : false}
+                  />
+                ))
+              ) : (
+                <TransitionGroup component={null}>
+                  {bets.map(b => (
+                    <CSSTransition
+                      key={b.id}
+                      classNames={{
+                        enter: styles[`fade${speed}-enter`],
+                        enterActive: styles[`fade${speed}-enter-active`],
+                        exit: styles[`fade${speed}-exit`],
+                        exitActive: styles[`fade${speed}-exit-active`],
+                      }}
+                      timeout={speed / 2}
+                      mountOnEnter={true}
+                    >
+                      <BetRow
+                        bet={b}
+                        highlight={signInUserId ? b.userid.toString() === signInUserId : false}
+                      />
+                    </CSSTransition>
+                  ))}
+                </TransitionGroup>
+              )}
               <SpacerRow />
             </>
           ) : null}
