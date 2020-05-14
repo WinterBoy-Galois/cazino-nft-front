@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BetTable from '../../../../../BetTable';
 import { useQuery, useSubscription } from '@apollo/react-hooks';
 import { LATEST_BETS } from '../../../../../../graphql/queries';
