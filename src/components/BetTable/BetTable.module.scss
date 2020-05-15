@@ -110,14 +110,14 @@ $radius: 10px;
 
 /* stylelint-disable-next-line */
 .fade1000-enter-active td div {
-  max-height: 50px;
+  max-height: 40px;
   opacity: 1;
-  padding: 6px 8px;
+  padding: 8px 8px;
 }
 
 /* stylelint-disable-next-line */
 .fade1000-exit td div {
-  max-height: 50px;
+  max-height: 40px;
   opacity: 1;
   transition: max-height 500ms linear, opacity 500ms ease-out, padding 500ms linear;
   overflow: hidden;
