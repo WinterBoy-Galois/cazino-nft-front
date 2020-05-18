@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import BetTable from '.';
+import LatestBetsTable from '.';
 import Bet from '../../models/bet';
 import { useBetGenerator, generateRandomBets } from './lib/useBetGenerator.hook';
 import { DispatchSpeed, useBetBuffer } from './lib/useBetBuffer.hook';
@@ -61,17 +61,17 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
   );
 };
 
-storiesOf('Components/BetTable', module)
+storiesOf('Components/LatestBetsTable', module)
   .addDecorator(withKnobs)
   .addDecorator(storyFn => (
     <div className="container" style={{ height: '500px' }}>
       {storyFn()}
     </div>
   ))
-  .add('default', () => <BetTable bets={initialBets} isLoading={false} error={false} />)
-  .add('empty', () => <BetTable bets={[]} isLoading={false} error={false} />)
-  .add('error', () => <BetTable bets={[]} isLoading={false} error={true} />)
-  .add('loading', () => <BetTable bets={[]} isLoading={true} error={false} />)
+  .add('default', () => <LatestBetsTable bets={initialBets} isLoading={false} error={false} />)
+  .add('empty', () => <LatestBetsTable bets={[]} isLoading={false} error={false} />)
+  .add('error', () => <LatestBetsTable bets={[]} isLoading={false} error={true} />)
+  .add('loading', () => <LatestBetsTable bets={[]} isLoading={true} error={false} />)
   .add('custom', () => {
     const [bets, setBets] = useState<Bet[]>(initialBets);
 
@@ -113,7 +113,7 @@ storiesOf('Components/BetTable', module)
         onBetAdded={handleBetAdded}
         onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
       >
-        <BetTable
+        <LatestBetsTable
           bets={bets}
           animationSpeed={select(
             'Animation speed',

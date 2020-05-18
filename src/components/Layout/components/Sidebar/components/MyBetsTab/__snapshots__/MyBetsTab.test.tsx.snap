@@ -5,14 +5,74 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div>
-        My Bets
+      <div
+        class="table"
+      >
+        <div
+          class="bet-table__wrapper"
+        >
+          <table
+            class="bet-table"
+          >
+            <thead
+              class="bet-table__header"
+            >
+              <tr>
+                <th />
+                <th>
+                  User
+                </th>
+                <th>
+                  Profit
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="bet-table__body"
+            />
+          </table>
+          <div
+            class="container"
+          >
+            Unexpected error
+          </div>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
-    <div>
-      My Bets
+    <div
+      class="table"
+    >
+      <div
+        class="bet-table__wrapper"
+      >
+        <table
+          class="bet-table"
+        >
+          <thead
+            class="bet-table__header"
+          >
+            <tr>
+              <th />
+              <th>
+                User
+              </th>
+              <th>
+                Profit
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="bet-table__body"
+          />
+        </table>
+        <div
+          class="container"
+        >
+          Unexpected error
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

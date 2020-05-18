@@ -6,7 +6,7 @@ import Error from '../Error';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { DispatchSpeed } from './lib/useBetBuffer.hook';
 
-import styles from './BetTable.module.scss';
+import styles from './LatestBetsTable.module.scss';
 import SpacerRow from './components/SpacerRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 
@@ -25,7 +25,7 @@ interface IProps {
   reduceMotion?: boolean;
 }
 
-const BetTable: React.FC<IProps> = ({
+const LatestBetsTable: React.FC<IProps> = ({
   bets = [],
   isLoading = false,
   error = false,
@@ -117,4 +117,4 @@ const BetTable: React.FC<IProps> = ({
   );
 };
 
-export default BetTable;
+export default LatestBetsTable;

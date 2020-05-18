@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import BetTable from '../../../../../BetTable';
+import LatestBetsTable from '../../../../../LatestBetsTable';
 import { useQuery, useSubscription } from '@apollo/react-hooks';
 import { LATEST_BETS } from '../../../../../../graphql/queries';
 import { BET_ADDED } from '../../../../../../graphql/subscriptions';
-import { useBetBuffer, DispatchSpeed } from '../../../../../BetTable/lib/useBetBuffer.hook';
+import { useBetBuffer, DispatchSpeed } from '../../../../../LatestBetsTable/lib/useBetBuffer.hook';
 import Bet, { GameTypes } from '../../../../../../models/bet';
 
 import styles from './MyBetsTab.module.scss';
-import { ViewMode } from '../../../../../BetTable/BetTable';
+import { ViewMode } from '../../../../../LatestBetsTable/LatestBetsTable';
 
 const MyBetsTab: React.SFC = () => {
   const [bets, setBets] = useState<Bet[]>([]);
@@ -51,7 +51,7 @@ const MyBetsTab: React.SFC = () => {
   return (
     <>
       <div className={styles.table}>
-        <BetTable
+        <LatestBetsTable
           bets={bets}
           isLoading={loading}
           error={error ? true : false}

@@ -10,7 +10,7 @@ import Mines from '../../../icons/games/Mines';
 
 import styles from './BetRow.module.scss';
 import BitcoinValue from '../../../BitcoinValue';
-import { ViewMode } from '../../BetTable';
+import { ViewMode } from '../../LatestBetsTable';
 
 interface IProps {
   bet: Bet;
