@@ -1,5 +1,5 @@
 import { addToArray, countCurrentUserBets } from './betBuffer';
-import Bet from '../../../models/bet';
+import Bet from '../models/bet';
 
 describe('addToArray', () => {
   it('should add all elements to buffer', () => {

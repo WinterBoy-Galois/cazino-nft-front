@@ -1,9 +1,8 @@
 import React, { useState, ReactNode } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
 
-import LatestBetsTable from '.';
+import MyBetsTable from '.';
 import Bet from '../../models/bet';
 import { useBetGenerator, generateRandomBets } from '../../hooks/useBetGenerator.hook';
 import { DispatchSpeed, useBetBuffer } from '../../hooks/useBetBuffer.hook';
@@ -61,21 +60,21 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
   );
 };
 
-storiesOf('Components/LatestBetsTable', module)
+storiesOf('Components/MyBetsTable', module)
   .addDecorator(withKnobs)
   .addDecorator(storyFn => (
     <div className="container" style={{ height: '500px' }}>
       {storyFn()}
     </div>
   ))
-  .add('default', () => <LatestBetsTable bets={initialBets} isLoading={false} error={false} />)
-  .add('empty', () => <LatestBetsTable bets={[]} isLoading={false} error={false} />)
-  .add('error', () => <LatestBetsTable bets={[]} isLoading={false} error={true} />)
-  .add('loading', () => <LatestBetsTable bets={[]} isLoading={true} error={false} />)
+  .add('default', () => <MyBetsTable bets={initialBets} isLoading={false} error={false} />)
+  .add('empty', () => <MyBetsTable bets={[]} isLoading={false} error={false} />)
+  .add('error', () => <MyBetsTable bets={[]} isLoading={false} error={true} />)
+  .add('loading', () => <MyBetsTable bets={[]} isLoading={true} error={false} />)
   .add('custom', () => {
-    const [bets, setBets] = useState<Bet[]>(initialBets);
+    const [bets, setBets] = useState<Bet[]>([]);
 
-    const handleBetAdded = (betAdded: Bet) => {
+    const handleBetAddedForCurrentUser = (betAdded: Bet) => {
       const newBets = [betAdded, ...bets.slice(0, 9)];
       setBets(newBets);
     };
@@ -110,10 +109,10 @@ storiesOf('Components/LatestBetsTable', module)
         )}
         currentUserId={select('Current User', userDict, 197)}
         bufferSize={number('Buffer Size', 100, { range: true, min: 1, max: 240, step: 1 })}
-        onBetAdded={handleBetAdded}
-        onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
+        // onBetAdded={handleBetAdded}
+        onBetAddedForCurrentUser={handleBetAddedForCurrentUser}
       >
-        <LatestBetsTable
+        <MyBetsTable
           bets={bets}
           animationSpeed={select(
             'Animation speed',

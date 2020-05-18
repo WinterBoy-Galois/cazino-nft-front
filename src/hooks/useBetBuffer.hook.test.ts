@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 
 import { useBetBuffer, DispatchSpeed } from './useBetBuffer.hook';
-import Bet from '../../../models/bet';
+import Bet from '../models/bet';
 
 describe('useBetBuffer hook', () => {
   it('should instantiate without errors', () => {

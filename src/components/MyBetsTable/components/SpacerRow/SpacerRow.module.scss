@@ -1,0 +1,9 @@
+@import '../../../../styles/shared.scss';
+
+.spacer td div {
+  padding: 0.25rem 0;
+
+  @include media-breakpoint-up(lg) {
+    padding: 0.3rem 0;
+  }
+}

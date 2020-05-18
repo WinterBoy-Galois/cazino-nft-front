@@ -1,6 +1,6 @@
-import Bet from '../../../models/bet';
+import Bet from '../models/bet';
 import { useState } from 'react';
-import { useInterval } from '../../../hooks/useInterval';
+import { useInterval } from './useInterval';
 
 export enum DispatchSpeed {
   AUTO,

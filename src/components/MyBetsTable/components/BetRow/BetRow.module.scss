@@ -1,0 +1,59 @@
+@import '../../../../styles/shared.scss';
+
+.link {
+  cursor: pointer;
+
+  &:hover {
+    color: lighten($table-ultra-light-blue, 15);
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  vertical-align: middle;
+  fill: $bitcoinYellow;
+
+  &__inner {
+    fill: $dark-blue;
+  }
+}
+
+.bet {
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: table-cell;
+  }
+}
+
+.time {
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: table-cell;
+  }
+}
+
+.row {
+  &--highlight {
+    background-color: rgba(255, 255, 255, 0.35);
+  }
+
+  &--red {
+    color: $lightRed;
+  }
+
+  &--green {
+    color: $lightGreen;
+  }
+}
+
+.username {
+  width: 130px;
+
+  @include media-breakpoint-up(lg) {
+    width: 129px;
+  }
+}
