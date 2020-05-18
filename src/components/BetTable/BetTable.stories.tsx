@@ -63,6 +63,11 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
 
 storiesOf('Components/BetTable', module)
   .addDecorator(withKnobs)
+  .addDecorator(storyFn => (
+    <div className="container" style={{ height: '500px' }}>
+      {storyFn()}
+    </div>
+  ))
   .add('default', () => <BetTable bets={initialBets} isLoading={false} error={false} />)
   .add('empty', () => <BetTable bets={[]} isLoading={false} error={false} />)
   .add('error', () => <BetTable bets={[]} isLoading={false} error={true} />)

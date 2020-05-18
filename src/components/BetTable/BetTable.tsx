@@ -8,6 +8,12 @@ import { DispatchSpeed } from './lib/useBetBuffer.hook';
 
 import styles from './BetTable.module.scss';
 import SpacerRow from './components/SpacerRow';
+import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
+
+export enum ViewMode {
+  RESPONSIVE,
+  COMPACT,
+}
 
 interface IProps {
   bets?: Bet[];
@@ -15,6 +21,7 @@ interface IProps {
   error?: boolean;
   animationSpeed?: DispatchSpeed;
   signInUserId?: string;
+  viewMode?: ViewMode;
   reduceMotion?: boolean;
 }
 
@@ -24,8 +31,23 @@ const BetTable: React.FC<IProps> = ({
   error = false,
   animationSpeed = DispatchSpeed.NORMAL,
   signInUserId,
+  viewMode = ViewMode.RESPONSIVE,
   reduceMotion = false,
 }) => {
+  const breakpoint = useBreakpoint();
+
+  const renderBetAndTimeColumn = () => {
+    switch (true) {
+      case breakpoint === 'xs':
+      case breakpoint === 'sm':
+      case breakpoint === 'md':
+      case viewMode === ViewMode.COMPACT:
+        return false;
+      default:
+        return true;
+    }
+  };
+
   let speed = 1000;
 
   if (animationSpeed === DispatchSpeed.FAST) {
@@ -42,9 +64,10 @@ const BetTable: React.FC<IProps> = ({
         <thead className={styles['bet-table__header']}>
           <tr>
             <th />
-            <th>Time</th>
             <th>User</th>
             <th>Profit</th>
+            {renderBetAndTimeColumn() && <th>Bet</th>}
+            {renderBetAndTimeColumn() && <th>Time</th>}
           </tr>
         </thead>
         <tbody className={styles['bet-table__body']}>
@@ -76,6 +99,7 @@ const BetTable: React.FC<IProps> = ({
                       <BetRow
                         bet={b}
                         highlight={signInUserId ? b.userid.toString() === signInUserId : false}
+                        viewMode={viewMode}
                       />
                     </CSSTransition>
                   ))}

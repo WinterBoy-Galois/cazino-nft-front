@@ -7,6 +7,7 @@ import { useBetBuffer, DispatchSpeed } from '../../../../../BetTable/lib/useBetB
 import Bet, { GameTypes } from '../../../../../../models/bet';
 
 import styles from './LatestBetsTab.module.scss';
+import { ViewMode } from '../../../../../BetTable/BetTable';
 
 const LatestBetsTab: React.SFC = () => {
   const [bets, setBets] = useState<Bet[]>([]);
@@ -71,7 +72,13 @@ const LatestBetsTab: React.SFC = () => {
   return (
     <>
       <div className={styles.table}>
-        <BetTable bets={bets} isLoading={loading} error={error ? true : false} signInUserId="15" />
+        <BetTable
+          bets={bets}
+          isLoading={loading}
+          error={error ? true : false}
+          signInUserId="15"
+          viewMode={ViewMode.COMPACT}
+        />
       </div>
     </>
   );

@@ -20,11 +20,19 @@
   }
 }
 
-.bonus {
+.bet {
   display: none;
 
   @include media-breakpoint-up(lg) {
-    display: unset;
+    display: table-cell;
+  }
+}
+
+.time {
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: table-cell;
   }
 }
 

@@ -20,9 +20,6 @@ Object {
               <tr>
                 <th />
                 <th>
-                  Time
-                </th>
-                <th>
                   User
                 </th>
                 <th>
@@ -58,9 +55,6 @@ Object {
           >
             <tr>
               <th />
-              <th>
-                Time
-              </th>
               <th>
                 User
               </th>
