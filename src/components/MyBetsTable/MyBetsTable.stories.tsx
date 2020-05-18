@@ -30,21 +30,29 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
   onBetAdded,
   onBetAddedForCurrentUser,
 }: IProps) => {
+  const [betsAddedCounter, setBetsAddedCounter] = useState(0);
   const [betsAddedForCurrentUserCounter, setBetsAddedForCurrentUserCounter] = useState(0);
 
-  const handleOnBetAddedForCurrentUser = (bet: Bet) => {
+  const handleBetAdded = (bet: Bet) => {
+    setBetsAddedCounter(counter => counter + 1);
+    if (onBetAdded) {
+      onBetAdded(bet);
+    }
+  };
+
+  const handleBetAddedForCurrentUser = (bet: Bet) => {
     setBetsAddedForCurrentUserCounter(counter => counter + 1);
     if (onBetAddedForCurrentUser) {
       onBetAddedForCurrentUser(bet);
     }
   };
 
-  const { bets, addBets } = useBetBuffer({
+  const { addBets } = useBetBuffer({
     bufferSize,
     dispatchSpeed,
-    onBetDispatched: onBetAdded,
     currentUserId,
-    onBetAddedForCurrentUser: handleOnBetAddedForCurrentUser,
+    onBetDispatched: handleBetAdded,
+    onBetAddedForCurrentUser: handleBetAddedForCurrentUser,
   });
 
   const handleOnBetsGenerated = (generatedBets: Bet[]) => {
@@ -57,10 +65,8 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
     <>
       {children}
       <div style={{ marginTop: '12px' }}>
-        <div>
-          Buffered: {bets.length} / {bufferSize}
-        </div>
-        <div>Bets for current user: {betsAddedForCurrentUserCounter}</div>
+        <div>Bets generated: {betsAddedCounter}</div>{' '}
+        <div>Bets generated for current user: {betsAddedForCurrentUserCounter}</div>
       </div>
     </>
   );
