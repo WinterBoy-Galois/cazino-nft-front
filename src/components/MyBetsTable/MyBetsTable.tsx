@@ -36,7 +36,7 @@ const MyBetsTable: React.FC<IProps> = ({
 }) => {
   const breakpoint = useBreakpoint();
 
-  const renderBetAndTimeColumn = () => {
+  const renderTimeAndMultiplierColumn = () => {
     switch (true) {
       case breakpoint === 'xs':
       case breakpoint === 'sm':
@@ -64,10 +64,10 @@ const MyBetsTable: React.FC<IProps> = ({
         <thead className={styles['bet-table__header']}>
           <tr>
             <th />
-            <th>User</th>
+            <th>Bet</th>
             <th>Profit</th>
-            {renderBetAndTimeColumn() && <th>Bet</th>}
-            {renderBetAndTimeColumn() && <th>Time</th>}
+            {renderTimeAndMultiplierColumn() && <th>Time</th>}
+            {renderTimeAndMultiplierColumn() && <th>Multiplier</th>}
           </tr>
         </thead>
         <tbody className={styles['bet-table__body']}>

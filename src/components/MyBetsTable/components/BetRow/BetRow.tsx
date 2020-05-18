@@ -1,6 +1,6 @@
 import React from 'react';
 import { timeFromEpoch } from '../../../../common/util/date.util';
-import { formatProfit, formatBet } from '../../../../common/util/format.util';
+import { formatProfit, formatBet, formatMultiplier } from '../../../../common/util/format.util';
 import { isPositive } from '../../../../common/util/sign.util';
 import Bet, { GameTypes } from '../../../../models/bet';
 import Dice from '../../../icons/games/Dice';
@@ -43,7 +43,7 @@ const BetRow: React.FC<IProps> = ({ bet, highlight = false, viewMode = ViewMode.
       </td>
 
       <td>
-        <div className={styles.username}>{bet.username}</div>
+        <BitcoinValue className="text--bold" value={formatBet(bet.bet)} />
       </td>
 
       <td
@@ -57,11 +57,11 @@ const BetRow: React.FC<IProps> = ({ bet, highlight = false, viewMode = ViewMode.
       {viewMode === ViewMode.RESPONSIVE && (
         <>
           <td className={`${styles.bet}`}>
-            <BitcoinValue className="text--bold" value={formatBet(bet.bet)} />
+            <div>{timeFromEpoch(bet.time)}</div>
           </td>
 
           <td className={`${styles.bet}`}>
-            <div>{timeFromEpoch(bet.time)}</div>
+            <div>{formatMultiplier(0)}</div>
           </td>
         </>
       )}

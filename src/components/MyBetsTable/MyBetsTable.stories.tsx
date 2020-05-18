@@ -28,17 +28,23 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
   dispatchSpeed = DispatchSpeed.NORMAL,
   bufferSize = 100,
   onBetAdded,
+  onBetAddedForCurrentUser,
 }: IProps) => {
   const [betsAddedForCurrentUserCounter, setBetsAddedForCurrentUserCounter] = useState(0);
+
+  const handleOnBetAddedForCurrentUser = (bet: Bet) => {
+    setBetsAddedForCurrentUserCounter(counter => counter + 1);
+    if (onBetAddedForCurrentUser) {
+      onBetAddedForCurrentUser(bet);
+    }
+  };
 
   const { bets, addBets } = useBetBuffer({
     bufferSize,
     dispatchSpeed,
     onBetDispatched: onBetAdded,
     currentUserId,
-    onBetAddedForCurrentUser: () => {
-      setBetsAddedForCurrentUserCounter(counter => counter + 1);
-    },
+    onBetAddedForCurrentUser: handleOnBetAddedForCurrentUser,
   });
 
   const handleOnBetsGenerated = (generatedBets: Bet[]) => {
