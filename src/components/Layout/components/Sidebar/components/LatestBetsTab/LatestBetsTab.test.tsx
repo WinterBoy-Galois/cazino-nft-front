@@ -1,25 +1,13 @@
 import React from 'react';
-import { render, wait, act } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import LatestBetsTab from '.';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { createMockClient } from 'mock-apollo-client';
-import { BET_ADDED } from '../../../../../../graphql/subscriptions';
 
 describe('LatestBetsTab', () => {
-  it('should match snapshot', async () => {
+  it('should match snapshot', () => {
     // Arrange
-    const mockClient = createMockClient();
-    const queryHandler = jest.fn().mockResolvedValue({ data: { betAdded: {} } });
-    mockClient.setRequestHandler(BET_ADDED, queryHandler);
 
     // Act
-    const container = render(
-      <ApolloProvider client={mockClient}>
-        <LatestBetsTab />
-      </ApolloProvider>
-    );
-
-    await act(wait);
+    const container = render(<LatestBetsTab />);
 
     // Assert
     expect(container).toMatchSnapshot();
