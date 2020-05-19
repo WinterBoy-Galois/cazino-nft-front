@@ -1,13 +1,25 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, wait, act } from '@testing-library/react';
 import SideBar from './SideBar';
+import { createMockClient } from 'mock-apollo-client';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { BET_ADDED } from '../../../../graphql/subscriptions';
 
 describe('SideBar', () => {
-  it('should match snapshot', () => {
+  it('should match snapshot', async () => {
     // Arrange
+    const mockClient = createMockClient();
+    const queryHandler = jest.fn().mockResolvedValue({ data: { betAdded: {} } });
+    mockClient.setRequestHandler(BET_ADDED, queryHandler);
 
     // Act
-    const container = render(<SideBar />);
+    const container = render(
+      <ApolloProvider client={mockClient}>
+        <SideBar />
+      </ApolloProvider>
+    );
+
+    await act(wait);
 
     // Assert
     expect(container).toMatchSnapshot();
