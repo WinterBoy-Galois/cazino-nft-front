@@ -68,7 +68,14 @@ storiesOf('Components/LatestBetsTable', module)
       {storyFn()}
     </div>
   ))
-  .add('default', () => <LatestBetsTable bets={initialBets} isLoading={false} error={false} />)
+  .add('default', () => (
+    <LatestBetsTable
+      bets={initialBets}
+      signInUserId={randomUserFromInitialBets}
+      isLoading={false}
+      error={false}
+    />
+  ))
   .add('empty', () => <LatestBetsTable bets={[]} isLoading={false} error={false} />)
   .add('error', () => <LatestBetsTable bets={[]} isLoading={false} error={true} />)
   .add('loading', () => <LatestBetsTable bets={[]} isLoading={true} error={false} />)
@@ -178,3 +185,6 @@ const users: any = [
 ];
 
 const initialBets: Bet[] = generateRandomBets(10, users);
+const randomUserFromInitialBets: string = initialBets[
+  Math.floor(Math.random() * initialBets.length)
+].userid.toString();

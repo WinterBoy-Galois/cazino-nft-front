@@ -12,9 +12,9 @@ const randomEnum = <T extends any>(anEnum: T): T[keyof T] => {
   return randomEnumValue;
 };
 
-function randomNumber(min: number, max: number) {
+const randomNumber = (min: number, max: number) => {
   return Math.random() * (max - min) + min;
-}
+};
 
 const generateRandomBet = (users?: any[]) => {
   const randomGame = randomEnum(GameTypes);
