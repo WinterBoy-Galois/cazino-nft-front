@@ -66,7 +66,7 @@ const MyBetsTable: React.FC<IProps> = ({
             <th />
             <th>Bet</th>
             <th>Profit</th>
-            {renderTimeAndMultiplierColumn() && <th>Time</th>}
+            <th>Time</th>
             {renderTimeAndMultiplierColumn() && <th>Multiplier</th>}
           </tr>
         </thead>
