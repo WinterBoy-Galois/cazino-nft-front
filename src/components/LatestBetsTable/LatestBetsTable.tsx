@@ -9,6 +9,7 @@ import { DispatchSpeed } from '../../hooks/useBetBuffer.hook';
 import styles from './LatestBetsTable.module.scss';
 import SpacerRow from './components/SpacerRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
+import { useTranslation } from 'react-i18next';
 
 export enum ViewMode {
   RESPONSIVE,
@@ -35,6 +36,7 @@ const LatestBetsTable: React.FC<IProps> = ({
   reduceMotion = false,
 }) => {
   const breakpoint = useBreakpoint();
+  const { t } = useTranslation(['sidebar']);
 
   const renderBetAndTimeColumn = () => {
     switch (true) {
@@ -64,10 +66,10 @@ const LatestBetsTable: React.FC<IProps> = ({
         <thead className={styles['bet-table__header']}>
           <tr>
             <th />
-            <th>User</th>
-            <th>Profit</th>
-            {renderBetAndTimeColumn() && <th>Bet</th>}
-            {renderBetAndTimeColumn() && <th>Time</th>}
+            <th>{t('latestBets.table.user')}</th>
+            <th>{t('latestBets.table.profit')}</th>
+            {renderBetAndTimeColumn() && <th>{t('latestBets.table.bet')}</th>}
+            {renderBetAndTimeColumn() && <th>{t('latestBets.table.time')}</th>}
           </tr>
         </thead>
         <tbody className={styles['bet-table__body']}>

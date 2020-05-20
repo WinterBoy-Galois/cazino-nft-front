@@ -9,6 +9,7 @@ import { DispatchSpeed } from '../../hooks/useBetBuffer.hook';
 import styles from './MyBetsTable.module.scss';
 import SpacerRow from './components/SpacerRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
+import { useTranslation } from 'react-i18next';
 
 export enum ViewMode {
   RESPONSIVE,
@@ -35,6 +36,7 @@ const MyBetsTable: React.FC<IProps> = ({
   reduceMotion = false,
 }) => {
   const breakpoint = useBreakpoint();
+  const { t } = useTranslation(['sidebar']);
 
   const renderTimeAndMultiplierColumn = () => {
     switch (true) {
@@ -64,10 +66,10 @@ const MyBetsTable: React.FC<IProps> = ({
         <thead className={styles['bet-table__header']}>
           <tr>
             <th />
-            <th>Bet</th>
-            <th>Profit</th>
-            <th>Time</th>
-            {renderTimeAndMultiplierColumn() && <th>Multiplier</th>}
+            <th>{t('myBets.table.bet')}</th>
+            <th>{t('myBets.table.profit')}</th>
+            <th>{t('myBets.table.time')}</th>
+            {renderTimeAndMultiplierColumn() && <th>{t('myBets.table.multiplier')}</th>}
           </tr>
         </thead>
         <tbody className={styles['bet-table__body']}>

@@ -5,6 +5,22 @@
     "myBets": "My Bets",
     "leaderboards": "Leaderboards"
   },
+  "latestBets": {
+    "table": {
+      "user": "User",
+      "profit": "Profit",
+      "bet": "Bet",
+      "time": "Time"
+    }
+  },
+  "myBets": {
+    "table": {
+      "bet": "Bet",
+      "profit": "Profit",
+      "time": "Time",
+      "multiplier": "Multiplier"
+    }
+  },
   "leaderboards": {
     "times": {
       "daily": "Daily",
