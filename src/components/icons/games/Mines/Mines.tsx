@@ -34,8 +34,8 @@ const Mines: React.SFC<IProps> = ({ className, innerClassName }) => {
             d="M29.58 19.39a11.13 11.13 0 00-5.4-5.84"
             fill="none"
             stroke="#fff"
-            stroke-miterlimit="10"
-            stroke-width="1.07"
+            strokeMiterlimit="10"
+            strokeWidth="1.07"
           />
         </g>
       </g>

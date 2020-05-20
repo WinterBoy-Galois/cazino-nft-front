@@ -14,8 +14,24 @@ const dateFromEpoch = (value: number) => {
   return result;
 };
 
+const dateFromEpochShort = (value: number) => {
+  const result = new Intl.DateTimeFormat(defaultLocale, {
+    ...defaultDateOptions,
+    year: '2-digit',
+  }).format(value);
+  return result;
+};
+
 const timeFromEpoch = (value: number) => {
   const result = new Intl.DateTimeFormat(defaultLocale, defaultTimeOptions).format(value);
+  return result;
+};
+
+const timeFromEpochShort = (value: number) => {
+  const result = new Intl.DateTimeFormat(defaultLocale, {
+    ...defaultTimeOptions,
+    second: undefined,
+  }).format(value);
   return result;
 };
 
@@ -24,4 +40,16 @@ const datetimeFromEpoch = (value: number) => {
   return result;
 };
 
-export { datetimeFromEpoch, dateFromEpoch, timeFromEpoch };
+const datetimeFromEpochShort = (value: number) => {
+  const result = `${dateFromEpochShort(value)} ${timeFromEpoch(value)}`;
+  return result;
+};
+
+export {
+  dateFromEpoch,
+  dateFromEpochShort,
+  timeFromEpoch,
+  timeFromEpochShort,
+  datetimeFromEpoch,
+  datetimeFromEpochShort,
+};

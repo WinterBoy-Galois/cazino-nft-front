@@ -1,4 +1,11 @@
-import { dateFromEpoch, timeFromEpoch, datetimeFromEpoch } from './date.util';
+import {
+  dateFromEpoch,
+  timeFromEpoch,
+  datetimeFromEpoch,
+  dateFromEpochShort,
+  datetimeFromEpochShort,
+  timeFromEpochShort,
+} from './date.util';
 
 describe('dateFromEpoch', () => {
   it('should return formatted date', () => {
@@ -10,6 +17,21 @@ describe('dateFromEpoch', () => {
 
     // Assert
     const expected = '19.02.2020';
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('dateFromEpochShort', () => {
+  it('should return formatted date', () => {
+    // Arrange
+    const value = 1582093456676;
+
+    // Act
+    const actual = dateFromEpochShort(value);
+
+    // Assert
+    const expected = '19.02.20';
 
     expect(actual).toEqual(expected);
   });
@@ -30,6 +52,21 @@ describe('timeFromEpoch', () => {
   });
 });
 
+describe('timeFromEpochShort', () => {
+  it('should return formatted time', () => {
+    // Arrange
+    const value = 1582093456676;
+
+    // Act
+    const actual = timeFromEpochShort(value);
+
+    // Assert
+    const expected = '07:24';
+
+    expect(actual).toEqual(expected);
+  });
+});
+
 describe('datetimeFromEpoch', () => {
   it('should return formatted datetime', () => {
     // Arrange
@@ -40,6 +77,21 @@ describe('datetimeFromEpoch', () => {
 
     // Assert
     const expected = '19.02.2020 07:24:16';
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('datetimeFromEpochShort', () => {
+  it('should return formatted datetime', () => {
+    // Arrange
+    const value = 1582093456676;
+
+    // Act
+    const actual = datetimeFromEpochShort(value);
+
+    // Assert
+    const expected = '19.02.20 07:24:16';
 
     expect(actual).toEqual(expected);
   });

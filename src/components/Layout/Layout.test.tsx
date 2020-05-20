@@ -1,11 +1,12 @@
 import React from 'react';
-import { render, wait } from '@testing-library/react';
+import { render, wait, act } from '@testing-library/react';
 import Layout from './Layout';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
 import { createMockClient } from 'mock-apollo-client';
 import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
+import { BET_ADDED } from '../../graphql/subscriptions';
 
 describe('Layout', () => {
   it('should match snapshot', async () => {
@@ -32,9 +33,19 @@ describe('Layout', () => {
           totalBets: 0,
           luckyBets: 0,
         },
+        betAdded: {
+          id: '155689',
+          time: 1589971668258,
+          userid: 59,
+          username: 'pamela56',
+          gameid: 'CLAMS',
+          bet: 0.00001028,
+          profit: -0.00001028,
+        },
       },
     });
     mockClient.setRequestHandler(USER_INFO, queryHandler);
+    mockClient.setRequestHandler(BET_ADDED, queryHandler);
 
     // Act
     const container = render(
@@ -42,6 +53,8 @@ describe('Layout', () => {
         <Layout />
       </ApolloProvider>
     );
+
+    await act(wait);
 
     // Assert
     expect(container).toMatchSnapshot();

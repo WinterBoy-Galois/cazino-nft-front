@@ -5,6 +5,22 @@
     "myBets": "Meine Wetten",
     "leaderboards": "Bestenliste"
   },
+  "latestBets": {
+    "table": {
+      "user": "Nutzer",
+      "profit": "Gewinn",
+      "bet": "Wette",
+      "time": "Zeit"
+    }
+  },
+  "myBets": {
+    "table": {
+      "bet": "Wette",
+      "profit": "Gewinn",
+      "time": "Zeit",
+      "multiplier": "Multiplier"
+    }
+  },
   "leaderboards": {
     "times": {
       "daily": "Tag",

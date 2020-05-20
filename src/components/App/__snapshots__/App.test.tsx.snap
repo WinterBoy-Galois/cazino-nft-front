@@ -1160,72 +1160,42 @@ Object {
           class="container tab-container"
         >
           <div
-            class="bet-table__wrapper"
+            class="table"
           >
-            <table
-              class="bet-table"
-            >
-              <thead
-                class="bet-table__header"
-              >
-                <tr>
-                  <th />
-                  <th>
-                    Time
-                  </th>
-                  <th>
-                    User
-                  </th>
-                  <th>
-                    Profit
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                class="bet-table__body"
-              >
-                <tr>
-                  <td>
-                    <div />
-                  </td>
-                  <td
-                    class="hide--small hide--medium"
-                  >
-                    <div />
-                  </td>
-                  <td
-                    class="hide--small hide--medium"
-                  >
-                    <div />
-                  </td>
-                  <td>
-                    <div />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div />
-                  </td>
-                  <td
-                    class="hide--small hide--medium"
-                  >
-                    <div />
-                  </td>
-                  <td
-                    class="hide--small hide--medium"
-                  >
-                    <div />
-                  </td>
-                  <td>
-                    <div />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
             <div
-              class="container"
+              class="bet-table__wrapper"
             >
-              No Data
+              <table
+                class="bet-table"
+              >
+                <thead
+                  class="bet-table__header"
+                >
+                  <tr>
+                    <th />
+                    <th>
+                      User
+                    </th>
+                    <th>
+                      Profit
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="bet-table__body"
+                />
+              </table>
+              <div
+                class="container"
+              >
+                <div
+                  class="spinner"
+                >
+                  <span
+                    class="spinner spinner--white"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2388,72 +2358,42 @@ Object {
         class="container tab-container"
       >
         <div
-          class="bet-table__wrapper"
+          class="table"
         >
-          <table
-            class="bet-table"
-          >
-            <thead
-              class="bet-table__header"
-            >
-              <tr>
-                <th />
-                <th>
-                  Time
-                </th>
-                <th>
-                  User
-                </th>
-                <th>
-                  Profit
-                </th>
-              </tr>
-            </thead>
-            <tbody
-              class="bet-table__body"
-            >
-              <tr>
-                <td>
-                  <div />
-                </td>
-                <td
-                  class="hide--small hide--medium"
-                >
-                  <div />
-                </td>
-                <td
-                  class="hide--small hide--medium"
-                >
-                  <div />
-                </td>
-                <td>
-                  <div />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div />
-                </td>
-                <td
-                  class="hide--small hide--medium"
-                >
-                  <div />
-                </td>
-                <td
-                  class="hide--small hide--medium"
-                >
-                  <div />
-                </td>
-                <td>
-                  <div />
-                </td>
-              </tr>
-            </tbody>
-          </table>
           <div
-            class="container"
+            class="bet-table__wrapper"
           >
-            No Data
+            <table
+              class="bet-table"
+            >
+              <thead
+                class="bet-table__header"
+              >
+                <tr>
+                  <th />
+                  <th>
+                    User
+                  </th>
+                  <th>
+                    Profit
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="bet-table__body"
+              />
+            </table>
+            <div
+              class="container"
+            >
+              <div
+                class="spinner"
+              >
+                <span
+                  class="spinner spinner--white"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

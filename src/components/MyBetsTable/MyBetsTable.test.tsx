@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import BetTable from '.';
+import MyBetsTable from '.';
 
 test.skip('renders', async () => {
-  const { container } = render(<BetTable />);
+  const { container } = render(<MyBetsTable />);
   expect(container).toMatchSnapshot();
 });
