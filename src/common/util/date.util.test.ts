@@ -4,6 +4,7 @@ import {
   datetimeFromEpoch,
   dateFromEpochShort,
   datetimeFromEpochShort,
+  timeFromEpochShort,
 } from './date.util';
 
 describe('dateFromEpoch', () => {
@@ -46,6 +47,21 @@ describe('timeFromEpoch', () => {
 
     // Assert
     const expected = '07:24:16';
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('timeFromEpochShort', () => {
+  it('should return formatted time', () => {
+    // Arrange
+    const value = 1582093456676;
+
+    // Act
+    const actual = timeFromEpochShort(value);
+
+    // Assert
+    const expected = '07:24';
 
     expect(actual).toEqual(expected);
   });

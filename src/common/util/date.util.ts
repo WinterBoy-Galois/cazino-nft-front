@@ -27,6 +27,14 @@ const timeFromEpoch = (value: number) => {
   return result;
 };
 
+const timeFromEpochShort = (value: number) => {
+  const result = new Intl.DateTimeFormat(defaultLocale, {
+    ...defaultTimeOptions,
+    second: undefined,
+  }).format(value);
+  return result;
+};
+
 const datetimeFromEpoch = (value: number) => {
   const result = `${dateFromEpoch(value)} ${timeFromEpoch(value)}`;
   return result;
@@ -41,6 +49,7 @@ export {
   dateFromEpoch,
   dateFromEpochShort,
   timeFromEpoch,
+  timeFromEpochShort,
   datetimeFromEpoch,
   datetimeFromEpochShort,
 };

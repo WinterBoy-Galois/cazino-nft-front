@@ -20,15 +20,7 @@
   }
 }
 
-.bet {
-  display: none;
-
-  @include media-breakpoint-up(lg) {
-    display: table-cell;
-  }
-}
-
-.time {
+.multiplier {
   display: none;
 
   @include media-breakpoint-up(lg) {
