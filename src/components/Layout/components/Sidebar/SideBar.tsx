@@ -19,6 +19,17 @@ import { LATEST_BETS } from '../../../../graphql/queries';
 import { BET_ADDED } from '../../../../graphql/subscriptions';
 import { ApolloError } from 'apollo-client';
 
+const mapGameType = (gameid: string): GameTypes => {
+  const games: { [key: string]: GameTypes } = {
+    DICE: GameTypes.DICE,
+    GOALS: GameTypes.GOALS,
+    MINES: GameTypes.MINES,
+    CLAMS: GameTypes.CLAMS,
+  };
+
+  return games[gameid];
+};
+
 const SideBar: React.SFC = () => {
   const [
     {
@@ -57,22 +68,19 @@ const SideBar: React.SFC = () => {
     onSubscriptionData: data => {
       const betAdded: Bet = data?.subscriptionData?.data?.betAdded;
       if (betAdded) {
-        // DICE
-        const games: { [key: string]: GameTypes } = {
-          DICE: GameTypes.DICE,
-          GOALS: GameTypes.GOALS,
-          MINES: GameTypes.MINES,
-          CLAMS: GameTypes.CLAMS,
-        };
-        const game: GameTypes = games[betAdded.gameid];
-        addBets([{ ...betAdded, gameid: game }]);
+        addBets([{ ...betAdded, gameid: mapGameType(betAdded.gameid.toString()) }]);
       }
     },
   });
 
   const { loading, error } = useQuery(LATEST_BETS, {
     onCompleted: data => {
-      setLatestBets(data.bets);
+      if (data?.bets) {
+        const initialBets = data.bets.map((bet: Bet) => {
+          return { ...bet, gameid: mapGameType(bet.gameid.toString()) };
+        });
+        setLatestBets(initialBets);
+      }
     },
   });
 
