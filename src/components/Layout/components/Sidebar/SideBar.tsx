@@ -68,7 +68,12 @@ const SideBar: React.SFC = () => {
     onSubscriptionData: data => {
       const betAdded: Bet = data?.subscriptionData?.data?.betAdded;
       if (betAdded) {
-        addBets([{ ...betAdded, gameid: mapGameType(betAdded.gameid.toString()) }]);
+        addBets([
+          {
+            ...betAdded,
+            gameid: betAdded.gameid ? mapGameType(betAdded.gameid.toString()) : betAdded.gameid,
+          },
+        ]);
       }
     },
   });
@@ -77,7 +82,10 @@ const SideBar: React.SFC = () => {
     onCompleted: data => {
       if (data?.bets) {
         const initialBets = data.bets.map((bet: Bet) => {
-          return { ...bet, gameid: mapGameType(bet.gameid.toString()) };
+          return {
+            ...bet,
+            gameid: bet.gameid ? mapGameType(bet.gameid.toString()) : bet.gameid,
+          };
         });
         setLatestBets(initialBets);
       }

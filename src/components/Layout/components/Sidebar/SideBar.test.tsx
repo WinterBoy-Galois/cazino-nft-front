@@ -9,7 +9,19 @@ describe('SideBar', () => {
   it('should match snapshot', async () => {
     // Arrange
     const mockClient = createMockClient();
-    const queryHandler = jest.fn().mockResolvedValue({ data: { betAdded: {} } });
+    const queryHandler = jest.fn().mockResolvedValue({
+      data: {
+        betAdded: {
+          id: '155689',
+          time: 1589971668258,
+          userid: 59,
+          username: 'pamela56',
+          gameid: 'CLAMS',
+          bet: 0.00001028,
+          profit: -0.00001028,
+        },
+      },
+    });
     mockClient.setRequestHandler(BET_ADDED, queryHandler);
 
     // Act

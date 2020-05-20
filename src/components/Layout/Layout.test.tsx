@@ -33,7 +33,15 @@ describe('Layout', () => {
           totalBets: 0,
           luckyBets: 0,
         },
-        betAdded: {},
+        betAdded: {
+          id: '155689',
+          time: 1589971668258,
+          userid: 59,
+          username: 'pamela56',
+          gameid: 'CLAMS',
+          bet: 0.00001028,
+          profit: -0.00001028,
+        },
       },
     });
     mockClient.setRequestHandler(USER_INFO, queryHandler);
