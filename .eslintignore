@@ -3,3 +3,4 @@ public/
 build/
 src/serviceWorker.ts
 src/setupTests.ts
+src/react-app-env.d.ts
