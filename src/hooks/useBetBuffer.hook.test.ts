@@ -97,7 +97,7 @@ describe('useBetBuffer hook', () => {
     ];
 
     // Act
-    for (let _i: number = 0; _i < 5; _i++) {
+    for (let _i = 0; _i < 5; _i++) {
       act(() => {
         result.current.addBets(newBets);
       });

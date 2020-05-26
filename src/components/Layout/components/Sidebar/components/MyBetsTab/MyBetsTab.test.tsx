@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, wait, act } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import MyBetsTab from '.';
 

@@ -19,6 +19,17 @@ import { RECENT_BETS } from '../../../../graphql/queries';
 import { BET_ADDED } from '../../../../graphql/subscriptions';
 import { ApolloError } from 'apollo-client';
 
+const activateScrollLock = (breakpoint: Breakpoint): boolean => {
+  switch (breakpoint) {
+    case 'xs':
+    case 'sm':
+      return true;
+
+    default:
+      return false;
+  }
+};
+
 const mapGameType = (gameid: string): GameTypes => {
   const games: { [key: string]: GameTypes } = {
     DICE: GameTypes.DICE,
@@ -28,6 +39,23 @@ const mapGameType = (gameid: string): GameTypes => {
   };
 
   return games[gameid];
+};
+
+const renderTab = (
+  tab: SidebarTab,
+  latestBets: Bet[],
+  myBets: Bet[],
+  isLoading: boolean,
+  error: ApolloError | undefined
+) => {
+  switch (tab) {
+    case 'LATEST_BETS':
+      return <LatestBetsTab bets={latestBets} isLoading={isLoading} error={error} />;
+    case 'MY_BETS':
+      return <MyBetsTab bets={myBets} isLoading={isLoading} error={error} />;
+    case 'LEADERBOARDS':
+      return <LeaderboardsTab />;
+  }
 };
 
 const SideBar: React.SFC = () => {
@@ -136,31 +164,3 @@ const SideBar: React.SFC = () => {
 };
 
 export default SideBar;
-
-const activateScrollLock = (breakpoint: Breakpoint): boolean => {
-  switch (breakpoint) {
-    case 'xs':
-    case 'sm':
-      return true;
-
-    default:
-      return false;
-  }
-};
-
-const renderTab = (
-  tab: SidebarTab,
-  latestBets: Bet[],
-  myBets: Bet[],
-  isLoading: boolean,
-  error: ApolloError | undefined
-) => {
-  switch (tab) {
-    case 'LATEST_BETS':
-      return <LatestBetsTab bets={latestBets} isLoading={isLoading} error={error} />;
-    case 'MY_BETS':
-      return <MyBetsTab bets={myBets} isLoading={isLoading} error={error} />;
-    case 'LEADERBOARDS':
-      return <LeaderboardsTab />;
-  }
-};

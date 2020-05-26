@@ -3,6 +3,18 @@ import styles from './Teaser.module.scss';
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
 
+const renderTeaser = (trans: string, t: TFunction) => (
+  <div
+    dangerouslySetInnerHTML={{
+      __html: t(trans, {
+        highlight: `<span class=${styles.highlight}>`,
+        '/highlight': '</span>',
+        interpolation: { escapeValue: false },
+      }),
+    }}
+  />
+);
+
 const Teaser: React.SFC = () => {
   const { t } = useTranslation(['home']);
 
@@ -33,15 +45,3 @@ const Teaser: React.SFC = () => {
 };
 
 export default Teaser;
-
-const renderTeaser = (trans: string, t: TFunction) => (
-  <div
-    dangerouslySetInnerHTML={{
-      __html: t(trans, {
-        highlight: `<span class=${styles.highlight}>`,
-        '/highlight': '</span>',
-        interpolation: { escapeValue: false },
-      }),
-    }}
-  />
-);

@@ -51,28 +51,28 @@ const Carousel: React.SFC = () => {
         <div className={styles.slide}>
           <div className={styles['carousel__slide-inner']}>
             <div className={styles.headline}>
-              I'm the <strong>SECOND</strong> Slide.
+              I&apos;m the <strong>SECOND</strong> Slide.
             </div>
           </div>
         </div>
         <div className={styles.slide}>
           <div className={styles['carousel__slide-inner']}>
             <div className={styles.headline}>
-              I'm the <strong>THIRD</strong> Slide.
+              I&apos;m the <strong>THIRD</strong> Slide.
             </div>
           </div>
         </div>
         <div className={styles.slide}>
           <div className={styles['carousel__slide-inner']}>
             <div className={styles.headline}>
-              I'm the <strong>FOURTH</strong> Slide.
+              I&apos;m the <strong>FOURTH</strong> Slide.
             </div>
           </div>
         </div>
         <div className={styles.slide}>
           <div className={styles['carousel__slide-inner']}>
             <div className={styles.headline}>
-              I'm the <strong>FIFTH</strong> Slide.
+              I&apos;m the <strong>FIFTH</strong> Slide.
             </div>
           </div>
         </div>

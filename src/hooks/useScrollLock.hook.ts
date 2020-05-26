@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useScrollbarWidth } from './useScrollbarWidth.hook';
 
-export function useScrollLock(lock: boolean, lockTouch: boolean = true) {
+export function useScrollLock(lock: boolean, lockTouch = true) {
   const scrollbarWidth = useScrollbarWidth();
 
   useEffect(() => {

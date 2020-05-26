@@ -43,8 +43,8 @@
     "test": "TZ=UTC react-scripts test",
     "eject": "react-scripts eject",
     "test:single": "TZ=UTC CI=true react-scripts test --watchAll=false",
-    "lint": "concurrently \"yarn run lint:ts\" \"yarn run lint:scss\"",
-    "lint:ts": "tslint --project .",
+    "lint": "concurrently \"yarn run lint:es\" \"yarn run lint:scss\"",
+    "lint:es": "eslint '*/**/*.{js,ts,tsx}'",
     "lint:scss": "stylelint \"src/**/*.scss\"",
     "format": "prettier --write './**/*.{ts,tsx,scss,md,json,js}'",
     "storybook": "start-storybook --ci -p 9009 -s .storybook/public",
@@ -86,6 +86,9 @@
     "@types/react-transition-group": "^4.4.0",
     "@types/uuid": "^8.0.0",
     "concurrently": "^5.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.20.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
     "mock-apollo-client": "^0.4.0",
@@ -100,10 +103,6 @@
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-config-standard": "^20.0.0",
-    "stylelint-scss": "^3.17.2",
-    "tslint": "^6.1.2",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.3.0",
-    "tslint-react": "^5.0.0"
+    "stylelint-scss": "^3.17.2"
   }
 }

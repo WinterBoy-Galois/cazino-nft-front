@@ -15,6 +15,17 @@ const getInitialState = (isSidebarOpen: boolean): State => ({
   },
 });
 
+const isSidebarInitiallyOpen = (breakpoint: Breakpoint) => {
+  switch (breakpoint) {
+    case 'xs':
+    case 'sm':
+      return false;
+
+    default:
+      return true;
+  }
+};
+
 export const StateContext = createContext<[State, Dispatch<Action>]>([
   getInitialState(false),
   () => null,
@@ -32,14 +43,3 @@ export const StateProvider: React.SFC = ({ children }) => {
 };
 
 export const useStateValue = () => useContext(StateContext);
-
-const isSidebarInitiallyOpen = (breakpoint: Breakpoint) => {
-  switch (breakpoint) {
-    case 'xs':
-    case 'sm':
-      return false;
-
-    default:
-      return true;
-  }
-};
