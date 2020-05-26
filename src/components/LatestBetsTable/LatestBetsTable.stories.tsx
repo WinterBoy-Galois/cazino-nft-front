@@ -8,6 +8,54 @@ import Bet from '../../models/bet';
 import { useBetGenerator, generateRandomBets } from '../../hooks/useBetGenerator.hook';
 import { DispatchSpeed, useBetBuffer } from '../../hooks/useBetBuffer.hook';
 
+const users: any = [
+  {
+    id: 197,
+    name: 'ashleypowell',
+  },
+  {
+    id: 121,
+    name: 'martinezmark',
+  },
+  {
+    id: 139,
+    name: 'heather73',
+  },
+  {
+    id: 183,
+    name: 'timothy78',
+  },
+  {
+    id: 169,
+    name: 'vgonzalez',
+  },
+  {
+    id: 195,
+    name: 'morsekevin',
+  },
+  {
+    id: 179,
+    name: 'mullinswalter',
+  },
+  {
+    id: 133,
+    name: 'aconley',
+  },
+  {
+    id: 184,
+    name: 'sdixon',
+  },
+  {
+    id: 191,
+    name: 'johnstanley',
+  },
+];
+
+const initialBets: Bet[] = generateRandomBets(10, users);
+const randomUserFromInitialBets: string = initialBets[
+  Math.floor(Math.random() * initialBets.length)
+].userid.toString();
+
 interface IProps {
   isActive?: boolean;
   speed?: number;
@@ -140,51 +188,3 @@ storiesOf('Components/LatestBetsTable', module)
       </RandomBetsConfiguration>
     );
   });
-
-const users: any = [
-  {
-    id: 197,
-    name: 'ashleypowell',
-  },
-  {
-    id: 121,
-    name: 'martinezmark',
-  },
-  {
-    id: 139,
-    name: 'heather73',
-  },
-  {
-    id: 183,
-    name: 'timothy78',
-  },
-  {
-    id: 169,
-    name: 'vgonzalez',
-  },
-  {
-    id: 195,
-    name: 'morsekevin',
-  },
-  {
-    id: 179,
-    name: 'mullinswalter',
-  },
-  {
-    id: 133,
-    name: 'aconley',
-  },
-  {
-    id: 184,
-    name: 'sdixon',
-  },
-  {
-    id: 191,
-    name: 'johnstanley',
-  },
-];
-
-const initialBets: Bet[] = generateRandomBets(10, users);
-const randomUserFromInitialBets: string = initialBets[
-  Math.floor(Math.random() * initialBets.length)
-].userid.toString();

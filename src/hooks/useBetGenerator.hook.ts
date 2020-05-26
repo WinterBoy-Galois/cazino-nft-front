@@ -31,6 +31,7 @@ const generateRandomBet = (users?: any[]) => {
     gameid: randomGame,
     bet: randomNumber(0.01, 0.02),
     profit: randomNumber(-0.02, 0.02),
+    multiplier: 1 / randomNumber(0.001, 0.98),
   };
 
   return result;

@@ -6,6 +6,19 @@ import gbFlag from '../../assets/images/flags/gb.svg';
 import { TFunction } from 'i18next';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 
+const getLanguages = (t: TFunction) => [
+  { code: 'de', label: t(`languages.de.label`), flag: deFlag },
+  { code: 'en', label: t(`languages.en.label`), flag: gbFlag },
+];
+
+const getLanguageCode = (code: string) => {
+  if (code.length <= 2) {
+    return code;
+  }
+
+  return code.substr(0, 2);
+};
+
 const LanguageSelect: React.SFC = () => {
   const wrapperRef = useRef(null);
   const [showList, setShowList] = useState(false);
@@ -60,16 +73,3 @@ const LanguageSelect: React.SFC = () => {
 };
 
 export default LanguageSelect;
-
-const getLanguages = (t: TFunction) => [
-  { code: 'de', label: t(`languages.de.label`), flag: deFlag },
-  { code: 'en', label: t(`languages.en.label`), flag: gbFlag },
-];
-
-const getLanguageCode = (code: string) => {
-  if (code.length <= 2) {
-    return code;
-  }
-
-  return code.substr(0, 2);
-};

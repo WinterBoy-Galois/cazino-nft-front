@@ -23,16 +23,16 @@ const BetRow: React.FC<IProps> = ({ bet, highlight = false, viewMode = ViewMode.
 
   switch (bet.gameid) {
     case GameTypes.CLAMS:
-      gameIcon = <Clams className={styles.icon} innerClassName={styles.icon__inner} />;
+      gameIcon = <Clams className={styles.icon} />;
       break;
     case GameTypes.DICE:
-      gameIcon = <Dice className={styles.icon} innerClassName={styles.icon__inner} />;
+      gameIcon = <Dice className={styles.icon} />;
       break;
     case GameTypes.GOALS:
-      gameIcon = <Goals className={styles.icon} innerClassName={styles.icon__inner} />;
+      gameIcon = <Goals className={styles.icon} />;
       break;
     case GameTypes.MINES:
-      gameIcon = <Mines className={styles.icon} innerClassName={styles.icon__inner} />;
+      gameIcon = <Mines className={styles.icon} />;
       break;
   }
 

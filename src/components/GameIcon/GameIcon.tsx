@@ -11,16 +11,16 @@ interface IProps {
   innerClassName?: string;
 }
 
-const GameIcon: React.SFC<IProps> = ({ game, className, innerClassName }) => {
+const GameIcon: React.SFC<IProps> = ({ game, className }) => {
   switch (game) {
     case 'CLAMS':
-      return <Clams className={className} innerClassName={innerClassName} />;
+      return <Clams className={className} />;
     case 'DICE':
-      return <Dice className={className} innerClassName={innerClassName} />;
+      return <Dice className={className} />;
     case 'GOALS':
-      return <Goals className={className} innerClassName={innerClassName} />;
+      return <Goals className={className} />;
     case 'MINES':
-      return <Mines className={className} innerClassName={innerClassName} />;
+      return <Mines className={className} />;
   }
 };
 

@@ -1,26 +1,28 @@
 import gql from 'graphql-tag';
 
-export const LATEST_BETS = gql`
+export const RECENT_BETS = gql`
   {
-    bets {
-      id
-      time
-      userid
-      username
-      gameid
-      bet
-      profit
-    }
-  }
-`;
-
-export const BETS = gql`
-  {
-    bets {
-      id
-      time
-      bet
-      profit
+    recentBets {
+      allBets {
+        id
+        time
+        userid
+        username
+        gameid
+        bet
+        profit
+        multiplier
+      }
+      myBets {
+        id
+        time
+        userid
+        username
+        gameid
+        bet
+        profit
+        multiplier
+      }
     }
   }
 `;

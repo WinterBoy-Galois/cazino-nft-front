@@ -15,9 +15,20 @@ import MyBetsTab from './components/MyBetsTab';
 import Bet, { GameTypes } from '../../../../models/bet';
 import { useBetBuffer, DispatchSpeed } from '../../../../hooks/useBetBuffer.hook';
 import { useQuery, useSubscription } from '@apollo/react-hooks';
-import { LATEST_BETS } from '../../../../graphql/queries';
+import { RECENT_BETS } from '../../../../graphql/queries';
 import { BET_ADDED } from '../../../../graphql/subscriptions';
 import { ApolloError } from 'apollo-client';
+
+const activateScrollLock = (breakpoint: Breakpoint): boolean => {
+  switch (breakpoint) {
+    case 'xs':
+    case 'sm':
+      return true;
+
+    default:
+      return false;
+  }
+};
 
 const mapGameType = (gameid: string): GameTypes => {
   const games: { [key: string]: GameTypes } = {
@@ -28,6 +39,23 @@ const mapGameType = (gameid: string): GameTypes => {
   };
 
   return games[gameid];
+};
+
+const renderTab = (
+  tab: SidebarTab,
+  latestBets: Bet[],
+  myBets: Bet[],
+  isLoading: boolean,
+  error: ApolloError | undefined
+) => {
+  switch (tab) {
+    case 'LATEST_BETS':
+      return <LatestBetsTab bets={latestBets} isLoading={isLoading} error={error} />;
+    case 'MY_BETS':
+      return <MyBetsTab bets={myBets} isLoading={isLoading} error={error} />;
+    case 'LEADERBOARDS':
+      return <LeaderboardsTab />;
+  }
 };
 
 const SideBar: React.SFC = () => {
@@ -78,16 +106,26 @@ const SideBar: React.SFC = () => {
     },
   });
 
-  const { loading, error } = useQuery(LATEST_BETS, {
+  const { loading, error } = useQuery(RECENT_BETS, {
     onCompleted: data => {
-      if (data?.bets) {
-        const initialBets = data.bets.map((bet: Bet) => {
+      if (data?.recentBets?.allBets) {
+        const initialLatestBets = data.recentBets.allBets.map((bet: Bet) => {
           return {
             ...bet,
             gameid: bet.gameid ? mapGameType(bet.gameid.toString()) : bet.gameid,
           };
         });
-        setLatestBets(initialBets);
+        setLatestBets(initialLatestBets);
+      }
+
+      if (data?.recentBets?.myBets) {
+        const initialMyBets = data.recentBets.myBets.map((bet: Bet) => {
+          return {
+            ...bet,
+            gameid: bet.gameid ? mapGameType(bet.gameid.toString()) : bet.gameid,
+          };
+        });
+        setMyBets(initialMyBets);
       }
     },
   });
@@ -126,31 +164,3 @@ const SideBar: React.SFC = () => {
 };
 
 export default SideBar;
-
-const activateScrollLock = (breakpoint: Breakpoint): boolean => {
-  switch (breakpoint) {
-    case 'xs':
-    case 'sm':
-      return true;
-
-    default:
-      return false;
-  }
-};
-
-const renderTab = (
-  tab: SidebarTab,
-  latestBets: Bet[],
-  myBets: Bet[],
-  isLoading: boolean,
-  error: ApolloError | undefined
-) => {
-  switch (tab) {
-    case 'LATEST_BETS':
-      return <LatestBetsTab bets={latestBets} isLoading={isLoading} error={error} />;
-    case 'MY_BETS':
-      return <MyBetsTab bets={myBets} isLoading={isLoading} error={error} />;
-    case 'LEADERBOARDS':
-      return <LeaderboardsTab />;
-  }
-};

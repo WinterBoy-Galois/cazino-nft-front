@@ -3,6 +3,21 @@ import styles from './TabSelect.module.scss';
 import { useStateValue } from '../../../../../../state';
 import { useTranslation } from 'react-i18next';
 
+const tabs = [
+  {
+    id: 'LATEST_BETS',
+    translationId: 'latestBets',
+  },
+  {
+    id: 'MY_BETS',
+    translationId: 'myBets',
+  },
+  {
+    id: 'LEADERBOARDS',
+    translationId: 'leaderboards',
+  },
+];
+
 const TabSelect: React.SFC = () => {
   const { t } = useTranslation(['sidebar']);
   const [
@@ -28,18 +43,3 @@ const TabSelect: React.SFC = () => {
 };
 
 export default TabSelect;
-
-const tabs = [
-  {
-    id: 'LATEST_BETS',
-    translationId: 'latestBets',
-  },
-  {
-    id: 'MY_BETS',
-    translationId: 'myBets',
-  },
-  {
-    id: 'LEADERBOARDS',
-    translationId: 'leaderboards',
-  },
-];

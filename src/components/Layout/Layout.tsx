@@ -10,6 +10,16 @@ import { ModalState } from '../../state/models/modal.model';
 import { Action } from '../../state/actions';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 
+const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
+  <>
+    <UserInfoModal
+      show={modal.type === 'USER_INFO_MODAL'}
+      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      {...modal.data}
+    />
+  </>
+);
+
 const Layout: React.SFC = ({ children }) => {
   const [{ sidebar, modal }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
@@ -70,13 +80,3 @@ const Layout: React.SFC = ({ children }) => {
 };
 
 export default Layout;
-
-const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
-  <>
-    <UserInfoModal
-      show={modal.type === 'USER_INFO_MODAL'}
-      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
-      {...modal.data}
-    />
-  </>
-);

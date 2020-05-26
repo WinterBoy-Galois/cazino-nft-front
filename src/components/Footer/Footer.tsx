@@ -16,6 +16,97 @@ import LanguageSelect from '../LanguageSelect';
 import { useStateValue } from '../../state';
 import { buildDate } from '../../common/util';
 
+const renderFooterLinks = (footer: FooterList[], isSidebarOpen: boolean) =>
+  footer.map((f, i) => (
+    <div className={`col-6 ${!isSidebarOpen ? 'col-lg-2' : 'col-xl-2'}`} key={`footer-list-${i}`}>
+      <ul className={`${styles.list} ${isSidebarOpen && styles['list--spacing']}`}>
+        <li className={styles['list__item--headline']}>{f.headline}</li>
+        {f.items.map((item, j) => (
+          <li className={styles.list__item} key={`footer-list-item-${j}`}>
+            <Link to={item.path} className={styles.list__item__link}>
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ));
+
+const getFooterData = (t: TFunction): FooterList[] => [
+  {
+    headline: t('links.games.headline'),
+    items: [
+      {
+        label: t('common:games.dices'),
+        path: '/games/dice',
+      },
+      {
+        label: t('common:games.clam'),
+        path: '/games/clam',
+      },
+      {
+        label: t('common:games.mines'),
+        path: '/games/mines',
+      },
+      {
+        label: t('common:games.goal'),
+        path: '/games/goal',
+      },
+    ],
+  },
+  {
+    headline: t('links.about.headline'),
+    items: [
+      {
+        label: t('links.about.howToPlay'),
+        path: '/',
+      },
+      {
+        label: t('links.about.bonuses'),
+        path: '/',
+      },
+      {
+        label: t('links.about.affiliates'),
+        path: '/',
+      },
+      {
+        label: t('links.about.fairness'),
+        path: '/',
+      },
+      {
+        label: t('links.about.news'),
+        path: '/',
+      },
+    ],
+  },
+  {
+    headline: t('links.support.headline'),
+    items: [
+      {
+        label: t('links.support.contact'),
+        path: '/',
+      },
+      {
+        label: t('links.support.faq'),
+        path: '/',
+      },
+    ],
+  },
+  {
+    headline: t('links.legal.headline'),
+    items: [
+      {
+        label: t('links.legal.privacyPolicy'),
+        path: '/',
+      },
+      {
+        label: t('links.legal.termsOfUse'),
+        path: '/',
+      },
+    ],
+  },
+];
+
 const Footer: React.SFC = () => {
   const { t } = useTranslation(['footer']);
   const year = new Date().getFullYear();
@@ -126,94 +217,3 @@ const Footer: React.SFC = () => {
 };
 
 export default Footer;
-
-const renderFooterLinks = (footer: FooterList[], isSidebarOpen: boolean) =>
-  footer.map((f, i) => (
-    <div className={`col-6 ${!isSidebarOpen ? 'col-lg-2' : 'col-xl-2'}`} key={`footer-list-${i}`}>
-      <ul className={`${styles.list} ${isSidebarOpen && styles['list--spacing']}`}>
-        <li className={styles['list__item--headline']}>{f.headline}</li>
-        {f.items.map((item, j) => (
-          <li className={styles.list__item} key={`footer-list-item-${j}`}>
-            <Link to={item.path} className={styles.list__item__link}>
-              {item.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  ));
-
-const getFooterData = (t: TFunction): FooterList[] => [
-  {
-    headline: t('links.games.headline'),
-    items: [
-      {
-        label: t('common:games.dices'),
-        path: '/games/dice',
-      },
-      {
-        label: t('common:games.clam'),
-        path: '/games/clam',
-      },
-      {
-        label: t('common:games.mines'),
-        path: '/games/mines',
-      },
-      {
-        label: t('common:games.goal'),
-        path: '/games/goal',
-      },
-    ],
-  },
-  {
-    headline: t('links.about.headline'),
-    items: [
-      {
-        label: t('links.about.howToPlay'),
-        path: '/',
-      },
-      {
-        label: t('links.about.bonuses'),
-        path: '/',
-      },
-      {
-        label: t('links.about.affiliates'),
-        path: '/',
-      },
-      {
-        label: t('links.about.fairness'),
-        path: '/',
-      },
-      {
-        label: t('links.about.news'),
-        path: '/',
-      },
-    ],
-  },
-  {
-    headline: t('links.support.headline'),
-    items: [
-      {
-        label: t('links.support.contact'),
-        path: '/',
-      },
-      {
-        label: t('links.support.faq'),
-        path: '/',
-      },
-    ],
-  },
-  {
-    headline: t('links.legal.headline'),
-    items: [
-      {
-        label: t('links.legal.privacyPolicy'),
-        path: '/',
-      },
-      {
-        label: t('links.legal.termsOfUse'),
-        path: '/',
-      },
-    ],
-  },
-];
