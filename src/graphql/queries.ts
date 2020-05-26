@@ -11,6 +11,7 @@ export const RECENT_BETS = gql`
         gameid
         bet
         profit
+        multiplier
       }
       myBets {
         id
@@ -20,6 +21,7 @@ export const RECENT_BETS = gql`
         gameid
         bet
         profit
+        multiplier
       }
     }
   }

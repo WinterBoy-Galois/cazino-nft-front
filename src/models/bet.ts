@@ -6,6 +6,7 @@ export default interface Bet {
   gameid: GameTypes;
   bet: number;
   profit: number;
+  multiplier: number;
 }
 
 export enum GameTypes {
