@@ -56,4 +56,9 @@
   @include media-breakpoint-up(lg) {
     width: 129px;
   }
+
+  &__hidden {
+    font-weight: 600;
+    color: #56718d;
+  }
 }
