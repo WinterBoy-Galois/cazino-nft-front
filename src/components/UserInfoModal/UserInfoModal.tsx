@@ -53,16 +53,24 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Total Wager</div>
               <div className={styles.details__item__value}>
-                <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />
+                {data.userInfo.totalWager !== null ? (
+                  <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />
+                ) : (
+                  <div className={styles.username__hidden}>hidden</div>
+                )}
               </div>
             </div>
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Total Profit</div>
               <div className={styles.details__item__value}>
-                <BitcoinValue
-                  className={profitClassName()}
-                  value={formatProfit(data.userInfo.totalProfit)}
-                />
+                {data.userInfo.totalProfit !== null ? (
+                  <BitcoinValue
+                    className={profitClassName()}
+                    value={formatProfit(data.userInfo.totalProfit)}
+                  />
+                ) : (
+                  <div className={styles.username__hidden}>hidden</div>
+                )}
               </div>
             </div>
             <div className={styles.details__item}>

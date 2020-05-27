@@ -66,6 +66,11 @@
       display: flex !important;
     }
   }
+
+  &__hidden {
+    font-weight: 600;
+    color: #56718d;
+  }
 }
 
 .game-icon {

@@ -44,6 +44,37 @@ storiesOf('Components/UserInfoModal', module)
       </ApolloProvider>
     );
   })
+  .add('anonymous user', () => {
+    const cache = new InMemoryCache({
+      addTypename: false,
+      fragmentMatcher,
+    });
+
+    const client = createMockClient({ cache });
+    client.setRequestHandler(USER_INFO, () =>
+      Promise.resolve({
+        data: {
+          userInfo: {
+            __typename: 'PublicUser',
+            id: '1',
+            username: null,
+            avatarUrl: 'https://dev.gambilife.com/ava/ano.svg',
+            totalWager: null,
+            totalProfit: null,
+            mostPlayed: 'CLAMS',
+            totalBets: 482,
+            luckyBets: 4,
+          },
+        },
+      })
+    );
+
+    return (
+      <ApolloProvider client={client}>
+        <UserInfoModal show={true} userId="1" onClose={action('close modal')} />
+      </ApolloProvider>
+    );
+  })
   .add('User not found', () => {
     const cache = new InMemoryCache({
       addTypename: false,
