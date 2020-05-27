@@ -7,7 +7,7 @@ describe('PageableModal', () => {
     // Arrange
 
     // Act
-    const container = render(<PageableModal />);
+    const container = render(<PageableModal show={true} pages={[<div key={0}>test</div>]} />);
 
     // Assert
     expect(container).toMatchSnapshot();
