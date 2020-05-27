@@ -10,6 +10,7 @@ import GameIcon from '../GameIcon';
 import Button from '../Button';
 import Loading from '../Loading';
 import Error from '../Error';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   show: boolean;
@@ -20,6 +21,7 @@ interface IProps {
 
 const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => {
   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
+  const { t } = useTranslation(['common']);
 
   const profitClassName = () => {
     if (data?.userInfo.totalProfit === 0) {
@@ -56,7 +58,7 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
                 {data.userInfo.totalWager !== null ? (
                   <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />
                 ) : (
-                  <div className={styles.username__hidden}>hidden</div>
+                  <div className={styles.username__hidden}>{t('hidden')}</div>
                 )}
               </div>
             </div>
@@ -69,7 +71,7 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
                     value={formatProfit(data.userInfo.totalProfit)}
                   />
                 ) : (
-                  <div className={styles.username__hidden}>hidden</div>
+                  <div className={styles.username__hidden}>{t('hidden')}</div>
                 )}
               </div>
             </div>

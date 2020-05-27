@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Username.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   avatarUrl: string;
@@ -8,8 +9,10 @@ interface IProps {
 }
 
 const Username: React.SFC<IProps> = ({ username, avatarUrl, className = '' }) => {
+  const { t } = useTranslation(['common']);
+
   const getUsername = () => {
-    return username !== null ? username : 'hidden';
+    return username !== null ? username : t('hidden');
   };
 
   const getUsernameStyle = () => {
