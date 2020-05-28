@@ -38,13 +38,11 @@ Object {
           <div
             class="modal__main"
           >
-            <div>
-              <div
-                style="position: absolute; width: 100%;"
-              >
-                <div>
-                  test
-                </div>
+            <div
+              style="width: 100%;"
+            >
+              <div>
+                test
               </div>
             </div>
           </div>
@@ -94,13 +92,11 @@ Object {
         <div
           class="modal__main"
         >
-          <div>
-            <div
-              style="position: absolute; width: 100%;"
-            >
-              <div>
-                test
-              </div>
+          <div
+            style="width: 100%;"
+          >
+            <div>
+              test
             </div>
           </div>
         </div>

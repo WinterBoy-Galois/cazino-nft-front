@@ -1,7 +1,7 @@
 import React, { ReactNode, useReducer, Reducer, useEffect } from 'react';
 import { pageableModalReducer, PageableModalState, PageableModalAction } from './lib/reducer';
 import Modal from '../Modal';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
 import styles from './PageableModal.module.scss';
 
 interface IProps {
@@ -41,10 +41,12 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
         </>
       }
     >
-      <TransitionGroup childFactory={dynamicChildFactory(classNames)}>
-        <CSSTransition classNames={classNames} key={state.activePage} timeout={300}>
-          <div style={{ position: 'absolute', width: '100%' }}>{pages[state.activePage]}</div>
-        </CSSTransition>
+      <TransitionGroup childFactory={dynamicChildFactory(classNames)} component={null}>
+        <SwitchTransition>
+          <CSSTransition classNames={classNames} key={state.activePage} timeout={300}>
+            <div style={{ width: '100%' }}>{pages[state.activePage]}</div>
+          </CSSTransition>
+        </SwitchTransition>
       </TransitionGroup>
     </Modal>
   );
