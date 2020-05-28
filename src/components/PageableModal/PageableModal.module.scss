@@ -1,7 +1,5 @@
 @import '../../styles/shared';
 
-$transition: opacity 300ms, transform 300ms;
-
 .slide-right-enter {
   opacity: 0;
   transform: translateX(100%);
@@ -9,7 +7,7 @@ $transition: opacity 300ms, transform 300ms;
 .slide-right-enter-active {
   opacity: 1;
   transform: translateX(0%);
-  transition: $transition;
+  transition: opacity 300ms, transform 300ms;
 }
 .slide-right-exit {
   opacity: 1;
@@ -18,7 +16,7 @@ $transition: opacity 300ms, transform 300ms;
 .slide-right-exit-active {
   opacity: 0;
   // transform: translateX(-100%);
-  transition: $transition;
+  transition: opacity 100ms, transform 100ms;
 }
 
 .slide-left-enter {
@@ -28,7 +26,7 @@ $transition: opacity 300ms, transform 300ms;
 .slide-left-enter-active {
   opacity: 1;
   transform: translateX(0%);
-  transition: $transition;
+  transition: opacity 300ms, transform 300ms;
 }
 .slide-left-exit {
   opacity: 1;
@@ -37,5 +35,5 @@ $transition: opacity 300ms, transform 300ms;
 .slide-left-exit-active {
   opacity: 0;
   // transform: translateX(100%);
-  transition: $transition;
+  transition: opacity 100ms, transform 100ms;
 }

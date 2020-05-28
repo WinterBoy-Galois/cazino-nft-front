@@ -1,0 +1,19 @@
+@import '../../../../styles/shared.scss';
+
+.dot {
+  &__wrapper--active {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $white;
+  }
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: $white;
+  cursor: pointer;
+}

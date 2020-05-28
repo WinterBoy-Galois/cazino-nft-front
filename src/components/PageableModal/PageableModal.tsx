@@ -37,6 +37,8 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
       show={show}
       footer={
         <Footer
+          pageCount={state.pageCount}
+          activePage={state.activePage}
           onPreviousPage={() => dispatch({ type: 'PREVIOUS_PAGE' })}
           onNextPage={() => dispatch({ type: 'NEXT_PAGE' })}
         />
@@ -44,7 +46,11 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
     >
       <TransitionGroup childFactory={dynamicChildFactory(classNames)} component={null}>
         <SwitchTransition>
-          <CSSTransition classNames={classNames} key={state.activePage} timeout={300}>
+          <CSSTransition
+            classNames={classNames}
+            key={state.activePage}
+            timeout={{ enter: 300, exit: 100 }}
+          >
             <div style={{ width: '100%' }}>{pages[state.activePage]}</div>
           </CSSTransition>
         </SwitchTransition>
