@@ -86,14 +86,12 @@
   }
 
   &__footer {
-    padding: 0 1rem;
     background-color: $blue;
     height: $modal-header-height;
     flex-shrink: 0;
 
     @include media-breakpoint-up(md) {
       height: 70px;
-      padding: 1.5rem;
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
     }

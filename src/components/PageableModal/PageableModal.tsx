@@ -3,6 +3,7 @@ import { pageableModalReducer, PageableModalState, PageableModalAction } from '.
 import Modal from '../Modal';
 import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
 import styles from './PageableModal.module.scss';
+import Footer from './components/Footer';
 
 interface IProps {
   show: boolean;
@@ -35,10 +36,10 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
     <Modal
       show={show}
       footer={
-        <>
-          <button onClick={() => dispatch({ type: 'PREVIOUS_PAGE' })}>Previous</button>
-          <button onClick={() => dispatch({ type: 'NEXT_PAGE' })}>Next</button>
-        </>
+        <Footer
+          onPreviousPage={() => dispatch({ type: 'PREVIOUS_PAGE' })}
+          onNextPage={() => dispatch({ type: 'NEXT_PAGE' })}
+        />
       }
     >
       <TransitionGroup childFactory={dynamicChildFactory(classNames)} component={null}>
