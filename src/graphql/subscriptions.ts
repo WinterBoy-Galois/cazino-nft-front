@@ -35,6 +35,7 @@ export const BET_ADDED = gql`
       gameid
       bet
       profit
+      multiplier
     }
   }
 `;

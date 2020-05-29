@@ -31,8 +31,8 @@ storiesOf('Components/UserInfoModal', module)
             totalWager: 0,
             totalProfit: 0,
             mostPlayed: 'CLAMS',
-            totalBets: 0,
-            luckyBets: 0,
+            totalBets: 27,
+            luckyBets: 4,
           },
         },
       })

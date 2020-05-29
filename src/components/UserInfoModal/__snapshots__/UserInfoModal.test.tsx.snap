@@ -247,6 +247,20 @@ Object {
                     0
                   </div>
                 </div>
+                <div
+                  class="details__item"
+                >
+                  <div
+                    class="details__item__label"
+                  >
+                    Lost Bets
+                  </div>
+                  <div
+                    class="details__item__value"
+                  >
+                    0
+                  </div>
+                </div>
               </div>
               <div
                 class="button"
@@ -495,6 +509,20 @@ Object {
                   class="details__item__label"
                 >
                   Won Bets
+                </div>
+                <div
+                  class="details__item__value"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="details__item"
+              >
+                <div
+                  class="details__item__label"
+                >
+                  Lost Bets
                 </div>
                 <div
                   class="details__item__value"

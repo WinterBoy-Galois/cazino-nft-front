@@ -41,6 +41,7 @@ describe('Layout', () => {
           gameid: 'CLAMS',
           bet: 0.00001028,
           profit: -0.00001028,
+          multiplier: 1.45,
         },
       },
     });

@@ -3,7 +3,11 @@ import { appConfig } from '../config';
 
 const fractionDigits = appConfig.bitcoinFractionDigits;
 
-const formatBitcoin = (value: number) => {
+const formatBitcoin = (value?: number | null) => {
+  if (!value) {
+    value = 0;
+  }
+
   return `${value.toFixed(fractionDigits)}`;
 };
 
