@@ -1,7 +1,7 @@
 import React, { ReactNode, useReducer, Reducer, useEffect } from 'react';
 import { pageableModalReducer, PageableModalState, PageableModalAction } from './lib/reducer';
 import Modal from '../Modal';
-import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import styles from './PageableModal.module.scss';
 import Footer from './components/Footer';
 
@@ -9,11 +9,6 @@ interface IProps {
   show: boolean;
   pages: ReactNode[];
 }
-
-const dynamicChildFactory = (classNames: any) => (child: any) =>
-  React.cloneElement(child, {
-    classNames,
-  });
 
 const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
   const [state, dispatch] = useReducer<Reducer<PageableModalState, PageableModalAction>>(
@@ -45,17 +40,15 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
         />
       }
     >
-      <TransitionGroup childFactory={dynamicChildFactory(classNames)} component={null}>
-        <SwitchTransition>
-          <CSSTransition
-            classNames={classNames}
-            key={state.activePage}
-            timeout={{ enter: 300, exit: 100 }}
-          >
-            <div style={{ width: '100%' }}>{pages[state.activePage]}</div>
-          </CSSTransition>
-        </SwitchTransition>
-      </TransitionGroup>
+      <SwitchTransition>
+        <CSSTransition
+          classNames={classNames}
+          key={state.activePage}
+          timeout={{ enter: 300, exit: 100 }}
+        >
+          <div style={{ width: '100%' }}>{pages[state.activePage]}</div>
+        </CSSTransition>
+      </SwitchTransition>
     </Modal>
   );
 };
