@@ -8,9 +8,16 @@ interface IProps {
   activePage: number;
   onPreviousPage?: () => void;
   onNextPage?: () => void;
+  onGoToPage?: (page: number) => void;
 }
 
-const Footer: React.FC<IProps> = ({ pageCount, activePage, onPreviousPage, onNextPage }) => (
+const Footer: React.FC<IProps> = ({
+  pageCount,
+  activePage,
+  onPreviousPage,
+  onNextPage,
+  onGoToPage,
+}) => (
   <div className={styles.container}>
     <div>
       <NavButton direction="left" onClick={onPreviousPage} />
@@ -18,7 +25,7 @@ const Footer: React.FC<IProps> = ({ pageCount, activePage, onPreviousPage, onNex
 
     <div className={styles.dots}>
       {Array.from(new Array(pageCount)).map((_, i) => (
-        <Dot key={i} isActive={i === activePage} />
+        <Dot key={i} isActive={i === activePage} onClick={() => onGoToPage && onGoToPage(i)} />
       ))}
     </div>
 

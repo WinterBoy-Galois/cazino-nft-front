@@ -100,7 +100,7 @@ Object {
                 class="dots"
               >
                 <div
-                  class="dot__wrapper--active"
+                  class="dot__wrapper dot__wrapper--active"
                 >
                   <div
                     class="dot"
@@ -251,7 +251,7 @@ Object {
               class="dots"
             >
               <div
-                class="dot__wrapper--active"
+                class="dot__wrapper dot__wrapper--active"
               >
                 <div
                   class="dot"

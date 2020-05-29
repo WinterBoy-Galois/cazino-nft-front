@@ -41,6 +41,7 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
           activePage={state.activePage}
           onPreviousPage={() => dispatch({ type: 'PREVIOUS_PAGE' })}
           onNextPage={() => dispatch({ type: 'NEXT_PAGE' })}
+          onGoToPage={page => dispatch({ type: 'GO_TO_PAGE', payload: { page } })}
         />
       }
     >
