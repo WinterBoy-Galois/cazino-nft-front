@@ -31,6 +31,17 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
     }
   };
 
+  const getLostBets = () => {
+    if (!data && !data.userInfo && !(data.userInfo.totalBets || data.userInfo.luckyBets)) {
+      return 0;
+    }
+
+    console.log('data?', data);
+
+    const result = data.userInfo.totalBets - data.userInfo.luckyBets;
+    return result;
+  };
+
   return (
     <Modal show={show} onClose={onClose} title="User Info">
       {loading ? <Loading /> : null}
@@ -83,6 +94,10 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
             <div className={styles.details__item}>
               <div className={styles.details__item__label}>Won Bets</div>
               <div className={styles.details__item__value}>{data.userInfo.luckyBets}</div>
+            </div>
+            <div className={styles.details__item}>
+              <div className={styles.details__item__label}>Lost Bets</div>
+              <div className={styles.details__item__value}>{getLostBets()}</div>
             </div>
           </div>
 
