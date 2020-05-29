@@ -1,0 +1,39 @@
+@import '../../styles/shared';
+
+.slide-right-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.slide-right-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: opacity 300ms, transform 300ms;
+}
+.slide-right-exit {
+  opacity: 1;
+  // transform: translateX(0%);
+}
+.slide-right-exit-active {
+  opacity: 0;
+  // transform: translateX(-100%);
+  transition: opacity 100ms, transform 100ms;
+}
+
+.slide-left-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.slide-left-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: opacity 300ms, transform 300ms;
+}
+.slide-left-exit {
+  opacity: 1;
+  // transform: translateX(0%);
+}
+.slide-left-exit-active {
+  opacity: 0;
+  // transform: translateX(100%);
+  transition: opacity 100ms, transform 100ms;
+}
