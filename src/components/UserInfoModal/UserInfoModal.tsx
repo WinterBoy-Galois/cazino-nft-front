@@ -36,8 +36,6 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
       return 0;
     }
 
-    console.log('data?', data);
-
     const result = data.userInfo.totalBets - data.userInfo.luckyBets;
     return result;
   };
