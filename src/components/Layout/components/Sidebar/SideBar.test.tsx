@@ -19,6 +19,7 @@ describe('SideBar', () => {
           gameid: 'CLAMS',
           bet: 0.00001028,
           profit: -0.00001028,
+          multiplier: 0,
         },
       },
     });
