@@ -15,6 +15,9 @@ export const pageableModalReducer = (state: PageableModalState, action: Pageable
 
   switch (type) {
     case 'INIT_PAGES':
+      if (payload.pages.length > 5) {
+        throw new Error('PageableModal allows only 5 pages.');
+      }
       return { ...state, pageCount: payload.pages.length };
 
     case 'NEXT_PAGE':
