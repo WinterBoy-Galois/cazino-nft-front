@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Modal from '../Modal';
 import styles from './UserInfoModal.module.scss';
 import { useQuery } from '@apollo/react-hooks';
@@ -10,6 +10,7 @@ import GameIcon from '../GameIcon';
 import Button from '../Button';
 import Loading from '../Loading';
 import Error from '../Error';
+import DetailList from '../DetailList';
 
 interface IProps {
   show: boolean;
@@ -50,40 +51,45 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
               username={data.userInfo.username}
               avatarUrl={data.userInfo.avatarUrl}
             />
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Total Wager</div>
-              <div className={styles.details__item__value}>
-                <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />
-              </div>
-            </div>
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Total Profit</div>
-              <div className={styles.details__item__value}>
-                <BitcoinValue
-                  className={profitClassName()}
-                  value={formatProfit(data.userInfo.totalProfit)}
-                />
-              </div>
-            </div>
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Most Played</div>
-              <div className={styles.details__item__value}>
-                <GameIcon
-                  game={data.userInfo.mostPlayed}
-                  className={styles['game-icon']}
-                  innerClassName={styles['game-icon__inner']}
-                />
-                {data.userInfo.mostPlayed}
-              </div>
-            </div>
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Total Bets</div>
-              <div className={styles.details__item__value}>{data.userInfo.totalBets}</div>
-            </div>
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Won Bets</div>
-              <div className={styles.details__item__value}>{data.userInfo.luckyBets}</div>
-            </div>
+
+            <DetailList
+              details={[
+                {
+                  label: 'Total Wager',
+                  value: <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />,
+                },
+                {
+                  label: 'Total Profit',
+                  value: (
+                    <BitcoinValue
+                      className={profitClassName()}
+                      value={formatProfit(data.userInfo.totalProfit)}
+                    />
+                  ),
+                },
+                {
+                  label: 'Most Played',
+                  value: (
+                    <Fragment>
+                      <GameIcon
+                        game={data.userInfo.mostPlayed}
+                        className={styles['game-icon']}
+                        innerClassName={styles['game-icon__inner']}
+                      />
+                      {data.userInfo.mostPlayed}
+                    </Fragment>
+                  ),
+                },
+                {
+                  label: 'Total Bets',
+                  value: data.userInfo.totalBets,
+                },
+                {
+                  label: 'Won Bets',
+                  value: data.userInfo.luckyBets,
+                },
+              ]}
+            />
           </div>
 
           <div className={styles.button}>
