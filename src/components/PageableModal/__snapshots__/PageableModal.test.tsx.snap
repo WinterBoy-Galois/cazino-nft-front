@@ -39,7 +39,7 @@ Object {
             class="modal__main"
           >
             <div
-              style="width: 100%;"
+              class="w-100"
             >
               <div>
                 test
@@ -190,7 +190,7 @@ Object {
           class="modal__main"
         >
           <div
-            style="width: 100%;"
+            class="w-100"
           >
             <div>
               test

@@ -37,6 +37,14 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer 
     return () => document.removeEventListener('keydown', handleEscKeydown);
   });
 
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (mainRef.current?.scrollTo) {
+      mainRef.current?.scrollTo(0, 0);
+    }
+  }, [children, mainRef]);
+
   return (
     <CSSTransition
       in={show}
@@ -68,7 +76,9 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer 
                 <Close className={`${styles.icon} ${styles.icon__close}`} />
               </div>
             </div>
-            <div className={styles.modal__main}>{children}</div>
+            <div ref={mainRef} className={styles.modal__main}>
+              {children}
+            </div>
             {footer && <div className={styles.modal__footer}>{footer}</div>}
           </div>
         </CSSTransition>
