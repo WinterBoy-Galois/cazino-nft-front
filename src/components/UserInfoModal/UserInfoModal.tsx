@@ -3,7 +3,7 @@ import Modal from '../Modal';
 import styles from './UserInfoModal.module.scss';
 import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
-import Username from './components/Username';
+import Username from '../Username';
 import BitcoinValue from '../BitcoinValue';
 import { formatProfit, formatBitcoin } from '../../common/util/format.util';
 import GameIcon from '../GameIcon';

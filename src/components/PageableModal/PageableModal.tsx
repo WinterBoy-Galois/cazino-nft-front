@@ -8,9 +8,10 @@ import Footer from './components/Footer';
 interface IProps {
   show: boolean;
   pages: ReactNode[];
+  title?: ReactNode;
 }
 
-const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
+const PageableModal: React.SFC<IProps> = ({ show, pages, title }) => {
   const [state, dispatch] = useReducer<Reducer<PageableModalState, PageableModalAction>>(
     pageableModalReducer,
     { activePage: 0, pageCount: 0, direction: 'right' }
@@ -30,6 +31,7 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
   return (
     <Modal
       show={show}
+      title={title}
       footer={
         <Footer
           pageCount={state.pageCount}

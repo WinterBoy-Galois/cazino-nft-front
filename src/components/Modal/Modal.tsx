@@ -7,7 +7,7 @@ import { useClickOutside } from '../../hooks/useClickOutside.hook';
 
 interface IProps {
   children: ReactNode;
-  title?: string | ReactNode;
+  title?: ReactNode;
   show: boolean;
   onClose?: () => void;
   footer?: ReactNode;
