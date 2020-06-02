@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, ReactNode, RefObject } from 'react';
 import styles from './Modal.module.scss';
 import Close from '../icons/Close';
 import { CSSTransition } from 'react-transition-group';
@@ -6,13 +6,15 @@ import { useScrollLock } from '../../hooks/useScrollLock.hook';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 
 interface IProps {
-  children: React.ReactNode;
-  title?: string;
+  children: ReactNode;
+  title?: string | ReactNode;
   show: boolean;
   onClose?: () => void;
+  footer?: ReactNode;
+  mainRef?: RefObject<HTMLDivElement>;
 }
 
-const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose }) => {
+const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer, mainRef }) => {
   useScrollLock(show);
 
   const handleClose = () => {
@@ -67,7 +69,10 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose }) => {
                 <Close className={`${styles.icon} ${styles.icon__close}`} />
               </div>
             </div>
-            <div className={styles.modal__main}>{children}</div>
+            <div ref={mainRef} className={styles.modal__main}>
+              {children}
+            </div>
+            {footer && <div className={styles.modal__footer}>{footer}</div>}
           </div>
         </CSSTransition>
       </div>
