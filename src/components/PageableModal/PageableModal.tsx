@@ -1,4 +1,4 @@
-import React, { ReactNode, useReducer, Reducer, useEffect } from 'react';
+import React, { ReactNode, useReducer, Reducer, useEffect, useRef } from 'react';
 import { pageableModalReducer, PageableModalState, PageableModalAction } from './lib/reducer';
 import Modal from '../Modal';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
@@ -11,6 +11,8 @@ interface IProps {
   title?: ReactNode;
 }
 
+const exitTimeout = 100;
+
 const PageableModal: React.SFC<IProps> = ({ show, pages, title }) => {
   const [state, dispatch] = useReducer<Reducer<PageableModalState, PageableModalAction>>(
     pageableModalReducer,
@@ -20,6 +22,16 @@ const PageableModal: React.SFC<IProps> = ({ show, pages, title }) => {
   useEffect(() => {
     dispatch({ type: 'INIT_PAGES', payload: { pages } });
   }, [pages]);
+
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (mainRef.current) {
+        mainRef.current.scrollTop = 0;
+      }
+    }, exitTimeout);
+  }, [mainRef, state.activePage]);
 
   const classNames = {
     enter: styles[`slide-${state.direction}-enter`],
@@ -32,6 +44,7 @@ const PageableModal: React.SFC<IProps> = ({ show, pages, title }) => {
     <Modal
       show={show}
       title={title}
+      mainRef={mainRef}
       footer={
         <Footer
           pageCount={state.pageCount}
@@ -46,7 +59,7 @@ const PageableModal: React.SFC<IProps> = ({ show, pages, title }) => {
         <CSSTransition
           classNames={classNames}
           key={state.activePage}
-          timeout={{ enter: 300, exit: 100 }}
+          timeout={{ enter: 300, exit: exitTimeout }}
         >
           <div className="w-100">{pages[state.activePage]}</div>
         </CSSTransition>

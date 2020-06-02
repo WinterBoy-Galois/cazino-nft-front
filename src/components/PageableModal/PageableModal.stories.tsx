@@ -35,19 +35,26 @@ const LargeText = () => (
   </div>
 );
 
-storiesOf('Components/PageableModal', module).add('default', () => (
-  <PageableModal
-    show={true}
-    pages={[
-      <div key={0}>
-        Page 1<br /> <LargeText />
-      </div>,
-      <div key={1}>
-        Page 2<br /> <LargeText />
-      </div>,
-      <div key={2}>
-        Page 3<br /> <LargeText />
-      </div>,
-    ]}
-  />
-));
+storiesOf('Components/PageableModal', module)
+  .add('default', () => (
+    <PageableModal
+      show={true}
+      pages={[<div key={0}>Page 1</div>, <div key={1}>Page 2</div>, <div key={2}>Page 3</div>]}
+    />
+  ))
+  .add('scroll', () => (
+    <PageableModal
+      show={true}
+      pages={[
+        <div key={0}>
+          Page 1<br /> <LargeText />
+        </div>,
+        <div key={1}>
+          Page 2<br /> <LargeText />
+        </div>,
+        <div key={2}>
+          Page 3<br /> <LargeText />
+        </div>,
+      ]}
+    />
+  ));
