@@ -72,7 +72,7 @@ describe('formatMultiplier', () => {
     const actual = formatMultiplier(value);
 
     // Assert
-    const expected = 'x0.750';
+    const expected = 'x0.7500';
 
     expect(actual).toEqual(expected);
   });

@@ -4,7 +4,7 @@ import Bet from '../../../../models/bet.model';
 import styles from './BetDetailsPage.module.scss';
 import Username from '../../../Username';
 import BitcoinValue from '../../../BitcoinValue';
-import { formatBitcoin } from '../../../../common/util/format.util';
+import { formatBitcoin, formatMultiplier } from '../../../../common/util/format.util';
 import GameIconAndText from '../../../GameIconAndText';
 import BitcoinProfit from '../../../BitcoinProfit';
 
@@ -26,7 +26,10 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
           { label: 'Bet Id', value: bet.id },
           { label: 'Game', value: <GameIconAndText game={bet.gameid} /> },
           { label: 'Bet', value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },
-          { label: `Profit (x${bet.multiplier})`, value: <BitcoinProfit value={bet.profit} /> },
+          {
+            label: `Profit (${formatMultiplier(bet.multiplier)})`,
+            value: <BitcoinProfit value={bet.profit} />,
+          },
         ]}
       />
     </div>
