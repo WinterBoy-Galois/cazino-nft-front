@@ -5,12 +5,13 @@ import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
 import Username from '../Username';
 import BitcoinValue from '../BitcoinValue';
-import { formatProfit, formatBitcoin } from '../../common/util/format.util';
+import { formatBitcoin } from '../../common/util/format.util';
 import Button from '../Button';
 import Loading from '../Loading';
 import Error from '../Error';
 import DetailList from '../DetailList';
 import GameIconAndText from '../GameIconAndText';
+import BitcoinProfit from '../BitcoinProfit';
 
 interface IProps {
   show: boolean;
@@ -21,16 +22,6 @@ interface IProps {
 
 const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => {
   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
-
-  const profitClassName = () => {
-    if (data?.userInfo.totalProfit === 0) {
-      return '';
-    } else if (data?.userInfo.totalProfit < 0) {
-      return 'text--negative';
-    } else if (data?.userInfo.totalProfit > 0) {
-      return 'text--positive';
-    }
-  };
 
   return (
     <Modal show={show} onClose={onClose} title="User Info">
@@ -60,12 +51,7 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
                 },
                 {
                   label: 'Total Profit',
-                  value: (
-                    <BitcoinValue
-                      className={profitClassName()}
-                      value={formatProfit(data.userInfo.totalProfit)}
-                    />
-                  ),
+                  value: <BitcoinProfit value={data.userInfo.totalProfit} />,
                 },
                 {
                   label: 'Most Played',

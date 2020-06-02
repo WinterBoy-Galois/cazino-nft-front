@@ -5,6 +5,8 @@ import styles from './BetDetailsPage.module.scss';
 import Username from '../../../Username';
 import BitcoinValue from '../../../BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
+import GameIconAndText from '../../../GameIconAndText';
+import BitcoinProfit from '../../../BitcoinProfit';
 
 interface IProps {
   bet: Bet;
@@ -22,9 +24,9 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
         details={[
           { label: 'Date/Time', value: bet.time },
           { label: 'Bet Id', value: bet.id },
-          { label: 'Game', value: bet.gameid },
+          { label: 'Game', value: <GameIconAndText game={bet.gameid} /> },
           { label: 'Bet', value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },
-          { label: `Profit (x${bet.multiplier})`, value: bet.profit },
+          { label: `Profit (x${bet.multiplier})`, value: <BitcoinProfit value={bet.profit} /> },
         ]}
       />
     </div>
