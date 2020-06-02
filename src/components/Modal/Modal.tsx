@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, ReactNode } from 'react';
+import React, { useRef, useEffect, ReactNode, RefObject } from 'react';
 import styles from './Modal.module.scss';
 import Close from '../icons/Close';
 import { CSSTransition } from 'react-transition-group';
@@ -11,9 +11,10 @@ interface IProps {
   show: boolean;
   onClose?: () => void;
   footer?: ReactNode;
+  mainRef?: RefObject<HTMLDivElement>;
 }
 
-const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer }) => {
+const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer, mainRef }) => {
   useScrollLock(show);
 
   const handleClose = () => {
@@ -36,14 +37,6 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer 
 
     return () => document.removeEventListener('keydown', handleEscKeydown);
   });
-
-  const mainRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (mainRef.current?.scrollTo) {
-      mainRef.current?.scrollTo(0, 0);
-    }
-  }, [children, mainRef]);
 
   return (
     <CSSTransition
