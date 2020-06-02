@@ -34,6 +34,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'no-console': 'error',
   },
   overrides: [
     // Override some TypeScript rules just for .js files

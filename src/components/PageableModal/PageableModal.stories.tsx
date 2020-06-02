@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Modal from '.';
+import PageableModal from '.';
 
 const LargeText = () => (
   <div>
@@ -35,21 +35,26 @@ const LargeText = () => (
   </div>
 );
 
-storiesOf('Components/Modal', module)
+storiesOf('Components/PageableModal', module)
   .add('default', () => (
-    <Modal show={true} title="Modal Title">
-      Hi, I&apos;m a Modal!
-    </Modal>
+    <PageableModal
+      show={true}
+      pages={[<div key={0}>Page 1</div>, <div key={1}>Page 2</div>, <div key={2}>Page 3</div>]}
+    />
   ))
   .add('scroll', () => (
-    <Modal show={true} title="Modal Title">
-      Hi, I&apos;m a Modal! <br />
-      <LargeText />
-    </Modal>
-  ))
-  .add('with footer', () => (
-    <Modal show={true} title="Modal Title" footer={<div>Footer</div>}>
-      Hi, I&apos;m a Modal! <br />
-      <LargeText />
-    </Modal>
+    <PageableModal
+      show={true}
+      pages={[
+        <div key={0}>
+          Page 1<br /> <LargeText />
+        </div>,
+        <div key={1}>
+          Page 2<br /> <LargeText />
+        </div>,
+        <div key={2}>
+          Page 3<br /> <LargeText />
+        </div>,
+      ]}
+    />
   ));
