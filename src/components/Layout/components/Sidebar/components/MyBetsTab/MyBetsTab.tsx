@@ -1,6 +1,6 @@
 import React from 'react';
 import MyBetsTable from '../../../../../MyBetsTable';
-import Bet from '../../../../../../models/bet';
+import Bet from '../../../../../../models/bet.model';
 
 import styles from './MyBetsTab.module.scss';
 import { ViewMode } from '../../../../../MyBetsTable/MyBetsTable';

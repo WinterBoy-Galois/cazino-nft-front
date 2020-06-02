@@ -1,6 +1,6 @@
 import React from 'react';
 import DetailList from '../../../DetailList';
-import Bet from '../../../../models/bet';
+import Bet from '../../../../models/bet.model';
 import styles from './BetDetailsPage.module.scss';
 import Username from '../../../Username';
 import BitcoinValue from '../../../BitcoinValue';

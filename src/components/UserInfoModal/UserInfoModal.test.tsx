@@ -6,6 +6,7 @@ import UserInfoModal from './UserInfoModal';
 import { USER_INFO } from '../../graphql/queries';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
+import { GameTypes } from '../../models/gameTypes.model';
 
 describe('LeaderboardsTab', () => {
   it('should match snapshot', async () => {
@@ -29,7 +30,7 @@ describe('LeaderboardsTab', () => {
           avatarUrl: 'https://dev.gambilife.com/ava/m1.svg',
           totalWager: 0,
           totalProfit: 0,
-          mostPlayed: 'DICE',
+          mostPlayed: GameTypes.CLAMS,
           totalBets: 0,
           luckyBets: 0,
         },

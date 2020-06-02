@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import BetDetailsPage from '.';
-import { GameTypes } from '../../../../models/bet';
+import { GameTypes } from '../../../../models/gameTypes.model';
 
 storiesOf('Components/BetDetailsModal/BetDetailsPage', module).add('default', () => (
   <BetDetailsPage

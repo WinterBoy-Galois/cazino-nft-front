@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Modal from '../Modal';
 import styles from './UserInfoModal.module.scss';
 import { useQuery } from '@apollo/react-hooks';
@@ -6,11 +6,11 @@ import { USER_INFO } from '../../graphql/queries';
 import Username from '../Username';
 import BitcoinValue from '../BitcoinValue';
 import { formatProfit, formatBitcoin } from '../../common/util/format.util';
-import GameIcon from '../GameIcon';
 import Button from '../Button';
 import Loading from '../Loading';
 import Error from '../Error';
 import DetailList from '../DetailList';
+import GameIconAndText from '../GameIconAndText';
 
 interface IProps {
   show: boolean;
@@ -69,16 +69,7 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
                 },
                 {
                   label: 'Most Played',
-                  value: (
-                    <Fragment>
-                      <GameIcon
-                        game={data.userInfo.mostPlayed}
-                        className={styles['game-icon']}
-                        innerClassName={styles['game-icon__inner']}
-                      />
-                      {data.userInfo.mostPlayed}
-                    </Fragment>
-                  ),
+                  value: <GameIconAndText game={data.userInfo.mostPlayed} />,
                 },
                 {
                   label: 'Total Bets',

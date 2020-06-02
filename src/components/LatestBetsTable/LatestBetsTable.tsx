@@ -1,5 +1,5 @@
 import React from 'react';
-import Bet from '../../models/bet';
+import Bet from '../../models/bet.model';
 import BetRow from './components/BetRow';
 import Loading from '../Loading';
 import Error from '../Error';

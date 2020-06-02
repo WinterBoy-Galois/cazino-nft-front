@@ -1,1 +1,6 @@
-export type GameTypes = 'DICE' | 'GOALS' | 'MINES' | 'CLAMS';
+export enum GameTypes {
+  DICE = 'DICE',
+  GOALS = 'GOALS',
+  MINES = 'MINES',
+  CLAMS = 'CLAMS',
+}

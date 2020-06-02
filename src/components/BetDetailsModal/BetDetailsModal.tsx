@@ -1,7 +1,7 @@
 import React from 'react';
 import PageableModal from '../PageableModal';
 import BetDetailsPage from './components/BetDetailsPage';
-import { GameTypes } from '../../models/bet';
+import { GameTypes } from '../../models/gameTypes.model';
 
 interface IProps {
   show: boolean;

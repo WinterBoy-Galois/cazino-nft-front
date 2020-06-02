@@ -3,7 +3,7 @@ import LatestBetsTable from '../../../../../LatestBetsTable';
 
 import styles from './LatestBetsTab.module.scss';
 import { ViewMode } from '../../../../../LatestBetsTable/LatestBetsTable';
-import Bet from '../../../../../../models/bet';
+import Bet from '../../../../../../models/bet.model';
 import { ApolloError } from 'apollo-client';
 
 interface IProps {
