@@ -25,9 +25,11 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (mainRef.current?.scrollTo) {
-      setTimeout(() => mainRef.current?.scrollTo(0, 0), exitTimeout);
-    }
+    setTimeout(() => {
+      if (mainRef.current) {
+        mainRef.current.scrollTop = 0;
+      }
+    }, exitTimeout);
   }, [mainRef, state.activePage]);
 
   const classNames = {
