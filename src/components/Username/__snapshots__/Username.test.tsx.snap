@@ -14,7 +14,7 @@ Object {
           src="testurl"
         />
         <span
-          class="text--bold username"
+          class="text--bold username "
         >
           test
         </span>
@@ -31,7 +31,7 @@ Object {
         src="testurl"
       />
       <span
-        class="text--bold username"
+        class="text--bold username "
       >
         test
       </span>

@@ -52,7 +52,7 @@ Object {
                   src="https://dev.gambilife.com/ava/ano.svg"
                 />
                 <span
-                  class="text--bold username"
+                  class="text--bold username link"
                 >
                   gutierrezbrian
                 </span>
@@ -69,7 +69,7 @@ Object {
                     src="https://dev.gambilife.com/ava/ano.svg"
                   />
                   <span
-                    class="text--bold username"
+                    class="text--bold username link"
                   >
                     gutierrezbrian
                   </span>
@@ -420,7 +420,7 @@ Object {
                 src="https://dev.gambilife.com/ava/ano.svg"
               />
               <span
-                class="text--bold username"
+                class="text--bold username link"
               >
                 gutierrezbrian
               </span>
@@ -437,7 +437,7 @@ Object {
                   src="https://dev.gambilife.com/ava/ano.svg"
                 />
                 <span
-                  class="text--bold username"
+                  class="text--bold username link"
                 >
                   gutierrezbrian
                 </span>

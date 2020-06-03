@@ -50,7 +50,7 @@ Object {
                   src="https://dev.gambilife.com/ava/m1.svg"
                 />
                 <span
-                  class="text--bold username"
+                  class="text--bold username "
                 >
                   NIDHjQ
                 </span>
@@ -67,7 +67,7 @@ Object {
                     src="https://dev.gambilife.com/ava/m1.svg"
                   />
                   <span
-                    class="text--bold username"
+                    class="text--bold username "
                   >
                     NIDHjQ
                   </span>
@@ -296,7 +296,7 @@ Object {
                 src="https://dev.gambilife.com/ava/m1.svg"
               />
               <span
-                class="text--bold username"
+                class="text--bold username "
               >
                 NIDHjQ
               </span>
@@ -313,7 +313,7 @@ Object {
                   src="https://dev.gambilife.com/ava/m1.svg"
                 />
                 <span
-                  class="text--bold username"
+                  class="text--bold username "
                 >
                   NIDHjQ
                 </span>

@@ -14,3 +14,12 @@
 .username {
   font-size: 19px;
 }
+
+.link {
+  color: $button-primary;
+  cursor: pointer;
+
+  &:hover {
+    color: $white;
+  }
+}

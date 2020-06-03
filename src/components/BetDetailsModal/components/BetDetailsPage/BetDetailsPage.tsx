@@ -17,12 +17,17 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
     return null;
   }
 
+  const handleUsernameClick = () => {
+    console.log('click');
+  };
+
   return (
     <Fragment>
       <Username
         className={`${styles.username} ${styles['username--mobile']}`}
         username={bet.username}
         avatarUrl={'https://dev.gambilife.com/ava/ano.svg'}
+        onClick={handleUsernameClick}
       />
 
       <div className={styles.details}>
@@ -30,6 +35,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
           className={`${styles.username} ${styles['username--desktop']}`}
           username={bet.username}
           avatarUrl={'https://dev.gambilife.com/ava/ano.svg'}
+          onClick={handleUsernameClick}
         />
 
         <DetailList
