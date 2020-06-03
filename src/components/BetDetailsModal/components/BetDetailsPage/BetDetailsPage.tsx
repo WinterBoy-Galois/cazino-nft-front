@@ -7,18 +7,34 @@ import BitcoinValue from '../../../BitcoinValue';
 import { formatBitcoin, formatMultiplier } from '../../../../common/util/format.util';
 import GameIconAndText from '../../../GameIconAndText';
 import BitcoinProfit from '../../../BitcoinProfit';
+import { useStateValue } from '../../../../state';
 
 interface IProps {
   bet: Bet;
 }
 
 const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
+  const [, dispatch] = useStateValue();
+
   if (!bet) {
     return null;
   }
 
   const handleUsernameClick = () => {
-    console.log('click');
+    dispatch({
+      type: 'SHOW_MODAL',
+      payload: {
+        type: 'USER_INFO_MODAL',
+        data: {
+          userId: bet.userid,
+          onBack: () =>
+            dispatch({
+              type: 'SHOW_MODAL',
+              payload: { type: 'BET_DETAILS_MODAL', data: { bet } },
+            }),
+        },
+      },
+    });
   };
 
   return (

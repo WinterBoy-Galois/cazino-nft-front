@@ -27,10 +27,10 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
   return (
     <Modal show={show} onClose={onClose} title="User Info">
       {loading ? <Loading /> : null}
-      {error || data?.userInfo?.errors || data?.errors ? (
-        <Error>Could not load user info.</Error>
-      ) : null}
-      {data?.userInfo && !data?.userInfo?.errors ? (
+
+      {error || data?.userInfo?.errors ? <Error>Could not load user info.</Error> : null}
+
+      {data?.userInfo && !data?.userInfo?.errors && !loading ? (
         <div>
           <Username
             className={`${styles.username} ${styles['username--mobile']}`}
@@ -81,7 +81,7 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
 
           <div className={styles.button}>
             {onBack ? (
-              <Button onClick={onClose}>Back</Button>
+              <Button onClick={onBack}>Back</Button>
             ) : (
               <div className={styles.button__spacer} />
             )}
