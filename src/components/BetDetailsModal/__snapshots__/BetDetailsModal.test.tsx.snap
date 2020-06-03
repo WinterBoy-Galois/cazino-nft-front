@@ -44,10 +44,24 @@ Object {
               class="w-100"
             >
               <div
+                class="container username username--mobile"
+              >
+                <img
+                  alt="gutierrezbrian"
+                  class="avatar"
+                  src="https://dev.gambilife.com/ava/ano.svg"
+                />
+                <span
+                  class="text--bold username"
+                >
+                  gutierrezbrian
+                </span>
+              </div>
+              <div
                 class="details"
               >
                 <div
-                  class="container "
+                  class="container username username--desktop"
                 >
                   <img
                     alt="gutierrezbrian"
@@ -390,10 +404,24 @@ Object {
             class="w-100"
           >
             <div
+              class="container username username--mobile"
+            >
+              <img
+                alt="gutierrezbrian"
+                class="avatar"
+                src="https://dev.gambilife.com/ava/ano.svg"
+              />
+              <span
+                class="text--bold username"
+              >
+                gutierrezbrian
+              </span>
+            </div>
+            <div
               class="details"
             >
               <div
-                class="container "
+                class="container username username--desktop"
               >
                 <img
                   alt="gutierrezbrian"

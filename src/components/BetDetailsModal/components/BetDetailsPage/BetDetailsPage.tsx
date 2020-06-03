@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import DetailList from '../../../DetailList';
 import Bet from '../../../../models/bet.model';
 import styles from './BetDetailsPage.module.scss';
@@ -18,21 +18,34 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
   }
 
   return (
-    <div className={styles.details}>
-      <Username username={bet.username} avatarUrl={'https://dev.gambilife.com/ava/ano.svg'} />
-      <DetailList
-        details={[
-          { label: 'Date/Time', value: bet.time },
-          { label: 'Bet Id', value: bet.id },
-          { label: 'Game', value: <GameIconAndText game={bet.gameid} /> },
-          { label: 'Bet', value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },
-          {
-            label: `Profit (${formatMultiplier(bet.multiplier)})`,
-            value: <BitcoinProfit value={bet.profit} />,
-          },
-        ]}
+    <Fragment>
+      <Username
+        className={`${styles.username} ${styles['username--mobile']}`}
+        username={bet.username}
+        avatarUrl={'https://dev.gambilife.com/ava/ano.svg'}
       />
-    </div>
+
+      <div className={styles.details}>
+        <Username
+          className={`${styles.username} ${styles['username--desktop']}`}
+          username={bet.username}
+          avatarUrl={'https://dev.gambilife.com/ava/ano.svg'}
+        />
+
+        <DetailList
+          details={[
+            { label: 'Date/Time', value: bet.time },
+            { label: 'Bet Id', value: bet.id },
+            { label: 'Game', value: <GameIconAndText game={bet.gameid} /> },
+            { label: 'Bet', value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },
+            {
+              label: `Profit (${formatMultiplier(bet.multiplier)})`,
+              value: <BitcoinProfit value={bet.profit} />,
+            },
+          ]}
+        />
+      </div>
+    </Fragment>
   );
 };
 
