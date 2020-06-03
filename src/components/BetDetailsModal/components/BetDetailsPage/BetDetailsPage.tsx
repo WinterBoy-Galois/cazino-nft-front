@@ -39,7 +39,13 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
             { label: 'Game', value: <GameIconAndText game={bet.gameid} /> },
             { label: 'Bet', value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },
             {
-              label: `Profit (${formatMultiplier(bet.multiplier)})`,
+              label: (
+                <span>
+                  Profit (
+                  <span className={styles['profit-label']}>{formatMultiplier(bet.multiplier)}</span>
+                  )
+                </span>
+              ),
               value: <BitcoinProfit value={bet.profit} />,
             },
           ]}

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
 export interface Detail {
-  label: string;
+  label: ReactNode;
   value: ReactNode;
 }

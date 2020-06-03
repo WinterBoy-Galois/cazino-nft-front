@@ -220,7 +220,15 @@ Object {
                     <div
                       class="list__item__label"
                     >
-                      Profit (x0.3257)
+                      <span>
+                        Profit (
+                        <span
+                          class="profit-label"
+                        >
+                          x0.3257
+                        </span>
+                        )
+                      </span>
                     </div>
                     <div
                       class="list__item__value"
@@ -580,7 +588,15 @@ Object {
                   <div
                     class="list__item__label"
                   >
-                    Profit (x0.3257)
+                    <span>
+                      Profit (
+                      <span
+                        class="profit-label"
+                      >
+                        x0.3257
+                      </span>
+                      )
+                    </span>
                   </div>
                   <div
                     class="list__item__value"
