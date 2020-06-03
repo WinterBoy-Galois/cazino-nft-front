@@ -12,6 +12,7 @@ import Error from '../Error';
 import DetailList from '../DetailList';
 import GameIconAndText from '../GameIconAndText';
 import BitcoinProfit from '../BitcoinProfit';
+import LostBets from '../LostBets';
 
 interface IProps {
   show: boolean;
@@ -64,6 +65,15 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
                 {
                   label: 'Won Bets',
                   value: data.userInfo.luckyBets,
+                },
+                {
+                  label: 'Lost Bets',
+                  value: (
+                    <LostBets
+                      totalBets={data.userInfo.totalBets}
+                      luckyBets={data.userInfo.luckyBets}
+                    />
+                  ),
                 },
               ]}
             />

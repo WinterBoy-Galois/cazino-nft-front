@@ -19,6 +19,19 @@ describe('formatBitcoin', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('should return 0 for null', () => {
+    // Arrange
+    const value = null;
+
+    // Act
+    const actual = formatBitcoin(value);
+
+    // Assert
+    const expected = '0.00000000';
+
+    expect(actual).toEqual(expected);
+  });
 });
 
 describe('formatBitcoinSmart', () => {
