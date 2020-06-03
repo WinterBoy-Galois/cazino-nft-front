@@ -9,11 +9,17 @@ import UserInfoModal from '../UserInfoModal';
 import { ModalState } from '../../state/models/modal.model';
 import { Action } from '../../state/actions';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
+import BetDetailsModal from '../BetDetailsModal';
 
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>
     <UserInfoModal
       show={modal.type === 'USER_INFO_MODAL'}
+      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      {...modal.data}
+    />
+    <BetDetailsModal
+      show={modal.type === 'BET_DETAILS_MODAL'}
       onClose={() => dispatch({ type: 'HIDE_MODAL' })}
       {...modal.data}
     />

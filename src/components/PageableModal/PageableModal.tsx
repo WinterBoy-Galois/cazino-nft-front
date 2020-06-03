@@ -9,11 +9,12 @@ interface IProps {
   show: boolean;
   pages: ReactNode[];
   title?: ReactNode;
+  onClose?: () => void;
 }
 
 const exitTimeout = 100;
 
-const PageableModal: React.SFC<IProps> = ({ show, pages, title }) => {
+const PageableModal: React.SFC<IProps> = ({ show, pages, title, onClose }) => {
   const [state, dispatch] = useReducer<Reducer<PageableModalState, PageableModalAction>>(
     pageableModalReducer,
     { activePage: 0, pageCount: 0, direction: 'right' }
@@ -45,6 +46,7 @@ const PageableModal: React.SFC<IProps> = ({ show, pages, title }) => {
       show={show}
       title={title}
       mainRef={mainRef}
+      onClose={onClose}
       footer={
         <Footer
           pageCount={state.pageCount}

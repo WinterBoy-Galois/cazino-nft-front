@@ -1,32 +1,21 @@
 import React from 'react';
 import PageableModal from '../PageableModal';
 import BetDetailsPage from './components/BetDetailsPage';
-import { GameTypes } from '../../models/gameTypes.model';
+import Bet from '../../models/bet.model';
 
 interface IProps {
   show: boolean;
+  onClose?: () => void;
+  bet: Bet;
 }
 
-const BetDetailsModal: React.SFC<IProps> = ({ show }) => {
+const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet }) => {
   return (
     <PageableModal
       show={show}
       title="Bet Details"
-      pages={[
-        <BetDetailsPage
-          key={1}
-          bet={{
-            id: '278192',
-            username: 'gutierrezbrian',
-            time: 1591032136876,
-            userid: 67,
-            gameid: GameTypes.MINES,
-            bet: 0.00009425,
-            profit: 0.00002852,
-            multiplier: 1.3026315789473684,
-          }}
-        />,
-      ]}
+      onClose={onClose}
+      pages={[<BetDetailsPage key={1} bet={bet} />]}
     />
   );
 };

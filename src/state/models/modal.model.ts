@@ -3,4 +3,4 @@ export interface ModalState {
   data?: any;
 }
 
-export type ModalType = 'NONE' | 'USER_INFO_MODAL';
+export type ModalType = 'NONE' | 'USER_INFO_MODAL' | 'BET_DETAILS_MODAL';
