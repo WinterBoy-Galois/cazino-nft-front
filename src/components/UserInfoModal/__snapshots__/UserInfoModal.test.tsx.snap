@@ -44,11 +44,15 @@ Object {
               <div
                 class="container username username--mobile"
               >
-                <img
-                  alt="NIDHjQ"
+                <div
                   class="avatar"
-                  src="https://dev.gambilife.com/ava/m1.svg"
-                />
+                >
+                  <img
+                    alt="NIDHjQ"
+                    class="w-100 h-100"
+                    src="https://dev.gambilife.com/ava/m1.svg"
+                  />
+                </div>
                 <span
                   class="text--bold username "
                 >
@@ -61,11 +65,15 @@ Object {
                 <div
                   class="container username username--desktop"
                 >
-                  <img
-                    alt="NIDHjQ"
+                  <div
                     class="avatar"
-                    src="https://dev.gambilife.com/ava/m1.svg"
-                  />
+                  >
+                    <img
+                      alt="NIDHjQ"
+                      class="w-100 h-100"
+                      src="https://dev.gambilife.com/ava/m1.svg"
+                    />
+                  </div>
                   <span
                     class="text--bold username "
                   >
@@ -290,11 +298,15 @@ Object {
             <div
               class="container username username--mobile"
             >
-              <img
-                alt="NIDHjQ"
+              <div
                 class="avatar"
-                src="https://dev.gambilife.com/ava/m1.svg"
-              />
+              >
+                <img
+                  alt="NIDHjQ"
+                  class="w-100 h-100"
+                  src="https://dev.gambilife.com/ava/m1.svg"
+                />
+              </div>
               <span
                 class="text--bold username "
               >
@@ -307,11 +319,15 @@ Object {
               <div
                 class="container username username--desktop"
               >
-                <img
-                  alt="NIDHjQ"
+                <div
                   class="avatar"
-                  src="https://dev.gambilife.com/ava/m1.svg"
-                />
+                >
+                  <img
+                    alt="NIDHjQ"
+                    class="w-100 h-100"
+                    src="https://dev.gambilife.com/ava/m1.svg"
+                  />
+                </div>
                 <span
                   class="text--bold username "
                 >

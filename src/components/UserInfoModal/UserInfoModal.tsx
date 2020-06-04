@@ -20,7 +20,7 @@ interface IProps {
   show: boolean;
   data: any;
   loading: boolean;
-  error: ApolloError | undefined;
+  error?: ApolloError;
   onClose?: () => void;
   onBack?: () => void;
 }

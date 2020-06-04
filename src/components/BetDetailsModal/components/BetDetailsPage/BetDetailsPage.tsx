@@ -12,9 +12,10 @@ import { transitionTimeout } from '../../../Modal';
 
 interface IProps {
   bet: Bet;
+  avatarUrl?: string;
 }
 
-const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
+const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl }) => {
   const [, dispatch] = useStateValue();
 
   if (!bet) {
@@ -54,7 +55,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
       <Username
         className={`${styles.username} ${styles['username--mobile']}`}
         username={bet.username}
-        avatarUrl={'https://dev.gambilife.com/ava/ano.svg'}
+        avatarUrl={avatarUrl}
         onClick={handleUsernameClick}
       />
 
@@ -62,7 +63,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
         <Username
           className={`${styles.username} ${styles['username--desktop']}`}
           username={bet.username}
-          avatarUrl={'https://dev.gambilife.com/ava/ano.svg'}
+          avatarUrl={avatarUrl}
           onClick={handleUsernameClick}
         />
 

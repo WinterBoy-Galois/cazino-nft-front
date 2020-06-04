@@ -8,11 +8,15 @@ Object {
       <div
         class="container "
       >
-        <img
-          alt="test"
+        <div
           class="avatar"
-          src="testurl"
-        />
+        >
+          <img
+            alt="test"
+            class="w-100 h-100"
+            src="testurl"
+          />
+        </div>
         <span
           class="text--bold username "
         >
@@ -25,11 +29,15 @@ Object {
     <div
       class="container "
     >
-      <img
-        alt="test"
+      <div
         class="avatar"
-        src="testurl"
-      />
+      >
+        <img
+          alt="test"
+          class="w-100 h-100"
+          src="testurl"
+        />
+      </div>
       <span
         class="text--bold username "
       >
