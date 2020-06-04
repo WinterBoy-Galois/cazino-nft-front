@@ -14,9 +14,10 @@ import { useTranslation } from 'react-i18next';
 interface IProps {
   bet: Bet;
   avatarUrl?: string;
+  loading: boolean;
 }
 
-const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl }) => {
+const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
   const { t } = useTranslation(['modals']);
   const [, dispatch] = useStateValue();
 
@@ -59,6 +60,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl }) => {
         username={bet.username}
         avatarUrl={avatarUrl}
         onClick={handleUsernameClick}
+        loading={loading}
       />
 
       <div className={styles.details}>
@@ -67,6 +69,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl }) => {
           username={bet.username}
           avatarUrl={avatarUrl}
           onClick={handleUsernameClick}
+          loading={loading}
         />
 
         <DetailList

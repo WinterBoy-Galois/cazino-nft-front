@@ -16,7 +16,7 @@ interface IProps {
   error?: ApolloError;
 }
 
-const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet, avatarUrl }) => {
+const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet, avatarUrl, loading }) => {
   const { t } = useTranslation(['modals']);
 
   return (
@@ -24,7 +24,7 @@ const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet, avatarUrl }) =
       show={show}
       title={[t('betDetails.title')]}
       onClose={onClose}
-      pages={[<BetDetailsPage key={1} bet={bet} avatarUrl={avatarUrl} />]}
+      pages={[<BetDetailsPage key={1} bet={bet} avatarUrl={avatarUrl} loading={loading} />]}
     />
   );
 };

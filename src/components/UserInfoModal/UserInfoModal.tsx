@@ -47,12 +47,14 @@ const UserInfoModal: React.FC<IProps> = ({
             className={`${styles.username} ${styles['username--mobile']}`}
             username={data.userInfo.username}
             avatarUrl={data.userInfo.avatarUrl}
+            loading={loading}
           />
           <div className={styles.details}>
             <Username
               className={`${styles.username} ${styles['username--desktop']}`}
               username={data.userInfo.username}
               avatarUrl={data.userInfo.avatarUrl}
+              loading={loading}
             />
 
             <DetailList

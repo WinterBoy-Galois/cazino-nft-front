@@ -8,9 +8,10 @@ interface IProps {
   username?: string;
   className?: string;
   onClick?: () => void;
+  loading: boolean;
 }
 
-const Username: React.SFC<IProps> = ({ username, avatarUrl, className = '', onClick }) => {
+const Username: React.SFC<IProps> = ({ username, avatarUrl, className = '', onClick, loading }) => {
   const { t } = useTranslation(['common']);
 
   const getUsername = () => {
@@ -24,7 +25,7 @@ const Username: React.SFC<IProps> = ({ username, avatarUrl, className = '', onCl
   return (
     <div className={`${styles.container} ${className}`}>
       <div className={styles.avatar}>
-        {avatarUrl ? (
+        {!loading && avatarUrl ? (
           <img className="w-100 h-100" src={avatarUrl} alt={username} />
         ) : (
           <div className={styles.avatar__spinner}>

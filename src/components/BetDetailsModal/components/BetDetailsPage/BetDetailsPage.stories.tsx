@@ -16,5 +16,6 @@ storiesOf('Components/BetDetailsModal/BetDetailsPage', module).add('default', ()
       multiplier: 1.3026315789473684,
     }}
     avatarUrl={'https://dev.gambilife.com/ava/m1.svg'}
+    loading={false}
   />
 ));
