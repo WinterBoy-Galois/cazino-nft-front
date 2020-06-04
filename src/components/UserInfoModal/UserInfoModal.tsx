@@ -11,16 +11,56 @@ import Button from '../Button';
 import Loading from '../Loading';
 import Error from '../Error';
 import { useTranslation } from 'react-i18next';
+import { ApolloError } from 'apollo-client';
 
 interface IProps {
   show: boolean;
-  userId: string;
+  data: any;
+  loading: boolean;
+  error: ApolloError | undefined;
   onClose?: () => void;
   onBack?: () => void;
 }
 
-const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => {
-  const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
+// const withData = () => <P extends object>(
+//   Component: React.ComponentType<P>
+// ): React.FC<P & IWithDataProps> => ({
+//   show,
+//   userId,
+//   onClose,
+//   onBack,
+//   ...props
+// }: IWithDataProps) => {
+//   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
+
+//   return (
+//     <Component
+//       {...(props as P)}
+//       show={show}
+//       data={data}
+//       loading={loading}
+//       error={error}
+//       onClose={onClose}
+//       back={onBack}
+//     />
+//   );
+// };
+
+// const withData = (userId: string) => (
+//   Component: React.ComponentType<IProps>
+// ): React.FC<IProps> => ({ show }) => {
+//   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
+//   return <Component show={show} data={data} loading={loading} error={error} />;
+// };
+
+const UserInfoModal: React.FC<IProps> = ({
+  show,
+  onClose,
+  data,
+  loading,
+  error,
+  onBack,
+}: IProps) => {
   const { t } = useTranslation(['common']);
 
   const profitClassName = () => {
@@ -122,4 +162,41 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
   );
 };
 
+// const UserInfoModalWithData = (show: boolean, userId: string): React.FC<IWithDataProps> =>
+//   withData(userId)(UserInfoModal);
+
+// const UserInfoModalWithData: React.FC<IWithDataProps> = ({ userId }: IWithDataProps) => {
+//   const result = withData(userId)(UserInfoModal);
+//   // return withData(userId)(UserInfoModal);
+//   return <>{result}</>;
+// };
+
+interface IWithDataProps {
+  show: boolean;
+  userId: string;
+  onClose?: () => void;
+  onBack?: () => void;
+}
+
+const UserInfoModalWithData: React.FC<IWithDataProps> = ({
+  show,
+  userId,
+  onClose,
+  onBack,
+}: IWithDataProps) => {
+  const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
+
+  return (
+    <UserInfoModal
+      show={show}
+      data={data}
+      loading={loading}
+      error={error}
+      onClose={onClose}
+      onBack={onBack}
+    />
+  );
+};
+
 export default UserInfoModal;
+export { UserInfoModalWithData };

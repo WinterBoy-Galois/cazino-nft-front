@@ -1,133 +1,104 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import UserInfoModal from '.';
-import { createMockClient } from 'mock-apollo-client';
-import { USER_INFO } from '../../graphql/queries';
-import { ApolloProvider } from '@apollo/react-hooks';
-import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
-import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 import { action } from '@storybook/addon-actions';
+import { ApolloError } from 'apollo-client';
 
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-});
+const mockData = {
+  userInfo: {
+    __typename: 'PublicUser',
+    id: '1',
+    username: 'AuYHKS',
+    avatarUrl: 'https://dev.gambilife.com/ava/m2.svg',
+    totalWager: 0,
+    totalProfit: 0,
+    mostPlayed: 'CLAMS',
+    totalBets: 27,
+    luckyBets: 4,
+  },
+};
 
 storiesOf('Components/UserInfoModal', module)
   .add('default', () => {
-    const cache = new InMemoryCache({
-      addTypename: false,
-      fragmentMatcher,
-    });
-
-    const client = createMockClient({ cache });
-    client.setRequestHandler(USER_INFO, () =>
-      Promise.resolve({
-        data: {
-          userInfo: {
-            __typename: 'PublicUser',
-            id: '1',
-            username: 'AuYHKS',
-            avatarUrl: 'https://dev.gambilife.com/ava/m2.svg',
-            totalWager: 0,
-            totalProfit: 0,
-            mostPlayed: 'CLAMS',
-            totalBets: 27,
-            luckyBets: 4,
-          },
-        },
-      })
-    );
-
     return (
-      <ApolloProvider client={client}>
-        <UserInfoModal show={true} userId="1" onClose={action('close modal')} />
-      </ApolloProvider>
+      <UserInfoModal
+        show={true}
+        data={mockData}
+        loading={false}
+        error={undefined}
+        onClose={action('close modal')}
+      />
     );
   })
   .add('anonymous user', () => {
-    const cache = new InMemoryCache({
-      addTypename: false,
-      fragmentMatcher,
-    });
-
-    const client = createMockClient({ cache });
-    client.setRequestHandler(USER_INFO, () =>
-      Promise.resolve({
-        data: {
+    return (
+      <UserInfoModal
+        show={true}
+        data={{
+          ...mockData,
           userInfo: {
-            __typename: 'PublicUser',
-            id: '1',
-            username: null,
+            ...mockData.userInfo,
             avatarUrl: 'https://dev.gambilife.com/ava/ano.svg',
+            username: null,
             totalWager: null,
             totalProfit: null,
-            mostPlayed: 'CLAMS',
-            totalBets: 482,
-            luckyBets: 4,
           },
-        },
-      })
-    );
-
-    return (
-      <ApolloProvider client={client}>
-        <UserInfoModal show={true} userId="1" onClose={action('close modal')} />
-      </ApolloProvider>
+        }}
+        // data={mockData}
+        loading={false}
+        error={undefined}
+        onClose={action('close modal')}
+      />
     );
   })
   .add('User not found', () => {
-    const cache = new InMemoryCache({
-      addTypename: false,
-      fragmentMatcher,
-    });
-
-    const client = createMockClient({ cache });
-    client.setRequestHandler(USER_INFO, () =>
-      Promise.resolve({
-        data: {
+    return (
+      <UserInfoModal
+        show={true}
+        data={{
           userInfo: {
             __typename: 'GenericErrorArray',
             errors: [{ type: '', field: '', messageKey: '' }],
           },
-        },
-      })
-    );
-
-    return (
-      <ApolloProvider client={client}>
-        <UserInfoModal show={true} userId="1" onClose={action('close modal')} />
-      </ApolloProvider>
+        }}
+        loading={false}
+        error={undefined}
+        onClose={action('close modal')}
+      />
     );
   })
   .add('loading', () => {
-    const client = createMockClient();
-    client.setRequestHandler(USER_INFO, () => new Promise(() => null));
-
     return (
-      <ApolloProvider client={client}>
-        <UserInfoModal show={true} userId="1" onClose={action('close modal')} />
-      </ApolloProvider>
+      <UserInfoModal
+        show={true}
+        data={undefined}
+        loading={true}
+        error={undefined}
+        onClose={action('close modal')}
+      />
     );
   })
   .add('graphlQL error', () => {
-    const client = createMockClient();
-    client.setRequestHandler(USER_INFO, () =>
-      Promise.resolve({ data: null, errors: [{ message: 'GraphQL Error' }] })
-    );
-
     return (
-      <ApolloProvider client={client}>
-        <UserInfoModal show={true} userId="1" onClose={action('close modal')} />
-      </ApolloProvider>
+      <UserInfoModal
+        show={true}
+        data={{
+          userInfo: { __typename: 'GenericErrorArray', errors: [{ message: 'GraphQL Error' }] },
+        }}
+        loading={false}
+        error={undefined}
+        onClose={action('close modal')}
+      />
     );
   })
   .add('network error', () => {
-    const client = createMockClient();
-    client.setRequestHandler(USER_INFO, () => Promise.reject(new Error('Network error')));
-
     return (
-      <ApolloProvider client={client}>
-        <UserInfoModal show={true} userId="1" onClose={action('close modal')} />
-      </ApolloProvider>
+      <UserInfoModal
+        show={true}
+        data={null}
+        loading={false}
+        error={new ApolloError({ networkError: new Error('Network error') })}
+        onClose={action('close modal')}
+      />
     );
   });
