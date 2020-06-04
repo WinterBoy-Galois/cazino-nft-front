@@ -1,4 +1,3 @@
-// TIME: time, BET: bet/1000, MULTIPLIER: payout/4, PROFIT: profit/1000
 import { appConfig } from '../config';
 
 const fractionDigits = appConfig.bitcoinFractionDigits;
@@ -12,18 +11,15 @@ const formatBitcoin = (value?: number | null) => {
 };
 
 const formatBet = (value: number) => {
-  const result = value / 1000;
-  return `${result.toFixed(fractionDigits)}`;
+  return `${value.toFixed(fractionDigits)}`;
 };
 
 const formatMultiplier = (value: number) => {
-  const result = value / 4;
-  return `x${result.toFixed(3)}`;
+  return `x${value.toFixed(3)}`;
 };
 
 const formatProfit = (value: number) => {
-  const result = value / 1000;
-  return result > 0 ? `+${result.toFixed(fractionDigits)}` : `${result.toFixed(fractionDigits)}`;
+  return value > 0 ? `+${value.toFixed(fractionDigits)}` : `${value.toFixed(fractionDigits)}`;
 };
 
 /**
@@ -34,7 +30,7 @@ const formatBitcoinSmart = (value: string) => {
     return formatBitcoin(parseFloat(value));
   }
 
-  return formatBet(parseFloat(value));
+  return formatBet(parseFloat(value) / 1000);
 };
 
 export { formatBet, formatMultiplier, formatProfit, formatBitcoin, formatBitcoinSmart };
