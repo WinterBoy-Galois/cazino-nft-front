@@ -33,6 +33,11 @@
       display: flex !important;
     }
   }
+
+  &__hidden {
+    font-weight: 600;
+    color: $live-updates-light-blue;
+  }
 }
 
 .button {

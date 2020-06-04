@@ -13,16 +13,27 @@ import DetailList from '../DetailList';
 import GameIconAndText from '../GameIconAndText';
 import BitcoinProfit from '../BitcoinProfit';
 import LostBets from '../LostBets';
+import { ApolloError } from 'apollo-client';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   show: boolean;
-  userId: string;
+  data: any;
+  loading: boolean;
+  error: ApolloError | undefined;
   onClose?: () => void;
   onBack?: () => void;
 }
 
-const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => {
-  const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
+const UserInfoModal: React.FC<IProps> = ({
+  show,
+  onClose,
+  data,
+  loading,
+  error,
+  onBack,
+}: IProps) => {
+  const { t } = useTranslation(['common']);
 
   return (
     <Modal show={show} onClose={onClose} title="User Info">
@@ -48,11 +59,21 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
               details={[
                 {
                   label: 'Total Wager',
-                  value: <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />,
+                  value:
+                    data.userInfo.totalWager !== null ? (
+                      <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />
+                    ) : (
+                      <div className={styles.username__hidden}>{t('hidden')}</div>
+                    ),
                 },
                 {
                   label: 'Total Profit',
-                  value: <BitcoinProfit value={data.userInfo.totalProfit} />,
+                  value:
+                    data.userInfo.totalProfit !== null ? (
+                      <BitcoinProfit value={data.userInfo.totalProfit} />
+                    ) : (
+                      <div className={styles.username__hidden}>{t('hidden')}</div>
+                    ),
                 },
                 {
                   label: 'Most Played',
@@ -92,4 +113,32 @@ const UserInfoModal: React.SFC<IProps> = ({ show, onClose, userId, onBack }) => 
   );
 };
 
+interface IWithDataProps {
+  show: boolean;
+  userId: string;
+  onClose?: () => void;
+  onBack?: () => void;
+}
+
+const UserInfoModalWithData: React.FC<IWithDataProps> = ({
+  show,
+  userId,
+  onClose,
+  onBack,
+}: IWithDataProps) => {
+  const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
+
+  return (
+    <UserInfoModal
+      show={show}
+      data={data}
+      loading={loading}
+      error={error}
+      onClose={onClose}
+      onBack={onBack}
+    />
+  );
+};
+
 export default UserInfoModal;
+export { UserInfoModalWithData };

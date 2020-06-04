@@ -2,7 +2,7 @@ import React from 'react';
 import { render, waitForDomChange } from '@testing-library/react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { createMockClient } from 'mock-apollo-client';
-import UserInfoModal from './UserInfoModal';
+import { UserInfoModalWithData } from './UserInfoModal';
 import { USER_INFO } from '../../graphql/queries';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
@@ -41,7 +41,7 @@ describe('LeaderboardsTab', () => {
     // Act
     const container = render(
       <ApolloProvider client={mockClient}>
-        <UserInfoModal show={true} userId="1" />
+        <UserInfoModalWithData show={true} userId="1" />
       </ApolloProvider>
     );
 

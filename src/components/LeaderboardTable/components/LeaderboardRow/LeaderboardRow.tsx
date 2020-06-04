@@ -3,6 +3,7 @@ import styles from './LeaderboardRow.module.scss';
 import { Leader } from '../../../../models/leader.model';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import BitcoinValue from '../../../BitcoinValue';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   leader: Leader;
@@ -19,6 +20,16 @@ const LeaderboardRow: React.FC<IProps> = ({
   onRowClicked,
   onUsernameClicked,
 }) => {
+  const { t } = useTranslation(['common']);
+
+  const getUsername = () => {
+    return leader.username !== null ? leader.username : t('hidden');
+  };
+
+  const getUsernameStyle = () => {
+    return leader.username !== null ? styles.username : styles.username__hidden;
+  };
+
   const handleClickUsername: React.MouseEventHandler = event => {
     if (onUsernameClicked) {
       onUsernameClicked(leader.userid);
@@ -37,9 +48,9 @@ const LeaderboardRow: React.FC<IProps> = ({
       </td>
 
       <td>
-        <div className={styles.username}>
+        <div className={getUsernameStyle()}>
           <span className={styles.link} onClick={handleClickUsername}>
-            {leader.username}
+            {getUsername()}
           </span>
         </div>
       </td>

@@ -12,6 +12,7 @@ import styles from './BetRow.module.scss';
 import BitcoinValue from '../../../BitcoinValue';
 import { ViewMode } from '../../LatestBetsTable';
 import { GameTypes } from '../../../../models/gameTypes.model';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   bet: Bet;
@@ -26,6 +27,8 @@ const BetRow: React.FC<IProps> = ({
   viewMode = ViewMode.RESPONSIVE,
   onRowClicked,
 }) => {
+  const { t } = useTranslation(['common']);
+
   let gameIcon;
 
   switch (bet.gameid) {
@@ -43,6 +46,14 @@ const BetRow: React.FC<IProps> = ({
       break;
   }
 
+  const getUsername = () => {
+    return bet.username !== null ? bet.username : t('hidden');
+  };
+
+  const getUsernameStyle = () => {
+    return bet.username !== null ? styles.username : styles.username__hidden;
+  };
+
   return (
     <tr
       key={bet.id}
@@ -54,7 +65,7 @@ const BetRow: React.FC<IProps> = ({
       </td>
 
       <td>
-        <div className={styles.username}>{bet.username}</div>
+        <div className={getUsernameStyle()}>{getUsername()}</div>
       </td>
 
       <td

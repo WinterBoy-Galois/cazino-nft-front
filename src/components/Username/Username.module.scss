@@ -13,6 +13,10 @@
 
 .username {
   font-size: 19px;
+
+  &__hidden {
+    color: $live-updates-light-blue;
+  }
 }
 
 .link {
