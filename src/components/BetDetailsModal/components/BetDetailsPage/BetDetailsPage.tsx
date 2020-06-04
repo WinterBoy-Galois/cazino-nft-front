@@ -8,6 +8,7 @@ import { formatBitcoin, formatMultiplier } from '../../../../common/util/format.
 import GameIconAndText from '../../../GameIconAndText';
 import BitcoinProfit from '../../../BitcoinProfit';
 import { useStateValue } from '../../../../state';
+import { transitionTimeout } from '../../../Modal';
 
 interface IProps {
   bet: Bet;
@@ -21,20 +22,31 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet }) => {
   }
 
   const handleUsernameClick = () => {
-    dispatch({
-      type: 'SHOW_MODAL',
-      payload: {
-        type: 'USER_INFO_MODAL',
-        data: {
-          userId: bet.userid,
-          onBack: () =>
-            dispatch({
-              type: 'SHOW_MODAL',
-              payload: { type: 'BET_DETAILS_MODAL', data: { bet } },
-            }),
-        },
-      },
-    });
+    dispatch({ type: 'HIDE_MODAL' });
+
+    setTimeout(
+      () =>
+        dispatch({
+          type: 'SHOW_MODAL',
+          payload: {
+            type: 'USER_INFO_MODAL',
+            data: {
+              userId: bet.userid,
+              onBack: () => {
+                dispatch({ type: 'HIDE_MODAL' });
+
+                setTimeout(() => {
+                  dispatch({
+                    type: 'SHOW_MODAL',
+                    payload: { type: 'BET_DETAILS_MODAL', data: { bet } },
+                  });
+                }, transitionTimeout);
+              },
+            },
+          },
+        }),
+      transitionTimeout
+    );
   };
 
   return (
