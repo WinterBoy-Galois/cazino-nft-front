@@ -9,6 +9,7 @@ import GameIconAndText from '../../../GameIconAndText';
 import BitcoinProfit from '../../../BitcoinProfit';
 import { useStateValue } from '../../../../state';
 import { transitionTimeout } from '../../../Modal';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   bet: Bet;
@@ -16,6 +17,7 @@ interface IProps {
 }
 
 const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl }) => {
+  const { t } = useTranslation(['modals']);
   const [, dispatch] = useStateValue();
 
   if (!bet) {
@@ -69,14 +71,14 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl }) => {
 
         <DetailList
           details={[
-            { label: 'Date/Time', value: bet.time },
-            { label: 'Bet Id', value: bet.id },
-            { label: 'Game', value: <GameIconAndText game={bet.gameid} /> },
-            { label: 'Bet', value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },
+            { label: t('betDetails.date'), value: bet.time },
+            { label: t('betDetails.betId'), value: bet.id },
+            { label: t('betDetails.game'), value: <GameIconAndText game={bet.gameid} /> },
+            { label: t('betDetails.bet'), value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },
             {
               label: (
                 <span>
-                  Profit (
+                  {t('betDetails.profit')} (
                   <span className={styles['profit-label']}>{formatMultiplier(bet.multiplier)}</span>
                   )
                 </span>
