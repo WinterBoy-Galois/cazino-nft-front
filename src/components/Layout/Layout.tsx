@@ -13,9 +13,9 @@ import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>
     <UserInfoModalWithData
-      userId={modal.data?.userId}
       show={modal.type === 'USER_INFO_MODAL'}
       onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      {...modal.data}
     />
   </>
 );

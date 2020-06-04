@@ -1,8 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import UserInfoModal from '.';
+import { withKnobs, number, text, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { ApolloError } from 'apollo-client';
+
+import UserInfoModal from '.';
 
 const mockData = {
   userInfo: {
@@ -19,6 +21,7 @@ const mockData = {
 };
 
 storiesOf('Components/UserInfoModal', module)
+  .addDecorator(withKnobs)
   .add('default', () => {
     return (
       <UserInfoModal
@@ -98,6 +101,40 @@ storiesOf('Components/UserInfoModal', module)
         data={null}
         loading={false}
         error={new ApolloError({ networkError: new Error('Network error') })}
+        onClose={action('close modal')}
+      />
+    );
+  })
+  .add('custom', () => {
+    const customData = {
+      userInfo: {
+        __typename: 'PublicUser',
+        id: '1',
+        avatarUrl: text('Avatar URL', 'https://dev.gambilife.com/ava/m2.svg'),
+        username: text('Username:', 'AuYHKS'),
+        totalWager: number('Total Wager:', 0),
+        totalProfit: number('Total Profit:', 0),
+        mostPlayed: select(
+          'Most played',
+          {
+            Dice: 'DICE',
+            Goals: 'GOALS',
+            Mines: 'MINES',
+            Clams: 'CLAMS',
+          },
+          'CLAMS'
+        ),
+        totalBets: number('Total Bets:', 27),
+        luckyBets: number('Won Bets:', 4),
+      },
+    };
+
+    return (
+      <UserInfoModal
+        show={true}
+        data={customData}
+        loading={boolean('Loading', false)}
+        error={undefined}
         onClose={action('close modal')}
       />
     );
