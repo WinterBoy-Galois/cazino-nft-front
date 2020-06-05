@@ -60,7 +60,7 @@ Object {
                 </span>
               </div>
               <div
-                class="details"
+                class="details container"
               >
                 <div
                   class="container username username--desktop"
@@ -314,7 +314,7 @@ Object {
               </span>
             </div>
             <div
-              class="details"
+              class="details container"
             >
               <div
                 class="container username username--desktop"

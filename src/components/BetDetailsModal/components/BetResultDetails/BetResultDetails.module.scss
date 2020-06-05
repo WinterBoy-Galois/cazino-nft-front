@@ -1,0 +1,12 @@
+@import '../../../../styles/shared';
+
+.details {
+  border-radius: 8px;
+  background-color: $user-info-main-blue;
+  padding: 1rem;
+
+  @include media-breakpoint-up(md) {
+    width: 80%;
+    margin: 0 auto;
+  }
+}

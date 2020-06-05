@@ -10,6 +10,7 @@ import BitcoinProfit from '../../../BitcoinProfit';
 import { useStateValue } from '../../../../state';
 import { transitionTimeout } from '../../../Modal';
 import { useTranslation } from 'react-i18next';
+import DetailsContainer from '../../../DetailsContainer';
 
 interface IProps {
   bet: Bet;
@@ -63,7 +64,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
         loading={loading}
       />
 
-      <div className={styles.details}>
+      <DetailsContainer className={styles.details}>
         <Username
           className={`${styles.username} ${styles['username--desktop']}`}
           username={bet.username}
@@ -90,7 +91,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
             },
           ]}
         />
-      </div>
+      </DetailsContainer>
     </Fragment>
   );
 };
