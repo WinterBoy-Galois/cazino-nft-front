@@ -2,7 +2,7 @@ import React from 'react';
 import { render, wait, act } from '@testing-library/react';
 import Layout from './Layout';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { USER_INFO } from '../../graphql/queries';
+import { USER_INFO, USER_INFO_AVATAR_URL } from '../../graphql/queries';
 import { createMockClient } from 'mock-apollo-client';
 import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
@@ -46,6 +46,7 @@ describe('Layout', () => {
       },
     });
     mockClient.setRequestHandler(USER_INFO, queryHandler);
+    mockClient.setRequestHandler(USER_INFO_AVATAR_URL, queryHandler);
     mockClient.setRequestHandler(BET_ADDED, queryHandler);
 
     // Act

@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import Bet, { GameTypes } from '../models/bet';
+import Bet from '../models/bet.model';
 import { useInterval } from './useInterval';
+import { GameTypes } from '../models/gameTypes.model';
 
 const randomEnum = <T extends any>(anEnum: T): T[keyof T] => {
   const enumValues = (Object.keys(anEnum)

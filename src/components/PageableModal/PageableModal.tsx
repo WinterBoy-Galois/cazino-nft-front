@@ -1,4 +1,4 @@
-import React, { ReactNode, useReducer, Reducer, useEffect, useRef } from 'react';
+import React, { ReactNode, useReducer, Reducer, useEffect, useRef, useState } from 'react';
 import { pageableModalReducer, PageableModalState, PageableModalAction } from './lib/reducer';
 import Modal from '../Modal';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
@@ -8,11 +8,14 @@ import Footer from './components/Footer';
 interface IProps {
   show: boolean;
   pages: ReactNode[];
+  title?: ReactNode | ReactNode[];
+  onClose?: () => void;
 }
 
 const exitTimeout = 100;
 
-const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
+const PageableModal: React.SFC<IProps> = ({ show, pages, title: initialTitle, onClose }) => {
+  const [title, setTitle] = useState<string>();
   const [state, dispatch] = useReducer<Reducer<PageableModalState, PageableModalAction>>(
     pageableModalReducer,
     { activePage: 0, pageCount: 0, direction: 'right' }
@@ -32,6 +35,14 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
     }, exitTimeout);
   }, [mainRef, state.activePage]);
 
+  useEffect(() => {
+    if (Array.isArray(initialTitle)) {
+      setTitle(initialTitle[state.activePage] as string);
+    } else {
+      setTitle(initialTitle as string);
+    }
+  }, [initialTitle, state.activePage]);
+
   const classNames = {
     enter: styles[`slide-${state.direction}-enter`],
     enterActive: styles[`slide-${state.direction}-enter-active`],
@@ -42,7 +53,9 @@ const PageableModal: React.SFC<IProps> = ({ show, pages }) => {
   return (
     <Modal
       show={show}
+      title={title}
       mainRef={mainRef}
+      onClose={onClose}
       footer={
         <Footer
           pageCount={state.pageCount}

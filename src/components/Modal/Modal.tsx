@@ -7,12 +7,14 @@ import { useClickOutside } from '../../hooks/useClickOutside.hook';
 
 interface IProps {
   children: ReactNode;
-  title?: string | ReactNode;
+  title?: ReactNode;
   show: boolean;
   onClose?: () => void;
   footer?: ReactNode;
   mainRef?: RefObject<HTMLDivElement>;
 }
+
+export const transitionTimeout = 200;
 
 const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer, mainRef }) => {
   useScrollLock(show);
@@ -41,7 +43,7 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer,
   return (
     <CSSTransition
       in={show}
-      timeout={200}
+      timeout={transitionTimeout}
       classNames={{
         enter: styles['fade--enter'],
         enterActive: styles['fade--enter-active'],

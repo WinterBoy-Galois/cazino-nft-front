@@ -1,5 +1,6 @@
 import { addToArray, countCurrentUserBets } from './betBuffer';
-import Bet from '../models/bet';
+import Bet from '../models/bet.model';
+import { GameTypes } from '../models/gameTypes.model';
 
 describe('addToArray', () => {
   it('should add all elements to buffer', () => {
@@ -8,11 +9,12 @@ describe('addToArray', () => {
       {
         id: '1518',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
     ];
 
@@ -33,11 +35,12 @@ describe('countCurrentUserBets', () => {
       {
         id: '1518',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
     ];
 
@@ -56,20 +59,22 @@ describe('countCurrentUserBets', () => {
       {
         id: '1518',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
       {
         id: '1519',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
     ];
 

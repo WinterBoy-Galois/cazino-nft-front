@@ -3,55 +3,27 @@ import Modal from '../Modal';
 import styles from './UserInfoModal.module.scss';
 import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
-import Username from './components/Username';
+import Username from '../Username';
 import BitcoinValue from '../BitcoinValue';
-import { formatProfit, formatBitcoin } from '../../common/util/format.util';
-import GameIcon from '../GameIcon';
+import { formatBitcoin } from '../../common/util/format.util';
 import Button from '../Button';
 import Loading from '../Loading';
 import Error from '../Error';
-import { useTranslation } from 'react-i18next';
+import DetailList from '../DetailList';
+import GameIconAndText from '../GameIconAndText';
+import BitcoinProfit from '../BitcoinProfit';
+import LostBets from '../LostBets';
 import { ApolloError } from 'apollo-client';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   show: boolean;
   data: any;
   loading: boolean;
-  error: ApolloError | undefined;
+  error?: ApolloError;
   onClose?: () => void;
   onBack?: () => void;
 }
-
-// const withData = () => <P extends object>(
-//   Component: React.ComponentType<P>
-// ): React.FC<P & IWithDataProps> => ({
-//   show,
-//   userId,
-//   onClose,
-//   onBack,
-//   ...props
-// }: IWithDataProps) => {
-//   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
-
-//   return (
-//     <Component
-//       {...(props as P)}
-//       show={show}
-//       data={data}
-//       loading={loading}
-//       error={error}
-//       onClose={onClose}
-//       back={onBack}
-//     />
-//   );
-// };
-
-// const withData = (userId: string) => (
-//   Component: React.ComponentType<IProps>
-// ): React.FC<IProps> => ({ show }) => {
-//   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
-//   return <Component show={show} data={data} loading={loading} error={error} />;
-// };
 
 const UserInfoModal: React.FC<IProps> = ({
   show,
@@ -63,95 +35,76 @@ const UserInfoModal: React.FC<IProps> = ({
 }: IProps) => {
   const { t } = useTranslation(['common']);
 
-  const profitClassName = () => {
-    if (data?.userInfo.totalProfit === 0) {
-      return '';
-    } else if (data?.userInfo.totalProfit < 0) {
-      return 'text--negative';
-    } else if (data?.userInfo.totalProfit > 0) {
-      return 'text--positive';
-    }
-  };
-
-  const getLostBets = () => {
-    if (!data && !data.userInfo && !(data.userInfo.totalBets || data.userInfo.luckyBets)) {
-      return 0;
-    }
-
-    const result = data.userInfo.totalBets - data.userInfo.luckyBets;
-    return result;
-  };
-
   return (
     <Modal show={show} onClose={onClose} title="User Info">
       {loading ? <Loading /> : null}
-      {error || data?.userInfo?.errors || data?.errors ? (
-        <Error>Could not load user info.</Error>
-      ) : null}
-      {data?.userInfo && !data?.userInfo?.errors ? (
+
+      {error || data?.userInfo?.errors ? <Error>Could not load user info.</Error> : null}
+
+      {data?.userInfo && !data?.userInfo?.errors && !loading ? (
         <div>
           <Username
             className={`${styles.username} ${styles['username--mobile']}`}
             username={data.userInfo.username}
             avatarUrl={data.userInfo.avatarUrl}
+            loading={loading}
           />
           <div className={styles.details}>
             <Username
               className={`${styles.username} ${styles['username--desktop']}`}
               username={data.userInfo.username}
               avatarUrl={data.userInfo.avatarUrl}
+              loading={loading}
             />
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Total Wager</div>
-              <div className={styles.details__item__value}>
-                {data.userInfo.totalWager !== null ? (
-                  <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />
-                ) : (
-                  <div className={styles.username__hidden}>{t('hidden')}</div>
-                )}
-              </div>
-            </div>
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Total Profit</div>
-              <div className={styles.details__item__value}>
-                {data.userInfo.totalProfit !== null ? (
-                  <BitcoinValue
-                    className={profitClassName()}
-                    value={formatProfit(data.userInfo.totalProfit)}
-                  />
-                ) : (
-                  <div className={styles.username__hidden}>{t('hidden')}</div>
-                )}
-              </div>
-            </div>
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Most Played</div>
-              <div className={styles.details__item__value}>
-                <GameIcon
-                  game={data.userInfo.mostPlayed}
-                  className={styles['game-icon']}
-                  innerClassName={styles['game-icon__inner']}
-                />
-                {data.userInfo.mostPlayed}
-              </div>
-            </div>
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Total Bets</div>
-              <div className={styles.details__item__value}>{data.userInfo.totalBets}</div>
-            </div>
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Won Bets</div>
-              <div className={styles.details__item__value}>{data.userInfo.luckyBets}</div>
-            </div>
-            <div className={styles.details__item}>
-              <div className={styles.details__item__label}>Lost Bets</div>
-              <div className={styles.details__item__value}>{getLostBets()}</div>
-            </div>
+
+            <DetailList
+              details={[
+                {
+                  label: 'Total Wager',
+                  value:
+                    data.userInfo.totalWager !== null ? (
+                      <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />
+                    ) : (
+                      <div className={styles.username__hidden}>{t('hidden')}</div>
+                    ),
+                },
+                {
+                  label: 'Total Profit',
+                  value:
+                    data.userInfo.totalProfit !== null ? (
+                      <BitcoinProfit value={data.userInfo.totalProfit} />
+                    ) : (
+                      <div className={styles.username__hidden}>{t('hidden')}</div>
+                    ),
+                },
+                {
+                  label: 'Most Played',
+                  value: <GameIconAndText game={data.userInfo.mostPlayed} />,
+                },
+                {
+                  label: 'Total Bets',
+                  value: data.userInfo.totalBets,
+                },
+                {
+                  label: 'Won Bets',
+                  value: data.userInfo.luckyBets,
+                },
+                {
+                  label: 'Lost Bets',
+                  value: (
+                    <LostBets
+                      totalBets={data.userInfo.totalBets}
+                      luckyBets={data.userInfo.luckyBets}
+                    />
+                  ),
+                },
+              ]}
+            />
           </div>
 
           <div className={styles.button}>
             {onBack ? (
-              <Button onClick={onClose}>Back</Button>
+              <Button onClick={onBack}>Back</Button>
             ) : (
               <div className={styles.button__spacer} />
             )}
@@ -161,15 +114,6 @@ const UserInfoModal: React.FC<IProps> = ({
     </Modal>
   );
 };
-
-// const UserInfoModalWithData = (show: boolean, userId: string): React.FC<IWithDataProps> =>
-//   withData(userId)(UserInfoModal);
-
-// const UserInfoModalWithData: React.FC<IWithDataProps> = ({ userId }: IWithDataProps) => {
-//   const result = withData(userId)(UserInfoModal);
-//   // return withData(userId)(UserInfoModal);
-//   return <>{result}</>;
-// };
 
 interface IWithDataProps {
   show: boolean;
