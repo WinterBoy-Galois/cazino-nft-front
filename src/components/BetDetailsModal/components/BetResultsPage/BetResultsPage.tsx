@@ -5,14 +5,15 @@ import { formatBitcoin } from '../../../../common/util/format.util';
 import ProfitLabel from '../../../ProfitLabel';
 import BitcoinProfit from '../../../BitcoinProfit';
 import BetResultsDice from './components/BetResultsDice';
+import styles from './BetResultsPage.module.scss';
 
 const BetResultsPage: React.FC = () => {
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.bet__results}>
         <BetResultsDice />
       </div>
-      <div>
+      <div className={styles.bet__details}>
         <BetResultDetails
           details={[
             { label: 'bet', value: <BitcoinValue value={formatBitcoin(0.00001219)} /> },

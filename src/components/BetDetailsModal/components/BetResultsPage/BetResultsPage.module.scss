@@ -1,8 +1,27 @@
 @import '../../../../styles/shared';
 
-.details {
+.container {
   @include media-breakpoint-up(md) {
-    width: 80%;
-    margin: 0 auto;
+    display: flex;
+  }
+}
+
+.bet {
+  &__results {
+    margin-bottom: 2.5rem;
+
+    @include media-breakpoint-up(md) {
+      margin: 0 2rem 0 0;
+      flex-grow: 1;
+    }
+  }
+
+  &__details {
+    @include media-breakpoint-up(md) {
+      width: 300px;
+      align-self: center;
+      justify-self: flex-end;
+      flex-shrink: 0;
+    }
   }
 }

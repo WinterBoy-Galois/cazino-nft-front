@@ -1,1 +1,1 @@
-export { default } from './BetResultsDice';
+export { default } from './DiceBetResults';
