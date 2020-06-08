@@ -1,19 +1,17 @@
 import React from 'react';
-import Bet from '../../../../models/bet.model';
 import BetResultDetails from '../BetResultDetails';
 import BitcoinValue from '../../../BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import ProfitLabel from '../../../ProfitLabel';
 import BitcoinProfit from '../../../BitcoinProfit';
+import BetResultsDice from './components/BetResultsDice';
 
-interface IProps {
-  bet?: Bet;
-}
-
-const BetResultsPage: React.SFC<IProps> = () => {
+const BetResultsPage: React.FC = () => {
   return (
     <div>
-      <div>Bet results</div>
+      <div>
+        <BetResultsDice />
+      </div>
       <div>
         <BetResultDetails
           details={[
