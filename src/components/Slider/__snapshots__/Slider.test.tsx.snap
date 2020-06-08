@@ -23,24 +23,6 @@ exports[`renders 1`] = `
           style="top: 50%;"
         >
           <svg
-            class="handle__large"
-            height="68.843"
-            width="146.001"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M43.814 68.818h-.107v-.084L0 34.41 43.708.088V0H138a8 8 0 018 8v52.818a8 8 0 01-8 8H43.846v.025z"
-              fill="#2a434f"
-            />
-            <text
-              class="handle__value"
-              x="24%"
-              y="70%"
-            >
-              50.00
-            </text>
-          </svg>
-          <svg
             class="handle__small"
             height="41.562"
             width="88.143"

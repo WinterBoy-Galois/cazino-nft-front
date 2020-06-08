@@ -38,21 +38,6 @@ const Handle: React.SFC<IProps> = ({
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="146.001"
-      height="68.843"
-      className={styles.handle__large}
-    >
-      <path
-        d="M43.814 68.818h-.107v-.084L0 34.41 43.708.088V0H138a8 8 0 018 8v52.818a8 8 0 01-8 8H43.846v.025z"
-        fill="#2a434f"
-      />
-      <text x="24%" y="70%" className={styles.handle__value}>
-        {getValue(value)}
-      </text>
-    </svg>
-
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
       width="88.143"
       height="41.562"
       className={styles.handle__small}

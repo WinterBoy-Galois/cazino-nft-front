@@ -7,33 +7,9 @@
   cursor: pointer;
   touch-action: none;
 
-  @include media-breakpoint-up(md) {
-    margin-top: -34px;
-  }
-
   &__value {
     fill: #fff;
     font-size: 23px;
     font-weight: 300;
-
-    @include media-breakpoint-up(md) {
-      font-size: 39px;
-    }
-  }
-
-  &__large {
-    display: none;
-
-    @include media-breakpoint-up(md) {
-      display: unset;
-    }
-  }
-
-  &__small {
-    display: unset;
-
-    @include media-breakpoint-up(md) {
-      display: none;
-    }
   }
 }

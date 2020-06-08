@@ -95,6 +95,60 @@ Object {
             </g>
           </g>
         </svg>
+        <div
+          class="slider"
+        >
+          <div
+            class="slider__wrapper"
+          >
+            <div
+              class="slider"
+            >
+              <div
+                class="slider__rail"
+              />
+              <div
+                class="slider-handles"
+              >
+                <div
+                  aria-valuemax="100"
+                  aria-valuemin="0"
+                  aria-valuenow="50"
+                  class="handle"
+                  role="slider"
+                  style="top: 50%;"
+                >
+                  <svg
+                    class="handle__small"
+                    height="41.562"
+                    width="88.143"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M26.451 41.547h-.064V41.5L0 20.774 26.387.053V0H80.142a8 8 0 018 8v25.547a8 8 0 01-8 8H26.471v.015z"
+                      fill="#2a434f"
+                    />
+                    <text
+                      class="handle__value"
+                      x="24%"
+                      y="70%"
+                    >
+                      50.00
+                    </text>
+                  </svg>
+                </div>
+              </div>
+              <div
+                class="slider-tracks"
+              >
+                <div
+                  class="track"
+                  style="top: 0%; height: 50%;"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>,
@@ -189,6 +243,60 @@ Object {
           </g>
         </g>
       </svg>
+      <div
+        class="slider"
+      >
+        <div
+          class="slider__wrapper"
+        >
+          <div
+            class="slider"
+          >
+            <div
+              class="slider__rail"
+            />
+            <div
+              class="slider-handles"
+            >
+              <div
+                aria-valuemax="100"
+                aria-valuemin="0"
+                aria-valuenow="50"
+                class="handle"
+                role="slider"
+                style="top: 50%;"
+              >
+                <svg
+                  class="handle__small"
+                  height="41.562"
+                  width="88.143"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M26.451 41.547h-.064V41.5L0 20.774 26.387.053V0H80.142a8 8 0 018 8v25.547a8 8 0 01-8 8H26.471v.015z"
+                    fill="#2a434f"
+                  />
+                  <text
+                    class="handle__value"
+                    x="24%"
+                    y="70%"
+                  >
+                    50.00
+                  </text>
+                </svg>
+              </div>
+            </div>
+            <div
+              class="slider-tracks"
+            >
+              <div
+                class="track"
+                style="top: 0%; height: 50%;"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],
