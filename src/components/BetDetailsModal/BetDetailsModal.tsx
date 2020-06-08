@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO_AVATAR_URL } from '../../graphql/queries';
 import { ApolloError } from 'apollo-client';
 import { useTranslation } from 'react-i18next';
+import BetResultsPage from './components/BetResultsPage';
 
 interface IProps {
   show: boolean;
@@ -22,9 +23,12 @@ const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet, avatarUrl, loa
   return (
     <PageableModal
       show={show}
-      title={[t('betDetails.title')]}
+      title={[t('betDetails.title'), 'Bet Results']}
       onClose={onClose}
-      pages={[<BetDetailsPage key={1} bet={bet} avatarUrl={avatarUrl} loading={loading} />]}
+      pages={[
+        <BetDetailsPage key={1} bet={bet} avatarUrl={avatarUrl} loading={loading} />,
+        <BetResultsPage key={2} />,
+      ]}
     />
   );
 };

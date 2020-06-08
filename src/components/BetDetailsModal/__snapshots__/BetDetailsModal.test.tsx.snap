@@ -104,6 +104,13 @@ Object {
                     class="dot"
                   />
                 </div>
+                <div
+                  class="dot__wrapper dot__wrapper--inactive"
+                >
+                  <div
+                    class="dot"
+                  />
+                </div>
               </div>
               <div>
                 <button
@@ -248,6 +255,13 @@ Object {
             >
               <div
                 class="dot__wrapper dot__wrapper--active"
+              >
+                <div
+                  class="dot"
+                />
+              </div>
+              <div
+                class="dot__wrapper dot__wrapper--inactive"
               >
                 <div
                   class="dot"
