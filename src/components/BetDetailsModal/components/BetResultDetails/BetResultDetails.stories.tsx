@@ -1,7 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import BetResultDetails from '.';
-import { GameTypes } from '../../../../models/gameTypes.model';
+import BitcoinValue from '../../../BitcoinValue';
+import { formatBitcoin } from '../../../../common/util/format.util';
+import ProfitLabel from '../../../ProfitLabel';
+import BitcoinProfit from '../../../BitcoinProfit';
 
 storiesOf('Components/BetDetailsModal/BetResultDetails', module)
   .addDecorator(storyFn => (
@@ -9,15 +12,14 @@ storiesOf('Components/BetDetailsModal/BetResultDetails', module)
   ))
   .add('default', () => (
     <BetResultDetails
-      bet={{
-        id: '278192',
-        username: 'gutierrezbrian',
-        time: 1591032136876,
-        userid: 67,
-        gameid: GameTypes.MINES,
-        bet: 0.00009425,
-        profit: 0.00002852,
-        multiplier: 1.3026315789473684,
-      }}
+      details={[
+        { label: 'bet', value: <BitcoinValue value={formatBitcoin(0.00001219)} /> },
+        { label: 'roll over', value: 25.6 },
+        { label: 'win chance', value: '74.4%' },
+        {
+          label: <ProfitLabel label="Profit" multiplier={0.12} />,
+          value: <BitcoinProfit value={0.0004354} />,
+        },
+      ]}
     />
   ));
