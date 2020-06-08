@@ -1,0 +1,27 @@
+@import '../../styles/shared.scss';
+
+.slider {
+  position: relative;
+  height: 100%;
+  margin: 0 23px 0 71px;
+  user-select: none;
+
+  @include media-breakpoint-up(md) {
+    margin: 0 39px 0 97px;
+  }
+
+  &__rail {
+    background-color: $red;
+    height: 100%;
+    width: 65px;
+    cursor: pointer;
+
+    @include media-breakpoint-up(md) {
+      width: 107px;
+    }
+  }
+
+  &__wrapper {
+    height: 100%;
+  }
+}

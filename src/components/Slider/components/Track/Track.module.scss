@@ -1,0 +1,13 @@
+@import '../../../../styles/shared.scss';
+
+.track {
+  position: absolute;
+  z-index: 1;
+  background-color: $green;
+  cursor: pointer;
+  width: 65px;
+
+  @include media-breakpoint-up(md) {
+    width: 107px;
+  }
+}
