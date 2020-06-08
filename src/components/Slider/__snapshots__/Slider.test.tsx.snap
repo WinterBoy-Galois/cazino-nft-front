@@ -68,21 +68,6 @@ exports[`renders 1`] = `
           style="top: 0%; height: 50%;"
         />
       </div>
-      <div
-        class="slider-ticks"
-      >
-        <div
-          class="tick"
-        >
-          0
-        </div>
-        <div
-          class="tick"
-          style="top: 0px;"
-        >
-          100
-        </div>
-      </div>
     </div>
   </div>
 </div>

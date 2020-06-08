@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './Slider.module.scss';
-import { Slider as ReactSlider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider';
+import { Slider as ReactSlider, Rail, Handles, Tracks } from 'react-compound-slider';
 import Handle from './components/Handle';
 import Track from './components/Track';
-import Tick from './components/Tick';
 
 interface IProps {
   onUpdate?: (value: number) => void;
@@ -53,16 +52,6 @@ const Slider: React.SFC<IProps> = ({ onUpdate, onChange }: IProps) => {
             </div>
           )}
         </Tracks>
-
-        <Ticks count={1}>
-          {({ ticks }) => (
-            <div className={styles['slider-ticks']}>
-              {ticks.map((tick, i) => (
-                <Tick key={i} tick={tick} />
-              ))}
-            </div>
-          )}
-        </Ticks>
       </ReactSlider>
     </div>
   );
