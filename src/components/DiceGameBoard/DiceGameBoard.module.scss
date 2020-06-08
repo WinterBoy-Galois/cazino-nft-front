@@ -3,3 +3,15 @@
 .container {
   position: relative;
 }
+
+.slider {
+  height: 259px;
+  position: absolute;
+  top: 28px;
+  right: 0;
+
+  @include media-breakpoint-up(md) {
+    height: 317px;
+    top: 34px;
+  }
+}

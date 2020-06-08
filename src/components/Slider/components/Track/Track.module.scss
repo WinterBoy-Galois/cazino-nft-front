@@ -5,9 +5,9 @@
   z-index: 1;
   background-color: $green;
   cursor: pointer;
-  width: 65px;
+  width: 67px;
 
   @include media-breakpoint-up(md) {
-    width: 107px;
+    width: 83px;
   }
 }
