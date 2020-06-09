@@ -10,7 +10,7 @@ interface IProps {
 const GameIconAndText: React.SFC<IProps> = ({ game }) => {
   return (
     <Fragment>
-      <GameIcon game={game} className={styles['icon']} innerClassName={styles['icon__inner']} />
+      <GameIcon game={game} className={styles['icon']} />
       {game}
     </Fragment>
   );
