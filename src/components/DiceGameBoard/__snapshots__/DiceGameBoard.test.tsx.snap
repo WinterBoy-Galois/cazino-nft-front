@@ -153,6 +153,7 @@ Object {
           class="character"
         >
           <img
+            alt="happy"
             src="dice-char-happy.svg"
           />
         </div>
@@ -308,6 +309,7 @@ Object {
         class="character"
       >
         <img
+          alt="happy"
           src="dice-char-happy.svg"
         />
       </div>

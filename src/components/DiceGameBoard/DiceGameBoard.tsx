@@ -21,7 +21,7 @@ const DiceGameBoard: React.FC<IProps> = ({ result = 0, rollOver = 0, disabled = 
         <Slider disabled={disabled} value={rollOver} />
       </div>
       <div className={styles.character}>
-        <img src={hasWon ? happyCharacter : sadCharacter} />
+        <img src={hasWon ? happyCharacter : sadCharacter} alt={hasWon ? 'happy' : 'sad'} />
       </div>
     </div>
   );
