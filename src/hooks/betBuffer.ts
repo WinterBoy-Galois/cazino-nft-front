@@ -1,4 +1,4 @@
-import Bet from '../models/bet';
+import Bet from '../models/bet.model';
 
 const addToArray = (buffer: Bet[], elements: Bet[]) => {
   elements.forEach(element => {

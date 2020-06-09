@@ -13,14 +13,16 @@ interface IProps {
 
 const GameIcon: React.SFC<IProps> = ({ game, className }) => {
   switch (game) {
-    case 'CLAMS':
+    case GameTypes.CLAMS:
       return <Clams className={className} />;
-    case 'DICE':
+    case GameTypes.DICE:
       return <Dice className={className} />;
-    case 'GOALS':
+    case GameTypes.GOALS:
       return <Goals className={className} />;
-    case 'MINES':
+    case GameTypes.MINES:
       return <Mines className={className} />;
+    default:
+      throw new Error(`Unknown game type: ${game}`);
   }
 };
 

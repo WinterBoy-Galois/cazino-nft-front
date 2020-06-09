@@ -76,3 +76,21 @@ export const USER_INFO = gql`
     }
   }
 `;
+
+export const USER_INFO_AVATAR_URL = gql`
+  query UserInfoAvatarUrl($userId: ID) {
+    userInfo(id: $userId) {
+      __typename
+      ... on PublicUser {
+        avatarUrl
+      }
+      ... on GenericErrorArray {
+        errors {
+          type
+          field
+          messageKey
+        }
+      }
+    }
+  }
+`;
