@@ -1,8 +1,13 @@
 import React from 'react';
 import DiceGameBoard from '../../../../../DiceGameBoard';
 
-const DiceBetResults: React.FC = () => {
-  return <DiceGameBoard disabled result={45} rollOver={34} />;
+interface IProps {
+  result: number;
+  rollOver: number;
+}
+
+const DiceBetResults: React.FC<IProps> = props => {
+  return <DiceGameBoard disabled {...props} />;
 };
 
 export default DiceBetResults;

@@ -11,7 +11,7 @@ const BetResultsPage: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.bet__results}>
-        <BetResultsDice />
+        <BetResultsDice result={22.1} rollOver={25.6} />
       </div>
       <div className={styles.bet__details}>
         <BetResultDetails
