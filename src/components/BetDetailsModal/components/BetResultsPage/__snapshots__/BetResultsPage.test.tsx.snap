@@ -84,7 +84,7 @@ Object {
                     x="10%"
                     y="19%"
                   >
-                    45.66
+                    45.00
                   </text>
                   <path
                     class="cls-1"
@@ -119,10 +119,10 @@ Object {
                     <div
                       aria-valuemax="100"
                       aria-valuemin="0"
-                      aria-valuenow="50"
+                      aria-valuenow="34"
                       class="handle"
                       role="slider"
-                      style="top: 50%;"
+                      style="top: 66%;"
                     >
                       <svg
                         class="handle__small"
@@ -139,7 +139,7 @@ Object {
                           x="24%"
                           y="70%"
                         >
-                          50.00
+                          34.00
                         </text>
                       </svg>
                     </div>
@@ -149,7 +149,7 @@ Object {
                   >
                     <div
                       class="track"
-                      style="top: 0%; height: 50%;"
+                      style="top: 0%; height: 66%;"
                     />
                   </div>
                 </div>
@@ -361,7 +361,7 @@ Object {
                   x="10%"
                   y="19%"
                 >
-                  45.66
+                  45.00
                 </text>
                 <path
                   class="cls-1"
@@ -396,10 +396,10 @@ Object {
                   <div
                     aria-valuemax="100"
                     aria-valuemin="0"
-                    aria-valuenow="50"
+                    aria-valuenow="34"
                     class="handle"
                     role="slider"
-                    style="top: 50%;"
+                    style="top: 66%;"
                   >
                     <svg
                       class="handle__small"
@@ -416,7 +416,7 @@ Object {
                         x="24%"
                         y="70%"
                       >
-                        50.00
+                        34.00
                       </text>
                     </svg>
                   </div>
@@ -426,7 +426,7 @@ Object {
                 >
                   <div
                     class="track"
-                    style="top: 0%; height: 50%;"
+                    style="top: 0%; height: 66%;"
                   />
                 </div>
               </div>

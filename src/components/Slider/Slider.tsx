@@ -5,13 +5,20 @@ import Handle from './components/Handle';
 import Track from './components/Track';
 
 interface IProps {
+  value?: number;
+  disabled?: boolean;
   onUpdate?: (value: number) => void;
   onChange?: (value: number) => void;
 }
 
 const domain = [0, 100];
 
-const Slider: React.SFC<IProps> = ({ onUpdate, onChange }: IProps) => {
+const Slider: React.SFC<IProps> = ({
+  value = 50,
+  disabled = false,
+  onUpdate,
+  onChange,
+}: IProps) => {
   return (
     <div className={styles.slider__wrapper}>
       <ReactSlider
@@ -21,8 +28,9 @@ const Slider: React.SFC<IProps> = ({ onUpdate, onChange }: IProps) => {
         domain={domain}
         onUpdate={u => onUpdate && onUpdate(u.length > 0 ? u[0] : 0)}
         onChange={c => onChange && onChange(c.length > 0 ? c[0] : 0)}
-        values={[50]}
+        values={[value]}
         className={styles.slider}
+        disabled={disabled}
       >
         <Rail>
           {({ getRailProps }) => <div className={styles.slider__rail} {...getRailProps()} />}

@@ -3,12 +3,18 @@ import styles from './DiceGameBoard.module.scss';
 import DiceResultScale from '../icons/DiceResultScale';
 import Slider from '../Slider';
 
-const DiceGameBoard: React.FC = () => {
+interface IProps {
+  result: number;
+  rollOver: number;
+  disabled?: boolean;
+}
+
+const DiceGameBoard: React.FC<IProps> = ({ result, rollOver, disabled = false }) => {
   return (
     <div className={styles.container}>
-      <DiceResultScale result="45.66" />
+      <DiceResultScale result={result.toFixed(2)} />
       <div className={styles.slider}>
-        <Slider />
+        <Slider disabled={disabled} value={rollOver} />
       </div>
     </div>
   );
