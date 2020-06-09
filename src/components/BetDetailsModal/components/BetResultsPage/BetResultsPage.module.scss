@@ -9,6 +9,7 @@
 .bet {
   &__results {
     margin-bottom: 2.5rem;
+    padding: 0 1rem;
 
     @include media-breakpoint-up(md) {
       margin: 0 2rem 0 0;

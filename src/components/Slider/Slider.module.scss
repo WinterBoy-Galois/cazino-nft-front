@@ -8,15 +8,12 @@
   &__rail {
     background-color: $red;
     height: 100%;
-    width: 67px;
+    width: 100%;
     cursor: pointer;
-
-    @include media-breakpoint-up(md) {
-      width: 83px;
-    }
   }
 
   &__wrapper {
     height: 100%;
+    width: 100%;
   }
 }
