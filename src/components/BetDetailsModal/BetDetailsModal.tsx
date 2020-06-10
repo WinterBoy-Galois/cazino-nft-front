@@ -27,7 +27,7 @@ const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet, avatarUrl, loa
       onClose={onClose}
       pages={[
         <BetDetailsPage key={1} bet={bet} avatarUrl={avatarUrl} loading={loading} />,
-        <BetResultsPage key={2} result={58.67} rollOver={60} />,
+        <BetResultsPage key={2} result={58.67} rollOver={60} gameType={bet?.gameid} />,
       ]}
     />
   );
