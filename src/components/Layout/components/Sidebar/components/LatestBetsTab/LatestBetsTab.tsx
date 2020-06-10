@@ -21,7 +21,7 @@ const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error 
           isLoading={isLoading}
           error={error ? true : false}
           signInUserId="15"
-          viewMode={ViewMode.COMPACT}
+          viewMode={ViewMode.RESPONSIVE}
         />
       </div>
     </>

@@ -25,6 +25,9 @@ Object {
                 <th>
                   Profit
                 </th>
+                <th>
+                  Bet
+                </th>
               </tr>
             </thead>
             <tbody
@@ -60,6 +63,9 @@ Object {
               </th>
               <th>
                 Profit
+              </th>
+              <th>
+                Bet
               </th>
             </tr>
           </thead>
