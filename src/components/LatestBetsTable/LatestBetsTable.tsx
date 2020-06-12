@@ -1,5 +1,5 @@
 import React from 'react';
-import Bet from '../../models/bet';
+import Bet from '../../models/bet.model';
 import BetRow from './components/BetRow';
 import Loading from '../Loading';
 import Error from '../Error';
@@ -10,6 +10,7 @@ import styles from './LatestBetsTable.module.scss';
 import SpacerRow from './components/SpacerRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { useTranslation } from 'react-i18next';
+import { useStateValue } from '../../state';
 
 export enum ViewMode {
   RESPONSIVE,
@@ -37,6 +38,7 @@ const LatestBetsTable: React.FC<IProps> = ({
 }) => {
   const breakpoint = useBreakpoint();
   const { t } = useTranslation(['sidebar']);
+  const [, dispatch] = useStateValue();
 
   const renderBetColumn = () => {
     switch (true) {
@@ -61,6 +63,10 @@ const LatestBetsTable: React.FC<IProps> = ({
   if (animationSpeed === DispatchSpeed.VERY_FAST) {
     speed = 250;
   }
+
+  const handleRowClick = (bet: Bet) => {
+    dispatch({ type: 'SHOW_MODAL', payload: { type: 'BET_DETAILS_MODAL', data: { bet } } });
+  };
 
   return (
     <div className={styles['bet-table__wrapper']}>
@@ -103,6 +109,7 @@ const LatestBetsTable: React.FC<IProps> = ({
                         bet={b}
                         highlight={signInUserId ? b.userid.toString() === signInUserId : false}
                         viewMode={viewMode}
+                        onRowClicked={() => handleRowClick(b)}
                       />
                     </CSSTransition>
                   ))}

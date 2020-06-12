@@ -1,3 +1,5 @@
+import { GameTypes } from './gameTypes.model';
+
 export default interface Bet {
   id: string;
   time: number;
@@ -7,11 +9,4 @@ export default interface Bet {
   bet: number;
   profit: number;
   multiplier: number;
-}
-
-export enum GameTypes {
-  DICE,
-  GOALS,
-  MINES,
-  CLAMS,
 }

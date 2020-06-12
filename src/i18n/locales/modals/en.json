@@ -1,0 +1,19 @@
+{
+  "userInfo": {
+    "title": "User Info",
+    "totalWager": "Total Wager",
+    "totalProfit": "Total Profit",
+    "mostPlayed": "Most Played",
+    "totalBets": "Total Bets",
+    "winBets": "Win Bets",
+    "lostBets": "Lost Bets"
+  },
+  "betDetails": {
+    "title": "Bet Details",
+    "date": "Date/time",
+    "betId": "Bet Id",
+    "game": "Game",
+    "bet": "Bet",
+    "profit": "Profit"
+  }
+}

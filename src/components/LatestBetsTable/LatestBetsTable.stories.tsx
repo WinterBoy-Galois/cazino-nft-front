@@ -3,7 +3,7 @@ import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import LatestBetsTable from '.';
-import Bet from '../../models/bet';
+import Bet from '../../models/bet.model';
 import { useBetGenerator, generateRandomBets } from '../../hooks/useBetGenerator.hook';
 import { DispatchSpeed, useBetBuffer } from '../../hooks/useBetBuffer.hook';
 
