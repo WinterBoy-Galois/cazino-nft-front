@@ -1,41 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Username should match snapshot 1`] = `
+exports[`LostBets should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="container "
-      >
-        <img
-          alt="test"
-          class="avatar"
-          src="testurl"
-        />
-        <span
-          class="text--bold username"
-        >
-          test
-        </span>
-      </div>
+      5
     </div>
   </body>,
   "container": <div>
-    <div
-      class="container "
-    >
-      <img
-        alt="test"
-        class="avatar"
-        src="testurl"
-      />
-      <span
-        class="text--bold username"
-      >
-        test
-      </span>
-    </div>
+    5
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

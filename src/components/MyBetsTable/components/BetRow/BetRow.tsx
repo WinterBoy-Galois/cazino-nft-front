@@ -2,7 +2,7 @@ import React from 'react';
 import { timeFromEpoch } from '../../../../common/util/date.util';
 import { formatProfit, formatBet, formatMultiplier } from '../../../../common/util/format.util';
 import { isPositive } from '../../../../common/util/sign.util';
-import Bet, { GameTypes } from '../../../../models/bet';
+import Bet from '../../../../models/bet.model';
 import Dice from '../../../icons/games/Dice';
 import Clams from '../../../icons/games/Clams';
 import Goals from '../../../icons/games/Goals';
@@ -11,6 +11,7 @@ import Mines from '../../../icons/games/Mines';
 import styles from './BetRow.module.scss';
 import BitcoinValue from '../../../BitcoinValue';
 import { ViewMode } from '../../MyBetsTable';
+import { GameTypes } from '../../../../models/gameTypes.model';
 
 interface IProps {
   bet: Bet;

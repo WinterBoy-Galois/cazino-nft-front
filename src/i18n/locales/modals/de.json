@@ -1,0 +1,19 @@
+{
+  "userInfo": {
+    "title": "User Info",
+    "totalWager": "Gesamteinsatz",
+    "totalProfit": "Gesamtgewinn",
+    "mostPlayed": "Meist gespielt",
+    "totalBets": "Wetten",
+    "winBets": "Gewonnene Wetten",
+    "lostBets": "Verlorene Wetten"
+  },
+  "betDetails": {
+    "title": "Wettdetails",
+    "date": "Datum/Zeit",
+    "betId": "Wettnr.",
+    "game": "Spiel",
+    "bet": "Wette",
+    "profit": "Gewinn"
+  }
+}

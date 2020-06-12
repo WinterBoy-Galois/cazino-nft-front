@@ -1,25 +1,27 @@
 import { appConfig } from '../config';
 
-const fractionDigits = appConfig.bitcoinFractionDigits;
+const { bitcoinFractionDigits, multiplierFractionDigits } = appConfig;
 
 const formatBitcoin = (value?: number | null) => {
   if (!value) {
     value = 0;
   }
 
-  return `${value.toFixed(fractionDigits)}`;
+  return `${value.toFixed(bitcoinFractionDigits)}`;
 };
 
 const formatBet = (value: number) => {
-  return `${value.toFixed(fractionDigits)}`;
+  return `${value.toFixed(bitcoinFractionDigits)}`;
 };
 
 const formatMultiplier = (value: number) => {
-  return `x${value.toFixed(3)}`;
+  return `x${value.toFixed(multiplierFractionDigits)}`;
 };
 
 const formatProfit = (value: number) => {
-  return value > 0 ? `+${value.toFixed(fractionDigits)}` : `${value.toFixed(fractionDigits)}`;
+  return value > 0
+    ? `+${value.toFixed(bitcoinFractionDigits)}`
+    : `${value.toFixed(bitcoinFractionDigits)}`;
 };
 
 /**

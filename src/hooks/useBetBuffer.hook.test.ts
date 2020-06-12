@@ -1,7 +1,8 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 
 import { useBetBuffer, DispatchSpeed } from './useBetBuffer.hook';
-import Bet from '../models/bet';
+import Bet from '../models/bet.model';
+import { GameTypes } from '../models/gameTypes.model';
 
 describe('useBetBuffer hook', () => {
   it('should instantiate without errors', () => {
@@ -21,11 +22,12 @@ describe('useBetBuffer hook', () => {
       {
         id: '1518',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
     ];
 
@@ -45,29 +47,32 @@ describe('useBetBuffer hook', () => {
       {
         id: '1518',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
       {
         id: '1518',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
       {
         id: '1518',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
     ];
 
@@ -88,11 +93,12 @@ describe('useBetBuffer hook', () => {
       {
         id: '1518',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
     ];
 
@@ -123,29 +129,32 @@ describe('useBetBuffer hook', () => {
       {
         id: '1518',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
       {
         id: '1519',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 121,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
       {
         id: '1520',
         bet: 0.01855738,
-        gameid: 1,
+        gameid: GameTypes.CLAMS,
         profit: -0.01891901,
         time: 1588086626434,
         userid: 122,
         username: 'martinezmark',
+        multiplier: 0.123123,
       },
     ];
 
@@ -179,47 +188,52 @@ describe('useBetBuffer hook', () => {
         {
           id: '1518',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 121,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
         {
           id: '1519',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 121,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
         {
           id: '1520',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 122,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
         {
           id: '1521',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 121,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
         {
           id: '1522',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 122,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
       ];
 
@@ -276,47 +290,52 @@ describe('useBetBuffer hook', () => {
         {
           id: '1518',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 121,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
         {
           id: '1519',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 121,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
         {
           id: '1520',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 122,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
         {
           id: '1521',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 121,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
         {
           id: '1522',
           bet: 0.01855738,
-          gameid: 1,
+          gameid: GameTypes.DICE,
           profit: -0.01891901,
           time: 1588086626434,
           userid: 122,
           username: 'martinezmark',
+          multiplier: 0.123123,
         },
       ];
 
