@@ -18,6 +18,8 @@
   }
 
   &__details {
+    margin-bottom: 1rem;
+
     @include media-breakpoint-up(md) {
       width: 300px;
       align-self: center;
