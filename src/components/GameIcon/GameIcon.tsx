@@ -8,7 +8,6 @@ import Mines from '../icons/games/Mines';
 interface IProps {
   game: GameTypes;
   className?: string;
-  innerClassName?: string;
 }
 
 const GameIcon: React.SFC<IProps> = ({ game, className }) => {

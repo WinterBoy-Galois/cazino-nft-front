@@ -11,6 +11,7 @@ import { useStateValue } from '../../../../state';
 import { transitionTimeout } from '../../../Modal';
 import { useTranslation } from 'react-i18next';
 import DetailsContainer from '../../../DetailsContainer';
+import { datetimeFromEpoch } from '../../../../common/util/date.util';
 
 interface IProps {
   bet: Bet;
@@ -75,7 +76,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
 
         <DetailList
           details={[
-            { label: t('betDetails.date'), value: bet.time },
+            { label: t('betDetails.date'), value: datetimeFromEpoch(bet.time) },
             { label: t('betDetails.betId'), value: bet.id },
             { label: t('betDetails.game'), value: <GameIconAndText game={bet.gameid} /> },
             { label: t('betDetails.bet'), value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },

@@ -26,7 +26,11 @@ const Username: React.SFC<IProps> = ({ username, avatarUrl, className = '', onCl
     <div className={`${styles.container} ${className}`}>
       <div className={styles.avatar}>
         {!loading && avatarUrl ? (
-          <img className="w-100 h-100" src={avatarUrl} alt={username} />
+          <img
+            className="w-100 h-100"
+            src={avatarUrl}
+            alt={getUsername()?.substr(0, 2).toUpperCase() ?? ''}
+          />
         ) : (
           <div className={styles.avatar__spinner}>
             <Spinner color={'WHITE'} />
