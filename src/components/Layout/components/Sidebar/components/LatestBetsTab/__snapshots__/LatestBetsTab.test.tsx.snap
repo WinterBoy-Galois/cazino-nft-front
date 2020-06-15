@@ -32,7 +32,7 @@ Object {
             />
           </table>
           <div
-            class="container"
+            class="undefined container"
           >
             No Data
           </div>
@@ -68,7 +68,7 @@ Object {
           />
         </table>
         <div
-          class="container"
+          class="undefined container"
         >
           No Data
         </div>

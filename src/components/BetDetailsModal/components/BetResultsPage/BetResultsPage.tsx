@@ -23,11 +23,11 @@ interface IProps {
 
 const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error }) => {
   if (loading) {
-    return <Loading />;
+    return <Loading className={styles.empty} />;
   }
 
   if (error) {
-    return <Error />;
+    return <Error className={styles.empty} />;
   }
 
   if (!betDetails) {

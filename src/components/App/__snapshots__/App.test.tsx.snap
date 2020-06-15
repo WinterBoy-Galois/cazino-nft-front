@@ -1186,7 +1186,7 @@ Object {
                 />
               </table>
               <div
-                class="container"
+                class=" container"
               >
                 <div
                   class="spinner"
@@ -2384,7 +2384,7 @@ Object {
               />
             </table>
             <div
-              class="container"
+              class=" container"
             >
               <div
                 class="spinner"

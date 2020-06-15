@@ -31,7 +31,7 @@ exports[`renders 1`] = `
       />
     </table>
     <div
-      class="container"
+      class="undefined container"
     >
       Sorry, received no data.
     </div>
