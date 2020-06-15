@@ -16,5 +16,5 @@ export interface DiceBetResult {
 export interface MinesBetResult {
   mineCount: number;
   minePositions: number[];
-  open: boolean;
+  open: number[];
 }
