@@ -14,6 +14,7 @@ Object {
           aria-modal="true"
           class="modal scale--enter scale--enter-active"
           role="dialog"
+          style="min-height: 590px;"
         >
           <div
             class="modal__header"
@@ -262,6 +263,7 @@ Object {
         aria-modal="true"
         class="modal scale--enter scale--enter-active"
         role="dialog"
+        style="min-height: 590px;"
       >
         <div
           class="modal__header"

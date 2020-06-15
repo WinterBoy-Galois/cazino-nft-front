@@ -12,11 +12,20 @@ interface IProps {
   onClose?: () => void;
   footer?: ReactNode;
   mainRef?: RefObject<HTMLDivElement>;
+  modalClassName?: string;
 }
 
 export const transitionTimeout = 200;
 
-const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer, mainRef }) => {
+const Modal: React.SFC<IProps> = ({
+  title = '',
+  show,
+  children,
+  onClose,
+  footer,
+  mainRef,
+  modalClassName = '',
+}) => {
   useScrollLock(show);
 
   const handleClose = () => {
@@ -64,7 +73,13 @@ const Modal: React.SFC<IProps> = ({ title = '', show, children, onClose, footer,
           }}
           appear={true}
         >
-          <div role="dialog" aria-modal="true" className={styles.modal} ref={modalRef}>
+          <div
+            role="dialog"
+            aria-modal="true"
+            className={`${modalClassName} ${styles.modal}`}
+            ref={modalRef}
+            style={{ minHeight: '590px' }}
+          >
             <div className={styles.modal__header}>
               <div className={styles.modal__header__headline}>{title}</div>
               <div className={styles.modal__header__close} onClick={handleClose}>

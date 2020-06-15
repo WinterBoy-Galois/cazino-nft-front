@@ -10,11 +10,18 @@ interface IProps {
   pages: ReactNode[];
   title?: ReactNode | ReactNode[];
   onClose?: () => void;
+  modalClassName?: string;
 }
 
 const exitTimeout = 100;
 
-const PageableModal: React.SFC<IProps> = ({ show, pages, title: initialTitle, onClose }) => {
+const PageableModal: React.SFC<IProps> = ({
+  show,
+  pages,
+  title: initialTitle,
+  onClose,
+  modalClassName,
+}) => {
   const [title, setTitle] = useState<string>();
   const [state, dispatch] = useReducer<Reducer<PageableModalState, PageableModalAction>>(
     pageableModalReducer,
@@ -65,6 +72,7 @@ const PageableModal: React.SFC<IProps> = ({ show, pages, title: initialTitle, on
           onGoToPage={page => dispatch({ type: 'GO_TO_PAGE', payload: { page } })}
         />
       }
+      modalClassName={modalClassName}
     >
       <SwitchTransition>
         <CSSTransition
