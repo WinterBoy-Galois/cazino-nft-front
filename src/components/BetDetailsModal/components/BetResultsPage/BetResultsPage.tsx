@@ -7,32 +7,53 @@ import BitcoinProfit from '../../../BitcoinProfit';
 import BetResultsDice from './components/BetResultsDice';
 import styles from './BetResultsPage.module.scss';
 import { GameTypes } from '../../../../models/gameTypes.model';
+import { useQuery } from '@apollo/react-hooks';
+import { BetDetails, DiceBetResult } from '../../../../models/betDetails.model';
+import { ApolloError } from 'apollo-client';
+import { BET_DETAILS } from '../../../../graphql/queries';
+import Error from '../../../Error';
+import Loading from '../../../Loading';
 
 interface IProps {
   gameType: GameTypes;
-  result: number;
-  rollOver: number;
+  betDetails?: BetDetails;
+  loading: boolean;
+  error?: ApolloError;
 }
 
-const BetResultsPage: React.FC<IProps> = ({ result, rollOver, gameType }) => {
+const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error }) => {
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
+
+  if (!betDetails) {
+    return null;
+  }
+
   let results;
   let details;
 
   switch (gameType) {
     case GameTypes.CLAMS:
       break;
-    case GameTypes.DICE:
-      results = <BetResultsDice result={result} rollOver={rollOver} />;
+    case GameTypes.DICE: {
+      const { resultFloat, target, winChance, over } = betDetails.gameResult as DiceBetResult;
+      results = <BetResultsDice result={resultFloat} rollOver={target} hasWon={!over} />;
       details = [
-        { label: 'bet', value: <BitcoinValue value={formatBitcoin(0.00001219)} /> },
-        { label: 'roll over', value: rollOver },
-        { label: 'win chance', value: '74.4%' },
+        { label: 'bet', value: <BitcoinValue value={formatBitcoin(betDetails.bet)} /> },
+        { label: 'roll over', value: target.toFixed(2) },
+        { label: 'win chance', value: `${winChance.toFixed(1)}%` },
         {
-          label: <ProfitLabel label="Profit" multiplier={0.12} />,
-          value: <BitcoinProfit value={0.0004354} />,
+          label: <ProfitLabel label="Profit" multiplier={betDetails.multiplier} />,
+          value: <BitcoinProfit value={betDetails.profit} />,
         },
       ];
       break;
+    }
     case GameTypes.MINES:
       break;
     case GameTypes.GOALS:
@@ -50,3 +71,18 @@ const BetResultsPage: React.FC<IProps> = ({ result, rollOver, gameType }) => {
 };
 
 export default BetResultsPage;
+
+interface IWithDataProps {
+  gameType: GameTypes;
+  betId: string;
+}
+
+export const BetResultsPageWithData: React.SFC<IWithDataProps> = props => {
+  const { data, loading, error } = useQuery<{ betDetails: BetDetails }>(BET_DETAILS, {
+    variables: { betId: props.betId },
+  });
+
+  return (
+    <BetResultsPage {...props} loading={loading} error={error} betDetails={data?.betDetails} />
+  );
+};

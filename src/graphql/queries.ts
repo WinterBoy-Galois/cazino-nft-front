@@ -94,3 +94,41 @@ export const USER_INFO_AVATAR_URL = gql`
     }
   }
 `;
+
+export const BET_DETAILS = gql`
+  query BetDetails($betId: ID) {
+    betDetails(id: $betId) {
+      ... on BetDetails {
+        bet
+        profit
+        profitCut
+        multiplier
+        gameResult {
+          ... on DiceResult {
+            target
+            over
+            winChance
+            resultFloat
+          }
+          ... on MinesResult {
+            mineCount
+            minePositions
+            open
+          }
+          ... on GoalsResult {
+            difficulty
+            selections {
+              step
+              luckySpots
+              selected
+            }
+          }
+          ... on ClamsResult {
+            selection
+            resultInteger
+          }
+        }
+      }
+    }
+  }
+`;

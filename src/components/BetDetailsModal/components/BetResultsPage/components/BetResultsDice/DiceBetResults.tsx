@@ -4,6 +4,7 @@ import DiceGameBoard from '../../../../../DiceGameBoard';
 interface IProps {
   result: number;
   rollOver: number;
+  hasWon: boolean;
 }
 
 const DiceBetResults: React.FC<IProps> = props => {

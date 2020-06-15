@@ -9,11 +9,15 @@ interface IProps {
   result?: number;
   rollOver?: number;
   disabled?: boolean;
+  hasWon?: boolean;
 }
 
-const DiceGameBoard: React.FC<IProps> = ({ result = 0, rollOver = 0, disabled = false }) => {
-  const hasWon = result <= rollOver;
-
+const DiceGameBoard: React.FC<IProps> = ({
+  result = 0,
+  rollOver = 0,
+  disabled = false,
+  hasWon = true,
+}) => {
   return (
     <div className={styles.container}>
       <DiceResultScale result={result.toFixed(2)} />

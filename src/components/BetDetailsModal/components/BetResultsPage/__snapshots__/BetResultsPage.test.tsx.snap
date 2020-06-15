@@ -4,39 +4,9 @@ exports[`BetDetailsPage should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div>
-      <div
-        class="container"
-      >
-        <div
-          class="bet__results"
-        />
-        <div
-          class="bet__details"
-        >
-          <div
-            class=" container"
-          />
-        </div>
-      </div>
-    </div>
+    <div />
   </body>,
-  "container": <div>
-    <div
-      class="container"
-    >
-      <div
-        class="bet__results"
-      />
-      <div
-        class="bet__details"
-      >
-        <div
-          class=" container"
-        />
-      </div>
-    </div>
-  </div>,
+  "container": <div />,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],
