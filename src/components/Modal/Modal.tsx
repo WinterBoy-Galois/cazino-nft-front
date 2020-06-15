@@ -78,7 +78,6 @@ const Modal: React.SFC<IProps> = ({
             aria-modal="true"
             className={`${modalClassName} ${styles.modal}`}
             ref={modalRef}
-            style={{ minHeight: '590px' }}
           >
             <div className={styles.modal__header}>
               <div className={styles.modal__header__headline}>{title}</div>
