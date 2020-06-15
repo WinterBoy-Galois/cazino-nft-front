@@ -5,635 +5,639 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div>
-        <div>
-          <span>
+      <div
+        class="container"
+      >
+        <div
+          class="field field--opened field--win"
+        >
+          <span
+            class="field__index"
+          >
             0
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Open
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             1
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             2
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             3
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--loss"
+        >
+          <span
+            class="field__index"
+          >
             4
           </span>
-           |
-          <span>
-            Mine
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Mine"
+            src="mines-boom.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field field--opened field--win"
+        >
+          <span
+            class="field__index"
+          >
             5
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Open
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             6
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             7
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             8
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             9
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field field--opened field--loss"
+        >
+          <span
+            class="field__index"
+          >
             10
           </span>
-           |
-          <span>
-            Mine
-          </span>
-           |
-          <span>
-            Open
-          </span>
+          <img
+            alt="Mine"
+            src="mines-boom.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             11
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             12
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             13
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             14
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field field--opened field--win"
+        >
+          <span
+            class="field__index"
+          >
             15
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Open
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             16
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             17
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             18
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             19
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             20
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             21
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--loss"
+        >
+          <span
+            class="field__index"
+          >
             22
           </span>
-           |
-          <span>
-            Mine
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Mine"
+            src="mines-boom.svg"
+          />
         </div>
-        <div>
-          <span>
+        <div
+          class="field  field--win"
+        >
+          <span
+            class="field__index"
+          >
             23
           </span>
-           |
-          <span>
-            Cash
-          </span>
-           |
-          <span>
-            Closed
-          </span>
+          <img
+            alt="Cash"
+            src="mines-bitcoin.svg"
+          />
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
-    <div>
-      <div>
-        <span>
+    <div
+      class="container"
+    >
+      <div
+        class="field field--opened field--win"
+      >
+        <span
+          class="field__index"
+        >
           0
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Open
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           1
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           2
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           3
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--loss"
+      >
+        <span
+          class="field__index"
+        >
           4
         </span>
-         |
-        <span>
-          Mine
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Mine"
+          src="mines-boom.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field field--opened field--win"
+      >
+        <span
+          class="field__index"
+        >
           5
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Open
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           6
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           7
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           8
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           9
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field field--opened field--loss"
+      >
+        <span
+          class="field__index"
+        >
           10
         </span>
-         |
-        <span>
-          Mine
-        </span>
-         |
-        <span>
-          Open
-        </span>
+        <img
+          alt="Mine"
+          src="mines-boom.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           11
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           12
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           13
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           14
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field field--opened field--win"
+      >
+        <span
+          class="field__index"
+        >
           15
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Open
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           16
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           17
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           18
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           19
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           20
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           21
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--loss"
+      >
+        <span
+          class="field__index"
+        >
           22
         </span>
-         |
-        <span>
-          Mine
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Mine"
+          src="mines-boom.svg"
+        />
       </div>
-      <div>
-        <span>
+      <div
+        class="field  field--win"
+      >
+        <span
+          class="field__index"
+        >
           23
         </span>
-         |
-        <span>
-          Cash
-        </span>
-         |
-        <span>
-          Closed
-        </span>
+        <img
+          alt="Cash"
+          src="mines-bitcoin.svg"
+        />
       </div>
     </div>
   </div>,

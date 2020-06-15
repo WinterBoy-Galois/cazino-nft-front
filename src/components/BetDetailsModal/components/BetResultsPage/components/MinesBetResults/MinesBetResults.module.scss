@@ -1,0 +1,62 @@
+@import '../../../../../../styles/shared';
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @include media-breakpoint-up(md) {
+    justify-content: start;
+  }
+}
+
+.field {
+  position: relative;
+  width: 55px;
+  height: 55px;
+  opacity: 0.5;
+  margin: 0.3rem;
+  border-radius: 0.5rem;
+  padding: 0.4rem;
+
+  @include media-breakpoint-up(md) {
+    width: 85px;
+    height: 85px;
+    margin: 0.5rem;
+    padding: 0.7rem;
+  }
+
+  &__index {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0.3rem;
+    left: 0.3rem;
+    border-radius: 50%;
+    background-color: rgba($white, 0.8);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 14px;
+
+    @include media-breakpoint-up(md) {
+      width: 33px;
+      height: 33px;
+      font-size: 19px;
+    }
+  }
+
+  &--opened {
+    opacity: 1;
+  }
+
+  &--loss {
+    background-color: rgba($negative, 0.5);
+  }
+
+  &--win {
+    background-color: rgba($positive, 0.5);
+  }
+}
