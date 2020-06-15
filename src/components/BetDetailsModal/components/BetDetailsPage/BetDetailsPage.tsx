@@ -12,11 +12,15 @@ import { transitionTimeout } from '../../../Modal';
 import { useTranslation } from 'react-i18next';
 import DetailsContainer from '../../../DetailsContainer';
 import { datetimeFromEpoch } from '../../../../common/util/date.util';
+import { useQuery } from '@apollo/react-hooks';
+import { USER_INFO_AVATAR_URL } from '../../../../graphql/queries';
+import { ApolloError } from 'apollo-client';
 
 interface IProps {
   bet: Bet;
-  avatarUrl?: string;
   loading: boolean;
+  avatarUrl?: string;
+  error?: ApolloError;
 }
 
 const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
@@ -98,3 +102,22 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
 };
 
 export default BetDetailsPage;
+
+interface IWithDataProps {
+  bet: Bet;
+}
+
+export const BetDetailsPageWithData: React.SFC<IWithDataProps> = props => {
+  const { data, loading, error } = useQuery(USER_INFO_AVATAR_URL, {
+    variables: { userId: props.bet?.userid },
+  });
+
+  return (
+    <BetDetailsPage
+      {...props}
+      avatarUrl={data?.userInfo?.avatarUrl}
+      loading={loading}
+      error={error}
+    />
+  );
+};
