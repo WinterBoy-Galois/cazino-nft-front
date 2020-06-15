@@ -7,7 +7,7 @@ import { withKnobs, select, number, boolean, array } from '@storybook/addon-knob
 storiesOf('Components/BetDetailsModal/BetResultsPage', module)
   .addDecorator(withKnobs)
   .addDecorator(storyFn => (
-    <div style={{ padding: '1rem 2rem', backgroundColor: '#2d4560', height: '100vh' }}>
+    <div style={{ padding: '1rem 2rem', backgroundColor: '#2d4560', minHeight: '100vh' }}>
       {storyFn()}
     </div>
   ))
