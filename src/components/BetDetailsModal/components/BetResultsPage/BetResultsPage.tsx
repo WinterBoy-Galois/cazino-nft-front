@@ -4,7 +4,7 @@ import BitcoinValue from '../../../BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import ProfitLabel from '../../../ProfitLabel';
 import BitcoinProfit from '../../../BitcoinProfit';
-import BetResultsDice from './components/BetResultsDice';
+import BetResultsDice from './components/DiceBetResults';
 import styles from './BetResultsPage.module.scss';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import { useQuery } from '@apollo/react-hooks';

@@ -153,8 +153,8 @@ Object {
           class="character"
         >
           <img
-            alt="happy"
-            src="dice-char-happy.svg"
+            alt="sad"
+            src="dice-char-sad.svg"
           />
         </div>
       </div>
@@ -309,8 +309,8 @@ Object {
         class="character"
       >
         <img
-          alt="happy"
-          src="dice-char-happy.svg"
+          alt="sad"
+          src="dice-char-sad.svg"
         />
       </div>
     </div>
