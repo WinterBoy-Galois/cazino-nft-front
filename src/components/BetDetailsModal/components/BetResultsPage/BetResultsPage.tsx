@@ -8,12 +8,18 @@ import BetResultsDice from './components/BetResultsDice';
 import styles from './BetResultsPage.module.scss';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import { useQuery } from '@apollo/react-hooks';
-import { BetDetails, DiceBetResult, MinesBetResult } from '../../../../models/betDetails.model';
+import {
+  BetDetails,
+  DiceBetResult,
+  MinesBetResult,
+  GoalsBetResult,
+} from '../../../../models/betDetails.model';
 import { ApolloError } from 'apollo-client';
 import { BET_DETAILS } from '../../../../graphql/queries';
 import Error from '../../../Error';
 import Loading from '../../../Loading';
 import MinesBetResults from './components/MinesBetResults';
+import GoalsBetResults from './components/GoalsBetResults';
 
 interface IProps {
   gameType: GameTypes;
@@ -70,8 +76,19 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       ];
       break;
     }
-    case GameTypes.GOALS:
+    case GameTypes.GOALS: {
+      const { selections, difficulty } = betDetails.gameResult as GoalsBetResult;
+      results = <GoalsBetResults selections={selections} />;
+      details = [
+        { label: 'bet', value: <BitcoinValue value={formatBitcoin(betDetails.bet)} /> },
+        { label: 'difficulty', value: `${difficulty}` },
+        {
+          label: <ProfitLabel label="Profit" multiplier={betDetails.multiplier} />,
+          value: <BitcoinProfit value={betDetails.profit} />,
+        },
+      ];
       break;
+    }
   }
 
   return (
