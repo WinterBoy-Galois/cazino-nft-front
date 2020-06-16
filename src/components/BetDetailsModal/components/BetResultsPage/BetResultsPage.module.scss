@@ -8,8 +8,9 @@
 
 .bet {
   &__results {
-    margin-bottom: 2.5rem;
+    margin: 0 auto 2.5rem;
     padding: 0 1rem;
+    max-width: 450px;
 
     @include media-breakpoint-up(md) {
       margin: 0 2rem 0 0;
