@@ -20,6 +20,7 @@ import Error from '../../../Error';
 import Loading from '../../../Loading';
 import MinesBetResults from './components/MinesBetResults';
 import GoalsBetResults from './components/GoalsBetResults';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   gameType: GameTypes;
@@ -29,6 +30,8 @@ interface IProps {
 }
 
 const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error }) => {
+  const { t } = useTranslation(['modals']);
+
   if (loading) {
     return <Loading className={styles.empty} />;
   }
@@ -51,11 +54,14 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       const { resultFloat, target, winChance, over } = betDetails.gameResult as DiceBetResult;
       results = <BetResultsDice result={resultFloat} rollOver={target} hasWon={!over} />;
       details = [
-        { label: 'bet', value: <BitcoinValue value={formatBitcoin(betDetails.bet)} /> },
-        { label: 'roll over', value: target.toFixed(2) },
-        { label: 'win chance', value: `${winChance.toFixed(1)}%` },
         {
-          label: <ProfitLabel label="Profit" multiplier={betDetails.multiplier} />,
+          label: t('betDetails.bet'),
+          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
+        },
+        { label: t('betDetails.rollOver'), value: target.toFixed(2) },
+        { label: t('betDetails.winChance'), value: `${winChance.toFixed(1)}%` },
+        {
+          label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
           value: <BitcoinProfit value={betDetails.profit} />,
         },
       ];
@@ -67,10 +73,13 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
         <MinesBetResults fieldCount={mineCount} minePositions={minePositions} openedFields={open} />
       );
       details = [
-        { label: 'bet', value: <BitcoinValue value={formatBitcoin(betDetails.bet)} /> },
-        { label: 'mines', value: `${mineCount}` },
         {
-          label: <ProfitLabel label="Profit" multiplier={betDetails.multiplier} />,
+          label: t('betDetails.bet'),
+          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
+        },
+        { label: t('betDetails.mines'), value: `${mineCount}` },
+        {
+          label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
           value: <BitcoinProfit value={betDetails.profit} />,
         },
       ];
@@ -80,10 +89,16 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       const { selections, difficulty } = betDetails.gameResult as GoalsBetResult;
       results = <GoalsBetResults selections={selections} />;
       details = [
-        { label: 'bet', value: <BitcoinValue value={formatBitcoin(betDetails.bet)} /> },
-        { label: 'difficulty', value: `${difficulty}` },
         {
-          label: <ProfitLabel label="Profit" multiplier={betDetails.multiplier} />,
+          label: t('betDetails.bet'),
+          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
+        },
+        {
+          label: t('betDetails.difficulty.label'),
+          value: t(`betDetails.difficulty.${difficulty}`),
+        },
+        {
+          label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
           value: <BitcoinProfit value={betDetails.profit} />,
         },
       ];
