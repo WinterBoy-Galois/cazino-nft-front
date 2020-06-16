@@ -23,13 +23,13 @@
 .bet {
   display: none;
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(sm) {
     display: table-cell;
   }
-}
 
-.time {
-  display: none;
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
 
   @include media-breakpoint-up(lg) {
     display: table-cell;
@@ -57,8 +57,12 @@
 .username {
   width: 130px;
 
+  @include media-breakpoint-up(md) {
+    width: 115px;
+  }
+
   @include media-breakpoint-up(lg) {
-    width: 129px;
+    width: 115px;
   }
 
   &__hidden {

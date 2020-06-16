@@ -40,13 +40,15 @@ const LatestBetsTable: React.FC<IProps> = ({
   const { t } = useTranslation(['sidebar']);
   const [, dispatch] = useStateValue();
 
-  const renderBetAndTimeColumn = () => {
+  const renderBetColumn = () => {
     switch (true) {
       case breakpoint === 'xs':
-      case breakpoint === 'sm':
-      case breakpoint === 'md':
-      case viewMode === ViewMode.COMPACT:
         return false;
+      case breakpoint === 'sm':
+        return true;
+      case breakpoint === 'md':
+        return false;
+      // case viewMode === ViewMode.COMPACT:
       default:
         return true;
     }
@@ -73,9 +75,8 @@ const LatestBetsTable: React.FC<IProps> = ({
           <tr>
             <th />
             <th>{t('latestBets.table.user')}</th>
+            {renderBetColumn() && <th>{t('latestBets.table.bet')}</th>}
             <th>{t('latestBets.table.profit')}</th>
-            {renderBetAndTimeColumn() && <th>{t('latestBets.table.bet')}</th>}
-            {renderBetAndTimeColumn() && <th>{t('latestBets.table.time')}</th>}
           </tr>
         </thead>
         <tbody className={styles['bet-table__body']}>
