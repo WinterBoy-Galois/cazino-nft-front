@@ -20,9 +20,8 @@
   padding: 0.4rem;
 
   @include media-breakpoint-up(md) {
-    width: 85px;
-    height: 85px;
-    margin: 0.5rem;
+    width: 70px;
+    height: 70px;
     padding: 0.7rem;
   }
 
@@ -42,9 +41,9 @@
     font-size: 14px;
 
     @include media-breakpoint-up(md) {
-      width: 33px;
-      height: 33px;
-      font-size: 19px;
+      width: 28px;
+      height: 28px;
+      font-size: 16px;
     }
   }
 
