@@ -68,19 +68,23 @@ storiesOf('Components/BetDetailsModal/BetResultsPage', module)
           ),
           selections: [
             {
-              luckySpots: array('Lucky Spots 1', ['0', '2']).map(p => parseInt(p)),
-              selected: number('Selected 1', 1),
               step: number('Step 1', 0),
+              luckySpots: array('Lucky Spots 1', ['1', '2']).map(p => parseInt(p)),
+              selected: number('Selected 1', 2),
             },
             {
-              luckySpots: array('Lucky Spots 2', ['0', '2']).map(p => parseInt(p)),
-              selected: number('Selected 2', 1),
               step: number('Step 2', 1),
+              luckySpots: array('Lucky Spots 2', ['0', '2']).map(p => parseInt(p)),
+              selected: number('Selected 2', 0),
             },
             {
-              luckySpots: array('Lucky Spots 3', ['0', '2']).map(p => parseInt(p)),
-              selected: number('Selected 3', 1),
               step: number('Step 3', 2),
+              luckySpots: array('Lucky Spots 3', ['0', '1']).map(p => parseInt(p)),
+              selected: number('Selected 3', 2),
+            },
+            {
+              step: number('Step 4', 3),
+              luckySpots: array('Lucky Spots 4', ['0', '1']).map(p => parseInt(p)),
             },
           ],
         },

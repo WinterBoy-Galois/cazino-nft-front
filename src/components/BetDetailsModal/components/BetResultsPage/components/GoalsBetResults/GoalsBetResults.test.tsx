@@ -7,7 +7,9 @@ describe('GoalsBetResults', () => {
     // Arrange
 
     // Act
-    const container = render(<GoalsBetResults />);
+    const container = render(
+      <GoalsBetResults selections={[{ step: 0, luckySpots: [0, 2], selected: 0 }]} />
+    );
 
     // Assert
     expect(container).toMatchSnapshot();

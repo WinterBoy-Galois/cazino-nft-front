@@ -27,7 +27,7 @@ export interface GoalsBetResult {
 export interface GoalSelection {
   step: number;
   luckySpots: number[];
-  selected: number;
+  selected?: number;
 }
 
 export enum GoalsDifficulty {
