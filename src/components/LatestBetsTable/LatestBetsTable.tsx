@@ -75,8 +75,8 @@ const LatestBetsTable: React.FC<IProps> = ({
           <tr>
             <th />
             <th>{t('latestBets.table.user')}</th>
-            <th>{t('latestBets.table.profit')}</th>
             {renderBetColumn() && <th>{t('latestBets.table.bet')}</th>}
+            <th>{t('latestBets.table.profit')}</th>
           </tr>
         </thead>
         <tbody className={styles['bet-table__body']}>

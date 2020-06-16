@@ -67,14 +67,6 @@ const BetRow: React.FC<IProps> = ({
         <div className={getUsernameStyle()}>{getUsername()}</div>
       </td>
 
-      <td
-        className={`${
-          isPositive(formatProfit(bet.profit)) ? styles['row--green'] : styles['row--red']
-        }`}
-      >
-        <BitcoinValue className="text--bold" value={formatProfit(bet.profit)} />
-      </td>
-
       {viewMode === ViewMode.RESPONSIVE && (
         <>
           <td className={`${styles.bet}`}>
@@ -82,6 +74,14 @@ const BetRow: React.FC<IProps> = ({
           </td>
         </>
       )}
+
+      <td
+        className={`${
+          isPositive(formatProfit(bet.profit)) ? styles['row--green'] : styles['row--red']
+        }`}
+      >
+        <BitcoinValue className="text--bold" value={formatProfit(bet.profit)} />
+      </td>
     </tr>
   );
 };

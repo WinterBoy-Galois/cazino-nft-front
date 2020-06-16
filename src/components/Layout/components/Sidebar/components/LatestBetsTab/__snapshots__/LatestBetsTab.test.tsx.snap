@@ -23,10 +23,10 @@ Object {
                   User
                 </th>
                 <th>
-                  Profit
+                  Bet
                 </th>
                 <th>
-                  Bet
+                  Profit
                 </th>
               </tr>
             </thead>
@@ -62,10 +62,10 @@ Object {
                 User
               </th>
               <th>
-                Profit
+                Bet
               </th>
               <th>
-                Bet
+                Profit
               </th>
             </tr>
           </thead>
