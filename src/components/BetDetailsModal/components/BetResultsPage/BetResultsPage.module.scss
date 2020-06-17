@@ -29,7 +29,7 @@
     &--mines {
       max-width: 381px;
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(xl) {
         max-width: unset;
       }
     }
