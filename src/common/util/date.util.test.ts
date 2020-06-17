@@ -16,7 +16,7 @@ describe('dateFromEpoch', () => {
     const actual = dateFromEpoch(value);
 
     // Assert
-    const expected = '19.02.2020';
+    const expected = '02/19/2020';
 
     expect(actual).toEqual(expected);
   });
@@ -31,7 +31,7 @@ describe('dateFromEpochShort', () => {
     const actual = dateFromEpochShort(value);
 
     // Assert
-    const expected = '19.02.20';
+    const expected = '02/19/20';
 
     expect(actual).toEqual(expected);
   });
@@ -46,7 +46,7 @@ describe('timeFromEpoch', () => {
     const actual = timeFromEpoch(value);
 
     // Assert
-    const expected = '07:24:16';
+    const expected = '06:24:16';
 
     expect(actual).toEqual(expected);
   });
@@ -61,7 +61,7 @@ describe('timeFromEpochShort', () => {
     const actual = timeFromEpochShort(value);
 
     // Assert
-    const expected = '07:24';
+    const expected = '06:24';
 
     expect(actual).toEqual(expected);
   });
@@ -76,7 +76,7 @@ describe('datetimeFromEpoch', () => {
     const actual = datetimeFromEpoch(value);
 
     // Assert
-    const expected = '19.02.2020 07:24:16';
+    const expected = '02/19/2020 06:24:16';
 
     expect(actual).toEqual(expected);
   });
@@ -91,7 +91,7 @@ describe('datetimeFromEpochShort', () => {
     const actual = datetimeFromEpochShort(value);
 
     // Assert
-    const expected = '19.02.20 07:24:16';
+    const expected = '02/19/20 06:24:16';
 
     expect(actual).toEqual(expected);
   });
