@@ -74,7 +74,11 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
 
   return (
     <div className={styles.container}>
-      <div className={styles.bet__results}>{results}</div>
+      <div
+        className={`${styles.bet__results} ${styles[`bet__results--${gameType.toLowerCase()}`]}`}
+      >
+        {results}
+      </div>
       <div className={styles.bet__details}>
         <BetResultDetails details={details} />
       </div>

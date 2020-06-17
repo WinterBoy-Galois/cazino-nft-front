@@ -9,13 +9,29 @@
 .bet {
   &__results {
     margin: 0 auto 2.5rem;
-    padding: 0 1rem;
-    max-width: 450px;
 
     @include media-breakpoint-up(md) {
       margin: 0 2rem 0 0;
       padding: 0;
       flex-grow: 1;
+    }
+
+    &--dice {
+      padding: 0 1rem;
+      max-width: 450px;
+
+      @include media-breakpoint-up(md) {
+        margin: 0 2rem 0 0;
+        max-width: unset;
+      }
+    }
+
+    &--mines {
+      max-width: 381px;
+
+      @include media-breakpoint-up(md) {
+        max-width: unset;
+      }
     }
   }
 
