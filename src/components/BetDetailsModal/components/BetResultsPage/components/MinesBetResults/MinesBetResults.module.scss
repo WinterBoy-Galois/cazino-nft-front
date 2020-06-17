@@ -1,0 +1,65 @@
+@import '../../../../../../styles/shared';
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.field {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  opacity: 0.5;
+  margin: 0.3rem;
+  border-radius: 0.5rem;
+
+  @include media-breakpoint-up(xl) {
+    width: 70px;
+    height: 70px;
+  }
+
+  &__index {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0.3rem;
+    left: 0.3rem;
+    border-radius: 50%;
+    background-color: rgba($white, 0.8);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 14px;
+
+    @include media-breakpoint-up(xl) {
+      width: 28px;
+      height: 28px;
+      font-size: 16px;
+    }
+  }
+
+  &--opened {
+    opacity: 1;
+  }
+
+  &--loss {
+    background-color: rgba($negative, 0.5);
+    padding: 0.2rem;
+
+    @include media-breakpoint-up(xl) {
+      padding: 0.3rem;
+    }
+  }
+
+  &--win {
+    background-color: rgba($positive, 0.5);
+    padding: 0.4rem;
+
+    @include media-breakpoint-up(xl) {
+      padding: 0.6rem;
+    }
+  }
+}
