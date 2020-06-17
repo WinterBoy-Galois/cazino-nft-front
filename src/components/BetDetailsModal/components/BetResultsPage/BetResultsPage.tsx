@@ -1,7 +1,7 @@
 import React from 'react';
 import BetResultDetails from '../BetResultDetails';
 import BitcoinValue from '../../../BitcoinValue';
-import { formatBitcoin } from '../../../../common/util/format.util';
+import { formatBitcoin, formatWinChance } from '../../../../common/util/format.util';
 import ProfitLabel from '../../../ProfitLabel';
 import BitcoinProfit from '../../../BitcoinProfit';
 import BetResultsDice from './components/DiceBetResults';
@@ -46,8 +46,8 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       results = <BetResultsDice result={resultFloat} rollOver={target} hasWon={!over} />;
       details = [
         { label: 'bet', value: <BitcoinValue value={formatBitcoin(betDetails.bet)} /> },
-        { label: 'roll over', value: target.toFixed(2) },
-        { label: 'win chance', value: `${winChance.toFixed(1)}%` },
+        { label: 'roll over', value: target?.toFixed(2) ?? 'n/a' },
+        { label: 'win chance', value: formatWinChance(winChance) },
         {
           label: <ProfitLabel label="Profit" multiplier={betDetails.multiplier} />,
           value: <BitcoinProfit value={betDetails.profit} />,
@@ -62,7 +62,7 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       );
       details = [
         { label: 'bet', value: <BitcoinValue value={formatBitcoin(betDetails.bet)} /> },
-        { label: 'mines', value: `${mineCount}` },
+        { label: 'mines', value: `${mineCount ?? 'n/a'}` },
         {
           label: <ProfitLabel label="Profit" multiplier={betDetails.multiplier} />,
           value: <BitcoinProfit value={betDetails.profit} />,
