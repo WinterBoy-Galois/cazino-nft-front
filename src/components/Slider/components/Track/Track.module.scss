@@ -1,0 +1,9 @@
+@import '../../../../styles/shared.scss';
+
+.track {
+  position: absolute;
+  z-index: 1;
+  background-color: $red;
+  cursor: pointer;
+  width: 100%;
+}

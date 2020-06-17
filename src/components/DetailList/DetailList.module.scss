@@ -30,6 +30,7 @@
       align-items: center;
       width: 50%;
       font-weight: 300;
+      text-align: right;
 
       @include media-breakpoint-up(md) {
         justify-content: flex-start;
