@@ -4,10 +4,9 @@ const defaultTimeOptions = {
   hour: '2-digit',
   minute: '2-digit',
   second: '2-digit',
-  timeZone: 'Europe/Berlin',
 };
 
-const defaultLocale = 'de-DE';
+const defaultLocale = navigator.language ?? (navigator as any).userLanguage;
 
 const dateFromEpoch = (value: number) => {
   const result = new Intl.DateTimeFormat(defaultLocale, defaultDateOptions).format(value);

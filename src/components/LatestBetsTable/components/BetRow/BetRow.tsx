@@ -1,5 +1,4 @@
 import React from 'react';
-import { timeFromEpoch } from '../../../../common/util/date.util';
 import { formatProfit, formatBet } from '../../../../common/util/format.util';
 import { isPositive } from '../../../../common/util/sign.util';
 import Bet from '../../../../models/bet.model';
@@ -68,6 +67,14 @@ const BetRow: React.FC<IProps> = ({
         <div className={getUsernameStyle()}>{getUsername()}</div>
       </td>
 
+      {viewMode === ViewMode.RESPONSIVE && (
+        <>
+          <td className={`${styles.bet}`}>
+            <BitcoinValue className="text--bold" value={formatBet(bet.bet)} />
+          </td>
+        </>
+      )}
+
       <td
         className={`${
           isPositive(formatProfit(bet.profit)) ? styles['row--green'] : styles['row--red']
@@ -75,18 +82,6 @@ const BetRow: React.FC<IProps> = ({
       >
         <BitcoinValue className="text--bold" value={formatProfit(bet.profit)} />
       </td>
-
-      {viewMode === ViewMode.RESPONSIVE && (
-        <>
-          <td className={`${styles.bet}`}>
-            <BitcoinValue className="text--bold" value={formatBet(bet.bet)} />
-          </td>
-
-          <td className={`${styles.bet}`}>
-            <div>{timeFromEpoch(bet.time)}</div>
-          </td>
-        </>
-      )}
     </tr>
   );
 };
