@@ -17,12 +17,10 @@
   opacity: 0.5;
   margin: 0.3rem;
   border-radius: 0.5rem;
-  padding: 0.4rem;
 
   @include media-breakpoint-up(md) {
     width: 70px;
     height: 70px;
-    padding: 0.7rem;
   }
 
   &__index {
@@ -53,9 +51,19 @@
 
   &--loss {
     background-color: rgba($negative, 0.5);
+    padding: 0.2rem;
+
+    @include media-breakpoint-up(md) {
+      padding: 0.3rem;
+    }
   }
 
   &--win {
     background-color: rgba($positive, 0.5);
+    padding: 0.4rem;
+
+    @include media-breakpoint-up(md) {
+      padding: 0.4rem;
+    }
   }
 }
