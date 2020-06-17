@@ -49,7 +49,7 @@ storiesOf('Components/BetDetailsModal/BetResultsPage', module)
         profitCut: boolean('Profit cut', false),
         multiplier: number('Multiplier', 1.4539),
         gameResult: {
-          mineCount: number('Mines', 24, { range: true, min: 12, max: 64, step: 1 }),
+          mineCount: number('Mines', 25, { range: true, min: 12, max: 64, step: 1 }),
           minePositions: array('Mine positions', ['3', '7', '9', '15']).map(p => parseInt(p)),
           open: array('Opened fields', ['4', '5', '8', '15', '20']).map(p => parseInt(p)),
         },
