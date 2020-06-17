@@ -28,7 +28,8 @@
       }
     }
 
-    &--mines {
+    &--mines,
+    &--goals {
       max-width: 381px;
 
       @include media-breakpoint-up(xl) {
@@ -38,8 +39,6 @@
   }
 
   &__details {
-    margin-bottom: 1rem;
-
     @include media-breakpoint-up(md) {
       width: 300px;
       align-self: center;

@@ -28,7 +28,6 @@
   @include media-breakpoint-up(md) {
     border-radius: 8px;
     height: auto;
-    max-height: 80vh;
     width: 700px;
   }
 
@@ -81,7 +80,7 @@
 
     @include media-breakpoint-up(md) {
       padding: 1.5rem;
-      max-height: 60vh;
+      max-height: 61vh;
     }
   }
 
