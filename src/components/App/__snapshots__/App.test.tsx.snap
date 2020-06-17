@@ -1177,6 +1177,9 @@ Object {
                       User
                     </th>
                     <th>
+                      Bet
+                    </th>
+                    <th>
                       Profit
                     </th>
                   </tr>
@@ -1186,7 +1189,7 @@ Object {
                 />
               </table>
               <div
-                class="container"
+                class=" container"
               >
                 <div
                   class="spinner"
@@ -2375,6 +2378,9 @@ Object {
                     User
                   </th>
                   <th>
+                    Bet
+                  </th>
+                  <th>
                     Profit
                   </th>
                 </tr>
@@ -2384,7 +2390,7 @@ Object {
               />
             </table>
             <div
-              class="container"
+              class=" container"
             >
               <div
                 class="spinner"

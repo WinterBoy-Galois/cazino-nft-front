@@ -1,0 +1,19 @@
+@import '../../styles/shared.scss';
+
+.slider {
+  position: relative;
+  height: 100%;
+  user-select: none;
+
+  &__rail {
+    background-color: $green;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  &__wrapper {
+    height: 100%;
+    width: 100%;
+  }
+}

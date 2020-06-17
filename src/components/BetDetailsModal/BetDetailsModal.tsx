@@ -1,53 +1,34 @@
 import React from 'react';
 import PageableModal from '../PageableModal';
-import BetDetailsPage from './components/BetDetailsPage';
 import Bet from '../../models/bet.model';
-import { useQuery } from '@apollo/react-hooks';
-import { USER_INFO_AVATAR_URL } from '../../graphql/queries';
-import { ApolloError } from 'apollo-client';
 import { useTranslation } from 'react-i18next';
+import { BetDetailsPageWithData } from './components/BetDetailsPage/BetDetailsPage';
+import { BetResultsPageWithData } from './components/BetResultsPage/BetResultsPage';
 
 interface IProps {
   show: boolean;
-  onClose?: () => void;
   bet: Bet;
-  avatarUrl?: string;
-  loading: boolean;
-  error?: ApolloError;
+  onClose?: () => void;
 }
 
-const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet, avatarUrl, loading }) => {
+const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet }) => {
   const { t } = useTranslation(['modals']);
+
+  if (!bet) {
+    return null;
+  }
 
   return (
     <PageableModal
       show={show}
-      title={[t('betDetails.title')]}
+      title={[t('betDetails.title'), 'Bet Results']}
       onClose={onClose}
-      pages={[<BetDetailsPage key={1} bet={bet} avatarUrl={avatarUrl} loading={loading} />]}
+      pages={[
+        <BetDetailsPageWithData key={1} bet={bet} />,
+        <BetResultsPageWithData key={2} gameType={bet.gameid} betId={bet.id} />,
+      ]}
     />
   );
 };
 
 export default BetDetailsModal;
-
-interface IWithDataProps {
-  show: boolean;
-  onClose?: () => void;
-  bet: Bet;
-}
-
-export const BetDetailsModalWithData: React.SFC<IWithDataProps> = props => {
-  const { data, loading, error } = useQuery(USER_INFO_AVATAR_URL, {
-    variables: { userId: props.bet?.userid },
-  });
-
-  return (
-    <BetDetailsModal
-      {...props}
-      avatarUrl={data?.userInfo?.avatarUrl}
-      loading={loading}
-      error={error}
-    />
-  );
-};

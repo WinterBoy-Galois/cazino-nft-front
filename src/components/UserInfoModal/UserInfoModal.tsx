@@ -15,6 +15,7 @@ import BitcoinProfit from '../BitcoinProfit';
 import LostBets from '../LostBets';
 import { ApolloError } from 'apollo-client';
 import { useTranslation } from 'react-i18next';
+import DetailsContainer from '../DetailsContainer';
 
 interface IProps {
   show: boolean;
@@ -49,7 +50,7 @@ const UserInfoModal: React.FC<IProps> = ({
             avatarUrl={data.userInfo.avatarUrl}
             loading={loading}
           />
-          <div className={styles.details}>
+          <DetailsContainer className={styles.details}>
             <Username
               className={`${styles.username} ${styles['username--desktop']}`}
               username={data.userInfo.username}
@@ -100,7 +101,7 @@ const UserInfoModal: React.FC<IProps> = ({
                 },
               ]}
             />
-          </div>
+          </DetailsContainer>
 
           <div className={styles.button}>
             {onBack ? (

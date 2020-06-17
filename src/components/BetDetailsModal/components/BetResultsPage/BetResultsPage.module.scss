@@ -1,0 +1,35 @@
+@import '../../../../styles/shared';
+
+.container {
+  @include media-breakpoint-up(md) {
+    display: flex;
+  }
+}
+
+.bet {
+  &__results {
+    margin: 0 auto 2.5rem;
+    padding: 0 1rem;
+    max-width: 450px;
+
+    @include media-breakpoint-up(md) {
+      margin: 0 2rem 0 0;
+      flex-grow: 1;
+    }
+  }
+
+  &__details {
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(md) {
+      width: 300px;
+      align-self: center;
+      justify-self: flex-end;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.empty {
+  height: 401px;
+}
