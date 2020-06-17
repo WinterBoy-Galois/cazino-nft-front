@@ -22,10 +22,20 @@ storiesOf('Components/BetDetailsModal/BetResultsPage', module)
         profitCut: boolean('Profit cut', false),
         multiplier: number('Multiplier', 1.4539),
         gameResult: {
-          target: number('Roll over', 68.09369753713791),
+          target: number('Roll over', 68.09369753713791, {
+            range: true,
+            min: 0,
+            max: 100,
+            step: 0.01,
+          }),
           over: boolean('Over', false),
-          winChance: number('Win Chance', 68.09369753713791),
-          resultFloat: number('Result', 65.66),
+          winChance: number('Win Chance', 68.09369753713791, {
+            range: true,
+            min: 0,
+            max: 100,
+            step: 0.1,
+          }),
+          resultFloat: number('Result', 65.66, { range: true, min: 0, max: 100, step: 0.01 }),
         },
       }}
     />
@@ -40,7 +50,7 @@ storiesOf('Components/BetDetailsModal/BetResultsPage', module)
         profitCut: boolean('Profit cut', false),
         multiplier: number('Multiplier', 1.4539),
         gameResult: {
-          mineCount: number('Mines', 24),
+          mineCount: number('Mines', 25, { range: true, min: 12, max: 64, step: 1 }),
           minePositions: array('Mine positions', ['3', '7', '9', '15']).map(p => parseInt(p)),
           open: array('Opened fields', ['4', '5', '8', '15', '20']).map(p => parseInt(p)),
         },

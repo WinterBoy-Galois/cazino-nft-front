@@ -4,26 +4,19 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
-  @include media-breakpoint-up(md) {
-    justify-content: start;
-  }
 }
 
 .field {
   position: relative;
-  width: 55px;
-  height: 55px;
+  width: 54px;
+  height: 54px;
   opacity: 0.5;
   margin: 0.3rem;
   border-radius: 0.5rem;
-  padding: 0.4rem;
 
-  @include media-breakpoint-up(md) {
-    width: 85px;
-    height: 85px;
-    margin: 0.5rem;
-    padding: 0.7rem;
+  @include media-breakpoint-up(xl) {
+    width: 70px;
+    height: 70px;
   }
 
   &__index {
@@ -41,10 +34,10 @@
     font-weight: 700;
     font-size: 14px;
 
-    @include media-breakpoint-up(md) {
-      width: 33px;
-      height: 33px;
-      font-size: 19px;
+    @include media-breakpoint-up(xl) {
+      width: 28px;
+      height: 28px;
+      font-size: 16px;
     }
   }
 
@@ -54,9 +47,19 @@
 
   &--loss {
     background-color: rgba($negative, 0.5);
+    padding: 0.2rem;
+
+    @include media-breakpoint-up(xl) {
+      padding: 0.3rem;
+    }
   }
 
   &--win {
     background-color: rgba($positive, 0.5);
+    padding: 0.4rem;
+
+    @include media-breakpoint-up(xl) {
+      padding: 0.6rem;
+    }
   }
 }

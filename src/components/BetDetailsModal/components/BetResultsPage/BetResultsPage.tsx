@@ -1,10 +1,10 @@
 import React from 'react';
 import BetResultDetails from '../BetResultDetails';
 import BitcoinValue from '../../../BitcoinValue';
-import { formatBitcoin } from '../../../../common/util/format.util';
+import { formatBitcoin, formatWinChance } from '../../../../common/util/format.util';
 import ProfitLabel from '../../../ProfitLabel';
 import BitcoinProfit from '../../../BitcoinProfit';
-import BetResultsDice from './components/BetResultsDice';
+import BetResultsDice from './components/DiceBetResults';
 import styles from './BetResultsPage.module.scss';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import { useQuery } from '@apollo/react-hooks';
@@ -58,8 +58,8 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
           label: t('betDetails.bet'),
           value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
         },
-        { label: t('betDetails.rollOver'), value: target.toFixed(2) },
-        { label: t('betDetails.winChance'), value: `${winChance.toFixed(1)}%` },
+        { label: t('betDetails.rollOver'), value: target?.toFixed(2) ?? 'n/a' },
+        { label: t('betDetails.winChance'), value: formatWinChance(winChance) },
         {
           label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
           value: <BitcoinProfit value={betDetails.profit} />,
@@ -69,15 +69,13 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
     }
     case GameTypes.MINES: {
       const { mineCount, minePositions, open } = betDetails.gameResult as MinesBetResult;
-      results = (
-        <MinesBetResults fieldCount={mineCount} minePositions={minePositions} openedFields={open} />
-      );
+      results = <MinesBetResults minePositions={minePositions} openedFields={open} />;
       details = [
         {
           label: t('betDetails.bet'),
           value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
         },
-        { label: t('betDetails.mines'), value: `${mineCount}` },
+        { label: t('betDetails.mines'), value: `${mineCount ?? 'n/a'}` },
         {
           label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
           value: <BitcoinProfit value={betDetails.profit} />,
@@ -108,7 +106,11 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
 
   return (
     <div className={styles.container}>
-      <div className={styles.bet__results}>{results}</div>
+      <div
+        className={`${styles.bet__results} ${styles[`bet__results--${gameType.toLowerCase()}`]}`}
+      >
+        {results}
+      </div>
       <div className={styles.bet__details}>
         <BetResultDetails details={details} />
       </div>

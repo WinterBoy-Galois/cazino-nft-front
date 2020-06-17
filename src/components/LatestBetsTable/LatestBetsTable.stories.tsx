@@ -1,5 +1,4 @@
 import React, { useState, ReactNode } from 'react';
-import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
@@ -109,82 +108,100 @@ const RandomBetsConfiguration: React.FC<IProps> = ({
   );
 };
 
-storiesOf('Components/LatestBetsTable', module)
-  .addDecorator(withKnobs)
-  .addDecorator(storyFn => (
-    <div className="container" style={{ height: '500px' }}>
-      {storyFn()}
-    </div>
-  ))
-  .add('default', () => (
-    <LatestBetsTable
-      bets={initialBets}
-      signInUserId={randomUserFromInitialBets}
-      isLoading={false}
-      error={false}
-    />
-  ))
-  .add('empty', () => <LatestBetsTable bets={[]} isLoading={false} error={false} />)
-  .add('error', () => <LatestBetsTable bets={[]} isLoading={false} error={true} />)
-  .add('loading', () => <LatestBetsTable bets={[]} isLoading={true} error={false} />)
-  .add('custom', () => {
-    const [bets, setBets] = useState<Bet[]>(initialBets);
+// More information at Storybook CSF at https://storybook.js.org/docs/formats/component-story-format/
 
-    const handleBetAdded = (betAdded: Bet) => {
-      const newBets = [betAdded, ...bets.slice(0, 9)];
-      setBets(newBets);
-    };
+// Configure Component
+export default {
+  title: 'Components/LatestBetsTable',
+  component: LatestBetsTable,
+  decorators: [
+    withKnobs,
+    (storyFn: () => React.ReactNode) => (
+      <div className="container" style={{ height: '500px' }}>
+        {storyFn()}
+      </div>
+    ),
+  ],
+};
 
-    const userDict = users.reduce(
-      (acc: any, cur: any) => ({
-        ...acc,
-        [cur.name]: cur.id,
-      }),
-      {}
-    );
+export const Default = () => (
+  <LatestBetsTable
+    bets={initialBets}
+    signInUserId={randomUserFromInitialBets}
+    isLoading={false}
+    error={false}
+  />
+);
 
-    return (
-      <RandomBetsConfiguration
-        isActive={boolean('Generate Data', true)}
-        speed={number('Generation Speed (ms)', 1000, {
-          range: true,
-          min: 250,
-          max: 5000,
-          step: 250,
-        })}
-        betsPerBatch={number('No of bets', 1, { range: true, min: 1, max: 20, step: 1 })}
-        dispatchSpeed={select(
-          'Dispatch speed',
+export const Empty = () => <LatestBetsTable bets={[]} isLoading={false} error={false} />;
+
+export const Error = () => <LatestBetsTable bets={[]} isLoading={false} error={true} />;
+
+export const Loading = () => <LatestBetsTable bets={[]} isLoading={true} error={false} />;
+
+export const Custom = () => {
+  const [bets, setBets] = useState<Bet[]>(initialBets);
+
+  const handleBetAdded = (betAdded: Bet) => {
+    const newBets = [betAdded, ...bets.slice(0, 9)];
+    setBets(newBets);
+  };
+
+  const userDict = users.reduce(
+    (acc: any, cur: any) => ({
+      ...acc,
+      [cur.name]: cur.id,
+    }),
+    {}
+  );
+
+  return (
+    <RandomBetsConfiguration
+      isActive={boolean('Generate Data', true)}
+      speed={number('Generation Speed (ms)', 1000, {
+        range: true,
+        min: 250,
+        max: 5000,
+        step: 250,
+      })}
+      betsPerBatch={number('No of bets', 1, { range: true, min: 1, max: 20, step: 1 })}
+      dispatchSpeed={select(
+        'Dispatch speed',
+        {
+          Auto: DispatchSpeed.AUTO,
+          Normal: DispatchSpeed.NORMAL,
+          Fast: DispatchSpeed.FAST,
+          'Very fast': DispatchSpeed.VERY_FAST,
+        },
+        DispatchSpeed.AUTO
+      )}
+      currentUserId={select('Current User', userDict, 197)}
+      bufferSize={number('Buffer Size', 100, { range: true, min: 1, max: 240, step: 1 })}
+      onBetAdded={handleBetAdded}
+      onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
+    >
+      <LatestBetsTable
+        bets={bets}
+        animationSpeed={select(
+          'Animation speed',
           {
             Auto: DispatchSpeed.AUTO,
             Normal: DispatchSpeed.NORMAL,
             Fast: DispatchSpeed.FAST,
             'Very fast': DispatchSpeed.VERY_FAST,
           },
-          DispatchSpeed.AUTO
+          DispatchSpeed.NORMAL
         )}
-        currentUserId={select('Current User', userDict, 197)}
-        bufferSize={number('Buffer Size', 100, { range: true, min: 1, max: 240, step: 1 })}
-        onBetAdded={handleBetAdded}
-        onBetAddedForCurrentUser={action('onBetAddedForCurrentUser')}
-      >
-        <LatestBetsTable
-          bets={bets}
-          animationSpeed={select(
-            'Animation speed',
-            {
-              Auto: DispatchSpeed.AUTO,
-              Normal: DispatchSpeed.NORMAL,
-              Fast: DispatchSpeed.FAST,
-              'Very fast': DispatchSpeed.VERY_FAST,
-            },
-            DispatchSpeed.NORMAL
-          )}
-          isLoading={false}
-          error={false}
-          signInUserId={'197'}
-          reduceMotion={boolean('Reduce Motion', false)}
-        />
-      </RandomBetsConfiguration>
-    );
-  });
+        isLoading={false}
+        error={false}
+        signInUserId={'197'}
+        reduceMotion={boolean('Reduce Motion', false)}
+      />
+    </RandomBetsConfiguration>
+  );
+};
+
+// Customize specific Story
+Custom.story = {
+  name: 'Demo',
+};

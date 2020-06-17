@@ -4,12 +4,12 @@ import Mine from '../../../../../../assets/images/games/mines/mines-boom.svg';
 import Cash from '../../../../../../assets/images/games/mines/mines-bitcoin.svg';
 
 interface IProps {
-  fieldCount: number;
+  fieldCount?: number;
   minePositions: number[];
   openedFields: number[];
 }
 
-const MinesBetResults: React.FC<IProps> = ({ fieldCount, minePositions, openedFields }) => {
+const MinesBetResults: React.FC<IProps> = ({ fieldCount = 25, minePositions, openedFields }) => {
   return (
     <div className={styles.container}>
       {Array.from(new Array(fieldCount)).map((_, fieldIndex) => (
