@@ -19,7 +19,7 @@ const formatBet = (value?: number) => {
 };
 
 const formatMultiplier = (value?: number) => {
-  if (!value) {
+  if (value !== 0 && !value) {
     return 'n/a';
   }
 
