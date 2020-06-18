@@ -9,6 +9,11 @@
   background-color: rgba(0, 0, 0, 0.73);
   z-index: 1000;
 
+  // Fixes modal height on safari mobile
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
+
   @include media-breakpoint-up(md) {
     display: flex;
     justify-content: center;
