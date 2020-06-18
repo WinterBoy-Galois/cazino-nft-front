@@ -92,6 +92,7 @@ storiesOf('Components/BetDetailsModal/BetResultsPage', module)
             {
               step: number('Step 4', 3),
               luckySpots: array('Lucky Spots 4', ['0', '1']).map(p => parseInt(p)),
+              selected: number('Selected 4', 2),
             },
           ],
         },

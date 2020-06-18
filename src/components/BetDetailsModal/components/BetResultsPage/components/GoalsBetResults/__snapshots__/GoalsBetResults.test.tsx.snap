@@ -12,7 +12,7 @@ Object {
           class="list"
         >
           <li
-            class="list__item "
+            class="list__item list__item--highlight"
           >
             <div
               class="step"
@@ -180,7 +180,7 @@ Object {
         class="list"
       >
         <li
-          class="list__item "
+          class="list__item list__item--highlight"
         >
           <div
             class="step"
