@@ -25,7 +25,10 @@ const GoalsBetResults: React.FC<IProps> = ({ selections }) => {
     <div className={styles.container}>
       <ul className={styles.list}>
         {selections.map((s, i) => (
-          <li key={`${s.toString()}`} className={`${styles.list__item} ${getHighlightClass(s, i)}`}>
+          <li
+            key={`${s.step}_${s.luckySpots.toString()}_${s.selected}`}
+            className={`${styles.list__item} ${getHighlightClass(s, i)}`}
+          >
             <div className={styles.step}>{s.step + 1}</div>
             <div className={styles.goals}>
               {Array.from(new Array(3)).map((_, i) => (
