@@ -50,9 +50,6 @@
 }
 
 .goal {
-  display: flex;
-  align-items: center;
-
   &__index {
     width: 21px;
     height: 21px;
@@ -79,6 +76,10 @@
 
     &--selected {
       opacity: 1;
+    }
+
+    &__icon {
+      vertical-align: unset;
     }
   }
 }
