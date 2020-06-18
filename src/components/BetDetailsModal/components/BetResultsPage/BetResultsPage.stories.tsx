@@ -4,14 +4,11 @@ import BetResultsPage from '.';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import { withKnobs, number, boolean, array, select } from '@storybook/addon-knobs';
 import { GoalsDifficulty } from '../../../../models/betDetails.model';
+import PageableModal from '../../../PageableModal';
 
 storiesOf('Components/BetDetailsModal/BetResultsPage', module)
   .addDecorator(withKnobs)
-  .addDecorator(storyFn => (
-    <div style={{ padding: '1rem 2rem', backgroundColor: '#2d4560', minHeight: '100vh' }}>
-      {storyFn()}
-    </div>
-  ))
+  .addDecorator(storyFn => <PageableModal show={true} pages={[storyFn()]} />)
   .add('Dice', () => (
     <BetResultsPage
       gameType={GameTypes.DICE}
@@ -50,7 +47,7 @@ storiesOf('Components/BetDetailsModal/BetResultsPage', module)
         profitCut: boolean('Profit cut', false),
         multiplier: number('Multiplier', 1.4539),
         gameResult: {
-          mineCount: number('Mines', 25, { range: true, min: 12, max: 64, step: 1 }),
+          mineCount: 0,
           minePositions: array('Mine positions', ['3', '7', '9', '15']).map(p => parseInt(p)),
           open: array('Opened fields', ['4', '5', '8', '15', '20']).map(p => parseInt(p)),
         },

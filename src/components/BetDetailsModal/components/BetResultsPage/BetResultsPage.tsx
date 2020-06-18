@@ -68,14 +68,14 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       break;
     }
     case GameTypes.MINES: {
-      const { mineCount, minePositions, open } = betDetails.gameResult as MinesBetResult;
+      const { minePositions, open } = betDetails.gameResult as MinesBetResult;
       results = <MinesBetResults minePositions={minePositions} openedFields={open} />;
       details = [
         {
           label: t('betDetails.bet'),
           value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
         },
-        { label: t('betDetails.mines'), value: `${mineCount ?? 'n/a'}` },
+        { label: t('betDetails.mines'), value: `${minePositions?.length ?? 'n/a'}` },
         {
           label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
           value: <BitcoinProfit value={betDetails.profit} />,
