@@ -3,7 +3,7 @@ export interface BetDetails {
   profit: number;
   profitCut: boolean;
   multiplier: number;
-  gameResult: DiceBetResult | MinesBetResult;
+  gameResult: DiceBetResult | MinesBetResult | GoalsBetResult;
 }
 
 export interface DiceBetResult {
@@ -17,4 +17,21 @@ export interface MinesBetResult {
   mineCount: number;
   minePositions: number[];
   open: number[];
+}
+
+export interface GoalsBetResult {
+  difficulty: GoalsDifficulty;
+  selections: GoalSelection[];
+}
+
+export interface GoalSelection {
+  step: number;
+  luckySpots: number[];
+  selected?: number;
+}
+
+export enum GoalsDifficulty {
+  GOALS2OUT3 = 'GOALS2OUT3',
+  GOALS1OUT2 = 'GOALS1OUT2',
+  GOALS1OUT3 = 'GOALS1OUT3',
 }

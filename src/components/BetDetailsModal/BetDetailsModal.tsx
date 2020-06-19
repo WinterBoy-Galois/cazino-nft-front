@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PageableModal from '../PageableModal';
 import Bet from '../../models/bet.model';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,13 @@ interface IProps {
 
 const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet }) => {
   const { t } = useTranslation(['modals']);
+  const pages = useMemo(
+    () => [
+      <BetDetailsPageWithData key={1} bet={bet} />,
+      <BetResultsPageWithData key={2} gameType={bet?.gameid} betId={bet?.id} />,
+    ],
+    [bet]
+  );
 
   if (!bet) {
     return null;
@@ -23,10 +30,7 @@ const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet }) => {
       show={show}
       title={[t('betDetails.title'), 'Bet Results']}
       onClose={onClose}
-      pages={[
-        <BetDetailsPageWithData key={1} bet={bet} />,
-        <BetResultsPageWithData key={2} gameType={bet.gameid} betId={bet.id} />,
-      ]}
+      pages={pages}
     />
   );
 };
