@@ -14,6 +14,15 @@
     "betId": "Wettnr.",
     "game": "Spiel",
     "bet": "Wette",
-    "profit": "Gewinn"
+    "profit": "Gewinn",
+    "rollOver": "Roll over",
+    "winChance": "Gewinnchance",
+    "mines": "Minen",
+    "difficulty": {
+      "label": "Schwierigkeit",
+      "GOALS2OUT3": "2 von 3 gewinnen",
+      "GOALS1OUT2": "1 von 2 gewinnen",
+      "GOALS1OUT3": "1 von 3 gewinnen"
+    }
   }
 }
