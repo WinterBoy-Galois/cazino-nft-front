@@ -50,6 +50,9 @@
 }
 
 .goal {
+  display: flex;
+  align-items: center;
+
   &__index {
     width: 21px;
     height: 21px;

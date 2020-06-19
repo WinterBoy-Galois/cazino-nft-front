@@ -33,6 +33,7 @@ const GoalsBetResults: React.FC<IProps> = ({ selections }) => {
             <div className={styles.goals}>
               {Array.from(new Array(3)).map((_, i) => (
                 <div key={`goal_${i}`} className={styles.goal}>
+                  <div className={styles.goal__index}>{i}</div>
                   <div
                     className={`${styles.goal__ball} ${
                       s.luckySpots.includes(i) ? styles['goal__ball--win'] : ''
