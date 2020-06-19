@@ -14,6 +14,15 @@
     "betId": "Bet Id",
     "game": "Game",
     "bet": "Bet",
-    "profit": "Profit"
+    "profit": "Profit",
+    "rollOver": "Roll over",
+    "winChance": "Win chance",
+    "mines": "Mines",
+    "difficulty": {
+      "label": "difficulty",
+      "GOALS2OUT3": "2 of 3 wins",
+      "GOALS1OUT2": "1 of 2 wins",
+      "GOALS1OUT3": "1 of 3 wins"
+    }
   }
 }
