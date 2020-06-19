@@ -98,4 +98,20 @@ storiesOf('Components/BetDetailsModal/BetResultsPage', module)
         },
       }}
     />
+  ))
+  .add('Clams', () => (
+    <BetResultsPage
+      gameType={GameTypes.CLAMS}
+      loading={false}
+      betDetails={{
+        bet: number('Bet', 0.00006874),
+        profit: number('Profit', 0.0000312),
+        profitCut: boolean('Profit cut', false),
+        multiplier: number('Multiplier', 1.4539),
+        gameResult: {
+          selection: array('Selection', ['8', '6', '3', '1', '5']).map(p => parseInt(p)),
+          resultInteger: number('Result', 1),
+        },
+      }}
+    />
   ));

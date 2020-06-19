@@ -1,0 +1,55 @@
+@import '../../../../../../styles/shared';
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.field {
+  width: 109px;
+  position: relative;
+  opacity: 0.5;
+  margin-bottom: 0.5rem;
+
+  @include media-breakpoint-only(md) {
+    width: 100px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 125px;
+    margin-bottom: 0.7rem;
+  }
+
+  &__selected {
+    opacity: 1;
+  }
+
+  &__index {
+    &__container {
+      position: absolute;
+      width: 100%;
+      bottom: -0.5rem;
+      left: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: rgba($white, 0.8);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 13px;
+
+    @include media-breakpoint-up(lg) {
+      width: 26px;
+      height: 26px;
+      font-size: 14px;
+    }
+  }
+}
