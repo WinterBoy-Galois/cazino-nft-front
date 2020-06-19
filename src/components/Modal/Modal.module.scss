@@ -46,6 +46,7 @@
     font-size: 1rem;
     padding: 0 0 0 1rem;
     text-transform: uppercase;
+    flex-shrink: 0;
 
     @include media-breakpoint-up(md) {
       font-size: 1.2rem;
