@@ -3,9 +3,9 @@ import { storiesOf } from '@storybook/react';
 import Button from '.';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-import { ButtonSize } from './lib/size';
+import { ButtonSize } from '../Button';
 
-storiesOf('Components/Button', module)
+storiesOf('Components/HollowButton', module)
   .addDecorator(withKnobs)
   .add('default', () => (
     <Button

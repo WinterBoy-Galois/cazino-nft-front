@@ -9,4 +9,16 @@
   background-color: $button-primary;
   border: 0;
   padding: 0.3rem;
+
+  &--small {
+    padding: 7px;
+  }
+
+  &--medium {
+    padding: 11px;
+  }
+
+  &--large {
+    padding: 15px;
+  }
 }
