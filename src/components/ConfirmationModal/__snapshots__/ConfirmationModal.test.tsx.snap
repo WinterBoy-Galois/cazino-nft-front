@@ -25,7 +25,7 @@ Object {
                 class="container"
               >
                 <svg
-                  class="icon fill"
+                  class="icon"
                   viewBox="0 0 34.99 30.05"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -117,7 +117,7 @@ Object {
               class="container"
             >
               <svg
-                class="icon fill"
+                class="icon"
                 viewBox="0 0 34.99 30.05"
                 xmlns="http://www.w3.org/2000/svg"
               >

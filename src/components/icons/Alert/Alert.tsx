@@ -5,13 +5,9 @@ interface IProps {
   className?: string;
 }
 
-const Alert: React.SFC<IProps> = ({ className }) => {
+const Alert: React.SFC<IProps> = ({ className = styles.fill }) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 34.99 30.05"
-      className={`${className} ${styles.fill}`}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.99 30.05" className={`${className}`}>
       <g data-name="Layer 2">
         <g data-name="Layer 1">
           <g data-name="Group 1060">
