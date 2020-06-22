@@ -7,17 +7,19 @@
 }
 
 .field {
-  width: 109px;
+  width: 33%;
+  min-width: 40px;
+  max-width: 110px;
   position: relative;
   opacity: 0.5;
   margin-bottom: 0.5rem;
 
   @include media-breakpoint-only(md) {
-    width: 100px;
+    max-width: 100px;
   }
 
   @include media-breakpoint-up(lg) {
-    width: 125px;
+    max-width: 125px;
     margin-bottom: 0.7rem;
   }
 
