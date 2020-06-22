@@ -47,14 +47,14 @@
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
+    font-size: 20px;
     color: #fff;
-    font-size: 1rem;
     padding: 0 0 0 1rem;
     text-transform: uppercase;
     flex-shrink: 0;
 
     @include media-breakpoint-up(md) {
-      font-size: 1.2rem;
+      font-size: 30px;
       height: 70px;
       padding: 0 0 0 1.5rem;
       border-top-left-radius: 8px;

@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button should match snapshot 1`] = `
+exports[`HollowButton should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <button
-        class=" button button--small"
+        class=" hollow button button--small"
         type="button"
       >
         Test
@@ -15,7 +15,7 @@ Object {
   </body>,
   "container": <div>
     <button
-      class=" button button--small"
+      class=" hollow button button--small"
       type="button"
     >
       Test
