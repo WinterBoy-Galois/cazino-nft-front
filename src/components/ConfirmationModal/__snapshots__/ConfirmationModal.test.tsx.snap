@@ -41,20 +41,24 @@ Object {
             class="modal__main"
           >
             <div
-              class="w-100"
-            />
-            <button
-              class=" button button--small"
-              type="button"
+              class="container"
             >
-              Yes
-            </button>
-            <button
-              class=" hollow button button--small"
-              type="button"
-            >
-              No
-            </button>
+              <p
+                class="text"
+              />
+              <button
+                class="button button__confirm button button--small"
+                type="button"
+              >
+                Yes
+              </button>
+              <button
+                class="button button__cancel hollow button button--small"
+                type="button"
+              >
+                No
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -95,20 +99,24 @@ Object {
           class="modal__main"
         >
           <div
-            class="w-100"
-          />
-          <button
-            class=" button button--small"
-            type="button"
+            class="container"
           >
-            Yes
-          </button>
-          <button
-            class=" hollow button button--small"
-            type="button"
-          >
-            No
-          </button>
+            <p
+              class="text"
+            />
+            <button
+              class="button button__confirm button button--small"
+              type="button"
+            >
+              Yes
+            </button>
+            <button
+              class="button button__cancel hollow button button--small"
+              type="button"
+            >
+              No
+            </button>
+          </div>
         </div>
       </div>
     </div>

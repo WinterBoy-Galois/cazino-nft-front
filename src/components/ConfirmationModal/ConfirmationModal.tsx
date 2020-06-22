@@ -14,9 +14,15 @@ interface IProps {
 const ConfirmationModal: React.SFC<IProps> = ({ show, onConfirmed, onCancelled, text }) => {
   return (
     <Modal show={show} title={'Confirm'} onClose={onCancelled} modalClassName={styles.modal}>
-      <div className="w-100">{text}</div>
-      <Button onClick={onConfirmed}>Yes</Button>
-      <HollowButton onClick={onCancelled}>No</HollowButton>
+      <div className={styles.container}>
+        <p className={styles.text}>{text}</p>
+        <Button className={`${styles.button} ${styles.button__confirm}`} onClick={onConfirmed}>
+          Yes
+        </Button>
+        <HollowButton className={`${styles.button} ${styles.button__cancel}`} onClick={onCancelled}>
+          No
+        </HollowButton>
+      </div>
     </Modal>
   );
 };

@@ -9,7 +9,7 @@ storiesOf('Components/ConfirmationModal', module)
   .add('Default', () => (
     <ConfirmationModal
       show={true}
-      text={text('Question', 'Are you sure that you want to quit?')}
+      text={text('Question', 'Are you sure that you want to change the server seed?')}
       onConfirmed={action('confirmed')}
       onCancelled={action('cancelled')}
     />

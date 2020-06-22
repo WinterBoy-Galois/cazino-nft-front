@@ -1,10 +1,35 @@
 @import '../../styles/shared';
 
 .modal {
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.text {
+  margin-bottom: 5rem;
   font-size: 20px;
+  font-weight: 400;
 
   @include media-breakpoint-up(md) {
     font-size: 22px;
     text-align: center;
+  }
+}
+
+.button {
+  max-width: 221px;
+  display: block;
+  margin: 0 auto;
+
+  &__confirm {
+    margin-bottom: 2rem;
+  }
+
+  &__cancel {
+    margin-bottom: 1rem;
   }
 }
