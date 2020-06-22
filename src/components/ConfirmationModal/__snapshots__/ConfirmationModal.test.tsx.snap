@@ -46,18 +46,26 @@ Object {
               <p
                 class="text"
               />
-              <button
-                class="button button__confirm button button--small"
-                type="button"
+              <div
+                class="button__container"
               >
-                Yes
-              </button>
-              <button
-                class="button button__cancel hollow button button--small"
-                type="button"
-              >
-                No
-              </button>
+                <div>
+                  <button
+                    class="button button__confirm button button--large"
+                    type="button"
+                  >
+                    Yes
+                  </button>
+                </div>
+                <div>
+                  <button
+                    class="button button__cancel hollow button button--large"
+                    type="button"
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -104,18 +112,26 @@ Object {
             <p
               class="text"
             />
-            <button
-              class="button button__confirm button button--small"
-              type="button"
+            <div
+              class="button__container"
             >
-              Yes
-            </button>
-            <button
-              class="button button__cancel hollow button button--small"
-              type="button"
-            >
-              No
-            </button>
+              <div>
+                <button
+                  class="button button__confirm button button--large"
+                  type="button"
+                >
+                  Yes
+                </button>
+              </div>
+              <div>
+                <button
+                  class="button button__cancel hollow button button--large"
+                  type="button"
+                >
+                  No
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

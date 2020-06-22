@@ -10,26 +10,46 @@
 }
 
 .text {
+  text-align: center;
   margin-bottom: 5rem;
   font-size: 20px;
   font-weight: 400;
 
   @include media-breakpoint-up(md) {
     font-size: 22px;
-    text-align: center;
+    margin-bottom: 7rem;
   }
 }
 
 .button {
-  max-width: 221px;
-  display: block;
-  margin: 0 auto;
+  width: 221px;
+
+  &__container {
+    max-width: 221px;
+    display: block;
+    margin: 0 auto;
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+      margin: 0;
+      justify-content: space-around;
+      max-width: unset;
+    }
+  }
 
   &__confirm {
     margin-bottom: 2rem;
+
+    @include media-breakpoint-up(md) {
+      margin: 0;
+    }
   }
 
   &__cancel {
     margin-bottom: 1rem;
+
+    @include media-breakpoint-up(md) {
+      margin: 0;
+    }
   }
 }

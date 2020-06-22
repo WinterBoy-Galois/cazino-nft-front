@@ -19,6 +19,10 @@
   }
 
   &--large {
-    padding: 15px;
+    padding: 7px;
+
+    @include media-breakpoint-up(md) {
+      padding: 15px;
+    }
   }
 }
