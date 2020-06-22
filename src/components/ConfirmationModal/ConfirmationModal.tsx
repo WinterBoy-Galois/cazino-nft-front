@@ -3,6 +3,7 @@ import Modal from '../Modal';
 import styles from './ConfirmationModal.module.scss';
 import Button, { ButtonSize } from '../Button';
 import HollowButton from '../HollowButton';
+import Title from './components/Title';
 
 interface IProps {
   show: boolean;
@@ -13,7 +14,7 @@ interface IProps {
 
 const ConfirmationModal: React.SFC<IProps> = ({ show, onConfirmed, onCancelled, text }) => {
   return (
-    <Modal show={show} title={'Confirm'} onClose={onCancelled} modalClassName={styles.modal}>
+    <Modal show={show} title={<Title />} onClose={onCancelled} modalClassName={styles.modal}>
       <div className={styles.container}>
         <p className={styles.text}>{text}</p>
         <div className={styles.button__container}>
