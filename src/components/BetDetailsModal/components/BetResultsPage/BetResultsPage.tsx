@@ -13,6 +13,7 @@ import {
   DiceBetResult,
   MinesBetResult,
   GoalsBetResult,
+  ClamsBetResult,
 } from '../../../../models/betDetails.model';
 import { ApolloError } from 'apollo-client';
 import { BET_DETAILS } from '../../../../graphql/queries';
@@ -21,6 +22,7 @@ import Loading from '../../../Loading';
 import MinesBetResults from './components/MinesBetResults';
 import GoalsBetResults from './components/GoalsBetResults';
 import { useTranslation } from 'react-i18next';
+import ClamsBetResults from './components/ClamsBetResults';
 
 interface IProps {
   gameType: GameTypes;
@@ -48,8 +50,22 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
   let details;
 
   switch (gameType) {
-    case GameTypes.CLAMS:
+    case GameTypes.CLAMS: {
+      const { resultInteger, selection } = betDetails.gameResult as ClamsBetResult;
+      results = <ClamsBetResults result={resultInteger} selection={selection} />;
+      details = [
+        {
+          label: t('betDetails.bet'),
+          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
+        },
+        { label: t('betDetails.clams'), value: selection?.length ?? 'n/a' },
+        {
+          label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
+          value: <BitcoinProfit value={betDetails.profit} />,
+        },
+      ];
       break;
+    }
     case GameTypes.DICE: {
       const { resultFloat, target, winChance, over } = betDetails.gameResult as DiceBetResult;
       results = <BetResultsDice result={resultFloat} rollOver={target} hasWon={!over} />;
