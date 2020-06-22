@@ -22,11 +22,11 @@ const cache = new InMemoryCache({
 });
 
 const httpLink = new HttpLink({
-  uri: 'https://staging.gambilife.com/graphql/',
+  uri: 'https://staging.jinglebets.com/graphqll/',
 });
 
 const wsLink = new WebSocketLink({
-  uri: `wss://staging.gambilife.com/graphql`,
+  uri: `wss://staging.jinglebets.com/graphql`,
   options: {
     reconnect: true,
   },
