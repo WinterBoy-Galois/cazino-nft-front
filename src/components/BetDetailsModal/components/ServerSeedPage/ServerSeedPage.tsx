@@ -11,6 +11,9 @@ import {
   ServerSeedDetailsLocked,
   ServerSeedDetails,
 } from '../../../../models/serverSeedDetails.model';
+import OwnServerSeedDetails from './components/OwnServerSeedDetails';
+import LockedServerSeedDetails from './components/LockedServerSeedDetails';
+import OtherServerSeedDetails from './components/OtherServerSeedDetails';
 
 interface IProps {
   ownDetails?: ServerSeedDetailsOwn;
@@ -27,6 +30,22 @@ const ServerSeedPage: React.FC<IProps> = ({
   error,
   loading,
 }) => {
+  const renderDetails = () => {
+    if (ownDetails) {
+      return <OwnServerSeedDetails ownDetails={ownDetails} />;
+    }
+
+    if (lockedDetails) {
+      return <LockedServerSeedDetails lockedDetails={lockedDetails} />;
+    }
+
+    if (otherDetails) {
+      return <OtherServerSeedDetails otherDetails={otherDetails} />;
+    }
+
+    return null;
+  };
+
   if (loading) {
     return <Loading className={styles.empty} />;
   }
@@ -35,7 +54,7 @@ const ServerSeedPage: React.FC<IProps> = ({
     return <Error className={styles.empty} />;
   }
 
-  return <div>ServerSeed</div>;
+  return <div>{renderDetails()}</div>;
 };
 
 export default ServerSeedPage;
