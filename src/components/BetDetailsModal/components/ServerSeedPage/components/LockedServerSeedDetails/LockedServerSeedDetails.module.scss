@@ -19,3 +19,9 @@
 .hash {
   margin-top: 3rem;
 }
+
+.button {
+  &__container {
+    margin-top: 5rem;
+  }
+}
