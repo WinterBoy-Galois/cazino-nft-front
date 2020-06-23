@@ -30,7 +30,7 @@ const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet }) => {
   return (
     <PageableModal
       show={show}
-      title={[t('betDetails.title'), 'Bet Results']}
+      title={[t('betDetails.title'), 'Bet Results', 'Server Seed']}
       onClose={onClose}
       pages={pages}
     />

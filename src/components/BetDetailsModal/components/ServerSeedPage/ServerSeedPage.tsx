@@ -54,7 +54,7 @@ const ServerSeedPage: React.FC<IProps> = ({
     return <Error className={styles.empty} />;
   }
 
-  return <div>{renderDetails()}</div>;
+  return <div className={styles.container}>{renderDetails()}</div>;
 };
 
 export default ServerSeedPage;

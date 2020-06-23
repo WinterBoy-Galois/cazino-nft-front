@@ -1,1 +1,12 @@
 @import '../../../../styles/shared';
+
+.container {
+  height: 100%;
+
+  @include media-breakpoint-up(md) {
+    height: 500px;
+    max-width: 445px;
+    display: block;
+    margin: 0 auto;
+  }
+}

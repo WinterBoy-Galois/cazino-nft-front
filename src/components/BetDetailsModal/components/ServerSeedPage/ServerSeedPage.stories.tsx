@@ -17,7 +17,10 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
         nonce: text('Nonce', 'asdf'),
         results: array('Results', ['5.34']),
         serverSeed: text('Server seed', 'asdfsadf'),
-        serverSeedHash: text('Server seed hash', 'asdf'),
+        serverSeedHash: text(
+          'Server seed hash',
+          'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
+        ),
         verificationUrl: text('Verification Url', 'asdf'),
       }}
     />
@@ -25,7 +28,13 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
   .add('Other', () => (
     <ServerSeedPage
       loading={false}
-      otherDetails={{ __typename: '', serverSeedHash: text('Server seed hash', 'asdf') }}
+      otherDetails={{
+        __typename: '',
+        serverSeedHash: text(
+          'Server seed hash',
+          'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
+        ),
+      }}
     />
   ))
   .add('Locked', () => (
