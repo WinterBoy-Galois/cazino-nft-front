@@ -132,3 +132,27 @@ export const BET_DETAILS = gql`
     }
   }
 `;
+
+export const BET_DETAILS_SERVER_SEED = gql`
+  query BetDetailsServerSeed($betId: ID) {
+    betDetails(id: $betId) {
+      ... on BetDetails {
+        seedDetails {
+          __typename
+          ... on SeedDetailsOther {
+            serverSeedHash
+          }
+          ... on SeedDetailsOwn {
+            activeGames
+            serverSeedHash
+            serverSeed
+            clientSeed
+            nonce
+            results
+            verificationUrl
+          }
+        }
+      }
+    }
+  }
+`;
