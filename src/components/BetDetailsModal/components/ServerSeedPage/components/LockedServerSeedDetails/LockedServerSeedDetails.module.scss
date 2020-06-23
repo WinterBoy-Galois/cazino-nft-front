@@ -1,1 +1,21 @@
 @import '../../../../../../styles/shared';
+
+.notice {
+  display: flex;
+  padding-top: 2rem;
+
+  &__lock {
+    width: 34px;
+    margin-right: 1rem;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+  }
+}
+
+.hash {
+  margin-top: 3rem;
+}

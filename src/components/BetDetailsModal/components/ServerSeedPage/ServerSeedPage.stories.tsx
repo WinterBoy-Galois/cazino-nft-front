@@ -42,7 +42,10 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
       loading={false}
       lockedDetails={{
         __typename: '',
-        serverSeedHash: text('Server seed hash', 'asdf'),
+        serverSeedHash: text(
+          'Server seed hash',
+          'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
+        ),
         activeGames: [GameTypes.GOALS],
       }}
     />
