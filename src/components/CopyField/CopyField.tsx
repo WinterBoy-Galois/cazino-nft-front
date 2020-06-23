@@ -8,8 +8,10 @@ interface IProps {
 }
 
 const CopyField: React.FC<IProps> = ({ label, value }) => {
+  const copyToClipboard = () => navigator.clipboard.writeText(value);
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={copyToClipboard}>
       <div className={styles.label}>{label}</div>
       <div className={styles.value}>{value}</div>
       <div className={styles.copy}>
