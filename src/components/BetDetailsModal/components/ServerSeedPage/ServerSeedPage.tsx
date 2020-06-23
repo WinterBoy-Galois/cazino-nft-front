@@ -15,6 +15,8 @@ import OwnServerSeedDetails from './components/OwnServerSeedDetails';
 import LockedServerSeedDetails from './components/LockedServerSeedDetails';
 import OtherServerSeedDetails from './components/OtherServerSeedDetails';
 import { CHANGE_SERVER_SEED } from '../../../../graphql/mutations';
+import { useStateValue } from '../../../../state';
+import { transitionTimeout } from '../../../Modal';
 
 interface IProps {
   ownDetails?: ServerSeedDetailsOwn;
@@ -33,16 +35,61 @@ const ServerSeedPage: React.FC<IProps> = ({
   loading,
   onChangeServerSeed,
 }) => {
+  const [, dispatch] = useStateValue();
+
   const renderDetails = () => {
     if (ownDetails) {
       return <OwnServerSeedDetails ownDetails={ownDetails} />;
     }
 
     if (lockedDetails) {
+      const showConfirmationModal = () => {
+        dispatch({ type: 'HIDE_MODAL' });
+        // Wait for modal close animation
+        setTimeout(
+          () =>
+            dispatch({
+              type: 'SHOW_MODAL',
+              payload: {
+                type: 'CHANGE_SERVER_SEED_CONFIRMATION',
+                data: {
+                  onConfirm: () => {
+                    if (onChangeServerSeed) {
+                      onChangeServerSeed();
+                    }
+
+                    dispatch({ type: 'HIDE_MODAL' });
+                    setTimeout(
+                      () =>
+                        dispatch({
+                          type: 'SHOW_MODAL',
+                          payload: { type: 'BET_DETAILS_MODAL', data: { pageIndex: 2 } },
+                        }),
+                      transitionTimeout
+                    );
+                  },
+                  onCancel: () => {
+                    dispatch({ type: 'HIDE_MODAL' });
+                    setTimeout(
+                      () =>
+                        dispatch({
+                          type: 'SHOW_MODAL',
+                          payload: { type: 'BET_DETAILS_MODAL', data: { pageIndex: 2 } },
+                        }),
+                      transitionTimeout
+                    );
+                  },
+                },
+              },
+            }),
+          transitionTimeout
+        );
+      };
+
       return (
         <LockedServerSeedDetails
           lockedDetails={lockedDetails}
-          onChangeServerSeed={onChangeServerSeed}
+          onChangeServerSeed={showConfirmationModal}
         />
       );
     }
