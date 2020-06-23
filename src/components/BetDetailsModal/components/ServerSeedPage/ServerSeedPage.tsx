@@ -8,19 +8,15 @@ import Error from '../../../Error';
 import {
   ServerSeedDetailsOwn,
   ServerSeedDetailsOther,
-  ServerSeedDetailsLocked,
-  ServerSeedDetails,
 } from '../../../../models/serverSeedDetails.model';
-import OwnServerSeedDetails from './components/OwnServerSeedDetails';
-import LockedServerSeedDetails from './components/LockedServerSeedDetails';
 import OtherServerSeedDetails from './components/OtherServerSeedDetails';
 import { CHANGE_SERVER_SEED } from '../../../../graphql/mutations';
 import { useStateValue } from '../../../../state';
 import { transitionTimeout } from '../../../Modal';
+import OwnServerSeedDetails from './components/OwnServerSeedDetails';
 
 interface IProps {
   ownDetails?: ServerSeedDetailsOwn;
-  lockedDetails?: ServerSeedDetailsLocked;
   otherDetails?: ServerSeedDetailsOther;
   loading: boolean;
   error?: ApolloError;
@@ -29,7 +25,6 @@ interface IProps {
 
 const ServerSeedPage: React.FC<IProps> = ({
   ownDetails,
-  lockedDetails,
   otherDetails,
   error,
   loading,
@@ -42,7 +37,7 @@ const ServerSeedPage: React.FC<IProps> = ({
       return <OwnServerSeedDetails ownDetails={ownDetails} />;
     }
 
-    if (lockedDetails) {
+    if (ownDetails) {
       const showConfirmationModal = () => {
         dispatch({ type: 'HIDE_MODAL' });
         // Wait for modal close animation
@@ -87,10 +82,7 @@ const ServerSeedPage: React.FC<IProps> = ({
       };
 
       return (
-        <LockedServerSeedDetails
-          lockedDetails={lockedDetails}
-          onChangeServerSeed={showConfirmationModal}
-        />
+        <OwnServerSeedDetails ownDetails={ownDetails} onChangeServerSeed={showConfirmationModal} />
       );
     }
 
@@ -105,7 +97,7 @@ const ServerSeedPage: React.FC<IProps> = ({
     return <Loading className={styles.empty} />;
   }
 
-  if (error || (!ownDetails && !lockedDetails && !otherDetails)) {
+  if (error || (!ownDetails && !otherDetails)) {
     return <Error className={styles.empty} />;
   }
 
@@ -119,27 +111,18 @@ interface IWithDataProps {
 }
 
 export const ServerSeedPageWithData: React.SFC<IWithDataProps> = props => {
-  const { data, loading, error } = useQuery<{ betDetails: { seedDetails: ServerSeedDetails } }>(
-    BET_DETAILS_SERVER_SEED,
-    {
-      variables: { betId: props.betId },
-    }
-  );
+  const { data, loading, error } = useQuery<{
+    betDetails: { seedDetails: ServerSeedDetailsOwn | ServerSeedDetailsOther };
+  }>(BET_DETAILS_SERVER_SEED, {
+    variables: { betId: props.betId },
+  });
 
   const [changeServerSeed] = useMutation(CHANGE_SERVER_SEED);
 
   const seedDetailsData = data?.betDetails.seedDetails;
   let seedDetails = {};
 
-  if (
-    seedDetailsData?.__typename === 'SeedDetailsOwn' &&
-    (seedDetailsData as ServerSeedDetailsLocked)?.activeGames
-  ) {
-    seedDetails = { lockedDetails: data?.betDetails.seedDetails };
-  } else if (
-    seedDetailsData?.__typename === 'SeedDetailsOwn' &&
-    !(seedDetailsData as ServerSeedDetailsLocked)?.activeGames
-  ) {
+  if (seedDetailsData?.__typename === 'SeedDetailsOwn') {
     seedDetails = { ownDetails: data?.betDetails.seedDetails };
   } else if (seedDetailsData?.__typename === 'SeedDetailsOther') {
     seedDetails = { otherDetails: data?.betDetails.seedDetails };

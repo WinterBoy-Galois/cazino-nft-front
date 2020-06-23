@@ -23,7 +23,46 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
           'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
         ),
         verificationUrl: text('Verification Url', 'asdf'),
+        activeGames: [],
       }}
+      onChangeServerSeed={action('change server seed')}
+    />
+  ))
+  .add('Own seed changed', () => (
+    <ServerSeedPage
+      loading={false}
+      ownDetails={{
+        __typename: '',
+        clientSeed: text('Client seed', 'asdf'),
+        nonce: text('Nonce', 'asdf'),
+        results: array('Results', ['5.34']),
+        serverSeed: text('Server seed', 'asdfsadf'),
+        serverSeedHash: text(
+          'Server seed hash',
+          'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
+        ),
+        verificationUrl: text('Verification Url', 'asdf'),
+        activeGames: [],
+      }}
+    />
+  ))
+  .add('Own active games', () => (
+    <ServerSeedPage
+      loading={false}
+      ownDetails={{
+        __typename: '',
+        clientSeed: text('Client seed', 'asdf'),
+        nonce: text('Nonce', 'asdf'),
+        results: array('Results', ['5.34']),
+        serverSeed: text('Server seed', 'asdfsadf'),
+        serverSeedHash: text(
+          'Server seed hash',
+          'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
+        ),
+        verificationUrl: text('Verification Url', 'asdf'),
+        activeGames: [GameTypes.GOALS],
+      }}
+      onChangeServerSeed={action('change server seed')}
     />
   ))
   .add('Other', () => (
@@ -36,19 +75,5 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
           'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
         ),
       }}
-    />
-  ))
-  .add('Locked', () => (
-    <ServerSeedPage
-      loading={false}
-      lockedDetails={{
-        __typename: '',
-        serverSeedHash: text(
-          'Server seed hash',
-          'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
-        ),
-        activeGames: [GameTypes.GOALS],
-      }}
-      onChangeServerSeed={action('change server seed')}
     />
   ));

@@ -7,6 +7,7 @@ interface IProps {
   className?: string;
   onClick?: () => void;
   size?: ButtonSize;
+  disabled?: boolean;
 }
 
 const SecondaryButton: React.SFC<IProps> = props => {

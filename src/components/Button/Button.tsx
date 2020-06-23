@@ -7,23 +7,17 @@ interface IProps {
   className?: string;
   onClick?: () => void;
   size?: ButtonSize;
+  disabled?: boolean;
 }
 
-const Button: React.SFC<IProps> = ({
-  children,
-  type = 'button',
-  className = '',
-  onClick,
-  size = ButtonSize.SMALL,
-}) => {
+const Button: React.SFC<IProps> = props => {
+  const { type = 'button', className = '', size = ButtonSize.SMALL } = props;
   return (
     <button
-      type={type}
+      {...props}
       className={`${className} ${styles.button} ${styles[`button--${size.toString()}`]}`}
-      onClick={onClick}
-    >
-      {children}
-    </button>
+      type={type}
+    />
   );
 };
 

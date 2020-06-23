@@ -7,6 +7,7 @@ export interface ServerSeedDetailsOther {
 
 export interface ServerSeedDetailsOwn {
   __typename: string;
+  activeGames: GameTypes[];
   serverSeedHash: string;
   serverSeed: string;
   clientSeed: string;
@@ -14,14 +15,3 @@ export interface ServerSeedDetailsOwn {
   results: string[];
   verificationUrl: string;
 }
-
-export interface ServerSeedDetailsLocked {
-  __typename: string;
-  serverSeedHash: string;
-  activeGames: GameTypes[];
-}
-
-export type ServerSeedDetails =
-  | ServerSeedDetailsOther
-  | ServerSeedDetailsOwn
-  | ServerSeedDetailsLocked;
