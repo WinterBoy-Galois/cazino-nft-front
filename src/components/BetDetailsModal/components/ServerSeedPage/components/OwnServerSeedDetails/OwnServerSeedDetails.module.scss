@@ -25,3 +25,14 @@
     margin-top: 5rem;
   }
 }
+
+.error {
+  margin-top: 1rem;
+  color: $negative;
+  font-size: 14px;
+  text-align: center;
+
+  @include media-breakpoint-up(md) {
+    font-size: 16px;
+  }
+}

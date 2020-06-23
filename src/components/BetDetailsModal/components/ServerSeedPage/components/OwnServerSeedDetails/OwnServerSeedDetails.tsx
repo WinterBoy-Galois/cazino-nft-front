@@ -33,6 +33,9 @@ const OwnServerSeedDetails: React.FC<IProps> = ({ ownDetails, onChangeServerSeed
         >
           change server seed
         </SecondaryButton>
+        {ownDetails.activeGames?.length > 0 && (
+          <div className={styles.error}>End active game(s) before changing server seed</div>
+        )}
       </div>
     </Fragment>
   );
