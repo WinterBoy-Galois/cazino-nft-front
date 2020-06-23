@@ -4,6 +4,7 @@ import ServerSeedPage from '.';
 import PageableModal from '../../../PageableModal';
 import { withKnobs, text, array } from '@storybook/addon-knobs';
 import { GameTypes } from '../../../../models/gameTypes.model';
+import { action } from '@storybook/addon-actions';
 
 storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
   .addDecorator(withKnobs)
@@ -48,5 +49,6 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
         ),
         activeGames: [GameTypes.GOALS],
       }}
+      onChangeServerSeed={action('change server seed')}
     />
   ));
