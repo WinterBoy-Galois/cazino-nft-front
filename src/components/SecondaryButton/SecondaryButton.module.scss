@@ -1,6 +1,6 @@
 @import '../../styles/shared';
 
 .secondary {
-  background-color: $button-secondary;
-  color: #000;
+  background-color: $button-secondary !important;
+  color: #000 !important;
 }
