@@ -6,6 +6,7 @@
   background-color: $user-info-main-blue;
   padding: 0.5rem;
   line-height: 1;
+  cursor: pointer;
 }
 
 .label {
@@ -25,4 +26,5 @@
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  width: 12px;
 }
