@@ -9,6 +9,7 @@
   font-size: 16px;
   text-transform: uppercase;
   margin-top: 2rem;
+  font-weight: 400;
 
   @include media-breakpoint-up(md) {
     font-size: 18px;
@@ -37,6 +38,12 @@
   display: flex;
   align-items: center;
 
+  @include media-breakpoint-up(md) {
+    width: 87px;
+    height: 30px;
+    font-size: 16px;
+  }
+
   &__dot {
     width: 13px;
     height: 13px;
@@ -44,6 +51,12 @@
     display: block;
     border-radius: 50%;
     margin-left: 0.2rem;
+
+    @include media-breakpoint-up(md) {
+      width: 19px;
+      height: 19px;
+      margin-left: 0.4rem;
+    }
   }
 
   &__value {
