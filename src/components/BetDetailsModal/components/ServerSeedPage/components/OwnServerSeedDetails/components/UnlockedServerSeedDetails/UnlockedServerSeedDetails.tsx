@@ -39,7 +39,7 @@ const UnlockedServerSeedDetails: React.FC<IProps> = ({ ownDetails }) => {
         nonce, generating result.
       </p>
 
-      <Link className={styles.link} href={ownDetails.verificationUrl}>
+      <Link className={styles.link} href={ownDetails.verificationUrl} target="_blank">
         Verify on REPL.IT
       </Link>
     </Fragment>

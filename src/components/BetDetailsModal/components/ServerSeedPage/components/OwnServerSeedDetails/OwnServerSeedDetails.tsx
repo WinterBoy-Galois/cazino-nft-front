@@ -9,9 +9,14 @@ interface IProps {
 }
 
 const OwnServerSeedDetails: React.FC<IProps> = ({ ownDetails, onChangeServerSeed }) => {
-  const { serverSeed, clientSeed, nonce, results, verificationUrl } = ownDetails;
+  const { serverSeed, clientSeed, nonce, results, verificationUrl, activeGames } = ownDetails;
 
-  return serverSeed && clientSeed && nonce && results && verificationUrl ? (
+  return serverSeed &&
+    clientSeed &&
+    nonce &&
+    results &&
+    verificationUrl &&
+    (!activeGames || activeGames.length <= 0) ? (
     <UnlockedServerSeedDetails ownDetails={ownDetails} />
   ) : (
     <LockedServerSeedDetails
