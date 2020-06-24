@@ -3,24 +3,35 @@ import styles from './UnlockedServerSeedDetails.module.scss';
 import { ServerSeedDetailsOwn } from '../../../../../../../../models/serverSeedDetails.model';
 import CopyField from '../../../../../../../CopyField';
 import Link from '../../../../../../../Link';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   ownDetails: ServerSeedDetailsOwn;
 }
 
 const UnlockedServerSeedDetails: React.FC<IProps> = ({ ownDetails }) => {
+  const { t } = useTranslation(['modals']);
+
   return (
     <Fragment>
       <CopyField
         className={styles.field}
-        label={'Server seed hash'}
+        label={t('serverSeed.serverSeedHash')}
         value={ownDetails.serverSeedHash}
       />
-      <CopyField className={styles.field} label={'Server seed'} value={ownDetails.serverSeed} />
-      <CopyField className={styles.field} label={'client seed'} value={ownDetails.clientSeed} />
-      <CopyField className={styles.field} label={'nonce'} value={ownDetails.nonce} />
+      <CopyField
+        className={styles.field}
+        label={t('serverSeed.serverSeed')}
+        value={ownDetails.serverSeed}
+      />
+      <CopyField
+        className={styles.field}
+        label={t('serverSeed.clientSeed')}
+        value={ownDetails.clientSeed}
+      />
+      <CopyField className={styles.field} label={t('serverSeed.nonce')} value={ownDetails.nonce} />
 
-      <h2 className={styles.headline}>result</h2>
+      <h2 className={styles.headline}>{t('serverSeed.result')}</h2>
       <ul className={styles['results-list']}>
         {ownDetails.results.map((r, i) => (
           <li key={`${r}_${i}`} className={styles['results-list__item']}>
@@ -32,15 +43,11 @@ const UnlockedServerSeedDetails: React.FC<IProps> = ({ ownDetails }) => {
         ))}
       </ul>
 
-      <h2 className={styles.headline}>Third party verfication</h2>
-      <p className={styles.text}>
-        REPL.IT is third party interactive programming environment. In order for you to allow verify
-        bet results, we have created scripts for each game, which takes as input set of seeds,
-        nonce, generating result.
-      </p>
+      <h2 className={styles.headline}>{t('serverSeed.thirdPartyVerfication')}</h2>
+      <p className={styles.text}>{t('serverSeed.verificationText')}</p>
 
       <Link className={styles.link} href={ownDetails.verificationUrl} target="_blank">
-        Verify on REPL.IT
+        {t('serverSeed.verificationLinkText')}
       </Link>
     </Fragment>
   );

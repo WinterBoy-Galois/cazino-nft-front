@@ -5,6 +5,7 @@ import CopyField from '../../../../../../../CopyField';
 import SecondaryButton from '../../../../../../../SecondaryButton';
 import { ButtonSize } from '../../../../../../../Button';
 import { GameTypes } from '../../../../../../../../models/gameTypes.model';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   activeGames: GameTypes[];
@@ -17,17 +18,17 @@ const LockedServerSeedDetails: React.FC<IProps> = ({
   serverSeedHash,
   onChangeServerSeed,
 }) => {
+  const { t } = useTranslation(['modals']);
+
   return (
     <Fragment>
       <div className={styles.notice}>
         <img src={lock} alt="Lock" className={styles.notice__lock} />
-        <p className={styles.notice__text}>
-          In order to see current server seed, new server seed must be generated.
-        </p>
+        <p className={styles.notice__text}>{t('serverSeed.lockedNotice')}</p>
       </div>
 
       <div className={styles.hash}>
-        <CopyField label={'Server seed hash'} value={serverSeedHash} />
+        <CopyField label={t('serverSeed.serverSeedHash')} value={serverSeedHash} />
       </div>
 
       <div className={styles.button__container}>
@@ -36,10 +37,10 @@ const LockedServerSeedDetails: React.FC<IProps> = ({
           onClick={onChangeServerSeed}
           disabled={activeGames?.length > 0}
         >
-          change server seed
+          {t('serverSeed.changeServerSeed')}
         </SecondaryButton>
         {activeGames?.length > 0 && (
-          <div className={styles.error}>End active game(s) before changing server seed</div>
+          <div className={styles.error}>{t('serverSeed.activeGameError')}</div>
         )}
       </div>
     </Fragment>
