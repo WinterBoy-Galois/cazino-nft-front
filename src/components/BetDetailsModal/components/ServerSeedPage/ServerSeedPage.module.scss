@@ -2,11 +2,12 @@
 
 .container {
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
 
   @include media-breakpoint-up(md) {
-    min-height: 500px;
+    min-height: 400px;
     max-width: 445px;
-    display: block;
     margin: 0 auto;
   }
 }
