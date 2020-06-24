@@ -21,9 +21,14 @@ const UnlockedServerSeedDetails: React.FC<IProps> = ({ ownDetails }) => {
       <CopyField className={styles.field} label={'nonce'} value={ownDetails.nonce} />
 
       <h2 className={styles.headline}>result</h2>
-      <ul>
+      <ul className={styles['results-list']}>
         {ownDetails.results.map((r, i) => (
-          <li key={`${r}_${i}`}>{r}</li>
+          <li key={`${r}_${i}`} className={styles['results-list__item']}>
+            <div className={styles.result}>
+              <span className={styles.result__dot} />
+              <span className={styles.result__value}>{r}</span>
+            </div>
+          </li>
         ))}
       </ul>
 
