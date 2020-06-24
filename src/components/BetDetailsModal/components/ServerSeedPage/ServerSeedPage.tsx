@@ -12,7 +12,7 @@ import {
 import OtherServerSeedDetails from './components/OtherServerSeedDetails';
 import { CHANGE_SERVER_SEED } from '../../../../graphql/mutations';
 import { useStateValue } from '../../../../state';
-import { transitionTimeout } from '../../../Modal';
+import { replaceModal } from '../../../Modal';
 import OwnServerSeedDetails from './components/OwnServerSeedDetails';
 
 interface IProps {
@@ -39,46 +39,15 @@ const ServerSeedPage: React.FC<IProps> = ({
 
     if (ownDetails) {
       const showConfirmationModal = () => {
-        dispatch({ type: 'HIDE_MODAL' });
-        // Wait for modal close animation
-        setTimeout(
-          () =>
-            dispatch({
-              type: 'SHOW_MODAL',
-              payload: {
-                type: 'CHANGE_SERVER_SEED_CONFIRMATION',
-                data: {
-                  onConfirm: () => {
-                    if (onChangeServerSeed) {
-                      onChangeServerSeed();
-                    }
-
-                    dispatch({ type: 'HIDE_MODAL' });
-                    setTimeout(
-                      () =>
-                        dispatch({
-                          type: 'SHOW_MODAL',
-                          payload: { type: 'BET_DETAILS_MODAL', data: { pageIndex: 2 } },
-                        }),
-                      transitionTimeout
-                    );
-                  },
-                  onCancel: () => {
-                    dispatch({ type: 'HIDE_MODAL' });
-                    setTimeout(
-                      () =>
-                        dispatch({
-                          type: 'SHOW_MODAL',
-                          payload: { type: 'BET_DETAILS_MODAL', data: { pageIndex: 2 } },
-                        }),
-                      transitionTimeout
-                    );
-                  },
-                },
-              },
-            }),
-          transitionTimeout
-        );
+        replaceModal(dispatch, 'CHANGE_SERVER_SEED_CONFIRMATION', {
+          onConfirm: () => {
+            if (onChangeServerSeed) {
+              onChangeServerSeed();
+            }
+            replaceModal(dispatch, 'BET_DETAILS_MODAL', { pageIndex: 2 });
+          },
+          onCancel: () => replaceModal(dispatch, 'BET_DETAILS_MODAL', { pageIndex: 2 }),
+        });
       };
 
       return (
