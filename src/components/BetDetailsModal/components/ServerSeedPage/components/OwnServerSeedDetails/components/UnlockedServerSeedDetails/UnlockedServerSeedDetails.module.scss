@@ -1,0 +1,31 @@
+@import '../../../../../../../../styles/shared';
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.headline {
+  color: $user-info-label-blue;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 2rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 18px;
+  }
+}
+
+.result {
+  width: 58px;
+  height: 19px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 19px;
+  background-color: $white;
+
+  &__dot {
+    width: 13px;
+    height: 13px;
+    background-color: $blue;
+  }
+}

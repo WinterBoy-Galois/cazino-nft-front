@@ -1,1 +1,1 @@
-export { default } from './OwnServerSeedDetails';
+export { default } from './UnlockedServerSeedDetails';

@@ -5,14 +5,15 @@ import Copy from '../icons/Copy';
 interface IProps {
   label: string;
   value: string;
+  className?: string;
 }
 
-const CopyField: React.FC<IProps> = ({ label, value }) => {
+const CopyField: React.FC<IProps> = ({ label, value, className = '' }) => {
   const copyToClipboard = () =>
     navigator?.clipboard?.writeText ? navigator.clipboard.writeText(value) : null;
 
   return (
-    <div className={styles.container} onClick={copyToClipboard}>
+    <div className={`${className} ${styles.container}`} onClick={copyToClipboard}>
       <div className={styles.label}>{label}</div>
       <div className={styles.value}>{value}</div>
       <div className={styles.copy}>

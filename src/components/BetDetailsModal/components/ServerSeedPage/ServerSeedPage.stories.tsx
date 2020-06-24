@@ -14,15 +14,18 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
       loading={false}
       ownDetails={{
         __typename: '',
-        clientSeed: text('Client seed', 'asdf'),
-        nonce: text('Nonce', 'asdf'),
-        results: array('Results', ['5.34']),
-        serverSeed: text('Server seed', 'asdfsadf'),
+        clientSeed: text('Client seed', 'tick-tock-tick-tock-tick-tock'),
+        nonce: text('Nonce', '32768'),
+        results: array('Results', ['5.34', '7.78']),
+        serverSeed: text(
+          'Server seed',
+          'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
+        ),
         serverSeedHash: text(
           'Server seed hash',
           'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
         ),
-        verificationUrl: text('Verification Url', 'asdf'),
+        verificationUrl: text('Verification Url', 'https://repl.it/'),
         activeGames: select(
           'Active Games',
           {
