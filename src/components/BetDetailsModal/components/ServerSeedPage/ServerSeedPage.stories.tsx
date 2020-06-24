@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import ServerSeedPage from '.';
 import PageableModal from '../../../PageableModal';
-import { withKnobs, text, array, select } from '@storybook/addon-knobs';
+import { withKnobs, text, array, select, boolean } from '@storybook/addon-knobs';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import { action } from '@storybook/addon-actions';
 
@@ -11,7 +11,7 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
   .addDecorator(storyFn => <PageableModal show={true} pages={[storyFn()]} />)
   .add('Own bet', () => (
     <ServerSeedPage
-      loading={false}
+      loading={boolean('Loading', false)}
       ownDetails={{
         __typename: '',
         clientSeed: text('Client seed', 'tick-tock-tick-tock-tick-tock'),
@@ -43,7 +43,7 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
   ))
   .add('Others bet', () => (
     <ServerSeedPage
-      loading={false}
+      loading={boolean('Loading', false)}
       otherDetails={{
         __typename: '',
         serverSeedHash: text(
