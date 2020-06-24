@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import styles from './UnlockedServerSeedDetails.module.scss';
 import { ServerSeedDetailsOwn } from '../../../../../../../../models/serverSeedDetails.model';
 import CopyField from '../../../../../../../CopyField';
+import Link from '../../../../../../../Link';
 
 interface IProps {
   ownDetails: ServerSeedDetailsOwn;
@@ -27,12 +28,15 @@ const UnlockedServerSeedDetails: React.FC<IProps> = ({ ownDetails }) => {
       </ul>
 
       <h2 className={styles.headline}>Third party verfication</h2>
-      <p>
+      <p className={styles.text}>
         REPL.IT is third party interactive programming environment. In order for you to allow verify
         bet results, we have created scripts for each game, which takes as input set of seeds,
         nonce, generating result.
       </p>
-      <a href={ownDetails.verificationUrl}>Verify on REPL.IT</a>
+
+      <Link className={styles.link} href={ownDetails.verificationUrl}>
+        Verify on REPL.IT
+      </Link>
     </Fragment>
   );
 };

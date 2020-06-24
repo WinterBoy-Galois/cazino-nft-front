@@ -1,7 +1,7 @@
 @import '../../../../styles/shared';
 
 .container {
-  height: 100%;
+  min-height: 100%;
 
   @include media-breakpoint-up(md) {
     height: 500px;
