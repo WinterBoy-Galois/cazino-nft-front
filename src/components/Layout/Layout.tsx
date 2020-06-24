@@ -25,7 +25,7 @@ const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
       {...modal.data}
     />
     <ChangeServerSeedConfirmationModal
-      show={modal.type === 'BET_DETAILS_MODAL'}
+      show={modal.type === 'CHANGE_SERVER_SEED_CONFIRMATION'}
       onClose={() => dispatch({ type: 'HIDE_MODAL' })}
       {...modal.data}
     />
