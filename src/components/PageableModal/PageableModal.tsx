@@ -30,7 +30,7 @@ const PageableModal: React.SFC<IProps> = ({
 
   useEffect(() => {
     dispatch({ type: 'INIT_PAGES', payload: { pages } });
-  }, [pages]);
+  }, [pages, show]);
 
   const mainRef = useRef<HTMLDivElement>(null);
 
