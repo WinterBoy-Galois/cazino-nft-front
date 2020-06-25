@@ -80,7 +80,7 @@ const PageableModal: React.SFC<IProps> = ({
           key={state.activePage}
           timeout={{ enter: 300, exit: exitTimeout }}
         >
-          <div className="w-100">{pages[state.activePage]}</div>
+          {pages[state.activePage]}
         </CSSTransition>
       </SwitchTransition>
     </Modal>

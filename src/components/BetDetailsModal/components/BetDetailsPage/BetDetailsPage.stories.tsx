@@ -2,13 +2,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import BetDetailsPage from '.';
 import { GameTypes } from '../../../../models/gameTypes.model';
+import PageableModal from '../../../PageableModal';
 
 storiesOf('Components/BetDetailsModal/BetDetailsPage', module)
-  .addDecorator(storyFn => (
-    <div style={{ padding: '1rem 2rem', backgroundColor: '#2d4560', height: '100vh' }}>
-      {storyFn()}
-    </div>
-  ))
+  .addDecorator(storyFn => <PageableModal show={true} pages={[storyFn()]} />)
   .add('default', () => (
     <BetDetailsPage
       bet={{

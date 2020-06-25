@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { ButtonSize } from './lib/size';
 
-storiesOf('Components/Button', module)
+storiesOf('Components/buttons/Button', module)
   .addDecorator(withKnobs)
   .add('default', () => (
     <Button

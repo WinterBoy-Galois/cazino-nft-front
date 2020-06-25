@@ -38,12 +38,8 @@ Object {
           <div
             class="modal__main"
           >
-            <div
-              class="w-100"
-            >
-              <div>
-                test
-              </div>
+            <div>
+              test
             </div>
           </div>
           <div
@@ -189,12 +185,8 @@ Object {
         <div
           class="modal__main"
         >
-          <div
-            class="w-100"
-          >
-            <div>
-              test
-            </div>
+          <div>
+            test
           </div>
         </div>
         <div

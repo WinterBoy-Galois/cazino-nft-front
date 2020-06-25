@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class=" container"
+      >
+        <div
+          class="label"
+        />
+        <div
+          class="value"
+        />
+        <div
+          class="copy"
+        >
+          <svg
+            class="default"
+            viewBox="0 0 12.14 13.88"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              data-name="Layer 2"
+            >
+              <g
+                data-name="Layer 1"
+              >
+                <path
+                  d="M8.67 12.14v1.09a.66.66 0 01-.65.65H.65a.66.66 0 01-.65-.65v-10a.65.65 0 01.65-.63h2v8a1.52 1.52 0 001.52 1.52zm0-9.32V0H4.12a.65.65 0 00-.65.65v10a.65.65 0 00.65.65h7.37a.65.65 0 00.65-.65V3.47H9.32a.65.65 0 01-.65-.65zM12 2L10.16.19A.66.66 0 009.7 0h-.16v2.6h2.6v-.16A.66.66 0 0012 2z"
+                  data-name="Icon awesome-copy"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class=" container"
+    >
+      <div
+        class="label"
+      />
+      <div
+        class="value"
+      />
+      <div
+        class="copy"
+      >
+        <svg
+          class="default"
+          viewBox="0 0 12.14 13.88"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            data-name="Layer 2"
+          >
+            <g
+              data-name="Layer 1"
+            >
+              <path
+                d="M8.67 12.14v1.09a.66.66 0 01-.65.65H.65a.66.66 0 01-.65-.65v-10a.65.65 0 01.65-.63h2v8a1.52 1.52 0 001.52 1.52zm0-9.32V0H4.12a.65.65 0 00-.65.65v10a.65.65 0 00.65.65h7.37a.65.65 0 00.65-.65V3.47H9.32a.65.65 0 01-.65-.65zM12 2L10.16.19A.66.66 0 009.7 0h-.16v2.6h2.6v-.16A.66.66 0 0012 2z"
+                data-name="Icon awesome-copy"
+              />
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

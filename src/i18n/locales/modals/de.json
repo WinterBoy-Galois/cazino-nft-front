@@ -25,5 +25,22 @@
       "GOALS1OUT3": "1 von 3 gewinnen"
     },
     "clams": "Muscheln"
+  },
+  "betResults": {
+    "title": "Bet Results"
+  },
+  "serverSeed": {
+    "title": "Server Seed",
+    "serverSeedHash": "Server Seed Hash",
+    "changeServerSeed": "change server seed",
+    "activeGameError": "End active game(s) before changing server seed",
+    "lockedNotice": "In order to see current server seed, new server seed must be generated.",
+    "serverSeed": "Server Seed",
+    "nonce": "Nonce",
+    "result": "Result",
+    "thirdPartyVerfication": "Third party verfication",
+    "verificationText": "REPL.IT is third party interactive programming environment. In order for you to allow verify bet results, we have created scripts for each game, which takes as input set of seeds, nonce, generating result.",
+    "verificationLinkText": "Verify on REPL.IT",
+    "clientSeed": "client seed"
   }
 }

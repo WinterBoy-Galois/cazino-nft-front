@@ -10,6 +10,7 @@ import { ModalState } from '../../state/models/modal.model';
 import { Action } from '../../state/actions';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import BetDetailsModal from '../BetDetailsModal';
+import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationModal';
 
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>
@@ -20,6 +21,11 @@ const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
     />
     <BetDetailsModal
       show={modal.type === 'BET_DETAILS_MODAL'}
+      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      {...modal.data}
+    />
+    <ChangeServerSeedConfirmationModal
+      show={modal.type === 'CHANGE_SERVER_SEED_CONFIRMATION'}
       onClose={() => dispatch({ type: 'HIDE_MODAL' })}
       {...modal.data}
     />
