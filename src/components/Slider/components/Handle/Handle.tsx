@@ -6,6 +6,7 @@ interface IProps {
   domain: ReadonlyArray<number>;
   handle: SliderItem;
   getHandleProps: GetHandleProps;
+  disabled?: boolean;
 }
 
 const getValue = (value: number) => {
@@ -24,6 +25,7 @@ const Handle: React.SFC<IProps> = ({
   domain: [min, max],
   handle: { id, value, percent },
   getHandleProps,
+  disabled = false,
 }) => (
   <div
     role="slider"
@@ -33,7 +35,7 @@ const Handle: React.SFC<IProps> = ({
     style={{
       top: `${percent}%`,
     }}
-    className={styles.handle}
+    className={`${styles.handle} ${disabled ? styles['handle--disabled'] : ''}`}
     {...getHandleProps(id)}
   >
     <svg

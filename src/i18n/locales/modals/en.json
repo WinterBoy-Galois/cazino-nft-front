@@ -16,6 +16,7 @@
     "bet": "Bet",
     "profit": "Profit",
     "rollOver": "Roll over",
+    "rollUnder": "Roll under",
     "winChance": "Win chance",
     "mines": "Mines",
     "difficulty": {

@@ -68,13 +68,16 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
     }
     case GameTypes.DICE: {
       const { resultFloat, target, winChance, over } = betDetails.gameResult as DiceBetResult;
-      results = <BetResultsDice result={resultFloat} rollOver={target} hasWon={!over} />;
+      results = <BetResultsDice result={resultFloat} target={target} over={over} />;
       details = [
         {
           label: t('betDetails.bet'),
           value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
         },
-        { label: t('betDetails.rollOver'), value: target?.toFixed(2) ?? 'n/a' },
+        {
+          label: over ? t('betDetails.rollOver') : t('betDetails.rollUnder'),
+          value: target?.toFixed(2) ?? 'n/a',
+        },
         { label: t('betDetails.winChance'), value: formatWinChance(winChance) },
         {
           label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,

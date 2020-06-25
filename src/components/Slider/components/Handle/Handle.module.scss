@@ -12,4 +12,8 @@
     font-size: 23px;
     font-weight: 300;
   }
+
+  &--disabled {
+    cursor: default;
+  }
 }
