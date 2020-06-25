@@ -9,7 +9,7 @@ exports[`renders 1`] = `
       class="slider"
     >
       <div
-        class="slider__rail"
+        class="slider__rail slider__rail--green"
       />
       <div
         class="slider-handles"
@@ -46,7 +46,7 @@ exports[`renders 1`] = `
         class="slider-tracks"
       >
         <div
-          class="track"
+          class="track track--red"
           style="top: 0%; height: 50%;"
         />
       </div>

@@ -6,10 +6,17 @@
   user-select: none;
 
   &__rail {
-    background-color: $green;
     height: 100%;
     width: 100%;
     cursor: pointer;
+
+    &--green {
+      background-color: $green;
+    }
+
+    &--red {
+      background-color: $red;
+    }
   }
 
   &__wrapper {
