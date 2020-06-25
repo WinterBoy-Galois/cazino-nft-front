@@ -89,6 +89,8 @@ const LatestBetsTable: React.FC<IProps> = ({
                     key={b.id}
                     bet={b}
                     highlight={signInUserId ? b.userid.toString() === signInUserId : false}
+                    viewMode={viewMode}
+                    onRowClicked={() => handleRowClick(b)}
                   />
                 ))
               ) : (
