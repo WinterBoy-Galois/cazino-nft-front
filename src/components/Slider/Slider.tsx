@@ -39,7 +39,7 @@ const Slider: React.SFC<IProps> = ({
             <div
               className={`${styles.slider__rail} ${
                 switchColors ? styles['slider__rail--red'] : styles['slider__rail--green']
-              }`}
+              } ${disabled ? styles['slider__rail--disabled'] : ''}`}
               {...getRailProps()}
             />
           )}
@@ -54,6 +54,7 @@ const Slider: React.SFC<IProps> = ({
                   handle={handle}
                   domain={domain}
                   getHandleProps={getHandleProps}
+                  disabled={disabled}
                 />
               ))}
             </div>
@@ -70,6 +71,7 @@ const Slider: React.SFC<IProps> = ({
                   target={target}
                   getTrackProps={getTrackProps}
                   switchColors={switchColors}
+                  disabled={disabled}
                 />
               ))}
             </div>

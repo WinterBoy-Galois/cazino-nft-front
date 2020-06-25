@@ -9,7 +9,7 @@ exports[`renders 1`] = `
       class="slider"
     >
       <div
-        class="slider__rail slider__rail--green"
+        class="slider__rail slider__rail--green "
       />
       <div
         class="slider-handles"
@@ -18,7 +18,7 @@ exports[`renders 1`] = `
           aria-valuemax="100"
           aria-valuemin="0"
           aria-valuenow="50"
-          class="handle"
+          class="handle "
           role="slider"
           style="top: 50%;"
         >
@@ -46,7 +46,7 @@ exports[`renders 1`] = `
         class="slider-tracks"
       >
         <div
-          class="track track--red"
+          class="track track--red "
           style="top: 0%; height: 50%;"
         />
       </div>

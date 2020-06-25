@@ -7,12 +7,15 @@ interface IProps {
   target: SliderItem;
   getTrackProps: GetTrackProps;
   switchColors: boolean;
+  disabled?: boolean;
 }
 
-const Track: React.SFC<IProps> = ({ source, target, getTrackProps, switchColors }) => {
+const Track: React.SFC<IProps> = ({ source, target, getTrackProps, switchColors, disabled }) => {
   return (
     <div
-      className={`${styles.track} ${switchColors ? styles['track--green'] : styles['track--red']}`}
+      className={`${styles.track} ${switchColors ? styles['track--green'] : styles['track--red']} ${
+        disabled ? styles['track--disabled'] : ''
+      }`}
       style={{ top: `${source.percent}%`, height: `${target.percent - source.percent}%` }}
       {...getTrackProps()}
     />
