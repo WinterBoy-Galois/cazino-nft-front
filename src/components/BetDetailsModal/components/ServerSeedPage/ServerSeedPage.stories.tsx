@@ -16,7 +16,7 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
         __typename: '',
         clientSeed: text('Client seed', 'tick-tock-tick-tock-tick-tock'),
         nonce: text('Nonce', '32768'),
-        results: array('Results', ['5.34', '7.78', '44.67']),
+        results: array('Results', ['5.34', '7.78', '44.67', '37.78', '45.78', '2.7']),
         serverSeed: text(
           'Server seed',
           'aa580a0ed83b7e4d102b8eaa3a17543d472efb7001ab38044d81e5b4ae3b764b'
