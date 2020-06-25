@@ -18,6 +18,7 @@ interface IProps {
   highlight?: boolean;
   viewMode?: ViewMode;
   onRowClicked?: () => void;
+  onUsernameClicked?: (userId: string) => void;
 }
 
 const BetRow: React.FC<IProps> = ({
@@ -25,6 +26,7 @@ const BetRow: React.FC<IProps> = ({
   highlight = false,
   viewMode = ViewMode.RESPONSIVE,
   onRowClicked,
+  onUsernameClicked,
 }) => {
   const { t } = useTranslation(['common']);
 
@@ -53,6 +55,14 @@ const BetRow: React.FC<IProps> = ({
     return bet.username !== null ? styles.username : styles.username__hidden;
   };
 
+  const handleClickUsername: React.MouseEventHandler = event => {
+    if (onUsernameClicked) {
+      onUsernameClicked(bet.userid.toString());
+    }
+
+    event.stopPropagation();
+  };
+
   return (
     <tr
       key={bet.id}
@@ -64,7 +74,11 @@ const BetRow: React.FC<IProps> = ({
       </td>
 
       <td>
-        <div className={getUsernameStyle()}>{getUsername()}</div>
+        <div className={getUsernameStyle()}>
+          <span className={styles.link} onClick={handleClickUsername}>
+            {getUsername()}
+          </span>
+        </div>
       </td>
 
       {viewMode === ViewMode.RESPONSIVE && (
