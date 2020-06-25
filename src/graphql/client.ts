@@ -4,10 +4,8 @@ import {
   NormalizedCacheObject,
   IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
-import { getMainDefinition } from 'apollo-utilities';
-import { split } from 'apollo-link';
+import { from } from 'apollo-link';
 import introspectionQueryResultData from './fragmentTypes.json';
 
 // https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
@@ -21,10 +19,6 @@ const cache = new InMemoryCache({
   fragmentMatcher,
 });
 
-const httpLink = new HttpLink({
-  uri: 'https://staging.jinglebets.com/graphqll/',
-});
-
 const wsLink = new WebSocketLink({
   uri: `wss://staging.jinglebets.com/graphql`,
   options: {
@@ -32,19 +26,7 @@ const wsLink = new WebSocketLink({
   },
 });
 
-const link = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query);
-    return (
-      definition.kind === 'OperationDefinition' &&
-      (definition.operation === 'subscription' ||
-        definition.operation === 'query' ||
-        definition.operation === 'mutation')
-    );
-  },
-  wsLink,
-  httpLink
-);
+const link = from([wsLink]);
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
