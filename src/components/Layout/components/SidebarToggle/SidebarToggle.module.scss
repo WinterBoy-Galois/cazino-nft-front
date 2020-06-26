@@ -1,0 +1,35 @@
+@import '../../../../styles/shared.scss';
+
+.button {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: $live-updates-light-blue;
+  border: 0;
+}
+
+.icon {
+  width: 9px;
+  display: block;
+  margin: 0 auto;
+}
+
+.fade {
+  transition: opacity 200ms ease-in-out;
+
+  &--enter {
+    opacity: 0;
+  }
+
+  &--enter-active {
+    opacity: 1;
+  }
+
+  &--exit {
+    opacity: 1;
+  }
+
+  &--exit-active {
+    opacity: 0;
+  }
+}

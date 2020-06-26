@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<div>
+  <div
+    class="leaderboard-table__wrapper"
+  >
+    <table
+      class="leaderboard-table"
+    >
+      <thead
+        class="leaderboard-table__header"
+      >
+        <tr>
+          <th>
+            #
+          </th>
+          <th>
+            User
+          </th>
+          <th>
+            Wagered
+          </th>
+          <th>
+            Bonus
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="leaderboard-table__body"
+      />
+    </table>
+    <div
+      class="undefined container"
+    >
+      Sorry, received no data.
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,13 @@
+@import '../../styles/shared.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgba($white, 0.7);
+  padding: 2rem;
+  font-weight: 300;
+  flex-grow: 1;
+  height: 100%;
+}

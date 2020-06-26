@@ -1,0 +1,19 @@
+@import '../../../../styles/shared.scss';
+
+.handle {
+  position: absolute;
+  margin-top: -21px;
+  z-index: 2;
+  cursor: pointer;
+  touch-action: none;
+
+  &__value {
+    fill: $white;
+    font-size: 23px;
+    font-weight: 300;
+  }
+
+  &--disabled {
+    cursor: default;
+  }
+}

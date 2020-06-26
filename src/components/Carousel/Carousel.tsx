@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, Autoplay, Pagination } from 'swiper/js/swiper.esm';
 import ReactIdSwiperCustom from 'react-id-swiper/lib/ReactIdSwiper.custom';
 import styles from './Carousel.module.scss';
+import { useStateValue } from '../../state';
 
 const Carousel: React.SFC = () => {
+  const [swiper, setSwiper] = useState<Swiper | null>();
+  const [
+    {
+      sidebar: { isOpen },
+    },
+  ] = useStateValue();
+
+  useEffect(() => {
+    setTimeout(() => {
+      swiper?.update();
+    }, 220);
+  }, [isOpen, swiper]);
+
   const params = {
     Swiper,
     modules: [Autoplay, Pagination],
@@ -22,7 +36,7 @@ const Carousel: React.SFC = () => {
 
   return (
     <div className={styles.container}>
-      <ReactIdSwiperCustom {...params}>
+      <ReactIdSwiperCustom {...params} getSwiper={s => setSwiper(s)}>
         <div className={styles.slide}>
           <div className={styles['carousel__slide-inner']}>
             <div className={styles.headline}>
@@ -37,28 +51,28 @@ const Carousel: React.SFC = () => {
         <div className={styles.slide}>
           <div className={styles['carousel__slide-inner']}>
             <div className={styles.headline}>
-              I'm the <strong>SECOND</strong> Slide.
+              I&apos;m the <strong>SECOND</strong> Slide.
             </div>
           </div>
         </div>
         <div className={styles.slide}>
           <div className={styles['carousel__slide-inner']}>
             <div className={styles.headline}>
-              I'm the <strong>THIRD</strong> Slide.
+              I&apos;m the <strong>THIRD</strong> Slide.
             </div>
           </div>
         </div>
         <div className={styles.slide}>
           <div className={styles['carousel__slide-inner']}>
             <div className={styles.headline}>
-              I'm the <strong>FOURTH</strong> Slide.
+              I&apos;m the <strong>FOURTH</strong> Slide.
             </div>
           </div>
         </div>
         <div className={styles.slide}>
           <div className={styles['carousel__slide-inner']}>
             <div className={styles.headline}>
-              I'm the <strong>FIFTH</strong> Slide.
+              I&apos;m the <strong>FIFTH</strong> Slide.
             </div>
           </div>
         </div>

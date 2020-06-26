@@ -1,35 +1,34 @@
 import React from 'react';
-import GameButton from './components/GameButton';
+import GoalGameButton from './components/GoalGameButton';
 import { useNavigate } from '@reach/router';
-import styles from './GameButtonList.module.scss';
+import { useStateValue } from '../../state';
+import MinesGameButton from './components/MinesGameButton';
+import ClamGameButton from './components/ClamGameButton';
+import DicesGameButton from './components/DicesGameButton';
 
 const GameButtonList: React.SFC = () => {
   const navigate = useNavigate();
-
-  const navigateToGoal = () => navigate('/games/goal');
-  const navigateToMines = () => navigate('/games/mines');
-  const navigateToClam = () => navigate('/games/clam');
-  const navigateToDice = () => navigate('/games/dice');
+  const [
+    {
+      sidebar: { isOpen },
+    },
+  ] = useStateValue();
 
   return (
-    <>
-      <div className="row">
-        <div className={`col-12 col-md-6 ${styles['spacing--right']}`}>
-          <GameButton game="GOAL" onClick={navigateToGoal} />
-        </div>
-        <div className={`col-12 col-md-6 ${styles['spacing--left']}`}>
-          <GameButton game="MINES" onClick={navigateToMines} />
-        </div>
+    <div className="row">
+      <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+        <GoalGameButton onClick={() => navigate('/games/goal')} />
       </div>
-      <div className="row">
-        <div className={`col-12 col-md-6 ${styles['spacing--right']}`}>
-          <GameButton game="CLAM" onClick={navigateToClam} />
-        </div>
-        <div className={`col-12 col-md-6 ${styles['spacing--left']}`}>
-          <GameButton game="DICES" onClick={navigateToDice} />
-        </div>
+      <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+        <MinesGameButton onClick={() => navigate('/games/mines')} />
       </div>
-    </>
+      <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+        <ClamGameButton onClick={() => navigate('/games/clam')} />
+      </div>
+      <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
+        <DicesGameButton onClick={() => navigate('/games/dices')} />
+      </div>
+    </div>
   );
 };
 

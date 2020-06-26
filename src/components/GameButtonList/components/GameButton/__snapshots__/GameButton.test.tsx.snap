@@ -6,51 +6,35 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="container container__clam"
+        class="container undefined"
       >
         <h2
           class="headline"
         >
-          Clams
+          test
         </h2>
         <span
           class="subline"
         >
           Play
         </span>
-        <div
-          class="animated__clam"
-        >
-          <img
-            alt="Pear"
-            src="clam-pearl.svg"
-          />
-        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="container container__clam"
+      class="container undefined"
     >
       <h2
         class="headline"
       >
-        Clams
+        test
       </h2>
       <span
         class="subline"
       >
         Play
       </span>
-      <div
-        class="animated__clam"
-      >
-        <img
-          alt="Pear"
-          src="clam-pearl.svg"
-        />
-      </div>
     </div>
   </div>,
   "debug": [Function],

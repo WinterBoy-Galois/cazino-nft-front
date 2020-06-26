@@ -1,0 +1,140 @@
+service:
+  name: cazzzino-webapp
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+  stage: ${opt:stage, 'dev'}
+  stackName: ${self:service.name}-${self:provider.stage}
+  profile: ${self:custom.profiles.${self:provider.stage}}
+  environment:
+    accountId: '#{AWS::AccountId}'
+    region: '#{AWS::Region}'
+    stage: ${self:provider.stage}
+  tags:
+    Application: CaZZZino
+    Name: ${self:service.name}
+
+plugins:
+  - serverless-s3-sync
+
+custom:
+  siteName: cazzzino.${self:provider.stage}.egonoid.net
+  certificate:
+    dev: arn:aws:acm:us-east-1:329426105556:certificate/73a6f5c8-3e39-416a-85e4-cb6b52eb0d94
+    test: arn:aws:acm:us-east-1:538894534293:certificate/34cd1f0f-7519-4396-b7fd-cbe7fdfd18cb
+  aliasHostedZoneId: Z2FDTNDATAQYW2
+  s3Sync:
+    - bucketName: ${self:custom.siteName}
+      localDir: build
+  profiles:
+    dev: cazzzino-dev
+    test: cazzzino-test
+  onViewerRequest:
+    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-extensions-dev-onViewerRequest:6
+    test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onViewerRequest:4
+  onOriginRequest:
+    dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-extensions-dev-onOriginRequest:6
+    test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onOriginRequest:4
+
+resources:
+  Resources:
+    WebAppS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: Private
+        BucketName: ${self:custom.siteName}
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - Authorization
+                - Content-Length
+              AllowedMethods:
+                - GET
+              AllowedOrigins:
+                - '*'
+              MaxAge: 3000
+    WebAppBucketOriginAccessIdentity:
+      Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+      Properties:
+        CloudFrontOriginAccessIdentityConfig:
+          Comment: 'CloudFrontOriginAccessIdentity for ${self:provider.stage}-${self:service}'
+    WebAppS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: ${self:custom.siteName}
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Action:
+                - s3:GetObject
+              Resource:
+                - 'arn:aws:s3:::${self:custom.siteName}/*'
+              Principal:
+                AWS:
+                  {
+                    'Fn::Join':
+                      [
+                        ' ',
+                        [
+                          'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity',
+                          { Ref: WebAppBucketOriginAccessIdentity },
+                        ],
+                      ],
+                  }
+    WebAppCloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Comment: CaZZZino App (${self:custom.siteName}) CloudFront Distribution
+          Aliases:
+            - ${self:custom.siteName}
+          DefaultRootObject: index.html
+          CustomErrorResponses:
+            - ErrorCode: 404
+              ResponseCode: 200
+              ResponsePagePath: /index.html
+          ViewerCertificate:
+            AcmCertificateArn: ${self:custom.certificate.${self:provider.stage}}
+            SslSupportMethod: sni-only
+          DefaultCacheBehavior:
+            TargetOriginId: ${self:custom.siteName}-S3
+            ViewerProtocolPolicy: 'redirect-to-https'
+            DefaultTTL: 30
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: none
+            Compress: True
+            LambdaFunctionAssociations:
+              - EventType: viewer-request
+                LambdaFunctionARN: ${self:custom.onViewerRequest.${self:provider.stage}}
+              - EventType: origin-request
+                LambdaFunctionARN: ${self:custom.onOriginRequest.${self:provider.stage}}
+          HttpVersion: http2
+          Enabled: true
+          Origins:
+            - Id: ${self:custom.siteName}-S3
+              DomainName: ${self:custom.siteName}.s3.amazonaws.com
+              S3OriginConfig:
+                OriginAccessIdentity:
+                  {
+                    'Fn::Join':
+                      [
+                        '',
+                        [
+                          'origin-access-identity/cloudfront/',
+                          { Ref: WebAppBucketOriginAccessIdentity },
+                        ],
+                      ],
+                  }
+
+  Outputs:
+    WebAppCloudFrontDistributionOutput:
+      Value:
+        'Fn::GetAtt': [WebAppCloudFrontDistribution, DomainName]

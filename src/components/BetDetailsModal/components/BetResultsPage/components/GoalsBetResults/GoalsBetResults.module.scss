@@ -1,0 +1,88 @@
+@import '../../../../../../styles/shared';
+
+.container {
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    max-width: 340px;
+  }
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+
+  &__item {
+    display: flex;
+    background-color: $blue;
+    margin: 0.6rem 0;
+    border-radius: 15px;
+
+    &:first-of-type,
+    &:last-of-type {
+      margin: 0;
+    }
+
+    &--highlight {
+      border: 2px solid $white;
+    }
+  }
+}
+
+.step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  border-radius: 15px;
+  background-color: $light-blue;
+  font-weight: 300;
+  flex-shrink: 0;
+}
+
+.goals {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.goal {
+  display: flex;
+  align-items: center;
+
+  &__index {
+    width: 21px;
+    height: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba($white, 0.5);
+    color: #000;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  &__ball {
+    width: 29px;
+    height: 29px;
+    border: 2px solid $negative;
+    border-radius: 50%;
+    opacity: 0.5;
+
+    &--win {
+      border-color: $positive;
+    }
+
+    &--selected {
+      opacity: 1;
+    }
+
+    &__icon {
+      vertical-align: unset;
+    }
+  }
+}

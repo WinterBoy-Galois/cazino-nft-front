@@ -1,0 +1,33 @@
+@import '../../styles/shared';
+
+.button {
+  width: 100%;
+  border-radius: 8px;
+  color: $white;
+  text-transform: uppercase;
+  font-size: 20px;
+  background-color: $button-primary;
+  border: 0;
+  padding: 0.3rem;
+
+  &--small {
+    padding: 7px;
+  }
+
+  &--medium {
+    padding: 11px;
+  }
+
+  &--large {
+    padding: 7px;
+
+    @include media-breakpoint-up(md) {
+      padding: 15px;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}

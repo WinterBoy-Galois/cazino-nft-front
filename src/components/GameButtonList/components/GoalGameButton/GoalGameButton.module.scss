@@ -1,0 +1,48 @@
+@import '../../../../styles/shared.scss';
+
+.container {
+  .highlight {
+    position: absolute;
+    left: 1rem;
+    right: 0;
+    bottom: 16px;
+    width: 37%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__animated {
+      width: 59%;
+      transform: translateY(18%);
+      transition: transform 200ms ease-in-out;
+    }
+
+    &__static {
+      width: 100%;
+    }
+  }
+
+  &:hover {
+    background-color: $footer-blue;
+  }
+
+  &:hover .highlight {
+    &__animated {
+      transform: translateY(-8%) scale(1.1);
+    }
+  }
+}
+
+.character {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  width: 50%;
+  transition: width 200ms ease-in-out;
+
+  &--with-sidebar {
+    @include media-breakpoint-only(xl) {
+      width: 57%;
+    }
+  }
+}

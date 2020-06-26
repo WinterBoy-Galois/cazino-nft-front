@@ -1,0 +1,47 @@
+{
+  "userInfo": {
+    "title": "User Info",
+    "totalWager": "Gesamteinsatz",
+    "totalProfit": "Gesamtgewinn",
+    "mostPlayed": "Meist gespielt",
+    "totalBets": "Wetten",
+    "winBets": "Gewonnene Wetten",
+    "lostBets": "Verlorene Wetten"
+  },
+  "betDetails": {
+    "title": "Wettdetails",
+    "date": "Datum/Zeit",
+    "betId": "Wettnr.",
+    "game": "Spiel",
+    "bet": "Wette",
+    "profit": "Gewinn",
+    "rollOver": "Roll over",
+    "rollUnder": "Roll under",
+    "winChance": "Gewinnchance",
+    "mines": "Minen",
+    "difficulty": {
+      "label": "Schwierigkeit",
+      "GOALS2OUT3": "2 von 3 gewinnen",
+      "GOALS1OUT2": "1 von 2 gewinnen",
+      "GOALS1OUT3": "1 von 3 gewinnen"
+    },
+    "clams": "Muscheln"
+  },
+  "betResults": {
+    "title": "Bet Results"
+  },
+  "serverSeed": {
+    "title": "Server Seed",
+    "serverSeedHash": "Server Seed Hash",
+    "changeServerSeed": "change server seed",
+    "activeGameError": "End active game(s) before changing server seed",
+    "lockedNotice": "In order to see current server seed, new server seed must be generated.",
+    "serverSeed": "Server Seed",
+    "nonce": "Nonce",
+    "result": "Result",
+    "thirdPartyVerfication": "Third party verfication",
+    "verificationText": "REPL.IT is third party interactive programming environment. In order for you to allow verify bet results, we have created scripts for each game, which takes as input set of seeds, nonce, generating result.",
+    "verificationLinkText": "Verify on REPL.IT",
+    "clientSeed": "client seed"
+  }
+}

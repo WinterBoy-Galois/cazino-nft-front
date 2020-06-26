@@ -1,0 +1,11 @@
+@import '../../styles/shared';
+
+.link {
+  color: $button-primary;
+  font-size: 19px;
+  font-weight: 600;
+
+  &:hover {
+    color: $button-primary;
+  }
+}

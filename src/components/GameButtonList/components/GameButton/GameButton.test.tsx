@@ -7,7 +7,7 @@ describe('GameButton', () => {
     // Arrange
 
     // Act
-    const container = render(<GameButton game={'CLAM'} />);
+    const container = render(<GameButton headline="test" />);
 
     // Assert
     expect(container).toMatchSnapshot();

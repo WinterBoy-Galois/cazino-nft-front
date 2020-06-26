@@ -1,0 +1,124 @@
+@import '../../styles/shared';
+
+$radius: 10px;
+
+.leaderboard-table {
+  min-width: 100%;
+  color: $white;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  td {
+    padding: 0;
+  }
+
+  &__header {
+    th {
+      position: sticky;
+      top: 0;
+      font-weight: 300;
+      padding: 0.5rem;
+      background-color: $table-light-blue;
+      text-transform: uppercase;
+      color: $table-ultra-light-blue;
+      font-size: 15px;
+      text-align: left;
+      z-index: 1;
+    }
+
+    th:first-child {
+      // Fixes Safari iOS border radius
+      @supports (-webkit-touch-callout: none) {
+        border-radius: $radius 0 0 0;
+      }
+
+      padding-left: 1rem;
+    }
+
+    th:last-child {
+      // Fixes Safari iOS border radius
+      @supports (-webkit-touch-callout: none) {
+        border-radius: 0 $radius 0 0;
+      }
+
+      padding-right: 1rem;
+    }
+  }
+
+  &__body {
+    background-color: $table-dark-blue;
+    font-size: 13px;
+
+    @include media-breakpoint-up(xs) {
+      font-size: 13px;
+    }
+
+    td div {
+      padding: 0.5rem 0.5rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 130px;
+
+      @include media-breakpoint-up(lg) {
+        max-width: 129px;
+        padding: 0.6rem 0.5rem;
+      }
+    }
+
+    tr td:first-child div {
+      padding-left: 1rem;
+    }
+
+    tr td:last-child div {
+      padding-right: 1rem;
+    }
+  }
+
+  &__wrapper {
+    max-height: calc(100% - 0.5rem);
+    min-height: 200px;
+    height: auto;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: nowrap;
+    background-color: $table-dark-blue;
+    border-radius: $radius;
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint-up(md) {
+      overflow-y: hidden;
+    }
+
+    @include media-breakpoint-up(lg) {
+      max-height: calc(100% - 1.5rem);
+    }
+  }
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(50%);
+}
+
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 500ms, transform 500ms;
+}

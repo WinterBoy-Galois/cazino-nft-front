@@ -1,0 +1,36 @@
+{
+  "headline": "Live Updates",
+  "tabs": {
+    "latestBets": "Letzte Wetten",
+    "myBets": "Meine Wetten",
+    "leaderboards": "Bestenliste"
+  },
+  "latestBets": {
+    "table": {
+      "user": "Nutzer",
+      "profit": "Gewinn",
+      "bet": "Wette",
+      "time": "Zeit"
+    }
+  },
+  "myBets": {
+    "table": {
+      "bet": "Wette",
+      "profit": "Gewinn",
+      "time": "Zeit",
+      "multiplier": "Multiplier"
+    }
+  },
+  "leaderboards": {
+    "times": {
+      "daily": "Tag",
+      "weekly": "Woche",
+      "monthly": "Monat"
+    },
+    "table": {
+      "user": "Nutzer",
+      "wagered": "Gewettet",
+      "bonus": "Bonus"
+    }
+  }
+}

@@ -27,7 +27,7 @@ export default create({
   // Form colors
   inputBg: '#292929',
   inputBorder: 'silver',
-  inputTextColor: 'black',
+  inputTextColor: 'white',
   inputBorderRadius: 8,
 
   brandTitle: 'cazzino storybook',

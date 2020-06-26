@@ -6,6 +6,7 @@ import '../src/i18n';
 addParameters({
   options: {
     panelPosition: 'right',
+    showRoots: true,
   },
   viewport: { viewports: INITIAL_VIEWPORTS, defaultViewport: 'iphone6' },
 });
