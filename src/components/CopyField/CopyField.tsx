@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './CopyField.module.scss';
 import Copy from '../icons/Copy';
+import copy from 'copy-to-clipboard';
 
 interface IProps {
   label: string;
@@ -9,8 +10,7 @@ interface IProps {
 }
 
 const CopyField: React.FC<IProps> = ({ label, value, className = '' }) => {
-  const copyToClipboard = () =>
-    navigator?.clipboard?.writeText ? navigator.clipboard.writeText(value) : null;
+  const copyToClipboard = () => copy(value);
 
   return (
     <div className={`${className} ${styles.container}`} onClick={copyToClipboard}>
