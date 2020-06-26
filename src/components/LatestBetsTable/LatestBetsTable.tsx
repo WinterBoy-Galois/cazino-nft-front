@@ -25,6 +25,8 @@ interface IProps {
   signInUserId?: string;
   viewMode?: ViewMode;
   reduceMotion?: boolean;
+  onRowClicked?: () => void;
+  onUsernameClicked?: (userId: string) => void;
 }
 
 const LatestBetsTable: React.FC<IProps> = ({
@@ -35,6 +37,7 @@ const LatestBetsTable: React.FC<IProps> = ({
   signInUserId,
   viewMode = ViewMode.RESPONSIVE,
   reduceMotion = false,
+  onUsernameClicked,
 }) => {
   const breakpoint = useBreakpoint();
   const { t } = useTranslation(['sidebar']);
@@ -91,6 +94,7 @@ const LatestBetsTable: React.FC<IProps> = ({
                     highlight={signInUserId ? b.userid.toString() === signInUserId : false}
                     viewMode={viewMode}
                     onRowClicked={() => handleRowClick(b)}
+                    onUsernameClicked={onUsernameClicked}
                   />
                 ))
               ) : (
@@ -112,6 +116,7 @@ const LatestBetsTable: React.FC<IProps> = ({
                         highlight={signInUserId ? b.userid.toString() === signInUserId : false}
                         viewMode={viewMode}
                         onRowClicked={() => handleRowClick(b)}
+                        onUsernameClicked={onUsernameClicked}
                       />
                     </CSSTransition>
                   ))}

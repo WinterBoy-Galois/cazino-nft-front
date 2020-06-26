@@ -5,6 +5,7 @@ import styles from './LatestBetsTab.module.scss';
 import { ViewMode } from '../../../../../LatestBetsTable/LatestBetsTable';
 import Bet from '../../../../../../models/bet.model';
 import { ApolloError } from 'apollo-client';
+import { useStateValue } from '../../../../../../state';
 
 interface IProps {
   bets?: Bet[];
@@ -13,6 +14,8 @@ interface IProps {
 }
 
 const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
+  const [, dispatch] = useStateValue();
+
   return (
     <>
       <div className={styles.table}>
@@ -23,6 +26,12 @@ const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error 
           signInUserId="15"
           viewMode={ViewMode.RESPONSIVE}
           reduceMotion={true}
+          onUsernameClicked={userId =>
+            dispatch({
+              type: 'SHOW_MODAL',
+              payload: { type: 'USER_INFO_MODAL', data: { userId } },
+            })
+          }
         />
       </div>
     </>
