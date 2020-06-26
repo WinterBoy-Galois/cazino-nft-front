@@ -20,7 +20,7 @@ const cache = new InMemoryCache({
 });
 
 const wsLink = new WebSocketLink({
-  uri: `wss://staging.jinglebets.com/graphql`,
+  uri: String(process.env.REACT_APP_BACKEND_URL),
   options: {
     reconnect: true,
   },
