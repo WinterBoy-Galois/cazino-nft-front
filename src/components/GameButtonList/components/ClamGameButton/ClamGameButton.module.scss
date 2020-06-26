@@ -1,0 +1,43 @@
+@import '../../../../styles/shared.scss';
+
+.container {
+  .highlight {
+    position: absolute;
+    left: -37px;
+    bottom: -58px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__animated {
+      width: 100%;
+    }
+  }
+
+  &:hover {
+    background-color: $footer-blue;
+  }
+
+  &:hover .highlight {
+    &__animated {
+      animation: rotating 5s linear infinite;
+
+      @keyframes rotating {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}
+
+.character {
+  position: absolute;
+  height: 100%;
+  bottom: 0;
+  right: -68px;
+}

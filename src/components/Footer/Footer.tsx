@@ -13,106 +13,13 @@ import CryptoGamblingFoundationLogo2x from '../../assets/images/footer/crypto-ga
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
 import LanguageSelect from '../LanguageSelect';
+import { useStateValue } from '../../state';
+import { buildDate } from '../../common/util';
 
-const Footer: React.SFC = () => {
-  const { t } = useTranslation(['footer']);
-  const year = new Date().getFullYear();
-
-  return (
-    <div className={styles.container}>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12 col-lg-2">
-            <div className={styles['language-select']}>
-              <LanguageSelect />
-            </div>
-            <div>
-              <Logo className={styles.logo} fillClassName={styles.logo__fill} />
-            </div>
-            <div className={styles.copyright}>&copy; {year} cazzzino.com</div>
-          </div>
-
-          {renderFooterLinks(getFooterData(t))}
-
-          <div className="col-6 col-lg-2">
-            <ul className={styles.list}>
-              <li className={styles['list__item--headline']}>Social</li>
-              <li className={styles.list__item}>
-                <a
-                  href="https://twitter.com/"
-                  className={`${styles.list__item__link} ${styles.social__link}`}
-                >
-                  <Twitter className={styles.social__icon} />
-                  <span>{t('links.social.twitter')}</span>
-                </a>
-              </li>
-              <li className={styles.list__item}>
-                <a
-                  href="https://www.facebook.com/"
-                  className={`${styles.list__item__link} ${styles.social__link}`}
-                >
-                  <Facebook className={styles.social__icon} />
-                  {t('links.social.facebook')}
-                </a>
-              </li>
-              <li className={styles.list__item}>
-                <a
-                  href="https://telegram.org/"
-                  className={`${styles.list__item__link} ${styles.social__link}`}
-                >
-                  <Telegram className={styles.social__icon} />
-                  {t('links.social.telegram')}
-                </a>
-              </li>
-              <li className={styles.list__item}>
-                <a
-                  href="https://bitcointalk.org/"
-                  className={`${styles.list__item__link} ${styles.social__link}`}
-                >
-                  <Bitcoin
-                    className={styles.social__icon}
-                    innerClassName={styles.social__icon__inner}
-                  />
-                  {t('links.social.bitcoinTalk')}
-                </a>
-              </li>
-              <li className={styles.list__item}>
-                <a
-                  href="https://www.instagram.com/"
-                  className={`${styles.list__item__link} ${styles.social__link}`}
-                >
-                  <Instagram className={styles.social__icon} />
-                  {t('links.social.instagram')}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="row">
-          <div className={`col-12 ${styles.seals}`}>
-            <img
-              className={styles.seals__item}
-              src={CryptoGamblingFoundationLogo}
-              srcSet={`${CryptoGamblingFoundationLogo} 1x, ${CryptoGamblingFoundationLogo2x} 2x`}
-              alt="Crypto Gambling Foundation"
-            />
-            <div className={styles['age-disclaimer']}>
-              <div className={styles['age-disclaimer__age']}>18+</div>
-              <div className={styles['age-disclaimer__label']}>Responsible Gambling</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Footer;
-
-const renderFooterLinks = (footer: FooterList[]) =>
+const renderFooterLinks = (footer: FooterList[], isSidebarOpen: boolean) =>
   footer.map((f, i) => (
-    <div className="col-6 col-lg-2" key={`footer-list-${i}`}>
-      <ul className={styles.list}>
+    <div className={`col-6 ${!isSidebarOpen ? 'col-lg-2' : 'col-xl-2'}`} key={`footer-list-${i}`}>
+      <ul className={`${styles.list} ${isSidebarOpen && styles['list--spacing']}`}>
         <li className={styles['list__item--headline']}>{f.headline}</li>
         {f.items.map((item, j) => (
           <li className={styles.list__item} key={`footer-list-item-${j}`}>
@@ -199,3 +106,114 @@ const getFooterData = (t: TFunction): FooterList[] => [
     ],
   },
 ];
+
+const Footer: React.SFC = () => {
+  const { t } = useTranslation(['footer']);
+  const year = new Date().getFullYear();
+  const [
+    {
+      sidebar: { isOpen },
+    },
+  ] = useStateValue();
+
+  return (
+    <div className={styles.container}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className={`col-12 ${!isOpen ? 'col-lg-2' : 'col-xl-2'}`}>
+            <div className={styles['language-select']}>
+              <LanguageSelect />
+            </div>
+            <div>
+              <Logo className={styles.logo} fillClassName={styles.logo__fill} />
+            </div>
+            <div className={styles.copyright}>&copy; {year} cazzzino.com</div>
+          </div>
+
+          {renderFooterLinks(getFooterData(t), isOpen)}
+
+          <div className={`col-6 ${!isOpen ? 'col-lg-2' : 'col-xl-2'}`}>
+            <ul className={`${styles.list} ${isOpen && styles['list--spacing']}`}>
+              <li className={styles['list__item--headline']}>Social</li>
+              <li className={styles.list__item}>
+                <a
+                  href="https://twitter.com/"
+                  className={`${styles.list__item__link} ${styles.social__link}`}
+                >
+                  <Twitter className={styles.social__icon} />
+                  <span className={styles.social__label}>{t('links.social.twitter')}</span>
+                </a>
+              </li>
+              <li className={styles.list__item}>
+                <a
+                  href="https://www.facebook.com/"
+                  className={`${styles.list__item__link} ${styles.social__link}`}
+                >
+                  <Facebook className={styles.social__icon} />
+                  <span className={styles.social__label}>{t('links.social.facebook')}</span>
+                </a>
+              </li>
+              <li className={styles.list__item}>
+                <a
+                  href="https://telegram.org/"
+                  className={`${styles.list__item__link} ${styles.social__link}`}
+                >
+                  <Telegram className={styles.social__icon} />
+                  <span className={styles.social__label}>{t('links.social.telegram')}</span>
+                </a>
+              </li>
+              <li className={styles.list__item}>
+                <a
+                  href="https://bitcointalk.org/"
+                  className={`${styles.list__item__link} ${styles.social__link}`}
+                >
+                  <Bitcoin
+                    className={styles.social__icon}
+                    innerClassName={styles.social__icon__inner}
+                  />
+                  <span className={styles.social__label}>{t('links.social.bitcoinTalk')}</span>
+                </a>
+              </li>
+              <li className={styles.list__item}>
+                <a
+                  href="https://www.instagram.com/"
+                  className={`${styles.list__item__link} ${styles.social__link}`}
+                >
+                  <Instagram className={styles.social__icon} />
+                  <span className={styles.social__label}>{t('links.social.instagram')}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className={`row`}>
+          <div className={`col-12 col-lg-9 ${styles.seals}`}>
+            <img
+              className={styles.seals__item}
+              src={CryptoGamblingFoundationLogo}
+              srcSet={`${CryptoGamblingFoundationLogo} 1x, ${CryptoGamblingFoundationLogo2x} 2x`}
+              alt="Crypto Gambling Foundation"
+            />
+            <div className={styles['age-disclaimer']}>
+              <div className={styles['age-disclaimer__age']}>18+</div>
+              <div className={styles['age-disclaimer__label']}>Responsible Gambling</div>
+            </div>
+          </div>
+          <div className={`col-12 col-lg-3 ${styles.build}`}>
+            <small>
+              {`Last build: ${new Intl.DateTimeFormat('de-DE', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              }).format(buildDate)}`}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Footer;

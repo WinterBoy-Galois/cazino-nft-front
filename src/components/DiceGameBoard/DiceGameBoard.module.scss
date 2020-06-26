@@ -1,0 +1,20 @@
+@import '../../styles/shared';
+
+.container {
+  position: relative;
+}
+
+.slider {
+  height: 72.6%;
+  position: absolute;
+  top: 7.8%;
+  right: 0;
+  width: 20.7%;
+}
+
+.character {
+  position: absolute;
+  left: -9%;
+  bottom: 0;
+  width: 46%;
+}

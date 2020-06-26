@@ -1,0 +1,39 @@
+language: node_js
+node_js:
+  - stable
+matrix:
+  include:
+    - if: branch =~ /^(develop)
+      env:
+        - AWS_REGION="eu-central-1"
+        - secure: rl1wWZNNcMskYtPDfzQ0cjWiN1RMfQ3is+aB3+LEoKsv7m3HaZ/ZAzHXAYB3vyoUSod1OmUDFP8TU//6hynF7Mkl33Z7elao0N3il2H5lhCyoOtP7niunMOCvS02dRjuIXwIoutrYwYp8Jtb1YrJPu9JzXmr9APC6Re0xG7kIpXztJDdK4O8zIPfz87ICbEBsEgDRikvf8RUiqZkSyaJmJjNwAAPX9l8xr44HSg1uAAlelC5mOwTnCVX6c4Dj42cLbaJGQLzUplSNWC0PONj7AiLudiGe+PixhxkruFCayz+U9z1ZmY565z2dwKgxeNE9zMRmqwemGQHOgZQnKqbBGbr6KOn6XgfYMQ/mf6yGq0sDICZeWSWVMjGK/arznADSCiMgKFdJltRxVKR3I0I1GvrpMBecAHIkk1g/keqRNVlTnzs2oyYn0oF6KtMP9BkJQ0fHS3iA6WfqSlkP5vDfotU9JnyvDFHHzNRG1zwBnlRKpE7tRor4+/kl0WQcrrZjVPAYKpJN3zj5SfWiUu5Zjegyz4bXEhxR1L/Q/zAOh1GFhudID+U6vGJxMN6ci126vAZnEGJFp9sIZQLgT/GezjkpvyfZg3YoVOKE+RyJBJiTSXd9kuilsiada4q4YdKFj5liT3hY1YX0aUJPlMv/hphCKLufFqzjBV+7UXrnPQ=
+    # - if: branch =~ /^(master)
+    #   env:
+    #     - AWS_REGION="eu-central-1"
+    #     - secure: Bu47Xuavz/05K9ngd+CjJ+Z1w/1nR1MgyTbTQHZNh+ZRu4SmD3MLpxUuMIQ9jT5viOb94KNQXz8WNprewpqkTAHLQxOPczRxqeXcEZuw5MH4rm+wcMHZ7ObNoLF2KTbf4tEEClSOZHfVDyI79EZETY2yut+cCyqagg3mXkzhx6KwT4LJoMhHPFeSSNBplDWROWD/0O9Q3gEzUhN/ujgp+SdqzIH8LHrLaYpHLzA4XP/r9u1CIO9Q31kZCUqhcwZtWAi3dafKZHPX7toC7vObrHjswo8trjsgrb4VsqEj+TDWn4YFuUUFfX+2PbXcg+JHROaMccKqspclzAjjhZCaOoXI9xP3NIo3AtEV12UhF71VxDUfeBlbZ97UQGPFfyjDeipWcFYDnqZ1FabrtYaWYxKb6xydCHJTbeY9UvexY/o0GA1PnVf9hrxDCvRnnoAt5P/EGWxgs8X9nHdys/hWQwSNUVoODmIfc3LiiFdFXntlAz5l7xC74gRKgB9BZt1LUJkESVU0wfuVZVTf8pVQr/ow8o/7/pswzVMIDdMNzNgrARLpSqahaPjO+cVm6th57cm3aGf/r2+dh0V7lADmxKhQDtfdDL0zvcSqAy4HEDysMQp+ODC8rd3gkufB6UX8gZZIBBIOLXLr2u4Y2gQSVaAxOc7Bj3pvwTbPz61Ci8c=
+cache: yarn
+script:
+  - yarn build
+  - yarn test:single
+  - yarn build-storybook
+before_deploy:
+  - yarn global add serverless
+  - pip install awscli --upgrade --user
+  - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile cazzzino-test
+  - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile cazzzino-test
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script:
+      - sls deploy -v -s test --conceal
+    on:
+      branch: develop
+  # - provider: script
+  #   skip_cleanup: true
+  #   script:
+  #     - sls deploy -v -s prod --conceal
+  #   on:
+  #     branch: master
+notifications:
+  slack:
+    secure: f+43Ef1MLk0b1ao44FNcmAfpFuqb27PPGXVSec3sV/7hiNxnjxBaO2x/zfSJklhsWGfK7d7A79x3rqhnFCq3vh/VPcxT0v4480TDyANHOwbaREbH6sDOYH3eDo28UzybsVM1i1sTa0cp9OxxlS7zDMzkj1/6Pd4FkyF402FCxPGpJWih7vZVVfEbd8ZtUgDEYqvWC9lzXWgTqI+CogX1spDCkTC5z6pzAM1LdoScTge+7o7bp6ZvaRkRmQ/d/J5TJbt2yK0NbhgFWmrIaySMKdhN+O++/5e23Rodf/jYPm6yVGkP+es2UrO8nq9NwcmgPO7iHXbtzlF9FUez6kKNY2sQcIrijpQazy19N10kOVJkyT4tEBHlyLadzihr4kTaRbyB4uBw19fuHi1iy8v76Wf7UdVwgqaKJC3u1y2WqTwhJDuDmbytj32oKOutQQcVov8Z17rPwwxndltkoEwMb+cHcy/wZXH37wE552IOSMJiuubXMST0RJbthYjJjwk0v2ZfHlqZE8kKu5VLeny3Tmxgdeh/lc/RFXywwZ2pptwWOb3mlDKVHzMcCX9HkRrThVmQdX97XxtLGZ8wQboZebf2//2R2eWKRhk3VCtoXFT8oHqi9ICr2UTGwr+iODiKtalpq0VUyaLQFsZ5c+1hbC+ktHmgQvHGO0tH+H1MrNA=

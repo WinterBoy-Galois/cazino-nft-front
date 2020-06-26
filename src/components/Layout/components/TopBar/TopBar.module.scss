@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.right {
+  justify-content: flex-end;
+}
+
 .logo {
   &__size {
     width: 90px;

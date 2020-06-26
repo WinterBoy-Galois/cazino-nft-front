@@ -1,0 +1,55 @@
+@import '../../styles/shared';
+
+.modal {
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.text {
+  text-align: center;
+  margin-bottom: 5rem;
+  font-size: 20px;
+  font-weight: 400;
+
+  @include media-breakpoint-up(md) {
+    font-size: 22px;
+    margin-bottom: 7rem;
+  }
+}
+
+.button {
+  width: 221px;
+
+  &__container {
+    max-width: 221px;
+    display: block;
+    margin: 0 auto;
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+      margin: 0;
+      justify-content: space-evenly;
+      max-width: unset;
+    }
+  }
+
+  &__confirm {
+    margin-bottom: 2rem;
+
+    @include media-breakpoint-up(md) {
+      margin: 0;
+    }
+  }
+
+  &__cancel {
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(md) {
+      margin: 0;
+    }
+  }
+}

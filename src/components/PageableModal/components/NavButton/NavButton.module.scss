@@ -1,0 +1,16 @@
+@import '../../../../styles/shared.scss';
+
+.arrow {
+  width: 30px;
+  height: 30px;
+
+  &--left {
+    transform: rotate(180deg);
+  }
+}
+
+.button {
+  background-color: unset;
+  border: none;
+  padding: 0.5rem 1.5rem;
+}

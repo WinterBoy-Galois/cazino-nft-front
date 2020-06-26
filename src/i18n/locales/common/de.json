@@ -6,6 +6,7 @@
     "goal": "Goals"
   },
   "play": "SPIEL",
+  "hidden": "verborgen",
   "languages": {
     "de": {
       "label": "Deutsch"

@@ -1,27 +1,21 @@
 @import '../../styles/shared';
 
 .container {
-  // height: 82px;
   margin: auto;
   width: 100%;
   overflow: auto;
 
   @include media-breakpoint-up(md) {
-    width: 80%;
-    // height: 180px;
+    width: 400px;
   }
-}
 
-.slider {
-  // // height: 82px;
-  // margin: auto;
-  // width: 100%;
-  // overflow: auto;
+  @include media-breakpoint-up(lg) {
+    width: 530px;
+  }
 
-  // @include media-breakpoint-up(md) {
-  //   width: 80%;
-  //   // height: 180px;
-  // }
+  @include media-breakpoint-up(xl) {
+    width: 750px;
+  }
 }
 
 .slide {
@@ -36,9 +30,8 @@
   overflow: hidden;
   user-select: none;
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(xl) {
     height: 180px;
-    // background-size: auto 180px;
   }
 }
 
@@ -67,8 +60,9 @@
     width: 50%;
     padding: 10px;
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(xl) {
       padding: 30px;
+      width: 60%;
     }
   }
 
@@ -77,7 +71,7 @@
     margin-top: 8px;
     margin-bottom: 8px;
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(xl) {
       margin-top: 21px;
       margin-bottom: 21px;
     }
@@ -94,7 +88,7 @@
       transition: opacity 0.3s ease;
       padding: 0;
 
-      @include media-breakpoint-up(lg) {
+      @include media-breakpoint-up(xl) {
         margin-top: 0;
         height: 21px;
         width: 21px;
@@ -127,7 +121,7 @@
     margin-top: 0;
   }
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(xl) {
     font-size: 28px;
     margin-bottom: 0.4rem;
     margin-top: 0;
@@ -146,7 +140,7 @@
     margin-top: 7px;
   }
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(xl) {
     font-size: 20px;
     margin-top: 20px;
     display: block;

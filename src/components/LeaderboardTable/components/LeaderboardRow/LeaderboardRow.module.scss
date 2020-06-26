@@ -1,0 +1,52 @@
+@import '../../../../styles/shared.scss';
+
+.link {
+  cursor: pointer;
+
+  &:hover {
+    color: lighten($table-ultra-light-blue, 15);
+  }
+}
+
+.icon {
+  width: 11px;
+  height: 11px;
+  margin-right: 4px;
+  vertical-align: baseline;
+  fill: $bitcoinYellow;
+
+  &__inner {
+    fill: $dark-blue;
+  }
+}
+
+.bonus {
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: unset;
+  }
+}
+
+.row {
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &--highlight {
+    background-color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+.username {
+  width: 130px;
+
+  @include media-breakpoint-up(lg) {
+    width: 129px;
+  }
+
+  &__hidden {
+    font-weight: 600;
+    color: $live-updates-light-blue;
+  }
+}

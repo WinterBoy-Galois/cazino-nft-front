@@ -1,0 +1,32 @@
+@import '../../styles/shared';
+
+.container {
+  position: relative;
+  display: flex;
+  height: 37px;
+  border-radius: 10px;
+  background-color: $slide-select-dark-blue;
+
+  @include media-breakpoint-up(lg) {
+    height: 45px;
+  }
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 2;
+
+  &--selected {
+    position: absolute;
+    height: 100%;
+    background-color: $slide-select-blue;
+    z-index: 1;
+    border-radius: 10px;
+    transition: transform 200ms ease-in-out;
+  }
+}
