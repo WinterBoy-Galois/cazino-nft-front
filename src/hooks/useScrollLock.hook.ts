@@ -13,7 +13,7 @@ export function useScrollLock(lock: boolean, lockTouch = true) {
       document.body.style.overflow = 'hidden';
     }
 
-    if (lockTouch) {
+    if (lock && lockTouch) {
       document.ontouchmove = e => {
         e.preventDefault();
       };

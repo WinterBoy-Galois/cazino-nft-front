@@ -1,8 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Slider from '.';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 storiesOf('Components/Slider', module)
+  .addDecorator(withKnobs)
   .addDecorator(storyFn => (
     <div
       style={{
@@ -17,5 +19,6 @@ storiesOf('Components/Slider', module)
       {storyFn()}
     </div>
   ))
-  .add('default', () => <Slider />)
-  .add('disabled', () => <Slider disabled value={34.67} />);
+  .add('default', () => (
+    <Slider disabled={boolean('Disabled', false)} switchColors={boolean('Switch colors', false)} />
+  ));

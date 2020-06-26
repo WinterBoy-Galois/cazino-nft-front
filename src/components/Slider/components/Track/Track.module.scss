@@ -3,7 +3,18 @@
 .track {
   position: absolute;
   z-index: 1;
-  background-color: $red;
   cursor: pointer;
   width: 100%;
+
+  &--green {
+    background-color: $green;
+  }
+
+  &--red {
+    background-color: $red;
+  }
+
+  &--disabled {
+    cursor: default;
+  }
 }

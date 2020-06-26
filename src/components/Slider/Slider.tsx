@@ -9,6 +9,7 @@ interface IProps {
   disabled?: boolean;
   onUpdate?: (value: number) => void;
   onChange?: (value: number) => void;
+  switchColors?: boolean;
 }
 
 const domain = [0, 100];
@@ -18,6 +19,7 @@ const Slider: React.SFC<IProps> = ({
   disabled = false,
   onUpdate,
   onChange,
+  switchColors = false,
 }: IProps) => {
   return (
     <div className={styles.slider__wrapper}>
@@ -33,7 +35,14 @@ const Slider: React.SFC<IProps> = ({
         disabled={disabled}
       >
         <Rail>
-          {({ getRailProps }) => <div className={styles.slider__rail} {...getRailProps()} />}
+          {({ getRailProps }) => (
+            <div
+              className={`${styles.slider__rail} ${
+                switchColors ? styles['slider__rail--red'] : styles['slider__rail--green']
+              } ${disabled ? styles['slider__rail--disabled'] : ''}`}
+              {...getRailProps()}
+            />
+          )}
         </Rail>
 
         <Handles>
@@ -45,6 +54,7 @@ const Slider: React.SFC<IProps> = ({
                   handle={handle}
                   domain={domain}
                   getHandleProps={getHandleProps}
+                  disabled={disabled}
                 />
               ))}
             </div>
@@ -55,7 +65,14 @@ const Slider: React.SFC<IProps> = ({
           {({ tracks, getTrackProps }) => (
             <div className={styles['slider-tracks']}>
               {tracks.map(({ id, source, target }) => (
-                <Track key={id} source={source} target={target} getTrackProps={getTrackProps} />
+                <Track
+                  key={id}
+                  source={source}
+                  target={target}
+                  getTrackProps={getTrackProps}
+                  switchColors={switchColors}
+                  disabled={disabled}
+                />
               ))}
             </div>
           )}

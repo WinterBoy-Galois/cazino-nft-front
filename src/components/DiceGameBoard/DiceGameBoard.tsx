@@ -7,22 +7,24 @@ import sadCharacter from '../../assets/images/games/dice/dice-char-sad.svg';
 
 interface IProps {
   result?: number;
-  rollOver?: number;
+  target?: number;
   disabled?: boolean;
-  hasWon?: boolean;
+  over?: boolean;
 }
 
 const DiceGameBoard: React.FC<IProps> = ({
   result = 0,
-  rollOver = 0,
+  target = 0,
   disabled = false,
-  hasWon = true,
+  over = false,
 }) => {
+  const hasWon = over ? result >= target : result <= target;
+
   return (
     <div className={styles.container}>
       <DiceResultScale result={result.toFixed(2)} />
       <div className={styles.slider}>
-        <Slider disabled={disabled} value={rollOver} />
+        <Slider disabled={disabled} value={target} switchColors={over} />
       </div>
       <div className={styles.character}>
         <img src={hasWon ? happyCharacter : sadCharacter} alt={hasWon ? 'happy' : 'sad'} />

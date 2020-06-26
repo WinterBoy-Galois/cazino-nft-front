@@ -7,7 +7,7 @@ describe('DiceGameBoard', () => {
     // Arrange
 
     // Act
-    const container = render(<DiceGameBoard result={55} rollOver={65} />);
+    const container = render(<DiceGameBoard result={55} target={65} />);
 
     // Assert
     expect(container).toMatchSnapshot();

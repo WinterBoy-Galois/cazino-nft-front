@@ -1,14 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Button from '.';
+import HollowButton from '.';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { ButtonSize } from '../Button';
 
-storiesOf('Components/HollowButton', module)
+storiesOf('Components/buttons/HollowButton', module)
   .addDecorator(withKnobs)
   .add('default', () => (
-    <Button
+    <HollowButton
       onClick={action('button click')}
       size={select(
         'Size',
@@ -21,5 +21,5 @@ storiesOf('Components/HollowButton', module)
       )}
     >
       {text('Text', 'Click me')}
-    </Button>
+    </HollowButton>
   ));
