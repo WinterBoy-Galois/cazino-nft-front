@@ -20,7 +20,7 @@ const cache = new InMemoryCache({
 });
 
 const wsLink = new WebSocketLink({
-  uri: String(process.env.REACT_APP_BACKEND_URL),
+  uri: process.env.REACT_APP_BACKEND_URL as string,
   options: {
     reconnect: true,
   },
