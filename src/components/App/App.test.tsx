@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import App from './App';
 
 describe('App', () => {
-  xit('should match snapshot', () => {
+  it('should match snapshot', () => {
     // Arrange
 
     // Act
