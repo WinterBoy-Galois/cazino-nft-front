@@ -46,7 +46,7 @@ jobs:
           --application-name cc-front
           --description "This is a revision for the cc-front"
           --no-ignore-hidden-files
-          --s3-location s3://jinglebets-cc-srv/jinglebets-master-cc-front.zip
+          --s3-location s3://jinglebets-cc-front/jinglebets-master-cc-front.zip
           --source .
 
     - name: AWS Create Deploy
@@ -62,7 +62,7 @@ jobs:
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name dev
           --file-exists-behavior OVERWRITE
-          --s3-location bucket=jinglebets-cc-srv,key=jinglebets-master-cc-front.zip,bundleType=zip
+          --s3-location bucket=jinglebets-cc-front,key=jinglebets-master-cc-front.zip,bundleType=zip
 
     - uses: 8398a7/action-slack@v3
       with:
