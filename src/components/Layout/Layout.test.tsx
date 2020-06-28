@@ -9,7 +9,7 @@ import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemo
 import { BET_ADDED } from '../../graphql/subscriptions';
 
 describe('Layout', () => {
-  it('should match snapshot', async () => {
+  xit('should match snapshot', async () => {
     // Arrange
     const fragmentMatcher = new IntrospectionFragmentMatcher({
       introspectionQueryResultData,
