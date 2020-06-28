@@ -34,3 +34,41 @@ jobs:
     - name: Test
       run: yarn test:single
       
+    - name: AWS Deploy push
+      uses: ItsKarma/aws-cli@v1.70.0
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      with:
+        args: >-
+          deploy push
+          --application-name cc-front
+          --description "This is a revision for the cc-front"
+          --no-ignore-hidden-files
+          --s3-location s3://jinglebets-cc-front/jinglebets-master-cc-front.zip
+          --source .
+
+    - name: AWS Create Deploy
+      uses: ItsKarma/aws-cli@v1.70.0
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      with:
+        args: >-
+          deploy create-deployment
+          --application-name cc-front
+          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-group-name dev
+          --file-exists-behavior OVERWRITE
+          --s3-location bucket=jinglebets-cc-front,key=jinglebets-master-cc-front.zip,bundleType=zip
+
+    - uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+      if: always()
