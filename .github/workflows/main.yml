@@ -56,7 +56,7 @@ jobs:
           deploy create-deployment
           --application-name cc-front
           --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name dev,staging
+          --deployment-group-name both
           --file-exists-behavior OVERWRITE
           --s3-location bucket=jinglebets-cc-front,key=jinglebets-master-cc-front.zip,bundleType=zip
 
