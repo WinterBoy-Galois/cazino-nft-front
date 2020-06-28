@@ -1,7 +1,7 @@
 #!/bin/bash
 
-cd /home/ubuntu
+# cd /home/ubuntu
 # pm2 stop ecosystem.config.js || true
 # pm2 stop simulator
 # pm2 stop backend
-echo 0
+exit 0

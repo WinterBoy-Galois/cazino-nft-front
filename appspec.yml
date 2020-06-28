@@ -7,7 +7,7 @@ files:
 hooks:
   ApplicationStop:
     - location: scripts/stop_pm2.sh
-      timeout: 300
+      timeout: 10
       runas: ubuntu
   BeforeInstall:
     - location: scripts/cleanup.sh
@@ -15,11 +15,11 @@ hooks:
       runas: root
   AfterInstall:
     - location: scripts/reload_pm2.sh
-      timeout: 300
+      timeout: 3
       runas: ubuntu
   ValidateService:
     - location: scripts/validate_service.sh
-      timeout: 300
+      timeout: 3
       runas: ubuntu
 permissions:
   - object: /home/ubuntu/cc-front
