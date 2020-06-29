@@ -24,16 +24,29 @@
 }
 
 .sign-in {
+  @include media-breakpoint-up(md) {
+    width: 195px;
+  }
+
+  &--spacing {
+    margin-right: 1rem;
+  }
+
   &__button {
     display: none;
 
     @include media-breakpoint-up(md) {
       display: unset;
-      width: 195px;
     }
+  }
 
-    &--spacing {
-      margin-right: 1rem;
+  &__icon {
+    width: 36px;
+    height: 36px;
+    display: block;
+
+    @include media-breakpoint-up(md) {
+      display: none;
     }
   }
 }

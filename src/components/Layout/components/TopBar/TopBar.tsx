@@ -5,6 +5,7 @@ import SidebarToggle from '../SidebarToggle';
 import { useStateValue } from '../../../../state';
 import SecondaryButton from '../../../SecondaryButton';
 import { ButtonSize } from '../../../Button';
+import SignIn from '../../../icons/SignIn';
 
 const TopBar: React.SFC = () => {
   const [{ sidebar }] = useStateValue();
@@ -19,11 +20,12 @@ const TopBar: React.SFC = () => {
         </div>
         <div className={`col-6 ${styles.center} ${styles.right}`}>
           <div
-            className={`${styles['sign-in__button']} ${
-              !sidebar.isOpen ? styles['sign-in__button--spacing'] : ''
-            }`}
+            className={`${styles['sign-in']} ${!sidebar.isOpen ? styles['sign-in--spacing'] : ''}`}
           >
-            <SecondaryButton size={ButtonSize.SMALL}>Sign-in</SecondaryButton>
+            <SecondaryButton size={ButtonSize.SMALL} className={styles['sign-in__button']}>
+              Sign-in
+            </SecondaryButton>
+            <SignIn className={styles['sign-in__icon']} />
           </div>
           <SidebarToggle arrowLeft={true} show={!sidebar.isOpen} />
         </div>
