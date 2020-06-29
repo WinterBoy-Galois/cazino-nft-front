@@ -40,7 +40,23 @@ Object {
           <div
             class="modal__main"
           >
-            SignIn
+            <div
+              class="row"
+            >
+              <div
+                class="col-12 col-md-7"
+              >
+                left
+              </div>
+              <div
+                class="col-12 col-md-5 illustration"
+              >
+                <img
+                  alt="Sign In Character"
+                  src="sign-in.svg"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +96,23 @@ Object {
         <div
           class="modal__main"
         >
-          SignIn
+          <div
+            class="row"
+          >
+            <div
+              class="col-12 col-md-7"
+            >
+              left
+            </div>
+            <div
+              class="col-12 col-md-5 illustration"
+            >
+              <img
+                alt="Sign In Character"
+                src="sign-in.svg"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from '../Modal';
-// import styles from './SignInModal.module.scss';
+import styles from './SignInModal.module.scss';
 import { ApolloError } from 'apollo-client';
+import signInIllustration from '../../assets/images/auth/sign-in.svg';
 
 interface IProps {
   show: boolean;
@@ -13,7 +14,12 @@ interface IProps {
 const SignInModal: React.FC<IProps> = ({ show, onClose }: IProps) => {
   return (
     <Modal show={show} onClose={onClose} title="Sign In">
-      SignIn
+      <div className="row">
+        <div className="col-12 col-md-7">left</div>
+        <div className={`col-12 col-md-5 ${styles.illustration}`}>
+          <img src={signInIllustration} alt="Sign In Character" />
+        </div>
+      </div>
     </Modal>
   );
 };
