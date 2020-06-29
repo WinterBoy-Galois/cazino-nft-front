@@ -14,6 +14,7 @@ Object {
         >
           <div
             class="main__top-bar false"
+            style="transition-duration: 200;"
           >
             <div
               class="container-fluid h-100"
@@ -768,6 +769,7 @@ Object {
       >
         <div
           class="main__top-bar false"
+          style="transition-duration: 200;"
         >
           <div
             class="container-fluid h-100"

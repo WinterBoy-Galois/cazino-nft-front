@@ -12,6 +12,7 @@ import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import BetDetailsModal from '../BetDetailsModal';
 import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationModal';
 import SignInModal from '../SignInModal';
+import { transitionTimeout } from '../Modal';
 
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>
@@ -65,7 +66,10 @@ const Layout: React.SFC = ({ children }) => {
             className={`${styles['main__top-bar']} ${
               sidebar.isOpen && styles['main__top-bar--sidebar-open']
             }`}
-            style={{ width: modal.type !== 'NONE' ? `${mainWidth}px` : '' }}
+            style={{
+              width: modal.type !== 'NONE' ? `${mainWidth}px` : '',
+              transitionDuration: modal.type === 'NONE' ? `${transitionTimeout}` : '0s',
+            }}
           >
             <TopBar />
           </div>
