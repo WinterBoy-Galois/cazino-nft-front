@@ -22,3 +22,18 @@
     fill: $ultra-light-blue;
   }
 }
+
+.sign-in {
+  &__button {
+    display: none;
+
+    @include media-breakpoint-up(md) {
+      display: unset;
+      width: 195px;
+    }
+
+    &--spacing {
+      margin-right: 1rem;
+    }
+  }
+}

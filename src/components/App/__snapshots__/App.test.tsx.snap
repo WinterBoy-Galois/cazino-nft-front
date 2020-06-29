@@ -70,7 +70,18 @@ Object {
                 </div>
                 <div
                   class="col-6 center right"
-                />
+                >
+                  <div
+                    class="sign-in__button "
+                  >
+                    <button
+                      class=" secondary button button--small"
+                      type="button"
+                    >
+                      Sign-in
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1271,7 +1282,18 @@ Object {
               </div>
               <div
                 class="col-6 center right"
-              />
+              >
+                <div
+                  class="sign-in__button "
+                >
+                  <button
+                    class=" secondary button button--small"
+                    type="button"
+                  >
+                    Sign-in
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
