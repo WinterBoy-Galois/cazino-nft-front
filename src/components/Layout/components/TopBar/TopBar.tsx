@@ -8,7 +8,10 @@ import { ButtonSize } from '../../../Button';
 import SignIn from '../../../icons/SignIn';
 
 const TopBar: React.SFC = () => {
-  const [{ sidebar }] = useStateValue();
+  const [{ sidebar }, dispatch] = useStateValue();
+
+  const handleSignInClick = () =>
+    dispatch({ type: 'SHOW_MODAL', payload: { type: 'SIGN_IN_MODAL' } });
 
   return (
     <div className={`container-fluid h-100`}>
@@ -22,10 +25,16 @@ const TopBar: React.SFC = () => {
           <div
             className={`${styles['sign-in']} ${!sidebar.isOpen ? styles['sign-in--spacing'] : ''}`}
           >
-            <SecondaryButton size={ButtonSize.SMALL} className={styles['sign-in__button']}>
+            <SecondaryButton
+              size={ButtonSize.SMALL}
+              className={styles['sign-in__button']}
+              onClick={handleSignInClick}
+            >
               Sign-in
             </SecondaryButton>
-            <SignIn className={styles['sign-in__icon']} />
+            <div onClick={handleSignInClick}>
+              <SignIn className={styles['sign-in__icon']} />
+            </div>
           </div>
           <SidebarToggle arrowLeft={true} show={!sidebar.isOpen} />
         </div>
