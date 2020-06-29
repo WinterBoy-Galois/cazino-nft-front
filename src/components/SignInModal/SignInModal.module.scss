@@ -1,0 +1,51 @@
+@import '../../styles/shared';
+
+.details {
+  @include media-breakpoint-up(md) {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.username {
+  margin: 1rem 0 2rem;
+
+  @include media-breakpoint-up(md) {
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 1rem;
+  }
+
+  &--mobile {
+    @include media-breakpoint-up(md) {
+      display: none !important;
+    }
+  }
+
+  &--desktop {
+    display: none !important;
+
+    @include media-breakpoint-up(md) {
+      display: flex !important;
+    }
+  }
+
+  &__hidden {
+    font-weight: 600;
+    color: $live-updates-light-blue;
+  }
+}
+
+.button {
+  width: 66%;
+  max-width: 220px;
+  margin: 3rem auto 0;
+
+  @include media-breakpoint-up(md) {
+    margin: 2rem auto 0.5rem;
+  }
+
+  &__spacer {
+    height: 40px;
+  }
+}
