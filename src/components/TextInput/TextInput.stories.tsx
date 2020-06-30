@@ -23,5 +23,5 @@ const data = {
 };
 
 export const Default = () => (
-  <TextInput label={text('Label', data.label)} value={text('Value', data.value)} />
+  <TextInput {...data} label={text('Label', data.label)} value={text('Value', data.value)} />
 );

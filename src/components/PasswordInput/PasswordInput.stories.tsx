@@ -23,5 +23,5 @@ const data = {
 };
 
 export const Default = () => (
-  <PasswordInput label={text('Label', data.label)} value={text('Value', data.value)} />
+  <PasswordInput {...data} label={text('Label', data.label)} value={text('Value', data.value)} />
 );

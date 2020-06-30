@@ -5,18 +5,27 @@ import './TextInput.scss';
 interface IProps {
   value?: string;
   label?: string;
-  onChangeAmount?: (quantity: number) => void;
+  onChangeValue?: (value: string) => void;
 }
 
-const TextInput = ({ value: initialValue = undefined, label = undefined }: IProps) => {
+const TextInput = ({
+  value: initialValue = undefined,
+  label = undefined,
+  onChangeValue = undefined,
+}: IProps) => {
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
 
-  const changeAmount = (e: { target: { value: string } }) => {
-    setValue(e.target.value);
+  const handleOnChange = (e: { target: { value: string } }) => {
+    const newValue = e.target.value;
+
+    setValue(newValue);
+    if (onChangeValue) {
+      onChangeValue(newValue);
+    }
   };
 
   const keypressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -34,7 +43,7 @@ const TextInput = ({ value: initialValue = undefined, label = undefined }: IProp
           value={value}
           className="inputField"
           autoComplete="off"
-          onChange={changeAmount}
+          onChange={handleOnChange}
           onKeyPress={keypressHandler}
         />
       </div>
