@@ -11,7 +11,7 @@ import { Action } from '../../state/actions';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import BetDetailsModal from '../BetDetailsModal';
 import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationModal';
-import SignInModal from '../SignInModal';
+import { SignInModalWithData } from '../SignInModal';
 import { transitionTimeout } from '../Modal';
 
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
@@ -31,7 +31,7 @@ const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
       onClose={() => dispatch({ type: 'HIDE_MODAL' })}
       {...modal.data}
     />
-    <SignInModal
+    <SignInModalWithData
       show={modal.type === 'SIGN_IN_MODAL'}
       onClose={() => dispatch({ type: 'HIDE_MODAL' })}
       {...modal.data}

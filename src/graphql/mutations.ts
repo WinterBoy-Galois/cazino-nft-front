@@ -6,6 +6,35 @@ export const CHANGE_SERVER_SEED = gql`
       ... on GenericErrorArray {
         errors {
           type
+          field
+          severity
+          messageKey
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const SIGN_IN = gql`
+  mutation SignIn($email: String, $password: String) {
+    signIn(email: $email, password: $password) {
+      ... on LoginResult {
+        accessToken
+        user {
+          id
+          username
+          avatarUrl
+          isActivated
+        }
+      }
+      ... on GenericErrorArray {
+        errors {
+          type
+          field
+          severity
+          messageKey
+          args
         }
       }
     }

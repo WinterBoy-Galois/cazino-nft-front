@@ -13,6 +13,7 @@ const getInitialState = (isSidebarOpen: boolean): State => ({
   modal: {
     type: 'NONE',
   },
+  auth: {},
 });
 
 const isSidebarInitiallyOpen = (breakpoint: Breakpoint) => {

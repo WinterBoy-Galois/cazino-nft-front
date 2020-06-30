@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styles from './TopBar.module.scss';
 import Logo from '../../../icons/Logo';
 import SidebarToggle from '../SidebarToggle';
@@ -8,7 +8,7 @@ import { ButtonSize } from '../../../Button';
 import SignIn from '../../../icons/SignIn';
 
 const TopBar: React.SFC = () => {
-  const [{ sidebar }, dispatch] = useStateValue();
+  const [{ sidebar, auth }, dispatch] = useStateValue();
 
   const handleSignInClick = () =>
     dispatch({ type: 'SHOW_MODAL', payload: { type: 'SIGN_IN_MODAL' } });
@@ -25,16 +25,22 @@ const TopBar: React.SFC = () => {
           <div
             className={`${styles['sign-in']} ${!sidebar.isOpen ? styles['sign-in--spacing'] : ''}`}
           >
-            <SecondaryButton
-              size={ButtonSize.SMALL}
-              className={styles['sign-in__button']}
-              onClick={handleSignInClick}
-            >
-              Sign-in
-            </SecondaryButton>
-            <div onClick={handleSignInClick}>
-              <SignIn className={styles['sign-in__icon']} />
-            </div>
+            {!auth.user ? (
+              <Fragment>
+                <SecondaryButton
+                  size={ButtonSize.SMALL}
+                  className={styles['sign-in__button']}
+                  onClick={handleSignInClick}
+                >
+                  Sign-in
+                </SecondaryButton>
+                <div onClick={handleSignInClick}>
+                  <SignIn className={styles['sign-in__icon']} />
+                </div>
+              </Fragment>
+            ) : (
+              <span>{auth.user.username}</span>
+            )}
           </div>
           <SidebarToggle arrowLeft={true} show={!sidebar.isOpen} />
         </div>
