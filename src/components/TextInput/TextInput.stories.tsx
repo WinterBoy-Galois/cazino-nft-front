@@ -1,12 +1,13 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { text } from '@storybook/addon-knobs';
+import { withKnobs, text } from '@storybook/addon-knobs';
 
-import InputField from '.';
+import TextInput from '.';
 
 export default {
-  title: 'Components/InputField',
-  component: InputField,
+  title: 'Components/TextInput',
+  component: TextInput,
+  decorators: [withKnobs],
   parameters: {
     backgrounds: [
       { name: 'Primary', value: '#091b33' },
@@ -16,11 +17,11 @@ export default {
 };
 
 const data = {
-  label: text('Label', 'Username'),
+  label: 'Username',
   value: 'sergioalvarez',
   onChangeValue: action('onChangeValue'),
 };
 
 export const Default = () => (
-  <InputField {...data} label={text('Label', 'Username')} value={text('Value', 'sergioalvarez')} />
+  <TextInput label={text('Label', data.label)} value={text('Value', data.value)} />
 );

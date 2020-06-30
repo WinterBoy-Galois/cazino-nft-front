@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './InputField.scss';
+import './TextInput.scss';
 
 interface IProps {
   value?: string;
@@ -8,7 +8,7 @@ interface IProps {
   onChangeAmount?: (quantity: number) => void;
 }
 
-const InputField = ({ value: initialValue = undefined, label = undefined }: IProps) => {
+const TextInput = ({ value: initialValue = undefined, label = undefined }: IProps) => {
   const [value, setValue] = useState(initialValue);
 
   const changeAmount = (e: { target: { value: string } }) => {
@@ -38,4 +38,4 @@ const InputField = ({ value: initialValue = undefined, label = undefined }: IPro
   );
 };
 
-export default InputField;
+export default TextInput;

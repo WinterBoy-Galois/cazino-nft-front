@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import InputField from '.';
+import TextInput from '.';
 
-test('renders InputField', () => {
-  const { container } = render(<InputField />);
+test('renders TextInput', () => {
+  const { container } = render(<TextInput />);
   expect(container).toMatchSnapshot();
 });
