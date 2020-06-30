@@ -1,0 +1,9 @@
+@import '../../styles/shared';
+
+.illustration {
+  display: none;
+
+  @include media-breakpoint-up(md) {
+    display: unset;
+  }
+}

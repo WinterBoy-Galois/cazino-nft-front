@@ -11,6 +11,8 @@ import { Action } from '../../state/actions';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import BetDetailsModal from '../BetDetailsModal';
 import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationModal';
+import SignInModal from '../SignInModal';
+import { transitionTimeout } from '../Modal';
 
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>
@@ -26,6 +28,11 @@ const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
     />
     <ChangeServerSeedConfirmationModal
       show={modal.type === 'CHANGE_SERVER_SEED_CONFIRMATION'}
+      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      {...modal.data}
+    />
+    <SignInModal
+      show={modal.type === 'SIGN_IN_MODAL'}
       onClose={() => dispatch({ type: 'HIDE_MODAL' })}
       {...modal.data}
     />
@@ -59,7 +66,10 @@ const Layout: React.SFC = ({ children }) => {
             className={`${styles['main__top-bar']} ${
               sidebar.isOpen && styles['main__top-bar--sidebar-open']
             }`}
-            style={{ width: modal.type !== 'NONE' ? `${mainWidth}px` : '' }}
+            style={{
+              width: modal.type !== 'NONE' ? `${mainWidth}px` : '',
+              transitionDuration: modal.type === 'NONE' ? `${transitionTimeout}` : '0s',
+            }}
           >
             <TopBar />
           </div>
