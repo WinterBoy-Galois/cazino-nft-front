@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders TextInput 1`] = `
+exports[`TextInput should match snapshot 1`] = `
 <div>
   <div
     class="inputField__container"
@@ -10,12 +10,15 @@ exports[`renders TextInput 1`] = `
     >
       <label
         class="inputFieldLabel"
-      />
+      >
+        Username
+      </label>
       <input
         autocomplete="off"
         class="inputField"
+        name="username"
         type="text"
-        value=""
+        value="sergioalvarez"
       />
     </div>
   </div>

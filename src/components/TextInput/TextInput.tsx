@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import './TextInput.scss';
 
 interface IProps {
+  name?: string;
   value?: string;
   label?: string;
   onChangeValue?: (value: string) => void;
 }
 
 const TextInput = ({
+  name = undefined,
   value: initialValue = undefined,
   label = undefined,
   onChangeValue = undefined,
@@ -39,6 +41,7 @@ const TextInput = ({
       <div className="inputField__wrapper">
         <label className="inputFieldLabel">{label}</label>
         <input
+          {...(name ? { name: name } : {})}
           type="text"
           value={value}
           className="inputField"
