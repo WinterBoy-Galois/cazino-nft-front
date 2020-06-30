@@ -37,3 +37,8 @@
 @import '../src/styles/typography';
 
 @import '../src/components/Carousel/Carousel.scss';
+
+body,
+html {
+  background: none !important;
+}
