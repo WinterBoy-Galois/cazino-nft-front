@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './TextInput.scss';
 
@@ -10,6 +10,10 @@ interface IProps {
 
 const TextInput = ({ value: initialValue = undefined, label = undefined }: IProps) => {
   const [value, setValue] = useState(initialValue);
+
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
 
   const changeAmount = (e: { target: { value: string } }) => {
     setValue(e.target.value);
