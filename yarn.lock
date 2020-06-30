@@ -3248,6 +3248,13 @@ apollo-link-http@^1.5.17:
     apollo-link-http-common "^0.2.16"
     tslib "^1.9.3"
 
+apollo-link-token-refresh@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/apollo-link-token-refresh/-/apollo-link-token-refresh-0.2.7.tgz#0ccfffce3510e5c8d399eefdedf9cc438d1c3d76"
+  integrity sha512-RMLrHObXnjM7L+8bf5HFK6uhGjSX5lOSyyWUHWcsb7xF3c1yAkZxFIopNiYkgRh/2G44kloGu/xt2uniYYM9DA==
+  dependencies:
+    apollo-link "^1.2.3"
+
 apollo-link-ws@^1.0.20:
   version "1.0.20"
   resolved "https://registry.yarnpkg.com/apollo-link-ws/-/apollo-link-ws-1.0.20.tgz#dfad44121f8445c6d7b7f8101a1b24813ba008ed"
@@ -3266,7 +3273,7 @@ apollo-link@^1.0.0:
     tslib "^1.9.3"
     zen-observable-ts "^0.8.20"
 
-apollo-link@^1.2.14:
+apollo-link@^1.2.14, apollo-link@^1.2.3:
   version "1.2.14"
   resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.14.tgz#3feda4b47f9ebba7f4160bef8b977ba725b684d9"
   integrity sha512-p67CMEFP7kOG1JZ0ZkYZwRDa369w5PIjtMjvrQd/HnIV8FRsHRqLqK+oAZQnFa1DDdZtOtHTi+aMIW6EatC2jg==
