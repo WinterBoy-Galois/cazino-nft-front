@@ -10,6 +10,8 @@ import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import introspectionQueryResultData from './fragmentTypes.json';
 import { getMainDefinition } from 'apollo-utilities';
 import { HttpLink } from 'apollo-link-http';
+import jwtDecode from 'jwt-decode';
+import { getEpoch } from '../common/util/date.util';
 
 // https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -31,22 +33,41 @@ const wsLink = new WebSocketLink({
 
 const httpLink = new HttpLink({
   uri: 'https://staging.jinglebets.com/graphql',
+  // credentials: 'include',
 });
 
 const tokenLink = new TokenRefreshLink({
   isTokenValidOrUndefined: () => {
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (accessToken) {
+      const { exp } = jwtDecode(accessToken);
+
+      if (exp < getEpoch()) {
+        return false;
+      }
+    }
+
     return true;
   },
   fetchAccessToken: () => {
     return fetch('https://staging.jinglebets.com/refresh_tokens', {
       method: 'POST',
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAxLCJzYWx0IjoiNzU0NTRhNDEtNmEwYy00MTUwLTg1M2YtMDM5OTJmNzRlNTMwIiwiaWF0IjoxNTkzNDk3NTQwLCJleHAiOjE1OTYwODk1NDB9.C31dupakcPX-HwKu7e2s8W3PDaKvxkmUkAR05BpYzJk',
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
+      credentials: 'include',
     });
   },
-  handleFetch: accessToken => accessToken,
+  handleFetch: accessToken => localStorage.setItem('accessToken', accessToken),
+  // handleResponse: (operation, accessTokenField) => (response: Response) => {
+  // here you can parse response, handle errors, prepare returned token to
+  // further operations
+  // returned object should be like this:
+  // {
+  //    access_token: 'token string here'
+  // }
+  // },
   // handleError: err => {
   //   // full control over handling token fetch Error
   //   console.warn('Your refresh token is invalid. Try to relogin');
