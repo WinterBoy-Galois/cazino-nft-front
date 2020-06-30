@@ -28,6 +28,9 @@ const wsLink = new WebSocketLink({
   uri: `wss://staging.jinglebets.com/graphql`,
   options: {
     reconnect: true,
+    connectionParams: {
+      authToken: localStorage.getItem('accessToken'),
+    },
   },
 });
 

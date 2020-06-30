@@ -8,6 +8,12 @@ export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }
       return {
         ...state,
         ...{ user: payload.data.user, accessToken: payload.data.accessToken },
+        state: 'SIGNED_IN',
+      };
+
+    case 'SIGN_OUT':
+      return {
+        state: 'UNAUTHENTICATED',
       };
 
     default:
