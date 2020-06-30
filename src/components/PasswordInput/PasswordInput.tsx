@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import './PasswordInput.scss';
 
 interface IProps {
+  name?: string;
   value?: string;
   label?: string;
   onChangeValue?: (value: string) => void;
 }
 
 const PasswordInput = ({
+  name = undefined,
   value: initialValue = undefined,
   label = undefined,
   onChangeValue = undefined,
@@ -39,6 +41,7 @@ const PasswordInput = ({
       <div className="inputField__wrapper">
         <label className="inputFieldLabel">{label}</label>
         <input
+          {...(name ? { name: name } : {})}
           type="password"
           value={value}
           className="inputField"
