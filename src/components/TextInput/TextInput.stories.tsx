@@ -5,7 +5,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import TextInput from '.';
 
 export default {
-  title: 'Components/TextInput',
+  title: 'Components/Forms/TextInput',
   component: TextInput,
   decorators: [withKnobs],
   parameters: {

@@ -5,7 +5,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import PasswordInput from '.';
 
 export default {
-  title: 'Components/PasswordInput',
+  title: 'Components/Forms/PasswordInput',
   component: PasswordInput,
   decorators: [withKnobs],
   parameters: {
