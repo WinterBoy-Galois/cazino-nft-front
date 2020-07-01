@@ -36,7 +36,7 @@ const wsLink = new WebSocketLink({
 
 const httpLink = new HttpLink({
   uri: 'https://staging.jinglebets.com/graphql',
-  // credentials: 'include',
+  credentials: 'include',
 });
 
 const tokenLink = new TokenRefreshLink({
