@@ -1,8 +1,7 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 import AuthOverlay from './AuthOverlay';
 import { createMockClient } from 'mock-apollo-client';
-import ApolloClient from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 describe('AuthOverlay', () => {
@@ -16,6 +15,8 @@ describe('AuthOverlay', () => {
         <AuthOverlay>Test</AuthOverlay>
       </ApolloProvider>
     );
+
+    wait();
 
     // Assert
     expect(container).toMatchSnapshot();

@@ -1,27 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import Layout from '../Layout/Layout';
 import { Router } from '@reach/router';
 import HomePage from '../../pages/home';
 import { ApolloProvider } from '@apollo/react-hooks';
 import AuthOverlay from '../AuthOverlay';
-import getApolloClient from '../../graphql/client';
-import { useStateValue } from '../../state';
+import { useApolloClient } from '../../hooks/useApolloClient.hook';
 
 const App: React.FC = () => {
-  const [
-    {
-      auth: { accessToken },
-    },
-    dispatch,
-  ] = useStateValue();
-  const client = useMemo(
-    () =>
-      getApolloClient(
-        t => dispatch({ type: 'AUTH_TOKEN_REFRESH', payload: { accessToken: t } }),
-        accessToken
-      ),
-    [dispatch, accessToken]
-  );
+  const client = useApolloClient();
 
   return (
     <ApolloProvider client={client}>
