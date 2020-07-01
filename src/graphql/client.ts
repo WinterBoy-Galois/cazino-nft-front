@@ -12,6 +12,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import { HttpLink } from 'apollo-link-http';
 import jwtDecode from 'jwt-decode';
 import { getEpoch } from '../common/util/date.util';
+import { getAccessToken, setAccessToken } from '../common/util/storage.util';
 
 // https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -29,7 +30,7 @@ const wsLink = new WebSocketLink({
   options: {
     reconnect: true,
     connectionParams: {
-      authToken: localStorage.getItem('accessToken'),
+      authToken: getAccessToken(),
     },
   },
 });
@@ -41,7 +42,7 @@ const httpLink = new HttpLink({
 
 const tokenLink = new TokenRefreshLink({
   isTokenValidOrUndefined: () => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAccessToken();
 
     if (accessToken) {
       const { exp } = jwtDecode(accessToken);
@@ -57,12 +58,12 @@ const tokenLink = new TokenRefreshLink({
     return fetch('https://staging.jinglebets.com/refresh_tokens', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        Authorization: `Bearer ${getAccessToken()}`,
       },
       credentials: 'include',
     });
   },
-  handleFetch: accessToken => localStorage.setItem('accessToken', accessToken),
+  handleFetch: accessToken => setAccessToken(accessToken),
   // handleResponse: (operation, accessTokenField) => (response: Response) => {
   // here you can parse response, handle errors, prepare returned token to
   // further operations
