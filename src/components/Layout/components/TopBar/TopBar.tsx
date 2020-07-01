@@ -11,7 +11,7 @@ const TopBar: React.SFC = () => {
   const [{ sidebar, auth }, dispatch] = useStateValue();
 
   const handleSignInClick = () =>
-    dispatch({ type: 'SHOW_MODAL', payload: { type: 'SIGN_IN_MODAL' } });
+    dispatch({ type: 'MODAL_SHOW', payload: { type: 'SIGN_IN_MODAL' } });
 
   return (
     <div className={`container-fluid h-100`}>

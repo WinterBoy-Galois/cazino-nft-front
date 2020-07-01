@@ -1,20 +1,32 @@
 import { Reducer } from 'react';
 import { Action } from '../actions';
 import { AuthState } from '../models/auth.model';
+import { setAccessToken } from '../../common/util/storage.util';
 
 export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }) => {
   switch (type) {
-    case 'SIGN_IN':
+    case 'AUTH_SIGN_IN':
+      setAccessToken(payload.accessToken);
+
       return {
         ...state,
-        ...{ user: payload.data.user, accessToken: payload.data.accessToken },
+        ...payload,
         state: 'SIGNED_IN',
       };
 
-    case 'SIGN_OUT':
+    case 'AUTH_SIGN_OUT':
       return {
         state: 'UNAUTHENTICATED',
       };
+
+    case 'AUTH_TOKEN_REFRESH': {
+      setAccessToken(payload.accessToken);
+
+      return {
+        ...state,
+        accessToken: payload.accessToken,
+      };
+    }
 
     default:
       return state;

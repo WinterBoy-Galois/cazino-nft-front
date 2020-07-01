@@ -18,22 +18,22 @@ const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>
     <UserInfoModalWithData
       show={modal.type === 'USER_INFO_MODAL'}
-      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
       {...modal.data}
     />
     <BetDetailsModal
       show={modal.type === 'BET_DETAILS_MODAL'}
-      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
       {...modal.data}
     />
     <ChangeServerSeedConfirmationModal
       show={modal.type === 'CHANGE_SERVER_SEED_CONFIRMATION'}
-      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
       {...modal.data}
     />
     <SignInModalWithData
       show={modal.type === 'SIGN_IN_MODAL'}
-      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
       {...modal.data}
     />
   </>

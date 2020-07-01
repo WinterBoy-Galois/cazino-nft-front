@@ -21,12 +21,6 @@ export const SIGN_IN = gql`
     signIn(email: $email, password: $password) {
       ... on LoginResult {
         accessToken
-        user {
-          id
-          username
-          avatarUrl
-          isActivated
-        }
       }
       ... on GenericErrorArray {
         errors {

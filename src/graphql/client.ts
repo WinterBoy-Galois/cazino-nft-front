@@ -8,7 +8,6 @@ import { getMainDefinition } from 'apollo-utilities';
 import { HttpLink } from 'apollo-link-http';
 import jwtDecode from 'jwt-decode';
 import { getEpoch } from '../common/util/date.util';
-import { getAccessToken, setAccessToken } from '../common/util/storage.util';
 import { setContext } from 'apollo-link-context';
 
 // https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
@@ -22,13 +21,16 @@ const cache = new InMemoryCache({
   fragmentMatcher,
 });
 
-const getApolloClient = () => {
+const getApolloClient = (
+  onAccessTokenRefresh: (accessToken: string) => void,
+  accessToken?: string
+) => {
   const wsLink = new WebSocketLink({
     uri: `wss://staging.jinglebets.com/graphql`,
     options: {
       reconnect: true,
       connectionParams: {
-        authToken: getAccessToken(),
+        authToken: accessToken,
       },
     },
   });
@@ -39,13 +41,11 @@ const getApolloClient = () => {
   });
 
   const authLink = setContext((_, { headers }) => {
-    const token = getAccessToken();
-
-    if (token) {
+    if (accessToken) {
       return {
         headers: {
           ...headers,
-          authorization: `Bearer ${token}`,
+          authorization: `Bearer ${accessToken}`,
         },
       };
     }
@@ -55,8 +55,6 @@ const getApolloClient = () => {
 
   const tokenLink = new TokenRefreshLink({
     isTokenValidOrUndefined: () => {
-      const accessToken = getAccessToken();
-
       if (accessToken) {
         const { exp } = jwtDecode(accessToken);
 
@@ -71,12 +69,12 @@ const getApolloClient = () => {
       return fetch('https://staging.jinglebets.com/refresh_tokens', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${getAccessToken()}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         credentials: 'include',
       });
     },
-    handleFetch: accessToken => setAccessToken(accessToken),
+    handleFetch: accessToken => onAccessTokenRefresh(accessToken),
     // handleResponse: (operation, accessTokenField) => (response: Response) => {
     // here you can parse response, handle errors, prepare returned token to
     // further operations
@@ -97,7 +95,7 @@ const getApolloClient = () => {
       const definition = getMainDefinition(query);
       return (
         definition.kind === 'OperationDefinition' &&
-        (definition.operation === 'subscription' || definition.operation === 'query')
+        definition.operation === 'subscription' /*|| definition.operation === 'query'*/
       );
     },
     wsLink,

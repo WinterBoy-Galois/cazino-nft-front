@@ -10,7 +10,6 @@ import { useMutation } from '@apollo/react-hooks';
 import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { GraphQLError } from 'graphql';
-import { setAccessToken } from '../../common/util/storage.util';
 
 interface IProps {
   show: boolean;
@@ -82,9 +81,8 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       return;
     }
 
-    dispatch({ type: 'SIGN_IN', payload: { data: data.signIn } });
-    setAccessToken(data.signIn.accessToken);
-    dispatch({ type: 'HIDE_MODAL' });
+    dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn } });
+    dispatch({ type: 'MODAL_HIDE' });
   };
 
   return (

@@ -10,13 +10,16 @@ const AuthOverlay: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (data) {
-      dispatch({ type: 'SIGN_IN', payload: { data: { user: { ...data.me } } } });
+      dispatch({
+        type: 'AUTH_SIGN_IN',
+        payload: { user: { ...data.me }, accessToken: auth.accessToken },
+      });
     }
 
     if (error || !getAccessToken()) {
-      dispatch({ type: 'SIGN_OUT' });
+      dispatch({ type: 'AUTH_SIGN_OUT' });
     }
-  }, [dispatch, data, error]);
+  }, [dispatch, data, error, auth.accessToken]);
 
   return auth.state === 'UNKNOWN' ? <div>Just a moment</div> : <Fragment>{children}</Fragment>;
 };
