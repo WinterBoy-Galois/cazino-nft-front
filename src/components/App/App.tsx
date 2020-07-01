@@ -1,33 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '../Layout/Layout';
 import { Router } from '@reach/router';
 import HomePage from '../../pages/home';
-import { useQuery } from '@apollo/react-hooks';
-import { useStateValue } from '../../state';
-import { ME } from '../../graphql/queries';
+import { ApolloProvider } from '@apollo/react-hooks';
+import AuthOverlay from '../AuthOverlay';
+import client from '../../graphql/client';
 
-const App: React.SFC = () => {
-  const [{ auth }, dispatch] = useStateValue();
-  const { data, error } = useQuery(ME);
-
-  useEffect(() => {
-    if (data) {
-      dispatch({ type: 'SIGN_IN', payload: { data: { user: { ...data.me } } } });
-    }
-
-    if (error) {
-      dispatch({ type: 'SIGN_OUT' });
-    }
-  }, [dispatch, data, error]);
-
-  return auth.state === 'UNKNOWN' ? (
-    <div>Just a moment</div>
-  ) : (
-    <Layout>
-      <Router>
-        <HomePage path="/" />
-      </Router>
-    </Layout>
+const App: React.FC = () => {
+  return (
+    <ApolloProvider client={client}>
+      <AuthOverlay>
+        <Layout>
+          <Router>
+            <HomePage path="/" />
+          </Router>
+        </Layout>
+      </AuthOverlay>
+    </ApolloProvider>
   );
 };
 

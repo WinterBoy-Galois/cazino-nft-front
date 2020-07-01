@@ -39,7 +39,7 @@ const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   </>
 );
 
-const Layout: React.SFC = ({ children }) => {
+const Layout: React.FC = ({ children }) => {
   const [{ sidebar, modal }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();

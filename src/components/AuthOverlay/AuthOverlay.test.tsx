@@ -1,10 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './App';
-import { ApolloProvider } from '@apollo/react-hooks';
+import AuthOverlay from './AuthOverlay';
 import { createMockClient } from 'mock-apollo-client';
+import ApolloClient from 'apollo-client';
+import { ApolloProvider } from '@apollo/react-hooks';
 
-describe('App', () => {
+describe('AuthOverlay', () => {
   it('should match snapshot', () => {
     // Arrange
     const mockClient = createMockClient();
@@ -12,7 +13,7 @@ describe('App', () => {
     // Act
     const container = render(
       <ApolloProvider client={mockClient}>
-        <App />
+        <AuthOverlay>Test</AuthOverlay>
       </ApolloProvider>
     );
 

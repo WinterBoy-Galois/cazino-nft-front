@@ -5,14 +5,10 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
 import { StateProvider } from './state';
-import { ApolloProvider } from '@apollo/react-hooks';
-import client from './graphql/client';
 
 ReactDOM.render(
   <StateProvider>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <App />
   </StateProvider>,
   document.getElementById('root')
 );
