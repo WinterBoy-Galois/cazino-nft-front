@@ -9,6 +9,7 @@ import { HttpLink } from 'apollo-link-http';
 import jwtDecode from 'jwt-decode';
 import { getEpoch } from '../common/util/date.util';
 import { setContext } from 'apollo-link-context';
+import { clearAccessToken } from '../common/util/storage.util';
 
 // https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -54,6 +55,7 @@ const getApolloClient = (
   });
 
   const tokenLink = new TokenRefreshLink({
+    accessTokenField: 'accessToken',
     isTokenValidOrUndefined: () => {
       if (accessToken) {
         const { exp } = jwtDecode(accessToken);
@@ -75,19 +77,7 @@ const getApolloClient = (
       });
     },
     handleFetch: accessToken => onAccessTokenRefresh(accessToken),
-    // handleResponse: (operation, accessTokenField) => (response: Response) => {
-    // here you can parse response, handle errors, prepare returned token to
-    // further operations
-    // returned object should be like this:
-    // {
-    //    access_token: 'token string here'
-    // }
-    // },
-    // handleError: err => {
-    //   // full control over handling token fetch Error
-    //   console.warn('Your refresh token is invalid. Try to relogin');
-    //   console.error(err);
-    // },
+    handleError: () => clearAccessToken(),
   });
 
   const link = split(
