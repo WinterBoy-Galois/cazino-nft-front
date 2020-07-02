@@ -37,16 +37,8 @@ const Layout: React.SFC = ({ children }) => {
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
 
-  const hideContent = (): boolean => {
-    switch (breakpoint) {
-      case 'xs':
-      case 'sm':
-        return sidebar.isOpen || modal.type !== 'NONE';
-
-      default:
-        return false;
-    }
-  };
+  const hideContent = () =>
+    breakpoint === 'xs' || breakpoint === 'sm' ? sidebar.isOpen || modal.type !== 'NONE' : false;
 
   return (
     <>
