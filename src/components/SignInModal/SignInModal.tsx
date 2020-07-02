@@ -10,11 +10,12 @@ import { useMutation } from '@apollo/react-hooks';
 import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { GraphQLError } from 'graphql';
+import { GenericError } from '../../models/genericError.model';
 
 interface IProps {
   show: boolean;
   loading: boolean;
-  errors?: GraphQLError[];
+  errors?: GraphQLError[] | GenericError[];
   onClose?: () => void;
   onSignIn?: (email: string, password: string) => void;
 }
@@ -76,8 +77,8 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     const { data, errors } = await signIn({ variables: { email, password } });
     setLoading(false);
 
-    if (errors) {
-      setErrors(errors);
+    if (errors || data.signIn.errors) {
+      setErrors(errors ?? data.signIn.errors);
       return;
     }
 
