@@ -11,7 +11,7 @@ storiesOf('Components/SignInModal', module)
       <SignInModal
         show={boolean('Show', true)}
         loading={boolean('Loading', true)}
-        error={undefined}
+        errors={undefined}
         onClose={action('close modal')}
       />
     );

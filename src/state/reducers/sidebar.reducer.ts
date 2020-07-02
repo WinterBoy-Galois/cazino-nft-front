@@ -4,13 +4,13 @@ import { Action } from '../actions';
 
 export const sidebarReducer: Reducer<SidebarState, Action> = (state, { type, payload }) => {
   switch (type) {
-    case 'TOGGLE_SIDEBAR':
+    case 'SIDEBAR_TOGGLE':
       return {
         ...state,
         isOpen: !state.isOpen,
       };
 
-    case 'SELECT_SIDEBAR_TAB':
+    case 'SIDEBAR_SELECT_TAB':
       return {
         ...state,
         selectedTab: payload,

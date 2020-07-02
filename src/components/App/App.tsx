@@ -2,21 +2,23 @@ import React from 'react';
 import Layout from '../Layout/Layout';
 import { Router } from '@reach/router';
 import HomePage from '../../pages/home';
-import { StateProvider } from '../../state';
 import { ApolloProvider } from '@apollo/react-hooks';
-import client from '../../graphql/client';
+import AuthOverlay from '../AuthOverlay';
+import { useApolloClient } from '../../hooks/useApolloClient.hook';
 
-const App: React.SFC = () => {
+const App: React.FC = () => {
+  const client = useApolloClient();
+
   return (
-    <StateProvider>
-      <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <AuthOverlay>
         <Layout>
           <Router>
             <HomePage path="/" />
           </Router>
         </Layout>
-      </ApolloProvider>
-    </StateProvider>
+      </AuthOverlay>
+    </ApolloProvider>
   );
 };
 

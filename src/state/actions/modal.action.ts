@@ -1,1 +1,1 @@
-export type ModalActionType = 'SHOW_MODAL' | 'HIDE_MODAL';
+export type ModalActionType = 'MODAL_SHOW' | 'MODAL_HIDE';
