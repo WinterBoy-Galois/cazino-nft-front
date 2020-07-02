@@ -13,16 +13,9 @@ export function useScrollLock(lock: boolean, lockTouch = true) {
       document.body.style.overflow = 'hidden';
     }
 
-    if (lock && lockTouch) {
-      document.ontouchmove = e => {
-        e.preventDefault();
-      };
-    }
-
     return () => {
       document.body.style.paddingRight = '';
       document.body.style.overflow = '';
-      document.ontouchmove = null;
     };
   }, [lock, lockTouch, scrollbarWidth]);
 }
