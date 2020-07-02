@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import './PasswordInput.scss';
+import styles from './PasswordInput.module.scss';
 
 interface IProps {
   name?: string;
@@ -37,14 +37,14 @@ const PasswordInput = ({
   };
 
   return (
-    <div className="inputField__container">
-      <div className="inputField__wrapper">
-        <label className="inputFieldLabel">{label}</label>
+    <div className={styles.inputField__container}>
+      <div className={styles.inputField__wrapper}>
+        <label className={styles.inputFieldLabel}>{label}</label>
         <input
           {...(name ? { name: name } : {})}
           type="password"
           value={value}
-          className="inputField"
+          className={styles.inputField}
           autoComplete="off"
           onChange={handleOnChange}
           onKeyPress={keypressHandler}

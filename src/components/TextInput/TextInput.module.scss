@@ -12,22 +12,22 @@
   flex: 1;
   display: inline-block;
   padding: 5px 10px 5px 10px;
-  border: 4px solid #0a1a33;
+  border: 4px solid $form-background;
   border-radius: 8px;
-  background-color: #0a1a33;
+  background-color: $form-background;
   height: 52px + (2 * 8px);
   vertical-align: bottom;
   transition: all 0.2s ease-in;
 }
 
 .inputField__wrapper:hover {
-  border: 4px solid #fec41c;
+  border: 4px solid $bitcoinYellow;
 }
 
 .inputField {
   text-align: left;
-  background-color: #0a1a33;
-  color: #fff;
+  background-color: $form-background;
+  color: $white;
   font-weight: 300;
   font-size: 18px;
   line-height: 24px;
@@ -48,7 +48,7 @@ input[type='text'].inputField {
 }
 
 input[type='text'].inputField:focus {
-  background-color: #133252;
+  background-color: $darkBlue;
   border-color: #275e9a;
 }
 
@@ -58,7 +58,7 @@ input[type='text'].inputField:focus {
   font-size: 14px;
   font-weight: 300;
   line-height: 19px;
-  color: #80a2cc;
+  color: $live-updates-light-blue;
   user-select: none;
   margin: 0;
 }
