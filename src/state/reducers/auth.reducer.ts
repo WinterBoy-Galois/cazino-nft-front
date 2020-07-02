@@ -1,7 +1,7 @@
 import { Reducer } from 'react';
 import { Action } from '../actions';
 import { AuthState } from '../models/auth.model';
-import { setAccessToken } from '../../common/util/storage.util';
+import { setAccessToken, clearAccessToken } from '../../common/util/storage.util';
 
 export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }) => {
   switch (type) {
@@ -15,6 +15,8 @@ export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }
       };
 
     case 'AUTH_SIGN_OUT':
+      clearAccessToken();
+
       return {
         state: 'UNAUTHENTICATED',
       };
