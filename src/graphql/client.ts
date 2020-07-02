@@ -95,7 +95,7 @@ const getApolloClient = (
       const definition = getMainDefinition(query);
       return (
         definition.kind === 'OperationDefinition' &&
-        definition.operation === 'subscription' /*|| definition.operation === 'query'*/
+        (definition.operation === 'subscription' || definition.operation === 'query')
       );
     },
     wsLink,
