@@ -1,29 +1,5 @@
 @import '../../styles/shared';
 
-.inputField__container {
-  min-width: 250px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.inputField__wrapper {
-  flex: 1;
-  display: inline-block;
-  padding: 5px 10px 5px 10px;
-  border: 4px solid $form-background;
-  border-radius: 8px;
-  background-color: $form-background;
-  height: 52px + (2 * 8px);
-  vertical-align: bottom;
-  transition: all 0.2s ease-in;
-}
-
-.inputField__wrapper:hover {
-  border: 4px solid $bitcoinYellow;
-}
-
 .inputField {
   text-align: left;
   background-color: $form-background;
@@ -33,24 +9,55 @@
   line-height: 24px;
   margin-left: 0;
   padding: 0;
-  // box-sizing: border-box;
   transition: all 0.2s ease-in;
   outline: none;
   border: none;
-  // width: auto;
-  // display: block;
-  // user-select: none;
+
+  &__container {
+    min-width: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  &__wrapper {
+    flex: 1;
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    border: 2px solid $form-background;
+    border-radius: 8px;
+    background-color: $form-background;
+    height: 52px + (2 * 8px);
+    vertical-align: bottom;
+    transition: all 0.2s ease-in;
+
+    &:focus-within {
+      border: 2px solid $bitcoinYellow;
+    }
+
+    input[type='text'].inputField {
+      size: '';
+      width: 100%;
+    }
+
+    input {
+      filter: none;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus {
+      border: none;
+      -webkit-text-fill-color: $white;
+      -webkit-box-shadow: 0 0 0 1000px $form-background inset;
+      box-shadow: 0 0 0 1000px $form-background inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
 }
 
-input[type='text'].inputField {
-  size: '';
-  width: 100%;
-}
-
-input[type='text'].inputField:focus {
-  background-color: $darkBlue;
-  border-color: #275e9a;
-}
+// .inputField .inputField__wrapper
 
 .inputFieldLabel {
   text-transform: uppercase;
