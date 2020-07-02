@@ -7,11 +7,13 @@ import SecondaryButton from '../../../SecondaryButton';
 import { ButtonSize } from '../../../Button';
 import SignIn from '../../../icons/SignIn';
 
-const TopBar: React.SFC = () => {
-  const [{ sidebar, auth }, dispatch] = useStateValue();
+interface IProps {
+  onSignInClick?: () => void;
+  onSignOutClick?: () => void;
+}
 
-  const handleSignInClick = () =>
-    dispatch({ type: 'MODAL_SHOW', payload: { type: 'SIGN_IN_MODAL' } });
+const TopBar: React.FC<IProps> = ({ onSignInClick }) => {
+  const [{ sidebar, auth }] = useStateValue();
 
   return (
     <div className={`container-fluid h-100`}>
@@ -30,11 +32,11 @@ const TopBar: React.SFC = () => {
                 <SecondaryButton
                   size={ButtonSize.SMALL}
                   className={styles['sign-in__button']}
-                  onClick={handleSignInClick}
+                  onClick={onSignInClick}
                 >
                   Sign-in
                 </SecondaryButton>
-                <div onClick={handleSignInClick}>
+                <div onClick={onSignInClick}>
                   <SignIn className={styles['sign-in__icon']} />
                 </div>
               </Fragment>

@@ -47,6 +47,9 @@ const Layout: React.FC = ({ children }) => {
   const hideContent = () =>
     breakpoint === 'xs' || breakpoint === 'sm' ? sidebar.isOpen || modal.type !== 'NONE' : false;
 
+  const handleSignInClick = () =>
+    dispatch({ type: 'MODAL_SHOW', payload: { type: 'SIGN_IN_MODAL' } });
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -63,7 +66,7 @@ const Layout: React.FC = ({ children }) => {
               transitionDuration: modal.type === 'NONE' ? `${transitionTimeout}` : '0s',
             }}
           >
-            <TopBar />
+            <TopBar onSignInClick={handleSignInClick} />
           </div>
           <div
             className={styles.main__content}
