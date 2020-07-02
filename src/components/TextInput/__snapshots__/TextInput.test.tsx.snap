@@ -21,6 +21,11 @@ exports[`TextInput should match snapshot 1`] = `
         value="sergioalvarez"
       />
     </div>
+    <div
+      class="inputField__error"
+    >
+      Username already exists
+    </div>
   </div>
 </div>
 `;

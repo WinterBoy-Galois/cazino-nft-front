@@ -7,6 +7,7 @@ const data = {
   name: 'username',
   label: 'Username',
   value: 'sergioalvarez',
+  validationMessage: 'Username already exists',
 };
 
 describe('TextInput', () => {
@@ -42,5 +43,23 @@ describe('TextInput', () => {
 
     // Assert
     expect(container).toHaveAttribute('name', expected);
+  });
+
+  it('should display validation error', () => {
+    // Arrange
+    const expected = data.validationMessage;
+
+    // Act
+    const { getByText } = render(<TextInput value={data.value} validationMessage={expected} />);
+    const container = getByText(expected);
+
+    // Assert
+    expect(container).toMatchInlineSnapshot(`
+      <div
+        class="inputField__error"
+      >
+        Username already exists
+      </div>
+    `);
   });
 });

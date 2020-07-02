@@ -19,9 +19,18 @@ export default {
 const data = {
   label: 'Username',
   value: 'sergioalvarez',
+  validationMessage: 'Username already exists',
   onChangeValue: action('onChangeValue'),
 };
 
-export const Default = () => (
-  <TextInput {...data} label={text('Label', data.label)} value={text('Value', data.value)} />
+export const Default = () => <TextInput {...data} validationMessage={undefined} />;
+
+export const ValidationError = () => <TextInput {...data} />;
+
+export const Custom = () => (
+  <TextInput
+    label={text('Label', data.label)}
+    value={text('Value', data.value)}
+    validationMessage={text('Validation', data.validationMessage)}
+  />
 );

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import './TextInput.scss';
+import styles from './TextInput.module.scss';
 
 interface IProps {
   name?: string;
   value?: string;
   label?: string;
+  validationMessage?: string;
   onChangeValue?: (value: string) => void;
 }
 
@@ -13,6 +14,7 @@ const TextInput = ({
   name = undefined,
   value: initialValue = undefined,
   label = undefined,
+  validationMessage = undefined,
   onChangeValue = undefined,
 }: IProps) => {
   const [value, setValue] = useState(initialValue);
@@ -37,19 +39,22 @@ const TextInput = ({
   };
 
   return (
-    <div className="inputField__container">
-      <div className="inputField__wrapper">
-        <label className="inputFieldLabel">{label}</label>
+    <div className={styles.inputField__container}>
+      <div className={styles.inputField__wrapper}>
+        <label className={styles.inputFieldLabel}>{label}</label>
         <input
           {...(name ? { name: name } : {})}
           type="text"
           value={value}
-          className="inputField"
+          className={styles.inputField}
           autoComplete="off"
           onChange={handleOnChange}
           onKeyPress={keypressHandler}
         />
       </div>
+      {validationMessage !== undefined && (
+        <div className={styles.inputField__error}>{validationMessage}</div>
+      )}
     </div>
   );
 };
