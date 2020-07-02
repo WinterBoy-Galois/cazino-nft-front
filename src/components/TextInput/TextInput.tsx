@@ -41,7 +41,7 @@ const TextInput = ({
   return (
     <div className={styles.inputField__container}>
       <div className={styles.inputField__wrapper}>
-        <label className={styles.inputFieldLabel}>{label}</label>
+        <label className={styles.inputField__label}>{label}</label>
         <input
           {...(name ? { name: name } : {})}
           type="text"

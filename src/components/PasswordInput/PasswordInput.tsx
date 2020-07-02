@@ -6,6 +6,7 @@ interface IProps {
   name?: string;
   value?: string;
   label?: string;
+  validationMessage?: string;
   onChangeValue?: (value: string) => void;
 }
 
@@ -13,6 +14,7 @@ const PasswordInput = ({
   name = undefined,
   value: initialValue = undefined,
   label = undefined,
+  validationMessage = undefined,
   onChangeValue = undefined,
 }: IProps) => {
   const [value, setValue] = useState(initialValue);
@@ -39,7 +41,7 @@ const PasswordInput = ({
   return (
     <div className={styles.inputField__container}>
       <div className={styles.inputField__wrapper}>
-        <label className={styles.inputFieldLabel}>{label}</label>
+        <label className={styles.inputField__label}>{label}</label>
         <input
           {...(name ? { name: name } : {})}
           type="password"
@@ -50,6 +52,9 @@ const PasswordInput = ({
           onKeyPress={keypressHandler}
         />
       </div>
+      {validationMessage !== undefined && (
+        <div className={styles.inputField__error}>{validationMessage}</div>
+      )}
     </div>
   );
 };

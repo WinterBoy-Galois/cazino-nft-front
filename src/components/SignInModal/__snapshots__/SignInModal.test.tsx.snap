@@ -54,7 +54,7 @@ Object {
                       class="inputField__wrapper"
                     >
                       <label
-                        class="inputFieldLabel"
+                        class="inputField__label"
                       >
                         email
                       </label>
@@ -74,7 +74,7 @@ Object {
                       class="inputField__wrapper"
                     >
                       <label
-                        class="inputFieldLabel"
+                        class="inputField__label"
                       >
                         password
                       </label>
@@ -157,7 +157,7 @@ Object {
                     class="inputField__wrapper"
                   >
                     <label
-                      class="inputFieldLabel"
+                      class="inputField__label"
                     >
                       email
                     </label>
@@ -177,7 +177,7 @@ Object {
                     class="inputField__wrapper"
                   >
                     <label
-                      class="inputFieldLabel"
+                      class="inputField__label"
                     >
                       password
                     </label>

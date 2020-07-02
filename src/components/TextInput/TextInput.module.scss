@@ -55,28 +55,26 @@
       transition: background-color 5000s ease-in-out 0s;
     }
   }
-}
 
-// .inputField .inputField__wrapper
+  &__label {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+    color: $live-updates-light-blue;
+    user-select: none;
+    margin: 0;
+  }
 
-.inputFieldLabel {
-  text-transform: uppercase;
-  display: block;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 19px;
-  color: $live-updates-light-blue;
-  user-select: none;
-  margin: 0;
-}
-
-.inputField__error {
-  text-transform: uppercase;
-  display: block;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 19px;
-  color: $red;
-  user-select: none;
-  margin: 4px 8px 4px 8px;
+  &__error {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+    color: $red;
+    user-select: none;
+    margin: 4px 8px 4px 8px;
+  }
 }

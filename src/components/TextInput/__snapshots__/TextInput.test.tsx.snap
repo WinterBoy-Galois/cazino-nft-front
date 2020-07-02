@@ -9,7 +9,7 @@ exports[`TextInput should match snapshot 1`] = `
       class="inputField__wrapper"
     >
       <label
-        class="inputFieldLabel"
+        class="inputField__label"
       >
         Username
       </label>
