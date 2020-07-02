@@ -51,7 +51,7 @@ Object {
                     class="inputField__container"
                   >
                     <div
-                      class="inputField__wrapper"
+                      class="inputField__wrapper inputField__wrapper--error"
                     >
                       <label
                         class="inputField__label"
@@ -66,6 +66,9 @@ Object {
                         value=""
                       />
                     </div>
+                    <div
+                      class="inputField__error"
+                    />
                   </div>
                   <div
                     class="inputField__container"
@@ -154,7 +157,7 @@ Object {
                   class="inputField__container"
                 >
                   <div
-                    class="inputField__wrapper"
+                    class="inputField__wrapper inputField__wrapper--error"
                   >
                     <label
                       class="inputField__label"
@@ -169,6 +172,9 @@ Object {
                       value=""
                     />
                   </div>
+                  <div
+                    class="inputField__error"
+                  />
                 </div>
                 <div
                   class="inputField__container"
