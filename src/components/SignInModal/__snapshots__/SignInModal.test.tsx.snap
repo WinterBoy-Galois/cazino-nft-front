@@ -51,7 +51,7 @@ Object {
                     class="inputField__container"
                   >
                     <div
-                      class="inputField__wrapper inputField__wrapper--error"
+                      class="inputField__wrapper"
                     >
                       <label
                         class="inputField__label"
@@ -157,7 +157,7 @@ Object {
                   class="inputField__container"
                 >
                   <div
-                    class="inputField__wrapper inputField__wrapper--error"
+                    class="inputField__wrapper"
                   >
                     <label
                       class="inputField__label"

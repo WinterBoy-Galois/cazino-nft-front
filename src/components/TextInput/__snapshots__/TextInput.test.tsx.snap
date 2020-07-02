@@ -6,7 +6,7 @@ exports[`TextInput should match snapshot 1`] = `
     class="inputField__container"
   >
     <div
-      class="inputField__wrapper"
+      class="inputField__wrapper inputField__wrapper--error"
     >
       <label
         class="inputField__label"
