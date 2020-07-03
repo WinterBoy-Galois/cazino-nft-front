@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LeaderboardsTab should match snapshot 1`] = `
+exports[`SignInModal should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body
@@ -92,6 +92,7 @@ Object {
                   </div>
                   <button
                     class=" secondary button button--small"
+                    disabled=""
                     type="submit"
                   >
                     Sign In
@@ -198,6 +199,7 @@ Object {
                 </div>
                 <button
                   class=" secondary button button--small"
+                  disabled=""
                   type="submit"
                 >
                   Sign In
