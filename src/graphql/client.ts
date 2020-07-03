@@ -22,16 +22,22 @@ const cache = new InMemoryCache({
   fragmentMatcher,
 });
 
+let wsLink: WebSocketLink;
+
 const getApolloClient = (
   onAccessTokenRefresh: (accessToken: string) => void,
   accessToken?: string
 ) => {
-  const wsLink = new WebSocketLink({
+  if (wsLink) {
+    (wsLink as any).subscriptionClient.close();
+  }
+
+  wsLink = new WebSocketLink({
     uri: `wss://staging.jinglebets.com/graphql`,
     options: {
       reconnect: true,
       connectionParams: {
-        authToken: accessToken,
+        authToken: accessToken ?? '',
       },
     },
   });
