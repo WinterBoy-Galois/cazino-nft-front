@@ -29,7 +29,18 @@ const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }:
     },
     isInitialValid: false,
     validationSchema: Yup.object().shape({
-      email: Yup.string().email('Invalid email').required('Required'),
+      email: Yup.string().required('Please enter your Email.').email('Please enter a valid Email.'),
+      password: Yup.string()
+        .required('Please enter a password.')
+        .min(8, ({ min }) => `Password is too short - length must be at least ${min} characters.`)
+        .max(20, ({ max }) => `Password is too long - maximum length is ${max} characters.`)
+        .matches(/[A-Z]/, 'Must contain at least one uppercase character.')
+        .matches(/[a-z]/, 'Must contain at least one lowercase character.')
+        .matches(/[0-9]/, 'Must contain at least one number.')
+        .matches(
+          /[\^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`]/,
+          'Your password must contain at least one of the following special characters: ^ $ * . [ ] { } ( ) ? - " ! @ # % & / \\ , > < \' : ; | _ ~ `'
+        ),
     }),
     onSubmit: values => {
       onSignIn(values.email, values.password);
@@ -53,7 +64,9 @@ const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }:
               label="password"
               name="password"
               onChangeValue={v => formik.setFieldValue('password', v)}
+              onBlur={formik.handleBlur}
               value={formik.values.password}
+              {...(formik.touched.password ? { validationMessage: formik.errors.password } : {})}
             />
             <SecondaryButton type="submit" {...(formik.isValid ? {} : { disabled: true })}>
               Sign In
