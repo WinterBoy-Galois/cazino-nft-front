@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as Yup from 'yup';
 import Modal from '../Modal';
 import styles from './SignInModal.module.scss';
 import signInIllustration from '../../assets/images/auth/sign-in.svg';
@@ -26,6 +27,10 @@ const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }:
       email: '',
       password: '',
     },
+    isInitialValid: false,
+    validationSchema: Yup.object().shape({
+      email: Yup.string().email('Invalid email').required('Required'),
+    }),
     onSubmit: values => {
       onSignIn(values.email, values.password);
     },
@@ -40,7 +45,9 @@ const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }:
               label="email"
               name="email"
               onChangeValue={v => formik.setFieldValue('email', v)}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
+              {...(formik.touched.email ? { validationMessage: formik.errors.email } : {})}
             />
             <PasswordInput
               label="password"
@@ -48,7 +55,9 @@ const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }:
               onChangeValue={v => formik.setFieldValue('password', v)}
               value={formik.values.password}
             />
-            <SecondaryButton type="submit">Sign In</SecondaryButton>
+            <SecondaryButton type="submit" {...(formik.isValid ? {} : { disabled: true })}>
+              Sign In
+            </SecondaryButton>
           </form>
         </div>
         <div className={`col-12 col-md-5 ${styles.illustration}`}>

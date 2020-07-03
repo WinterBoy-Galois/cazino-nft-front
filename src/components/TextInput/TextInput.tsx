@@ -8,6 +8,7 @@ interface IProps {
   label?: string;
   validationMessage?: string;
   onChangeValue?: (value: string) => void;
+  onBlur?: ({ target }: { target: EventTarget | null }) => void;
 }
 
 const TextInput = ({
@@ -16,6 +17,7 @@ const TextInput = ({
   label = undefined,
   validationMessage = undefined,
   onChangeValue = undefined,
+  onBlur = undefined,
 }: IProps) => {
   const [value, setValue] = useState(initialValue);
 
@@ -42,6 +44,12 @@ const TextInput = ({
     }
   };
 
+  const handleBlur = (event?: React.FocusEvent<HTMLInputElement>) => {
+    if (onBlur && event) {
+      onBlur(event);
+    }
+  };
+
   return (
     <div className={styles.inputField__container}>
       <div
@@ -60,6 +68,7 @@ const TextInput = ({
           autoComplete="off"
           onChange={handleOnChange}
           onKeyPress={keypressHandler}
+          onBlur={handleBlur}
         />
       </div>
       {isError() !== undefined && (
