@@ -25,6 +25,10 @@ const PasswordInput = ({
     setValue(initialValue);
   }, [initialValue]);
 
+  const isError = () => {
+    return !!validationMessage;
+  };
+
   const handleOnChange = (e: { target: { value: string } }) => {
     const newValue = e.target.value;
 
@@ -48,7 +52,13 @@ const PasswordInput = ({
 
   return (
     <div className={styles.inputField__container}>
-      <div className={styles.inputField__wrapper}>
+      <div
+        className={
+          !isError()
+            ? `${styles['inputField__wrapper']}`
+            : `${styles['inputField__wrapper']} ${styles['inputField__wrapper--error']}`
+        }
+      >
         <label className={styles.inputField__label}>{label}</label>
         <input
           {...(name ? { name: name } : {})}
@@ -61,9 +71,7 @@ const PasswordInput = ({
           onBlur={handleBlur}
         />
       </div>
-      {validationMessage !== undefined && (
-        <div className={styles.inputField__error}>{validationMessage}</div>
-      )}
+      {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}
     </div>
   );
 };

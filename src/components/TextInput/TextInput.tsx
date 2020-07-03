@@ -71,9 +71,7 @@ const TextInput = ({
           onBlur={handleBlur}
         />
       </div>
-      {isError() !== undefined && (
-        <div className={styles.inputField__error}>{validationMessage}</div>
-      )}
+      {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}
     </div>
   );
 };

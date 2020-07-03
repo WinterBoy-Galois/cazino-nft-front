@@ -31,7 +31,7 @@ const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }:
     validationSchema: Yup.object().shape({
       email: Yup.string().required('Please enter your Email.').email('Please enter a valid Email.'),
       password: Yup.string()
-        .required('Please enter a password.')
+        .required('Please enter your password.')
         .min(8, ({ min }) => `Password is too short - length must be at least ${min} characters.`)
         .max(20, ({ max }) => `Password is too long - maximum length is ${max} characters.`)
         .matches(/[A-Z]/, 'Must contain at least one uppercase character.')
