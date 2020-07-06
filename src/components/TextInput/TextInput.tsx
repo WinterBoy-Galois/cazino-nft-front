@@ -8,6 +8,7 @@ interface IProps {
   label?: string;
   validationMessage?: string;
   onChangeValue?: (value: string) => void;
+  onBlur?: ({ target }: { target: EventTarget | null }) => void;
 }
 
 const TextInput = ({
@@ -16,12 +17,17 @@ const TextInput = ({
   label = undefined,
   validationMessage = undefined,
   onChangeValue = undefined,
+  onBlur = undefined,
 }: IProps) => {
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
+
+  const isError = () => {
+    return !!validationMessage;
+  };
 
   const handleOnChange = (e: { target: { value: string } }) => {
     const newValue = e.target.value;
@@ -38,9 +44,21 @@ const TextInput = ({
     }
   };
 
+  const handleBlur = (event?: React.FocusEvent<HTMLInputElement>) => {
+    if (onBlur && event) {
+      onBlur(event);
+    }
+  };
+
   return (
     <div className={styles.inputField__container}>
-      <div className={styles.inputField__wrapper}>
+      <div
+        className={
+          !isError()
+            ? `${styles['inputField__wrapper']}`
+            : `${styles['inputField__wrapper']} ${styles['inputField__wrapper--error']}`
+        }
+      >
         <label className={styles.inputField__label}>{label}</label>
         <input
           {...(name ? { name: name } : {})}
@@ -50,11 +68,10 @@ const TextInput = ({
           autoComplete="off"
           onChange={handleOnChange}
           onKeyPress={keypressHandler}
+          onBlur={handleBlur}
         />
       </div>
-      {validationMessage !== undefined && (
-        <div className={styles.inputField__error}>{validationMessage}</div>
-      )}
+      {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}
     </div>
   );
 };

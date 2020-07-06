@@ -36,6 +36,14 @@
       border: 2px solid $bitcoinYellow;
     }
 
+    &--error {
+      border: 2px solid $red;
+
+      &:focus-within {
+        border: 2px solid $red;
+      }
+    }
+
     input[type='text'].inputField {
       size: '';
       width: 100%;

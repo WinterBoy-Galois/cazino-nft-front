@@ -2,7 +2,7 @@ import React from 'react';
 import { render, waitForDomChange } from '@testing-library/react';
 import SignInModal from './SignInModal';
 
-describe('LeaderboardsTab', () => {
+describe('SignInModal', () => {
   it('should match snapshot', async () => {
     // Arrange
 
