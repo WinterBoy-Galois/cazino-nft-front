@@ -65,8 +65,8 @@ const PasswordInput = ({
             : `${styles['inputField__wrapper']} ${styles['inputField__wrapper--error']}`
         }
       >
-        <label className={styles.inputField__label}>{label}</label>
-        <span className={styles.inputField__group}>
+        <div className={styles.inputField__group}>
+          <label className={styles.inputField__label}>{label}</label>
           <input
             {...(name ? { name: name } : {})}
             type={isPasswordVisible ? 'text' : 'password'}
@@ -77,10 +77,10 @@ const PasswordInput = ({
             onKeyPress={keypressHandler}
             onBlur={handleBlur}
           />
-          <span className={`${styles['inputField__icon--clickable']}`} onClick={handleClick}>
-            <Eye className={styles.inputField__icon} />
-          </span>
-        </span>
+        </div>
+        <div className={`${styles['inputField__icon--clickable']}`} onClick={handleClick}>
+          <Eye className={styles.inputField__icon} />
+        </div>
       </div>
       {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}
     </div>
