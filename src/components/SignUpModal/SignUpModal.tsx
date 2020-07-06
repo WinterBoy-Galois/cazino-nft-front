@@ -44,6 +44,7 @@ const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }:
           /[\^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`]/,
           'Your password must contain at least one of the following special characters: ^ $ * . [ ] { } ( ) ? - " ! @ # % & / \\ , > < \' : ; | _ ~ `'
         ),
+      confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords must match'),
     }),
     onSubmit: values => {
       onSignUp(values.email, values.password, values.username, '');
