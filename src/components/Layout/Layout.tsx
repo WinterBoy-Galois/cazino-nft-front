@@ -13,7 +13,7 @@ import BetDetailsModal from '../BetDetailsModal';
 import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationModal';
 import { SignInModalWithData } from '../SignInModal';
 import { transitionTimeout } from '../Modal';
-import { SignUpModalWithData } from '../SignUpModal/SignUpModal';
+import { SignUpModalWithData } from '../SignUpModal';
 
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>

@@ -219,6 +219,7 @@ Object {
               >
                 <img
                   alt="Sign Up Character"
+                  class="illustration__image"
                   src="sign-up.svg"
                 />
               </div>
@@ -444,6 +445,7 @@ Object {
             >
               <img
                 alt="Sign Up Character"
+                class="illustration__image"
                 src="sign-up.svg"
               />
             </div>

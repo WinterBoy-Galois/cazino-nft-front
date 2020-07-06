@@ -6,4 +6,10 @@
   @include media-breakpoint-up(md) {
     display: unset;
   }
+
+  &__image {
+    max-width: 240px;
+    margin: 0 auto;
+    display: block;
+  }
 }

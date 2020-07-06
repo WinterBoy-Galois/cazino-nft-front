@@ -112,7 +112,11 @@ const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }:
           </form>
         </div>
         <div className={`col-12 col-md-5 ${styles.illustration}`}>
-          <img src={signUpIllustration} alt="Sign Up Character" />
+          <img
+            src={signUpIllustration}
+            alt="Sign Up Character"
+            className={styles.illustration__image}
+          />
         </div>
       </div>
     </Modal>
