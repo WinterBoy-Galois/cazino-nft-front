@@ -61,18 +61,20 @@ const PasswordInput = ({
         }
       >
         <label className={styles.inputField__label}>{label}</label>
-        <input
-          {...(name ? { name: name } : {})}
-          type="password"
-          value={value}
-          className={styles.inputField}
-          autoComplete="off"
-          onChange={handleOnChange}
-          onKeyPress={keypressHandler}
-          onBlur={handleBlur}
-        />
-        <span>
-          <Eye />
+        <span className={styles.inputField__group}>
+          <input
+            {...(name ? { name: name } : {})}
+            type="password"
+            value={value}
+            className={styles.inputField}
+            autoComplete="off"
+            onChange={handleOnChange}
+            onKeyPress={keypressHandler}
+            onBlur={handleBlur}
+          />
+          <span>
+            <Eye />
+          </span>
         </span>
       </div>
       {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}
