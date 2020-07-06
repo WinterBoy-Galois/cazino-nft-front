@@ -1,2 +1,2 @@
 export { default } from './SignUpModal';
-export { UserInfoModalWithData } from './SignUpModal';
+export { SignUpModalWithData } from './SignUpModal';
