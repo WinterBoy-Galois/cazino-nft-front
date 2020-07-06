@@ -54,8 +54,8 @@ const Layout: React.FC = ({ children }) => {
     dispatch({ type: 'MODAL_SHOW', payload: { type: 'SIGN_IN_MODAL' } });
 
   const handleSignOutClick = async () => {
-    dispatch({ type: 'AUTH_SIGN_OUT' });
     await signOut();
+    dispatch({ type: 'AUTH_SIGN_OUT' });
   };
 
   return (
