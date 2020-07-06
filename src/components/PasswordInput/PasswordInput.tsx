@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import styles from './PasswordInput.module.scss';
+import { Eye } from '..';
 
 interface IProps {
   name?: string;
@@ -70,6 +71,9 @@ const PasswordInput = ({
           onKeyPress={keypressHandler}
           onBlur={handleBlur}
         />
+        <span>
+          <Eye />
+        </span>
       </div>
       {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}
     </div>
