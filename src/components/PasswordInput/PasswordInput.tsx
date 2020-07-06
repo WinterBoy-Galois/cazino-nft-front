@@ -21,6 +21,7 @@ const PasswordInput = ({
   onBlur = undefined,
 }: IProps) => {
   const [value, setValue] = useState(initialValue);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   useEffect(() => {
     setValue(initialValue);
@@ -51,6 +52,10 @@ const PasswordInput = ({
     }
   };
 
+  const handleClick = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <div className={styles.inputField__container}>
       <div
@@ -64,7 +69,7 @@ const PasswordInput = ({
         <span className={styles.inputField__group}>
           <input
             {...(name ? { name: name } : {})}
-            type="password"
+            type={isPasswordVisible ? 'text' : 'password'}
             value={value}
             className={styles.inputField}
             autoComplete="off"
@@ -72,8 +77,8 @@ const PasswordInput = ({
             onKeyPress={keypressHandler}
             onBlur={handleBlur}
           />
-          <span>
-            <Eye />
+          <span className={`${styles['inputField__icon--clickable']}`} onClick={handleClick}>
+            <Eye className={styles.inputField__icon} />
           </span>
         </span>
       </div>

@@ -88,9 +88,11 @@ Object {
                           type="password"
                           value=""
                         />
-                        <span>
+                        <span
+                          class="inputField__icon--clickable"
+                        >
                           <svg
-                            class="fill"
+                            class="fill inputField__icon"
                             viewBox="0 0 28.49 21.53"
                             xmlns="http://www.w3.org/2000/svg"
                           >
@@ -229,9 +231,11 @@ Object {
                         type="password"
                         value=""
                       />
-                      <span>
+                      <span
+                        class="inputField__icon--clickable"
+                      >
                         <svg
-                          class="fill"
+                          class="fill inputField__icon"
                           viewBox="0 0 28.49 21.53"
                           xmlns="http://www.w3.org/2000/svg"
                         >

@@ -7,7 +7,11 @@ interface IProps {
 
 const Eye: React.SFC<IProps> = ({ className = styles.fill }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.49 21.53" className={`${className}`}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 28.49 21.53"
+      className={`${styles.fill} ${className}`}
+    >
       <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_1-2" data-name="Layer 1">
           <g id="Icon_feather-eye" data-name="Icon feather-eye">
