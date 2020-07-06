@@ -13,6 +13,7 @@ import BetDetailsModal from '../BetDetailsModal';
 import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationModal';
 import { SignInModalWithData } from '../SignInModal';
 import { transitionTimeout } from '../Modal';
+import { SignUpModalWithData } from '../SignUpModal/SignUpModal';
 
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>
@@ -33,6 +34,11 @@ const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
     />
     <SignInModalWithData
       show={modal.type === 'SIGN_IN_MODAL'}
+      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
+      {...modal.data}
+    />
+    <SignUpModalWithData
+      show={modal.type === 'SIGN_UP_MODAL'}
       onClose={() => dispatch({ type: 'MODAL_HIDE' })}
       {...modal.data}
     />

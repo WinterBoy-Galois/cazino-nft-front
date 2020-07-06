@@ -8,4 +8,5 @@ export type ModalType =
   | 'USER_INFO_MODAL'
   | 'BET_DETAILS_MODAL'
   | 'CHANGE_SERVER_SEED_CONFIRMATION'
-  | 'SIGN_IN_MODAL';
+  | 'SIGN_IN_MODAL'
+  | 'SIGN_UP_MODAL';
