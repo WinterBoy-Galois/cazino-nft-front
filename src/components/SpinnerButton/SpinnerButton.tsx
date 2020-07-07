@@ -3,6 +3,7 @@ import styles from './SpinnerButton.module.scss';
 import Button, { ButtonSize } from '../Button';
 import SecondaryButton from '../SecondaryButton';
 import Spinner from '../Spinner';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   type?: 'submit' | 'reset' | 'button';
@@ -15,15 +16,17 @@ interface IProps {
 }
 
 const SpinnerButton: React.SFC<IProps> = props => {
+  const { t } = useTranslation();
+
   const color = props.color ?? 'PRIMARY';
   const buttonProps = {
     ...props,
     className: `${styles.button} ${props.className ?? ''}`,
-    disabled: props.loading,
+    disabled: props.disabled || props.loading,
     children: props.loading ? (
       <div className={styles.loading}>
         <Spinner color={'WHITE'} className={styles.loading__spinner} />
-        <div className={styles.loading__text}>Loading...</div>
+        <div className={styles.loading__text}>{t('loading')}</div>
       </div>
     ) : (
       props.children
