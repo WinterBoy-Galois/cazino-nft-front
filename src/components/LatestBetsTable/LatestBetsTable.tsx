@@ -87,9 +87,9 @@ const LatestBetsTable: React.FC<IProps> = ({
             <>
               <SpacerRow />
               {reduceMotion ? (
-                bets.map(b => (
+                bets.map((b, i) => (
                   <BetRow
-                    key={b.id}
+                    key={`${b.id}_${i}`}
                     bet={b}
                     highlight={signInUserId ? b.userid.toString() === signInUserId : false}
                     viewMode={viewMode}
