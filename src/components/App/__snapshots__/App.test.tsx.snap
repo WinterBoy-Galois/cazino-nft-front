@@ -12,7 +12,7 @@ Object {
           class="spinner"
         >
           <span
-            class="spinner spinner--white"
+            class="spinner spinner--white "
           />
         </div>
         <div>
@@ -29,7 +29,7 @@ Object {
         class="spinner"
       >
         <span
-          class="spinner spinner--white"
+          class="spinner spinner--white "
         />
       </div>
       <div>

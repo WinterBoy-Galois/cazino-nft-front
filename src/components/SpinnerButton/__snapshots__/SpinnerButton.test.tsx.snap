@@ -1,41 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthOverlay should match snapshot 1`] = `
+exports[`SpinnerButton should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="container"
+      <button
+        class="button  button button--small"
+        type="button"
       >
-        <div
-          class="spinner"
-        >
-          <span
-            class="spinner spinner--white "
-          />
-        </div>
-        <div>
-          Just a moment
-        </div>
-      </div>
+        Test
+      </button>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="container"
+    <button
+      class="button  button button--small"
+      type="button"
     >
-      <div
-        class="spinner"
-      >
-        <span
-          class="spinner spinner--white "
-        />
-      </div>
-      <div>
-        Just a moment
-      </div>
-    </div>
+      Test
+    </button>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

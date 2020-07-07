@@ -3,16 +3,17 @@ import styles from './Spinner.module.scss';
 
 interface IProps {
   color: 'WHITE' | 'PRIMARY';
+  className?: string;
 }
 
-const Spinner = ({ color }: IProps) => {
+const Spinner: React.FC<IProps> = ({ color, className = '' }) => {
   const getClassName = () => {
     switch (color) {
       case 'PRIMARY':
-        return `${styles.spinner} ${styles['spinner--primary']}`;
+        return `${styles.spinner} ${styles['spinner--primary']} ${className}`;
       case 'WHITE':
       default:
-        return `${styles.spinner} ${styles['spinner--white']}`;
+        return `${styles.spinner} ${styles['spinner--white']} ${className}`;
     }
   };
 
