@@ -6,7 +6,11 @@ export const closeModal = (dispatch: (value: Action) => void) => {
   dispatch({ type: 'MODAL_HIDE' });
 };
 
-export const replaceModal = (dispatch: (value: Action) => void, newModal: ModalType, data: any) => {
+export const replaceModal = (
+  dispatch: (value: Action) => void,
+  newModal: ModalType,
+  data?: any
+) => {
   closeModal(dispatch);
   setTimeout(
     () =>

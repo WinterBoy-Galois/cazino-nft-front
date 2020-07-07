@@ -1,25 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button should match snapshot 1`] = `
+exports[`Uppercase should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <a
-        class=" link"
-        href=""
+      <div
+        class="container "
       >
-        Test
-      </a>
+        test
+      </div>
     </div>
   </body>,
   "container": <div>
-    <a
-      class=" link"
-      href=""
+    <div
+      class="container "
     >
-      Test
-    </a>
+      test
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

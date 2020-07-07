@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '../Modal';
+import Modal, { replaceModal } from '../Modal';
 import styles from './SignUpModal.module.scss';
 import { GenericError } from '../../models/genericError.model';
 import { GraphQLError } from 'graphql';
@@ -13,6 +13,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import signUpIllustration from '../../assets/images/auth/sign-up.svg';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import Uppercase from '../Uppercase';
+import Link from '../Link';
 
 interface IProps {
   show: boolean;
@@ -20,9 +22,15 @@ interface IProps {
   errors?: GraphQLError[] | GenericError[];
   onClose?: () => void;
   onSignUp?: (email: string, password: string, username: string, token: string) => void;
+  onNavigateToSignIn?: () => void;
 }
 
-const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }: IProps) => {
+const SignUpModal: React.FC<IProps> = ({
+  show,
+  onClose,
+  onSignUp = () => null,
+  onNavigateToSignIn,
+}: IProps) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const formik = useFormik({
@@ -103,9 +111,19 @@ const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }:
               {...(formik.touched.email ? { validationMessage: formik.errors.email } : {})}
             />
 
-            <SecondaryButton type="submit" {...(formik.isValid ? {} : { disabled: true })}>
+            <SecondaryButton
+              type="submit"
+              {...(formik.isValid ? {} : { disabled: true })}
+              className={styles.button}
+            >
               Create account
             </SecondaryButton>
+
+            <Uppercase>
+              <span>already have an account?</span>
+              &nbsp;
+              <Link onClick={onNavigateToSignIn}>sign in now!</Link>
+            </Uppercase>
           </form>
         </div>
         <div className={`col-12 col-md-5 ${styles.illustration}`}>
@@ -145,6 +163,8 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     dispatch({ type: 'MODAL_HIDE' });
   };
 
+  const handleNavigateToSignIn = () => replaceModal(dispatch, 'SIGN_IN_MODAL');
+
   return (
     <SignUpModal
       show={show}
@@ -152,6 +172,7 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       errors={errors}
       onClose={onClose}
       onSignUp={handleSignUp}
+      onNavigateToSignIn={handleNavigateToSignIn}
     />
   );
 };

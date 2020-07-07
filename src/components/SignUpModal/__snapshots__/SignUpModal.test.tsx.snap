@@ -188,11 +188,25 @@ Object {
                     </div>
                   </div>
                   <button
-                    class=" secondary button button--small"
+                    class="button secondary button button--small"
                     type="submit"
                   >
                     Create account
                   </button>
+                  <div
+                    class="container "
+                  >
+                    <span>
+                      already have an account?
+                    </span>
+                     
+                    <a
+                      class=" link"
+                      href=""
+                    >
+                      sign in now!
+                    </a>
+                  </div>
                 </form>
               </div>
               <div
@@ -392,11 +406,25 @@ Object {
                   </div>
                 </div>
                 <button
-                  class=" secondary button button--small"
+                  class="button secondary button button--small"
                   type="submit"
                 >
                   Create account
                 </button>
+                <div
+                  class="container "
+                >
+                  <span>
+                    already have an account?
+                  </span>
+                   
+                  <a
+                    class=" link"
+                    href=""
+                  >
+                    sign in now!
+                  </a>
+                </div>
               </form>
             </div>
             <div
