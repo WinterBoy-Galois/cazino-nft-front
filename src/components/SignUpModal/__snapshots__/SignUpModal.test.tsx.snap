@@ -191,7 +191,7 @@ Object {
                     class=" secondary button button--small"
                     type="submit"
                   >
-                    Sign Up
+                    Create account
                   </button>
                 </form>
               </div>
@@ -395,7 +395,7 @@ Object {
                   class=" secondary button button--small"
                   type="submit"
                 >
-                  Sign Up
+                  Create account
                 </button>
               </form>
             </div>

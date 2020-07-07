@@ -13,7 +13,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import signUpIllustration from '../../assets/images/auth/sign-up.svg';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-// import { appConfig } from '../../common/config';
 
 interface IProps {
   show: boolean;
@@ -105,7 +104,7 @@ const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }:
             />
 
             <SecondaryButton type="submit" {...(formik.isValid ? {} : { disabled: true })}>
-              Sign Up
+              Create account
             </SecondaryButton>
           </form>
         </div>
