@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import styles from './PasswordInput.module.scss';
-import { Eye } from '..';
+import { Eye, EyeInvisible } from '..';
 
 interface IProps {
   name?: string;
@@ -78,8 +78,12 @@ const PasswordInput = ({
             onBlur={handleBlur}
           />
         </div>
-        <div className={`${styles['inputField__icon--clickable']}`} onClick={handleClick}>
-          <Eye className={styles.inputField__icon} />
+        <div className={`${styles['inputField__icon']}`} onClick={handleClick}>
+          {isPasswordVisible ? (
+            <Eye className={`${styles['inputField__icon--visible']}`} />
+          ) : (
+            <EyeInvisible className={`${styles['inputField__icon--invisible']}`} />
+          )}
         </div>
       </div>
       {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}
