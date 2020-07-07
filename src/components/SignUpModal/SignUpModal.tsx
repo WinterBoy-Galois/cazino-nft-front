@@ -12,8 +12,7 @@ import SecondaryButton from '../SecondaryButton';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import signUpIllustration from '../../assets/images/auth/sign-up.svg';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { appConfig } from '../../common/config';
+// import { appConfig } from '../../common/config';
 
 interface IProps {
   show: boolean;
@@ -24,8 +23,6 @@ interface IProps {
 }
 
 const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }: IProps) => {
-  const recaptchaRef = React.useRef<any>(null);
-
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -51,8 +48,7 @@ const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }:
       confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords must match'),
     }),
     onSubmit: async values => {
-      const token = await recaptchaRef.current?.executeAsync();
-      onSignUp(values.email, values.password, values.username, token);
+      onSignUp(values.email, values.password, values.username, '');
     },
   });
 
@@ -97,13 +93,6 @@ const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }:
               onBlur={formik.handleBlur}
               value={formik.values.email}
               {...(formik.touched.email ? { validationMessage: formik.errors.email } : {})}
-            />
-
-            <ReCAPTCHA
-              ref={recaptchaRef}
-              size="invisible"
-              sitekey={appConfig.reCaptchaSiteKey}
-              theme="dark"
             />
 
             <SecondaryButton type="submit" {...(formik.isValid ? {} : { disabled: true })}>

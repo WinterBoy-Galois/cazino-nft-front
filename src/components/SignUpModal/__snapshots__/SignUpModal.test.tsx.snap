@@ -187,7 +187,6 @@ Object {
                       />
                     </div>
                   </div>
-                  <div />
                   <button
                     class=" secondary button button--small"
                     type="submit"
@@ -210,9 +209,6 @@ Object {
         </div>
       </div>
     </div>
-    <script
-      src="https://www.google.com/recaptcha/api.js?onload=onloadcallback&render=explicit"
-    />
   </body>,
   "container": <div>
     <div
@@ -395,7 +391,6 @@ Object {
                     />
                   </div>
                 </div>
-                <div />
                 <button
                   class=" secondary button button--small"
                   type="submit"
