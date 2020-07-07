@@ -1,6 +1,7 @@
 node_modules/
 public/
 build/
+.vsc-templates
 src/serviceWorker.ts
 src/setupTests.ts
 src/react-app-env.d.ts
