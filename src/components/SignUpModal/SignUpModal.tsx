@@ -12,6 +12,7 @@ import SecondaryButton from '../SecondaryButton';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import signUpIllustration from '../../assets/images/auth/sign-up.svg';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 // import { appConfig } from '../../common/config';
 
 interface IProps {
@@ -23,6 +24,8 @@ interface IProps {
 }
 
 const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }: IProps) => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -48,7 +51,13 @@ const SignUpModal: React.FC<IProps> = ({ show, onClose, onSignUp = () => null }:
       confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords must match'),
     }),
     onSubmit: async values => {
-      onSignUp(values.email, values.password, values.username, '');
+      let token = '';
+
+      if (executeRecaptcha) {
+        token = await executeRecaptcha();
+      }
+
+      onSignUp(values.email, values.password, values.username, token);
     },
   });
 
@@ -128,8 +137,8 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     const { data, errors } = await signUp({ variables: { email, password, username, token } });
     setLoading(false);
 
-    if (errors || data.signIn.errors) {
-      setErrors(errors ?? data.signIn.errors);
+    if (errors || data.registerUser.errors) {
+      setErrors(errors ?? data.registerUser.errors);
       return;
     }
 

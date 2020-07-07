@@ -33,6 +33,7 @@
     "react": "^16.13.1",
     "react-compound-slider": "^2.5.0",
     "react-dom": "^16.13.1",
+    "react-google-recaptcha-v3": "^1.5.2",
     "react-i18next": "^11.5.0",
     "react-id-swiper": "^3.0.0",
     "react-scripts": "3.4.1",
