@@ -12,6 +12,7 @@ import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { GraphQLError } from 'graphql';
 import { GenericError } from '../../models/genericError.model';
+import { ValidationSummary } from '..';
 
 interface IProps {
   show: boolean;
@@ -21,7 +22,12 @@ interface IProps {
   onSignIn?: (email: string, password: string) => void;
 }
 
-const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }: IProps) => {
+const SignInModal: React.FC<IProps> = ({
+  show,
+  errors = undefined,
+  onClose,
+  onSignIn = () => null,
+}: IProps) => {
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -52,6 +58,12 @@ const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }:
       <div className="row">
         <div className="col-12 col-md-7">
           <form onSubmit={formik.handleSubmit}>
+            {errors && (
+              <ValidationSummary
+                className={styles.validation}
+                message="Your email or password is wrong."
+              />
+            )}
             <TextInput
               label="email"
               name="email"
