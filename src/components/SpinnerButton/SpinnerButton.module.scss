@@ -1,0 +1,22 @@
+@import '../../styles/shared';
+
+.loading {
+  display: flex;
+  align-items: center;
+
+  &__spinner {
+    width: 22px;
+    height: 22px;
+  }
+
+  &__text {
+    margin-left: 0.5rem;
+  }
+}
+
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
