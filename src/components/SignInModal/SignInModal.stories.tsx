@@ -6,7 +6,6 @@ import SignInModal from '.';
 import { GenericErrorSeverity, GenericErrorType } from '../../models/genericError.model';
 
 const data = {
-  validationSummary: 'Your email or password is wrong.',
   genericError: {
     type: GenericErrorType.FIELD,
     field: '',
@@ -30,7 +29,7 @@ export const Default = () => (
   />
 );
 
-export const WithValidationSummary = () => (
+export const WithErrorSummary = () => (
   <SignInModal
     show={boolean('Show', true)}
     loading={boolean('Loading', false)}

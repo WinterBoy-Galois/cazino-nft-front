@@ -12,7 +12,7 @@ import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { GraphQLError } from 'graphql';
 import { GenericError } from '../../models/genericError.model';
-import { ValidationSummary } from '..';
+import { ErrorSummary } from '..';
 
 interface IProps {
   show: boolean;
@@ -59,7 +59,7 @@ const SignInModal: React.FC<IProps> = ({
         <div className="col-12 col-md-7">
           <form onSubmit={formik.handleSubmit}>
             {errors && (
-              <ValidationSummary
+              <ErrorSummary
                 className={styles.validation}
                 message="Your email or password is wrong."
               />

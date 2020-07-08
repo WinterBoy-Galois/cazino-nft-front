@@ -1,13 +1,13 @@
 import React from 'react';
 
-import styles from './ValidationSummary.module.scss';
+import styles from './ErrorSummary.module.scss';
 
 interface IProps {
   message?: string;
   className?: string;
 }
 
-const ValidationSummary: React.SFC<IProps> = ({ message = undefined, className = '' }) => {
+const ErrorSummary: React.SFC<IProps> = ({ message = undefined, className = '' }) => {
   return (
     <div className={`${styles.container} ${className}`}>
       <div className={styles.wrapper}>{message}</div>
@@ -15,4 +15,4 @@ const ValidationSummary: React.SFC<IProps> = ({ message = undefined, className =
   );
 };
 
-export default ValidationSummary;
+export default ErrorSummary;
