@@ -16,6 +16,7 @@ import Uppercase from '../Uppercase';
 import Link from '../Link';
 import SpinnerButton from '../SpinnerButton';
 import CheckboxInput from '../CheckboxInput';
+import ErrorSummary from '../ErrorSummary';
 
 interface IProps {
   show: boolean;
@@ -32,6 +33,7 @@ const SignUpModal: React.FC<IProps> = ({
   onSignUp = () => null,
   onNavigateToSignIn,
   loading,
+  errors,
 }: IProps) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -76,6 +78,13 @@ const SignUpModal: React.FC<IProps> = ({
     <Modal show={show} onClose={onClose} title="Sign Up">
       <div className="row">
         <div className="col-12 col-md-7">
+          {errors && (
+            <ErrorSummary
+              className={styles.spacing__bottom}
+              message="Could not sign you up, please try again."
+            />
+          )}
+
           <form onSubmit={formik.handleSubmit}>
             <TextInput
               label="username"
