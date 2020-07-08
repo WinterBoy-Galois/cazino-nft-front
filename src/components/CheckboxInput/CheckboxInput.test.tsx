@@ -1,14 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import ValidationSummary from '.';
+import CheckboxInput from '.';
 
-describe('ValidationSummary', () => {
+describe('CheckboxInput', () => {
   it('should match snapshot', () => {
     // Arrange
 
     // Act
-    const container = render(<ValidationSummary message="Your email or password is wrong." />);
+    const container = render(<CheckboxInput message="Hello World!" />);
 
     // Assert
     expect(container).toMatchSnapshot();

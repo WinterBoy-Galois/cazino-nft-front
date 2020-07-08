@@ -1,2 +1,3 @@
 export * from './icons';
-export { default as ValidationSummary } from './ValidationSummary';
+export { default as ErrorSummary } from './ErrorSummary';
+export { default as CheckboxInput } from './CheckboxInput';

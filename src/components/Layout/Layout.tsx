@@ -14,6 +14,8 @@ import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationMo
 import { SignInModalWithData } from '../SignInModal';
 import { transitionTimeout } from '../Modal';
 import { SignUpModalWithData } from '../SignUpModal';
+import { useMutation } from '@apollo/react-hooks';
+import { SIGN_OUT } from '../../graphql/mutations';
 
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>
@@ -49,12 +51,18 @@ const Layout: React.FC = ({ children }) => {
   const [{ sidebar, modal }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
+  const [signOut] = useMutation(SIGN_OUT);
 
   const hideContent = () =>
     breakpoint === 'xs' || breakpoint === 'sm' ? sidebar.isOpen || modal.type !== 'NONE' : false;
 
   const handleSignInClick = () =>
     dispatch({ type: 'MODAL_SHOW', payload: { type: 'SIGN_UP_MODAL' } });
+
+  const handleSignOutClick = async () => {
+    await signOut();
+    dispatch({ type: 'AUTH_SIGN_OUT' });
+  };
 
   return (
     <>
@@ -72,7 +80,7 @@ const Layout: React.FC = ({ children }) => {
               transitionDuration: modal.type === 'NONE' ? `${transitionTimeout}` : '0s',
             }}
           >
-            <TopBar onSignInClick={handleSignInClick} />
+            <TopBar onSignInClick={handleSignInClick} onSignOutClick={handleSignOutClick} />
           </div>
           <div
             className={styles.main__content}

@@ -12,18 +12,18 @@ interface IProps {
   onSignOutClick?: () => void;
 }
 
-const TopBar: React.FC<IProps> = ({ onSignInClick }) => {
+const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
   const [{ sidebar, auth }] = useStateValue();
 
   return (
     <div className={`container-fluid h-100`}>
       <div className={`row h-100`}>
-        <div className={`col-6 ${styles.center}`}>
+        <div className={`col-4 ${styles.center}`}>
           <a href="/">
             <Logo className={styles.logo__size} fillClassName={styles.logo__color} />
           </a>
         </div>
-        <div className={`col-6 ${styles.center} ${styles.right}`}>
+        <div className={`col-8 ${styles.center} ${styles.right}`}>
           <div
             className={`${styles['sign-in']} ${!sidebar.isOpen ? styles['sign-in--spacing'] : ''}`}
           >
@@ -41,7 +41,12 @@ const TopBar: React.FC<IProps> = ({ onSignInClick }) => {
                 </div>
               </Fragment>
             ) : (
-              <span>{auth.user.username}</span>
+              <Fragment>
+                <span>{auth.user.username}</span>
+                <SecondaryButton size={ButtonSize.SMALL} onClick={onSignOutClick}>
+                  Sign out
+                </SecondaryButton>
+              </Fragment>
             )}
           </div>
           <SidebarToggle arrowLeft={true} show={!sidebar.isOpen} />

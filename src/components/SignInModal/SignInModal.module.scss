@@ -8,6 +8,12 @@
   }
 }
 
-.validation {
-  margin-bottom: 1rem;
+.spacing {
+  &__top {
+    margin-top: 1rem;
+  }
+
+  &__bottom {
+    margin-bottom: 1rem;
+  }
 }

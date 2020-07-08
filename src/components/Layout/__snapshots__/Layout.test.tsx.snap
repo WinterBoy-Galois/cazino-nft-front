@@ -23,7 +23,7 @@ Object {
                 class="row h-100"
               >
                 <div
-                  class="col-6 center"
+                  class="col-4 center"
                 >
                   <a
                     href="/"
@@ -70,7 +70,7 @@ Object {
                   </a>
                 </div>
                 <div
-                  class="col-6 center right"
+                  class="col-8 center right"
                 >
                   <div
                     class="sign-in sign-in--spacing"
@@ -778,7 +778,7 @@ Object {
               class="row h-100"
             >
               <div
-                class="col-6 center"
+                class="col-4 center"
               >
                 <a
                   href="/"
@@ -825,7 +825,7 @@ Object {
                 </a>
               </div>
               <div
-                class="col-6 center right"
+                class="col-8 center right"
               >
                 <div
                   class="sign-in sign-in--spacing"

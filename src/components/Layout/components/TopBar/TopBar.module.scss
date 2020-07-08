@@ -24,6 +24,9 @@
 }
 
 .sign-in {
+  display: flex;
+  align-items: center;
+
   @include media-breakpoint-up(md) {
     width: 195px;
   }
