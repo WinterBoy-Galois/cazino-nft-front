@@ -15,7 +15,9 @@ Object {
         class="cbx"
         for="cbx"
       >
-        <span>
+        <span
+          class="cbx__icon"
+        >
           <svg
             height="17px"
             viewBox="0 0 12 9"
@@ -27,7 +29,7 @@ Object {
           </svg>
         </span>
         <span
-          class="cbx__label"
+          class="cbx__label "
         />
       </label>
     </div>
@@ -43,7 +45,9 @@ Object {
       class="cbx"
       for="cbx"
     >
-      <span>
+      <span
+        class="cbx__icon"
+      >
         <svg
           height="17px"
           viewBox="0 0 12 9"
@@ -55,7 +59,7 @@ Object {
         </svg>
       </span>
       <span
-        class="cbx__label"
+        class="cbx__label "
       />
     </label>
   </div>,

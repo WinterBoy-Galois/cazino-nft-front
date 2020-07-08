@@ -187,6 +187,39 @@ Object {
                       />
                     </div>
                   </div>
+                  <div
+                    class="spacing__top"
+                  >
+                    <input
+                      class="inp-cbx"
+                      id="cbx"
+                      style="display: none;"
+                      type="checkbox"
+                    />
+                    <label
+                      class="cbx"
+                      for="cbx"
+                    >
+                      <span
+                        class="cbx__icon"
+                      >
+                        <svg
+                          height="17px"
+                          viewBox="0 0 12 9"
+                          width="20px"
+                        >
+                          <polyline
+                            points="1 5 4 8 11 1"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="cbx__label terms__cbx"
+                      >
+                        I agree to the collection of information in cookies, I agree with Privacy Policy and with Terms of Use, Gambling isn’t forbidden by my local authorities and I’m at least 18 years old.
+                      </span>
+                    </label>
+                  </div>
                   <button
                     class="button button secondary button button--small"
                     color="SECONDARY"
@@ -405,6 +438,39 @@ Object {
                       value=""
                     />
                   </div>
+                </div>
+                <div
+                  class="spacing__top"
+                >
+                  <input
+                    class="inp-cbx"
+                    id="cbx"
+                    style="display: none;"
+                    type="checkbox"
+                  />
+                  <label
+                    class="cbx"
+                    for="cbx"
+                  >
+                    <span
+                      class="cbx__icon"
+                    >
+                      <svg
+                        height="17px"
+                        viewBox="0 0 12 9"
+                        width="20px"
+                      >
+                        <polyline
+                          points="1 5 4 8 11 1"
+                        />
+                      </svg>
+                    </span>
+                    <span
+                      class="cbx__label terms__cbx"
+                    >
+                      I agree to the collection of information in cookies, I agree with Privacy Policy and with Terms of Use, Gambling isn’t forbidden by my local authorities and I’m at least 18 years old.
+                    </span>
+                  </label>
                 </div>
                 <button
                   class="button button secondary button button--small"

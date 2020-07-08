@@ -17,3 +17,14 @@
 .button {
   margin-bottom: 1rem;
 }
+
+.spacing__bottom {
+  margin-bottom: 1rem;
+}
+
+.terms {
+  &__cbx {
+    font-size: 14px;
+    text-transform: none;
+  }
+}

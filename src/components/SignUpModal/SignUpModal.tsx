@@ -15,6 +15,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import Uppercase from '../Uppercase';
 import Link from '../Link';
 import SpinnerButton from '../SpinnerButton';
+import CheckboxInput from '../CheckboxInput';
 
 interface IProps {
   show: boolean;
@@ -111,6 +112,15 @@ const SignUpModal: React.FC<IProps> = ({
               value={formik.values.email}
               {...(formik.touched.email ? { validationMessage: formik.errors.email } : {})}
             />
+
+            <div className={styles.spacing__bottom}>
+              <CheckboxInput
+                className={styles.terms__cbx}
+                label={
+                  'I agree to the collection of information in cookies, I agree with Privacy Policy and with Terms of Use, Gambling isn’t forbidden by my local authorities and I’m at least 18 years old.'
+                }
+              />
+            </div>
 
             <SpinnerButton
               color={'SECONDARY'}
