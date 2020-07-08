@@ -7,7 +7,10 @@ import TextInput from '.';
 export default {
   title: 'Components/Forms/TextInput',
   component: TextInput,
-  decorators: [withKnobs],
+  decorators: [
+    withKnobs,
+    (storyFn: () => React.ReactNode) => <div style={{ padding: '1rem' }}>{storyFn()}</div>,
+  ],
   parameters: {
     backgrounds: [
       { name: 'Primary', value: '#091b33' },
