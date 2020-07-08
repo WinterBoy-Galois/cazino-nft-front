@@ -14,6 +14,7 @@ $gray: #80a2cc;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
   display: flex;
+  align-items: center;
 
   &__label {
     text-transform: uppercase;
