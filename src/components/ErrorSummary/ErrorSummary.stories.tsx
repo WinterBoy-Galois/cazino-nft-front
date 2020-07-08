@@ -6,6 +6,9 @@ import ErrorSummary from '.';
 export default {
   title: 'Components/ErrorSummary',
   component: ErrorSummary,
+  decorators: [
+    (storyFn: () => React.ReactNode) => <div style={{ padding: '1rem' }}>{storyFn()}</div>,
+  ],
 };
 
 const data = {

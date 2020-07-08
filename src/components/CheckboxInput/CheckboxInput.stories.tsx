@@ -6,6 +6,9 @@ import CheckboxInput from '.';
 export default {
   title: 'Components/CheckboxInput',
   component: CheckboxInput,
+  decorators: [
+    (storyFn: () => React.ReactNode) => <div style={{ padding: '1rem' }}>{storyFn()}</div>,
+  ],
 };
 
 const data = {
