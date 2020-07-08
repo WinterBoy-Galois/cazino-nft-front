@@ -150,12 +150,26 @@ Object {
                     </label>
                   </div>
                   <button
-                    class=" secondary button button--small"
+                    class="spacing__bottom secondary button button--small"
                     disabled=""
                     type="submit"
                   >
                     Sign In
                   </button>
+                  <div
+                    class="container "
+                  >
+                    <span>
+                      don't have an account?
+                    </span>
+                     
+                    <a
+                      class=" link"
+                      href=""
+                    >
+                      sign up now!
+                    </a>
+                  </div>
                 </form>
               </div>
               <div
@@ -316,12 +330,26 @@ Object {
                   </label>
                 </div>
                 <button
-                  class=" secondary button button--small"
+                  class="spacing__bottom secondary button button--small"
                   disabled=""
                   type="submit"
                 >
                   Sign In
                 </button>
+                <div
+                  class="container "
+                >
+                  <span>
+                    don't have an account?
+                  </span>
+                   
+                  <a
+                    class=" link"
+                    href=""
+                  >
+                    sign up now!
+                  </a>
+                </div>
               </form>
             </div>
             <div

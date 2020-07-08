@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
-import Modal from '../Modal';
+import Modal, { replaceModal } from '../Modal';
 import styles from './SignInModal.module.scss';
 import signInIllustration from '../../assets/images/auth/sign-in.svg';
 import TextInput from '../TextInput';
@@ -13,6 +13,8 @@ import { useStateValue } from '../../state';
 import { GraphQLError } from 'graphql';
 import { GenericError } from '../../models/genericError.model';
 import { ErrorSummary, CheckboxInput } from '..';
+import Uppercase from '../Uppercase';
+import Link from '../Link';
 
 interface IProps {
   show: boolean;
@@ -20,6 +22,7 @@ interface IProps {
   errors?: GraphQLError[] | GenericError[];
   onClose?: () => void;
   onSignIn?: (email: string, password: string) => void;
+  onNavigateToSignUp?: () => void;
 }
 
 const SignInModal: React.FC<IProps> = ({
@@ -27,6 +30,7 @@ const SignInModal: React.FC<IProps> = ({
   errors = undefined,
   onClose,
   onSignIn = () => null,
+  onNavigateToSignUp,
 }: IProps) => {
   const formik = useFormik({
     initialValues: {
@@ -83,9 +87,19 @@ const SignInModal: React.FC<IProps> = ({
             <div className={`${styles.spacing__top} ${styles.spacing__bottom}`}>
               <CheckboxInput label={'Remember me'} />
             </div>
-            <SecondaryButton type="submit" {...(formik.isValid ? {} : { disabled: true })}>
+            <SecondaryButton
+              type="submit"
+              {...(formik.isValid ? {} : { disabled: true })}
+              className={styles.spacing__bottom}
+            >
               Sign In
             </SecondaryButton>
+
+            <Uppercase>
+              <span>{"don't have an account?"}</span>
+              &nbsp;
+              <Link onClick={onNavigateToSignUp}>sign up now!</Link>
+            </Uppercase>
           </form>
         </div>
         <div className={`col-12 col-md-5 ${styles.illustration}`}>
@@ -123,6 +137,8 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     dispatch({ type: 'MODAL_HIDE' });
   };
 
+  const handleNavigateToSignUp = () => replaceModal(dispatch, 'SIGN_UP_MODAL');
+
   return (
     <SignInModal
       show={show}
@@ -130,6 +146,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       errors={errors}
       onClose={onClose}
       onSignIn={handleSignIn}
+      onNavigateToSignUp={handleNavigateToSignUp}
     />
   );
 };
