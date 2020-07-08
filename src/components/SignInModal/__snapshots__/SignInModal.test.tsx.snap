@@ -117,6 +117,37 @@ Object {
                       </div>
                     </div>
                   </div>
+                  <div
+                    class="spacing__top spacing__bottom"
+                  >
+                    <input
+                      class="inp-cbx"
+                      id="cbx"
+                      style="display: none;"
+                      type="checkbox"
+                    />
+                    <label
+                      class="cbx"
+                      for="cbx"
+                    >
+                      <span>
+                        <svg
+                          height="17px"
+                          viewBox="0 0 12 9"
+                          width="20px"
+                        >
+                          <polyline
+                            points="1 5 4 8 11 1"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="cbx__label"
+                      >
+                        Remember me
+                      </span>
+                    </label>
+                  </div>
                   <button
                     class=" secondary button button--small"
                     disabled=""
@@ -250,6 +281,37 @@ Object {
                       </svg>
                     </div>
                   </div>
+                </div>
+                <div
+                  class="spacing__top spacing__bottom"
+                >
+                  <input
+                    class="inp-cbx"
+                    id="cbx"
+                    style="display: none;"
+                    type="checkbox"
+                  />
+                  <label
+                    class="cbx"
+                    for="cbx"
+                  >
+                    <span>
+                      <svg
+                        height="17px"
+                        viewBox="0 0 12 9"
+                        width="20px"
+                      >
+                        <polyline
+                          points="1 5 4 8 11 1"
+                        />
+                      </svg>
+                    </span>
+                    <span
+                      class="cbx__label"
+                    >
+                      Remember me
+                    </span>
+                  </label>
                 </div>
                 <button
                   class=" secondary button button--small"

@@ -12,7 +12,7 @@ import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { GraphQLError } from 'graphql';
 import { GenericError } from '../../models/genericError.model';
-import { ErrorSummary } from '..';
+import { ErrorSummary, CheckboxInput } from '..';
 
 interface IProps {
   show: boolean;
@@ -60,7 +60,7 @@ const SignInModal: React.FC<IProps> = ({
           <form onSubmit={formik.handleSubmit}>
             {errors && (
               <ErrorSummary
-                className={styles.validation}
+                className={styles.spacing__bottom}
                 message="Your email or password is wrong."
               />
             )}
@@ -80,6 +80,9 @@ const SignInModal: React.FC<IProps> = ({
               value={formik.values.password}
               {...(formik.touched.password ? { validationMessage: formik.errors.password } : {})}
             />
+            <div className={`${styles.spacing__top} ${styles.spacing__bottom}`}>
+              <CheckboxInput label={'Remember me'} />
+            </div>
             <SecondaryButton type="submit" {...(formik.isValid ? {} : { disabled: true })}>
               Sign In
             </SecondaryButton>
