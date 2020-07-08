@@ -8,13 +8,13 @@ import { useStateValue } from '../../state';
 import { SIGN_UP } from '../../graphql/mutations';
 import TextInput from '../TextInput';
 import PasswordInput from '../PasswordInput';
-import SecondaryButton from '../SecondaryButton';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import signUpIllustration from '../../assets/images/auth/sign-up.svg';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import Uppercase from '../Uppercase';
 import Link from '../Link';
+import SpinnerButton from '../SpinnerButton';
 
 interface IProps {
   show: boolean;
@@ -30,6 +30,7 @@ const SignUpModal: React.FC<IProps> = ({
   onClose,
   onSignUp = () => null,
   onNavigateToSignIn,
+  loading,
 }: IProps) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -111,13 +112,15 @@ const SignUpModal: React.FC<IProps> = ({
               {...(formik.touched.email ? { validationMessage: formik.errors.email } : {})}
             />
 
-            <SecondaryButton
+            <SpinnerButton
+              color={'SECONDARY'}
               type="submit"
               {...(formik.isValid ? {} : { disabled: true })}
               className={styles.button}
+              loading={loading}
             >
               Create account
-            </SecondaryButton>
+            </SpinnerButton>
 
             <Uppercase>
               <span>already have an account?</span>

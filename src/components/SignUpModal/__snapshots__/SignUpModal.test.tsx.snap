@@ -188,7 +188,8 @@ Object {
                     </div>
                   </div>
                   <button
-                    class="button secondary button button--small"
+                    class="button button secondary button button--small"
+                    color="SECONDARY"
                     type="submit"
                   >
                     Create account
@@ -406,7 +407,8 @@ Object {
                   </div>
                 </div>
                 <button
-                  class="button secondary button button--small"
+                  class="button button secondary button button--small"
+                  color="SECONDARY"
                   type="submit"
                 >
                   Create account
