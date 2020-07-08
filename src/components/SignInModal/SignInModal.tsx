@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as Yup from 'yup';
 import Modal from '../Modal';
 import styles from './SignInModal.module.scss';
 import signInIllustration from '../../assets/images/auth/sign-in.svg';
@@ -11,6 +12,7 @@ import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { GraphQLError } from 'graphql';
 import { GenericError } from '../../models/genericError.model';
+import { ErrorSummary, CheckboxInput } from '..';
 
 interface IProps {
   show: boolean;
@@ -20,12 +22,32 @@ interface IProps {
   onSignIn?: (email: string, password: string) => void;
 }
 
-const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }: IProps) => {
+const SignInModal: React.FC<IProps> = ({
+  show,
+  errors = undefined,
+  onClose,
+  onSignIn = () => null,
+}: IProps) => {
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
+    isInitialValid: false,
+    validationSchema: Yup.object().shape({
+      email: Yup.string().required('Please enter your Email.').email('Please enter a valid Email.'),
+      password: Yup.string()
+        .required('Please enter your password.')
+        .min(8, ({ min }) => `Password is too short - length must be at least ${min} characters.`)
+        .max(20, ({ max }) => `Password is too long - maximum length is ${max} characters.`)
+        .matches(/[A-Z]/, 'Must contain at least one uppercase character.')
+        .matches(/[a-z]/, 'Must contain at least one lowercase character.')
+        .matches(/[0-9]/, 'Must contain at least one number.')
+        .matches(
+          /[\^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`]/,
+          'Your password must contain at least one of the following special characters: ^ $ * . [ ] { } ( ) ? - " ! @ # % & / \\ , > < \' : ; | _ ~ `'
+        ),
+    }),
     onSubmit: values => {
       onSignIn(values.email, values.password);
     },
@@ -36,19 +58,34 @@ const SignInModal: React.FC<IProps> = ({ show, onClose, onSignIn = () => null }:
       <div className="row">
         <div className="col-12 col-md-7">
           <form onSubmit={formik.handleSubmit}>
+            {errors && (
+              <ErrorSummary
+                className={styles.spacing__bottom}
+                message="Your email or password is wrong."
+              />
+            )}
             <TextInput
               label="email"
               name="email"
               onChangeValue={v => formik.setFieldValue('email', v)}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
+              {...(formik.touched.email ? { validationMessage: formik.errors.email } : {})}
             />
             <PasswordInput
               label="password"
               name="password"
               onChangeValue={v => formik.setFieldValue('password', v)}
+              onBlur={formik.handleBlur}
               value={formik.values.password}
+              {...(formik.touched.password ? { validationMessage: formik.errors.password } : {})}
             />
-            <SecondaryButton type="submit">Sign In</SecondaryButton>
+            <div className={`${styles.spacing__top} ${styles.spacing__bottom}`}>
+              <CheckboxInput label={'Remember me'} />
+            </div>
+            <SecondaryButton type="submit" {...(formik.isValid ? {} : { disabled: true })}>
+              Sign In
+            </SecondaryButton>
           </form>
         </div>
         <div className={`col-12 col-md-5 ${styles.illustration}`}>

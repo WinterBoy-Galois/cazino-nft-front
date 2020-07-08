@@ -1,39 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthOverlay should match snapshot 1`] = `
+exports[`ErrorSummary should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="container"
+        class="container "
       >
         <div
-          class="spinner"
+          class="wrapper"
         >
-          <span
-            class="spinner spinner--white "
-          />
-        </div>
-        <div>
-          Just a moment
+          Your email or password is wrong.
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="container"
+      class="container "
     >
       <div
-        class="spinner"
+        class="wrapper"
       >
-        <span
-          class="spinner spinner--white "
-        />
-      </div>
-      <div>
-        Just a moment
+        Your email or password is wrong.
       </div>
     </div>
   </div>,

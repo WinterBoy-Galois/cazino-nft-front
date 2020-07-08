@@ -1,41 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthOverlay should match snapshot 1`] = `
+exports[`CheckboxInput should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="container"
+      <input
+        class="inp-cbx"
+        id="cbx"
+        style="display: none;"
+        type="checkbox"
+      />
+      <label
+        class="cbx"
+        for="cbx"
       >
-        <div
-          class="spinner"
-        >
-          <span
-            class="spinner spinner--white "
-          />
-        </div>
-        <div>
-          Just a moment
-        </div>
-      </div>
+        <span>
+          <svg
+            height="17px"
+            viewBox="0 0 12 9"
+            width="20px"
+          >
+            <polyline
+              points="1 5 4 8 11 1"
+            />
+          </svg>
+        </span>
+        <span
+          class="cbx__label"
+        />
+      </label>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="container"
+    <input
+      class="inp-cbx"
+      id="cbx"
+      style="display: none;"
+      type="checkbox"
+    />
+    <label
+      class="cbx"
+      for="cbx"
     >
-      <div
-        class="spinner"
-      >
-        <span
-          class="spinner spinner--white "
-        />
-      </div>
-      <div>
-        Just a moment
-      </div>
-    </div>
+      <span>
+        <svg
+          height="17px"
+          viewBox="0 0 12 9"
+          width="20px"
+        >
+          <polyline
+            points="1 5 4 8 11 1"
+          />
+        </svg>
+      </span>
+      <span
+        class="cbx__label"
+      />
+    </label>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

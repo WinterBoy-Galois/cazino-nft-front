@@ -28,12 +28,20 @@
     border: 2px solid $form-background;
     border-radius: 8px;
     background-color: $form-background;
-    height: 52px + (2 * 8px);
+    height: 57px;
     vertical-align: bottom;
     transition: all 0.2s ease-in;
 
     &:focus-within {
       border: 2px solid $bitcoinYellow;
+    }
+
+    &--error {
+      border: 2px solid $red;
+
+      &:focus-within {
+        border: 2px solid $red;
+      }
     }
 
     input[type='text'].inputField {
