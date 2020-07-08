@@ -57,7 +57,7 @@ const Layout: React.FC = ({ children }) => {
     breakpoint === 'xs' || breakpoint === 'sm' ? sidebar.isOpen || modal.type !== 'NONE' : false;
 
   const handleSignInClick = () =>
-    dispatch({ type: 'MODAL_SHOW', payload: { type: 'SIGN_UP_MODAL' } });
+    dispatch({ type: 'MODAL_SHOW', payload: { type: 'SIGN_IN_MODAL' } });
 
   const handleSignOutClick = async () => {
     await signOut();
