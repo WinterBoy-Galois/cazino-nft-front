@@ -29,6 +29,7 @@ storiesOf('Components/buttons/SpinnerButton', module)
       )}
       disabled={boolean('Disabled', false)}
       loading={boolean('Loading', false)}
+      loadingText={text('Loading text', 'Loading...')}
     >
       {text('Text', 'Click me')}
     </SpinnerButton>

@@ -13,6 +13,7 @@ interface IProps {
   disabled?: boolean;
   color?: 'PRIMARY' | 'SECONDARY';
   loading?: boolean;
+  loadingText?: string;
 }
 
 const SpinnerButton: React.SFC<IProps> = props => {
@@ -26,7 +27,7 @@ const SpinnerButton: React.SFC<IProps> = props => {
     children: props.loading ? (
       <div className={styles.loading}>
         <Spinner color={'WHITE'} className={styles.loading__spinner} />
-        <div className={styles.loading__text}>{t('loading')}</div>
+        <div className={styles.loading__text}>{props.loadingText ?? t('loading')}</div>
       </div>
     ) : (
       props.children
