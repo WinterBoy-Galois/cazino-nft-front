@@ -30,6 +30,15 @@ export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }
       };
     }
 
+    case 'AUTH_SIGN_UP':
+      setAccessToken(payload.accessToken);
+
+      return {
+        ...state,
+        ...payload,
+        state: 'SIGNED_IN',
+      };
+
     default:
       return state;
   }
