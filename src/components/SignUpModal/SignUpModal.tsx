@@ -41,6 +41,7 @@ const SignUpModal: React.FC<IProps> = ({
       password: '',
       confirmPassword: '',
       username: '',
+      terms: false,
     },
     validateOnMount: false,
     validationSchema: Yup.object().shape({
@@ -58,6 +59,7 @@ const SignUpModal: React.FC<IProps> = ({
           'Your password must contain at least one of the following special characters: ^ $ * . [ ] { } ( ) ? - " ! @ # % & / \\ , > < \' : ; | _ ~ `'
         ),
       confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords must match'),
+      terms: Yup.bool().oneOf([true], 'Please accept the terms of use.'),
     }),
     onSubmit: async values => {
       let token = '';
@@ -115,7 +117,11 @@ const SignUpModal: React.FC<IProps> = ({
 
             <div className={styles.spacing__bottom}>
               <CheckboxInput
+                name="terms"
                 className={styles.terms__cbx}
+                value={formik.values.terms}
+                onChangeValue={v => formik.setFieldValue('terms', v)}
+                {...(formik.touched.terms ? { validationMessage: formik.errors.terms } : {})}
                 label={
                   'I agree to the collection of information in cookies, I agree with Privacy Policy and with Terms of Use, Gambling isn’t forbidden by my local authorities and I’m at least 18 years old.'
                 }

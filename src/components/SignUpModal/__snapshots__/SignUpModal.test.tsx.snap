@@ -193,7 +193,7 @@ Object {
                     <input
                       class="inp-cbx"
                       id="cbx"
-                      style="display: none;"
+                      name="terms"
                       type="checkbox"
                     />
                     <label
@@ -445,7 +445,7 @@ Object {
                   <input
                     class="inp-cbx"
                     id="cbx"
-                    style="display: none;"
+                    name="terms"
                     type="checkbox"
                   />
                   <label

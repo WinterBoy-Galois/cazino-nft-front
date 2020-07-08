@@ -1,16 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styles from './CheckboxInput.module.scss';
 
 interface IProps {
+  name?: string;
   label?: string;
   className?: string;
+  validationMessage?: string;
+  onChangeValue?: (value: boolean) => void;
+  value?: boolean;
 }
 
-const CheckboxInput: React.SFC<IProps> = ({ label = undefined, className = '' }) => {
+const CheckboxInput: React.SFC<IProps> = ({
+  name,
+  label,
+  className = '',
+  validationMessage,
+  onChangeValue,
+  value: initialValue = false,
+}) => {
+  const [value, setValue] = useState<boolean>(initialValue);
+
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
+
+  const handleOnChange = () => {
+    const newValue = !value;
+
+    setValue(newValue);
+
+    if (onChangeValue) {
+      onChangeValue(newValue);
+    }
+  };
+
   return (
     <>
-      <input className={styles['inp-cbx']} id="cbx" type="checkbox" style={{ display: 'none' }} />
+      <input
+        name={name}
+        className={styles['inp-cbx']}
+        id="cbx"
+        type="checkbox"
+        defaultChecked={initialValue}
+        onChange={handleOnChange}
+      />
       <label className={styles.cbx} htmlFor="cbx">
         <span className={styles.cbx__icon}>
           <svg width="20px" height="17px" viewBox="0 0 12 9">
@@ -19,7 +53,7 @@ const CheckboxInput: React.SFC<IProps> = ({ label = undefined, className = '' })
         </span>
         <span className={`${styles.cbx__label} ${className}`}>{label}</span>
       </label>
-      {/* <div className={`${styles.container} ${className}`}>{message}</div> */}
+      {validationMessage && <div className={styles.inputField__error}>{validationMessage}</div>}
     </>
   );
 };
