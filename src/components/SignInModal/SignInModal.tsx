@@ -6,7 +6,6 @@ import signInIllustration from '../../assets/images/auth/sign-in.svg';
 import TextInput from '../TextInput';
 import PasswordInput from '../PasswordInput';
 import { useFormik } from 'formik';
-import SecondaryButton from '../SecondaryButton';
 import { useMutation } from '@apollo/react-hooks';
 import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
@@ -15,6 +14,7 @@ import { GenericError } from '../../models/genericError.model';
 import { ErrorSummary, CheckboxInput } from '..';
 import Uppercase from '../Uppercase';
 import Link from '../Link';
+import SpinnerButton from '../SpinnerButton';
 
 interface IProps {
   show: boolean;
@@ -33,6 +33,7 @@ const SignInModal: React.FC<IProps> = ({
   onSignIn = () => null,
   onNavigateToSignUp,
   onNavigateToForgotPassword,
+  loading,
 }: IProps) => {
   const formik = useFormik({
     initialValues: {
@@ -94,13 +95,15 @@ const SignInModal: React.FC<IProps> = ({
               </Uppercase>
             </div>
 
-            <SecondaryButton
+            <SpinnerButton
+              color="SECONDARY"
               type="submit"
               {...(formik.isValid ? {} : { disabled: true })}
               className={styles.spacing__bottom}
+              loading={loading}
             >
               Sign In
-            </SecondaryButton>
+            </SpinnerButton>
 
             <Uppercase>
               <span>{"don't have an account?"}</span>

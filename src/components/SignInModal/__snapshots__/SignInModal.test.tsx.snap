@@ -160,7 +160,8 @@ Object {
                     </div>
                   </div>
                   <button
-                    class="spacing__bottom secondary button button--small"
+                    class="button spacing__bottom secondary button button--small"
+                    color="SECONDARY"
                     disabled=""
                     type="submit"
                   >
@@ -350,7 +351,8 @@ Object {
                   </div>
                 </div>
                 <button
-                  class="spacing__bottom secondary button button--small"
+                  class="button spacing__bottom secondary button button--small"
+                  color="SECONDARY"
                   disabled=""
                   type="submit"
                 >
