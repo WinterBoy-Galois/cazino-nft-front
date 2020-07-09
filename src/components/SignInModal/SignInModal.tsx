@@ -23,6 +23,7 @@ interface IProps {
   onClose?: () => void;
   onSignIn?: (email: string, password: string) => void;
   onNavigateToSignUp?: () => void;
+  onNavigateToForgotPassword?: () => void;
 }
 
 const SignInModal: React.FC<IProps> = ({
@@ -31,6 +32,7 @@ const SignInModal: React.FC<IProps> = ({
   onClose,
   onSignIn = () => null,
   onNavigateToSignUp,
+  onNavigateToForgotPassword,
 }: IProps) => {
   const formik = useFormik({
     initialValues: {
@@ -84,9 +86,14 @@ const SignInModal: React.FC<IProps> = ({
               value={formik.values.password}
               {...(formik.touched.password ? { validationMessage: formik.errors.password } : {})}
             />
-            <div className={`${styles.spacing__top} ${styles.spacing__bottom}`}>
+
+            <div className={`${styles['remember-me']} ${styles.spacing__bottom}`}>
               <CheckboxInput label={'Remember me'} />
+              <Uppercase>
+                <Link onClick={onNavigateToForgotPassword}>forgot password?</Link>
+              </Uppercase>
             </div>
+
             <SecondaryButton
               type="submit"
               {...(formik.isValid ? {} : { disabled: true })}
@@ -139,6 +146,8 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
 
   const handleNavigateToSignUp = () => replaceModal(dispatch, 'SIGN_UP_MODAL');
 
+  const handleNavigateToForgotPassword = () => null;
+
   return (
     <SignInModal
       show={show}
@@ -147,6 +156,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       onClose={onClose}
       onSignIn={handleSignIn}
       onNavigateToSignUp={handleNavigateToSignUp}
+      onNavigateToForgotPassword={handleNavigateToForgotPassword}
     />
   );
 };
