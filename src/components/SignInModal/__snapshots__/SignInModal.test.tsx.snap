@@ -118,7 +118,7 @@ Object {
                     </div>
                   </div>
                   <div
-                    class="spacing__top spacing__bottom"
+                    class="remember-me spacing__bottom"
                   >
                     <input
                       class="inp-cbx"
@@ -148,9 +148,20 @@ Object {
                         Remember me
                       </span>
                     </label>
+                    <div
+                      class="container "
+                    >
+                      <a
+                        class=" link"
+                        href=""
+                      >
+                        forgot password?
+                      </a>
+                    </div>
                   </div>
                   <button
-                    class="spacing__bottom secondary button button--small"
+                    class="button spacing__bottom secondary button button--small"
+                    color="SECONDARY"
                     disabled=""
                     type="submit"
                   >
@@ -298,7 +309,7 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="spacing__top spacing__bottom"
+                  class="remember-me spacing__bottom"
                 >
                   <input
                     class="inp-cbx"
@@ -328,9 +339,20 @@ Object {
                       Remember me
                     </span>
                   </label>
+                  <div
+                    class="container "
+                  >
+                    <a
+                      class=" link"
+                      href=""
+                    >
+                      forgot password?
+                    </a>
+                  </div>
                 </div>
                 <button
-                  class="spacing__bottom secondary button button--small"
+                  class="button spacing__bottom secondary button button--small"
+                  color="SECONDARY"
                   disabled=""
                   type="submit"
                 >

@@ -23,7 +23,7 @@ export default {
 export const Default = () => (
   <SignInModal
     show={boolean('Show', true)}
-    loading={boolean('Loading', true)}
+    loading={boolean('Loading', false)}
     errors={undefined}
     onClose={action('close modal')}
   />
