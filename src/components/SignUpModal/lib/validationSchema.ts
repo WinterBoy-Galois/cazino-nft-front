@@ -14,6 +14,8 @@ export const validationSchema = Yup.object().shape({
       /[\^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`]/,
       'Your password must contain at least one of the following special characters: ^ $ * . [ ] { } ( ) ? - " ! @ # % & / \\ , > < \' : ; | _ ~ `'
     ),
-  confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords must match'),
+  confirmPassword: Yup.string()
+    .required('Please confirm your password.')
+    .oneOf([Yup.ref('password')], 'Passwords must match'),
   terms: Yup.bool().oneOf([true], 'Please accept the terms of use.'),
 });
