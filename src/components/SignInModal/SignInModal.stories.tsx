@@ -1,6 +1,7 @@
 import React from 'react';
 import { boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 
 import SignInModal from '.';
 import { GenericErrorSeverity, GenericErrorType } from '../../models/genericError.model';
@@ -18,6 +19,7 @@ const data = {
 export default {
   title: 'Components/SignInModal',
   component: SignInModal,
+  decorators: [withA11y],
 };
 
 export const Default = () => (
