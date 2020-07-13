@@ -25,18 +25,18 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
           </a>
         </div>
         <div className={`col-8 ${styles.center} ${styles.right}`}>
-          <div
-            className={`${styles['sign-in']} ${!sidebar.isOpen ? styles['sign-in--spacing'] : ''}`}
-          >
+          <div className={`${styles.details} ${!sidebar.isOpen ? styles['details--spacing'] : ''}`}>
             {!auth.user ? (
               <Fragment>
-                <SecondaryButton
-                  size={ButtonSize.SMALL}
-                  className={styles['sign-in__button']}
-                  onClick={onSignInClick}
-                >
-                  Sign-in
-                </SecondaryButton>
+                <div className={styles.details__button}>
+                  <SecondaryButton
+                    size={ButtonSize.SMALL}
+                    className={styles['sign-in__button']}
+                    onClick={onSignInClick}
+                  >
+                    Sign-in
+                  </SecondaryButton>
+                </div>
                 <div onClick={onSignInClick}>
                   <SignIn className={styles['sign-in__icon']} />
                 </div>
@@ -50,6 +50,7 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
               </Fragment>
             )}
           </div>
+
           <SidebarToggle arrowLeft={true} show={!sidebar.isOpen} />
         </div>
       </div>

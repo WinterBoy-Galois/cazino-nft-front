@@ -9,7 +9,7 @@ export default {
 };
 
 const data = {
-  url: 'Hello World!',
+  url: 'https://dev.gambilife.com/ava/m1.svg',
 };
 
 export const Default = () => <Avatar avatarUrl={text('Avatar Url', data.url)} />;
