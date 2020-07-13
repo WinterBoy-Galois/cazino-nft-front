@@ -45,7 +45,7 @@ const SignUpModal: React.FC<IProps> = ({
       username: '',
       terms: false,
     },
-    validateOnMount: false,
+    isInitialValid: false,
     validationSchema,
     onSubmit: async values => {
       let token = '';

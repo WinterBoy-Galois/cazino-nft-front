@@ -223,6 +223,7 @@ Object {
                   <button
                     class="button button secondary button button--small"
                     color="SECONDARY"
+                    disabled=""
                     type="submit"
                   >
                     Create account
@@ -475,6 +476,7 @@ Object {
                 <button
                   class="button button secondary button button--small"
                   color="SECONDARY"
+                  disabled=""
                   type="submit"
                 >
                   Create account

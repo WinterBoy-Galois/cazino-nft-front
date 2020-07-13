@@ -36,17 +36,16 @@ export const SIGN_IN = gql`
 `;
 
 export const SIGN_UP = gql`
-  mutation SignIn($email: String, $password: String, $username: String) {
-    registerUser(username: $username, email: $email, password: $password) {
+  mutation SignUp($email: String, $password: String, $username: String, $token: String) {
+    registerUser(username: $username, email: $email, password: $password, captcha: $token) {
       ... on LoginResult {
         accessToken
       }
       ... on GenericErrorArray {
         errors {
-          type
-          field
-          severity
-          messageKey
+          source
+          code
+          message
           args
         }
       }
