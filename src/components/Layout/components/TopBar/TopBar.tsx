@@ -6,6 +6,7 @@ import { useStateValue } from '../../../../state';
 import SecondaryButton from '../../../SecondaryButton';
 import { ButtonSize } from '../../../Button';
 import SignIn from '../../../icons/SignIn';
+import Avatar from '../../../Avatar';
 
 interface IProps {
   onSignInClick?: () => void;
@@ -43,9 +44,9 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
             ) : (
               <Fragment>
                 <span>{auth.user.username}</span>
-                <SecondaryButton size={ButtonSize.SMALL} onClick={onSignOutClick}>
-                  Sign out
-                </SecondaryButton>
+                <div role="button" onClick={onSignOutClick}>
+                  <Avatar avatarUrl={auth.user.avatarUrl} username={auth.user.username} />
+                </div>
               </Fragment>
             )}
           </div>
