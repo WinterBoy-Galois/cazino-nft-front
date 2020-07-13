@@ -12,7 +12,7 @@ Object {
       >
         <div
           aria-modal="true"
-          class="modal"
+          class="modal scale--enter scale--enter-active"
           role="dialog"
         >
           <div
@@ -203,7 +203,7 @@ Object {
     >
       <div
         aria-modal="true"
-        class="modal"
+        class="modal scale--enter scale--enter-active"
         role="dialog"
       >
         <div
