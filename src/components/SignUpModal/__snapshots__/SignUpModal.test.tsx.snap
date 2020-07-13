@@ -12,7 +12,7 @@ Object {
       >
         <div
           aria-modal="true"
-          class="modal"
+          class="modal scale--enter scale--enter-active"
           role="dialog"
         >
           <div
@@ -223,6 +223,7 @@ Object {
                   <button
                     class="button button secondary button button--small"
                     color="SECONDARY"
+                    disabled=""
                     type="submit"
                   >
                     Create account
@@ -264,7 +265,7 @@ Object {
     >
       <div
         aria-modal="true"
-        class="modal"
+        class="modal scale--enter scale--enter-active"
         role="dialog"
       >
         <div
@@ -475,6 +476,7 @@ Object {
                 <button
                   class="button button secondary button button--small"
                   color="SECONDARY"
+                  disabled=""
                   type="submit"
                 >
                   Create account
