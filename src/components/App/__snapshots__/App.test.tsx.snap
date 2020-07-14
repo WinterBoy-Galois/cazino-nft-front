@@ -1203,6 +1203,9 @@ Object {
           </div>
         </div>
       </div>
+      <div
+        class="Toastify"
+      />
     </div>
   </body>,
   "container": <div>
@@ -2404,6 +2407,9 @@ Object {
         </div>
       </div>
     </div>
+    <div
+      class="Toastify"
+    />
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
