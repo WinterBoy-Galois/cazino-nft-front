@@ -24,10 +24,9 @@ export const SIGN_IN = gql`
       }
       ... on GenericErrorArray {
         errors {
-          type
-          field
-          severity
-          messageKey
+          source
+          code
+          message
           args
         }
       }
