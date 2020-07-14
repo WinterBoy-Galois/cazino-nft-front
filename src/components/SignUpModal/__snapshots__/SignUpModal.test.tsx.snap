@@ -56,7 +56,7 @@ Object {
                       <label
                         class="inputField__label"
                       >
-                        username
+                        Username
                       </label>
                       <input
                         autocomplete="off"
@@ -79,7 +79,7 @@ Object {
                         <label
                           class="inputField__label"
                         >
-                          password
+                          Password
                         </label>
                         <input
                           autocomplete="off"
@@ -129,7 +129,7 @@ Object {
                         <label
                           class="inputField__label"
                         >
-                          confirm password
+                          Confirm Password
                         </label>
                         <input
                           autocomplete="off"
@@ -176,7 +176,7 @@ Object {
                       <label
                         class="inputField__label"
                       >
-                        email
+                        Email
                       </label>
                       <input
                         autocomplete="off"
@@ -224,6 +224,7 @@ Object {
                     class="button button secondary button button--small"
                     color="SECONDARY"
                     disabled=""
+                    loadingtext="signing up..."
                     type="submit"
                   >
                     Create account
@@ -232,14 +233,14 @@ Object {
                     class="container "
                   >
                     <span>
-                      already have an account?
+                      Already have an Account?
                     </span>
                      
                     <a
                       class=" link"
                       href=""
                     >
-                      sign in now!
+                      Sign In now!
                     </a>
                   </div>
                 </form>
@@ -309,7 +310,7 @@ Object {
                     <label
                       class="inputField__label"
                     >
-                      username
+                      Username
                     </label>
                     <input
                       autocomplete="off"
@@ -332,7 +333,7 @@ Object {
                       <label
                         class="inputField__label"
                       >
-                        password
+                        Password
                       </label>
                       <input
                         autocomplete="off"
@@ -382,7 +383,7 @@ Object {
                       <label
                         class="inputField__label"
                       >
-                        confirm password
+                        Confirm Password
                       </label>
                       <input
                         autocomplete="off"
@@ -429,7 +430,7 @@ Object {
                     <label
                       class="inputField__label"
                     >
-                      email
+                      Email
                     </label>
                     <input
                       autocomplete="off"
@@ -477,6 +478,7 @@ Object {
                   class="button button secondary button button--small"
                   color="SECONDARY"
                   disabled=""
+                  loadingtext="signing up..."
                   type="submit"
                 >
                   Create account
@@ -485,14 +487,14 @@ Object {
                   class="container "
                 >
                   <span>
-                    already have an account?
+                    Already have an Account?
                   </span>
                    
                   <a
                     class=" link"
                     href=""
                   >
-                    sign in now!
+                    Sign In now!
                   </a>
                 </div>
               </form>

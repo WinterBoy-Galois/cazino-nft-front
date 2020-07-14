@@ -1,23 +1,29 @@
 {
   "labels": {
+    "username": "Benutzername",
     "email": "E-Mail",
     "password": "Passwort",
     "newPassword": "Neues Passwort",
     "confirmPassword": "Neues Passwort bestätigen"
   },
   "validation": {
+    "username": {
+      "required": "Bitte gib einen Benutzernamen an."
+    },
     "email": {
       "required": "Bitte gib Deine E-Mail Adresse an.",
       "valid": "Bitte gib eine gültige E-Mail Adresse an."
     },
     "password": {
       "required": "Bitte gib ein Passwort an.",
-      "min": "Das Passwort ist zu kurz - es muss mindestens 8 Zeichen lang sein.",
+      "min": "Das Passwort ist zu kurz - es muss mindestens {{min}} Zeichen lang sein.",
+      "max": "Das Passwort ist zu lang - es darf maximal {{max}} Zeichen lang sein.",
       "uppercase": "Das Passwort muss einen Großbuchstaben enthalten.",
       "lowercase": "Das Passwort muss einen Kleinbuchstaben enthalten.",
       "digit": "Das Passwort muss eine Zahl enthalten.",
       "special": "Das Passwort muss mindestens eines dieser Sonderzeichen enthalten: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < \\' : ; | _ ~ `",
-      "match": "Die Passwörter müssen übereinstimmen."
+      "match": "Die Passwörter müssen übereinstimmen.",
+      "terms": "Bitte akzeptiere die Nutzungsbedingungen."
     }
   },
   "signIn": {
@@ -29,6 +35,16 @@
       "goToSignUp": "Jetzt registrieren!",
       "rememberMe": "Eingeloggt bleiben",
       "loading": "Anmeldung..."
+    }
+  },
+  "signUp": {
+    "headline": "Registrieren",
+    "buttons": {
+      "signUp": "Account erstellen",
+      "termsText": "Ich stimme der Speicherung von Informationen in Cookies zu, ich stimme den Datenschutz- und Nutzungsbedingungen zu, Glücksspiel ist in meinem Land nicht gesetzlich verboten und ich bin mindestend 18 Jahre alt.",
+      "goToSignInText": "Du hast schon einen Account?",
+      "goToSignIn": "Jetzt anmelden!",
+      "loading": "Registrierung..."
     }
   }
 }

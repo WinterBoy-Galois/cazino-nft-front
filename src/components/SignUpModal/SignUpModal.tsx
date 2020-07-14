@@ -17,6 +17,7 @@ import SpinnerButton from '../SpinnerButton';
 import CheckboxInput from '../CheckboxInput';
 import ErrorSummary from '../ErrorSummary';
 import { validationSchema } from './lib/validationSchema';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   show: boolean;
@@ -35,6 +36,7 @@ const SignUpModal: React.FC<IProps> = ({
   loading,
   errors,
 }: IProps) => {
+  const { t } = useTranslation(['auth']);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const formik = useFormik({
@@ -46,7 +48,7 @@ const SignUpModal: React.FC<IProps> = ({
       terms: false,
     },
     validateOnMount: true,
-    validationSchema,
+    validationSchema: validationSchema(t),
     onSubmit: async values => {
       let token = '';
 
@@ -59,7 +61,7 @@ const SignUpModal: React.FC<IProps> = ({
   });
 
   return (
-    <Modal show={show} onClose={onClose} title="Sign Up">
+    <Modal show={show} onClose={onClose} title={t('signUp.headline')}>
       <div className="row">
         <div className="col-12 col-md-7">
           {errors && (
@@ -71,7 +73,7 @@ const SignUpModal: React.FC<IProps> = ({
 
           <form onSubmit={formik.handleSubmit}>
             <TextInput
-              label="username"
+              label={t('labels.username')}
               name="username"
               onChangeValue={v => formik.setFieldValue('username', v)}
               onBlur={formik.handleBlur}
@@ -80,7 +82,7 @@ const SignUpModal: React.FC<IProps> = ({
             />
 
             <PasswordInput
-              label="password"
+              label={t('labels.password')}
               name="password"
               onChangeValue={v => formik.setFieldValue('password', v)}
               onBlur={formik.handleBlur}
@@ -89,7 +91,7 @@ const SignUpModal: React.FC<IProps> = ({
             />
 
             <PasswordInput
-              label="confirm password"
+              label={t('labels.confirmPassword')}
               name="confirmPassword"
               onChangeValue={v => formik.setFieldValue('confirmPassword', v)}
               onBlur={formik.handleBlur}
@@ -100,7 +102,7 @@ const SignUpModal: React.FC<IProps> = ({
             />
 
             <TextInput
-              label="email"
+              label={t('labels.email')}
               name="email"
               onChangeValue={v => formik.setFieldValue('email', v)}
               onBlur={formik.handleBlur}
@@ -115,9 +117,7 @@ const SignUpModal: React.FC<IProps> = ({
                 value={formik.values.terms}
                 onChangeValue={v => formik.setFieldValue('terms', v)}
                 {...(formik.touched.terms ? { validationMessage: formik.errors.terms } : {})}
-                label={
-                  'I agree to the collection of information in cookies, I agree with Privacy Policy and with Terms of Use, Gambling isn’t forbidden by my local authorities and I’m at least 18 years old.'
-                }
+                label={t('signUp.buttons.termsText')}
               />
             </div>
 
@@ -127,14 +127,15 @@ const SignUpModal: React.FC<IProps> = ({
               {...(formik.isValid ? {} : { disabled: true })}
               className={styles.button}
               loading={loading}
+              loadingText={t('signUp.buttons.loading')}
             >
-              Create account
+              {t('signUp.buttons.signUp')}
             </SpinnerButton>
 
             <Uppercase>
-              <span>already have an account?</span>
+              <span>{t('signUp.buttons.goToSignInText')}</span>
               &nbsp;
-              <Link onClick={onNavigateToSignIn}>sign in now!</Link>
+              <Link onClick={onNavigateToSignIn}>{t('signUp.buttons.goToSignIn')}</Link>
             </Uppercase>
           </form>
         </div>

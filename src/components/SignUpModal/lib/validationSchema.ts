@@ -1,21 +1,20 @@
 import * as Yup from 'yup';
+import { TFunction } from 'i18next';
 
-export const validationSchema = Yup.object().shape({
-  email: Yup.string().required('Please enter your Email.').email('Please enter a valid Email.'),
-  username: Yup.string().required('Please enter your Username.'),
-  password: Yup.string()
-    .required('Please enter your password.')
-    .min(8, ({ min }) => `Password is too short - length must be at least ${min} characters.`)
-    .max(20, ({ max }) => `Password is too long - maximum length is ${max} characters.`)
-    .matches(/[A-Z]/, 'Must contain at least one uppercase character.')
-    .matches(/[a-z]/, 'Must contain at least one lowercase character.')
-    .matches(/[0-9]/, 'Must contain at least one number.')
-    .matches(
-      /[\^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`]/,
-      'Your password must contain at least one of the following special characters: ^ $ * . [ ] { } ( ) ? - " ! @ # % & / \\ , > < \' : ; | _ ~ `'
-    ),
-  confirmPassword: Yup.string()
-    .required('Please confirm your password.')
-    .oneOf([Yup.ref('password')], 'Passwords must match'),
-  terms: Yup.bool().oneOf([true], 'Please accept the terms of use.'),
-});
+export const validationSchema = (t: TFunction) =>
+  Yup.object().shape({
+    email: Yup.string().required(t('validation.email.required')).email(t('validation.email.valid')),
+    username: Yup.string().required(t('validation.username.required')),
+    password: Yup.string()
+      .required(t('validation.password.required'))
+      .min(8, ({ min }) => t('validation.password.min', { min }))
+      .max(20, ({ max }) => t('validation.password.max', { max }))
+      .matches(/[A-Z]/, t('validation.password.uppercase'))
+      .matches(/[a-z]/, t('validation.password.lowercase'))
+      .matches(/[0-9]/, t('validation.password.digit'))
+      .matches(/[\^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`]/, t('validation.password.special')),
+    confirmPassword: Yup.string()
+      .required(t('validation.password.required'))
+      .oneOf([Yup.ref('password')], t('validation.password.match')),
+    terms: Yup.bool().oneOf([true], t('validation.password.terms')),
+  });

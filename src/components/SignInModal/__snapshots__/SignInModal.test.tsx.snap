@@ -21,7 +21,7 @@ Object {
             <div
               class="modal__header__headline"
             >
-              Sign in
+              Sign In
             </div>
             <div
               class="modal__header__close"
@@ -56,7 +56,7 @@ Object {
                       <label
                         class="inputField__label"
                       >
-                        email
+                        Email
                       </label>
                       <input
                         autocomplete="off"
@@ -79,7 +79,7 @@ Object {
                         <label
                           class="inputField__label"
                         >
-                          password
+                          Password
                         </label>
                         <input
                           autocomplete="off"
@@ -155,7 +155,7 @@ Object {
                         class=" link"
                         href=""
                       >
-                        forgot password?
+                        Forgot password?
                       </a>
                     </div>
                   </div>
@@ -172,14 +172,14 @@ Object {
                     class="container "
                   >
                     <span>
-                      don't have an account?
+                      Don't have an Account?
                     </span>
                      
                     <a
                       class=" link"
                       href=""
                     >
-                      sign up now!
+                      Sign Up now!
                     </a>
                   </div>
                 </form>
@@ -213,7 +213,7 @@ Object {
           <div
             class="modal__header__headline"
           >
-            Sign in
+            Sign In
           </div>
           <div
             class="modal__header__close"
@@ -248,7 +248,7 @@ Object {
                     <label
                       class="inputField__label"
                     >
-                      email
+                      Email
                     </label>
                     <input
                       autocomplete="off"
@@ -271,7 +271,7 @@ Object {
                       <label
                         class="inputField__label"
                       >
-                        password
+                        Password
                       </label>
                       <input
                         autocomplete="off"
@@ -347,7 +347,7 @@ Object {
                       class=" link"
                       href=""
                     >
-                      forgot password?
+                      Forgot password?
                     </a>
                   </div>
                 </div>
@@ -364,14 +364,14 @@ Object {
                   class="container "
                 >
                   <span>
-                    don't have an account?
+                    Don't have an Account?
                   </span>
                    
                   <a
                     class=" link"
                     href=""
                   >
-                    sign up now!
+                    Sign Up now!
                   </a>
                 </div>
               </form>
