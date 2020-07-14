@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import TopBar from '.';
 import { StateProvider } from '../../../../state';
+import { action } from '@storybook/addon-actions';
 
 storiesOf('Components/TopBar', module)
   .add('default', () => <TopBar />)
@@ -28,6 +29,6 @@ storiesOf('Components/TopBar', module)
         },
       }}
     >
-      <TopBar />
+      <TopBar onSignOutClick={action('Sign-out')} />
     </StateProvider>
   ));
