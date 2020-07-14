@@ -6,12 +6,15 @@ import { setAccessToken, clearAccessToken } from '../../common/util/storage.util
 export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }) => {
   switch (type) {
     case 'AUTH_SIGN_IN':
-      setAccessToken(payload.accessToken);
+      if (payload.accessToken) {
+        setAccessToken(payload.accessToken);
+      }
 
       return {
         ...state,
-        ...payload,
+        user: payload.user,
         state: 'SIGNED_IN',
+        accessToken: payload.accessToken ?? state.accessToken,
       };
 
     case 'AUTH_SIGN_OUT':
@@ -37,12 +40,6 @@ export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }
         ...state,
         ...payload,
         state: 'SIGNED_IN',
-      };
-
-    case 'AUTH_ADD_USER':
-      return {
-        ...state,
-        user: payload,
       };
 
     default:

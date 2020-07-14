@@ -8,13 +8,13 @@ import Spinner from '../Spinner';
 
 const AuthOverlay: React.FC = ({ children }) => {
   const [{ auth }, dispatch] = useStateValue();
-  const { data, error, refetch } = useQuery(ME);
+  const { data, error, loading, refetch } = useQuery(ME);
 
   useEffect(() => {
     if (auth.state === 'SIGNED_IN') {
       refetch();
     }
-  }, [auth.accessToken, auth.state, refetch]);
+  }, [refetch, auth.accessToken, auth.state]);
 
   useEffect(() => {
     if (data) {
@@ -27,7 +27,7 @@ const AuthOverlay: React.FC = ({ children }) => {
     if (error || !getAccessToken()) {
       dispatch({ type: 'AUTH_SIGN_OUT' });
     }
-  }, [dispatch, data, error, auth.accessToken]);
+  }, [dispatch, data, error, auth.accessToken, loading, refetch]);
 
   return auth.state === 'UNKNOWN' ? (
     <div className={styles.container}>
