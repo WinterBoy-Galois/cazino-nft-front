@@ -1,7 +1,8 @@
 import React from 'react';
-
 import styles from './Toast.module.scss';
 import Info from '../icons/Info';
+import Check from '../icons/Check';
+import Error from '../icons/Error';
 
 interface IProps {
   type?: 'SUCCESS' | 'INFO' | 'ERROR';
@@ -16,11 +17,11 @@ const Toast: React.SFC<IProps> = ({ children, type = 'INFO' }) => {
       break;
 
     case 'SUCCESS':
-      icon = <Info />;
+      icon = <Check />;
       break;
 
     case 'ERROR':
-      icon = <Info />;
+      icon = <Error />;
       break;
   }
 

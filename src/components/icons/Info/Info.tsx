@@ -6,14 +6,16 @@ interface IProps {
   fillClassName?: string;
 }
 
-const Info: React.SFC<IProps> = ({ className = styles.container, fillClassName = styles.fill }) => {
+const Info: React.FC<IProps> = ({ className = styles.container, fillClassName = styles.fill }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" className={className}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.02 31.02" className={className}>
       <g>
-        <path
-          d="M17.5 0A17.5 17.5 0 1035 17.5 17.51 17.51 0 0017.5 0zm2.56 24.54a2.14 2.14 0 01-2.14 2.14h-.83A2.14 2.14 0 0115 24.54v-6.85a2.14 2.14 0 012.14-2.15h.83a2.14 2.14 0 012.14 2.15zM17.5 13.3a3.09 3.09 0 113.1-3.09 3.09 3.09 0 01-3.1 3.09z"
-          className={fillClassName}
-        />
+        <g>
+          <path
+            d="M15.51 0A15.51 15.51 0 1031 15.51 15.5 15.5 0 0015.51 0zm0 6.88a2.63 2.63 0 11-2.63 2.63 2.63 2.63 0 012.63-2.63zM19 22.76a.75.75 0 01-.75.75h-5.5a.75.75 0 01-.75-.75v-1.5a.76.76 0 01.75-.75h.75v-4h-.75a.75.75 0 01-.75-.75v-1.5a.76.76 0 01.75-.75h4a.76.76 0 01.75.75v6.26h.75a.75.75 0 01.75.75z"
+            className={fillClassName}
+          />
+        </g>
       </g>
     </svg>
   );
