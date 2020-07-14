@@ -8,7 +8,7 @@ describe('ToastContainer', () => {
     // Arrange
 
     // Act
-    const container = render(<ToastContainer message="Hello World!" />);
+    const container = render(<ToastContainer />);
 
     // Assert
     expect(container).toMatchSnapshot();

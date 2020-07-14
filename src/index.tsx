@@ -4,7 +4,6 @@ import './index.scss';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
-import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
