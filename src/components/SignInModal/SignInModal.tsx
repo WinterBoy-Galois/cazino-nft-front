@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
+import { useFormik } from 'formik';
+import { useMutation } from '@apollo/react-hooks';
+
 import Modal, { replaceModal } from '../Modal';
 import styles from './SignInModal.module.scss';
 import signInIllustration from '../../assets/images/auth/sign-in.svg';
 import TextInput from '../TextInput';
 import PasswordInput from '../PasswordInput';
-import { useFormik } from 'formik';
-import { useMutation } from '@apollo/react-hooks';
 import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { GraphQLError } from 'graphql';
@@ -35,6 +37,7 @@ const SignInModal: React.FC<IProps> = ({
   onNavigateToForgotPassword,
   loading,
 }: IProps) => {
+  const { t } = useTranslation(['auth']);
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -42,8 +45,10 @@ const SignInModal: React.FC<IProps> = ({
     },
     validateOnMount: true,
     validationSchema: Yup.object().shape({
-      email: Yup.string().required('Please enter your Email.').email('Please enter a valid Email.'),
-      password: Yup.string().required('Please enter your password.'),
+      email: Yup.string()
+        .required(t('validation.email.required'))
+        .email(t('validation.email.valid')),
+      password: Yup.string().required(t('validation.password.required')),
     }),
     onSubmit: values => {
       onSignIn(values.email, values.password);
@@ -51,7 +56,7 @@ const SignInModal: React.FC<IProps> = ({
   });
 
   return (
-    <Modal show={show} onClose={onClose} title="Sign In">
+    <Modal show={show} onClose={onClose} title={t('signIn.headline')}>
       <div className="row">
         <div className="col-12 col-md-7">
           <form onSubmit={formik.handleSubmit}>
@@ -62,7 +67,7 @@ const SignInModal: React.FC<IProps> = ({
               />
             )}
             <TextInput
-              label="email"
+              label={t('labels.email')}
               name="email"
               onChangeValue={v => formik.setFieldValue('email', v)}
               onBlur={formik.handleBlur}
@@ -70,7 +75,7 @@ const SignInModal: React.FC<IProps> = ({
               {...(formik.touched.email ? { validationMessage: formik.errors.email } : {})}
             />
             <PasswordInput
-              label="password"
+              label={t('labels.password')}
               name="password"
               onChangeValue={v => formik.setFieldValue('password', v)}
               onBlur={formik.handleBlur}
@@ -79,9 +84,11 @@ const SignInModal: React.FC<IProps> = ({
             />
 
             <div className={`${styles['remember-me']} ${styles.spacing__bottom}`}>
-              <CheckboxInput label={'Remember me'} />
+              <CheckboxInput label={t('signIn.buttons.rememberMe')} />
               <Uppercase>
-                <Link onClick={onNavigateToForgotPassword}>forgot password?</Link>
+                <Link onClick={onNavigateToForgotPassword}>
+                  {t('signIn.buttons.goToForgotPassword')}
+                </Link>
               </Uppercase>
             </div>
 
@@ -91,14 +98,15 @@ const SignInModal: React.FC<IProps> = ({
               {...(formik.isValid ? {} : { disabled: true })}
               className={styles.spacing__bottom}
               loading={loading}
+              loadingText={t('signIn.buttons.loading')}
             >
-              Sign In
+              {t('signIn.buttons.signIn')}
             </SpinnerButton>
 
             <Uppercase>
-              <span>{"don't have an account?"}</span>
+              <span>{t('signIn.buttons.goToSignUpText')}</span>
               &nbsp;
-              <Link onClick={onNavigateToSignUp}>sign up now!</Link>
+              <Link onClick={onNavigateToSignUp}>{t('signIn.buttons.goToSignUp')}</Link>
             </Uppercase>
           </form>
         </div>

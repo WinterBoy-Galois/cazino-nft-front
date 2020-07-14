@@ -21,7 +21,7 @@ Object {
             <div
               class="modal__header__headline"
             >
-              Sign In
+              Sign in
             </div>
             <div
               class="modal__header__close"
@@ -163,6 +163,7 @@ Object {
                     class="button spacing__bottom secondary button button--small"
                     color="SECONDARY"
                     disabled=""
+                    loadingtext="signing in..."
                     type="submit"
                   >
                     Sign In
@@ -212,7 +213,7 @@ Object {
           <div
             class="modal__header__headline"
           >
-            Sign In
+            Sign in
           </div>
           <div
             class="modal__header__close"
@@ -354,6 +355,7 @@ Object {
                   class="button spacing__bottom secondary button button--small"
                   color="SECONDARY"
                   disabled=""
+                  loadingtext="signing in..."
                   type="submit"
                 >
                   Sign In

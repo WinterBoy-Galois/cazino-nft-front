@@ -1,0 +1,34 @@
+{
+  "labels": {
+    "email": "Email",
+    "password": "Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm new Password"
+  },
+  "validation": {
+    "email": {
+      "required": "Please enter your Email.",
+      "valid": "Please enter a valid Email."
+    },
+    "password": {
+      "required": "Please enter a password.",
+      "min": "Password is too short - should be 6 chars minimum.",
+      "uppercase": "Must contain at least one uppercase character.",
+      "lowercase": "Must contain at least one lowercase character.",
+      "digit": "Must contain at least one number.",
+      "special": "Your password must contain at least one of the following special characters: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < \\' : ; | _ ~ `",
+      "match": "Passwords must match."
+    }
+  },
+  "signIn": {
+    "headline": "Sign In",
+    "buttons": {
+      "signIn": "Sign In",
+      "goToForgotPassword": "Forgot password?",
+      "goToSignUpText": "Don't have an Account?",
+      "goToSignUp": "Sign Up now!",
+      "rememberMe": "Remember me",
+      "loading": "signing in..."
+    }
+  }
+}
