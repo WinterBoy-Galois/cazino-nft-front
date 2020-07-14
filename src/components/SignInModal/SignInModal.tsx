@@ -40,7 +40,7 @@ const SignInModal: React.FC<IProps> = ({
       email: '',
       password: '',
     },
-    isInitialValid: false,
+    validateOnMount: true,
     validationSchema: Yup.object().shape({
       email: Yup.string().required('Please enter your Email.').email('Please enter a valid Email.'),
       password: Yup.string().required('Please enter your password.'),
