@@ -1,5 +1,5 @@
 import React from 'react';
-import { text, button } from '@storybook/addon-knobs';
+import { text, button, boolean } from '@storybook/addon-knobs';
 import { ToastContainer, info, error } from '.';
 import { success } from '.';
 
@@ -13,13 +13,14 @@ const data = {
 };
 
 export const Default = () => {
+  text('Toast text', data.message);
   button('Show success toast', () => success(text('Toast text', data.message)));
   button('Show info toast', () => info(text('Toast text', data.message)));
   button('Show error toast', () => error(text('Toast text', data.message)));
 
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer autoClose={boolean('Auto close', true)} />
     </div>
   );
 };
