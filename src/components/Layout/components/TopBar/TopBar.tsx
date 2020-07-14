@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import styles from './TopBar.module.scss';
 import Logo from '../../../icons/Logo';
 import SidebarToggle from '../SidebarToggle';
@@ -14,6 +16,7 @@ interface IProps {
 }
 
 const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
+  const { t } = useTranslation(['auth']);
   const [{ sidebar, auth }] = useStateValue();
 
   return (
@@ -34,7 +37,7 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
                     className={styles['sign-in__button']}
                     onClick={onSignInClick}
                   >
-                    Sign-in
+                    {t('signIn.headline')}
                   </SecondaryButton>
                 </div>
                 <div onClick={onSignInClick}>
@@ -43,7 +46,7 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
               </Fragment>
             ) : (
               <Fragment>
-                <span>{auth.user.username}</span>
+                <span className={styles['details--spacing']}>{auth.user.username}</span>
                 <div role="button" onClick={onSignOutClick}>
                   <Avatar avatarUrl={auth.user.avatarUrl} username={auth.user.username} />
                 </div>

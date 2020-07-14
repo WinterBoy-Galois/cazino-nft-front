@@ -71,7 +71,7 @@ Object {
                   class="sign-in__button secondary button button--small"
                   type="button"
                 >
-                  Sign-in
+                  Sign In
                 </button>
               </div>
               <div>
@@ -222,7 +222,7 @@ Object {
                 class="sign-in__button secondary button button--small"
                 type="button"
               >
-                Sign-in
+                Sign In
               </button>
             </div>
             <div>
