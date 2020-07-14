@@ -1,0 +1,9 @@
+@import '../../../../styles/shared';
+
+.container {
+  margin-bottom: $bar-height;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 0;
+  }
+}
