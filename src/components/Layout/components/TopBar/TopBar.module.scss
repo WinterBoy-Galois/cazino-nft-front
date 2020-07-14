@@ -23,18 +23,23 @@
   }
 }
 
-.sign-in {
+.details {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 
-  @include media-breakpoint-up(md) {
-    width: 195px;
+  &__button {
+    @include media-breakpoint-up(md) {
+      width: 195px;
+    }
   }
 
   &--spacing {
     margin-right: 1rem;
   }
+}
 
+.sign-in {
   &__button {
     display: none;
 

@@ -62,14 +62,18 @@ Object {
             class="col-8 center right"
           >
             <div
-              class="sign-in sign-in--spacing"
+              class="details details--spacing"
             >
-              <button
-                class="sign-in__button secondary button button--small"
-                type="button"
+              <div
+                class="details__button"
               >
-                Sign-in
-              </button>
+                <button
+                  class="sign-in__button secondary button button--small"
+                  type="button"
+                >
+                  Sign-in
+                </button>
+              </div>
               <div>
                 <svg
                   class="sign-in__icon"
@@ -209,14 +213,18 @@ Object {
           class="col-8 center right"
         >
           <div
-            class="sign-in sign-in--spacing"
+            class="details details--spacing"
           >
-            <button
-              class="sign-in__button secondary button button--small"
-              type="button"
+            <div
+              class="details__button"
             >
-              Sign-in
-            </button>
+              <button
+                class="sign-in__button secondary button button--small"
+                type="button"
+              >
+                Sign-in
+              </button>
+            </div>
             <div>
               <svg
                 class="sign-in__icon"

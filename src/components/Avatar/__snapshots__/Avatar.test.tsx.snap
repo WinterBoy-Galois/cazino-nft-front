@@ -1,48 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Username should match snapshot 1`] = `
+exports[`Avatar should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="container "
+        class="avatar "
       >
         <div
-          class="avatar "
+          class="avatar__spinner"
         >
-          <img
-            alt=""
-            class="w-100 h-100"
-            src="testurl"
+          <span
+            class="spinner spinner--white "
           />
         </div>
-        <span
-          class="text--bold username "
-        >
-          test
-        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="container "
+      class="avatar "
     >
       <div
-        class="avatar "
+        class="avatar__spinner"
       >
-        <img
-          alt=""
-          class="w-100 h-100"
-          src="testurl"
+        <span
+          class="spinner spinner--white "
         />
       </div>
-      <span
-        class="text--bold username "
-      >
-        test
-      </span>
     </div>
   </div>,
   "debug": [Function],

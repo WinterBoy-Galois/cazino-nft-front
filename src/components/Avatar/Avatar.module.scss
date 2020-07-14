@@ -1,0 +1,14 @@
+@import '../../styles/shared';
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__spinner {
+    width: 24px;
+    height: 24px;
+  }
+}
