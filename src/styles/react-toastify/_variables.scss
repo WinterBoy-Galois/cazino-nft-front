@@ -1,15 +1,15 @@
 $rt-namespace: 'Toastify';
-$rt-toast-width: 320px !default;
+$rt-toast-width: 520px !default;
 $rt-toast-background: #fff !default;
-$rt-toast-min-height: 64px !default;
+$rt-toast-min-height: 80px !default;
 $rt-toast-max-height: 800px !default;
 
 $rt-color-default: #fff !default;
 $rt-color-dark: #121212 !default;
-$rt-color-info: #3498db !default;
-$rt-color-success: #07bc0c !default;
+$rt-color-info: $toast-info !default;
+$rt-color-success: $toast-success !default;
 $rt-color-warning: #f1c40f !default;
-$rt-color-error: #e74c3c !default;
+$rt-color-error: $toast-error !default;
 
 $rt-text-color-default: #aaa !default;
 $rt-text-color-dark: #fff !default;
@@ -25,5 +25,5 @@ $rt-color-progress-default: linear-gradient(
 ) !default;
 $rt-color-progress-dark: #bb86fc !default;
 $rt-mobile: 'only screen and (max-width : 480px)' !default;
-$rt-font-family: sans-serif !default;
+$rt-font-family: 'Roboto' sans-serif !default;
 $rt-z-index: 9999 !default;
