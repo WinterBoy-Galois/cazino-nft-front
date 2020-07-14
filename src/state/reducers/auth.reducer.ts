@@ -39,6 +39,12 @@ export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }
         state: 'SIGNED_IN',
       };
 
+    case 'AUTH_ADD_USER':
+      return {
+        ...state,
+        user: payload,
+      };
+
     default:
       return state;
   }

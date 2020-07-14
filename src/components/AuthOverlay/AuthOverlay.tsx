@@ -8,13 +8,19 @@ import Spinner from '../Spinner';
 
 const AuthOverlay: React.FC = ({ children }) => {
   const [{ auth }, dispatch] = useStateValue();
-  const { data, error } = useQuery(ME);
+  const { data, error, refetch } = useQuery(ME);
+
+  useEffect(() => {
+    if (auth.state === 'SIGNED_IN') {
+      refetch();
+    }
+  }, [auth.accessToken, auth.state, refetch]);
 
   useEffect(() => {
     if (data) {
       dispatch({
         type: 'AUTH_SIGN_IN',
-        payload: { user: { ...data.me }, accessToken: auth.accessToken },
+        payload: { user: { ...data.me } },
       });
     }
 

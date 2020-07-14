@@ -163,7 +163,6 @@ Object {
                     class="button spacing__bottom secondary button button--small"
                     color="SECONDARY"
                     disabled=""
-                    loadingtext="signing in..."
                     type="submit"
                   >
                     Sign In
@@ -355,7 +354,6 @@ Object {
                   class="button spacing__bottom secondary button button--small"
                   color="SECONDARY"
                   disabled=""
-                  loadingtext="signing in..."
                   type="submit"
                 >
                   Sign In

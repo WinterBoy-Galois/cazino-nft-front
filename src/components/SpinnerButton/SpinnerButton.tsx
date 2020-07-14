@@ -33,6 +33,7 @@ const SpinnerButton: React.SFC<IProps> = props => {
       props.children
     ),
     loading: undefined,
+    loadingText: undefined,
   };
 
   let button;

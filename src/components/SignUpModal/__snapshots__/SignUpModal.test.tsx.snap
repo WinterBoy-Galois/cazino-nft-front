@@ -224,7 +224,6 @@ Object {
                     class="button button secondary button button--small"
                     color="SECONDARY"
                     disabled=""
-                    loadingtext="signing up..."
                     type="submit"
                   >
                     Create account
@@ -478,7 +477,6 @@ Object {
                   class="button button secondary button button--small"
                   color="SECONDARY"
                   disabled=""
-                  loadingtext="signing up..."
                   type="submit"
                 >
                   Create account
