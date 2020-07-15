@@ -8,7 +8,7 @@ import Spinner from '../Spinner';
 
 const AuthOverlay: React.FC = ({ children }) => {
   const [{ auth }, dispatch] = useStateValue();
-  const { data, error, loading, refetch } = useQuery(ME);
+  const { data, error, loading, refetch } = useQuery(ME, { fetchPolicy: 'network-only' });
 
   useEffect(() => {
     if (auth.state === 'SIGNED_IN') {
