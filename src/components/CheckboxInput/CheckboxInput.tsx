@@ -35,6 +35,13 @@ const CheckboxInput: React.SFC<IProps> = ({
     }
   };
 
+  const keypressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const isEnterOrSpace = event.key === ' ' || event.key === 'Enter';
+    if (isEnterOrSpace) {
+      handleOnChange();
+    }
+  };
+
   return (
     <>
       <input
@@ -42,11 +49,16 @@ const CheckboxInput: React.SFC<IProps> = ({
         className={styles['inp-cbx']}
         id="cbx"
         type="checkbox"
-        defaultChecked={initialValue}
         onChange={handleOnChange}
+        checked={value}
       />
       <label className={styles.cbx} htmlFor="cbx">
-        <span className={styles.cbx__icon}>
+        <span
+          className={styles.cbx__icon}
+          role="checkbox"
+          tabIndex={0}
+          onKeyPress={keypressHandler}
+        >
           <svg width="20px" height="17px" viewBox="0 0 12 9">
             <polyline points="1 5 4 8 11 1"></polyline>
           </svg>

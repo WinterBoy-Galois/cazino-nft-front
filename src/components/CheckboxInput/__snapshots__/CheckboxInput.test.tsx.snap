@@ -16,6 +16,8 @@ Object {
       >
         <span
           class="cbx__icon"
+          role="checkbox"
+          tabindex="0"
         >
           <svg
             height="17px"
@@ -45,6 +47,8 @@ Object {
     >
       <span
         class="cbx__icon"
+        role="checkbox"
+        tabindex="0"
       >
         <svg
           height="17px"
