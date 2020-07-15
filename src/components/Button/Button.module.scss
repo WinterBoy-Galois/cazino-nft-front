@@ -38,4 +38,9 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  &:hover,
+  &:focus {
+    background-color: lighten($button-primary, 10%);
+  }
 }
