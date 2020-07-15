@@ -23,7 +23,7 @@ interface IProps {
   loading: boolean;
   errors?: GraphQLError[] | GenericError[];
   onClose?: () => void;
-  onSignIn?: (email: string, password: string) => void;
+  onSignIn?: (email: string, password: string, remember: boolean) => void;
   onNavigateToSignUp?: () => void;
   onNavigateToForgotPassword?: () => void;
 }
@@ -42,6 +42,7 @@ const SignInModal: React.FC<IProps> = ({
     initialValues: {
       email: '',
       password: '',
+      remember: false,
     },
     validateOnMount: true,
     validationSchema: Yup.object().shape({
@@ -51,7 +52,7 @@ const SignInModal: React.FC<IProps> = ({
       password: Yup.string().required(t('validation.password.required')),
     }),
     onSubmit: values => {
-      onSignIn(values.email, values.password);
+      onSignIn(values.email, values.password, values.remember);
     },
   });
 
@@ -84,7 +85,10 @@ const SignInModal: React.FC<IProps> = ({
             />
 
             <div className={`${styles['remember-me']} ${styles.spacing__bottom}`}>
-              <CheckboxInput label={t('signIn.buttons.rememberMe')} />
+              <CheckboxInput
+                label={t('signIn.buttons.rememberMe')}
+                onChangeValue={v => formik.setFieldValue('remember', v)}
+              />
               <Uppercase>
                 <Link onClick={onNavigateToForgotPassword}>
                   {t('signIn.buttons.goToForgotPassword')}
@@ -131,9 +135,9 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<GraphQLError[]>();
 
-  const handleSignIn = async (email: string, password: string) => {
+  const handleSignIn = async (email: string, password: string, remember: boolean) => {
     setLoading(true);
-    const { data, errors } = await signIn({ variables: { email, password } });
+    const { data, errors } = await signIn({ variables: { email, password, remember } });
     setLoading(false);
 
     if (errors || data.signIn.errors) {

@@ -17,8 +17,8 @@ export const CHANGE_SERVER_SEED = gql`
 `;
 
 export const SIGN_IN = gql`
-  mutation SignIn($email: String, $password: String) {
-    signIn(email: $email, password: $password) {
+  mutation SignIn($email: String, $password: String, $remember: Boolean) {
+    signIn(email: $email, password: $password, remember: $remember) {
       ... on LoginResult {
         accessToken
       }
