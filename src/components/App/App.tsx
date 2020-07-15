@@ -5,6 +5,7 @@ import HomePage from '../../pages/home';
 import { StateProvider } from '../../state';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from '../../graphql/client';
+import { ToastContainer } from '../Toast';
 
 const App: React.SFC = () => {
   return (
@@ -16,6 +17,8 @@ const App: React.SFC = () => {
           </Router>
         </Layout>
       </ApolloProvider>
+
+      <ToastContainer />
     </StateProvider>
   );
 };
