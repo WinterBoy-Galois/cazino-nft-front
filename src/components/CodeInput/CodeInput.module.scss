@@ -1,0 +1,29 @@
+@import '../../styles/shared';
+
+.container {
+  input {
+    border-radius: 10px;
+    width: 42px;
+    height: 52px;
+    font-size: 40px;
+    text-align: center;
+    border: 0;
+    margin-right: 0.5rem;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  /* stylelint-disable */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* stylelint-enable */
+}
