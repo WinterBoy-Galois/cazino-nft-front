@@ -13,6 +13,10 @@
     &:last-of-type {
       margin-right: 0;
     }
+
+    &:focus {
+      border: 3px solid $activation-code-border-blue;
+    }
   }
 
   input[type='number'] {

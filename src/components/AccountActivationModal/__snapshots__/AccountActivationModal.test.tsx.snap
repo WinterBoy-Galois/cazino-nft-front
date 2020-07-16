@@ -4,21 +4,9 @@ exports[`AccountActivationModal should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div>
-      <div
-        class="container "
-      >
-        Hello World!
-      </div>
-    </div>
+    <div />
   </body>,
-  "container": <div>
-    <div
-      class="container "
-    >
-      Hello World!
-    </div>
-  </div>,
+  "container": <div />,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],
