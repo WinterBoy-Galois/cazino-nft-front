@@ -56,6 +56,7 @@ const CheckboxInput: React.SFC<IProps> = ({
         <span
           className={styles.cbx__icon}
           role="checkbox"
+          aria-checked={value}
           tabIndex={0}
           onKeyPress={keypressHandler}
         >

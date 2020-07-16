@@ -130,6 +130,7 @@ Object {
                       for="cbx"
                     >
                       <span
+                        aria-checked="false"
                         class="cbx__icon"
                         role="checkbox"
                         tabindex="0"
@@ -323,6 +324,7 @@ Object {
                     for="cbx"
                   >
                     <span
+                      aria-checked="false"
                       class="cbx__icon"
                       role="checkbox"
                       tabindex="0"
