@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal, { replaceModal } from '../Modal';
+import Modal, { replaceModal, transitionTimeout } from '../Modal';
 import styles from './SignUpModal.module.scss';
 import { GenericError } from '../../models/genericError.model';
 import { GraphQLError } from 'graphql';
@@ -61,8 +61,27 @@ const SignUpModal: React.FC<IProps> = ({
     },
   });
 
+  const handleClose = () => {
+    setTimeout(() => {
+      formik.resetForm({});
+      formik.validateForm();
+    }, transitionTimeout);
+
+    if (onClose) {
+      onClose();
+    }
+  };
+
+  const handleNavigateToSignIn = () => {
+    handleClose();
+
+    if (onNavigateToSignIn) {
+      onNavigateToSignIn();
+    }
+  };
+
   return (
-    <Modal show={show} onClose={onClose} title={t('signUp.headline')}>
+    <Modal show={show} onClose={handleClose} title={t('signUp.headline')}>
       {show === true && (
         <Helmet>
           <body data-recaptcha="true" />
@@ -142,7 +161,7 @@ const SignUpModal: React.FC<IProps> = ({
             <Uppercase>
               <span>{t('signUp.buttons.goToSignInText')}</span>
               &nbsp;
-              <Link onClick={onNavigateToSignIn}>{t('signUp.buttons.goToSignIn')}</Link>
+              <Link onClick={handleNavigateToSignIn}>{t('signUp.buttons.goToSignIn')}</Link>
             </Uppercase>
           </form>
         </div>

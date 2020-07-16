@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useMutation } from '@apollo/react-hooks';
 
-import Modal, { replaceModal } from '../Modal';
+import Modal, { replaceModal, transitionTimeout } from '../Modal';
 import styles from './SignInModal.module.scss';
 import signInIllustration from '../../assets/images/auth/sign-in.svg';
 import TextInput from '../TextInput';
@@ -56,8 +56,27 @@ const SignInModal: React.FC<IProps> = ({
     },
   });
 
+  const handleClose = () => {
+    setTimeout(() => {
+      formik.resetForm({});
+      formik.validateForm();
+    }, transitionTimeout);
+
+    if (onClose) {
+      onClose();
+    }
+  };
+
+  const handleNavigateToSignUp = () => {
+    handleClose();
+
+    if (onNavigateToSignUp) {
+      onNavigateToSignUp();
+    }
+  };
+
   return (
-    <Modal show={show} onClose={onClose} title={t('signIn.headline')}>
+    <Modal show={show} onClose={handleClose} title={t('signIn.headline')}>
       <div className="row">
         <div className="col-12 col-md-7">
           <form onSubmit={formik.handleSubmit}>
@@ -110,7 +129,7 @@ const SignInModal: React.FC<IProps> = ({
             <Uppercase>
               <span>{t('signIn.buttons.goToSignUpText')}</span>
               &nbsp;
-              <Link onClick={onNavigateToSignUp}>{t('signIn.buttons.goToSignUp')}</Link>
+              <Link onClick={handleNavigateToSignUp}>{t('signIn.buttons.goToSignUp')}</Link>
             </Uppercase>
           </form>
         </div>
