@@ -116,6 +116,7 @@ const SignUpModal: React.FC<IProps> = ({
                 className={styles.terms__cbx}
                 value={formik.values.terms}
                 onChangeValue={v => formik.setFieldValue('terms', v)}
+                onBlur={formik.handleBlur}
                 {...(formik.touched.terms ? { validationMessage: formik.errors.terms } : {})}
                 label={t('signUp.buttons.termsText')}
               />

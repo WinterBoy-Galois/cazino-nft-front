@@ -12,12 +12,12 @@ interface IProps {
 }
 
 const TextInput = ({
-  name = undefined,
-  value: initialValue = undefined,
-  label = undefined,
-  validationMessage = undefined,
-  onChangeValue = undefined,
-  onBlur = undefined,
+  name,
+  value: initialValue,
+  label,
+  validationMessage,
+  onChangeValue,
+  onBlur,
 }: IProps) => {
   const [value, setValue] = useState(initialValue);
 

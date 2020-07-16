@@ -7,8 +7,9 @@ interface IProps {
   label?: string;
   className?: string;
   validationMessage?: string;
-  onChangeValue?: (value: boolean) => void;
   value?: boolean;
+  onChangeValue?: (value: boolean) => void;
+  onBlur?: ({ target }: { target: EventTarget | null }) => void;
 }
 
 const CheckboxInput: React.SFC<IProps> = ({
@@ -16,8 +17,9 @@ const CheckboxInput: React.SFC<IProps> = ({
   label,
   className = '',
   validationMessage,
-  onChangeValue,
   value: initialValue = false,
+  onChangeValue,
+  onBlur,
 }) => {
   const [value, setValue] = useState<boolean>(initialValue);
 
@@ -35,8 +37,15 @@ const CheckboxInput: React.SFC<IProps> = ({
     }
   };
 
-  const keypressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleBlur = (event?: React.FocusEvent<any>) => {
+    if (onBlur && event) {
+      onBlur(event);
+    }
+  };
+
+  const keypressHandler = (event: React.KeyboardEvent<any>) => {
     const isEnterOrSpace = event.key === ' ' || event.key === 'Enter';
+
     if (isEnterOrSpace) {
       handleOnChange();
     }
@@ -45,20 +54,22 @@ const CheckboxInput: React.SFC<IProps> = ({
   return (
     <>
       <input
-        name={name}
         className={styles['inp-cbx']}
         id="cbx"
         type="checkbox"
         onChange={handleOnChange}
         checked={value}
+        onBlur={handleBlur}
       />
       <label className={styles.cbx} htmlFor="cbx">
         <span
+          id={name}
           className={styles.cbx__icon}
           role="checkbox"
           aria-checked={value}
           tabIndex={0}
           onKeyPress={keypressHandler}
+          onBlur={handleBlur}
         >
           <svg width="20px" height="17px" viewBox="0 0 12 9">
             <polyline points="1 5 4 8 11 1"></polyline>
