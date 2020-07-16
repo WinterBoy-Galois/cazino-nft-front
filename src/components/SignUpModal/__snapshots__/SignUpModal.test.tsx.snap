@@ -4,6 +4,8 @@ exports[`SignUpModal should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body
+    data-react-helmet="data-recaptcha"
+    data-recaptcha="true"
     style="overflow: hidden;"
   >
     <div>

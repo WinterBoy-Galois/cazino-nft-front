@@ -18,6 +18,7 @@ import CheckboxInput from '../CheckboxInput';
 import ErrorSummary from '../ErrorSummary';
 import { validationSchema } from './lib/validationSchema';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 
 interface IProps {
   show: boolean;
@@ -62,6 +63,11 @@ const SignUpModal: React.FC<IProps> = ({
 
   return (
     <Modal show={show} onClose={onClose} title={t('signUp.headline')}>
+      {show === true && (
+        <Helmet>
+          <body data-recaptcha="true" />
+        </Helmet>
+      )}
       <div className="row">
         <div className="col-12 col-md-7">
           {errors && (
