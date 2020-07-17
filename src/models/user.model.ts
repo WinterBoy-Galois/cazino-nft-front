@@ -2,7 +2,7 @@ export default interface User {
   id: string;
   username: string;
   avatarUrl: string;
-  isActivated: string;
+  isActivated: boolean;
   email?: string;
   balance?: number;
   hideUsername?: boolean;

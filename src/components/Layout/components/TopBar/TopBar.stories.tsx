@@ -22,7 +22,7 @@ storiesOf('Components/TopBar', module)
           accessToken: 'token',
           user: {
             id: '123',
-            isActivated: 'true',
+            isActivated: true,
             username: 'testuser',
             avatarUrl: 'https://dev.gambilife.com/ava/m1.svg',
           },

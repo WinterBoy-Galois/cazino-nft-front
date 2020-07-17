@@ -199,7 +199,7 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     }
 
     dispatch({ type: 'AUTH_SIGN_UP', payload: { ...data.registerUser } });
-    dispatch({ type: 'MODAL_HIDE' });
+    replaceModal(dispatch, 'ACCOUNT_ACTIVATION_MODAL');
   };
 
   const handleNavigateToSignIn = () => replaceModal(dispatch, 'SIGN_IN_MODAL');

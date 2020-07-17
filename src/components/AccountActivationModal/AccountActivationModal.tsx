@@ -6,13 +6,15 @@ import activationIllustration from '../../assets/images/auth/safe-locker.svg';
 import { useMutation } from '@apollo/react-hooks';
 import { ACTIVATE_ACCOUNT } from '../../graphql/mutations';
 import { ApolloError } from 'apollo-client';
+import { useStateValue } from '../../state';
+import { success } from '../Toast';
 
 interface IProps {
   show: boolean;
   loading: boolean;
   error?: ApolloError;
   onClose?: () => void;
-  onActivateUser?: () => void;
+  onActivateUser?: (code: string) => void;
 }
 
 const AccountActivationModal: React.SFC<IProps> = ({ show, onClose, onActivateUser, loading }) => {
@@ -51,6 +53,14 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
   onClose,
 }: IWithDataProps) => {
   const [activateAccount, { loading, error }] = useMutation(ACTIVATE_ACCOUNT);
+  const [, dispatch] = useStateValue();
+
+  const handleActivateAccount = async (code: string) => {
+    await activateAccount({ variables: { code } });
+    dispatch({ type: 'MODAL_HIDE' });
+    success('Your account was successfully activated');
+    dispatch({ type: 'AUTH_UPDATE_USER', payload: { isActivated: true } });
+  };
 
   return (
     <AccountActivationModal
@@ -58,7 +68,7 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
       loading={loading}
       error={error}
       onClose={onClose}
-      onActivateUser={activateAccount}
+      onActivateUser={handleActivateAccount}
     />
   );
 };

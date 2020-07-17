@@ -5,7 +5,7 @@ import ReactCodeInput from 'react-code-input';
 interface IProps {
   name?: string;
   fields?: number;
-  onComplete?: () => void;
+  onComplete?: (code: string) => void;
   disabled?: boolean;
 }
 
@@ -23,7 +23,7 @@ const CodeInput: React.SFC<IProps> = ({
       fields={fields}
       className={styles.container}
       filterKeyCodes={[188, 187, 190, 189, 109, 107, 110]}
-      onChange={value => (onComplete && value.length === 6 ? onComplete() : null)}
+      onChange={value => (onComplete && value.length === 6 ? onComplete(value) : null)}
       disabled={disabled}
     />
   );
