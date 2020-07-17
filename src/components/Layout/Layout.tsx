@@ -11,6 +11,7 @@ import { Action } from '../../state/actions';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import BetDetailsModal from '../BetDetailsModal';
 import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationModal';
+import { AccountActivationModalWithData } from '../AccountActivationModal/AccountActivationModal';
 
 const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
   <>
@@ -26,6 +27,11 @@ const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
     />
     <ChangeServerSeedConfirmationModal
       show={modal.type === 'CHANGE_SERVER_SEED_CONFIRMATION'}
+      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
+      {...modal.data}
+    />
+    <AccountActivationModalWithData
+      show={modal.type === 'ACCOUNT_ACTIVATION_MODAL'}
       onClose={() => dispatch({ type: 'HIDE_MODAL' })}
       {...modal.data}
     />

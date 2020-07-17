@@ -1,18 +1,21 @@
 import React from 'react';
 import styles from './AccountActivationModal.module.scss';
-import { GraphQLError } from 'graphql';
 import Modal from '../Modal';
 import CodeInput from '../CodeInput';
 import activationIllustration from '../../assets/images/auth/safe-locker.svg';
+import { useMutation } from '@apollo/react-hooks';
+import { ACTIVATE_ACCOUNT } from '../../graphql/mutations';
+import { ApolloError } from 'apollo-client';
 
 interface IProps {
   show: boolean;
   loading: boolean;
-  error?: GraphQLError;
+  error?: ApolloError;
   onClose?: () => void;
+  onActivateUser?: () => void;
 }
 
-const AccountActivationModal: React.SFC<IProps> = ({ show, onClose }) => {
+const AccountActivationModal: React.SFC<IProps> = ({ show, onClose, onActivateUser, loading }) => {
   return (
     <Modal show={show} onClose={onClose} title="ACTIVATE ACCOUNT">
       <div className="row">
@@ -26,7 +29,7 @@ const AccountActivationModal: React.SFC<IProps> = ({ show, onClose }) => {
           </p>
 
           <div className={styles['code-input']}>
-            <CodeInput />
+            <CodeInput onComplete={onActivateUser} disabled={loading} />
           </div>
         </div>
         <div className={`col-12 col-md-4 ${styles.illustration}`}>
@@ -47,12 +50,15 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
   show,
   onClose,
 }: IWithDataProps) => {
+  const [activateAccount, { loading, error }] = useMutation(ACTIVATE_ACCOUNT);
+
   return (
     <AccountActivationModal
       show={show}
-      loading={false}
-      // error={error}
+      loading={loading}
+      error={error}
       onClose={onClose}
+      onActivateUser={activateAccount}
     />
   );
 };
