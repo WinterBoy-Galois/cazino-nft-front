@@ -7,6 +7,7 @@ Object {
     <div>
       <a
         class=" link"
+        href=""
       >
         Test
       </a>
@@ -15,6 +16,7 @@ Object {
   "container": <div>
     <a
       class=" link"
+      href=""
     >
       Test
     </a>

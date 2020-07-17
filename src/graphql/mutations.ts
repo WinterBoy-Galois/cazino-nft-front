@@ -6,6 +6,10 @@ export const CHANGE_SERVER_SEED = gql`
       ... on GenericErrorArray {
         errors {
           type
+          field
+          severity
+          messageKey
+          args
         }
       }
     }
@@ -24,5 +28,47 @@ export const ACTIVATE_ACCOUNT = gql`
         }
       }
     }
+  }
+`;
+
+export const SIGN_IN = gql`
+  mutation SignIn($email: String, $password: String, $remember: Boolean) {
+    signIn(email: $email, password: $password, remember: $remember) {
+      ... on LoginResult {
+        accessToken
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const SIGN_UP = gql`
+  mutation SignUp($email: String, $password: String, $username: String, $token: String) {
+    registerUser(username: $username, email: $email, password: $password, captcha: $token) {
+      ... on LoginResult {
+        accessToken
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const SIGN_OUT = gql`
+  mutation SignOut {
+    signOut
   }
 `;

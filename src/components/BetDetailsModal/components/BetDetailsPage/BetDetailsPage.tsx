@@ -32,22 +32,22 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
   }
 
   const handleUsernameClick = () => {
-    dispatch({ type: 'HIDE_MODAL' });
+    dispatch({ type: 'MODAL_HIDE' });
 
     setTimeout(
       () =>
         dispatch({
-          type: 'SHOW_MODAL',
+          type: 'MODAL_SHOW',
           payload: {
             type: 'USER_INFO_MODAL',
             data: {
               userId: bet.userid,
               onBack: () => {
-                dispatch({ type: 'HIDE_MODAL' });
+                dispatch({ type: 'MODAL_HIDE' });
 
                 setTimeout(() => {
                   dispatch({
-                    type: 'SHOW_MODAL',
+                    type: 'MODAL_SHOW',
                     payload: { type: 'BET_DETAILS_MODAL', data: { bet } },
                   });
                 }, transitionTimeout);

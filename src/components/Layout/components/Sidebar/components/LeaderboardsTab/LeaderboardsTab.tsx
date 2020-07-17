@@ -43,7 +43,7 @@ const LeaderboardsTab: React.SFC = () => {
           signInUserId="15"
           onUsernameClicked={userId =>
             dispatch({
-              type: 'SHOW_MODAL',
+              type: 'MODAL_SHOW',
               payload: { type: 'USER_INFO_MODAL', data: { userId } },
             })
           }

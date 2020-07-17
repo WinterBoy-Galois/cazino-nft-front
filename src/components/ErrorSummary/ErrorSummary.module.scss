@@ -1,0 +1,20 @@
+@import '../../styles/shared';
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  text-transform: uppercase;
+  display: block;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 19px;
+  color: $red;
+  user-select: none;
+  padding: 5px 10px 5px 10px;
+  border: 2px solid $red;
+  border-radius: 8px;
+  width: 100%;
+}

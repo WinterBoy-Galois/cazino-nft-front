@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput should match snapshot 1`] = `
+<div>
+  <div
+    class="inputField__container"
+  >
+    <div
+      class="inputField__wrapper inputField__wrapper--error"
+    >
+      <label
+        class="inputField__label"
+      >
+        Username
+      </label>
+      <input
+        autocomplete="off"
+        class="inputField"
+        name="username"
+        type="text"
+        value="sergioalvarez"
+      />
+    </div>
+    <div
+      class="inputField__error"
+    >
+      Username already exists
+    </div>
+  </div>
+</div>
+`;

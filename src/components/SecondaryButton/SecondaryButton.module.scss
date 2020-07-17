@@ -3,4 +3,9 @@
 .secondary {
   background-color: $button-secondary !important;
   color: #000 !important;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($button-secondary, 10%) !important;
+  }
 }

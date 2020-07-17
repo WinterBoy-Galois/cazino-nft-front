@@ -45,10 +45,10 @@ Object {
                 class="container username username--mobile"
               >
                 <div
-                  class="avatar"
+                  class="avatar "
                 >
                   <img
-                    alt="NI"
+                    alt=""
                     class="w-100 h-100"
                     src="https://dev.gambilife.com/ava/m1.svg"
                   />
@@ -66,10 +66,10 @@ Object {
                   class="container username username--desktop"
                 >
                   <div
-                    class="avatar"
+                    class="avatar "
                   >
                     <img
-                      alt="NI"
+                      alt=""
                       class="w-100 h-100"
                       src="https://dev.gambilife.com/ava/m1.svg"
                     />
@@ -293,10 +293,10 @@ Object {
               class="container username username--mobile"
             >
               <div
-                class="avatar"
+                class="avatar "
               >
                 <img
-                  alt="NI"
+                  alt=""
                   class="w-100 h-100"
                   src="https://dev.gambilife.com/ava/m1.svg"
                 />
@@ -314,10 +314,10 @@ Object {
                 class="container username username--desktop"
               >
                 <div
-                  class="avatar"
+                  class="avatar "
                 >
                   <img
-                    alt="NI"
+                    alt=""
                     class="w-100 h-100"
                     src="https://dev.gambilife.com/ava/m1.svg"
                   />

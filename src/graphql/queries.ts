@@ -156,3 +156,13 @@ export const BET_DETAILS_SERVER_SEED = gql`
     }
   }
 `;
+
+export const ME = gql`
+  query Me {
+    me {
+      id
+      username
+      avatarUrl
+    }
+  }
+`;

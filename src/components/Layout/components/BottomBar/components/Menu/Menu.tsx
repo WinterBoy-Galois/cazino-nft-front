@@ -16,7 +16,7 @@ const Menu: React.SFC<IProps> = ({ hasUnclaimedBonus }) => {
       <div className={styles.menu}>Burger Menu</div>
       <div
         className={styles.item}
-        onClick={() => dispatch({ type: 'SHOW_MODAL', payload: { type: 'USER_INFO_MODAL' } })}
+        onClick={() => dispatch({ type: 'MODAL_SHOW', payload: { type: 'USER_INFO_MODAL' } })}
       >
         <Present className={styles.item__icon} />
         {hasUnclaimedBonus ? (

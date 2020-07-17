@@ -1,0 +1,25 @@
+@import '../../styles/shared';
+
+.illustration {
+  display: none;
+
+  @include media-breakpoint-up(md) {
+    display: unset;
+  }
+}
+
+.spacing {
+  &__top {
+    margin-top: 1rem;
+  }
+
+  &__bottom {
+    margin-bottom: 1rem;
+  }
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
