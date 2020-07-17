@@ -4,14 +4,12 @@ import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
 import SignInModal from '.';
-import { GenericErrorSeverity, GenericErrorType } from '../../models/genericError.model';
 
 const data = {
   genericError: {
-    type: GenericErrorType.FIELD,
-    field: '',
-    severity: GenericErrorSeverity.CRITICAL,
-    messageKey: '',
+    source: null,
+    code: 'AUTH_ERROR',
+    message: 'Authentication error',
     args: null,
   },
 };
