@@ -4,10 +4,32 @@
   font-size: 20px;
   margin-top: 3rem;
   font-weight: 400;
+
+  @include media-breakpoint-up(md) {
+    font-size: 30px;
+    margin-top: 0;
+  }
 }
 
 .code-input {
   display: flex;
   justify-content: center;
   margin: 3rem 0;
+
+  @include media-breakpoint-up(md) {
+    margin: 0;
+    justify-content: flex-start;
+  }
+}
+
+.illustration {
+  display: none;
+
+  @include media-breakpoint-up(md) {
+    display: unset;
+  }
+}
+
+.text {
+  font-size: 20px;
 }

@@ -3,6 +3,7 @@ import styles from './AccountActivationModal.module.scss';
 import { GraphQLError } from 'graphql';
 import Modal from '../Modal';
 import CodeInput from '../CodeInput';
+import activationIllustration from '../../assets/images/auth/safe-locker.svg';
 
 interface IProps {
   show: boolean;
@@ -14,15 +15,23 @@ interface IProps {
 const AccountActivationModal: React.SFC<IProps> = ({ show, onClose }) => {
   return (
     <Modal show={show} onClose={onClose} title="ACTIVATE ACCOUNT">
-      <h1 className={styles.headline}>Your account successfully created</h1>
+      <div className="row">
+        <div className="col-12 col-md-8">
+          <h1 className={styles.headline}>Your account successfully created</h1>
 
-      <p>
-        We’ve sent activation code to your e-mail. Please enter 6 digit number below to activate
-        your account.
-      </p>
+          <p className={styles.text}>
+            We’ve sent activation code to your e-mail.
+            <br />
+            Please enter 6 digit number below to activate your account.
+          </p>
 
-      <div className={styles['code-input']}>
-        <CodeInput />
+          <div className={styles['code-input']}>
+            <CodeInput />
+          </div>
+        </div>
+        <div className={`col-12 col-md-4 ${styles.illustration}`}>
+          <img src={activationIllustration} alt="Sign In Character" />
+        </div>
       </div>
     </Modal>
   );
