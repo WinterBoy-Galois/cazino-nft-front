@@ -17,6 +17,7 @@ import { ErrorSummary, CheckboxInput } from '..';
 import Uppercase from '../Uppercase';
 import Link from '../Link';
 import SpinnerButton from '../SpinnerButton';
+// import { getGeneralErrors } from '../../common/util/error.util';
 
 interface IProps {
   show: boolean;
@@ -75,15 +76,17 @@ const SignInModal: React.FC<IProps> = ({
     }
   };
 
+  // const generalErrors = getGeneralErrors(errors);
+
   return (
     <Modal show={show} onClose={handleClose} title={t('signIn.headline')}>
       <div className="row">
         <div className="col-12 col-md-7">
           <form onSubmit={formik.handleSubmit}>
-            {errors && (
+            {errors && errors.length > 0 && (
               <ErrorSummary
                 className={styles.spacing__bottom}
-                message="Your email or password is wrong."
+                message="Unknown server error - administrators are notified."
               />
             )}
             <TextInput
@@ -161,6 +164,8 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
 
     if (errors || data.signIn.errors) {
       setErrors(errors ?? data.signIn.errors);
+      // console.log('errors', errors);
+      // console.log('errors', data?.signIn?.errors);
       return;
     }
 
