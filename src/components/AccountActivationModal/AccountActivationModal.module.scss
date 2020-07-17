@@ -1,6 +1,13 @@
 @import '../../styles/shared';
 
-.container {
+.headline {
+  font-size: 20px;
+  margin-top: 3rem;
+  font-weight: 400;
+}
+
+.code-input {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  margin: 3rem 0;
 }

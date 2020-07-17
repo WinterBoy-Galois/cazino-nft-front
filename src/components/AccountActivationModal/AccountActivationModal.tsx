@@ -1,5 +1,5 @@
 import React from 'react';
-// import styles from './AccountActivationModal.module.scss';
+import styles from './AccountActivationModal.module.scss';
 import { GraphQLError } from 'graphql';
 import Modal from '../Modal';
 import CodeInput from '../CodeInput';
@@ -14,14 +14,16 @@ interface IProps {
 const AccountActivationModal: React.SFC<IProps> = ({ show, onClose }) => {
   return (
     <Modal show={show} onClose={onClose} title="ACTIVATE ACCOUNT">
-      <h1>Your account successfully created</h1>
+      <h1 className={styles.headline}>Your account successfully created</h1>
 
       <p>
         We’ve sent activation code to your e-mail. Please enter 6 digit number below to activate
         your account.
       </p>
 
-      <CodeInput />
+      <div className={styles['code-input']}>
+        <CodeInput />
+      </div>
     </Modal>
   );
 };
