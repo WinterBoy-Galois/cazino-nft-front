@@ -13,3 +13,6 @@ const data = {
 };
 
 export const Default = () => <AccountActivationModal show={data.show} loading={data.loading} />;
+export const withError = () => (
+  <AccountActivationModal show={data.show} loading={data.loading} errors={[]} />
+);

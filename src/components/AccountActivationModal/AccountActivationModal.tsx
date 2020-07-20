@@ -5,7 +5,6 @@ import CodeInput from '../CodeInput';
 import activationIllustration from '../../assets/images/auth/safe-locker.svg';
 import { useMutation } from '@apollo/react-hooks';
 import { ACTIVATE_ACCOUNT } from '../../graphql/mutations';
-import { ApolloError } from 'apollo-client';
 import { useStateValue } from '../../state';
 import { success } from '../Toast';
 import Link from '../Link';
@@ -14,7 +13,7 @@ import Uppercase from '../Uppercase';
 interface IProps {
   show: boolean;
   loading: boolean;
-  error?: ApolloError;
+  errors?: any[];
   onClose?: () => void;
   onActivateUser?: (code: string) => void;
   onResendEmail?: () => void;
@@ -26,6 +25,7 @@ const AccountActivationModal: React.SFC<IProps> = ({
   onActivateUser,
   loading,
   onResendEmail,
+  errors,
 }) => {
   return (
     <Modal show={show} onClose={onClose} title="ACTIVATE ACCOUNT">
@@ -41,6 +41,7 @@ const AccountActivationModal: React.SFC<IProps> = ({
 
           <div className={styles['code-input']}>
             <CodeInput onComplete={onActivateUser} disabled={loading} />
+            {errors && <div className={styles.inputField__error}>Invalid activation code</div>}
           </div>
 
           <Uppercase>
@@ -83,7 +84,7 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
     <AccountActivationModal
       show={show}
       loading={loading}
-      error={error}
+      errors={[error]}
       onClose={onClose}
       onActivateUser={handleActivateAccount}
       onResendEmail={handleResendEmail}

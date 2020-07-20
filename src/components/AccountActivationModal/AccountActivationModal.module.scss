@@ -15,12 +15,15 @@
 
 .code-input {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: 3rem 0;
 
   @include media-breakpoint-up(md) {
     margin: 0 0 1rem;
     justify-content: flex-start;
+    align-items: flex-start;
   }
 }
 
@@ -39,5 +42,18 @@
   @include media-breakpoint-up(md) {
     font-size: 20px;
     text-align: left;
+  }
+}
+
+.inputField {
+  &__error {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+    color: $red;
+    user-select: none;
+    margin: 0.5rem 0 0;
   }
 }
