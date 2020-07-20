@@ -8,8 +8,8 @@ import { ACTIVATE_ACCOUNT } from '../../graphql/mutations';
 import { ApolloError } from 'apollo-client';
 import { useStateValue } from '../../state';
 import { success } from '../Toast';
-import Uppercase from '../Uppercase';
 import Link from '../Link';
+import Uppercase from '../Uppercase';
 
 interface IProps {
   show: boolean;
