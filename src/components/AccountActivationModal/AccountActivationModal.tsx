@@ -8,6 +8,8 @@ import { ACTIVATE_ACCOUNT } from '../../graphql/mutations';
 import { ApolloError } from 'apollo-client';
 import { useStateValue } from '../../state';
 import { success } from '../Toast';
+import Uppercase from '../Uppercase';
+import Link from '../Link';
 
 interface IProps {
   show: boolean;
@@ -15,9 +17,16 @@ interface IProps {
   error?: ApolloError;
   onClose?: () => void;
   onActivateUser?: (code: string) => void;
+  onResendEmail?: () => void;
 }
 
-const AccountActivationModal: React.SFC<IProps> = ({ show, onClose, onActivateUser, loading }) => {
+const AccountActivationModal: React.SFC<IProps> = ({
+  show,
+  onClose,
+  onActivateUser,
+  loading,
+  onResendEmail,
+}) => {
   return (
     <Modal show={show} onClose={onClose} title="ACTIVATE ACCOUNT">
       <div className="row">
@@ -33,6 +42,12 @@ const AccountActivationModal: React.SFC<IProps> = ({ show, onClose, onActivateUs
           <div className={styles['code-input']}>
             <CodeInput onComplete={onActivateUser} disabled={loading} />
           </div>
+
+          <Uppercase>
+            <span>{"Havent't received an email from us?"}</span>
+            &nbsp;
+            <Link onClick={onResendEmail}>resend email</Link>
+          </Uppercase>
         </div>
         <div className={`col-12 col-md-4 ${styles.illustration}`}>
           <img src={activationIllustration} alt="Sign In Character" />
@@ -58,9 +73,11 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
   const handleActivateAccount = async (code: string) => {
     await activateAccount({ variables: { code } });
     dispatch({ type: 'MODAL_HIDE' });
-    success('Your account was successfully activated');
     dispatch({ type: 'AUTH_UPDATE_USER', payload: { isActivated: true } });
+    success('Your account was successfully activated');
   };
+
+  const handleResendEmail = () => null;
 
   return (
     <AccountActivationModal
@@ -69,6 +86,7 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
       error={error}
       onClose={onClose}
       onActivateUser={handleActivateAccount}
+      onResendEmail={handleResendEmail}
     />
   );
 };
