@@ -9,6 +9,7 @@
   @include media-breakpoint-up(md) {
     font-size: 30px;
     margin-top: 0;
+    text-align: left;
   }
 }
 
@@ -18,7 +19,7 @@
   margin: 3rem 0;
 
   @include media-breakpoint-up(md) {
-    margin: 0;
+    margin: 0 0 1rem;
     justify-content: flex-start;
   }
 }
@@ -37,5 +38,6 @@
 
   @include media-breakpoint-up(md) {
     font-size: 20px;
+    text-align: left;
   }
 }

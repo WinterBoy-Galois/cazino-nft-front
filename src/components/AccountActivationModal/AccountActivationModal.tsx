@@ -44,7 +44,7 @@ const AccountActivationModal: React.SFC<IProps> = ({
           </div>
 
           <Uppercase>
-            <span>{"Havent't received an email from us?"}</span>
+            <span>{"Didn't receive an email from us?"}</span>
             &nbsp;
             <Link onClick={onResendEmail}>resend email</Link>
           </Uppercase>
