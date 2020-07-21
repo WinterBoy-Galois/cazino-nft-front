@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useMutation } from '@apollo/react-hooks';
@@ -11,18 +10,18 @@ import TextInput from '../TextInput';
 import PasswordInput from '../PasswordInput';
 import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
-import { GraphQLError } from 'graphql';
-import { GenericError } from '../../models/genericError.model';
 import { ErrorSummary, CheckboxInput } from '..';
 import Uppercase from '../Uppercase';
 import Link from '../Link';
 import SpinnerButton from '../SpinnerButton';
-// import { getGeneralErrors } from '../../common/util/error.util';
+import ApplicationError from '../../models/applicationError.model';
+import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
+import { validationSchema } from './lib/validationSchema';
 
 interface IProps {
   show: boolean;
   loading: boolean;
-  errors?: GraphQLError[] | GenericError[];
+  errors?: ApplicationError[];
   onClose?: () => void;
   onSignIn?: (email: string, password: string, remember: boolean) => void;
   onNavigateToSignUp?: () => void;
@@ -46,12 +45,7 @@ const SignInModal: React.FC<IProps> = ({
       remember: false,
     },
     validateOnMount: true,
-    validationSchema: Yup.object().shape({
-      email: Yup.string()
-        .required(t('validation.email.required'))
-        .email(t('validation.email.valid')),
-      password: Yup.string().required(t('validation.password.required')),
-    }),
+    validationSchema: validationSchema(t),
     onSubmit: values => {
       onSignIn(values.email, values.password, values.remember);
     },
@@ -75,8 +69,6 @@ const SignInModal: React.FC<IProps> = ({
       onNavigateToSignUp();
     }
   };
-
-  // const generalErrors = getGeneralErrors(errors);
 
   return (
     <Modal show={show} onClose={handleClose} title={t('signIn.headline')}>
@@ -155,18 +147,17 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
   const [signIn] = useMutation(SIGN_IN);
   const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState<boolean>(false);
-  const [errors, setErrors] = useState<GraphQLError[]>();
+  const [errors, setErrors] = useState<ApplicationError[]>();
 
   const handleSignIn = async (email: string, password: string, remember: boolean) => {
     setLoading(true);
     const { data, errors } = await signIn({ variables: { email, password, remember } });
     setLoading(false);
 
-    if (errors || data.signIn.errors) {
-      setErrors(errors ?? data.signIn.errors);
-      // console.log('errors', errors);
-      // console.log('errors', data?.signIn?.errors);
-      return;
+    if (errors) {
+      setErrors(getFromGraphQLErrors(errors));
+    } else if (data?.signIn?.errors) {
+      setErrors(getFromGenericErrors(data.signIn.errors));
     }
 
     dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn } });
