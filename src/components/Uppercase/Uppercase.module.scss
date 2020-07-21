@@ -1,0 +1,19 @@
+@import '../../styles/shared';
+
+.container {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  color: $live-updates-light-blue;
+
+  @include media-breakpoint-up(md) {
+    text-align: left;
+  }
+
+  * {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}

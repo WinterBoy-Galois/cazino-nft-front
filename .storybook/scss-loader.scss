@@ -39,3 +39,8 @@
 @import '../src/components/Carousel/Carousel.scss';
 
 @import '../src/styles/react-toastify/main';
+
+body,
+html {
+  background: none !important;
+}

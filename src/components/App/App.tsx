@@ -2,24 +2,28 @@ import React from 'react';
 import Layout from '../Layout/Layout';
 import { Router } from '@reach/router';
 import HomePage from '../../pages/home';
-import { StateProvider } from '../../state';
 import { ApolloProvider } from '@apollo/react-hooks';
-import client from '../../graphql/client';
 import { ToastContainer } from '../Toast';
+import AuthOverlay from '../AuthOverlay';
+import { useApolloClient } from '../../hooks/useApolloClient.hook';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+import { appConfig } from '../../common/config';
 
-const App: React.SFC = () => {
+const App: React.FC = () => {
+  const client = useApolloClient();
   return (
-    <StateProvider>
-      <ApolloProvider client={client}>
-        <Layout>
-          <Router>
-            <HomePage path="/" />
-          </Router>
-        </Layout>
-      </ApolloProvider>
-
-      <ToastContainer />
-    </StateProvider>
+    <ApolloProvider client={client}>
+      <GoogleReCaptchaProvider reCaptchaKey={appConfig.reCaptchaSiteKey}>
+        <AuthOverlay>
+          <Layout>
+            <Router>
+              <HomePage path="/" />
+            </Router>
+          </Layout>
+          <ToastContainer />
+        </AuthOverlay>
+      </GoogleReCaptchaProvider>
+    </ApolloProvider>
   );
 };
 

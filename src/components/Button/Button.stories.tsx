@@ -7,6 +7,7 @@ import { ButtonSize } from './lib/size';
 
 storiesOf('Components/buttons/Button', module)
   .addDecorator(withKnobs)
+  .addDecorator(storyFn => <div style={{ padding: '1rem', maxWidth: '200px' }}>{storyFn()}</div>)
   .add('default', () => (
     <Button
       onClick={action('button click')}

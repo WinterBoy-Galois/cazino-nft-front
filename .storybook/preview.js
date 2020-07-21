@@ -9,4 +9,8 @@ addParameters({
     showRoots: true,
   },
   viewport: { viewports: INITIAL_VIEWPORTS, defaultViewport: 'iphone6' },
+  backgrounds: [
+    { name: 'Primary', value: '#091b33', default: true },
+    { name: 'Secondary', value: '#2d4560' },
+  ],
 });

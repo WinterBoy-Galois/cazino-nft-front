@@ -3,15 +3,19 @@ import { transitionTimeout } from '../Modal';
 import { ModalType } from '../../../state/models/modal.model';
 
 export const closeModal = (dispatch: (value: Action) => void) => {
-  dispatch({ type: 'HIDE_MODAL' });
+  dispatch({ type: 'MODAL_HIDE' });
 };
 
-export const replaceModal = (dispatch: (value: Action) => void, newModal: ModalType, data: any) => {
+export const replaceModal = (
+  dispatch: (value: Action) => void,
+  newModal: ModalType,
+  data?: any
+) => {
   closeModal(dispatch);
   setTimeout(
     () =>
       dispatch({
-        type: 'SHOW_MODAL',
+        type: 'MODAL_SHOW',
         payload: { type: newModal, data },
       }),
     transitionTimeout

@@ -68,7 +68,7 @@ const LatestBetsTable: React.FC<IProps> = ({
   }
 
   const handleRowClick = (bet: Bet) => {
-    dispatch({ type: 'SHOW_MODAL', payload: { type: 'BET_DETAILS_MODAL', data: { bet } } });
+    dispatch({ type: 'MODAL_SHOW', payload: { type: 'BET_DETAILS_MODAL', data: { bet } } });
   };
 
   return (

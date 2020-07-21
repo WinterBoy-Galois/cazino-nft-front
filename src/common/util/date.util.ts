@@ -44,6 +44,7 @@ const datetimeFromEpochShort = (value: number) => {
   return result;
 };
 
+const getEpoch = () => +new Date() / 1000;
 export {
   dateFromEpoch,
   dateFromEpochShort,
@@ -51,4 +52,5 @@ export {
   timeFromEpochShort,
   datetimeFromEpoch,
   datetimeFromEpochShort,
+  getEpoch,
 };

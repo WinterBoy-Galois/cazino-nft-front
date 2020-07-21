@@ -1,0 +1,88 @@
+@import '../../styles/shared';
+
+.inputField {
+  text-align: left;
+  background-color: $form-background;
+  color: $white;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 24px;
+  margin-left: 0;
+  padding: 0;
+  transition: all 0.2s ease-in;
+  outline: none;
+  border: none;
+
+  &__container {
+    min-width: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  &__wrapper {
+    flex: 1;
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    border: 2px solid $form-background;
+    border-radius: 8px;
+    background-color: $form-background;
+    height: 57px;
+    vertical-align: bottom;
+    transition: all 0.2s ease-in;
+
+    &:focus-within {
+      border: 2px solid $bitcoinYellow;
+    }
+
+    &--error {
+      border: 2px solid $red;
+
+      &:focus-within {
+        border: 2px solid $red;
+      }
+    }
+
+    input[type='text'].inputField {
+      size: '';
+      width: 100%;
+    }
+
+    input {
+      filter: none;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus {
+      border: none;
+      -webkit-text-fill-color: $white;
+      -webkit-box-shadow: 0 0 0 1000px $form-background inset;
+      box-shadow: 0 0 0 1000px $form-background inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+
+  &__label {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+    color: $live-updates-light-blue;
+    user-select: none;
+    margin: 0;
+  }
+
+  &__error {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+    color: $red;
+    user-select: none;
+    margin: 4px 8px 4px 8px;
+  }
+}

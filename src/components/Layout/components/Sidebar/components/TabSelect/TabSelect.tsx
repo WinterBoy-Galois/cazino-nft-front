@@ -32,7 +32,7 @@ const TabSelect: React.SFC = () => {
       {tabs.map((tab, i) => (
         <button
           key={`tabSelect_${i}`}
-          onClick={() => dispatch({ type: 'SELECT_SIDEBAR_TAB', payload: tab.id })}
+          onClick={() => dispatch({ type: 'SIDEBAR_SELECT_TAB', payload: tab.id })}
           className={`${styles.button} ${selectedTab === tab.id && styles['button--active']}`}
         >
           {t(`tabs.${tab.translationId}`)}

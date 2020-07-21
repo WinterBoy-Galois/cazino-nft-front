@@ -28,7 +28,7 @@ const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error 
           reduceMotion={true}
           onUsernameClicked={userId =>
             dispatch({
-              type: 'SHOW_MODAL',
+              type: 'MODAL_SHOW',
               payload: { type: 'USER_INFO_MODAL', data: { userId } },
             })
           }
