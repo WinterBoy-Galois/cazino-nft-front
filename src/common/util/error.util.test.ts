@@ -51,38 +51,6 @@ describe('ErrorUtil', () => {
       expect(actual).toHaveLength(expected);
     });
 
-    it('should return only errors with no source', () => {
-      // Arrange
-      const value = [
-        {
-          source: null,
-          code: 'AUTH_ERROR',
-          message: 'Authentication error',
-          args: null,
-        },
-        {
-          source: 'email',
-          code: 'NOT_VALID_EMAIL',
-          message: 'Not a valid e-mail',
-          args: null,
-        },
-        {
-          source: 'password',
-          code: 'INVALID_PASSWORD',
-          message: 'Invalid password',
-          args: null,
-        },
-      ];
-
-      // Act
-      const actual = getFromGenericErrors(value);
-
-      // Assert
-      const expected = 1;
-
-      expect(actual).toHaveLength(expected);
-    });
-
     it('should return a localized message for code', () => {
       // Arrange
       const value = 'AUTH_ERROR';

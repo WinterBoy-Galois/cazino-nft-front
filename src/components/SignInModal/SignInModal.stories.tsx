@@ -4,14 +4,11 @@ import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
 import SignInModal from '.';
+import ApplicationError from '../../models/applicationError.model';
 
-const data = {
-  genericError: {
-    source: null,
-    code: 'AUTH_ERROR',
-    message: 'Authentication error',
-    args: null,
-  },
+const data: ApplicationError = {
+  code: 'AUTH_ERROR',
+  message: 'Authentication error',
 };
 
 export default {
@@ -33,7 +30,7 @@ export const WithErrorSummary = () => (
   <SignInModal
     show={boolean('Show', true)}
     loading={boolean('Loading', false)}
-    errors={[data.genericError]}
+    errors={[data]}
     onClose={action('close modal')}
   />
 );

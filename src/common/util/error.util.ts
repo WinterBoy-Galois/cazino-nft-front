@@ -25,9 +25,7 @@ const getFromGraphQLErrors = (errors?: GraphQLError[]) => {
         args: error.args,
       };
 
-      if (newError.source === null) {
-        result.push(newError);
-      }
+      result.push(newError);
     }
   });
 
@@ -55,9 +53,7 @@ const getFromGenericErrors = (errors?: GenericError[]) => {
         args: error.args,
       };
 
-      if (newError.source === null) {
-        result.push(newError);
-      }
+      result.push(newError);
     }
   });
 
