@@ -64,6 +64,8 @@ const getMessageFromCode = (t: TFunction, code: string) => {
   switch (code) {
     case 'AUTH_ERROR':
       return t('errors.AUTH_ERROR');
+    case 'ALREADY_EXIST':
+      return t('errors.ALREADY_EXISTS');
     default:
       return t('errors.SERVER_ERROR');
   }

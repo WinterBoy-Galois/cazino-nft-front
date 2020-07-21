@@ -8,6 +8,8 @@ const translate = (key: string) => {
   switch (key) {
     case 'errors.AUTH_ERROR':
       return 'Authentication error';
+    case 'errors.ALREADY_EXISTS':
+      return 'Username already exists';
     default:
       return 'Unknown server error - administrators are notified';
   }
@@ -64,7 +66,20 @@ describe('ErrorUtil', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('should return a general message for unknown code', () => {
+    it('should return a specific message for a known code', () => {
+      // Arrange
+      const value = 'ALREADY_EXIST';
+
+      // Act
+      const actual = getMessageFromCode(mockedTranslation, value);
+
+      // Assert
+      const expected = 'Username already exists';
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('should return a general message for an unknown code', () => {
       // Arrange
       const value = 'THIS_IS_NO_REAL_ERROR_CODE';
 

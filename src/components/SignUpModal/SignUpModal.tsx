@@ -39,7 +39,7 @@ const SignUpModal: React.FC<IProps> = ({
   loading,
   errors,
 }: IProps) => {
-  const { t } = useTranslation(['auth']);
+  const { t } = useTranslation(['auth', 'common']);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const formik = useFormik({
@@ -91,7 +91,13 @@ const SignUpModal: React.FC<IProps> = ({
       )}
       <div className="row">
         <div className="col-12 col-md-7">
-          {errors && <ErrorSummary className={styles.spacing__bottom} errors={errors} />}
+          {errors && (
+            <ErrorSummary
+              className={styles.spacing__bottom}
+              errors={errors}
+              showGeneralErrorsOnly={false}
+            />
+          )}
 
           <form onSubmit={formik.handleSubmit}>
             <TextInput
@@ -192,8 +198,10 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
 
     if (errors) {
       setErrors(getFromGraphQLErrors(errors));
+      return;
     } else if (data?.registerUser?.errors) {
       setErrors(getFromGenericErrors(data.registerUser.errors));
+      return;
     }
 
     dispatch({ type: 'AUTH_SIGN_UP', payload: { ...data.registerUser } });

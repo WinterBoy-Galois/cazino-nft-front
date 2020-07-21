@@ -76,7 +76,11 @@ const SignInModal: React.FC<IProps> = ({
         <div className="col-12 col-md-7">
           <form onSubmit={formik.handleSubmit}>
             {errors && errors.length > 0 && (
-              <ErrorSummary className={styles.spacing__bottom} errors={errors} />
+              <ErrorSummary
+                className={styles.spacing__bottom}
+                errors={errors}
+                showGeneralErrorsOnly={false}
+              />
             )}
             <TextInput
               label={t('labels.email')}
@@ -153,8 +157,10 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
 
     if (errors) {
       setErrors(getFromGraphQLErrors(errors));
+      return;
     } else if (data?.signIn?.errors) {
       setErrors(getFromGenericErrors(data.signIn.errors));
+      return;
     }
 
     dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn } });
