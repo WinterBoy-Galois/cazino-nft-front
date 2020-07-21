@@ -25,24 +25,78 @@ describe('ErrorSummary', () => {
   describe('for single error', () => {
     it('should match snapshot', () => {
       // Arrange
+      const values = data;
 
       // Act
-      const container = render(<ErrorSummary errors={data} />);
+      const container = render(<ErrorSummary errors={values} showGeneralErrorsOnly={false} />);
 
       // Assert
       expect(container).toMatchSnapshot();
+    });
+
+    it('should not display as a list', () => {
+      // Arrange
+      const value = data[0];
+
+      // Act
+      const { getByText } = render(<ErrorSummary errors={[value]} showGeneralErrorsOnly={false} />);
+      const element = getByText('Authentication error');
+
+      // Assert
+      expect(element).toMatchInlineSnapshot(`
+        <div
+          class="wrapper"
+        >
+          Authentication error
+        </div>
+      `);
     });
   });
 
   describe('for multiple errors', () => {
     it('should match snapshot', () => {
       // Arrange
+      const values = data;
 
       // Act
-      const container = render(<ErrorSummary errors={data} showGeneralErrorsOnly={false} />);
+      const container = render(<ErrorSummary errors={values} showGeneralErrorsOnly={false} />);
 
       // Assert
       expect(container).toMatchSnapshot();
+    });
+
+    it('should display as a list', () => {
+      // Arrange
+      const value = data[0];
+
+      // Act
+      const { getAllByRole } = render(
+        <ErrorSummary errors={[value, value]} showGeneralErrorsOnly={false} />
+      );
+      const listItems = getAllByRole('listitem');
+
+      // Assert
+      expect(listItems).toHaveLength(2);
+    });
+  });
+
+  describe('for general errors only', () => {
+    it('should remove all errors with a source', () => {
+      // Arrange
+      const values = data;
+
+      // Act
+      const { getByText } = render(<ErrorSummary errors={values} />);
+      const element = getByText('Authentication error');
+
+      // Assert
+      expect(element).toMatchInlineSnapshot(`
+        <div
+          class="wrapper"
+        >
+          Authentication error
+        </div>
+      `);
     });
   });
 });

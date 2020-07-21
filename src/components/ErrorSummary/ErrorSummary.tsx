@@ -10,13 +10,37 @@ interface IProps {
 }
 
 const ErrorSummary: React.SFC<IProps> = ({
-  // errors,
-  // showGeneralErrorsOnly = true,
+  errors,
+  showGeneralErrorsOnly = true,
   className = '',
 }) => {
+  if (showGeneralErrorsOnly) {
+    errors = errors.filter((error: ApplicationError) => {
+      return !error.source;
+    });
+  }
+
+  if (errors.length === 0) {
+    return <></>;
+  }
+
+  if (errors.length === 1) {
+    return (
+      <div className={`${styles.container} ${className}`}>
+        <div className={styles.wrapper}>{errors[0].message}</div>
+      </div>
+    );
+  }
+
+  const listItems = errors.map((error: ApplicationError, index) => {
+    return <li key={index}>{error.message}</li>;
+  });
+
   return (
     <div className={`${styles.container} ${className}`}>
-      <div className={styles.wrapper}></div>
+      <div className={styles.wrapper}>
+        <ul>{listItems}</ul>
+      </div>
     </div>
   );
 };

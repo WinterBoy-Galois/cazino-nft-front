@@ -10,7 +10,19 @@ Object {
       >
         <div
           class="wrapper"
-        />
+        >
+          <ul>
+            <li>
+              Authentication error
+            </li>
+            <li>
+              Not a valid e-mail
+            </li>
+            <li>
+              Invalid password
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>,
@@ -20,7 +32,19 @@ Object {
     >
       <div
         class="wrapper"
-      />
+      >
+        <ul>
+          <li>
+            Authentication error
+          </li>
+          <li>
+            Not a valid e-mail
+          </li>
+          <li>
+            Invalid password
+          </li>
+        </ul>
+      </div>
     </div>
   </div>,
   "debug": [Function],
@@ -87,7 +111,19 @@ Object {
       >
         <div
           class="wrapper"
-        />
+        >
+          <ul>
+            <li>
+              Authentication error
+            </li>
+            <li>
+              Not a valid e-mail
+            </li>
+            <li>
+              Invalid password
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>,
@@ -97,7 +133,19 @@ Object {
     >
       <div
         class="wrapper"
-      />
+      >
+        <ul>
+          <li>
+            Authentication error
+          </li>
+          <li>
+            Not a valid e-mail
+          </li>
+          <li>
+            Invalid password
+          </li>
+        </ul>
+      </div>
     </div>
   </div>,
   "debug": [Function],
