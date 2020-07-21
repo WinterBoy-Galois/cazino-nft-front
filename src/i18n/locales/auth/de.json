@@ -48,6 +48,7 @@
     }
   },
   "errors": {
-    "ALREADY_EXISTS": "Der Benutzername ist bereits vergeben"
+    "ALREADY_EXISTS": "Der Benutzername ist bereits vergeben",
+    "INVALID_ACTIVATION_CODE": "Der eingegebene Aktivierungscode ist ungültig."
   }
 }

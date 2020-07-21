@@ -9,11 +9,15 @@ import { useStateValue } from '../../state';
 import { success, info } from '../Toast';
 import Link from '../Link';
 import Uppercase from '../Uppercase';
+import ApplicationError from '../../models/applicationError.model';
+import { useTranslation } from 'react-i18next';
+import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
+import ErrorSummary from '../ErrorSummary';
 
 interface IProps {
   show: boolean;
   loading: boolean;
-  errors?: any[];
+  errors?: ApplicationError[];
   onClose?: () => void;
   onActivateUser?: (code: string) => void;
   onResendEmail?: () => void;
@@ -41,7 +45,7 @@ const AccountActivationModal: React.SFC<IProps> = ({
 
           <div className={styles['code-input']}>
             <CodeInput onComplete={onActivateUser} disabled={loading} />
-            {errors && <div className={styles.inputField__error}>Invalid activation code</div>}
+            {errors && <ErrorSummary errors={errors} showBorder={false} className={styles.error} />}
           </div>
 
           <Uppercase>
@@ -68,17 +72,19 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
   show,
   onClose,
 }: IWithDataProps) => {
+  const { t } = useTranslation(['auth', 'common']);
   const [activateAccount, { loading }] = useMutation(ACTIVATE_ACCOUNT);
   const [resendActivationCode] = useMutation(RESEND_ACTIVATION_CODE);
   const [, dispatch] = useStateValue();
-  const [errors, setErrors] = useState<any[]>();
+  const [errors, setErrors] = useState<ApplicationError[]>();
 
   const handleActivateAccount = async (code: string) => {
-    const { errors: activateAccountErrors } = await activateAccount({ variables: { code } });
+    const { data, errors: activateAccountErrors } = await activateAccount({ variables: { code } });
 
-    if (errors) {
-      setErrors(activateAccountErrors);
-      return;
+    if (activateAccountErrors) {
+      return setErrors(getFromGraphQLErrors(activateAccountErrors, t));
+    } else if (data?.activateAccount?.errors) {
+      return setErrors(getFromGenericErrors(data.activateAccount.errors, t));
     }
 
     dispatch({ type: 'MODAL_HIDE' });
@@ -87,11 +93,12 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
   };
 
   const handleResendEmail = async () => {
-    const { errors: resendActivationCodeErrors } = await resendActivationCode();
+    const { data, errors: resendActivationCodeErrors } = await resendActivationCode();
 
-    if (errors) {
-      setErrors(resendActivationCodeErrors);
-      return;
+    if (resendActivationCodeErrors) {
+      return setErrors(getFromGraphQLErrors(resendActivationCodeErrors, t));
+    } else if (data?.resendActivationCode?.errors) {
+      return setErrors(getFromGenericErrors(data.resendActivationCode.errors, t));
     }
 
     info('We sent you a new activation code.');

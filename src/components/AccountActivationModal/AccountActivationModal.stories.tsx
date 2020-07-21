@@ -10,9 +10,17 @@ export default {
 const data = {
   show: true,
   loading: false,
+  errors: [
+    {
+      code: 'INVALID_ACTIVATION_CODE',
+      message: 'Invalid activation code',
+      source: 'code',
+      args: undefined,
+    },
+  ],
 };
 
 export const Default = () => <AccountActivationModal show={data.show} loading={data.loading} />;
 export const withError = () => (
-  <AccountActivationModal show={data.show} loading={data.loading} errors={[]} />
+  <AccountActivationModal show={data.show} loading={data.loading} errors={data.errors} />
 );

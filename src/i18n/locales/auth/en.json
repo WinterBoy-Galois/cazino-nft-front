@@ -48,6 +48,7 @@
     }
   },
   "errors": {
-    "ALREADY_EXISTS": "Username already exists"
+    "ALREADY_EXISTS": "Username already exists",
+    "INVALID_ACTIVATION_CODE": "The entered activation code is invalid."
   }
 }

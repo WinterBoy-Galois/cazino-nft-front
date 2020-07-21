@@ -10,6 +10,8 @@ const getMessageFromCode = (t: TFunction, code: string) => {
       return t('errors.AUTH_ERROR');
     case 'ALREADY_EXIST':
       return t('errors.ALREADY_EXISTS');
+    case 'INVALID_ACTIVATION_CODE':
+      return t('errors.INVALID_ACTIVATION_CODE');
     default:
       return t('errors.SERVER_ERROR');
   }

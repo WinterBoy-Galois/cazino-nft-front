@@ -45,15 +45,6 @@
   }
 }
 
-.inputField {
-  &__error {
-    text-transform: uppercase;
-    display: block;
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 19px;
-    color: $red;
-    user-select: none;
-    margin: 0.5rem 0 0;
-  }
+.error {
+  margin: 0.5rem 0 0;
 }
