@@ -9,7 +9,7 @@ Object {
         class="container "
       >
         <div
-          class="wrapper"
+          class="wrapper border"
         >
           <ul>
             <li>
@@ -31,7 +31,7 @@ Object {
       class="container "
     >
       <div
-        class="wrapper"
+        class="wrapper border"
       >
         <ul>
           <li>
@@ -110,7 +110,7 @@ Object {
         class="container "
       >
         <div
-          class="wrapper"
+          class="wrapper border"
         >
           <ul>
             <li>
@@ -132,7 +132,7 @@ Object {
       class="container "
     >
       <div
-        class="wrapper"
+        class="wrapper border"
       >
         <ul>
           <li>

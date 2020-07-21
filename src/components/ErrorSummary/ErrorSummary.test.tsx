@@ -45,7 +45,7 @@ describe('ErrorSummary', () => {
       // Assert
       expect(element).toMatchInlineSnapshot(`
         <div
-          class="wrapper"
+          class="wrapper border"
         >
           Authentication error
         </div>
@@ -63,7 +63,7 @@ describe('ErrorSummary', () => {
       // Assert
       expect(element).toMatchInlineSnapshot(`
         <div
-          class="wrapper"
+          class="wrapper border"
         >
           Anmeldungsfehler
         </div>
@@ -110,7 +110,7 @@ describe('ErrorSummary', () => {
       // Assert
       expect(element).toMatchInlineSnapshot(`
         <div
-          class="wrapper"
+          class="wrapper border"
         >
           Authentication error
         </div>

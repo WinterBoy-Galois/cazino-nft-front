@@ -6,12 +6,14 @@ import ApplicationError from '../../models/applicationError.model';
 interface IProps {
   errors: ApplicationError[];
   showGeneralErrorsOnly?: boolean;
+  showBorder?: boolean;
   className?: string;
 }
 
 const ErrorSummary: React.SFC<IProps> = ({
   errors,
   showGeneralErrorsOnly = true,
+  showBorder = true,
   className = '',
 }) => {
   if (showGeneralErrorsOnly) {
@@ -29,7 +31,7 @@ const ErrorSummary: React.SFC<IProps> = ({
 
     return (
       <div className={`${styles.container} ${className}`}>
-        <div className={styles.wrapper}>
+        <div className={`${styles.wrapper} ${showBorder ? styles.border : ''}`}>
           {error.localizedMessage ? error.localizedMessage : error.message}
         </div>
       </div>
@@ -42,7 +44,7 @@ const ErrorSummary: React.SFC<IProps> = ({
 
   return (
     <div className={`${styles.container} ${className}`}>
-      <div className={styles.wrapper}>
+      <div className={`${styles.wrapper} ${showBorder ? styles.border : ''}`}>
         <ul>{listItems}</ul>
       </div>
     </div>

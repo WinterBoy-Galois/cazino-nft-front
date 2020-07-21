@@ -31,8 +31,10 @@ export default {
 
 export const Default = () => <ErrorSummary errors={[data[0]]} />;
 export const Multiple = () => <ErrorSummary errors={data} showGeneralErrorsOnly={false} />;
+export const WithoutBorder = () => <ErrorSummary errors={[data[0]]} showBorder={false} />;
 export const Custom = () => (
   <ErrorSummary
+    showBorder={boolean('Show Border', true)}
     showGeneralErrorsOnly={boolean('General Errors only', false)}
     errors={object('Errors', data)}
   />
