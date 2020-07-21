@@ -1,19 +1,15 @@
-// import { GraphQLError, Source } from 'graphql';
-// import { GenericError } from '../../models/genericError.model';
+import { GraphQLError } from 'graphql';
+import { TFunction } from 'i18next';
 
-export interface CazzzinoError {
-  source: string | null;
-  code: string;
-  message: string;
-  args: [string] | null;
-}
+import { GenericError } from '../../models/genericError.model';
+import ApplicationError from '../../models/applicationError.model';
 
-const getGeneralErrors = (errors: any[] | undefined) => {
+const getFromGraphQLErrors = (errors?: GraphQLError[]) => {
   if (errors === undefined || errors.length <= 0) {
     return [];
   }
 
-  const result: CazzzinoError[] = [];
+  const result: ApplicationError[] = [];
 
   errors.forEach((error: any) => {
     if (
@@ -22,7 +18,7 @@ const getGeneralErrors = (errors: any[] | undefined) => {
       error.message !== undefined &&
       error.args !== undefined
     ) {
-      const newError: CazzzinoError = {
+      const newError: ApplicationError = {
         source: error.source,
         code: error.code,
         message: error.message,
@@ -38,13 +34,43 @@ const getGeneralErrors = (errors: any[] | undefined) => {
   return result;
 };
 
-const getMessageFromCode = (code: string) => {
+const getFromGenericErrors = (errors?: GenericError[]) => {
+  if (errors === undefined || errors.length <= 0) {
+    return [];
+  }
+
+  const result: ApplicationError[] = [];
+
+  errors.forEach((error: any) => {
+    if (
+      error.source !== undefined &&
+      error.code !== undefined &&
+      error.message !== undefined &&
+      error.args !== undefined
+    ) {
+      const newError: ApplicationError = {
+        source: error.source,
+        code: error.code,
+        message: error.message,
+        args: error.args,
+      };
+
+      if (newError.source === null) {
+        result.push(newError);
+      }
+    }
+  });
+
+  return result;
+};
+
+const getMessageFromCode = (t: TFunction, code: string) => {
   switch (code) {
     case 'AUTH_ERROR':
-      return 'Invalid password';
+      return t('errors.AUTH_ERROR');
     default:
-      return 'Unknown server error - administrators are notified';
+      return t('errors.SERVER_ERROR');
   }
 };
 
-export { getGeneralErrors, getMessageFromCode };
+export { getFromGraphQLErrors, getFromGenericErrors, getMessageFromCode };

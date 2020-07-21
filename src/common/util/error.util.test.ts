@@ -1,88 +1,112 @@
-import { getGeneralErrors, getMessageFromCode } from './error.util';
+import { cleanup } from '@testing-library/react';
+import { GraphQLError } from 'graphql';
+
+import { getFromGraphQLErrors, getFromGenericErrors, getMessageFromCode } from './error.util';
 import { GenericError } from '../../models/genericError.model';
 
-describe('getGeneralErrors', () => {
-  it('should return 0 for an empty array', () => {
-    // Arrange
-    const value: GenericError[] = [];
+const translate = (key: string) => {
+  switch (key) {
+    case 'errors.AUTH_ERROR':
+      return 'Authentication error';
+    default:
+      return 'Unknown server error - administrators are notified';
+  }
+};
 
-    // Act
-    const actual = getGeneralErrors(value);
+describe('ErrorUtil', () => {
+  let mockedTranslation: jest.Mock;
 
-    // Assert
-    const expected = 0;
+  beforeEach(() => {
+    cleanup();
 
-    expect(actual).toHaveLength(expected);
+    mockedTranslation = jest.fn(translate);
   });
 
-  it('should return 0 for an undefined value', () => {
-    // Arrange
-    const value: GenericError[] = [];
+  describe('for GraphQLErrors', () => {
+    it('should return 0 for an empty array', () => {
+      // Arrange
+      const value: GraphQLError[] = [];
 
-    // Act
-    const actual = getGeneralErrors(value);
+      // Act
+      const actual = getFromGraphQLErrors(value);
 
-    // Assert
-    const expected = 0;
+      // Assert
+      const expected = 0;
 
-    expect(actual).toHaveLength(expected);
+      expect(actual).toHaveLength(expected);
+    });
   });
 
-  it('should return only errors with no source', () => {
-    // Arrange
-    const value = [
-      {
-        source: null,
-        code: 'AUTH_ERROR',
-        message: 'Authentication error',
-        args: null,
-      },
-      {
-        source: 'email',
-        code: 'NOT_VALID_EMAIL',
-        message: 'Not a valid e-mail',
-        args: null,
-      },
-      {
-        source: 'password',
-        code: 'INVALID_PASSWORD',
-        message: 'Invalid password',
-        args: null,
-      },
-    ];
+  describe('for GenericErrors', () => {
+    it('should return 0 for an undefined value', () => {
+      // Arrange
+      const value: GenericError[] = [];
 
-    // Act
-    const actual = getGeneralErrors(value);
+      // Act
+      const actual = getFromGenericErrors(value);
 
-    // Assert
-    const expected = 1;
+      // Assert
+      const expected = 0;
 
-    expect(actual).toHaveLength(expected);
-  });
+      expect(actual).toHaveLength(expected);
+    });
 
-  it('should return a localized message for code', () => {
-    // Arrange
-    const value = 'AUTH_ERROR';
+    it('should return only errors with no source', () => {
+      // Arrange
+      const value = [
+        {
+          source: null,
+          code: 'AUTH_ERROR',
+          message: 'Authentication error',
+          args: null,
+        },
+        {
+          source: 'email',
+          code: 'NOT_VALID_EMAIL',
+          message: 'Not a valid e-mail',
+          args: null,
+        },
+        {
+          source: 'password',
+          code: 'INVALID_PASSWORD',
+          message: 'Invalid password',
+          args: null,
+        },
+      ];
 
-    // Act
-    const actual = getMessageFromCode(value);
+      // Act
+      const actual = getFromGenericErrors(value);
 
-    // Assert
-    const expected = 'Invalid password';
+      // Assert
+      const expected = 1;
 
-    expect(actual).toEqual(expected);
-  });
+      expect(actual).toHaveLength(expected);
+    });
 
-  it('should return a general message for unknown code', () => {
-    // Arrange
-    const value = 'THIS_IS_NO_REAL_ERROR_CODE';
+    it('should return a localized message for code', () => {
+      // Arrange
+      const value = 'AUTH_ERROR';
 
-    // Act
-    const actual = getMessageFromCode(value);
+      // Act
+      const actual = getMessageFromCode(mockedTranslation, value);
 
-    // Assert
-    const expected = 'Unknown server error - administrators are notified';
+      // Assert
+      const expected = 'Authentication error';
 
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
+
+    it('should return a general message for unknown code', () => {
+      // Arrange
+      const value = 'THIS_IS_NO_REAL_ERROR_CODE';
+
+      // Act
+      const actual = getMessageFromCode(mockedTranslation, value);
+
+      // Assert
+      const expected = 'Unknown server error - administrators are notified';
+
+      expect(actual).toEqual(expected);
+    });
   });
 });
