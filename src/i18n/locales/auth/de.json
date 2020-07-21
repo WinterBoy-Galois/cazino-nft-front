@@ -46,5 +46,8 @@
       "goToSignIn": "Jetzt anmelden!",
       "loading": "Registrierung..."
     }
+  },
+  "errors": {
+    "ALREADY_EXISTS": "Der Benutzername ist bereits vergeben"
   }
 }

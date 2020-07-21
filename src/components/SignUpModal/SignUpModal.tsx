@@ -186,6 +186,7 @@ interface IWithDataProps {
 }
 
 const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
+  const { t } = useTranslation(['auth', 'common']);
   const [signUp] = useMutation(SIGN_UP);
   const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState<boolean>(false);
@@ -197,10 +198,10 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     setLoading(false);
 
     if (errors) {
-      setErrors(getFromGraphQLErrors(errors));
+      setErrors(getFromGraphQLErrors(errors, t));
       return;
     } else if (data?.registerUser?.errors) {
-      setErrors(getFromGenericErrors(data.registerUser.errors));
+      setErrors(getFromGenericErrors(data.registerUser.errors, t));
       return;
     }
 

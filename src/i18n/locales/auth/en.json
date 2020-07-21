@@ -46,5 +46,8 @@
       "goToSignIn": "Sign In now!",
       "loading": "signing up..."
     }
+  },
+  "errors": {
+    "ALREADY_EXISTS": "Username already exists"
   }
 }

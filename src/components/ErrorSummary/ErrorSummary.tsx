@@ -25,15 +25,19 @@ const ErrorSummary: React.SFC<IProps> = ({
   }
 
   if (errors.length === 1) {
+    const error: ApplicationError = errors[0];
+
     return (
       <div className={`${styles.container} ${className}`}>
-        <div className={styles.wrapper}>{errors[0].message}</div>
+        <div className={styles.wrapper}>
+          {error.localizedMessage ? error.localizedMessage : error.message}
+        </div>
       </div>
     );
   }
 
   const listItems = errors.map((error: ApplicationError, index) => {
-    return <li key={index}>{error.message}</li>;
+    return <li key={index}>{error.localizedMessage ? error.localizedMessage : error.message}</li>;
   });
 
   return (

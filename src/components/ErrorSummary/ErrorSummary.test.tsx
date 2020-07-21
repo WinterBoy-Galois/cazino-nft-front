@@ -51,6 +51,24 @@ describe('ErrorSummary', () => {
         </div>
       `);
     });
+
+    it('should show localized message if available', () => {
+      // Arrange
+      const value: ApplicationError = { ...data[0], localizedMessage: 'Anmeldungsfehler' };
+
+      // Act
+      const { getByText } = render(<ErrorSummary errors={[value]} showGeneralErrorsOnly={false} />);
+      const element = getByText('Anmeldungsfehler');
+
+      // Assert
+      expect(element).toMatchInlineSnapshot(`
+        <div
+          class="wrapper"
+        >
+          Anmeldungsfehler
+        </div>
+      `);
+    });
   });
 
   describe('for multiple errors', () => {

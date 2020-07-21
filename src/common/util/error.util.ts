@@ -4,62 +4,6 @@ import { TFunction } from 'i18next';
 import { GenericError } from '../../models/genericError.model';
 import ApplicationError from '../../models/applicationError.model';
 
-const getFromGraphQLErrors = (errors?: GraphQLError[]) => {
-  if (errors === undefined || errors.length <= 0) {
-    return [];
-  }
-
-  const result: ApplicationError[] = [];
-
-  errors.forEach((error: any) => {
-    if (
-      error.source !== undefined &&
-      error.code !== undefined &&
-      error.message !== undefined &&
-      error.args !== undefined
-    ) {
-      const newError: ApplicationError = {
-        source: error.source,
-        code: error.code,
-        message: error.message,
-        args: error.args,
-      };
-
-      result.push(newError);
-    }
-  });
-
-  return result;
-};
-
-const getFromGenericErrors = (errors?: GenericError[]) => {
-  if (errors === undefined || errors.length <= 0) {
-    return [];
-  }
-
-  const result: ApplicationError[] = [];
-
-  errors.forEach((error: any) => {
-    if (
-      error.source !== undefined &&
-      error.code !== undefined &&
-      error.message !== undefined &&
-      error.args !== undefined
-    ) {
-      const newError: ApplicationError = {
-        source: error.source,
-        code: error.code,
-        message: error.message,
-        args: error.args,
-      };
-
-      result.push(newError);
-    }
-  });
-
-  return result;
-};
-
 const getMessageFromCode = (t: TFunction, code: string) => {
   switch (code) {
     case 'AUTH_ERROR':
@@ -71,4 +15,62 @@ const getMessageFromCode = (t: TFunction, code: string) => {
   }
 };
 
-export { getFromGraphQLErrors, getFromGenericErrors, getMessageFromCode };
+const getFromGraphQLErrors = (errors?: GraphQLError[], t?: TFunction) => {
+  if (errors === undefined || errors.length <= 0) {
+    return [];
+  }
+
+  const result: ApplicationError[] = [];
+
+  errors.forEach((error: any) => {
+    if (
+      error.source !== undefined &&
+      error.code !== undefined &&
+      error.message !== undefined &&
+      error.args !== undefined
+    ) {
+      const newError: ApplicationError = {
+        source: error.source,
+        code: error.code,
+        message: error.message,
+        localizedMessage: t ? getMessageFromCode(t, error.code) : '',
+        args: error.args,
+      };
+
+      result.push(newError);
+    }
+  });
+
+  return result;
+};
+
+const getFromGenericErrors = (errors?: GenericError[], t?: TFunction) => {
+  if (errors === undefined || errors.length <= 0) {
+    return [];
+  }
+
+  const result: ApplicationError[] = [];
+
+  errors.forEach((error: any) => {
+    if (
+      error.source !== undefined &&
+      error.code !== undefined &&
+      error.message !== undefined &&
+      error.args !== undefined
+    ) {
+      const newError: ApplicationError = {
+        source: error.source,
+        code: error.code,
+        message: error.message,
+        localizedMessage: t ? getMessageFromCode(t, error.code) : '',
+        args: error.args,
+      };
+
+      result.push(newError);
+    }
+  });
+
+  return result;
+};
+
+export { getMessageFromCode, getFromGraphQLErrors, getFromGenericErrors };
