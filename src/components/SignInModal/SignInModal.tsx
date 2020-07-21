@@ -76,10 +76,7 @@ const SignInModal: React.FC<IProps> = ({
         <div className="col-12 col-md-7">
           <form onSubmit={formik.handleSubmit}>
             {errors && errors.length > 0 && (
-              <ErrorSummary
-                className={styles.spacing__bottom}
-                message="Unknown server error - administrators are notified."
-              />
+              <ErrorSummary className={styles.spacing__bottom} errors={errors} />
             )}
             <TextInput
               label={t('labels.email')}

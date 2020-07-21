@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
-import Modal, { replaceModal, transitionTimeout } from '../Modal';
-import styles from './SignUpModal.module.scss';
-import { GenericError } from '../../models/genericError.model';
-import { GraphQLError } from 'graphql';
+import { Helmet } from 'react-helmet';
 import { useMutation } from '@apollo/react-hooks';
+import { useFormik } from 'formik';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { useTranslation } from 'react-i18next';
+
+import Modal, { replaceModal, transitionTimeout } from '../Modal';
 import { useStateValue } from '../../state';
 import { SIGN_UP } from '../../graphql/mutations';
 import TextInput from '../TextInput';
 import PasswordInput from '../PasswordInput';
-import { useFormik } from 'formik';
 import signUpIllustration from '../../assets/images/auth/sign-up.svg';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import Uppercase from '../Uppercase';
 import Link from '../Link';
 import SpinnerButton from '../SpinnerButton';
 import CheckboxInput from '../CheckboxInput';
 import ErrorSummary from '../ErrorSummary';
 import { validationSchema } from './lib/validationSchema';
-import { useTranslation } from 'react-i18next';
-import { Helmet } from 'react-helmet';
+import ApplicationError from '../../models/applicationError.model';
+
+import styles from './SignUpModal.module.scss';
+import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 
 interface IProps {
   show: boolean;
   loading: boolean;
-  errors?: GraphQLError[] | GenericError[];
+  errors?: ApplicationError[];
   onClose?: () => void;
   onSignUp?: (email: string, password: string, username: string, token: string) => void;
   onNavigateToSignIn?: () => void;
@@ -89,12 +91,7 @@ const SignUpModal: React.FC<IProps> = ({
       )}
       <div className="row">
         <div className="col-12 col-md-7">
-          {errors && (
-            <ErrorSummary
-              className={styles.spacing__bottom}
-              message="Could not sign you up, please try again."
-            />
-          )}
+          {errors && <ErrorSummary className={styles.spacing__bottom} errors={errors} />}
 
           <form onSubmit={formik.handleSubmit}>
             <TextInput
@@ -186,16 +183,17 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
   const [signUp] = useMutation(SIGN_UP);
   const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState<boolean>(false);
-  const [errors, setErrors] = useState<GraphQLError[]>();
+  const [errors, setErrors] = useState<ApplicationError[]>();
 
   const handleSignUp = async (email: string, password: string, username: string, token: string) => {
     setLoading(true);
     const { data, errors } = await signUp({ variables: { email, password, username, token } });
     setLoading(false);
 
-    if (errors || data.registerUser.errors) {
-      setErrors(errors ?? data.registerUser.errors);
-      return;
+    if (errors) {
+      setErrors(getFromGraphQLErrors(errors));
+    } else if (data?.registerUser?.errors) {
+      setErrors(getFromGenericErrors(data.registerUser.errors));
     }
 
     dispatch({ type: 'AUTH_SIGN_UP', payload: { ...data.registerUser } });
