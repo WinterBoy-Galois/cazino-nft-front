@@ -15,5 +15,9 @@
       "label": "English"
     }
   },
+  "errors": {
+    "AUTH_ERROR": "Authentication error",
+    "SERVER_ERROR": "Unknown server error - administrators are notified"
+  },
   "loading": "loading..."
 }

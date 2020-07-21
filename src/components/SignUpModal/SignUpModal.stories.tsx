@@ -4,16 +4,11 @@ import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
 import SignUpModal from '.';
-import { GenericErrorType, GenericErrorSeverity } from '../../models/genericError.model';
+import ApplicationError from '../../models/applicationError.model';
 
-const data = {
-  genericError: {
-    type: GenericErrorType.FIELD,
-    field: '',
-    severity: GenericErrorSeverity.CRITICAL,
-    messageKey: '',
-    args: null,
-  },
+const data: ApplicationError = {
+  code: 'AUTH_ERROR',
+  message: 'Authentication error',
 };
 
 export default {
@@ -35,7 +30,7 @@ export const WithErrorSummary = () => (
   <SignUpModal
     show={true}
     loading={boolean('Loading', false)}
-    errors={[data.genericError]}
+    errors={[data]}
     onClose={action('close modal')}
   />
 );
