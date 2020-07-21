@@ -72,3 +72,21 @@ export const SIGN_OUT = gql`
     signOut
   }
 `;
+
+export const RESEND_ACTIVATION_CODE = gql`
+  mutation ResendActivationCode {
+    resendActivationCode {
+      ... on GenericBoolean {
+        result
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

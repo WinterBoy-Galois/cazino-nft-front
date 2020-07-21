@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './AccountActivationModal.module.scss';
 import Modal from '../Modal';
 import CodeInput from '../CodeInput';
 import activationIllustration from '../../assets/images/auth/safe-locker.svg';
 import { useMutation } from '@apollo/react-hooks';
-import { ACTIVATE_ACCOUNT } from '../../graphql/mutations';
+import { ACTIVATE_ACCOUNT, RESEND_ACTIVATION_CODE } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
-import { success } from '../Toast';
+import { success, info } from '../Toast';
 import Link from '../Link';
 import Uppercase from '../Uppercase';
 
@@ -68,23 +68,40 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
   show,
   onClose,
 }: IWithDataProps) => {
-  const [activateAccount, { loading, error }] = useMutation(ACTIVATE_ACCOUNT);
+  const [activateAccount, { loading }] = useMutation(ACTIVATE_ACCOUNT);
+  const [resendActivationCode] = useMutation(RESEND_ACTIVATION_CODE);
   const [, dispatch] = useStateValue();
+  const [errors, setErrors] = useState<any[]>();
 
   const handleActivateAccount = async (code: string) => {
-    await activateAccount({ variables: { code } });
+    const { errors: activateAccountErrors } = await activateAccount({ variables: { code } });
+
+    if (errors) {
+      setErrors(activateAccountErrors);
+      return;
+    }
+
     dispatch({ type: 'MODAL_HIDE' });
     dispatch({ type: 'AUTH_UPDATE_USER', payload: { isActivated: true } });
     success('Your account was successfully activated');
   };
 
-  const handleResendEmail = () => null;
+  const handleResendEmail = async () => {
+    const { errors: resendActivationCodeErrors } = await resendActivationCode();
+
+    if (errors) {
+      setErrors(resendActivationCodeErrors);
+      return;
+    }
+
+    info('We sent you a new activation code.');
+  };
 
   return (
     <AccountActivationModal
       show={show}
       loading={loading}
-      errors={[error]}
+      errors={errors}
       onClose={onClose}
       onActivateUser={handleActivateAccount}
       onResendEmail={handleResendEmail}
