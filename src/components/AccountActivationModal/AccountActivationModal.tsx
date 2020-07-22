@@ -31,16 +31,18 @@ const AccountActivationModal: React.SFC<IProps> = ({
   onResendEmail,
   errors,
 }) => {
+  const { t } = useTranslation(['auth']);
+
   return (
-    <Modal show={show} onClose={onClose} title="ACTIVATE ACCOUNT">
+    <Modal show={show} onClose={onClose} title={t('accountActivation.headline')}>
       <div className="row">
         <div className="col-12 col-md-8">
-          <h1 className={styles.headline}>Your account successfully created</h1>
+          <h1 className={styles.headline}>{t('accountActivation.subHeadline')}</h1>
 
           <p className={styles.text}>
-            We’ve sent activation code to your e-mail.
+            {t('accountActivation.text1')}
             <br />
-            Please enter 6 digit number below to activate your account.
+            {t('accountActivation.text2')}
           </p>
 
           <div className={styles['code-input']}>
@@ -56,9 +58,9 @@ const AccountActivationModal: React.SFC<IProps> = ({
           </div>
 
           <Uppercase>
-            <span>{"Didn't receive an email from us?"}</span>
+            <span>{t('accountActivation.resendEmailText')}</span>
             &nbsp;
-            <Link onClick={onResendEmail}>resend email</Link>
+            <Link onClick={onResendEmail}>{t('accountActivation.resendEmail')}</Link>
           </Uppercase>
         </div>
         <div className={`col-12 col-md-4 ${styles.illustration}`}>

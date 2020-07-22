@@ -47,6 +47,14 @@
       "loading": "signing up..."
     }
   },
+  "accountActivation": {
+    "headline": "activate account",
+    "subHeadline": "Your account successfully created",
+    "text1": "We’ve sent activation code to your e-mail.",
+    "text2": "Please enter 6 digit number below to activate your account.",
+    "resendEmailText": "Didn't receive an email from us?",
+    "resendEmail": "resend email"
+  },
   "errors": {
     "ALREADY_EXISTS": "Username already exists",
     "INVALID_ACTIVATION_CODE": "The entered activation code is invalid.",
