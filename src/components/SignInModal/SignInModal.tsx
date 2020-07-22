@@ -146,15 +146,13 @@ interface IWithDataProps {
 
 const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
-  const [signIn] = useMutation(SIGN_IN);
+  const [signIn, { loading }] = useMutation(SIGN_IN);
   const [, dispatch] = useStateValue();
-  const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<ApplicationError[]>();
 
   const handleSignIn = async (email: string, password: string, remember: boolean) => {
-    setLoading(true);
+    setErrors([]);
     const { data, errors } = await signIn({ variables: { email, password, remember } });
-    setLoading(false);
 
     if (errors) {
       setErrors(getFromGraphQLErrors(errors, t));
@@ -172,12 +170,20 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
 
   const handleNavigateToForgotPassword = () => null;
 
+  const handleClose = () => {
+    setTimeout(() => setErrors([]), transitionTimeout);
+
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
     <SignInModal
       show={show}
       loading={loading}
       errors={errors}
-      onClose={onClose}
+      onClose={handleClose}
       onSignIn={handleSignIn}
       onNavigateToSignUp={handleNavigateToSignUp}
       onNavigateToForgotPassword={handleNavigateToForgotPassword}
