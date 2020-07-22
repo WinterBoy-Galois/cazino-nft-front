@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './Layout.module.scss';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
