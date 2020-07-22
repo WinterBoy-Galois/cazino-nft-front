@@ -45,7 +45,14 @@ const AccountActivationModal: React.SFC<IProps> = ({
 
           <div className={styles['code-input']}>
             <CodeInput onComplete={onActivateUser} disabled={loading} />
-            {errors && <ErrorSummary errors={errors} showBorder={false} className={styles.error} />}
+            {errors && (
+              <ErrorSummary
+                errors={errors}
+                showBorder={false}
+                className={styles.error}
+                showGeneralErrorsOnly={false}
+              />
+            )}
           </div>
 
           <Uppercase>
