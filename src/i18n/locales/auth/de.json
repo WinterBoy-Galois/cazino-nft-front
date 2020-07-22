@@ -49,11 +49,13 @@
   },
   "accountActivation": {
     "headline": "account aktivieren",
-    "subHeadline": "Dein Account wurde erfolgreich aktiviert.",
-    "text1": "Wir haben einen neuen Aktivierungscode an deine E-Mail Adresse gesendet.",
+    "subHeadline": "Dein Account wurde erfolgreich erstellt.",
+    "text1": "Wir haben einen Aktivierungscode an deine E-Mail Adresse gesendet.",
     "text2": "Bitte gib den sechstelligen Code ein, um deinen Account zu aktivieren.",
+    "success": "Dein Account wurde erfolgreich aktiviert.",
     "resendEmailText": "Du hast keine E-Mail von uns erhalten?",
-    "resendEmail": "E-Mail erneut senden"
+    "resendEmail": "E-Mail erneut senden",
+    "resendSuccess": "Wir haben dir einen neuen Aktivierungscode gesendet."
   },
   "errors": {
     "ALREADY_EXISTS": "Der Benutzername ist bereits vergeben",

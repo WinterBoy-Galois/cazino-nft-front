@@ -98,7 +98,7 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
 
     dispatch({ type: 'MODAL_HIDE' });
     dispatch({ type: 'AUTH_UPDATE_USER', payload: { isActivated: true } });
-    success('Your account was successfully activated');
+    success(t('accountActivation.success'));
   };
 
   const handleResendEmail = async () => {
@@ -110,7 +110,7 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
       return setErrors(getFromGenericErrors(data.resendActivationCode.errors, t));
     }
 
-    info('We sent you a new activation code.');
+    info(t('accountActivation.resendSuccess'));
   };
 
   return (

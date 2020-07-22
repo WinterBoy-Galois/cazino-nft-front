@@ -52,8 +52,10 @@
     "subHeadline": "Your account successfully created",
     "text1": "We’ve sent activation code to your e-mail.",
     "text2": "Please enter 6 digit number below to activate your account.",
+    "success": "Your account was successfully activated.",
     "resendEmailText": "Didn't receive an email from us?",
-    "resendEmail": "resend email"
+    "resendEmail": "resend email",
+    "resendSuccess": "We sent you a new activation code."
   },
   "errors": {
     "ALREADY_EXISTS": "Username already exists",
