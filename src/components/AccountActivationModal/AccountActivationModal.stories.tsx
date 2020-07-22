@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AccountActivationModal from '.';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/AccountActivationModal',
@@ -20,7 +21,14 @@ const data = {
   ],
 };
 
-export const Default = () => <AccountActivationModal show={data.show} loading={data.loading} />;
+export const Default = () => (
+  <AccountActivationModal
+    show={data.show}
+    loading={data.loading}
+    onResendEmail={action('resendEmail')}
+    onActivateUser={action('activateUser')}
+  />
+);
 export const withError = () => (
   <AccountActivationModal show={data.show} loading={data.loading} errors={data.errors} />
 );

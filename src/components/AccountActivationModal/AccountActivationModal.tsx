@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styles from './AccountActivationModal.module.scss';
 import Modal from '../Modal';
 import CodeInput from '../CodeInput';
@@ -32,6 +32,32 @@ const AccountActivationModal: React.SFC<IProps> = ({
   errors,
 }) => {
   const { t } = useTranslation(['auth']);
+  const codeRef = useRef<any>();
+
+  const clearInput = () => {
+    if (codeRef.current?.textInput[0]) {
+      codeRef?.current?.textInput[0].focus();
+      for (let i = 0; i < 6; i++) {
+        if (codeRef?.current?.textInput[i] && codeRef?.current?.state.input[i]) {
+          codeRef.current.state.input[i] = '';
+          codeRef.current.textInput[i].value = '';
+        }
+      }
+    }
+  };
+
+  const handleResendEmail = useCallback(() => {
+    if (onResendEmail) {
+      onResendEmail();
+    }
+    clearInput();
+  }, [onResendEmail]);
+
+  useEffect(() => {
+    if (errors?.length) {
+      clearInput();
+    }
+  }, [errors]);
 
   return (
     <Modal show={show} onClose={onClose} title={t('accountActivation.headline')}>
@@ -46,7 +72,7 @@ const AccountActivationModal: React.SFC<IProps> = ({
           </p>
 
           <div className={styles['code-input']}>
-            <CodeInput onComplete={onActivateUser} disabled={loading} />
+            <CodeInput onComplete={onActivateUser} disabled={loading} ref={codeRef} />
             {errors && (
               <ErrorSummary
                 errors={errors}
@@ -60,7 +86,7 @@ const AccountActivationModal: React.SFC<IProps> = ({
           <Uppercase>
             <span>{t('accountActivation.resendEmailText')}</span>
             &nbsp;
-            <Link onClick={onResendEmail}>{t('accountActivation.resendEmail')}</Link>
+            <Link onClick={handleResendEmail}>{t('accountActivation.resendEmail')}</Link>
           </Uppercase>
         </div>
         <div className={`col-12 col-md-4 ${styles.illustration}`}>
