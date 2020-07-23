@@ -37,7 +37,7 @@ const SignInModal: React.FC<IProps> = ({
   onNavigateToForgotPassword,
   loading,
 }: IProps) => {
-  const { t } = useTranslation(['auth']);
+  const { t } = useTranslation(['auth', 'common']);
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -145,7 +145,7 @@ interface IWithDataProps {
 }
 
 const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
-  const { t } = useTranslation(['auth']);
+  const { t } = useTranslation(['auth', 'common']);
   const [signIn] = useMutation(SIGN_IN);
   const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState<boolean>(false);

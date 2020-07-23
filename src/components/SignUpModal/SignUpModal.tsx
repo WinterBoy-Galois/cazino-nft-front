@@ -39,7 +39,7 @@ const SignUpModal: React.FC<IProps> = ({
   loading,
   errors,
 }: IProps) => {
-  const { t } = useTranslation(['auth']);
+  const { t } = useTranslation(['auth', 'common']);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const formik = useFormik({
@@ -186,7 +186,7 @@ interface IWithDataProps {
 }
 
 const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
-  const { t } = useTranslation(['auth']);
+  const { t } = useTranslation(['auth', 'common']);
   const [signUp] = useMutation(SIGN_UP);
   const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState<boolean>(false);
