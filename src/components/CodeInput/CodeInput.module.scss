@@ -8,9 +8,15 @@
     margin-right: 0.5rem;
     border: 3px solid transparent;
     line-height: 1;
+    width: 40px;
+
+    @supports (-webkit-touch-callout: none) {
+      width: auto;
+    }
 
     @include media-breakpoint-up(md) {
       font-size: 50px;
+      width: 56px;
     }
 
     &:last-of-type {
