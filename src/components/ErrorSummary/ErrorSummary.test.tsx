@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, within } from '@testing-library/react';
 
 import ErrorSummary from '.';
 import ApplicationError from '../../models/applicationError.model';
@@ -18,6 +18,7 @@ const data: ApplicationError[] = [
     source: 'password',
     code: 'INVALID_PASSWORD',
     message: 'Invalid password',
+    localizedMessage: 'Falsches Passwort',
   },
 ];
 
@@ -95,6 +96,28 @@ describe('ErrorSummary', () => {
 
       // Assert
       expect(listItems).toHaveLength(2);
+    });
+
+    it('should show localized message if available', async () => {
+      // Arrange
+      const values: ApplicationError[] = data;
+
+      // Act
+      const { getAllByRole } = render(
+        <ErrorSummary errors={values} showGeneralErrorsOnly={false} />
+      );
+      const listItems = getAllByRole('listitem');
+
+      // Assert
+      listItems.forEach((item, index) => {
+        const { getByText } = within(item);
+        const { message, localizedMessage } = values[index];
+        if (localizedMessage) {
+          expect(getByText(localizedMessage)).toBeInTheDocument();
+        } else {
+          expect(getByText(message)).toBeInTheDocument();
+        }
+      });
     });
   });
 

@@ -10,8 +10,10 @@ const getMessageFromCode = (t: TFunction, code: string) => {
       return t('common:errors.AUTH_ERROR');
     case 'ALREADY_EXIST':
       return t('auth:errors.ALREADY_EXISTS');
-    default:
+    case 'SERVER_ERROR':
       return t('common:errors.SERVER_ERROR');
+    default:
+      return undefined;
   }
 };
 
@@ -33,7 +35,7 @@ const getFromGraphQLErrors = (errors?: GraphQLError[], t?: TFunction) => {
         source: error.source,
         code: error.code,
         message: error.message,
-        localizedMessage: t ? getMessageFromCode(t, error.code) : '',
+        localizedMessage: t ? getMessageFromCode(t, error.code) : undefined,
         args: error.args,
       };
 
