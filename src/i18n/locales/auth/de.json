@@ -41,7 +41,7 @@
     "headline": "Registrieren",
     "buttons": {
       "signUp": "Account erstellen",
-      "termsText": "Ich stimme der Speicherung von Informationen in Cookies zu, ich stimme den Datenschutz- und Nutzungsbedingungen zu, Glücksspiel ist in meinem Land nicht gesetzlich verboten und ich bin mindestend 18 Jahre alt.",
+      "termsText": "Ich stimme der Speicherung von Informationen in Cookies zu, ich stimme den Datenschutz- und Nutzungsbedingungen zu, Glücksspiel ist in meinem Land nicht gesetzlich verboten und ich bin mindestens 18 Jahre alt.",
       "goToSignInText": "Du hast schon einen Account?",
       "goToSignIn": "Jetzt anmelden!",
       "loading": "Registrierung..."
