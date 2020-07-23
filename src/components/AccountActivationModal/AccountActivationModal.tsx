@@ -114,6 +114,7 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
   const [errors, setErrors] = useState<ApplicationError[]>();
 
   const handleActivateAccount = async (code: string) => {
+    setErrors([]);
     const { data, errors: activateAccountErrors } = await activateAccount({ variables: { code } });
 
     if (activateAccountErrors) {
@@ -139,12 +140,20 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
     info(t('accountActivation.resendSuccess'));
   };
 
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    }
+
+    setErrors([]);
+  };
+
   return (
     <AccountActivationModal
       show={show}
       loading={loading}
       errors={errors}
-      onClose={onClose}
+      onClose={handleClose}
       onActivateUser={handleActivateAccount}
       onResendEmail={handleResendEmail}
     />
