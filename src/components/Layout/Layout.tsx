@@ -5,53 +5,11 @@ import BottomBar from './components/BottomBar';
 import Sidebar from './components/Sidebar';
 import Footer from '../Footer';
 import { useStateValue } from '../../state';
-import { UserInfoModalWithData } from '../UserInfoModal';
-import { ModalState } from '../../state/models/modal.model';
-import { Action } from '../../state/actions';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
-import BetDetailsModal from '../BetDetailsModal';
-import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationModal';
-import { AccountActivationModalWithData } from '../AccountActivationModal/AccountActivationModal';
-import { SignInModalWithData } from '../SignInModal';
 import { transitionTimeout } from '../Modal';
-import { SignUpModalWithData } from '../SignUpModal';
 import { useMutation } from '@apollo/react-hooks';
 import { SIGN_OUT } from '../../graphql/mutations';
-
-const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
-  <>
-    <UserInfoModalWithData
-      show={modal.type === 'USER_INFO_MODAL'}
-      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
-      {...modal.data}
-    />
-    <BetDetailsModal
-      show={modal.type === 'BET_DETAILS_MODAL'}
-      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
-      {...modal.data}
-    />
-    <ChangeServerSeedConfirmationModal
-      show={modal.type === 'CHANGE_SERVER_SEED_CONFIRMATION'}
-      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
-      {...modal.data}
-    />
-    <SignInModalWithData
-      show={modal.type === 'SIGN_IN_MODAL'}
-      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
-      {...modal.data}
-    />
-    <SignUpModalWithData
-      show={modal.type === 'SIGN_UP_MODAL'}
-      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
-      {...modal.data}
-    />
-    <AccountActivationModalWithData
-      show={modal.type === 'ACCOUNT_ACTIVATION_MODAL'}
-      onClose={() => dispatch({ type: 'MODAL_HIDE' })}
-      {...modal.data}
-    />
-  </>
-);
+import Modals from './components/Modals';
 
 const Layout: React.FC = ({ children }) => {
   const [{ sidebar, modal }, dispatch] = useStateValue();
@@ -111,7 +69,7 @@ const Layout: React.FC = ({ children }) => {
 
       <Sidebar />
 
-      {renderModals(modal, dispatch)}
+      <Modals />
     </>
   );
 };
