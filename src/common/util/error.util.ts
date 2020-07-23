@@ -7,9 +7,9 @@ import ApplicationError from '../../models/applicationError.model';
 const getMessageFromCode = (t: TFunction, code: string) => {
   switch (code) {
     case 'AUTH_ERROR':
-      return t('common:errors.AUTH_ERROR');
+      return t('common:errors.ACCOUNT_AUTH_ERROR');
     case 'ALREADY_EXIST':
-      return t('auth:errors.ALREADY_EXISTS');
+      return t('auth:errors.ACCOUNT_USERNAME_ALREADY_EXISTS');
     case 'SERVER_ERROR':
       return t('common:errors.SERVER_ERROR');
     default:

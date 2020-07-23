@@ -48,6 +48,6 @@
     }
   },
   "errors": {
-    "ALREADY_EXISTS": "Der Benutzername ist bereits vergeben"
+    "ACCOUNT_USERNAME_ALREADY_EXISTS": "Der Benutzername ist bereits vergeben"
   }
 }

@@ -1,6 +1,6 @@
 {
   "ALREADY_EXIST": {
-    "name": "USERNAME_ALREADY_EXISTS",
+    "name": "ACCOUNT_USERNAME_ALREADY_EXISTS",
     "message": "Already exist",
     "remark": "syntax, namespace"
   },
@@ -23,7 +23,7 @@
     "remark": "namespace, order"
   },
   "AUTH_ERR": {
-    "name": "AUTH_ERROR",
+    "name": "ACCOUNT_AUTH_ERROR",
     "message": "Authentication error",
     "remark": "abbreviation"
   },
@@ -47,7 +47,7 @@
     "remark": "meaning"
   },
   "INVALID_ACTIVATION_CODE": {
-    "name": "ACTIVATION_CODE_INVALID",
+    "name": "ACCOUNT_ACTIVATION_CODE_INVALID",
     "message": "Invalid activation code",
     "remark": "namespace, order"
   },

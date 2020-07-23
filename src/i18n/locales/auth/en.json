@@ -48,6 +48,6 @@
     }
   },
   "errors": {
-    "ALREADY_EXISTS": "Username already exists"
+    "ACCOUNT_USERNAME_ALREADY_EXISTS": "Username already exists"
   }
 }
