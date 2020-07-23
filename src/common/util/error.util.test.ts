@@ -6,9 +6,9 @@ import { GenericError } from '../../models/genericError.model';
 
 const translate = (key: string) => {
   switch (key) {
-    case 'errors.AUTH_ERROR':
+    case 'common:errors.AUTH_ERROR':
       return 'Authentication error';
-    case 'errors.ALREADY_EXISTS':
+    case 'auth:errors.ALREADY_EXISTS':
       return 'Username already exists';
     default:
       return 'Unknown server error - administrators are notified';
