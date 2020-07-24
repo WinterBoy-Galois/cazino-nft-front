@@ -3,4 +3,5 @@ export type AuthActionType =
   | 'AUTH_SIGN_OUT'
   | 'AUTH_TOKEN_REFRESH'
   | 'AUTH_SIGN_UP'
-  | 'AUTH_ADD_USER';
+  | 'AUTH_ADD_USER'
+  | 'AUTH_UPDATE_USER';

@@ -8,7 +8,7 @@ interface IProps {
   autoClose?: boolean;
 }
 
-const ToastContainer: React.FC<IProps> = ({ autoClose = false }) => {
+const ToastContainer: React.FC<IProps> = ({ autoClose = true }) => {
   return (
     <ToastifyToastContainer
       className={styles.container}

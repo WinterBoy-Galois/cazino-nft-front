@@ -16,6 +16,21 @@ export const CHANGE_SERVER_SEED = gql`
   }
 `;
 
+export const ACTIVATE_ACCOUNT = gql`
+  mutation ActivateAccount($code: String!) {
+    activateAccount(code: $code) {
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
 export const SIGN_IN = gql`
   mutation SignIn($email: String, $password: String, $remember: Boolean) {
     signIn(email: $email, password: $password, remember: $remember) {
@@ -55,5 +70,23 @@ export const SIGN_UP = gql`
 export const SIGN_OUT = gql`
   mutation SignOut {
     signOut
+  }
+`;
+
+export const RESEND_ACTIVATION_CODE = gql`
+  mutation ResendActivationCode {
+    resendActivationCode {
+      ... on GenericBoolean {
+        result
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
   }
 `;

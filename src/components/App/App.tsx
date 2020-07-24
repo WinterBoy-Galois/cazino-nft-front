@@ -11,6 +11,7 @@ import { appConfig } from '../../common/config';
 
 const App: React.FC = () => {
   const client = useApolloClient();
+
   return (
     <ApolloProvider client={client}>
       <GoogleReCaptchaProvider reCaptchaKey={appConfig.reCaptchaSiteKey}>
@@ -20,6 +21,7 @@ const App: React.FC = () => {
               <HomePage path="/" />
             </Router>
           </Layout>
+
           <ToastContainer />
         </AuthOverlay>
       </GoogleReCaptchaProvider>

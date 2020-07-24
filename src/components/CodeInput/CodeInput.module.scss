@@ -1,0 +1,42 @@
+@import '../../styles/shared';
+
+.container {
+  input {
+    border-radius: 10px;
+    font-size: 28px;
+    text-align: center;
+    margin-right: 0.5rem;
+    border: 3px solid transparent;
+    line-height: 1;
+    width: 40px;
+
+    @supports (-webkit-touch-callout: none) {
+      width: auto;
+    }
+
+    @include media-breakpoint-up(md) {
+      font-size: 50px;
+      width: 56px;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &:focus {
+      border: 3px solid $activation-code-border-blue;
+    }
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  /* stylelint-disable */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* stylelint-enable */
+}

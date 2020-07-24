@@ -6,6 +6,7 @@ import { SignInModalWithData } from '../../../SignInModal';
 import { SignUpModalWithData } from '../../../SignUpModal';
 import { useStateValue } from '../../../../state';
 import { ModalType } from '../../../../state/models/modal.model';
+import { AccountActivationModalWithData } from '../../../AccountActivationModal/AccountActivationModal';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
@@ -37,6 +38,11 @@ const Modals: React.FC = () => {
       <SignUpModalWithData
         show={handleShow('SIGN_UP_MODAL')}
         onClose={handleClose}
+        {...modal.data}
+      />
+      <AccountActivationModalWithData
+        show={modal.type === 'ACCOUNT_ACTIVATION_MODAL'}
+        onClose={() => dispatch({ type: 'MODAL_HIDE' })}
         {...modal.data}
       />
     </>
