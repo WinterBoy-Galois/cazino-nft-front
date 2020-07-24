@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { UserInfoModalWithData } from '../../../UserInfoModal';
 import BetDetailsModal from '../../../BetDetailsModal';
 import ChangeServerSeedConfirmationModal from '../../../ChangeServerSeedConfirmationModal';
@@ -7,11 +7,24 @@ import { SignUpModalWithData } from '../../../SignUpModal';
 import { useStateValue } from '../../../../state';
 import { ModalType } from '../../../../state/models/modal.model';
 import { AccountActivationModalWithData } from '../../../AccountActivationModal/AccountActivationModal';
+import { useQueryParams } from '../../../../hooks/useQueryParams.hook';
+import { mapQueryParamToModal } from './lib/modalQueryParamMapping';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
   const handleClose = useCallback(() => dispatch({ type: 'MODAL_HIDE' }), [dispatch]);
   const handleShow = useCallback((type: ModalType) => modal.type === type, [modal.type]);
+  const params = useQueryParams();
+
+  useEffect(() => {
+    if (params?.dialog) {
+      const modalType = mapQueryParamToModal(params.dialog);
+
+      if (modalType) {
+        dispatch({ type: 'MODAL_SHOW', payload: { type: modalType } });
+      }
+    }
+  }, [params, dispatch]);
 
   return (
     <>
