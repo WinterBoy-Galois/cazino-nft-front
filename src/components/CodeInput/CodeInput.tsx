@@ -24,6 +24,7 @@ const CodeInput: React.ForwardRefExoticComponent<IProps> = React.forwardRef(
         filterKeyCodes={[188, 187, 190, 189, 109, 107, 110]}
         onChange={value => (onComplete && value.length === 6 ? onComplete(value) : null)}
         disabled={disabled}
+        pattern={'[0-9]*'}
       />
     );
   }
