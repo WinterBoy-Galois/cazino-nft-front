@@ -16,7 +16,7 @@
     }
   },
   "errors": {
-    "AUTH_ERROR": "Authentication error",
+    "ACCOUNT_AUTH_ERROR": "Your email or password is wrong",
     "SERVER_ERROR": "Unknown server error - administrators are notified"
   },
   "loading": "loading..."

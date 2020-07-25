@@ -58,7 +58,7 @@
     "resendSuccess": "We sent you a new activation code."
   },
   "errors": {
-    "ALREADY_EXISTS": "Username already exists",
+    "ACCOUNT_USERNAME_ALREADY_EXISTS": "Username already exists",
     "INVALID_ACTIVATION_CODE": "The entered activation code is invalid.",
     "ALREADY_ACTIVATED": "Your account is already activated."
   }

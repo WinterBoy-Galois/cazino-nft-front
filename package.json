@@ -53,7 +53,7 @@
     "build:all": "yarn build && yarn build-storybook",
     "test": "TZ=UTC react-scripts test",
     "eject": "react-scripts eject",
-    "test:single": "TZ=UTC CI=true react-scripts test --watchAll=false",
+    "test:single": "TZ=UTC CI=true react-scripts test --watchAll=false --verbose --colors",
     "lint": "concurrently \"yarn run lint:es\" \"yarn run lint:scss\"",
     "lint:es": "eslint '*/**/*.{js,ts,tsx}'",
     "lint:scss": "stylelint \"src/**/*.scss\"",

@@ -15,5 +15,9 @@
       "label": "English"
     }
   },
+  "errors": {
+    "ACCOUNT_AUTH_ERROR": "Der Benutzername oder das Passwort sind falsch",
+    "SERVER_ERROR": "Unbekannter Serverfehler - die Administratoren wurden bereits benachrichtigt"
+  },
   "loading": "lade..."
 }

@@ -19,7 +19,7 @@ Object {
               Not a valid e-mail
             </li>
             <li>
-              Invalid password
+              Falsches Passwort
             </li>
           </ul>
         </div>
@@ -41,7 +41,7 @@ Object {
             Not a valid e-mail
           </li>
           <li>
-            Invalid password
+            Falsches Passwort
           </li>
         </ul>
       </div>
@@ -120,7 +120,7 @@ Object {
               Not a valid e-mail
             </li>
             <li>
-              Invalid password
+              Falsches Passwort
             </li>
           </ul>
         </div>
@@ -142,7 +142,7 @@ Object {
             Not a valid e-mail
           </li>
           <li>
-            Invalid password
+            Falsches Passwort
           </li>
         </ul>
       </div>
