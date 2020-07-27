@@ -168,7 +168,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
 
   const handleNavigateToSignUp = () => replaceModal(dispatch, 'SIGN_UP_MODAL');
 
-  const handleNavigateToForgotPassword = () => null;
+  const handleNavigateToForgotPassword = () => replaceModal(dispatch, 'PASSWORD_RECOVERY_MODAL');
 
   const handleClose = () => {
     setTimeout(() => setErrors([]), transitionTimeout);

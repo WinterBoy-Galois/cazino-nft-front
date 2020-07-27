@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './PasswordRecoveryModal.module.scss';
-import Modal, { transitionTimeout } from '../Modal';
+import Modal, { transitionTimeout, closeModal } from '../Modal';
 import { useMutation } from '@apollo/react-hooks';
 import { RECOVER_PASSWORD } from '../../graphql/mutations';
 import { info } from '../Toast';
@@ -15,6 +15,7 @@ import { validationSchema } from './lib/validationSchema';
 import passwordRecoveryIllustration from '../../assets/images/auth/password-recovery.svg';
 import Uppercase from '../Uppercase';
 import Link from '../Link';
+import { useStateValue } from '../../state';
 
 interface IProps {
   show: boolean;
@@ -120,6 +121,7 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
   const { t } = useTranslation(['auth', 'common']);
   const [recoverPassword, { loading }] = useMutation(RECOVER_PASSWORD);
   const [errors, setErrors] = useState<ApplicationError[]>();
+  const [, dispatch] = useStateValue();
 
   const onPasswordRecovery = async (email: string) => {
     const { data, errors: recoverPasswordErrors } = await recoverPassword({
@@ -132,7 +134,8 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
       return setErrors(getFromGenericErrors(data.forgotPassword.errors, t));
     }
 
-    info(t('onPasswordRecovery.success'));
+    closeModal(dispatch);
+    info(t('passwordRecovery.success'));
   };
 
   const handleClose = () => {

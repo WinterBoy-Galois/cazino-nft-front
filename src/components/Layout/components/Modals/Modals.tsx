@@ -10,6 +10,7 @@ import { AccountActivationModalWithData } from '../../../AccountActivationModal/
 import { useQueryParams } from '../../../../hooks/useQueryParams.hook';
 import { mapQueryParamToModal } from './lib/modalQueryParamMapping';
 import { PasswordResetModalWithData } from '../../../PasswordResetModal/PasswordResetModal';
+import { PasswordRecoveryModalWithData } from '../../../PasswordRecoveryModal/PasswordRecoveryModal';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
@@ -61,6 +62,11 @@ const Modals: React.FC = () => {
       />
       <PasswordResetModalWithData
         show={modal.type === 'PASSWORD_RESET_MODAL'}
+        onClose={handleClose}
+        {...modal.data}
+      />
+      <PasswordRecoveryModalWithData
+        show={modal.type === 'PASSWORD_RECOVERY_MODAL'}
         onClose={handleClose}
         {...modal.data}
       />
