@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 
 import PasswordResetModal from '.';
 
@@ -8,7 +8,9 @@ describe('PasswordResetModal', () => {
     // Arrange
 
     // Act
-    const container = render(<PasswordResetModal message="Hello World!" />);
+    const container = render(<PasswordResetModal show loading={false} />);
+
+    wait();
 
     // Assert
     expect(container).toMatchSnapshot();
