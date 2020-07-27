@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import styles from './PasswordResetModal.module.scss';
+import styles from './PasswordResetModal.module.scss';
 import Modal, { transitionTimeout } from '../Modal';
 import { useMutation } from '@apollo/react-hooks';
 import { RESET_PASSWORD } from '../../graphql/mutations';
@@ -58,8 +58,10 @@ const PasswordResetModal: React.SFC<IProps> = ({
   return (
     <Modal show={show} onClose={handleClose} title={t('passwordReset.headline')}>
       <div className="row">
-        <div className="col-12 col-md-8">
-          {errors && <ErrorSummary errors={errors} showGeneralErrorsOnly={false} />}
+        <div className={`col-12 col-md-8 ${styles.container}`}>
+          {errors && (
+            <ErrorSummary errors={errors} showGeneralErrorsOnly={false} className={styles.error} />
+          )}
 
           <form onSubmit={formik.handleSubmit}>
             <PasswordInput

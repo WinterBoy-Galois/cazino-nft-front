@@ -11,10 +11,28 @@ export default {
   decorators: [withA11y],
 };
 
+const data = {
+  errors: [
+    {
+      code: 'UUID_EXPIRED',
+      message: 'Activation code has been expired',
+    },
+  ],
+};
+
 export const Default = () => (
   <PasswordResetModal
     loading={boolean('Loading', false)}
     show={boolean('Show', true)}
     onPasswordReset={action('onPasswordReset')}
+  />
+);
+
+export const withError = () => (
+  <PasswordResetModal
+    loading={boolean('Loading', false)}
+    show={boolean('Show', true)}
+    onPasswordReset={action('onPasswordReset')}
+    errors={data.errors}
   />
 );
