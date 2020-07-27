@@ -18,7 +18,7 @@ const Layout: React.FC = ({ children }) => {
   const [signOut] = useMutation(SIGN_OUT);
 
   const hideContent = () =>
-    breakpoint === 'xs' || breakpoint === 'sm' ? sidebar.isOpen || modal.type !== 'NONE' : false;
+    breakpoint === 'xs' || breakpoint === 'sm' ? modal.type !== 'NONE' : false;
 
   const handleSignInClick = () =>
     dispatch({ type: 'MODAL_SHOW', payload: { type: 'SIGN_IN_MODAL' } });
@@ -30,7 +30,7 @@ const Layout: React.FC = ({ children }) => {
 
   return (
     <>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} style={{ display: hideContent() ? 'none' : 'block' }}>
         <div
           id="main"
           className={`${styles.main} ${sidebar.isOpen && styles['main--sidebar-open']}`}
@@ -46,10 +46,7 @@ const Layout: React.FC = ({ children }) => {
           >
             <TopBar onSignInClick={handleSignInClick} onSignOutClick={handleSignOutClick} />
           </div>
-          <div
-            className={styles.main__content}
-            style={{ display: hideContent() ? 'none' : 'block' }}
-          >
+          <div className={styles.main__content}>
             {children}
             <Footer />
           </div>
