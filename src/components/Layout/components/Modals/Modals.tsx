@@ -9,6 +9,7 @@ import { ModalType } from '../../../../state/models/modal.model';
 import { AccountActivationModalWithData } from '../../../AccountActivationModal/AccountActivationModal';
 import { useQueryParams } from '../../../../hooks/useQueryParams.hook';
 import { mapQueryParamToModal } from './lib/modalQueryParamMapping';
+import { PasswordResetModalWithData } from '../../../PasswordResetModal/PasswordResetModal';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
@@ -55,7 +56,12 @@ const Modals: React.FC = () => {
       />
       <AccountActivationModalWithData
         show={modal.type === 'ACCOUNT_ACTIVATION_MODAL'}
-        onClose={() => dispatch({ type: 'MODAL_HIDE' })}
+        onClose={handleClose}
+        {...modal.data}
+      />
+      <PasswordResetModalWithData
+        show={modal.type === 'PASSWORD_RESET_MODAL'}
+        onClose={handleClose}
         {...modal.data}
       />
     </>

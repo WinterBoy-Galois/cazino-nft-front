@@ -51,6 +51,12 @@ export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }
         },
       };
 
+    case 'AUTH_ADD_PASSWORD_RESET_TOKEN':
+      return {
+        ...state,
+        passwordResetToken: payload,
+      };
+
     default:
       return state;
   }

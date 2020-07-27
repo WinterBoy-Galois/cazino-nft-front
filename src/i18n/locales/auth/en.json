@@ -57,6 +57,10 @@
     "resendEmail": "resend email",
     "resendSuccess": "We sent you a new activation code."
   },
+  "passwordReset": {
+    "headline": "password recovery",
+    "success": "Your password has been changed."
+  },
   "errors": {
     "ALREADY_EXISTS": "Username already exists",
     "INVALID_ACTIVATION_CODE": "The entered activation code is invalid.",
