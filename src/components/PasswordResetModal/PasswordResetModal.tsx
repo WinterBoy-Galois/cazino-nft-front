@@ -120,17 +120,17 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
   ] = useStateValue();
 
   const onPasswordReset = async (newPassword: string) => {
-    const { data, errors: resendActivationCodeErrors } = await resetPassword({
+    const { data, errors: resetPasswordErrors } = await resetPassword({
       variables: { token, newPassword },
     });
 
-    if (resendActivationCodeErrors) {
-      return setErrors(getFromGraphQLErrors(resendActivationCodeErrors, t));
+    if (resetPasswordErrors) {
+      return setErrors(getFromGraphQLErrors(resetPasswordErrors, t));
     } else if (data?.resendActivationCode?.errors) {
-      return setErrors(getFromGenericErrors(data.resendActivationCode.errors, t));
+      return setErrors(getFromGenericErrors(data.resetPassword.errors, t));
     }
 
-    dispatch({ type: 'AUTH_SIGN_IN', payload: data.passwordReset });
+    dispatch({ type: 'AUTH_SIGN_IN', payload: data.resetPassword });
 
     success(t('passwordReset.success'));
   };

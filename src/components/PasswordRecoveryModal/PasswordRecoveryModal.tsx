@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import styles from './PasswordRecoveryModal.module.scss';
 import Modal, { transitionTimeout } from '../Modal';
 import { useMutation } from '@apollo/react-hooks';
-import { RESET_PASSWORD } from '../../graphql/mutations';
-import { useStateValue } from '../../state';
-import { success } from '../Toast';
+import { RECOVER_PASSWORD } from '../../graphql/mutations';
+import { info } from '../Toast';
 import ApplicationError from '../../models/applicationError.model';
 import { useTranslation } from 'react-i18next';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
@@ -94,9 +93,8 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
   onClose,
 }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
-  const [recoverPassword, { loading }] = useMutation(RESET_PASSWORD);
+  const [recoverPassword, { loading }] = useMutation(RECOVER_PASSWORD);
   const [errors, setErrors] = useState<ApplicationError[]>();
-  const [, dispatch] = useStateValue();
 
   const onPasswordRecovery = async (email: string) => {
     const { data, errors: recoverPasswordErrors } = await recoverPassword({
@@ -106,12 +104,10 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
     if (recoverPasswordErrors) {
       return setErrors(getFromGraphQLErrors(recoverPasswordErrors, t));
     } else if (data?.resendActivationCode?.errors) {
-      return setErrors(getFromGenericErrors(data.resendActivationCode.errors, t));
+      return setErrors(getFromGenericErrors(data.forgotPassword.errors, t));
     }
 
-    dispatch({ type: 'AUTH_SIGN_IN', payload: data.passwordReset });
-
-    success(t('onPasswordRecovery.success'));
+    info(t('onPasswordRecovery.success'));
   };
 
   const handleClose = () => {

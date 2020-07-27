@@ -108,3 +108,21 @@ export const RESET_PASSWORD = gql`
     }
   }
 `;
+
+export const RECOVER_PASSWORD = gql`
+  mutation RecoverPassword($email: String!) {
+    forgotPassword(email: $email) {
+      ... on GenericBoolean {
+        result
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

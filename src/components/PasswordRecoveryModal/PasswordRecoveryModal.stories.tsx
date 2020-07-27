@@ -22,7 +22,7 @@ export const Default = () => (
   <PasswordRecoveryModal
     loading={boolean('Loading', false)}
     show={boolean('Show', true)}
-    onPasswordRecovery={action('onPasswordReset')}
+    onPasswordRecovery={action('onPasswordRecovery')}
   />
 );
 
@@ -30,7 +30,7 @@ export const withError = () => (
   <PasswordRecoveryModal
     loading={boolean('Loading', false)}
     show={boolean('Show', true)}
-    onPasswordRecovery={action('onPasswordReset')}
+    onPasswordRecovery={action('onPasswordRecovery')}
     errors={data.errors}
   />
 );
