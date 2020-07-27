@@ -12,6 +12,9 @@ import { useFormik } from 'formik';
 import SpinnerButton from '../SpinnerButton';
 import TextInput from '../TextInput';
 import { validationSchema } from './lib/validationSchema';
+import passwordRecoveryIllustration from '../../assets/images/auth/password-recovery.svg';
+import Uppercase from '../Uppercase';
+import Link from '../Link';
 
 interface IProps {
   show: boolean;
@@ -19,6 +22,8 @@ interface IProps {
   errors?: ApplicationError[];
   onClose?: () => void;
   onPasswordRecovery?: (email: string) => void;
+  onNavigateToSignIn?: () => void;
+  onNavigateToSignUp?: () => void;
 }
 
 const PasswordRecoveryModal: React.SFC<IProps> = ({
@@ -27,6 +32,8 @@ const PasswordRecoveryModal: React.SFC<IProps> = ({
   errors,
   onClose,
   onPasswordRecovery = () => null,
+  onNavigateToSignIn,
+  onNavigateToSignUp,
 }) => {
   const { t } = useTranslation(['auth']);
 
@@ -53,30 +60,48 @@ const PasswordRecoveryModal: React.SFC<IProps> = ({
   return (
     <Modal show={show} onClose={handleClose} title={t('passwordReset.headline')}>
       <div className="row">
-        <div className="col-12 col-md-8">
-          {errors && (
-            <ErrorSummary errors={errors} showGeneralErrorsOnly={false} className={styles.error} />
-          )}
+        <div className={`col-12 col-md-7 ${styles.container}`}>
+          <div>
+            {errors && (
+              <ErrorSummary
+                errors={errors}
+                showGeneralErrorsOnly={false}
+                className={styles.error}
+              />
+            )}
 
-          <form onSubmit={formik.handleSubmit}>
-            <TextInput
-              label={t('labels.email')}
-              name="email"
-              onChangeValue={v => formik.setFieldValue('email', v)}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              {...(formik.touched.email ? { validationMessage: formik.errors.email } : {})}
-            />
+            <form onSubmit={formik.handleSubmit}>
+              <TextInput
+                label={t('labels.email')}
+                name="email"
+                onChangeValue={v => formik.setFieldValue('email', v)}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+                {...(formik.touched.email ? { validationMessage: formik.errors.email } : {})}
+              />
 
-            <SpinnerButton
-              type="submit"
-              color="SECONDARY"
-              loading={loading}
-              className={styles.button}
-            >
-              Recover password
-            </SpinnerButton>
-          </form>
+              <SpinnerButton
+                type="submit"
+                color="SECONDARY"
+                loading={loading}
+                className={styles.button}
+              >
+                Recover password
+              </SpinnerButton>
+            </form>
+          </div>
+
+          <div>
+            <Uppercase className={styles.spacing}>
+              MEMORY BACK? <Link onClick={onNavigateToSignIn}>TRY TO SIGN IN!</Link>
+            </Uppercase>
+            <Uppercase>
+              DON’T HAVE AN ACCOUNT? <Link onClick={onNavigateToSignUp}>SIGN UP NOW!</Link>
+            </Uppercase>
+          </div>
+        </div>
+        <div className={`col-12 col-md-5 ${styles.illustration}`}>
+          <img src={passwordRecoveryIllustration} alt="Sign In Character" />
         </div>
       </div>
     </Modal>
