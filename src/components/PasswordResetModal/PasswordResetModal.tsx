@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './PasswordResetModal.module.scss';
-import Modal, { transitionTimeout } from '../Modal';
+import Modal, { transitionTimeout, closeModal } from '../Modal';
 import { useMutation } from '@apollo/react-hooks';
 import { RESET_PASSWORD } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
@@ -126,12 +126,13 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
 
     if (resetPasswordErrors) {
       return setErrors(getFromGraphQLErrors(resetPasswordErrors, t));
-    } else if (data?.resendActivationCode?.errors) {
+    } else if (data?.resetPassword?.errors) {
       return setErrors(getFromGenericErrors(data.resetPassword.errors, t));
     }
 
     dispatch({ type: 'AUTH_SIGN_IN', payload: data.resetPassword });
 
+    closeModal(dispatch);
     success(t('passwordReset.success'));
   };
 

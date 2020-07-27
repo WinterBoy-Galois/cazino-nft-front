@@ -124,13 +124,13 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
   const [, dispatch] = useStateValue();
 
   const onPasswordRecovery = async (email: string) => {
-    const { data, errors: recoverPasswordErrors } = await recoverPassword({
+    const { data, errors: recoveryPasswordErrors } = await recoverPassword({
       variables: { email },
     });
 
-    if (recoverPasswordErrors) {
-      return setErrors(getFromGraphQLErrors(recoverPasswordErrors, t));
-    } else if (data?.resendActivationCode?.errors) {
+    if (recoveryPasswordErrors) {
+      return setErrors(getFromGraphQLErrors(recoveryPasswordErrors, t));
+    } else if (data?.forgotPassword?.errors) {
       return setErrors(getFromGenericErrors(data.forgotPassword.errors, t));
     }
 
