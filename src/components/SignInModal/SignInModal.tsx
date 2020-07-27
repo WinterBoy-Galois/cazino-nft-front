@@ -104,7 +104,7 @@ const SignInModal: React.FC<IProps> = ({
                 label={t('signIn.buttons.rememberMe')}
                 onChangeValue={v => formik.setFieldValue('remember', v)}
               />
-              <Uppercase>
+              <Uppercase className={styles['forgot-password']}>
                 <Link onClick={onNavigateToForgotPassword}>
                   {t('signIn.buttons.goToForgotPassword')}
                 </Link>

@@ -152,7 +152,7 @@ Object {
                       </span>
                     </label>
                     <div
-                      class="container "
+                      class="container forgot-password"
                     >
                       <a
                         class=" link"
@@ -346,7 +346,7 @@ Object {
                     </span>
                   </label>
                   <div
-                    class="container "
+                    class="container forgot-password"
                   >
                     <a
                       class=" link"
