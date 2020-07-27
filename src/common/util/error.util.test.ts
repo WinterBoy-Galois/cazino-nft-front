@@ -6,12 +6,12 @@ import { GenericError } from '../../models/genericError.model';
 
 const translate = (key: string) => {
   switch (key) {
-    case 'errors.AUTH_ERROR':
+    case 'common:errors.ACCOUNT_AUTH_ERROR':
       return 'Authentication error';
-    case 'errors.ALREADY_EXISTS':
+    case 'auth:errors.ACCOUNT_USERNAME_ALREADY_EXISTS':
       return 'Username already exists';
     default:
-      return 'Unknown server error - administrators are notified';
+      return undefined;
   }
 };
 
@@ -79,7 +79,7 @@ describe('ErrorUtil', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('should return a general message for an unknown code', () => {
+    it('should return null for an unknown code', () => {
       // Arrange
       const value = 'THIS_IS_NO_REAL_ERROR_CODE';
 
@@ -87,7 +87,7 @@ describe('ErrorUtil', () => {
       const actual = getMessageFromCode(mockedTranslation, value);
 
       // Assert
-      const expected = 'Unknown server error - administrators are notified';
+      const expected = undefined;
 
       expect(actual).toEqual(expected);
     });

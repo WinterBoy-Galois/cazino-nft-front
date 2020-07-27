@@ -65,7 +65,7 @@
     "success": "We’ve sent you an e-mail with password recovery instructions"
   },
   "errors": {
-    "ALREADY_EXISTS": "Username already exists",
+    "ACCOUNT_USERNAME_ALREADY_EXISTS": "Username already exists",
     "INVALID_ACTIVATION_CODE": "The entered activation code is invalid.",
     "ALREADY_ACTIVATED": "Your account is already activated."
   }

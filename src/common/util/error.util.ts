@@ -7,15 +7,17 @@ import ApplicationError from '../../models/applicationError.model';
 const getMessageFromCode = (t: TFunction, code: string) => {
   switch (code) {
     case 'AUTH_ERROR':
-      return t('errors.AUTH_ERROR');
+      return t('common:errors.ACCOUNT_AUTH_ERROR');
     case 'ALREADY_EXIST':
-      return t('errors.ALREADY_EXISTS');
+      return t('auth:errors.ACCOUNT_USERNAME_ALREADY_EXISTS');
     case 'INVALID_ACTIVATION_CODE':
       return t('errors.INVALID_ACTIVATION_CODE');
     case 'ALREADY_ACTIVATED':
       return t('errors.ALREADY_ACTIVATED');
+    case 'SERVER_ERROR':
+      return t('common:errors.SERVER_ERROR');
     default:
-      return t('errors.SERVER_ERROR');
+      return undefined;
   }
 };
 
@@ -37,7 +39,7 @@ const getFromGraphQLErrors = (errors?: GraphQLError[], t?: TFunction) => {
         source: error.source,
         code: error.code,
         message: error.message,
-        localizedMessage: t ? getMessageFromCode(t, error.code) : '',
+        localizedMessage: t ? getMessageFromCode(t, error.code) : undefined,
         args: error.args,
       };
 

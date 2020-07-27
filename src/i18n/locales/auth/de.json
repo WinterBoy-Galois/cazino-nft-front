@@ -58,7 +58,7 @@
     "resendSuccess": "Wir haben dir einen neuen Aktivierungscode gesendet."
   },
   "errors": {
-    "ALREADY_EXISTS": "Der Benutzername ist bereits vergeben",
+    "ACCOUNT_USERNAME_ALREADY_EXISTS": "Der Benutzername ist bereits vergeben",
     "INVALID_ACTIVATION_CODE": "Der eingegebene Aktivierungscode ist ungültig.",
     "ALREADY_ACTIVATED": "Dein Account ist bereits aktiviert."
   }
