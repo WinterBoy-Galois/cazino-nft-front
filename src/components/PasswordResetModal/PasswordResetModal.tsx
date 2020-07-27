@@ -84,7 +84,12 @@ const PasswordResetModal: React.SFC<IProps> = ({
                 : {})}
             />
 
-            <SpinnerButton type="submit" color="SECONDARY" loading={loading}>
+            <SpinnerButton
+              type="submit"
+              color="SECONDARY"
+              loading={loading}
+              className={styles.button}
+            >
               Reset password
             </SpinnerButton>
           </form>
