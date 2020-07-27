@@ -11,6 +11,9 @@ export const mapQueryParamToModal = (param: string): ModalType | undefined => {
     case 'activation':
       return 'ACCOUNT_ACTIVATION_MODAL';
 
+    case 'password-recovery':
+      return 'PASSWORD_RESET_MODAL';
+
     default:
       return undefined;
   }

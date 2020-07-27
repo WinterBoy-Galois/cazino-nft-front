@@ -21,7 +21,10 @@ export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }
       clearAccessToken();
 
       return {
+        ...state,
         state: 'UNAUTHENTICATED',
+        accessToken: undefined,
+        user: undefined,
       };
 
     case 'AUTH_TOKEN_REFRESH': {

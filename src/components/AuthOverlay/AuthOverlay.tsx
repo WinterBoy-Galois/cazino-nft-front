@@ -24,10 +24,10 @@ const AuthOverlay: React.FC = ({ children }) => {
       });
     }
 
-    if (error || !getAccessToken()) {
+    if ((error || !getAccessToken()) && auth.state !== 'UNAUTHENTICATED') {
       dispatch({ type: 'AUTH_SIGN_OUT' });
     }
-  }, [dispatch, data, error, auth.accessToken, loading, refetch]);
+  }, [dispatch, data, error, auth.accessToken, loading, refetch, auth.state]);
 
   return auth.state === 'UNKNOWN' ? (
     <div className={styles.container}>
