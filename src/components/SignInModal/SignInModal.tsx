@@ -166,7 +166,8 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     }
 
     dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn } });
-    dispatch({ type: 'MODAL_HIDE' });
+
+    navigate(`${location.pathname}`);
   };
 
   const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
@@ -176,10 +177,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
 
   const handleClose = () => {
     setTimeout(() => setErrors([]), transitionTimeout);
-
-    if (onClose) {
-      onClose();
-    }
+    onClose && onClose();
   };
 
   return (

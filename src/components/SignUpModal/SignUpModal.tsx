@@ -4,8 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { useFormik } from 'formik';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useTranslation } from 'react-i18next';
-
-import Modal, { replaceModal, transitionTimeout } from '../Modal';
+import Modal, { transitionTimeout } from '../Modal';
 import { useStateValue } from '../../state';
 import { SIGN_UP } from '../../graphql/mutations';
 import TextInput from '../TextInput';
@@ -18,7 +17,6 @@ import CheckboxInput from '../CheckboxInput';
 import ErrorSummary from '../ErrorSummary';
 import { validationSchema } from './lib/validationSchema';
 import ApplicationError from '../../models/applicationError.model';
-
 import styles from './SignUpModal.module.scss';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { useLocation, useNavigate } from '@reach/router';
@@ -207,7 +205,8 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     }
 
     dispatch({ type: 'AUTH_SIGN_UP', payload: { ...data.registerUser } });
-    replaceModal(dispatch, 'ACCOUNT_ACTIVATION_MODAL');
+
+    navigate(`${location.pathname}?dialog=activation`);
   };
 
   const handleNavigateToSignIn = () => navigate(`${location.pathname}?dialog=sign-in`);

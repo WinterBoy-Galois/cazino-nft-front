@@ -12,12 +12,13 @@ import { mapQueryParamToModal } from './lib/modalQueryParamMapping';
 import { PasswordResetModalWithData } from '../../../PasswordResetModal/PasswordResetModal';
 import { PasswordRecoveryModalWithData } from '../../../PasswordRecoveryModal/PasswordRecoveryModal';
 import { closeModal, replaceModal, showModal } from '../../../Modal';
-import { useLocation, navigate } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
   const location = useLocation();
-  const handleClose = useCallback(() => navigate(location.pathname), [location.pathname]);
+  const navigate = useNavigate();
+  const handleClose = useCallback(() => navigate(location.pathname), [location.pathname, navigate]);
   const handleShow = useCallback((type: ModalType) => modal.type === type, [modal.type]);
   const params = useQueryParams();
 
