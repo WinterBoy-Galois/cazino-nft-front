@@ -5,6 +5,7 @@ import { ViewMode } from '../../../../../LatestBetsTable/LatestBetsTable';
 import Bet from '../../../../../../models/bet.model';
 import { ApolloError } from 'apollo-client';
 import { navigate, useLocation } from '@reach/router';
+import { useStateValue } from '../../../../../../state';
 
 interface IProps {
   bets?: Bet[];
@@ -13,6 +14,11 @@ interface IProps {
 }
 
 const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
+  const [
+    {
+      auth: { user },
+    },
+  ] = useStateValue();
   const location = useLocation();
   const handleUsernameClick = useCallback(
     userId => navigate(`${location.pathname}?dialog=user-info`, { state: { userId } }),
@@ -26,7 +32,7 @@ const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error 
           bets={bets}
           isLoading={isLoading}
           error={error ? true : false}
-          signInUserId="15"
+          signInUserId={user?.id}
           viewMode={ViewMode.RESPONSIVE}
           reduceMotion={true}
           onUsernameClicked={handleUsernameClick}

@@ -133,7 +133,7 @@ const UserInfoModalWithData: React.FC<IWithDataProps> = ({
   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
   const location = useLocation();
 
-  if (!userId) {
+  if (!userId && show) {
     return <Redirect noThrow to={`${location.pathname}`} />;
   }
 
