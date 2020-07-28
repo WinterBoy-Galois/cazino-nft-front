@@ -17,7 +17,7 @@ const AuthOverlay: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!auth.accessToken || error) {
-      return dispatch({ type: 'AUTH_SIGN_OUT' });
+      dispatch({ type: 'AUTH_SIGN_OUT' });
     } else if (!error && data) {
       dispatch({
         type: 'AUTH_SIGN_IN',

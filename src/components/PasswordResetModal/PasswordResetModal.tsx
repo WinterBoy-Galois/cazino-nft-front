@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './PasswordResetModal.module.scss';
-import Modal, { transitionTimeout, closeModal } from '../Modal';
+import Modal, { transitionTimeout } from '../Modal';
 import { useMutation } from '@apollo/react-hooks';
 import { RESET_PASSWORD } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
@@ -14,6 +14,7 @@ import { useFormik } from 'formik';
 import { validationSchema } from './lib/validationSchema';
 import SpinnerButton from '../SpinnerButton';
 import { useQueryParams } from '../../hooks/useQueryParams.hook';
+import { Redirect, useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -114,10 +115,12 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
   const [errors, setErrors] = useState<ApplicationError[]>();
   const [
     {
-      auth: { passwordResetToken: token },
+      auth: { passwordResetToken: token, state },
     },
     dispatch,
   ] = useStateValue();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const onPasswordReset = async (newPassword: string) => {
     const { data, errors: resetPasswordErrors } = await resetPassword({
@@ -132,7 +135,7 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
 
     dispatch({ type: 'AUTH_SIGN_IN', payload: data.resetPassword });
 
-    closeModal(dispatch);
+    navigate(location.pathname);
     success(t('passwordReset.success'));
   };
 
@@ -149,6 +152,10 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
       dispatch({ type: 'AUTH_ADD_PASSWORD_RESET_TOKEN', payload: params.token });
     }
   }, [params, dispatch]);
+
+  if (state === 'SIGNED_IN') {
+    return <Redirect noThrow to={location.pathname} />;
+  }
 
   return (
     <PasswordResetModal

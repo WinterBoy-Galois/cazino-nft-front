@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './PasswordRecoveryModal.module.scss';
-import Modal, { transitionTimeout, closeModal } from '../Modal';
+import Modal, { transitionTimeout } from '../Modal';
 import { useMutation } from '@apollo/react-hooks';
 import { RECOVER_PASSWORD } from '../../graphql/mutations';
 import { info } from '../Toast';
@@ -16,7 +16,7 @@ import passwordRecoveryIllustration from '../../assets/images/auth/password-reco
 import Uppercase from '../Uppercase';
 import Link from '../Link';
 import { useStateValue } from '../../state';
-import { useLocation, useNavigate } from '@reach/router';
+import { useLocation, useNavigate, Redirect } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -122,7 +122,7 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
   const { t } = useTranslation(['auth', 'common']);
   const [recoverPassword, { loading }] = useMutation(RECOVER_PASSWORD);
   const [errors, setErrors] = useState<ApplicationError[]>();
-  const [, dispatch] = useStateValue();
+  const [{ auth }] = useStateValue();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -137,7 +137,7 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
       return setErrors(getFromGenericErrors(data.forgotPassword.errors, t));
     }
 
-    closeModal(dispatch);
+    navigate(location.pathname);
     info(t('passwordRecovery.success'));
   };
 
@@ -151,6 +151,10 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
 
   const handleNavigateToSignIn = () => navigate(`${location.pathname}?dialog=sign-in`);
   const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
+
+  if (auth.state === 'SIGNED_IN') {
+    return <Redirect noThrow to={location.pathname} />;
+  }
 
   return (
     <PasswordRecoveryModal

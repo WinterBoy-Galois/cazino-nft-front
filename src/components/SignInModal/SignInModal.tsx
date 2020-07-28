@@ -17,7 +17,7 @@ import SpinnerButton from '../SpinnerButton';
 import ApplicationError from '../../models/applicationError.model';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { validationSchema } from './lib/validationSchema';
-import { useLocation, useNavigate } from '@reach/router';
+import { useLocation, useNavigate, Redirect } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -148,7 +148,7 @@ interface IWithDataProps {
 const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
   const [signIn, { loading }] = useMutation(SIGN_IN);
-  const [, dispatch] = useStateValue();
+  const [{ auth }, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
   const location = useLocation();
   const navigate = useNavigate();
@@ -179,6 +179,10 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     setTimeout(() => setErrors([]), transitionTimeout);
     onClose && onClose();
   };
+
+  if (auth.state === 'SIGNED_IN') {
+    return <Redirect noThrow to={location.pathname} />;
+  }
 
   return (
     <SignInModal
