@@ -60,7 +60,7 @@ const PasswordRecoveryModal: React.SFC<IProps> = ({
   };
 
   return (
-    <Modal show={show} onClose={handleClose} title={t('passwordReset.headline')}>
+    <Modal show={show} onClose={handleClose} title={t('passwordRecovery.headline')}>
       <div className="row">
         <div className={`col-12 col-md-7 ${styles.container}`}>
           <div>
@@ -88,17 +88,19 @@ const PasswordRecoveryModal: React.SFC<IProps> = ({
                 loading={loading}
                 className={styles.button}
               >
-                Recover password
+                {t('passwordRecovery.button')}
               </SpinnerButton>
             </form>
           </div>
 
           <div>
             <Uppercase className={styles.spacing}>
-              MEMORY BACK? <Link onClick={onNavigateToSignIn}>TRY TO SIGN IN!</Link>
+              {t('passwordRecovery.goToSignInText')}&nbsp;
+              <Link onClick={onNavigateToSignIn}>{t('passwordRecovery.goToSignIn')}</Link>
             </Uppercase>
             <Uppercase>
-              DON’T HAVE AN ACCOUNT? <Link onClick={onNavigateToSignUp}>SIGN UP NOW!</Link>
+              {t('passwordRecovery.goToSignUpText')}&nbsp;
+              <Link onClick={onNavigateToSignUp}>{t('passwordRecovery.goToSignUp')}</Link>
             </Uppercase>
           </div>
         </div>

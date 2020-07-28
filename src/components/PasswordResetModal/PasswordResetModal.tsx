@@ -91,7 +91,7 @@ const PasswordResetModal: React.SFC<IProps> = ({
               loading={loading}
               className={styles.button}
             >
-              Reset password
+              {t('passwordReset.button')}
             </SpinnerButton>
           </form>
         </div>
