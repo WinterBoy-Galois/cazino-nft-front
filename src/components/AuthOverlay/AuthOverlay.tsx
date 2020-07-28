@@ -1,33 +1,30 @@
 import React, { useEffect, Fragment } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import { useStateValue } from '../../state';
 import { ME } from '../../graphql/queries';
-import { getAccessToken } from '../../common/util/storage.util';
 import styles from './AuthOverlay.module.scss';
 import Spinner from '../Spinner';
 
 const AuthOverlay: React.FC = ({ children }) => {
   const [{ auth }, dispatch] = useStateValue();
-  const { data, error, loading, refetch } = useQuery(ME, { fetchPolicy: 'network-only' });
+  const [me, { data, error }] = useLazyQuery(ME, { fetchPolicy: 'network-only' });
 
   useEffect(() => {
-    if (auth.state === 'SIGNED_IN') {
-      refetch();
+    if (auth.state !== 'UNAUTHENTICATED' && auth.accessToken) {
+      me();
     }
-  }, [refetch, auth.accessToken, auth.state]);
+  }, [me, auth.accessToken, auth.state]);
 
   useEffect(() => {
-    if (data) {
+    if (!auth.accessToken || error) {
+      return dispatch({ type: 'AUTH_SIGN_OUT' });
+    } else if (!error && data) {
       dispatch({
         type: 'AUTH_SIGN_IN',
         payload: { user: { ...data.me } },
       });
     }
-
-    if ((error || !getAccessToken()) && auth.state !== 'UNAUTHENTICATED') {
-      dispatch({ type: 'AUTH_SIGN_OUT' });
-    }
-  }, [dispatch, data, error, auth.accessToken, loading, refetch, auth.state]);
+  }, [dispatch, data, error, auth.state, auth.accessToken, me]);
 
   return auth.state === 'UNKNOWN' ? (
     <div className={styles.container}>
