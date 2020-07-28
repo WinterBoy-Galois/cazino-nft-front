@@ -16,6 +16,7 @@ import passwordRecoveryIllustration from '../../assets/images/auth/password-reco
 import Uppercase from '../Uppercase';
 import Link from '../Link';
 import { useStateValue } from '../../state';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -122,8 +123,10 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
   const [recoverPassword, { loading }] = useMutation(RECOVER_PASSWORD);
   const [errors, setErrors] = useState<ApplicationError[]>();
   const [, dispatch] = useStateValue();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const onPasswordRecovery = async (email: string) => {
+  const handlePasswordRecovery = async (email: string) => {
     const { data, errors: recoveryPasswordErrors } = await recoverPassword({
       variables: { email },
     });
@@ -146,13 +149,18 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
     setErrors([]);
   };
 
+  const handleNavigateToSignIn = () => navigate(`${location.pathname}?dialog=sign-in`);
+  const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
+
   return (
     <PasswordRecoveryModal
       show={show}
       loading={loading}
       errors={errors}
       onClose={handleClose}
-      onPasswordRecovery={onPasswordRecovery}
+      onPasswordRecovery={handlePasswordRecovery}
+      onNavigateToSignIn={handleNavigateToSignIn}
+      onNavigateToSignUp={handleNavigateToSignUp}
     />
   );
 };

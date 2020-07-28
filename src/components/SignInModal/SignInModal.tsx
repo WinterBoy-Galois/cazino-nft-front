@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useMutation } from '@apollo/react-hooks';
 
-import Modal, { replaceModal, transitionTimeout } from '../Modal';
+import Modal, { transitionTimeout } from '../Modal';
 import styles from './SignInModal.module.scss';
 import signInIllustration from '../../assets/images/auth/sign-in.svg';
 import TextInput from '../TextInput';
@@ -17,7 +17,7 @@ import SpinnerButton from '../SpinnerButton';
 import ApplicationError from '../../models/applicationError.model';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { validationSchema } from './lib/validationSchema';
-import { navigate, useLocation } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -151,6 +151,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
   const [, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSignIn = async (email: string, password: string, remember: boolean) => {
     setErrors([]);
@@ -170,7 +171,8 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
 
   const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
 
-  const handleNavigateToForgotPassword = () => replaceModal(dispatch, 'PASSWORD_RECOVERY_MODAL');
+  const handleNavigateToForgotPassword = () =>
+    navigate(`${location.pathname}?dialog=password-recovery`);
 
   const handleClose = () => {
     setTimeout(() => setErrors([]), transitionTimeout);

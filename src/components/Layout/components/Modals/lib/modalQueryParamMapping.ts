@@ -11,14 +11,20 @@ export const mapQueryParamToModal = (param: string): ModalType | undefined => {
     case 'activation':
       return 'ACCOUNT_ACTIVATION_MODAL';
 
-    case 'password-recovery':
+    case 'password-reset':
       return 'PASSWORD_RESET_MODAL';
+
+    case 'password-recovery':
+      return 'PASSWORD_RECOVERY_MODAL';
 
     case 'bet-details':
       return 'BET_DETAILS_MODAL';
 
     case 'user-info':
       return 'USER_INFO_MODAL';
+
+    case 'seed-confirm':
+      return 'CHANGE_SERVER_SEED_CONFIRMATION';
 
     default:
       return undefined;

@@ -21,6 +21,7 @@ import ApplicationError from '../../models/applicationError.model';
 
 import styles from './SignUpModal.module.scss';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -190,6 +191,8 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
   const [signUp, { loading }] = useMutation(SIGN_UP);
   const [, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSignUp = async (email: string, password: string, username: string, token: string) => {
     setErrors([]);
@@ -207,7 +210,7 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     replaceModal(dispatch, 'ACCOUNT_ACTIVATION_MODAL');
   };
 
-  const handleNavigateToSignIn = () => replaceModal(dispatch, 'SIGN_IN_MODAL');
+  const handleNavigateToSignIn = () => navigate(`${location.pathname}?dialog=sign-in`);
 
   const handleClose = () => {
     setTimeout(() => setErrors([]), transitionTimeout);
