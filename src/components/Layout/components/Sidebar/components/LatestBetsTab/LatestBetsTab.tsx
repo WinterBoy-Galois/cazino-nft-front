@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import LatestBetsTable from '../../../../../LatestBetsTable';
-
 import styles from './LatestBetsTab.module.scss';
 import { ViewMode } from '../../../../../LatestBetsTable/LatestBetsTable';
 import Bet from '../../../../../../models/bet.model';
 import { ApolloError } from 'apollo-client';
-import { useStateValue } from '../../../../../../state';
+import { navigate, useLocation } from '@reach/router';
 
 interface IProps {
   bets?: Bet[];
@@ -14,7 +13,11 @@ interface IProps {
 }
 
 const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
-  const [, dispatch] = useStateValue();
+  const location = useLocation();
+  const handleUsernameClick = useCallback(
+    userId => navigate(`${location.pathname}?dialog=user-info`, { state: { userId } }),
+    [location.pathname]
+  );
 
   return (
     <>
@@ -26,12 +29,7 @@ const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error 
           signInUserId="15"
           viewMode={ViewMode.RESPONSIVE}
           reduceMotion={true}
-          onUsernameClicked={userId =>
-            dispatch({
-              type: 'MODAL_SHOW',
-              payload: { type: 'USER_INFO_MODAL', data: { userId } },
-            })
-          }
+          onUsernameClicked={handleUsernameClick}
         />
       </div>
     </>

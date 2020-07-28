@@ -25,7 +25,9 @@ const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet }) => {
     [bet]
   );
 
-  if (!bet) {
+  if (!bet && !show) {
+    return null;
+  } else if (!bet) {
     return <Redirect noThrow to={`${location.pathname}`} />;
   }
 
