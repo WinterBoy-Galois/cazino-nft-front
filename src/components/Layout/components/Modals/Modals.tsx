@@ -11,22 +11,35 @@ import { useQueryParams } from '../../../../hooks/useQueryParams.hook';
 import { mapQueryParamToModal } from './lib/modalQueryParamMapping';
 import { PasswordResetModalWithData } from '../../../PasswordResetModal/PasswordResetModal';
 import { PasswordRecoveryModalWithData } from '../../../PasswordRecoveryModal/PasswordRecoveryModal';
+import { closeModal, replaceModal, showModal } from '../../../Modal';
+import { useLocation, navigate } from '@reach/router';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
-  const handleClose = useCallback(() => dispatch({ type: 'MODAL_HIDE' }), [dispatch]);
+  const location = useLocation();
+  const handleClose = useCallback(() => navigate(location.pathname), [location.pathname]);
   const handleShow = useCallback((type: ModalType) => modal.type === type, [modal.type]);
   const params = useQueryParams();
 
   useEffect(() => {
-    if (params?.dialog) {
-      const modalType = mapQueryParamToModal(params.dialog);
+    const currentModalType = modal.type;
 
-      if (modalType) {
-        dispatch({ type: 'MODAL_SHOW', payload: { type: modalType } });
+    if (params?.dialog) {
+      const newModalType = mapQueryParamToModal(params.dialog);
+
+      if (!newModalType) {
+        return;
       }
+
+      if (currentModalType !== 'NONE' && newModalType !== currentModalType) {
+        replaceModal(dispatch, newModalType, { ...location.state, key: undefined });
+      } else if (currentModalType === 'NONE' && !modal.isReplace) {
+        showModal(dispatch, newModalType, { ...location.state, key: undefined });
+      }
+    } else if (!params?.dialog && currentModalType !== 'NONE') {
+      closeModal(dispatch);
     }
-  }, [params, dispatch]);
+  }, [params, dispatch, modal.type, modal.isReplace, location.state]);
 
   return (
     <>

@@ -11,7 +11,8 @@ export const replaceModal = (
   newModal: ModalType,
   data?: any
 ) => {
-  closeModal(dispatch);
+  dispatch({ type: 'MODAL_HIDE', payload: { isReplace: true } });
+
   setTimeout(
     () =>
       dispatch({
@@ -20,4 +21,11 @@ export const replaceModal = (
       }),
     transitionTimeout
   );
+};
+
+export const showModal = (dispatch: (value: Action) => void, modal: ModalType, data?: any) => {
+  dispatch({
+    type: 'MODAL_SHOW',
+    payload: { type: modal, data },
+  });
 };

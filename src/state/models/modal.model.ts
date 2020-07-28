@@ -1,6 +1,7 @@
 export interface ModalState {
   type: ModalType;
   data?: any;
+  isReplace?: boolean;
 }
 
 export type ModalType =

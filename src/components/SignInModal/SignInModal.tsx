@@ -17,6 +17,7 @@ import SpinnerButton from '../SpinnerButton';
 import ApplicationError from '../../models/applicationError.model';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { validationSchema } from './lib/validationSchema';
+import { navigate, useLocation } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -149,6 +150,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
   const [signIn, { loading }] = useMutation(SIGN_IN);
   const [, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
+  const location = useLocation();
 
   const handleSignIn = async (email: string, password: string, remember: boolean) => {
     setErrors([]);
@@ -166,7 +168,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     dispatch({ type: 'MODAL_HIDE' });
   };
 
-  const handleNavigateToSignUp = () => replaceModal(dispatch, 'SIGN_UP_MODAL');
+  const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
 
   const handleNavigateToForgotPassword = () => replaceModal(dispatch, 'PASSWORD_RECOVERY_MODAL');
 
