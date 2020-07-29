@@ -58,7 +58,7 @@
     "resendSuccess": "We sent you a new activation code."
   },
   "passwordReset": {
-    "headline": "password recovery",
+    "headline": "password reset",
     "success": "Your password has been changed.",
     "button": "reset password"
   },
