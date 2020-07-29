@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import styles from './TopBar.module.scss';
 import Logo from '../../../icons/Logo';
 import SidebarToggle from '../SidebarToggle';

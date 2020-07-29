@@ -4,8 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { useFormik } from 'formik';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useTranslation } from 'react-i18next';
-
-import Modal, { replaceModal, transitionTimeout } from '../Modal';
+import Modal, { transitionTimeout } from '../Modal';
 import { useStateValue } from '../../state';
 import { SIGN_UP } from '../../graphql/mutations';
 import TextInput from '../TextInput';
@@ -18,9 +17,9 @@ import CheckboxInput from '../CheckboxInput';
 import ErrorSummary from '../ErrorSummary';
 import { validationSchema } from './lib/validationSchema';
 import ApplicationError from '../../models/applicationError.model';
-
 import styles from './SignUpModal.module.scss';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
+import { useLocation, useNavigate, Redirect } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -188,8 +187,10 @@ interface IWithDataProps {
 const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
   const [signUp, { loading }] = useMutation(SIGN_UP);
-  const [, dispatch] = useStateValue();
+  const [{ auth }, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSignUp = async (email: string, password: string, username: string, token: string) => {
     setErrors([]);
@@ -204,10 +205,11 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     }
 
     dispatch({ type: 'AUTH_SIGN_UP', payload: { ...data.registerUser } });
-    replaceModal(dispatch, 'ACCOUNT_ACTIVATION_MODAL');
+
+    navigate(`${location.pathname}?dialog=activation`);
   };
 
-  const handleNavigateToSignIn = () => replaceModal(dispatch, 'SIGN_IN_MODAL');
+  const handleNavigateToSignIn = () => navigate(`${location.pathname}?dialog=sign-in`);
 
   const handleClose = () => {
     setTimeout(() => setErrors([]), transitionTimeout);
@@ -216,6 +218,10 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       onClose();
     }
   };
+
+  if (auth.state === 'SIGNED_IN') {
+    return <Redirect noThrow to={location.pathname} />;
+  }
 
   return (
     <SignUpModal

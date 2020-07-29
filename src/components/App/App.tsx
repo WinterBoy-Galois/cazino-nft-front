@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../Layout/Layout';
-import { Router } from '@reach/router';
+import { Router, LocationProvider } from '@reach/router';
 import HomePage from '../../pages/home';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ToastContainer } from '../Toast';
@@ -16,13 +16,15 @@ const App: React.FC = () => {
     <ApolloProvider client={client}>
       <GoogleReCaptchaProvider reCaptchaKey={appConfig.reCaptchaSiteKey}>
         <AuthOverlay>
-          <Layout>
-            <Router>
-              <HomePage path="/" />
-            </Router>
-          </Layout>
+          <LocationProvider>
+            <Layout>
+              <Router>
+                <HomePage path="/" />
+              </Router>
+            </Layout>
 
-          <ToastContainer />
+            <ToastContainer />
+          </LocationProvider>
         </AuthOverlay>
       </GoogleReCaptchaProvider>
     </ApolloProvider>

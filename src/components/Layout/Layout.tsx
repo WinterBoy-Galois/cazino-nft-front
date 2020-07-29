@@ -10,18 +10,19 @@ import { transitionTimeout } from '../Modal';
 import { useMutation } from '@apollo/react-hooks';
 import { SIGN_OUT } from '../../graphql/mutations';
 import Modals from './components/Modals';
+import { navigate, useLocation } from '@reach/router';
 
 const Layout: React.FC = ({ children }) => {
   const [{ sidebar, modal }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
   const [signOut] = useMutation(SIGN_OUT);
+  const location = useLocation();
 
   const hideContent = () =>
     breakpoint === 'xs' || breakpoint === 'sm' ? modal.type !== 'NONE' : false;
 
-  const handleSignInClick = () =>
-    dispatch({ type: 'MODAL_SHOW', payload: { type: 'SIGN_IN_MODAL' } });
+  const handleSignInClick = () => navigate(`${location.pathname}?dialog=sign-in`);
 
   const handleSignOutClick = async () => {
     await signOut();

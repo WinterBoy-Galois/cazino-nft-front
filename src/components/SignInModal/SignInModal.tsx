@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useMutation } from '@apollo/react-hooks';
 
-import Modal, { replaceModal, transitionTimeout } from '../Modal';
+import Modal, { transitionTimeout } from '../Modal';
 import styles from './SignInModal.module.scss';
 import signInIllustration from '../../assets/images/auth/sign-in.svg';
 import TextInput from '../TextInput';
@@ -17,6 +17,7 @@ import SpinnerButton from '../SpinnerButton';
 import ApplicationError from '../../models/applicationError.model';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { validationSchema } from './lib/validationSchema';
+import { useLocation, useNavigate, Redirect } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -104,7 +105,7 @@ const SignInModal: React.FC<IProps> = ({
                 label={t('signIn.buttons.rememberMe')}
                 onChangeValue={v => formik.setFieldValue('remember', v)}
               />
-              <Uppercase>
+              <Uppercase className={styles['forgot-password']}>
                 <Link onClick={onNavigateToForgotPassword}>
                   {t('signIn.buttons.goToForgotPassword')}
                 </Link>
@@ -147,8 +148,10 @@ interface IWithDataProps {
 const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
   const [signIn, { loading }] = useMutation(SIGN_IN);
-  const [, dispatch] = useStateValue();
+  const [{ auth }, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSignIn = async (email: string, password: string, remember: boolean) => {
     setErrors([]);
@@ -163,20 +166,23 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     }
 
     dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn, remember } });
-    dispatch({ type: 'MODAL_HIDE' });
+
+    navigate(`${location.pathname}`);
   };
 
-  const handleNavigateToSignUp = () => replaceModal(dispatch, 'SIGN_UP_MODAL');
+  const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
 
-  const handleNavigateToForgotPassword = () => null;
+  const handleNavigateToForgotPassword = () =>
+    navigate(`${location.pathname}?dialog=password-recovery`);
 
   const handleClose = () => {
     setTimeout(() => setErrors([]), transitionTimeout);
-
-    if (onClose) {
-      onClose();
-    }
+    onClose && onClose();
   };
+
+  if (auth.state === 'SIGNED_IN') {
+    return <Redirect noThrow to={location.pathname} />;
+  }
 
   return (
     <SignInModal

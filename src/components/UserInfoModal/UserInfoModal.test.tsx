@@ -7,6 +7,7 @@ import { USER_INFO } from '../../graphql/queries';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
 import { GameTypes } from '../../models/gameTypes.model';
+import { LocationProvider } from '@reach/router';
 
 describe('LeaderboardsTab', () => {
   it('should match snapshot', async () => {
@@ -40,9 +41,11 @@ describe('LeaderboardsTab', () => {
 
     // Act
     const container = render(
-      <ApolloProvider client={mockClient}>
-        <UserInfoModalWithData show={true} userId="1" />
-      </ApolloProvider>
+      <LocationProvider>
+        <ApolloProvider client={mockClient}>
+          <UserInfoModalWithData show={true} userId="1" />
+        </ApolloProvider>
+      </LocationProvider>
     );
 
     await waitForDomChange();
