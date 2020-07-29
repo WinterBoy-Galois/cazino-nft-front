@@ -1,6 +1,7 @@
 export interface ModalState {
   type: ModalType;
   data?: any;
+  isReplace?: boolean;
 }
 
 export type ModalType =
@@ -10,4 +11,6 @@ export type ModalType =
   | 'CHANGE_SERVER_SEED_CONFIRMATION'
   | 'ACCOUNT_ACTIVATION_MODAL'
   | 'SIGN_IN_MODAL'
-  | 'SIGN_UP_MODAL';
+  | 'SIGN_UP_MODAL'
+  | 'PASSWORD_RESET_MODAL'
+  | 'PASSWORD_RECOVERY_MODAL';

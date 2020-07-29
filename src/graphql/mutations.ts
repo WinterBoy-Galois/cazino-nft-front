@@ -90,3 +90,39 @@ export const RESEND_ACTIVATION_CODE = gql`
     }
   }
 `;
+
+export const RESET_PASSWORD = gql`
+  mutation ResetPassword($token: String!, $newPassword: String!) {
+    resetPassword(uuid: $token, newPassword: $newPassword) {
+      ... on LoginResult {
+        accessToken
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const RECOVER_PASSWORD = gql`
+  mutation RecoverPassword($email: String!) {
+    forgotPassword(email: $email) {
+      ... on GenericBoolean {
+        result
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

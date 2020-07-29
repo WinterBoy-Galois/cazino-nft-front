@@ -57,6 +57,20 @@
     "resendEmail": "resend email",
     "resendSuccess": "We sent you a new activation code."
   },
+  "passwordReset": {
+    "headline": "password reset",
+    "success": "Your password has been changed.",
+    "button": "reset password"
+  },
+  "passwordRecovery": {
+    "headline": "password recovery",
+    "success": "We’ve sent you an e-mail with password recovery instructions",
+    "goToSignInText": "MEMORY BACK?",
+    "goToSignIn": "TRY TO SIGN IN!",
+    "goToSignUpText": "DON’T HAVE AN ACCOUNT?",
+    "goToSignUp": "SIGN UP NOW!",
+    "button": "recover password"
+  },
   "errors": {
     "ACCOUNT_USERNAME_ALREADY_EXISTS": "Username already exists",
     "INVALID_ACTIVATION_CODE": "The entered activation code is invalid.",
