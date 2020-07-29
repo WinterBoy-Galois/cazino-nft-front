@@ -1,14 +1,12 @@
 import { Reducer } from 'react';
 import { Action } from '../actions';
 import { AuthState } from '../models/auth.model';
-import { setAccessToken, clearAccessToken } from '../../common/util/storage.util';
+import { saveAuthState } from '../../common/util/storage.util';
 
 export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }) => {
   switch (type) {
     case 'AUTH_SIGN_IN':
-      if (payload.accessToken && payload.remember) {
-        setAccessToken(payload.accessToken);
-      }
+      saveAuthState('SIGNED_IN');
 
       return {
         ...state,
@@ -18,18 +16,16 @@ export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }
       };
 
     case 'AUTH_SIGN_OUT':
-      clearAccessToken();
+      saveAuthState('SIGNED_OUT');
 
       return {
         ...state,
-        state: 'UNAUTHENTICATED',
+        state: 'SIGNED_OUT',
         accessToken: undefined,
         user: undefined,
       };
 
     case 'AUTH_TOKEN_REFRESH': {
-      setAccessToken(payload.accessToken);
-
       return {
         ...state,
         accessToken: payload.accessToken,
@@ -37,7 +33,7 @@ export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }
     }
 
     case 'AUTH_SIGN_UP':
-      setAccessToken(payload.accessToken);
+      saveAuthState('SIGNED_IN');
 
       return {
         ...state,

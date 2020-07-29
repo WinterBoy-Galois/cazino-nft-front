@@ -5,7 +5,7 @@ import getApolloClient from '../graphql/client';
 export function useApolloClient() {
   const [
     {
-      auth: { accessToken },
+      auth: { accessToken, state },
     },
     dispatch,
   ] = useStateValue();
@@ -14,9 +14,11 @@ export function useApolloClient() {
     () =>
       getApolloClient(
         t => dispatch({ type: 'AUTH_TOKEN_REFRESH', payload: { accessToken: t } }),
+        () => dispatch({ type: 'AUTH_SIGN_OUT' }),
+        state,
         accessToken
       ),
-    [dispatch, accessToken]
+    [dispatch, accessToken, state]
   );
 
   return client;
