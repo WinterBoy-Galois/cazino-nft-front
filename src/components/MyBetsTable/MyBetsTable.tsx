@@ -10,6 +10,8 @@ import styles from './MyBetsTable.module.scss';
 import SpacerRow from './components/SpacerRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from '@reach/router';
+import Button from '../Button';
 
 export enum ViewMode {
   RESPONSIVE,
@@ -21,9 +23,9 @@ interface IProps {
   isLoading?: boolean;
   error?: boolean;
   animationSpeed?: DispatchSpeed;
-  signInUserId?: string;
   viewMode?: ViewMode;
   reduceMotion?: boolean;
+  isSignedIn?: boolean;
 }
 
 const MyBetsTable: React.FC<IProps> = ({
@@ -31,12 +33,14 @@ const MyBetsTable: React.FC<IProps> = ({
   isLoading = false,
   error = false,
   animationSpeed = DispatchSpeed.NORMAL,
-  signInUserId,
   viewMode = ViewMode.RESPONSIVE,
   reduceMotion = false,
+  isSignedIn = false,
 }) => {
   const breakpoint = useBreakpoint();
   const { t } = useTranslation(['sidebar']);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const renderTimeAndMultiplierColumn = () => {
     switch (true) {
@@ -77,13 +81,7 @@ const MyBetsTable: React.FC<IProps> = ({
             <>
               <SpacerRow />
               {reduceMotion ? (
-                bets.map(b => (
-                  <BetRow
-                    key={b.id}
-                    bet={b}
-                    highlight={signInUserId ? b.userid.toString() === signInUserId : false}
-                  />
-                ))
+                bets.map(b => <BetRow key={b.id} bet={b} />)
               ) : (
                 <TransitionGroup component={null}>
                   {bets.map(b => (
@@ -98,11 +96,7 @@ const MyBetsTable: React.FC<IProps> = ({
                       timeout={speed / 2}
                       mountOnEnter={true}
                     >
-                      <BetRow
-                        bet={b}
-                        highlight={signInUserId ? b.userid.toString() === signInUserId : false}
-                        viewMode={viewMode}
-                      />
+                      <BetRow bet={b} viewMode={viewMode} />
                     </CSSTransition>
                   ))}
                 </TransitionGroup>
@@ -114,7 +108,17 @@ const MyBetsTable: React.FC<IProps> = ({
       </table>
       {!error && isLoading && (bets.length <= 0 || !bets) && <Loading />}
       {error && !isLoading && (bets.length <= 0 || !bets) && <Error>Unexpected error</Error>}
-      {!error && !isLoading && (bets.length <= 0 || !bets) && <Error>No Data</Error>}
+      {!isSignedIn && (
+        <Error>
+          <Button
+            onClick={() => navigate(`${location.pathname}?dialog=sign-in`)}
+            className={styles.button}
+          >
+            Sign In
+          </Button>
+        </Error>
+      )}
+      {isSignedIn && !error && !isLoading && (bets.length <= 0 || !bets) && <Error>No Data</Error>}
     </div>
   );
 };

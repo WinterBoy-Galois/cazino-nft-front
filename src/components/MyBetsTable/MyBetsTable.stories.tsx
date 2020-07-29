@@ -183,8 +183,8 @@ storiesOf('Components/MyBetsTable', module)
           )}
           isLoading={false}
           error={false}
-          signInUserId={'197'}
           reduceMotion={boolean('Reduce Motion', false)}
+          isSignedIn={boolean('isSignedIn', true)}
         />
       </RandomBetsConfiguration>
     );
