@@ -1,31 +1,24 @@
 import React, { useEffect, Fragment } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { useStateValue } from '../../state';
 import { ME } from '../../graphql/queries';
 import styles from './AuthOverlay.module.scss';
 import Spinner from '../Spinner';
-import { useEffectOnce } from '../../hooks/useEffectOnce.hook';
 
 const AuthOverlay: React.FC = ({ children }) => {
   const [{ auth }, dispatch] = useStateValue();
-  const [me, { data, error }] = useLazyQuery(ME, { fetchPolicy: 'network-only' });
-
-  useEffectOnce(() => {
-    if (auth.state === 'SIGNED_IN') {
-      me();
-    }
-  });
+  const { data, error } = useQuery(ME, { fetchPolicy: 'network-only' });
 
   useEffect(() => {
-    if (error) {
+    if (error && auth.state === 'SIGNED_IN') {
       dispatch({ type: 'AUTH_SIGN_OUT' });
-    } else if (!error && data) {
+    } else if (!error && data && auth.state === 'SIGNED_IN') {
       dispatch({
         type: 'AUTH_SIGN_IN',
         payload: { user: { ...data.me } },
       });
     }
-  }, [dispatch, data, error]);
+  }, [dispatch, data, error, auth.state]);
 
   return auth.state === 'SIGNED_IN' && !auth.user ? (
     <div className={styles.container}>
