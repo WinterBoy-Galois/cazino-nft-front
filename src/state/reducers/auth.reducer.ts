@@ -6,7 +6,7 @@ import { setAccessToken, clearAccessToken } from '../../common/util/storage.util
 export const authReducer: Reducer<AuthState, Action> = (state, { type, payload }) => {
   switch (type) {
     case 'AUTH_SIGN_IN':
-      if (payload.accessToken) {
+      if (payload.accessToken && payload.remember) {
         setAccessToken(payload.accessToken);
       }
 
