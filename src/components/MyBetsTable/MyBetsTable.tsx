@@ -37,7 +37,7 @@ const MyBetsTable: React.FC<IProps> = ({
   isSignedIn = false,
 }) => {
   const breakpoint = useBreakpoint();
-  const { t } = useTranslation(['sidebar']);
+  const { t } = useTranslation(['sidebar', 'auth']);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -113,7 +113,7 @@ const MyBetsTable: React.FC<IProps> = ({
             onClick={() => navigate(`${location.pathname}?dialog=sign-in`)}
             className={styles.button}
           >
-            Sign In
+            {t('auth:signIn.headline')}
           </Button>
         </Error>
       )}
