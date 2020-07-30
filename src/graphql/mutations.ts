@@ -36,6 +36,11 @@ export const SIGN_IN = gql`
     signIn(email: $email, password: $password, remember: $remember) {
       ... on LoginResult {
         accessToken
+        user {
+          id
+          username
+          avatarUrl
+        }
       }
       ... on GenericErrorArray {
         errors {
@@ -66,6 +71,11 @@ export const SIGN_UP = gql`
     ) {
       ... on LoginResult {
         accessToken
+        user {
+          id
+          username
+          avatarUrl
+        }
       }
       ... on GenericErrorArray {
         errors {
@@ -108,6 +118,11 @@ export const RESET_PASSWORD = gql`
     resetPassword(uuid: $token, newPassword: $newPassword) {
       ... on LoginResult {
         accessToken
+        user {
+          id
+          username
+          avatarUrl
+        }
       }
       ... on GenericErrorArray {
         errors {

@@ -165,7 +165,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       return;
     }
 
-    dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn } });
+    dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn, remember } });
 
     navigate(`${location.pathname}`);
   };
@@ -180,7 +180,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     onClose && onClose();
   };
 
-  if (auth.state === 'SIGNED_IN') {
+  if (show && auth.state === 'SIGNED_IN') {
     return <Redirect noThrow to={location.pathname} />;
   }
 

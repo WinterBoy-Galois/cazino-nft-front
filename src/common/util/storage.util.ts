@@ -1,12 +1,12 @@
-const tokenName = 'accessToken';
+import { AuthType } from '../../state/models/auth.model';
+
 const refName = 'ref';
+const stateName = 'authState';
 
-export const getAccessToken = () => localStorage.getItem(tokenName) ?? undefined;
-
-export const setAccessToken = (accessToken: string) => localStorage.setItem(tokenName, accessToken);
-
-export const clearAccessToken = () => localStorage.removeItem(tokenName);
+export const readAuthState = (): AuthType =>
+  (localStorage.getItem(stateName) as AuthType) ?? 'SIGNED_OUT';
+export const saveAuthState = (state: AuthType) => localStorage.setItem(stateName, state);
+export const clearAuthState = () => localStorage.removeItem(stateName);
 
 export const saveReferral = (referralId: string) => localStorage.setItem(refName, referralId);
-
 export const readReferral = () => localStorage.getItem(refName) ?? undefined;

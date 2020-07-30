@@ -9,7 +9,7 @@ import { HttpLink } from 'apollo-link-http';
 import jwtDecode from 'jwt-decode';
 import { getEpoch } from '../common/util/date.util';
 import { setContext } from 'apollo-link-context';
-import { clearAccessToken } from '../common/util/storage.util';
+import { AuthType } from '../state/models/auth.model';
 
 // https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -26,6 +26,8 @@ let wsLink: WebSocketLink;
 
 const getApolloClient = (
   onAccessTokenRefresh: (accessToken: string) => void,
+  onSignOut: () => void,
+  authType: AuthType,
   accessToken?: string
 ) => {
   if (wsLink) {
@@ -69,6 +71,8 @@ const getApolloClient = (
         if (exp < getEpoch()) {
           return false;
         }
+      } else if (authType === 'SIGNED_IN') {
+        return false;
       }
 
       return true;
@@ -76,14 +80,11 @@ const getApolloClient = (
     fetchAccessToken: () => {
       return fetch('https://staging.jinglebets.com/refresh_tokens', {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
         credentials: 'include',
       });
     },
     handleFetch: accessToken => onAccessTokenRefresh(accessToken),
-    handleError: () => clearAccessToken(),
+    handleError: () => onSignOut(),
   });
 
   const link = split(
