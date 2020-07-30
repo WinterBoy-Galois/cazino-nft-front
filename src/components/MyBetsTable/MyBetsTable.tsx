@@ -5,7 +5,6 @@ import Loading from '../Loading';
 import Error from '../Error';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { DispatchSpeed } from '../../hooks/useBetBuffer.hook';
-
 import styles from './MyBetsTable.module.scss';
 import SpacerRow from './components/SpacerRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
@@ -108,7 +107,7 @@ const MyBetsTable: React.FC<IProps> = ({
       </table>
       {!error && isLoading && (bets.length <= 0 || !bets) && <Loading />}
       {error && !isLoading && (bets.length <= 0 || !bets) && <Error>Unexpected error</Error>}
-      {!isSignedIn && (
+      {!isLoading && !isSignedIn && (
         <Error>
           <Button
             onClick={() => navigate(`${location.pathname}?dialog=sign-in`)}
