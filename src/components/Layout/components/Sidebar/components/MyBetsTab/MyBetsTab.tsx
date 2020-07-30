@@ -10,21 +10,25 @@ interface IProps {
   bets?: Bet[];
   isLoading?: boolean;
   error?: ApolloError | undefined;
+  isSignedIn?: boolean;
 }
 
-const MyBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
+const MyBetsTab: React.SFC<IProps> = ({
+  bets = [],
+  isLoading = false,
+  error,
+  isSignedIn,
+}: IProps) => {
   return (
-    <>
-      <div className={styles.table}>
-        <MyBetsTable
-          bets={bets}
-          isLoading={isLoading}
-          error={error ? true : false}
-          // signInUserId="15"
-          viewMode={ViewMode.COMPACT}
-        />
-      </div>
-    </>
+    <div className={styles.table}>
+      <MyBetsTable
+        bets={bets}
+        isLoading={isLoading}
+        error={error ? true : false}
+        viewMode={ViewMode.COMPACT}
+        isSignedIn={isSignedIn}
+      />
+    </div>
   );
 };
 

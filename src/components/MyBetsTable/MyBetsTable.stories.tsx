@@ -6,6 +6,7 @@ import MyBetsTable from '.';
 import Bet from '../../models/bet.model';
 import { useBetGenerator, generateRandomBets } from '../../hooks/useBetGenerator.hook';
 import { DispatchSpeed, useBetBuffer } from '../../hooks/useBetBuffer.hook';
+import { LocationProvider } from '@reach/router';
 
 const users: any = [
   {
@@ -124,6 +125,7 @@ storiesOf('Components/MyBetsTable', module)
       {storyFn()}
     </div>
   ))
+  .addDecorator(storyFn => <LocationProvider>{storyFn()}</LocationProvider>)
   .add('default', () => <MyBetsTable bets={initialBets} isLoading={false} error={false} />)
   .add('empty', () => <MyBetsTable bets={[]} isLoading={false} error={false} />)
   .add('error', () => <MyBetsTable bets={[]} isLoading={false} error={true} />)
@@ -183,8 +185,8 @@ storiesOf('Components/MyBetsTable', module)
           )}
           isLoading={false}
           error={false}
-          signInUserId={'197'}
           reduceMotion={boolean('Reduce Motion', false)}
+          isSignedIn={boolean('isSignedIn', true)}
         />
       </RandomBetsConfiguration>
     );
