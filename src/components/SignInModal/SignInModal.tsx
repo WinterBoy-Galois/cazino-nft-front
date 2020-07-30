@@ -165,7 +165,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       return;
     }
 
-    dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn } });
+    dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn, remember } });
 
     navigate(`${location.pathname}`);
   };
