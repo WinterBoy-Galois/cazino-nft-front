@@ -19,7 +19,7 @@ import { validationSchema } from './lib/validationSchema';
 import ApplicationError from '../../models/applicationError.model';
 import styles from './SignUpModal.module.scss';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
-import { useLocation, useNavigate } from '@reach/router';
+import { useLocation, useNavigate, Redirect } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -187,7 +187,7 @@ interface IWithDataProps {
 const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
   const [signUp, { loading }] = useMutation(SIGN_UP);
-  const [, dispatch] = useStateValue();
+  const [{ auth }, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
   const location = useLocation();
   const navigate = useNavigate();
@@ -218,6 +218,10 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       onClose();
     }
   };
+
+  if (show && auth.state === 'SIGNED_IN') {
+    return <Redirect noThrow to={location.pathname} />;
+  }
 
   return (
     <SignUpModal

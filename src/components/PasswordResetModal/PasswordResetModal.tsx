@@ -153,7 +153,7 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
     }
   }, [params, dispatch]);
 
-  if (state === 'SIGNED_IN' || !params?.token) {
+  if (show && (state === 'SIGNED_IN' || !params?.token)) {
     return <Redirect noThrow to={location.pathname} />;
   }
 
