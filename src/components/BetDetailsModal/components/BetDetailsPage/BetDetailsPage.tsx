@@ -7,14 +7,13 @@ import BitcoinValue from '../../../BitcoinValue';
 import { formatBitcoin, formatMultiplier } from '../../../../common/util/format.util';
 import GameIconAndText from '../../../GameIconAndText';
 import BitcoinProfit from '../../../BitcoinProfit';
-import { useStateValue } from '../../../../state';
-import { transitionTimeout } from '../../../Modal';
 import { useTranslation } from 'react-i18next';
 import DetailsContainer from '../../../DetailsContainer';
 import { datetimeFromEpoch } from '../../../../common/util/date.util';
 import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO_AVATAR_URL } from '../../../../graphql/queries';
 import { ApolloError } from 'apollo-client';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   bet: Bet;
@@ -25,38 +24,15 @@ interface IProps {
 
 const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
   const { t } = useTranslation(['modals']);
-  const [, dispatch] = useStateValue();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   if (!bet) {
     return null;
   }
 
   const handleUsernameClick = () => {
-    dispatch({ type: 'MODAL_HIDE' });
-
-    setTimeout(
-      () =>
-        dispatch({
-          type: 'MODAL_SHOW',
-          payload: {
-            type: 'USER_INFO_MODAL',
-            data: {
-              userId: bet.userid,
-              onBack: () => {
-                dispatch({ type: 'MODAL_HIDE' });
-
-                setTimeout(() => {
-                  dispatch({
-                    type: 'MODAL_SHOW',
-                    payload: { type: 'BET_DETAILS_MODAL', data: { bet } },
-                  });
-                }, transitionTimeout);
-              },
-            },
-          },
-        }),
-      transitionTimeout
-    );
+    navigate(`${location.pathname}?dialog=user-info`, { state: { userId: bet.userid } });
   };
 
   return (
