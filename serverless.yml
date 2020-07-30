@@ -37,6 +37,12 @@ custom:
   onOriginRequest:
     dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-extensions-dev-onOriginRequest:6
     test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onOriginRequest:4
+  aliases:
+    dev:
+      - ${self:custom.siteName}
+      - app-dev.jinglebets.com
+    test:
+      - ${self:custom.siteName}
 
 resources:
   Resources:
@@ -92,8 +98,7 @@ resources:
       Properties:
         DistributionConfig:
           Comment: CaZZZino App (${self:custom.siteName}) CloudFront Distribution
-          Aliases:
-            - ${self:custom.siteName}
+          Aliases: ${self:custom.aliases.${self:provider.stage}}
           DefaultRootObject: index.html
           CustomErrorResponses:
             - ErrorCode: 404
