@@ -1,7 +1,10 @@
-const tokenName = 'accessToken';
+import { AuthType } from '../../state/models/auth.model';
 
-export const getAccessToken = () => localStorage.getItem(tokenName) ?? undefined;
+const stateName = 'authState';
 
-export const setAccessToken = (accessToken: string) => localStorage.setItem(tokenName, accessToken);
+export const readAuthState = (): AuthType =>
+  (localStorage.getItem(stateName) as AuthType) ?? 'SIGNED_OUT';
 
-export const clearAccessToken = () => localStorage.removeItem(tokenName);
+export const saveAuthState = (state: AuthType) => localStorage.setItem(stateName, state);
+
+export const clearAuthState = () => localStorage.removeItem(stateName);

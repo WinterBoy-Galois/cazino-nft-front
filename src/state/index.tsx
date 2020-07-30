@@ -3,7 +3,7 @@ import { State } from './models';
 import { mainReducer } from './reducers';
 import { Action } from './actions';
 import { useBreakpoint, Breakpoint } from '../hooks/useBreakpoint.hook';
-import { getAccessToken } from '../common/util/storage.util';
+import { readAuthState } from '../common/util/storage.util';
 
 const getInitialState = (isSidebarOpen: boolean): State => ({
   sidebar: {
@@ -14,7 +14,7 @@ const getInitialState = (isSidebarOpen: boolean): State => ({
   modal: {
     type: 'NONE',
   },
-  auth: { state: 'UNKNOWN', accessToken: getAccessToken() },
+  auth: { state: readAuthState() },
 });
 
 const isSidebarInitiallyOpen = (breakpoint: Breakpoint) => {

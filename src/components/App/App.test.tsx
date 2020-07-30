@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 import App from './App';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { createMockClient } from 'mock-apollo-client';
@@ -15,6 +15,8 @@ describe('App', () => {
         <App />
       </ApolloProvider>
     );
+
+    wait();
 
     // Assert
     expect(container).toMatchSnapshot();
