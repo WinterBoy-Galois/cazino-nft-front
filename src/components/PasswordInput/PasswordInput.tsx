@@ -40,12 +40,6 @@ const PasswordInput = ({
     }
   };
 
-  const keypressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      // refAmount?.current?.blur();
-    }
-  };
-
   const handleBlur = (event?: React.FocusEvent<HTMLInputElement>) => {
     if (onBlur && event) {
       onBlur(event);
@@ -74,7 +68,6 @@ const PasswordInput = ({
             className={styles.inputField}
             autoComplete="off"
             onChange={handleOnChange}
-            onKeyPress={keypressHandler}
             onBlur={handleBlur}
           />
         </div>
