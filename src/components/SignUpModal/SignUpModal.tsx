@@ -187,14 +187,16 @@ interface IWithDataProps {
 const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
   const [signUp, { loading }] = useMutation(SIGN_UP);
-  const [{ auth }, dispatch] = useStateValue();
+  const [{ auth, referral }, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleSignUp = async (email: string, password: string, username: string, token: string) => {
     setErrors([]);
-    const { data, errors } = await signUp({ variables: { email, password, username, token } });
+    const { data, errors } = await signUp({
+      variables: { email, password, username, token, ref: referral.id },
+    });
 
     if (errors) {
       setErrors(getFromGraphQLErrors(errors, t));

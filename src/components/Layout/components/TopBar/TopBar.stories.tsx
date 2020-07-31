@@ -27,6 +27,7 @@ storiesOf('Components/TopBar', module)
             avatarUrl: 'https://dev.gambilife.com/ava/m1.svg',
           },
         },
+        referral: {},
       }}
     >
       <TopBar onSignOutClick={action('Sign-out')} />
