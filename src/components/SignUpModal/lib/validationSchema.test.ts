@@ -261,6 +261,56 @@ describe('Validation Schema', () => {
       );
     });
 
+    it('should pass for whitelisted special characters', async () => {
+      // Arrange
+      const specialCharacters = '^$*.[]{}()?-"!@#%&/\\,><\':;|_~`';
+      const passwords: string[] = [];
+
+      for (let _i = 0; _i < specialCharacters.length; _i++) {
+        const specialCharacter = specialCharacters.substr(_i, 1);
+        passwords.push(`MyP${specialCharacter}ssw0rd`);
+      }
+
+      // Act
+      const schema = validationSchema(mockedTranslation);
+
+      // Assert
+      passwords.forEach(async password => {
+        const values = {
+          ...data,
+          password: password,
+          confirmPassword: password,
+        };
+        await expect(schema.validate(values)).resolves.toBe(values);
+      });
+    });
+
+    it('should fail for non whitelisted special characters', async () => {
+      // Arrange
+      const specialCharacters = '€¥';
+      const passwords: string[] = [];
+
+      for (let _i = 0; _i < specialCharacters.length; _i++) {
+        const specialCharacter = specialCharacters.substr(_i, 1);
+        passwords.push(`MyP${specialCharacter}ssw0rd`);
+      }
+
+      // Act
+      const schema = validationSchema(mockedTranslation);
+
+      // Assert
+      passwords.forEach(async password => {
+        const values = {
+          ...data,
+          password: password,
+          confirmPassword: password,
+        };
+        await expect(schema.validate(values)).rejects.toThrow(
+          /Must contain at least one special character/
+        );
+      });
+    });
+
     xit('should fail for non alphanumeric values', async () => {
       // Arrange
       const passwords = ['мyP@ssw0rй'];
