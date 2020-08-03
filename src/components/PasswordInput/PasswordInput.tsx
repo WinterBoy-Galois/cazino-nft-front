@@ -71,13 +71,13 @@ const PasswordInput = ({
             onBlur={handleBlur}
           />
         </div>
-        <div className={`${styles['inputField__icon']}`} onClick={handleClick}>
+        <button type="button" className={`${styles['inputField__icon']}`} onClick={handleClick}>
           {isPasswordVisible ? (
             <Eye className={`${styles['inputField__icon--visible']}`} />
           ) : (
             <EyeInvisible className={`${styles['inputField__icon--invisible']}`} />
           )}
-        </div>
+        </button>
       </div>
       {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}
     </div>
