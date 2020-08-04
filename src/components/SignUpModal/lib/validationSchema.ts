@@ -24,5 +24,5 @@ export const validationSchema = (t: TFunction) =>
     confirmPassword: Yup.string()
       .required(t('validation.password.required'))
       .oneOf([Yup.ref('password')], t('validation.password.match')),
-    terms: Yup.bool().oneOf([true], t('validation.password.terms')),
+    terms: Yup.bool().oneOf([true], t('validation.terms.required')),
   });

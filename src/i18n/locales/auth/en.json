@@ -22,8 +22,10 @@
       "lowercase": "Must contain at least one lowercase character.",
       "digit": "Must contain at least one number.",
       "special": "Your password must contain at least one of the following special characters: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < \\' : ; | _ ~ `",
-      "match": "Passwords must match.",
-      "terms": "Please accept the terms of use."
+      "match": "Passwords must match."
+    },
+    "terms": {
+      "required": "Please accept the terms of use."
     }
   },
   "signIn": {

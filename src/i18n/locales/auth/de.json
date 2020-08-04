@@ -22,8 +22,10 @@
       "lowercase": "Das Passwort muss einen Kleinbuchstaben enthalten.",
       "digit": "Das Passwort muss eine Zahl enthalten.",
       "special": "Das Passwort muss mindestens eines dieser Sonderzeichen enthalten: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < \\' : ; | _ ~ `",
-      "match": "Die Passwörter müssen übereinstimmen.",
-      "terms": "Bitte akzeptiere die Nutzungsbedingungen."
+      "match": "Die Passwörter müssen übereinstimmen."
+    },
+    "terms": {
+      "required": "Bitte akzeptiere die Nutzungsbedingungen."
     }
   },
   "signIn": {

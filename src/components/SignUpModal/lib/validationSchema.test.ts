@@ -5,10 +5,20 @@ import { ValidationError } from 'yup';
 
 const translate = (key: string) => {
   switch (key) {
-    case 'common:errors.ACCOUNT_AUTH_ERROR':
-      return 'Authentication error';
-    case 'auth:errors.ACCOUNT_USERNAME_ALREADY_EXISTS':
-      return 'Username already exists';
+    case 'validation.email.required':
+      return 'Email is a required field';
+    case 'validation.email.valid':
+      return 'Email must be a valid email';
+    case 'validation.username.required':
+      return 'Username is a required field';
+    case 'validation.username.min':
+      return 'Username it too short';
+    case 'validation.username.max':
+      return 'Username it too long';
+    case 'validation.username.alphanumeric':
+      return 'Username must be alphanumeric';
+    case 'validation.password.required':
+      return 'Password is a required field';
     case 'validation.password.min':
       return 'Password it too short';
     case 'validation.password.max':
@@ -21,6 +31,12 @@ const translate = (key: string) => {
       return 'Must contain at least one number';
     case 'validation.password.special':
       return 'Must contain at least one special character';
+    case 'validation.password.alphanumeric':
+      return 'Password must be alphanumeric';
+    case 'validation.password.match':
+      return 'Passwords must match';
+    case 'validation.terms.required':
+      return 'Terms is a required field';
     default:
       return undefined;
   }
@@ -64,7 +80,7 @@ describe('Validation Schema', () => {
       const schema = validationSchema(mockedTranslation);
 
       // Assert
-      await expect(schema.validate(values)).rejects.toThrow(/username is a required field/);
+      await expect(schema.validate(values)).rejects.toThrow(/Username is a required field/);
     });
 
     it('should fail if too short', async () => {
@@ -124,7 +140,7 @@ describe('Validation Schema', () => {
       // Assert
       usernames.forEach(async username => {
         const value = { ...data, username: username };
-        await expect(schema.validate(value)).rejects.toThrow(/username must match the following/);
+        await expect(schema.validate(value)).rejects.toThrow(/Username must be alphanumeric/);
       });
     });
   });
@@ -138,7 +154,7 @@ describe('Validation Schema', () => {
       const schema = validationSchema(mockedTranslation);
 
       // Assert
-      await expect(schema.validate(values)).rejects.toThrow(/confirmPassword is a required field/);
+      await expect(schema.validate(values)).rejects.toThrow(/Password is a required field/);
     });
 
     it('should fail if different from password confirmation', async () => {
@@ -149,9 +165,7 @@ describe('Validation Schema', () => {
       const schema = validationSchema(mockedTranslation);
 
       // Assert
-      await expect(schema.validate(values)).rejects.toThrow(
-        /confirmPassword must be one of the following values/
-      );
+      await expect(schema.validate(values)).rejects.toThrow(/Passwords must match/);
     });
 
     it('should fail if too short', async () => {
@@ -321,7 +335,7 @@ describe('Validation Schema', () => {
       // Assert
       passwords.forEach(async password => {
         const value = { ...data, password: password, confirmPassword: password };
-        await expect(schema.validate(value)).rejects.toThrow(/password must match the following/);
+        await expect(schema.validate(value)).rejects.toThrow(/Password must be alphanumeric/);
       });
     });
   });
@@ -335,7 +349,7 @@ describe('Validation Schema', () => {
       const schema = validationSchema(mockedTranslation);
 
       // Assert
-      await expect(schema.validate(values)).rejects.toThrow(/email is a required field/);
+      await expect(schema.validate(values)).rejects.toThrow(/Email is a required field/);
     });
 
     it('should fail if no valid email schema', async () => {
@@ -346,7 +360,7 @@ describe('Validation Schema', () => {
       const schema = validationSchema(mockedTranslation);
 
       // Assert
-      await expect(schema.validate(values)).rejects.toThrow(/email must be a valid email/);
+      await expect(schema.validate(values)).rejects.toThrow(/Email must be a valid email/);
     });
   });
 
@@ -359,9 +373,7 @@ describe('Validation Schema', () => {
       const schema = validationSchema(mockedTranslation);
 
       // Assert
-      await expect(schema.validate(values)).rejects.toThrow(
-        /terms must be one of the following values: true/
-      );
+      await expect(schema.validate(values)).rejects.toThrow(/Terms is a required field/);
     });
   });
 });
