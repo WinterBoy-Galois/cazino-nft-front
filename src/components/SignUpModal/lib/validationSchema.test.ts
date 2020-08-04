@@ -116,7 +116,7 @@ describe('Validation Schema', () => {
 
     it('should fail for non alphanumeric values', async () => {
       // Arrange
-      const usernames = ['Борис', 'Антон', 'Di_Vider', '!Megaman'];
+      const usernames = ['Борис', 'Антон', 'Di_Vider', '!Megaman', '_KillaMC'];
 
       // Act
       const schema = validationSchema(mockedTranslation);
@@ -311,9 +311,9 @@ describe('Validation Schema', () => {
       });
     });
 
-    xit('should fail for non alphanumeric values', async () => {
+    it('should fail for non alphanumeric values', async () => {
       // Arrange
-      const passwords = ['мyP@ssw0rй'];
+      const passwords = ['мyP@ssw0rй', 'Пить_Password!2323'];
 
       // Act
       const schema = validationSchema(mockedTranslation);

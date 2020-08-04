@@ -16,11 +16,11 @@ export const validationSchema = (t: TFunction) =>
       .matches(/[A-Z]/, t('validation.password.uppercase'))
       .matches(/[a-z]/, t('validation.password.lowercase'))
       .matches(/[0-9]/, t('validation.password.digit'))
-      .matches(/[\^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`]/, t('validation.password.special')),
-    // .matches(
-    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#?!@$%^&*\-_])[A-Za-z\d#?!@$%^&*\-_]+$/,
-    //   t('validation.password.alphanumeric')
-    // ),
+      .matches(/[\^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`]/, t('validation.password.special'))
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`])[A-Za-z\d^$*.[\]{}()?\-\\"!@#%&/\\,><':;|_~`]+$/,
+        t('validation.password.alphanumeric')
+      ),
     confirmPassword: Yup.string()
       .required(t('validation.password.required'))
       .oneOf([Yup.ref('password')], t('validation.password.match')),
