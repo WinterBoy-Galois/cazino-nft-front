@@ -163,6 +163,7 @@ export const ME = gql`
       id
       username
       avatarUrl
+      balance
     }
   }
 `;

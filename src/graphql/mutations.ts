@@ -40,6 +40,7 @@ export const SIGN_IN = gql`
           id
           username
           avatarUrl
+          balance
         }
       }
       ... on GenericErrorArray {
@@ -75,6 +76,7 @@ export const SIGN_UP = gql`
           id
           username
           avatarUrl
+          balance
         }
       }
       ... on GenericErrorArray {
@@ -122,6 +124,7 @@ export const RESET_PASSWORD = gql`
           id
           username
           avatarUrl
+          balance
         }
       }
       ... on GenericErrorArray {
