@@ -8,7 +8,10 @@
   },
   "validation": {
     "username": {
-      "required": "Please enter your Username."
+      "required": "Please enter your Username.",
+      "min": "Username is too short - should be {{min}} chars minimum.",
+      "max": "Username is too long - should be {{max}} chars maximum.",
+      "alphanumeric": "Username can only contain latin chars A-Z and digits 0-9."
     },
     "email": {
       "required": "Please enter your Email.",
@@ -23,7 +26,10 @@
       "digit": "Must contain at least one number.",
       "special": "Your password must contain at least one of the following special characters: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < \\' : ; | _ ~ `",
       "match": "Passwords must match.",
-      "terms": "Please accept the terms of use."
+      "alphanumeric": "Username can only contain latin chars A-Z."
+    },
+    "terms": {
+      "required": "Please accept the terms of use."
     }
   },
   "signIn": {

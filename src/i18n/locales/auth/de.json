@@ -8,7 +8,10 @@
   },
   "validation": {
     "username": {
-      "required": "Bitte gib einen Benutzernamen an."
+      "required": "Bitte gib einen Benutzernamen an.",
+      "min": "Der Benutzername ist zu kurz - es muss mindestens {{min}} Zeichen lang sein.",
+      "max": "Der Benutzername ist zu lang - es darf maximal {{max}} Zeichen lang sein.",
+      "alphanumeric": "Der Benutzername darf nur aus den Buchstaben A-Z und den Zahlen 0-9 bestehen."
     },
     "email": {
       "required": "Bitte gib Deine E-Mail Adresse an.",
@@ -23,7 +26,10 @@
       "digit": "Das Passwort muss eine Zahl enthalten.",
       "special": "Das Passwort muss mindestens eines dieser Sonderzeichen enthalten: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < \\' : ; | _ ~ `",
       "match": "Die Passwörter müssen übereinstimmen.",
-      "terms": "Bitte akzeptiere die Nutzungsbedingungen."
+      "alphanumeric": "Der Benutzername darf nur die lateinischen Buchstaben A-Z enthalten."
+    },
+    "terms": {
+      "required": "Bitte akzeptiere die Nutzungsbedingungen."
     }
   },
   "signIn": {
