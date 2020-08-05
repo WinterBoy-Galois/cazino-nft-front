@@ -1,0 +1,85 @@
+{
+  "labels": {
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Neues Passwort bestätigen"
+  },
+  "validation": {
+    "username": {
+      "required": "Bitte gib einen Benutzernamen an.",
+      "min": "Der Benutzername ist zu kurz - es muss mindestens {{min}} Zeichen lang sein.",
+      "max": "Der Benutzername ist zu lang - es darf maximal {{max}} Zeichen lang sein.",
+      "alphanumeric": "Der Benutzername darf nur aus den Buchstaben A-Z und den Zahlen 0-9 bestehen."
+    },
+    "email": {
+      "required": "Bitte gib Deine E-Mail Adresse an.",
+      "valid": "Bitte gib eine gültige E-Mail Adresse an."
+    },
+    "password": {
+      "required": "Bitte gib ein Passwort an.",
+      "min": "Das Passwort ist zu kurz - es muss mindestens {{min}} Zeichen lang sein.",
+      "max": "Das Passwort ist zu lang - es darf maximal {{max}} Zeichen lang sein.",
+      "uppercase": "Das Passwort muss einen Großbuchstaben enthalten.",
+      "lowercase": "Das Passwort muss einen Kleinbuchstaben enthalten.",
+      "digit": "Das Passwort muss eine Zahl enthalten.",
+      "special": "Das Passwort muss mindestens eines dieser Sonderzeichen enthalten: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < \\' : ; | _ ~ `",
+      "match": "Die Passwörter müssen übereinstimmen.",
+      "alphanumeric": "Der Benutzername darf nur die lateinischen Buchstaben A-Z enthalten."
+    },
+    "terms": {
+      "required": "Bitte akzeptiere die Nutzungsbedingungen."
+    }
+  },
+  "signIn": {
+    "headline": "Anmelden",
+    "buttons": {
+      "signIn": "Anmelden",
+      "goToForgotPassword": "Passwort vergessen?",
+      "goToSignUpText": "Noch keinen Account?",
+      "goToSignUp": "Jetzt registrieren!",
+      "rememberMe": "Eingeloggt bleiben",
+      "loading": "Anmeldung..."
+    }
+  },
+  "signUp": {
+    "headline": "Registrieren",
+    "buttons": {
+      "signUp": "Account erstellen",
+      "termsText": "Ich stimme der Speicherung von Informationen in Cookies zu, ich stimme den Datenschutz- und Nutzungsbedingungen zu, Glücksspiel ist in meinem Land nicht gesetzlich verboten und ich bin mindestens 18 Jahre alt.",
+      "goToSignInText": "Du hast schon einen Account?",
+      "goToSignIn": "Jetzt anmelden!",
+      "loading": "Registrierung..."
+    }
+  },
+  "accountActivation": {
+    "headline": "account aktivieren",
+    "subHeadline": "Dein Account wurde erfolgreich erstellt.",
+    "text1": "Wir haben einen Aktivierungscode an deine E-Mail Adresse gesendet.",
+    "text2": "Bitte gib den sechstelligen Code ein, um deinen Account zu aktivieren.",
+    "success": "Dein Account wurde erfolgreich aktiviert.",
+    "resendEmailText": "Du hast keine E-Mail von uns erhalten?",
+    "resendEmail": "E-Mail erneut senden",
+    "resendSuccess": "Wir haben dir einen neuen Aktivierungscode gesendet."
+  },
+  "passwordReset": {
+    "headline": "passwort ändern",
+    "success": "Dein Password wurde geändert.",
+    "button": "passwort ändern"
+  },
+  "passwordRecovery": {
+    "headline": "passwort vergessen",
+    "success": "Wir haben die eine E-Mail zum Zurücksetzen deines Passworts gesendet.",
+    "goToSignInText": "Erinnerung zurück?",
+    "goToSignIn": "Versuch dich anzumelden!",
+    "goToSignUpText": "Noch keinen Account?",
+    "goToSignUp": "Jetz registrieren!",
+    "button": "Passwort zurücksetzen"
+  },
+  "errors": {
+    "ACCOUNT_USERNAME_ALREADY_EXISTS": "Der Benutzername ist bereits vergeben",
+    "INVALID_ACTIVATION_CODE": "Der eingegebene Aktivierungscode ist ungültig.",
+    "ALREADY_ACTIVATED": "Dein Account ist bereits aktiviert."
+  }
+}

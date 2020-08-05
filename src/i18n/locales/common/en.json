@@ -14,5 +14,10 @@
     "en": {
       "label": "English"
     }
-  }
+  },
+  "errors": {
+    "ACCOUNT_AUTH_ERROR": "Your email or password is wrong",
+    "SERVER_ERROR": "Unknown server error - administrators are notified"
+  },
+  "loading": "loading..."
 }

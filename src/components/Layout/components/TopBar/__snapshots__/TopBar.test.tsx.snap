@@ -12,7 +12,7 @@ Object {
           class="row h-100"
         >
           <div
-            class="col-6 center"
+            class="col-4 center"
           >
             <a
               href="/"
@@ -59,8 +59,54 @@ Object {
             </a>
           </div>
           <div
-            class="col-6 center right"
+            class="col-8 center right"
           >
+            <div
+              class="details details--spacing"
+            >
+              <div
+                class="details__button"
+              >
+                <button
+                  class="sign-in__button secondary button button--small"
+                  type="button"
+                >
+                  Sign In
+                </button>
+              </div>
+              <div>
+                <svg
+                  class="sign-in__icon"
+                  viewBox="0 0 35.9 38"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    data-name="Layer 2"
+                    id="Layer_2"
+                  >
+                    <g
+                      data-name="Слой 5"
+                      id="Слой_5"
+                    >
+                      <path
+                        class="cls-1"
+                        d="M34.4 27.32a17.5 17.5 0 110-16.66"
+                      />
+                      <circle
+                        cx="19"
+                        cy="19"
+                        fill="#fff"
+                        r="3.07"
+                      />
+                      <path
+                        class="cls-1"
+                        d="M24.82 19h9.58M31.57 21.83L34.4 19l-2.83-2.83"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
             <button
               class="button fade"
               style="transform: rotate(180deg);"
@@ -117,7 +163,7 @@ Object {
         class="row h-100"
       >
         <div
-          class="col-6 center"
+          class="col-4 center"
         >
           <a
             href="/"
@@ -164,8 +210,54 @@ Object {
           </a>
         </div>
         <div
-          class="col-6 center right"
+          class="col-8 center right"
         >
+          <div
+            class="details details--spacing"
+          >
+            <div
+              class="details__button"
+            >
+              <button
+                class="sign-in__button secondary button button--small"
+                type="button"
+              >
+                Sign In
+              </button>
+            </div>
+            <div>
+              <svg
+                class="sign-in__icon"
+                viewBox="0 0 35.9 38"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  data-name="Layer 2"
+                  id="Layer_2"
+                >
+                  <g
+                    data-name="Слой 5"
+                    id="Слой_5"
+                  >
+                    <path
+                      class="cls-1"
+                      d="M34.4 27.32a17.5 17.5 0 110-16.66"
+                    />
+                    <circle
+                      cx="19"
+                      cy="19"
+                      fill="#fff"
+                      r="3.07"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M24.82 19h9.58M31.57 21.83L34.4 19l-2.83-2.83"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
           <button
             class="button fade"
             style="transform: rotate(180deg);"

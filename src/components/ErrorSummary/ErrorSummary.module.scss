@@ -1,0 +1,37 @@
+@import '../../styles/shared';
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  text-transform: uppercase;
+  display: block;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 19px;
+  user-select: none;
+  color: $red;
+  width: 100%;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin-left: 10px;
+    padding-left: 5px;
+  }
+}
+
+.border {
+  padding: 5px 10px 5px 10px;
+  border: 2px solid $red;
+  border-radius: 8px;
+
+  ul {
+    padding: 5px 10px 5px 10px;
+  }
+}

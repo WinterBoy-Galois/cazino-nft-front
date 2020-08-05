@@ -3,7 +3,7 @@
 exports[`<Spinner /> renders correctly 1`] = `
 <div>
   <span
-    class="spinner spinner--white"
+    class="spinner spinner--white "
   />
 </div>
 `;

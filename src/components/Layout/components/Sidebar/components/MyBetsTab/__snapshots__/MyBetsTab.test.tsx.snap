@@ -37,7 +37,12 @@ Object {
           <div
             class="undefined container"
           >
-            No Data
+            <button
+              class="button button button--small"
+              type="button"
+            >
+              Sign In
+            </button>
           </div>
         </div>
       </div>
@@ -76,7 +81,12 @@ Object {
         <div
           class="undefined container"
         >
-          No Data
+          <button
+            class="button button button--small"
+            type="button"
+          >
+            Sign In
+          </button>
         </div>
       </div>
     </div>
