@@ -13,7 +13,7 @@ import Modals from './components/Modals';
 import { navigate, useLocation } from '@reach/router';
 
 const Layout: React.FC = ({ children }) => {
-  const [{ sidebar, modal }, dispatch] = useStateValue();
+  const [{ sidebar, modal, auth }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
   const [signOut] = useMutation(SIGN_OUT);
@@ -60,7 +60,7 @@ const Layout: React.FC = ({ children }) => {
               transition: modal.type !== 'NONE' ? 'none' : '',
             }}
           >
-            <BottomBar />
+            <BottomBar balance={auth.user?.balance} />
           </div>
         </div>
       </div>

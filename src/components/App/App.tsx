@@ -8,6 +8,7 @@ import AuthOverlay from '../AuthOverlay';
 import { useApolloClient } from '../../hooks/useApolloClient.hook';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { appConfig } from '../../common/config';
+import Referrals from '../Referrals';
 
 const App: React.FC = () => {
   const client = useApolloClient();
@@ -24,6 +25,7 @@ const App: React.FC = () => {
             </Layout>
 
             <ToastContainer />
+            <Referrals />
           </LocationProvider>
         </AuthOverlay>
       </GoogleReCaptchaProvider>

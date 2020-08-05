@@ -90,8 +90,9 @@ Object {
                           value=""
                         />
                       </div>
-                      <div
+                      <button
                         class="inputField__icon"
+                        type="button"
                       >
                         <svg
                           class="fill inputField__icon--invisible"
@@ -115,7 +116,7 @@ Object {
                             </g>
                           </g>
                         </svg>
-                      </div>
+                      </button>
                     </div>
                   </div>
                   <div
@@ -285,8 +286,9 @@ Object {
                         value=""
                       />
                     </div>
-                    <div
+                    <button
                       class="inputField__icon"
+                      type="button"
                     >
                       <svg
                         class="fill inputField__icon--invisible"
@@ -310,7 +312,7 @@ Object {
                           </g>
                         </g>
                       </svg>
-                    </div>
+                    </button>
                   </div>
                 </div>
                 <div

@@ -2,17 +2,23 @@ import React from 'react';
 import styles from './BottomBar.module.scss';
 import Balance from './components/Balance';
 import BottomBarMenu from './components/Menu';
+import { formatBitcoin } from '../../../../common/util/format.util';
 
-const BottomBar: React.SFC = () => {
+interface IProps {
+  hasUnclaimedBonus?: boolean;
+  balance?: number;
+}
+
+const BottomBar: React.FC<IProps> = ({ hasUnclaimedBonus = true, balance = 0.0 }) => {
   return (
     <div className={`container-fluid h-100`}>
       <div className={`row h-100`}>
         <div className={`col-12 ${styles.container}`}>
           <div>
-            <BottomBarMenu hasUnclaimedBonus={true} />
+            <BottomBarMenu hasUnclaimedBonus={hasUnclaimedBonus} />
           </div>
           <div className={styles.balance}>
-            <Balance value="0.00000000" />
+            <Balance value={formatBitcoin(balance)} />
           </div>
         </div>
       </div>

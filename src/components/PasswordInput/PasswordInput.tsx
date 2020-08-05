@@ -40,12 +40,6 @@ const PasswordInput = ({
     }
   };
 
-  const keypressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      // refAmount?.current?.blur();
-    }
-  };
-
   const handleBlur = (event?: React.FocusEvent<HTMLInputElement>) => {
     if (onBlur && event) {
       onBlur(event);
@@ -74,17 +68,16 @@ const PasswordInput = ({
             className={styles.inputField}
             autoComplete="off"
             onChange={handleOnChange}
-            onKeyPress={keypressHandler}
             onBlur={handleBlur}
           />
         </div>
-        <div className={`${styles['inputField__icon']}`} onClick={handleClick}>
+        <button type="button" className={`${styles['inputField__icon']}`} onClick={handleClick}>
           {isPasswordVisible ? (
             <Eye className={`${styles['inputField__icon--visible']}`} />
           ) : (
             <EyeInvisible className={`${styles['inputField__icon--invisible']}`} />
           )}
-        </div>
+        </button>
       </div>
       {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}
     </div>

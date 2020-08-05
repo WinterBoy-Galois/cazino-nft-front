@@ -40,6 +40,7 @@ export const SIGN_IN = gql`
           id
           username
           avatarUrl
+          balance
         }
       }
       ... on GenericErrorArray {
@@ -55,14 +56,27 @@ export const SIGN_IN = gql`
 `;
 
 export const SIGN_UP = gql`
-  mutation SignUp($email: String, $password: String, $username: String, $token: String) {
-    registerUser(username: $username, email: $email, password: $password, captcha: $token) {
+  mutation SignUp(
+    $email: String
+    $password: String
+    $username: String
+    $token: String
+    $ref: String
+  ) {
+    registerUser(
+      username: $username
+      email: $email
+      password: $password
+      captcha: $token
+      ref: $ref
+    ) {
       ... on LoginResult {
         accessToken
         user {
           id
           username
           avatarUrl
+          balance
         }
       }
       ... on GenericErrorArray {
@@ -110,6 +124,7 @@ export const RESET_PASSWORD = gql`
           id
           username
           avatarUrl
+          balance
         }
       }
       ... on GenericErrorArray {
