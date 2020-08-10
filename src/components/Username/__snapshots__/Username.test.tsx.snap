@@ -9,7 +9,7 @@ Object {
         class="container "
       >
         <div
-          class="avatar "
+          class="avatar avatar"
         >
           <img
             alt=""
@@ -30,7 +30,7 @@ Object {
       class="container "
     >
       <div
-        class="avatar "
+        class="avatar avatar"
       >
         <img
           alt=""

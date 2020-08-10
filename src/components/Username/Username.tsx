@@ -24,7 +24,7 @@ const Username: React.SFC<IProps> = ({ username, avatarUrl, className = '', onCl
 
   return (
     <div className={`${styles.container} ${className}`}>
-      <Avatar loading={loading} avatarUrl={avatarUrl} />
+      <Avatar loading={loading} avatarUrl={avatarUrl} className={styles.avatar} />
       <span
         className={`text--bold ${getUsernameStyle()} ${onClick ? styles.link : ''}`}
         onClick={onClick}

@@ -46,7 +46,7 @@ Object {
                 class="container username username--mobile"
               >
                 <div
-                  class="avatar "
+                  class="avatar avatar"
                 >
                   <img
                     alt=""
@@ -67,7 +67,7 @@ Object {
                   class="container username username--desktop"
                 >
                   <div
-                    class="avatar "
+                    class="avatar avatar"
                   >
                     <img
                       alt=""
@@ -295,7 +295,7 @@ Object {
               class="container username username--mobile"
             >
               <div
-                class="avatar "
+                class="avatar avatar"
               >
                 <img
                   alt=""
@@ -316,7 +316,7 @@ Object {
                 class="container username username--desktop"
               >
                 <div
-                  class="avatar "
+                  class="avatar avatar"
                 >
                   <img
                     alt=""
