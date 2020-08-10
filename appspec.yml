@@ -1,0 +1,31 @@
+---
+version: 0.0
+os: linux
+files:
+  - source: .
+    destination: /home/ubuntu/cc-front
+hooks:
+  ApplicationStop:
+    - location: scripts/stop_pm2.sh
+      timeout: 10
+      runas: ubuntu
+  BeforeInstall:
+    - location: scripts/cleanup.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/reload_pm2.sh
+      timeout: 3
+      runas: ubuntu
+  ValidateService:
+    - location: scripts/validate_service.sh
+      timeout: 3
+      runas: ubuntu
+permissions:
+  - object: /home/ubuntu/cc-front
+    owner: ubuntu
+    group: ubuntu
+    type:
+      - directory
+      - file
+
