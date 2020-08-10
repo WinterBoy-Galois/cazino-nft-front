@@ -1,0 +1,52 @@
+.#{$rt-namespace}__toast {
+  position: relative;
+  min-height: $rt-toast-min-height;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 9px 9px 10px #0000008d;
+  display: flex;
+  justify-content: space-between;
+  max-height: $rt-toast-max-height;
+  overflow: hidden;
+  font-family: $rt-font-family;
+  cursor: pointer;
+  direction: ltr;
+  font-weight: 600;
+  font-size: 17px;
+
+  &--rtl {
+    direction: rtl;
+  }
+  &--dark {
+    background: $rt-color-dark;
+    color: $rt-text-color-dark;
+  }
+  &--default {
+    background: $rt-color-default;
+    color: $rt-text-color-default;
+  }
+  &--info {
+    background: $rt-color-info;
+  }
+  &--success {
+    background: $rt-color-success;
+  }
+  &--warning {
+    background: $rt-color-warning;
+  }
+  &--error {
+    background: $rt-color-error;
+  }
+  &-body {
+    margin: auto 0;
+    flex: 1 1 auto;
+  }
+}
+
+@media #{$rt-mobile} {
+  .#{$rt-namespace}__toast {
+    margin: 0.5rem;
+  }
+}

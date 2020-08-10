@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Username.module.scss';
 import { useTranslation } from 'react-i18next';
-import Spinner from '../Spinner';
+import Avatar from '../Avatar';
 
 interface IProps {
   avatarUrl?: string;
@@ -24,19 +24,7 @@ const Username: React.SFC<IProps> = ({ username, avatarUrl, className = '', onCl
 
   return (
     <div className={`${styles.container} ${className}`}>
-      <div className={styles.avatar}>
-        {!loading && avatarUrl ? (
-          <img
-            className="w-100 h-100"
-            src={avatarUrl}
-            alt={getUsername()?.substr(0, 2).toUpperCase() ?? ''}
-          />
-        ) : (
-          <div className={styles.avatar__spinner}>
-            <Spinner color={'WHITE'} />
-          </div>
-        )}
-      </div>
+      <Avatar loading={loading} avatarUrl={avatarUrl} className={styles.avatar} />
       <span
         className={`text--bold ${getUsernameStyle()} ${onClick ? styles.link : ''}`}
         onClick={onClick}

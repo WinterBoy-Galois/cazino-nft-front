@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toast should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <div
+          class="icon"
+        >
+          <svg
+            class="container"
+            viewBox="0 0 31.02 31.02"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g>
+              <g>
+                <path
+                  class="fill"
+                  d="M15.51 0A15.51 15.51 0 1031 15.51 15.5 15.5 0 0015.51 0zm0 6.88a2.63 2.63 0 11-2.63 2.63 2.63 2.63 0 012.63-2.63zM19 22.76a.75.75 0 01-.75.75h-5.5a.75.75 0 01-.75-.75v-1.5a.76.76 0 01.75-.75h.75v-4h-.75a.75.75 0 01-.75-.75v-1.5a.76.76 0 01.75-.75h4a.76.76 0 01.75.75v6.26h.75a.75.75 0 01.75.75z"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <div
+        class="icon"
+      >
+        <svg
+          class="container"
+          viewBox="0 0 31.02 31.02"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g>
+            <g>
+              <path
+                class="fill"
+                d="M15.51 0A15.51 15.51 0 1031 15.51 15.5 15.5 0 0015.51 0zm0 6.88a2.63 2.63 0 11-2.63 2.63 2.63 2.63 0 012.63-2.63zM19 22.76a.75.75 0 01-.75.75h-5.5a.75.75 0 01-.75-.75v-1.5a.76.76 0 01.75-.75h.75v-4h-.75a.75.75 0 01-.75-.75v-1.5a.76.76 0 01.75-.75h4a.76.76 0 01.75.75v6.26h.75a.75.75 0 01.75.75z"
+              />
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div />
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

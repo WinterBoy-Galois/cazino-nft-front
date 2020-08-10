@@ -9,10 +9,10 @@ Object {
         class="container "
       >
         <div
-          class="avatar"
+          class="avatar avatar"
         >
           <img
-            alt="TE"
+            alt=""
             class="w-100 h-100"
             src="testurl"
           />
@@ -30,10 +30,10 @@ Object {
       class="container "
     >
       <div
-        class="avatar"
+        class="avatar avatar"
       >
         <img
-          alt="TE"
+          alt=""
           class="w-100 h-100"
           src="testurl"
         />

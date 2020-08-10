@@ -16,6 +16,7 @@ import LostBets from '../LostBets';
 import { ApolloError } from 'apollo-client';
 import { useTranslation } from 'react-i18next';
 import DetailsContainer from '../DetailsContainer';
+import { useLocation, Redirect } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -130,6 +131,11 @@ const UserInfoModalWithData: React.FC<IWithDataProps> = ({
   onBack,
 }: IWithDataProps) => {
   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
+  const location = useLocation();
+
+  if (!userId && show) {
+    return <Redirect noThrow to={`${location.pathname}`} />;
+  }
 
   return (
     <UserInfoModal

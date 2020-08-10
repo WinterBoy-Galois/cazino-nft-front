@@ -47,13 +47,16 @@ const renderTab = (
   latestBets: Bet[],
   myBets: Bet[],
   isLoading: boolean,
-  error: ApolloError | undefined
+  error: ApolloError | undefined,
+  isSignedIn?: boolean
 ) => {
   switch (tab) {
     case 'LATEST_BETS':
       return <LatestBetsTab bets={latestBets} isLoading={isLoading} error={error} />;
     case 'MY_BETS':
-      return <MyBetsTab bets={myBets} isLoading={isLoading} error={error} />;
+      return (
+        <MyBetsTab bets={myBets} isLoading={isLoading} error={error} isSignedIn={isSignedIn} />
+      );
     case 'LEADERBOARDS':
       return <LeaderboardsTab />;
   }
@@ -64,6 +67,7 @@ const SideBar: React.SFC = () => {
     {
       sidebar: { isOpen, selectedTab },
       modal: { type: modalType },
+      auth: { state },
     },
   ] = useStateValue();
   const breakpoint = useBreakpoint();
@@ -157,7 +161,7 @@ const SideBar: React.SFC = () => {
           <TabSelect />
         </div>
         <div className={`container ${styles['tab-container']}`}>
-          {renderTab(selectedTab, latestBets, myBets, loading, error)}
+          {renderTab(selectedTab, latestBets, myBets, loading, error, state === 'SIGNED_IN')}
         </div>
       </div>
     </CSSTransition>

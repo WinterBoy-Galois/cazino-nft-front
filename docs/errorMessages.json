@@ -1,0 +1,110 @@
+{
+  "ALREADY_EXIST": {
+    "name": "ALREADY_EXIST",
+    "message": "Already exist"
+  },
+  "NOT_NULL_NOT_EMPTY": {
+    "name": "NOT_NULL_NOT_EMPTY",
+    "message": "Should not be empty"
+  },
+  "NOT_ALPHANUMERIC": {
+    "name": "NOT_ALPHANUMERIC",
+    "message": "Value should contain only alphanumeric values"
+  },
+  "LENGTH": {
+    "name": "LENGTH",
+    "message": "Length is out of range"
+  },
+  "NOT_VALID_EMAIL": {
+    "name": "NOT_VALID_EMAIL",
+    "message": "Not a valid e-mail"
+  },
+  "AUTH_ERR": {
+    "name": "AUTH_ERROR",
+    "message": "Authentication error"
+  },
+  "NOT_FOUND": {
+    "name": "NOT_FOUND",
+    "message": "Not found"
+  },
+  "INVALID_PASSWORD": {
+    "name": "INVALID_PASSWORD",
+    "message": "Invalid password"
+  },
+  "CAPTCHA_ERR": {
+    "name": "CAPTCHA_ERR",
+    "message": "Captcha request failed"
+  },
+  "UUID_EXPIRED": {
+    "name": "UUID_EXPIRED",
+    "message": "UUID is expired"
+  },
+  "INVALID_ACTIVATION_CODE": {
+    "name": "INVALID_ACTIVATION_CODE",
+    "message": "Invalid activation code"
+  },
+  "ALREADY_ACTIVATED": {
+    "name": "ALREADY_ACTIVATED",
+    "message": "account is already activated"
+  },
+  "SEED_USED": {
+    "name": "SEED_USED",
+    "message": "Server seed is currently in use"
+  },
+  "DICE_INVALID_TARGET": {
+    "name": "DICE_INVALID_TARGET",
+    "message": "Invalid target"
+  },
+  "CLAMS_INVALID_SELECTION": {
+    "name": "CLAMS_INVALID_SELECTION",
+    "message": "Invalid selection"
+  },
+  "GOALS_INVALID_DIFFICULTY": {
+    "name": "GOALS_INVALID_DIFFICULTY",
+    "message": "Invalid difficulty level"
+  },
+  "GOALS_INVALID_SELECTION": {
+    "name": "GOALS_INVALID_SELECTION",
+    "message": "Invalid selection"
+  },
+  "MINES_INVALID_SELECTION": {
+    "name": "MINES_INVALID_SELECTION",
+    "message": "Invalid selection"
+  },
+  "MINES_ALREADY_SELECTED": {
+    "name": "MINES_ALREADY_SELECTED",
+    "message": "The cell is already selected"
+  },
+  "MINES_INVALID_COUNT": {
+    "name": "MINES_INVALID_COUNT",
+    "message": "Invalid mines count"
+  },
+  "GAME_IN_PROGRESS": {
+    "name": "GAME_IN_PROGRESS",
+    "message": "Game in progress"
+  },
+  "BET_NOT_ALLOWED": {
+    "name": "BET_NOT_ALLOWED",
+    "message": "No more bets are allowed for this session"
+  },
+  "CASHOUT_NOT_ALLOWED": {
+    "name": "CASHOUT_NOT_ALLOWED",
+    "message": "Cashout is not allowed"
+  },
+  "INVALID_BET_ID": {
+    "name": "INVALID_BET_ID",
+    "message": "Invalid bet id"
+  },
+  "MAX_PROFIT": {
+    "name": "MAX_PROFIT",
+    "message": "Max profit may be reached"
+  },
+  "INVALID_BET_AMOUNT": {
+    "name": "INVALID_BET_AMOUNT",
+    "message": "Invalid bet amount"
+  },
+  "SERVER_ERROR": {
+    "name": "SERVER_ERROR",
+    "message": "Unknown server error - administrators are notified"
+  }
+}

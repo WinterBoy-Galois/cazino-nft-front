@@ -7,6 +7,7 @@ import { createMockClient } from 'mock-apollo-client';
 import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 import { BET_ADDED } from '../../graphql/subscriptions';
+import { LocationProvider } from '@reach/router';
 
 describe('Layout', () => {
   xit('should match snapshot', async () => {
@@ -51,9 +52,11 @@ describe('Layout', () => {
 
     // Act
     const container = render(
-      <ApolloProvider client={mockClient}>
-        <Layout />
-      </ApolloProvider>
+      <LocationProvider>
+        <ApolloProvider client={mockClient}>
+          <Layout />
+        </ApolloProvider>
+      </LocationProvider>
     );
 
     await act(wait);

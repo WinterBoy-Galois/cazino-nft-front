@@ -11,23 +11,36 @@
   padding: 0.3rem;
 
   &--small {
-    padding: 7px;
+    padding: 5px;
+
+    @include media-breakpoint-up(lg) {
+      padding: 7px;
+    }
   }
 
   &--medium {
-    padding: 11px;
+    padding: 9px;
+
+    @include media-breakpoint-up(lg) {
+      padding: 14px;
+    }
   }
 
   &--large {
-    padding: 7px;
+    padding: 9px;
 
-    @include media-breakpoint-up(md) {
-      padding: 15px;
+    @include media-breakpoint-up(lg) {
+      padding: 18px;
     }
   }
 
   &:disabled {
-    opacity: 0.3;
+    opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: lighten($button-primary, 10%);
   }
 }

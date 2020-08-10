@@ -1,0 +1,129 @@
+{
+  "ALREADY_EXIST": {
+    "name": "ACCOUNT_USERNAME_ALREADY_EXISTS",
+    "message": "Already exist",
+    "remark": "syntax, namespace"
+  },
+  "NOT_NULL_NOT_EMPTY": {
+    "name": "REQUIRED",
+    "message": "Should not be empty",
+    "remark": "meaning"
+  },
+  "NOT_ALPHANUMERIC": {
+    "name": "NOT_ALPHANUMERIC",
+    "message": "Value should contain only alphanumeric values"
+  },
+  "LENGTH": {
+    "name": "LENGTH",
+    "message": "Length is out of range"
+  },
+  "NOT_VALID_EMAIL": {
+    "name": "EMAIL_NOT_VALID",
+    "message": "Not a valid e-mail",
+    "remark": "namespace, order"
+  },
+  "AUTH_ERR": {
+    "name": "ACCOUNT_AUTH_ERROR",
+    "message": "Authentication error",
+    "remark": "abbreviation"
+  },
+  "NOT_FOUND": {
+    "name": "NOT_FOUND",
+    "message": "Not found"
+  },
+  "INVALID_PASSWORD": {
+    "name": "PASSWORD_INVALID",
+    "message": "Invalid password",
+    "remark": "namespace, order"
+  },
+  "CAPTCHA_ERR": {
+    "name": "CAPTCHA_FAILED",
+    "message": "Captcha request failed",
+    "remark": "abbreviation, meaning"
+  },
+  "UUID_EXPIRED": {
+    "name": "TOKEN_EXPIRED",
+    "message": "UUID is expired",
+    "remark": "meaning"
+  },
+  "INVALID_ACTIVATION_CODE": {
+    "name": "ACCOUNT_ACTIVATION_CODE_INVALID",
+    "message": "Invalid activation code",
+    "remark": "namespace, order"
+  },
+  "ALREADY_ACTIVATED": {
+    "name": "ACCOUNT_ALREADY_ACTIVATED",
+    "message": "account is already activated",
+    "remark": "namespace"
+  },
+  "SEED_USED": {
+    "name": "SEED_IN_USE",
+    "message": "Server seed is currently in use",
+    "remark": "meaning"
+  },
+  "DICE_INVALID_TARGET": {
+    "name": "DICE_TARGET_INVALID",
+    "message": "Invalid target",
+    "remark": "order"
+  },
+  "CLAMS_INVALID_SELECTION": {
+    "name": "CLAMS_SELECTION_INVALID",
+    "message": "Invalid selection",
+    "remark": "order"
+  },
+  "GOALS_INVALID_DIFFICULTY": {
+    "name": "GOALS_DIFFICULTY_INVALID",
+    "message": "Invalid difficulty level",
+    "remark": "order"
+  },
+  "GOALS_INVALID_SELECTION": {
+    "name": "GOALS_SELECTION_INVALID",
+    "message": "Invalid selection",
+    "remark": "order"
+  },
+  "MINES_INVALID_SELECTION": {
+    "name": "MINES_SELECTION_INVALID",
+    "message": "Invalid selection",
+    "remark": "order"
+  },
+  "MINES_ALREADY_SELECTED": {
+    "name": "MINES_ALREADY_SELECTED",
+    "message": "The cell is already selected"
+  },
+  "MINES_INVALID_COUNT": {
+    "name": "MINES_INVALID_COUNT",
+    "message": "Invalid mines count"
+  },
+  "GAME_IN_PROGRESS": {
+    "name": "GAME_IN_PROGRESS",
+    "message": "Game in progress"
+  },
+  "BET_NOT_ALLOWED": {
+    "name": "BET_NOT_ALLOWED",
+    "message": "No more bets are allowed for this session"
+  },
+  "CASHOUT_NOT_ALLOWED": {
+    "name": "CASHOUT_NOT_ALLOWED",
+    "message": "Cashout is not allowed"
+  },
+  "INVALID_BET_ID": {
+    "name": "BET_INVALID_ID",
+    "message": "Invalid bet id",
+    "remark": "order"
+  },
+  "MAX_PROFIT": {
+    "name": "BET_PROFIT_MAX",
+    "message": "Max profit may be reached",
+    "remark": "namespace, order"
+  },
+  "INVALID_BET_AMOUNT": {
+    "name": "BET_AMOUNT_INVALID",
+    "message": "Invalid bet amount",
+    "remark": "order"
+  },
+  "SERVER_ERROR": {
+    "name": "SERVER_ERROR",
+    "message": "Unknown server error - administrators are notified",
+    "nameNew": "UNKNOWN_SERVER_ERROR"
+  }
+}

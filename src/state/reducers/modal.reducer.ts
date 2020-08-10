@@ -4,11 +4,11 @@ import { ModalState } from '../models/modal.model';
 
 export const modalReducer: Reducer<ModalState, Action> = (state, { type, payload }) => {
   switch (type) {
-    case 'SHOW_MODAL':
-      return { type: payload.type, data: payload.data };
+    case 'MODAL_SHOW':
+      return { type: payload.type, data: payload.data, isReplace: false };
 
-    case 'HIDE_MODAL':
-      return { ...state, type: 'NONE' };
+    case 'MODAL_HIDE':
+      return { ...state, type: 'NONE', isReplace: payload?.isReplace };
 
     default:
       return state;

@@ -22,7 +22,7 @@ plugins:
 custom:
   siteName: cazzzino.${self:provider.stage}.egonoid.net
   certificate:
-    dev: arn:aws:acm:us-east-1:329426105556:certificate/73a6f5c8-3e39-416a-85e4-cb6b52eb0d94
+    dev: arn:aws:acm:us-east-1:329426105556:certificate/d1de3016-030a-4b37-bba8-687e0a0f2a1a
     test: arn:aws:acm:us-east-1:538894534293:certificate/34cd1f0f-7519-4396-b7fd-cbe7fdfd18cb
   aliasHostedZoneId: Z2FDTNDATAQYW2
   s3Sync:
@@ -37,6 +37,12 @@ custom:
   onOriginRequest:
     dev: arn:aws:lambda:us-east-1:329426105556:function:cazzzino-cloudfront-extensions-dev-onOriginRequest:6
     test: arn:aws:lambda:us-east-1:538894534293:function:cazzzino-cloudfront-extensions-test-onOriginRequest:4
+  aliases:
+    dev:
+      - ${self:custom.siteName}
+      - app-dev.jinglebets.com
+    test:
+      - ${self:custom.siteName}
 
 resources:
   Resources:
@@ -92,8 +98,7 @@ resources:
       Properties:
         DistributionConfig:
           Comment: CaZZZino App (${self:custom.siteName}) CloudFront Distribution
-          Aliases:
-            - ${self:custom.siteName}
+          Aliases: ${self:custom.aliases.${self:provider.stage}}
           DefaultRootObject: index.html
           CustomErrorResponses:
             - ErrorCode: 404

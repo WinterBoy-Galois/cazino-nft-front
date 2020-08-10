@@ -1,0 +1,9 @@
+@import '../../../styles/shared';
+
+.fill {
+  fill: none;
+  stroke: $eye-outline;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3px;
+}

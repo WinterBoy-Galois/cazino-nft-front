@@ -1,0 +1,23 @@
+@import '../../../../styles/shared';
+
+.container {
+  margin-bottom: calc(#{$bar-height} + 1rem);
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 0;
+  }
+}
+
+.close {
+  &__icon {
+    width: 15px;
+    height: 15px;
+    fill: $white;
+  }
+
+  &__button {
+    border: none;
+    background: none;
+    padding: 0;
+  }
+}

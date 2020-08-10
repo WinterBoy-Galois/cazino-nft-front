@@ -11,9 +11,8 @@ import {
 } from '../../../../models/serverSeedDetails.model';
 import OtherServerSeedDetails from './components/OtherServerSeedDetails';
 import { CHANGE_SERVER_SEED } from '../../../../graphql/mutations';
-import { useStateValue } from '../../../../state';
-import { replaceModal } from '../../../Modal';
 import OwnServerSeedDetails from './components/OwnServerSeedDetails';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   ownDetails?: ServerSeedDetailsOwn;
@@ -30,23 +29,21 @@ const ServerSeedPage: React.FC<IProps> = ({
   loading,
   onChangeServerSeed,
 }) => {
-  const [, dispatch] = useStateValue();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const renderDetails = () => {
     if (ownDetails) {
-      return <OwnServerSeedDetails ownDetails={ownDetails} />;
-    }
-
-    if (ownDetails) {
       const showConfirmationModal = () => {
-        replaceModal(dispatch, 'CHANGE_SERVER_SEED_CONFIRMATION', {
-          onConfirm: () => {
-            if (onChangeServerSeed) {
-              onChangeServerSeed();
-            }
-            replaceModal(dispatch, 'BET_DETAILS_MODAL', { pageIndex: 2 });
+        navigate(`${location.pathname}?dialog=seed-confirm`, {
+          state: {
+            onConfirm: () => {
+              onChangeServerSeed && onChangeServerSeed();
+              navigate(`${location.pathname}?dialog=bet-details`, { state: { pageIndex: 2 } });
+            },
+            onCancel: () =>
+              navigate(`${location.pathname}?dialog=bet-details`, { state: { pageIndex: 2 } }),
           },
-          onCancel: () => replaceModal(dispatch, 'BET_DETAILS_MODAL', { pageIndex: 2 }),
         });
       };
 

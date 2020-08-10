@@ -4,6 +4,7 @@ import Close from '../icons/Close';
 import { CSSTransition } from 'react-transition-group';
 import { useScrollLock } from '../../hooks/useScrollLock.hook';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
+import Div100vh from 'react-div-100vh';
 
 interface IProps {
   children: ReactNode;
@@ -61,7 +62,7 @@ const Modal: React.SFC<IProps> = ({
       }}
       unmountOnExit={true}
     >
-      <div className={styles.container}>
+      <Div100vh className={styles.container}>
         <CSSTransition
           in={show}
           timeout={200}
@@ -91,7 +92,7 @@ const Modal: React.SFC<IProps> = ({
             {footer && <div className={styles.modal__footer}>{footer}</div>}
           </div>
         </CSSTransition>
-      </div>
+      </Div100vh>
     </CSSTransition>
   );
 };

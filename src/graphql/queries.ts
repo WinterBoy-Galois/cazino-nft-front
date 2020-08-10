@@ -68,9 +68,10 @@ export const USER_INFO = gql`
       }
       ... on GenericErrorArray {
         errors {
-          type
-          field
-          messageKey
+          source
+          code
+          message
+          args
         }
       }
     }
@@ -86,9 +87,10 @@ export const USER_INFO_AVATAR_URL = gql`
       }
       ... on GenericErrorArray {
         errors {
-          type
-          field
-          messageKey
+          source
+          code
+          message
+          args
         }
       }
     }
@@ -153,6 +155,17 @@ export const BET_DETAILS_SERVER_SEED = gql`
           }
         }
       }
+    }
+  }
+`;
+
+export const ME = gql`
+  query Me {
+    me {
+      id
+      username
+      avatarUrl
+      balance
     }
   }
 `;

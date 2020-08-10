@@ -5,52 +5,33 @@ import BottomBar from './components/BottomBar';
 import Sidebar from './components/Sidebar';
 import Footer from '../Footer';
 import { useStateValue } from '../../state';
-import { UserInfoModalWithData } from '../UserInfoModal';
-import { ModalState } from '../../state/models/modal.model';
-import { Action } from '../../state/actions';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
-import BetDetailsModal from '../BetDetailsModal';
-import ChangeServerSeedConfirmationModal from '../ChangeServerSeedConfirmationModal';
+import { transitionTimeout } from '../Modal';
+import { useMutation } from '@apollo/react-hooks';
+import { SIGN_OUT } from '../../graphql/mutations';
+import Modals from './components/Modals';
+import { navigate, useLocation } from '@reach/router';
 
-const renderModals = (modal: ModalState, dispatch: React.Dispatch<Action>) => (
-  <>
-    <UserInfoModalWithData
-      show={modal.type === 'USER_INFO_MODAL'}
-      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
-      {...modal.data}
-    />
-    <BetDetailsModal
-      show={modal.type === 'BET_DETAILS_MODAL'}
-      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
-      {...modal.data}
-    />
-    <ChangeServerSeedConfirmationModal
-      show={modal.type === 'CHANGE_SERVER_SEED_CONFIRMATION'}
-      onClose={() => dispatch({ type: 'HIDE_MODAL' })}
-      {...modal.data}
-    />
-  </>
-);
-
-const Layout: React.SFC = ({ children }) => {
-  const [{ sidebar, modal }, dispatch] = useStateValue();
+const Layout: React.FC = ({ children }) => {
+  const [{ sidebar, modal, auth }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
+  const [signOut] = useMutation(SIGN_OUT);
+  const location = useLocation();
 
-  const hideContent = (): boolean => {
-    switch (breakpoint) {
-      case 'xs':
-      case 'sm':
-        return sidebar.isOpen || modal.type !== 'NONE';
+  const hideContent = () =>
+    breakpoint === 'xs' || breakpoint === 'sm' ? modal.type !== 'NONE' : false;
 
-      default:
-        return false;
-    }
+  const handleSignInClick = () => navigate(`${location.pathname}?dialog=sign-in`);
+
+  const handleSignOutClick = async () => {
+    await signOut();
+    dispatch({ type: 'AUTH_SIGN_OUT' });
   };
 
   return (
     <>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} style={{ display: hideContent() ? 'none' : 'block' }}>
         <div
           id="main"
           className={`${styles.main} ${sidebar.isOpen && styles['main--sidebar-open']}`}
@@ -59,14 +40,14 @@ const Layout: React.SFC = ({ children }) => {
             className={`${styles['main__top-bar']} ${
               sidebar.isOpen && styles['main__top-bar--sidebar-open']
             }`}
-            style={{ width: modal.type !== 'NONE' ? `${mainWidth}px` : '' }}
+            style={{
+              width: modal.type !== 'NONE' ? `${mainWidth}px` : '',
+              transitionDuration: modal.type === 'NONE' ? `${transitionTimeout}` : '0s',
+            }}
           >
-            <TopBar />
+            <TopBar onSignInClick={handleSignInClick} onSignOutClick={handleSignOutClick} />
           </div>
-          <div
-            className={styles.main__content}
-            style={{ display: hideContent() ? 'none' : 'block' }}
-          >
+          <div className={styles.main__content}>
             {children}
             <Footer />
           </div>
@@ -79,14 +60,14 @@ const Layout: React.SFC = ({ children }) => {
               transition: modal.type !== 'NONE' ? 'none' : '',
             }}
           >
-            <BottomBar />
+            <BottomBar balance={auth.user?.balance} />
           </div>
         </div>
       </div>
 
       <Sidebar />
 
-      {renderModals(modal, dispatch)}
+      <Modals />
     </>
   );
 };

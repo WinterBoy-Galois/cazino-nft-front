@@ -1,1 +1,1 @@
-export type SidebarActionType = 'TOGGLE_SIDEBAR' | 'SELECT_SIDEBAR_TAB';
+export type SidebarActionType = 'SIDEBAR_TOGGLE' | 'SIDEBAR_SELECT_TAB';
