@@ -68,9 +68,10 @@ export const USER_INFO = gql`
       }
       ... on GenericErrorArray {
         errors {
-          type
-          field
-          messageKey
+          source
+          code
+          message
+          args
         }
       }
     }
@@ -86,9 +87,10 @@ export const USER_INFO_AVATAR_URL = gql`
       }
       ... on GenericErrorArray {
         errors {
-          type
-          field
-          messageKey
+          source
+          code
+          message
+          args
         }
       }
     }
