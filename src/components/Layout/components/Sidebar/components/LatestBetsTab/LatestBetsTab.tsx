@@ -6,6 +6,7 @@ import Bet from '../../../../../../models/bet.model';
 import { ApolloError } from 'apollo-client';
 import { navigate, useLocation } from '@reach/router';
 import { useStateValue } from '../../../../../../state';
+import { appConfig } from '../../../../../../common/config';
 
 interface IProps {
   bets?: Bet[];
@@ -34,7 +35,7 @@ const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error 
           error={error ? true : false}
           signInUserId={user?.id}
           viewMode={ViewMode.RESPONSIVE}
-          reduceMotion={true}
+          reduceMotion={appConfig.reduceMotion}
           onUsernameClicked={handleUsernameClick}
         />
       </div>
