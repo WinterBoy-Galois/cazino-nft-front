@@ -10,6 +10,7 @@ import jwtDecode from 'jwt-decode';
 import { getEpoch } from '../common/util/date.util';
 import { setContext } from 'apollo-link-context';
 import { AuthType } from '../state/models/auth.model';
+import { appConfig } from '../common/config';
 
 // https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -35,7 +36,7 @@ const getApolloClient = (
   }
 
   wsLink = new WebSocketLink({
-    uri: `wss://staging.jinglebets.com/graphql`,
+    uri: `${appConfig.apiBasePathWS}/graphql`,
     options: {
       reconnect: true,
       connectionParams: {
@@ -45,7 +46,7 @@ const getApolloClient = (
   });
 
   const httpLink = new HttpLink({
-    uri: 'https://staging.jinglebets.com/graphql',
+    uri: `${appConfig.apiBasePath}/graphql`,
     credentials: 'include',
   });
 
@@ -78,7 +79,7 @@ const getApolloClient = (
       return true;
     },
     fetchAccessToken: () => {
-      return fetch('https://staging.jinglebets.com/refresh_tokens', {
+      return fetch(`${appConfig.apiBasePath}/refresh_tokens`, {
         method: 'POST',
         credentials: 'include',
       });
