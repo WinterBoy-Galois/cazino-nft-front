@@ -61,7 +61,7 @@ Object {
                 </span>
               </div>
               <div
-                class="details container"
+                class="details container container--light"
               >
                 <div
                   class="container username username--desktop"
@@ -88,7 +88,7 @@ Object {
                     class="list__item"
                   >
                     <div
-                      class="list__item__label"
+                      class="list__item__label truncate"
                     >
                       Total Wager
                     </div>
@@ -96,7 +96,7 @@ Object {
                       class="list__item__value"
                     >
                       <div
-                        class=""
+                        class="container value"
                       >
                         <svg
                           class="icon"
@@ -115,7 +115,9 @@ Object {
                             />
                           </g>
                         </svg>
-                        <span>
+                        <span
+                          class="truncate"
+                        >
                           0.00000000
                         </span>
                       </div>
@@ -125,7 +127,7 @@ Object {
                     class="list__item"
                   >
                     <div
-                      class="list__item__label"
+                      class="list__item__label truncate"
                     >
                       Total Profit
                     </div>
@@ -133,7 +135,7 @@ Object {
                       class="list__item__value"
                     >
                       <div
-                        class=""
+                        class="container  value"
                       >
                         <svg
                           class="icon"
@@ -152,8 +154,10 @@ Object {
                             />
                           </g>
                         </svg>
-                        <span>
-                          n/a
+                        <span
+                          class="truncate"
+                        >
+                          0.00000000
                         </span>
                       </div>
                     </div>
@@ -162,7 +166,7 @@ Object {
                     class="list__item"
                   >
                     <div
-                      class="list__item__label"
+                      class="list__item__label truncate"
                     >
                       Most Played
                     </div>
@@ -202,7 +206,7 @@ Object {
                     class="list__item"
                   >
                     <div
-                      class="list__item__label"
+                      class="list__item__label truncate"
                     >
                       Total Bets
                     </div>
@@ -216,7 +220,7 @@ Object {
                     class="list__item"
                   >
                     <div
-                      class="list__item__label"
+                      class="list__item__label truncate"
                     >
                       Won Bets
                     </div>
@@ -230,7 +234,7 @@ Object {
                     class="list__item"
                   >
                     <div
-                      class="list__item__label"
+                      class="list__item__label truncate"
                     >
                       Lost Bets
                     </div>
@@ -310,7 +314,7 @@ Object {
               </span>
             </div>
             <div
-              class="details container"
+              class="details container container--light"
             >
               <div
                 class="container username username--desktop"
@@ -337,7 +341,7 @@ Object {
                   class="list__item"
                 >
                   <div
-                    class="list__item__label"
+                    class="list__item__label truncate"
                   >
                     Total Wager
                   </div>
@@ -345,7 +349,7 @@ Object {
                     class="list__item__value"
                   >
                     <div
-                      class=""
+                      class="container value"
                     >
                       <svg
                         class="icon"
@@ -364,7 +368,9 @@ Object {
                           />
                         </g>
                       </svg>
-                      <span>
+                      <span
+                        class="truncate"
+                      >
                         0.00000000
                       </span>
                     </div>
@@ -374,7 +380,7 @@ Object {
                   class="list__item"
                 >
                   <div
-                    class="list__item__label"
+                    class="list__item__label truncate"
                   >
                     Total Profit
                   </div>
@@ -382,7 +388,7 @@ Object {
                     class="list__item__value"
                   >
                     <div
-                      class=""
+                      class="container  value"
                     >
                       <svg
                         class="icon"
@@ -401,8 +407,10 @@ Object {
                           />
                         </g>
                       </svg>
-                      <span>
-                        n/a
+                      <span
+                        class="truncate"
+                      >
+                        0.00000000
                       </span>
                     </div>
                   </div>
@@ -411,7 +419,7 @@ Object {
                   class="list__item"
                 >
                   <div
-                    class="list__item__label"
+                    class="list__item__label truncate"
                   >
                     Most Played
                   </div>
@@ -451,7 +459,7 @@ Object {
                   class="list__item"
                 >
                   <div
-                    class="list__item__label"
+                    class="list__item__label truncate"
                   >
                     Total Bets
                   </div>
@@ -465,7 +473,7 @@ Object {
                   class="list__item"
                 >
                   <div
-                    class="list__item__label"
+                    class="list__item__label truncate"
                   >
                     Won Bets
                   </div>
@@ -479,7 +487,7 @@ Object {
                   class="list__item"
                 >
                   <div
-                    class="list__item__label"
+                    class="list__item__label truncate"
                   >
                     Lost Bets
                   </div>

@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmailActivationStatus should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container "
+      >
+        <svg
+          class="icon"
+          viewBox="0 0 23.13 23.13"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g>
+            <g>
+              <g>
+                <path
+                  class="fill"
+                  d="M11.57 23.13a11.57 11.57 0 110-23.13 11.53 11.53 0 014.7 1 1.5 1.5 0 01-1.22 2.74A8.5 8.5 0 0011.57 3a8.57 8.57 0 000 17.13 8.55 8.55 0 008.56-8.56v-.92a1.5 1.5 0 013 0v.92a11.56 11.56 0 01-11.56 11.56z"
+                />
+                <path
+                  class="fill"
+                  d="M11.57 15.09a1.46 1.46 0 01-1.06-.44l-3-3a1.49 1.49 0 010-2.12 1.51 1.51 0 012.12 0l2 2 9-9a1.5 1.5 0 012.07 2.05L12.63 14.65a1.46 1.46 0 01-1.06.44z"
+                />
+              </g>
+            </g>
+          </g>
+        </svg>
+        <span
+          class="truncate"
+        >
+          test@test.de
+        </span>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container "
+    >
+      <svg
+        class="icon"
+        viewBox="0 0 23.13 23.13"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g>
+          <g>
+            <g>
+              <path
+                class="fill"
+                d="M11.57 23.13a11.57 11.57 0 110-23.13 11.53 11.53 0 014.7 1 1.5 1.5 0 01-1.22 2.74A8.5 8.5 0 0011.57 3a8.57 8.57 0 000 17.13 8.55 8.55 0 008.56-8.56v-.92a1.5 1.5 0 013 0v.92a11.56 11.56 0 01-11.56 11.56z"
+              />
+              <path
+                class="fill"
+                d="M11.57 15.09a1.46 1.46 0 01-1.06-.44l-3-3a1.49 1.49 0 010-2.12 1.51 1.51 0 012.12 0l2 2 9-9a1.5 1.5 0 012.07 2.05L12.63 14.65a1.46 1.46 0 01-1.06.44z"
+              />
+            </g>
+          </g>
+        </g>
+      </svg>
+      <span
+        class="truncate"
+      >
+        test@test.de
+      </span>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

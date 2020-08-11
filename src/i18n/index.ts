@@ -13,6 +13,8 @@ import modalsEN from './locales/modals/en.json';
 import modalsDE from './locales/modals/de.json';
 import authEN from './locales/auth/en.json';
 import authDE from './locales/auth/de.json';
+import profileEN from './locales/profile/en.json';
+import profileDE from './locales/profile/de.json';
 
 i18n
   .use(LanguageDetector)
@@ -26,6 +28,7 @@ i18n
         sidebar: sidebarEN,
         modals: modalsEN,
         auth: authEN,
+        profile: profileEN,
       },
       de: {
         common: commonDE,
@@ -34,13 +37,14 @@ i18n
         sidebar: sidebarDE,
         modals: modalsDE,
         auth: authDE,
+        profile: profileDE,
       },
     },
 
     fallbackLng: 'en',
     debug: false,
 
-    ns: ['common', 'home', 'footer', 'sidebar', 'modals', 'auth'],
+    ns: ['common', 'home', 'footer', 'sidebar', 'modals', 'auth', 'profile'],
     defaultNS: 'common',
 
     keySeparator: '.',

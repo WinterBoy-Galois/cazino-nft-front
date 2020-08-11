@@ -20,15 +20,15 @@ describe('formatBitcoin', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should return 0 for null', () => {
+  it('should return n/a for null', () => {
     // Arrange
     const value = null;
 
     // Act
-    const actual = formatBitcoin(value);
+    const actual = formatBitcoin((value as unknown) as number);
 
     // Assert
-    const expected = '0.00000000';
+    const expected = 'n/a';
 
     expect(actual).toEqual(expected);
   });

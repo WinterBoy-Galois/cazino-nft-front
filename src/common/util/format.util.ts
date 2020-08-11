@@ -3,8 +3,8 @@ import { appConfig } from '../config';
 const { bitcoinFractionDigits, multiplierFractionDigits } = appConfig;
 
 const formatBitcoin = (value?: number) => {
-  if (!value) {
-    value = 0;
+  if (value === undefined || value === null) {
+    return 'n/a';
   }
 
   return `${value.toFixed(bitcoinFractionDigits)}`;
@@ -19,7 +19,7 @@ const formatBet = (value?: number) => {
 };
 
 const formatMultiplier = (value?: number) => {
-  if (value !== 0 && !value) {
+  if (value === undefined || value === null) {
     return 'n/a';
   }
 
@@ -27,7 +27,7 @@ const formatMultiplier = (value?: number) => {
 };
 
 const formatProfit = (value?: number) => {
-  if (!value) {
+  if (value === undefined || value === null) {
     return 'n/a';
   }
 
@@ -40,7 +40,7 @@ const formatProfit = (value?: number) => {
  * Assume if the value should be divided by 1.000
  */
 const formatBitcoinSmart = (value?: string) => {
-  if (!value) {
+  if (value === undefined || value === null) {
     return 'n/a';
   }
 
@@ -52,7 +52,7 @@ const formatBitcoinSmart = (value?: string) => {
 };
 
 const formatWinChance = (value?: number) => {
-  if (!value) {
+  if (value === undefined || value === null) {
     return 'n/a';
   }
 
