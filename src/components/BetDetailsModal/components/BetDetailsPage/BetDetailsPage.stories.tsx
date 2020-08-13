@@ -3,8 +3,10 @@ import { storiesOf } from '@storybook/react';
 import BetDetailsPage from '.';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import PageableModal from '../../../PageableModal';
+import { LocationProvider } from '@reach/router';
 
 storiesOf('Components/BetDetailsModal/BetDetailsPage', module)
+  .addDecorator(storyFn => <LocationProvider>{storyFn()}</LocationProvider>)
   .addDecorator(storyFn => <PageableModal show={true} pages={[storyFn()]} />)
   .add('default', () => (
     <BetDetailsPage

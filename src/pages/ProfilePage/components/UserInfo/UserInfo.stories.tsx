@@ -14,7 +14,7 @@ const data = {
   user: {
     id: '',
     username: 'name',
-    avatarUrl: '',
+    avatarUrl: 'https://staging.jinglebets.com/ava/m6.svg',
     isActivated: true,
     email: 'test@test.de',
   },

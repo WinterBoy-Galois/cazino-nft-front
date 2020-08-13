@@ -6,6 +6,7 @@ import LatestBetsTable from '.';
 import Bet from '../../models/bet.model';
 import { useBetGenerator, generateRandomBets } from '../../hooks/useBetGenerator.hook';
 import { DispatchSpeed, useBetBuffer } from '../../hooks/useBetBuffer.hook';
+import { LocationProvider } from '@reach/router';
 
 const users: any = [
   {
@@ -117,9 +118,11 @@ export default {
   decorators: [
     withKnobs,
     (storyFn: () => React.ReactNode) => (
-      <div className="container" style={{ height: '500px' }}>
-        {storyFn()}
-      </div>
+      <LocationProvider>
+        <div className="container" style={{ height: '500px' }}>
+          {storyFn()}
+        </div>
+      </LocationProvider>
     ),
   ],
 };

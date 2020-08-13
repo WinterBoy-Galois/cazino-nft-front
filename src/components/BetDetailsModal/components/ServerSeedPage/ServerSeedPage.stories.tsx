@@ -5,9 +5,11 @@ import PageableModal from '../../../PageableModal';
 import { withKnobs, text, array, select, boolean } from '@storybook/addon-knobs';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import { action } from '@storybook/addon-actions';
+import { LocationProvider } from '@reach/router';
 
 storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
   .addDecorator(withKnobs)
+  .addDecorator(storyFn => <LocationProvider>{storyFn()}</LocationProvider>)
   .addDecorator(storyFn => <PageableModal show={true} pages={[storyFn()]} />)
   .add('Own bet', () => (
     <ServerSeedPage
