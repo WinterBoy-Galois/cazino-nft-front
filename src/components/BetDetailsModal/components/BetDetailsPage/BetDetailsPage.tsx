@@ -59,7 +59,10 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
             { label: t('betDetails.date'), value: datetimeFromEpoch(bet.time) },
             { label: t('betDetails.betId'), value: bet.id },
             { label: t('betDetails.game'), value: <GameIconAndText game={bet.gameid} /> },
-            { label: t('betDetails.bet'), value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },
+            {
+              label: t('betDetails.bet'),
+              value: <BitcoinValue value={formatBitcoin(bet.bet)} className={styles.value} />,
+            },
             {
               label: (
                 <span>
@@ -68,7 +71,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
                   )
                 </span>
               ),
-              value: <BitcoinProfit value={bet.profit} />,
+              value: <BitcoinProfit value={bet.profit} className={styles.value} />,
             },
           ]}
         />
