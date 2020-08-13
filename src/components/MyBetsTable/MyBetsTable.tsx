@@ -76,7 +76,7 @@ const MyBetsTable: React.FC<IProps> = ({
           </tr>
         </thead>
         <tbody className={styles['bet-table__body']}>
-          {bets && bets.length > 0 ? (
+          {bets && bets.length > 0 && isSignedIn ? (
             <>
               <SpacerRow />
               {reduceMotion ? (
