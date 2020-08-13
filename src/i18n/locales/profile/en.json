@@ -1,4 +1,11 @@
 {
   "pageHeadline": "profile",
-  "statistics": "statistics"
+  "statistics": "statistics",
+  "security": {
+    "headline": "security",
+    "oldPassword": "current password",
+    "newPassword": "New password",
+    "newPasswordConfirm": "Confirm new password",
+    "button": "Change Password"
+  }
 }

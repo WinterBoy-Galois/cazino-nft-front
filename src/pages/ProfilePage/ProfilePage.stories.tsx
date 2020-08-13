@@ -6,6 +6,9 @@ import { boolean } from '@storybook/addon-knobs';
 
 storiesOf('Pages/Profile', module).add('default', () => (
   <LocationProvider>
-    <ProfilePage statisticsLoading={boolean('StatisticsLoading', false)} />
+    <ProfilePage
+      statisticsLoading={boolean('StatisticsLoading', false)}
+      securityLoading={boolean('SecurityLoading', false)}
+    />
   </LocationProvider>
 ));

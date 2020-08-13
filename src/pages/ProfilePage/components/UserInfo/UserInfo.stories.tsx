@@ -3,7 +3,7 @@ import UserInfo from '.';
 import { LocationProvider } from '@reach/router';
 
 export default {
-  title: 'Components/UserInfo',
+  title: 'Components/Profile/UserInfo',
   component: UserInfo,
   decorators: [
     (storyFn: () => React.ReactNode) => <LocationProvider>{storyFn()}</LocationProvider>,

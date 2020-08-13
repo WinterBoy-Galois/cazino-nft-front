@@ -156,3 +156,18 @@ export const RECOVER_PASSWORD = gql`
     }
   }
 `;
+
+export const UPDATE_PASSWORD = gql`
+  mutation UpdatePassword($oldPassword: String!, $newPassword: String!) {
+    modifyPassword(oldPassword: $oldPassword, newPassword: $newPassword) {
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

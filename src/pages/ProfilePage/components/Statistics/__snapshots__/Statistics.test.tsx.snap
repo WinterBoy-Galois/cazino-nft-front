@@ -9,9 +9,9 @@ Object {
         class=" container container--dark"
       >
         <h2
-          class="headline"
+          class="headline "
         >
-          Statistics
+          statistics
         </h2>
         <div
           class="undefined container"
@@ -26,9 +26,9 @@ Object {
       class=" container container--dark"
     >
       <h2
-        class="headline"
+        class="headline "
       >
-        Statistics
+        statistics
       </h2>
       <div
         class="undefined container"

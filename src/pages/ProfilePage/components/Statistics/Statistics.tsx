@@ -24,7 +24,7 @@ const Statistics: React.SFC<IProps> = ({
 
   return (
     <DetailsContainer background={'DARK'} className={className}>
-      <CardHeadline>Statistics</CardHeadline>
+      <CardHeadline>{t('statistics')}</CardHeadline>
       {loading && <Loading />}
 
       {(error || !userStatistics) && !loading && <Error>{t('auth:errors.SERVER_ERROR')}</Error>}

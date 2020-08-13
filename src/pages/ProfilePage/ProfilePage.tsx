@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RouteComponentProps, Redirect } from '@reach/router';
 import PageHeadline from '../../components/PageHeadline';
 import PageContentContainer from '../../components/PageContentContainer';
 import DetailsContainer from '../../components/DetailsContainer';
 import styles from './ProfilePage.module.scss';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { ME_STATISTICS } from '../../graphql/queries';
 import { useStateValue } from '../../state';
 import Statistics from './components/Statistics';
@@ -12,14 +12,29 @@ import { useTranslation } from 'react-i18next';
 import { ApolloError } from 'apollo-client';
 import UserInfo from './components/UserInfo';
 import { UserStatistic } from '../../models/userStatistics.model';
+import Security from './components/Security';
+import ApplicationError from '../../models/applicationError.model';
+import { UPDATE_PASSWORD } from '../../graphql/mutations';
+import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
+import { success } from '../../components/Toast';
 
 interface IProps extends RouteComponentProps {
   userStatistic?: UserStatistic;
   statisticsLoading: boolean;
   statisticsError?: ApolloError;
+  securityLoading: boolean;
+  securityErrors?: ApplicationError[];
+  onPasswordChange?: (oldPassword: string, newPassword: string) => Promise<boolean>;
 }
 
-const ProfilePage: React.SFC<IProps> = ({ userStatistic, statisticsLoading, statisticsError }) => {
+const ProfilePage: React.SFC<IProps> = ({
+  userStatistic,
+  statisticsLoading,
+  statisticsError,
+  securityLoading,
+  securityErrors,
+  onPasswordChange,
+}) => {
   const { t } = useTranslation('profile');
   const [{ auth }] = useStateValue();
 
@@ -50,13 +65,6 @@ const ProfilePage: React.SFC<IProps> = ({ userStatistic, statisticsLoading, stat
                   Toggle this switch element
                 </label>
               </div>
-            </DetailsContainer>
-            <DetailsContainer background={'DARK'} className={styles.password}>
-              Security
-              <br />
-              <br />
-              <br />
-              <br />
               <br />
               <br />
               <br />
@@ -64,6 +72,13 @@ const ProfilePage: React.SFC<IProps> = ({ userStatistic, statisticsLoading, stat
               <br />
               <br />
             </DetailsContainer>
+
+            <Security
+              loading={securityLoading}
+              errors={securityErrors}
+              className={styles.password}
+              onPasswordChange={onPasswordChange}
+            />
           </div>
         </div>
       </PageContentContainer>
@@ -72,13 +87,37 @@ const ProfilePage: React.SFC<IProps> = ({ userStatistic, statisticsLoading, stat
 };
 
 const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
+  const { t } = useTranslation(['auth']);
   const { data, loading: statisticsLoading, error: statisticsError } = useQuery(ME_STATISTICS);
+  const [updatePassword, { loading: securityLoading }] = useMutation(UPDATE_PASSWORD, {
+    variables: { oldPassword: '', newPassword: '' },
+  });
+  const [securityErrors, setSecurityErrors] = useState<ApplicationError[]>();
+
+  const onPasswordChange = async (oldPassword: string, newPassword: string) => {
+    setSecurityErrors([]);
+    const { data, errors } = await updatePassword({ variables: { oldPassword, newPassword } });
+
+    if (errors) {
+      setSecurityErrors(getFromGraphQLErrors(errors, t));
+      return false;
+    } else if (data?.modifyPassword?.errors) {
+      setSecurityErrors(getFromGenericErrors(data.modifyPassword.errors, t));
+      return false;
+    }
+
+    success('Password succesfully changed.');
+    return true;
+  };
 
   return (
     <ProfilePage
       userStatistic={data?.me}
       statisticsLoading={statisticsLoading}
       statisticsError={statisticsError}
+      securityLoading={securityLoading}
+      securityErrors={securityErrors}
+      onPasswordChange={onPasswordChange}
     />
   );
 };

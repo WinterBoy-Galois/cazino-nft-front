@@ -9,7 +9,7 @@ Object {
         class=" container container--dark"
       >
         <h2
-          class="headline"
+          class="headline "
         >
           User info
         </h2>
@@ -68,7 +68,7 @@ Object {
       class=" container container--dark"
     >
       <h2
-        class="headline"
+        class="headline "
       >
         User info
       </h2>

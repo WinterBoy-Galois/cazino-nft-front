@@ -4,7 +4,7 @@ import Statistics from '.';
 import { GameTypes } from '../../../../models/gameTypes.model';
 
 export default {
-  title: 'Components/Statistics',
+  title: 'Components/Profile/Statistics',
   component: Statistics,
   decorators: [
     (storyFn: () => React.ReactNode) => <div style={{ minHeight: '200px' }}>{storyFn()}</div>,
