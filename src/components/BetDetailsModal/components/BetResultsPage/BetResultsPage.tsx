@@ -56,12 +56,12 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       details = [
         {
           label: t('betDetails.bet'),
-          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
+          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} className={styles.value} />,
         },
         { label: t('betDetails.clams'), value: selection?.length ?? 'n/a' },
         {
           label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
-          value: <BitcoinProfit value={betDetails.profit} />,
+          value: <BitcoinProfit value={betDetails.profit} className={styles.value} />,
         },
       ];
       break;
@@ -72,7 +72,7 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       details = [
         {
           label: t('betDetails.bet'),
-          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
+          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} className={styles.value} />,
         },
         {
           label: over ? t('betDetails.rollOver') : t('betDetails.rollUnder'),
@@ -81,7 +81,7 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
         { label: t('betDetails.winChance'), value: formatWinChance(winChance) },
         {
           label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
-          value: <BitcoinProfit value={betDetails.profit} />,
+          value: <BitcoinProfit value={betDetails.profit} className={styles.value} />,
         },
       ];
       break;
@@ -92,12 +92,12 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       details = [
         {
           label: t('betDetails.bet'),
-          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
+          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} className={styles.value} />,
         },
         { label: t('betDetails.mines'), value: `${minePositions?.length ?? 'n/a'}` },
         {
           label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
-          value: <BitcoinProfit value={betDetails.profit} />,
+          value: <BitcoinProfit value={betDetails.profit} className={styles.value} />,
         },
       ];
       break;
