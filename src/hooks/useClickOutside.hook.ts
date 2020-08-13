@@ -8,10 +8,10 @@ export function useClickOutside(ref: MutableRefObject<any>, onOutsideClick: () =
   }
 
   useEffect(() => {
-    document.addEventListener('mouseup', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener('mouseup', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   });
 }
