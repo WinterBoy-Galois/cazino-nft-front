@@ -171,3 +171,22 @@ export const UPDATE_PASSWORD = gql`
     }
   }
 `;
+
+export const UPDATE_PREFERENCES = gql`
+  mutation UpdatePreferences($hideUsername: Boolean!, $hideProfit: Boolean!, $hideWager: Boolean!) {
+    modifyPreferences(
+      hideUsername: $hideUsername
+      hideTotalProfit: $hideProfit
+      hideTotalWager: $hideWager
+    ) {
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

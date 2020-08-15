@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { RouteComponentProps, Redirect } from '@reach/router';
 import PageHeadline from '../../components/PageHeadline';
 import PageContentContainer from '../../components/PageContentContainer';
-import DetailsContainer from '../../components/DetailsContainer';
 import styles from './ProfilePage.module.scss';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { ME_STATISTICS } from '../../graphql/queries';
+import { ME_STATISTICS_PREFERENCES } from '../../graphql/queries';
 import { useStateValue } from '../../state';
 import Statistics from './components/Statistics';
 import { useTranslation } from 'react-i18next';
 import { ApolloError } from 'apollo-client';
 import UserInfo from './components/UserInfo';
 import { UserStatistic } from '../../models/userStatistics.model';
+import Preferences from './components/Preferences';
 import Security from './components/Security';
 import ApplicationError from '../../models/applicationError.model';
-import { UPDATE_PASSWORD } from '../../graphql/mutations';
+import { UPDATE_PASSWORD, UPDATE_PREFERENCES } from '../../graphql/mutations';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
-import { success } from '../../components/Toast';
+import { success, error } from '../../components/Toast';
+import { Preferences as PreferencesModel } from './components/Preferences/lib/preferences';
 
 interface IProps extends RouteComponentProps {
   userStatistic?: UserStatistic;
@@ -25,6 +26,8 @@ interface IProps extends RouteComponentProps {
   securityLoading: boolean;
   securityErrors?: ApplicationError[];
   onPasswordChange?: (oldPassword: string, newPassword: string) => Promise<boolean>;
+  preferences?: PreferencesModel;
+  onPreferenceChange?: (preferences: PreferencesModel) => void;
 }
 
 const ProfilePage: React.SFC<IProps> = ({
@@ -34,6 +37,8 @@ const ProfilePage: React.SFC<IProps> = ({
   securityLoading,
   securityErrors,
   onPasswordChange,
+  preferences,
+  onPreferenceChange,
 }) => {
   const { t } = useTranslation('profile');
   const [{ auth }] = useStateValue();
@@ -57,21 +62,12 @@ const ProfilePage: React.SFC<IProps> = ({
             />
           </div>
           <div className={`col-12 col-lg-6 ${styles.column}`}>
-            <DetailsContainer background={'DARK'} className={styles.preferences}>
-              Preferences
-              <div className="custom-control custom-switch">
-                <input type="checkbox" className="custom-control-input" id="customSwitch1" />
-                <label className="custom-control-label" htmlFor="customSwitch1">
-                  Toggle this switch element
-                </label>
-              </div>
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-            </DetailsContainer>
+            <Preferences
+              className={styles.preferences}
+              preferences={preferences}
+              loading={statisticsLoading}
+              onPreferenceChange={onPreferenceChange}
+            />
 
             <Security
               loading={securityLoading}
@@ -87,13 +83,13 @@ const ProfilePage: React.SFC<IProps> = ({
 };
 
 const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
-  const { t } = useTranslation(['auth']);
-  const { data, loading: statisticsLoading, error: statisticsError } = useQuery(ME_STATISTICS);
-  const [updatePassword, { loading: securityLoading }] = useMutation(UPDATE_PASSWORD, {
-    variables: { oldPassword: '', newPassword: '' },
-  });
-  const [securityErrors, setSecurityErrors] = useState<ApplicationError[]>();
+  const { t } = useTranslation(['auth', 'profile']);
 
+  const { data, loading: statisticsLoading, error: statisticsError } = useQuery(
+    ME_STATISTICS_PREFERENCES
+  );
+  const [updatePassword, { loading: securityLoading }] = useMutation(UPDATE_PASSWORD);
+  const [securityErrors, setSecurityErrors] = useState<ApplicationError[]>();
   const onPasswordChange = async (oldPassword: string, newPassword: string) => {
     setSecurityErrors([]);
     const { data, errors } = await updatePassword({ variables: { oldPassword, newPassword } });
@@ -106,9 +102,39 @@ const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
       return false;
     }
 
-    success('Password succesfully changed.');
+    success(t('profile:security.successToast'));
     return true;
   };
+
+  const [preferences, setPreferences] = useState<PreferencesModel>();
+  const [updatePreferences] = useMutation(UPDATE_PREFERENCES);
+  const onUpdatePreferences = async ({ hideUsername, hideProfit, hideWager }: PreferencesModel) => {
+    const oldPreferences = preferences;
+    setPreferences({
+      hideUsername,
+      hideProfit,
+      hideWager,
+    });
+
+    const { data, errors } = await updatePreferences({
+      variables: { hideUsername, hideProfit, hideWager },
+    });
+
+    if (errors || data?.modifyPreferences.errors) {
+      setPreferences(oldPreferences);
+      return error(t('profile:preferences.errorToast'));
+    }
+  };
+  useMemo(
+    () =>
+      data &&
+      setPreferences({
+        hideUsername: data.me.hideUsername,
+        hideProfit: data.me.hideTotalProfit,
+        hideWager: data.me.hideTotalWager,
+      }),
+    [data]
+  );
 
   return (
     <ProfilePage
@@ -117,7 +143,9 @@ const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
       statisticsError={statisticsError}
       securityLoading={securityLoading}
       securityErrors={securityErrors}
+      preferences={preferences}
       onPasswordChange={onPasswordChange}
+      onPreferenceChange={onUpdatePreferences}
     />
   );
 };

@@ -172,7 +172,7 @@ export const ME = gql`
   }
 `;
 
-export const ME_STATISTICS = gql`
+export const ME_STATISTICS_PREFERENCES = gql`
   query Me {
     me {
       id
@@ -181,6 +181,9 @@ export const ME_STATISTICS = gql`
       mostPlayed
       totalBets
       luckyBets
+      hideUsername
+      hideTotalProfit
+      hideTotalWager
     }
   }
 `;

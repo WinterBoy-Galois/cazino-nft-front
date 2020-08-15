@@ -22,7 +22,7 @@ const UserStatistics: React.SFC<IProps> = ({
     <DetailList
       details={[
         {
-          label: 'Total Wager',
+          label: t('userStatistics.totalWager'),
           value:
             totalWager !== null ? (
               <BitcoinValue value={formatBitcoin(totalWager)} className={styles.value} />
@@ -31,7 +31,7 @@ const UserStatistics: React.SFC<IProps> = ({
             ),
         },
         {
-          label: 'Total Profit',
+          label: t('userStatistics.totalProfit'),
           value:
             totalProfit !== null ? (
               <BitcoinProfit value={totalProfit} className={styles.value} />
@@ -40,19 +40,19 @@ const UserStatistics: React.SFC<IProps> = ({
             ),
         },
         {
-          label: 'Most Played',
+          label: t('userStatistics.mostPlayed'),
           value: <GameIconAndText game={mostPlayed} />,
         },
         {
-          label: 'Total Bets',
+          label: t('userStatistics.totalBets'),
           value: totalBets,
         },
         {
-          label: 'Won Bets',
+          label: t('userStatistics.wonBets'),
           value: luckyBets,
         },
         {
-          label: 'Lost Bets',
+          label: t('userStatistics.lostBets'),
           value: <LostBets totalBets={totalBets} luckyBets={luckyBets} />,
         },
       ]}

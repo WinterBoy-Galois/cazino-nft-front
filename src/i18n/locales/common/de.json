@@ -1,1 +1,31 @@
-{}
+{
+  "games": {
+    "dices": "Dice",
+    "clam": "Clams",
+    "mines": "Mines",
+    "goal": "Goals"
+  },
+  "play": "Play",
+  "hidden": "hidden",
+  "languages": {
+    "de": {
+      "label": "Deutsch"
+    },
+    "en": {
+      "label": "English"
+    }
+  },
+  "errors": {
+    "ACCOUNT_AUTH_ERROR": "Your email or password is wrong",
+    "SERVER_ERROR": "Unknown server error - administrators are notified"
+  },
+  "loading": "loading...",
+  "userStatistics": {
+    "totalProfit": "Gesamtgewinn",
+    "totalWager": "Gesamteinsatz",
+    "mostPlayed": "Meistgespielt",
+    "totalBets": "Alle Wetten",
+    "wonBets": "Gewonnene Wetten",
+    "lostBets": "Verlorene Wetten"
+  }
+}

@@ -15,6 +15,9 @@ const data = {
     mostPlayed: GameTypes.CLAMS,
     totalBets: 27,
     luckyBets: 4,
+    hideUsername: true,
+    hideTotalProfit: false,
+    hideTotalWager: false,
   },
 };
 

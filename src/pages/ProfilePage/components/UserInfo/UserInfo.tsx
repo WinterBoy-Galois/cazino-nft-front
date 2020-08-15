@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from '@reach/router';
 import Avatar from '../../../../components/Avatar';
 import EmailActivationStatus from './component/EmailActivationStatus';
 import DetailsContainer from '../../../../components/DetailsContainer';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   user: User;
@@ -14,12 +15,13 @@ interface IProps {
 }
 
 const UserInfo: React.SFC<IProps> = ({ user, className = '' }) => {
+  const { t } = useTranslation(['profile']);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   return (
     <DetailsContainer background={'DARK'} className={className}>
-      <CardHeadline>User info</CardHeadline>
+      <CardHeadline>{t('userInfo.headline')}</CardHeadline>
       <div className={styles.container}>
         <Avatar avatarUrl={user.avatarUrl} />
 
@@ -33,15 +35,13 @@ const UserInfo: React.SFC<IProps> = ({ user, className = '' }) => {
 
         {!user.isActivated && (
           <Fragment>
-            <div className={styles.error}>
-              Your e-mail is not verified. Press the button to send activation code.
-            </div>
+            <div className={styles.error}>{t('userInfo.notActivatedText')}</div>
 
             <SecondaryButton
               className={styles.button}
               onClick={() => navigate(`${pathname}?dialog=activation`)}
             >
-              Activate
+              {t('userInfo.activateButton')}
             </SecondaryButton>
           </Fragment>
         )}

@@ -19,5 +19,13 @@
     "ACCOUNT_AUTH_ERROR": "Your email or password is wrong",
     "SERVER_ERROR": "Unknown server error - administrators are notified"
   },
-  "loading": "loading..."
+  "loading": "loading...",
+  "userStatistics": {
+    "totalProfit": "Total Profit",
+    "totalWager": "Total Wager",
+    "mostPlayed": "Most Played",
+    "totalBets": "Total Bets",
+    "wonBets": "Won Bets",
+    "lostBets": "Lost Bets"
+  }
 }
