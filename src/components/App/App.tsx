@@ -10,6 +10,7 @@ import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { appConfig } from '../../common/config';
 import Referrals from '../Referrals';
 import { ProfilePageWithData } from '../../pages/ProfilePage/ProfilePage';
+import ScrollToTop from '../ScrollToTop';
 
 const App: React.FC = () => {
   const client = useApolloClient();
@@ -19,6 +20,8 @@ const App: React.FC = () => {
       <GoogleReCaptchaProvider reCaptchaKey={appConfig.reCaptchaSiteKey}>
         <AuthOverlay>
           <LocationProvider>
+            <ScrollToTop />
+
             <Layout>
               <Router>
                 <HomePage path="/" />

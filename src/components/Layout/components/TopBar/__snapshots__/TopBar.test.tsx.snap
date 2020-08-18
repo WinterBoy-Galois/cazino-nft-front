@@ -15,6 +15,7 @@ Object {
             class="col-4 center"
           >
             <a
+              aria-current="page"
               href="/"
             >
               <svg
@@ -166,6 +167,7 @@ Object {
           class="col-4 center"
         >
           <a
+            aria-current="page"
             href="/"
           >
             <svg

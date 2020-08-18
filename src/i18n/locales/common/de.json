@@ -27,5 +27,9 @@
     "totalBets": "Alle Wetten",
     "wonBets": "Gewonnene Wetten",
     "lostBets": "Verlorene Wetten"
+  },
+  "menu": {
+    "profile": "profil",
+    "signOut": "ausloggen"
   }
 }

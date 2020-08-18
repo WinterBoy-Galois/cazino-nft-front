@@ -27,5 +27,9 @@
     "totalBets": "Total Bets",
     "wonBets": "Won Bets",
     "lostBets": "Lost Bets"
+  },
+  "menu": {
+    "profile": "profile",
+    "signOut": "sign out"
   }
 }
