@@ -11,7 +11,7 @@ const mockData = {
     __typename: 'PublicUser',
     id: '1',
     username: 'AuYHKS',
-    avatarUrl: 'https://dev.gambilife.com/ava/m2.svg',
+    avatarUrl: 'https://staging.jinglebets.com/ava/m2.svg',
     totalWager: 0,
     totalProfit: 0,
     mostPlayed: 'CLAMS',
@@ -41,7 +41,7 @@ storiesOf('Components/UserInfoModal', module)
           ...mockData,
           userInfo: {
             ...mockData.userInfo,
-            avatarUrl: 'https://dev.gambilife.com/ava/ano.svg',
+            avatarUrl: 'https://staging.jinglebets.com/ava/ano.svg',
             username: null,
             totalWager: null,
             totalProfit: null,
@@ -110,7 +110,7 @@ storiesOf('Components/UserInfoModal', module)
       userInfo: {
         __typename: 'PublicUser',
         id: '1',
-        avatarUrl: text('Avatar URL', 'https://dev.gambilife.com/ava/m2.svg'),
+        avatarUrl: text('Avatar URL', 'https://staging.jinglebets.com/ava/m2.svg'),
         username: text('Username:', 'AuYHKS'),
         totalWager: number('Total Wager:', 0),
         totalProfit: number('Total Profit:', 0),

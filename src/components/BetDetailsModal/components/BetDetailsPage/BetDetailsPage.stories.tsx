@@ -20,7 +20,7 @@ storiesOf('Components/BetDetailsModal/BetDetailsPage', module)
         profit: 0.00002852,
         multiplier: 1.3026315789473684,
       }}
-      avatarUrl={'https://dev.gambilife.com/ava/m1.svg'}
+      avatarUrl={'https://staging.jinglebets.com/ava/m1.svg'}
       loading={false}
     />
   ));
