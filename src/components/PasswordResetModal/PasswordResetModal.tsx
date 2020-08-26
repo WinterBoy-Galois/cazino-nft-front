@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './PasswordResetModal.module.scss';
 import Modal, { transitionTimeout } from '../Modal';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { RESET_PASSWORD } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { success } from '../Toast';

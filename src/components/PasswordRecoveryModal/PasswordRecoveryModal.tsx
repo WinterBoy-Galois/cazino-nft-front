@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './PasswordRecoveryModal.module.scss';
 import Modal, { transitionTimeout } from '../Modal';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { RECOVER_PASSWORD } from '../../graphql/mutations';
 import { info } from '../Toast';
 import ApplicationError from '../../models/applicationError.model';

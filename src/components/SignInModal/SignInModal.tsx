@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 
 import Modal, { transitionTimeout } from '../Modal';
 import styles from './SignInModal.module.scss';

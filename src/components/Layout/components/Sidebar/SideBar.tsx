@@ -14,10 +14,9 @@ import LatestBetsTab from './components/LatestBetsTab';
 import MyBetsTab from './components/MyBetsTab';
 import Bet from '../../../../models/bet.model';
 import { useBetBuffer, DispatchSpeed } from '../../../../hooks/useBetBuffer.hook';
-import { useQuery, useSubscription } from '@apollo/react-hooks';
 import { RECENT_BETS } from '../../../../graphql/queries';
 import { BET_ADDED } from '../../../../graphql/subscriptions';
-import { ApolloError } from 'apollo-client';
+import { ApolloError, useQuery, useSubscription } from '@apollo/client';
 import { GameTypes } from '../../../../models/gameTypes.model';
 
 const activateScrollLock = (breakpoint: Breakpoint): boolean => {

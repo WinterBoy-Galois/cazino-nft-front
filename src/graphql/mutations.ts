@@ -41,6 +41,8 @@ export const SIGN_IN = gql`
           username
           avatarUrl
           balance
+          email
+          isActivated
         }
       }
       ... on GenericErrorArray {
@@ -179,6 +181,12 @@ export const UPDATE_PREFERENCES = gql`
       hideTotalProfit: $hideProfit
       hideTotalWager: $hideWager
     ) {
+      ... on User {
+        id
+        hideUsername
+        hideTotalProfit
+        hideTotalWager
+      }
       ... on GenericErrorArray {
         errors {
           source

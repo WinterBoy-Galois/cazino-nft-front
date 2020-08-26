@@ -1,7 +1,13 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+import { text } from '@storybook/addon-knobs';
+
 import Balance from '.';
 
-storiesOf('Components/BottomBar/Balance', module)
-  .add('default', () => <Balance value="0.00000000" />)
-  .add('default', () => <Balance value="0.00463242" />);
+export default {
+  title: 'Components/BottomBar/Balance',
+  component: Balance,
+};
+
+export const Default = () => <Balance value="0.00000000" />;
+
+export const Custom = () => <Balance value={text('Value', '0.00463242')} />;

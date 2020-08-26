@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../Layout/Layout';
 import { Router, LocationProvider } from '@reach/router';
 import HomePage from '../../pages/HomePage';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import { ToastContainer } from '../Toast';
 import AuthOverlay from '../AuthOverlay';
 import { useApolloClient } from '../../hooks/useApolloClient.hook';

@@ -1,13 +1,12 @@
 import React from 'react';
 import Modal from '../Modal';
 import styles from './UserInfoModal.module.scss';
-import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
 import Username from '../Username';
 import Button from '../Button';
 import Loading from '../Loading';
 import Error from '../Error';
-import { ApolloError } from 'apollo-client';
+import { ApolloError, useQuery } from '@apollo/client';
 import DetailsContainer from '../DetailsContainer';
 import { useLocation, Redirect } from '@reach/router';
 import UserStatistics from '../UserStatistics';

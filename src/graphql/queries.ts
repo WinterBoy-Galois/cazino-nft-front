@@ -83,6 +83,7 @@ export const USER_INFO_AVATAR_URL = gql`
     userInfo(id: $userId) {
       __typename
       ... on PublicUser {
+        id
         avatarUrl
       }
       ... on GenericErrorArray {

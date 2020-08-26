@@ -1,15 +1,41 @@
 import React from 'react';
-import { render, wait, act } from '@testing-library/react';
-import SideBar from './SideBar';
-import { createMockClient } from 'mock-apollo-client';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { BET_ADDED } from '../../../../graphql/subscriptions';
+import { render, waitForDomChange } from '@testing-library/react';
+import { MockedProvider } from '@apollo/client/testing';
 
-describe('SideBar', () => {
-  it('should match snapshot', async () => {
-    // Arrange
-    const mockClient = createMockClient();
-    const queryHandler = jest.fn().mockResolvedValue({
+import SideBar from './SideBar';
+import { BET_ADDED } from '../../../../graphql/subscriptions';
+import { RECENT_BETS } from '../../../../graphql/queries';
+
+const mocks = [
+  {
+    request: {
+      query: RECENT_BETS,
+    },
+    result: {
+      data: {
+        recentBets: {
+          allBets: [
+            {
+              id: '816380',
+              time: 1598013566307,
+              userid: 478,
+              username: 'williamsjohn',
+              gameid: 'GOALS',
+              bet: 0.00006406,
+              profit: 0.00013324,
+              multiplier: 3.08,
+            },
+          ],
+          myBets: null,
+        },
+      },
+    },
+  },
+  {
+    request: {
+      query: BET_ADDED,
+    },
+    result: {
       data: {
         betAdded: {
           id: '155689',
@@ -22,17 +48,20 @@ describe('SideBar', () => {
           multiplier: 0,
         },
       },
-    });
-    mockClient.setRequestHandler(BET_ADDED, queryHandler);
+    },
+  },
+];
+
+describe('SideBar', () => {
+  it('should match snapshot', async () => {
+    // Arrange
 
     // Act
     const container = render(
-      <ApolloProvider client={mockClient}>
+      <MockedProvider mocks={mocks} addTypename={false}>
         <SideBar />
-      </ApolloProvider>
+      </MockedProvider>
     );
-
-    await act(wait);
 
     // Assert
     expect(container).toMatchSnapshot();

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, number, text, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { ApolloError } from 'apollo-client';
+import { ApolloError } from '@apollo/client';
 
 import UserInfoModal from '.';
 

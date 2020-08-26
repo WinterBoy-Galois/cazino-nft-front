@@ -1,27 +1,42 @@
 import React from 'react';
-import { render, wait, act } from '@testing-library/react';
+import { render, waitForDomChange } from '@testing-library/react';
+import { MockedProvider } from '@apollo/client/testing';
+
 import LeaderboardsTab from './LeaderboardsTab';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { createMockClient } from 'mock-apollo-client';
 import { LEADERBOARDS_SUBSCRIPTION } from '../../../../../../graphql/subscriptions';
+import { LEADERBOARDS } from '../../../../../../graphql/queries';
+
+const mocks = [
+  {
+    request: {
+      query: LEADERBOARDS,
+    },
+    result: {
+      data: { leaderboards: { daily: [], weekly: [], monthly: [] } },
+    },
+  },
+  {
+    request: {
+      query: LEADERBOARDS_SUBSCRIPTION,
+    },
+    result: {
+      data: { leaderboardChanged: { daily: [], weekly: [], monthly: [] } },
+    },
+  },
+];
 
 describe('LeaderboardsTab', () => {
   it('should match snapshot', async () => {
     // Arrange
-    const mockClient = createMockClient();
-    const queryHandler = jest
-      .fn()
-      .mockResolvedValue({ data: { leaderboardChanged: { daily: [], weekly: [], monthly: [] } } });
-    mockClient.setRequestHandler(LEADERBOARDS_SUBSCRIPTION, queryHandler);
 
     // Act
     const container = render(
-      <ApolloProvider client={mockClient}>
+      <MockedProvider mocks={mocks} addTypename={false}>
         <LeaderboardsTab />
-      </ApolloProvider>
+      </MockedProvider>
     );
 
-    await act(wait);
+    await waitForDomChange();
 
     // Assert
     expect(container).toMatchSnapshot();

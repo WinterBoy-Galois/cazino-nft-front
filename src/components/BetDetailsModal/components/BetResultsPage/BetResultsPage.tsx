@@ -7,7 +7,6 @@ import BitcoinProfit from '../../../BitcoinProfit';
 import BetResultsDice from './components/DiceBetResults';
 import styles from './BetResultsPage.module.scss';
 import { GameTypes } from '../../../../models/gameTypes.model';
-import { useQuery } from '@apollo/react-hooks';
 import {
   BetDetails,
   DiceBetResult,
@@ -15,7 +14,7 @@ import {
   GoalsBetResult,
   ClamsBetResult,
 } from '../../../../models/betDetails.model';
-import { ApolloError } from 'apollo-client';
+import { ApolloError, useQuery } from '@apollo/client';
 import { BET_DETAILS } from '../../../../graphql/queries';
 import Error from '../../../Error';
 import Loading from '../../../Loading';

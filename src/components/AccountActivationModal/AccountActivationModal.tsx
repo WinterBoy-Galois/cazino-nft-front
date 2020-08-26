@@ -3,7 +3,7 @@ import styles from './AccountActivationModal.module.scss';
 import Modal from '../Modal';
 import CodeInput from '../CodeInput';
 import activationIllustration from '../../assets/images/auth/safe-locker.svg';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { ACTIVATE_ACCOUNT, RESEND_ACTIVATION_CODE } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { success, info } from '../Toast';

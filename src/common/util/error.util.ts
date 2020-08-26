@@ -21,7 +21,7 @@ const getMessageFromCode = (t: TFunction, code: string) => {
   }
 };
 
-const getFromGraphQLErrors = (errors?: GraphQLError[], t?: TFunction) => {
+const getFromGraphQLErrors = (errors?: GraphQLError[] | readonly GraphQLError[], t?: TFunction) => {
   if (errors === undefined || errors.length <= 0) {
     return [];
   }
@@ -50,7 +50,7 @@ const getFromGraphQLErrors = (errors?: GraphQLError[], t?: TFunction) => {
   return result;
 };
 
-const getFromGenericErrors = (errors?: GenericError[], t?: TFunction) => {
+const getFromGenericErrors = (errors?: GenericError[] | readonly GraphQLError[], t?: TFunction) => {
   if (errors === undefined || errors.length <= 0) {
     return [];
   }
