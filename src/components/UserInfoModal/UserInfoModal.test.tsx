@@ -28,7 +28,7 @@ describe('LeaderboardsTab', () => {
           __typename: 'PublicUser',
           id: '1',
           username: 'NIDHjQ',
-          avatarUrl: 'https://dev.gambilife.com/ava/m1.svg',
+          avatarUrl: 'https://staging.jinglebets.com/ava/m1.svg',
           totalWager: 0,
           totalProfit: 0,
           mostPlayed: GameTypes.CLAMS,

@@ -7,7 +7,7 @@
   width: $sidebar-width;
   height: calc(100% - #{$bar-height});
   background-color: #0d253b;
-  z-index: 2;
+  z-index: 5;
 
   @include media-breakpoint-up(md) {
     height: 100%;

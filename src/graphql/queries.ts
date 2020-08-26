@@ -166,6 +166,24 @@ export const ME = gql`
       username
       avatarUrl
       balance
+      email
+      isActivated
+    }
+  }
+`;
+
+export const ME_STATISTICS_PREFERENCES = gql`
+  query Me {
+    me {
+      id
+      totalWager
+      totalProfit
+      mostPlayed
+      totalBets
+      luckyBets
+      hideUsername
+      hideTotalProfit
+      hideTotalWager
     }
   }
 `;

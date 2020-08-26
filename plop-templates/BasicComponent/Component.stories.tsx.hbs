@@ -1,0 +1,15 @@
+import React from 'react';
+import { text } from '@storybook/addon-knobs';
+
+import {{pascalCase name}} from '.';
+
+export default {
+  title: 'Components/{{pascalCase name}}',
+  component: {{pascalCase name}},
+};
+
+const data = {
+  message: 'Hello World!',
+};
+
+export const Default = () => <{{pascalCase name}} message={text('Message', data.message)} />;

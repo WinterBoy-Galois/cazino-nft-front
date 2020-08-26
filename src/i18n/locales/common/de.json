@@ -5,8 +5,8 @@
     "mines": "Mines",
     "goal": "Goals"
   },
-  "play": "SPIEL",
-  "hidden": "verborgen",
+  "play": "Play",
+  "hidden": "hidden",
   "languages": {
     "de": {
       "label": "Deutsch"
@@ -16,8 +16,20 @@
     }
   },
   "errors": {
-    "ACCOUNT_AUTH_ERROR": "Der Benutzername oder das Passwort sind falsch",
-    "SERVER_ERROR": "Unbekannter Serverfehler - die Administratoren wurden bereits benachrichtigt"
+    "ACCOUNT_AUTH_ERROR": "Your email or password is wrong",
+    "SERVER_ERROR": "Unknown server error - administrators are notified"
   },
-  "loading": "lade..."
+  "loading": "loading...",
+  "userStatistics": {
+    "totalProfit": "Gesamtgewinn",
+    "totalWager": "Gesamteinsatz",
+    "mostPlayed": "Meistgespielt",
+    "totalBets": "Alle Wetten",
+    "wonBets": "Gewonnene Wetten",
+    "lostBets": "Verlorene Wetten"
+  },
+  "menu": {
+    "profile": "profil",
+    "signOut": "ausloggen"
+  }
 }

@@ -15,7 +15,7 @@ const DetailList: React.SFC<IProps> = ({ details }) => {
     <ul className={styles.list}>
       {details.map((d, i) => (
         <li key={i} className={styles.list__item}>
-          <div className={styles.list__item__label}>{d.label}</div>
+          <div className={`${styles.list__item__label} truncate`}>{d.label}</div>
           <div className={styles.list__item__value}>{d.value}</div>
         </li>
       ))}

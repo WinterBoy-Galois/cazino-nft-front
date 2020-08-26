@@ -156,3 +156,37 @@ export const RECOVER_PASSWORD = gql`
     }
   }
 `;
+
+export const UPDATE_PASSWORD = gql`
+  mutation UpdatePassword($oldPassword: String!, $newPassword: String!) {
+    modifyPassword(oldPassword: $oldPassword, newPassword: $newPassword) {
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_PREFERENCES = gql`
+  mutation UpdatePreferences($hideUsername: Boolean!, $hideProfit: Boolean!, $hideWager: Boolean!) {
+    modifyPreferences(
+      hideUsername: $hideUsername
+      hideTotalProfit: $hideProfit
+      hideTotalWager: $hideWager
+    ) {
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

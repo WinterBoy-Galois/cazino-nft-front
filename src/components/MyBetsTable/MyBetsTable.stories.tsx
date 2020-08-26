@@ -126,9 +126,12 @@ storiesOf('Components/MyBetsTable', module)
     </div>
   ))
   .addDecorator(storyFn => <LocationProvider>{storyFn()}</LocationProvider>)
-  .add('default', () => <MyBetsTable bets={initialBets} isLoading={false} error={false} />)
-  .add('empty', () => <MyBetsTable bets={[]} isLoading={false} error={false} />)
-  .add('error', () => <MyBetsTable bets={[]} isLoading={false} error={true} />)
+  .add('default', () => (
+    <MyBetsTable bets={initialBets} isLoading={false} error={false} isSignedIn />
+  ))
+  .add('empty', () => <MyBetsTable bets={[]} isLoading={false} error={false} isSignedIn />)
+  .add('error', () => <MyBetsTable bets={[]} isLoading={false} error={true} isSignedIn />)
+  .add('not signed in', () => <MyBetsTable bets={[]} isLoading={false} error={true} />)
   .add('loading', () => <MyBetsTable bets={[]} isLoading={true} error={false} />)
   .add('custom', () => {
     const [bets, setBets] = useState<Bet[]>([]);

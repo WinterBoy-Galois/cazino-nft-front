@@ -3,8 +3,10 @@ import { storiesOf } from '@storybook/react';
 import BetDetailsPage from '.';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import PageableModal from '../../../PageableModal';
+import { LocationProvider } from '@reach/router';
 
 storiesOf('Components/BetDetailsModal/BetDetailsPage', module)
+  .addDecorator(storyFn => <LocationProvider>{storyFn()}</LocationProvider>)
   .addDecorator(storyFn => <PageableModal show={true} pages={[storyFn()]} />)
   .add('default', () => (
     <BetDetailsPage
@@ -18,7 +20,7 @@ storiesOf('Components/BetDetailsModal/BetDetailsPage', module)
         profit: 0.00002852,
         multiplier: 1.3026315789473684,
       }}
-      avatarUrl={'https://dev.gambilife.com/ava/m1.svg'}
+      avatarUrl={'https://staging.jinglebets.com/ava/m1.svg'}
       loading={false}
     />
   ));

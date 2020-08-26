@@ -76,7 +76,7 @@ const MyBetsTable: React.FC<IProps> = ({
           </tr>
         </thead>
         <tbody className={styles['bet-table__body']}>
-          {bets && bets.length > 0 ? (
+          {bets && bets.length > 0 && isSignedIn ? (
             <>
               <SpacerRow />
               {reduceMotion ? (
@@ -106,7 +106,9 @@ const MyBetsTable: React.FC<IProps> = ({
         </tbody>
       </table>
       {!error && isLoading && (bets.length <= 0 || !bets) && <Loading />}
-      {error && !isLoading && (bets.length <= 0 || !bets) && <Error>Unexpected error</Error>}
+      {error && !isLoading && (bets.length <= 0 || !bets) && isSignedIn && (
+        <Error>Unexpected error</Error>
+      )}
       {!isLoading && !isSignedIn && (
         <Error>
           <Button

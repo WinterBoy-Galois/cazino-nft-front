@@ -13,6 +13,7 @@ import ApplicationError from '../../models/applicationError.model';
 import { useTranslation } from 'react-i18next';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import ErrorSummary from '../ErrorSummary';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -112,6 +113,8 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
   const [resendActivationCode] = useMutation(RESEND_ACTIVATION_CODE);
   const [, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const handleActivateAccount = async (code: string) => {
     setErrors([]);
@@ -125,7 +128,9 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
 
     dispatch({ type: 'MODAL_HIDE' });
     dispatch({ type: 'AUTH_UPDATE_USER', payload: { isActivated: true } });
+
     success(t('accountActivation.success'));
+    navigate(pathname);
   };
 
   const handleResendEmail = async () => {

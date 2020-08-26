@@ -1,0 +1,416 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Statistics should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container  container container--dark"
+      >
+        <h2
+          class="headline headline"
+        >
+          security
+        </h2>
+        <form
+          class="form"
+        >
+          <div
+            class="inputField__container"
+          >
+            <div
+              class="inputField__wrapper"
+            >
+              <div
+                class="inputField__group"
+              >
+                <label
+                  class="inputField__label"
+                >
+                  current password
+                </label>
+                <input
+                  autocomplete="off"
+                  class="inputField"
+                  name="oldPassword"
+                  type="password"
+                  value=""
+                />
+              </div>
+              <button
+                class="inputField__icon"
+                tabindex="-1"
+                type="button"
+              >
+                <svg
+                  class="fill inputField__icon--invisible"
+                  viewBox="0 0 28.49 21.53"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    data-name="Layer 2"
+                    id="Layer_2"
+                  >
+                    <g
+                      data-name="Layer 1"
+                      id="Layer_1-2"
+                    >
+                      <path
+                        d="M28.33 10.1a22.8 22.8 0 00-6.44-7.51l-1.72 2.47a19.79 19.79 0 015.1 5.71c-1.2 2-5.15 7.76-11 7.76a9.26 9.26 0 01-3.08-.53l-1.76 2.54a12.26 12.26 0 004.81 1c8.94 0 13.88-9.68 14.09-10.09a1.5 1.5 0 000-1.35zM8.31 16.47a19.72 19.72 0 01-5.09-5.7c1.2-2 5.15-7.77 11-7.77a9.27 9.27 0 013.06.53L19.06 1a12.31 12.31 0 00-4.82-1C5.31 0 .36 9.68.16 10.1a1.5 1.5 0 000 1.34 22.64 22.64 0 006.44 7.5z"
+                      />
+                      <path
+                        d="M12.27 10.77a2 2 0 011.28-1.85l2-2.92a4.88 4.88 0 00-1.34-.21 5 5 0 00-4 7.9zM16.22 10.76a2 2 0 01-1.29 1.84l-2 2.92a4.63 4.63 0 001.34.21 5 5 0 005-5 5 5 0 00-1-2.93zM7.48 21.38a1 1 0 01-.48-.16.94.94 0 01-.23-1.3L20.27.45a.92.92 0 011.29-.24.93.93 0 01.23 1.3L8.25 21a.93.93 0 01-.77.38z"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            class="inputField__container"
+          >
+            <div
+              class="inputField__wrapper"
+            >
+              <div
+                class="inputField__group"
+              >
+                <label
+                  class="inputField__label"
+                >
+                  New password
+                </label>
+                <input
+                  autocomplete="off"
+                  class="inputField"
+                  name="newPassword"
+                  type="password"
+                  value=""
+                />
+              </div>
+              <button
+                class="inputField__icon"
+                tabindex="-1"
+                type="button"
+              >
+                <svg
+                  class="fill inputField__icon--invisible"
+                  viewBox="0 0 28.49 21.53"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    data-name="Layer 2"
+                    id="Layer_2"
+                  >
+                    <g
+                      data-name="Layer 1"
+                      id="Layer_1-2"
+                    >
+                      <path
+                        d="M28.33 10.1a22.8 22.8 0 00-6.44-7.51l-1.72 2.47a19.79 19.79 0 015.1 5.71c-1.2 2-5.15 7.76-11 7.76a9.26 9.26 0 01-3.08-.53l-1.76 2.54a12.26 12.26 0 004.81 1c8.94 0 13.88-9.68 14.09-10.09a1.5 1.5 0 000-1.35zM8.31 16.47a19.72 19.72 0 01-5.09-5.7c1.2-2 5.15-7.77 11-7.77a9.27 9.27 0 013.06.53L19.06 1a12.31 12.31 0 00-4.82-1C5.31 0 .36 9.68.16 10.1a1.5 1.5 0 000 1.34 22.64 22.64 0 006.44 7.5z"
+                      />
+                      <path
+                        d="M12.27 10.77a2 2 0 011.28-1.85l2-2.92a4.88 4.88 0 00-1.34-.21 5 5 0 00-4 7.9zM16.22 10.76a2 2 0 01-1.29 1.84l-2 2.92a4.63 4.63 0 001.34.21 5 5 0 005-5 5 5 0 00-1-2.93zM7.48 21.38a1 1 0 01-.48-.16.94.94 0 01-.23-1.3L20.27.45a.92.92 0 011.29-.24.93.93 0 01.23 1.3L8.25 21a.93.93 0 01-.77.38z"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            class="inputField__container"
+          >
+            <div
+              class="inputField__wrapper"
+            >
+              <div
+                class="inputField__group"
+              >
+                <label
+                  class="inputField__label"
+                >
+                  Confirm new password
+                </label>
+                <input
+                  autocomplete="off"
+                  class="inputField"
+                  name="newPasswordConfirm"
+                  type="password"
+                  value=""
+                />
+              </div>
+              <button
+                class="inputField__icon"
+                tabindex="-1"
+                type="button"
+              >
+                <svg
+                  class="fill inputField__icon--invisible"
+                  viewBox="0 0 28.49 21.53"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    data-name="Layer 2"
+                    id="Layer_2"
+                  >
+                    <g
+                      data-name="Layer 1"
+                      id="Layer_1-2"
+                    >
+                      <path
+                        d="M28.33 10.1a22.8 22.8 0 00-6.44-7.51l-1.72 2.47a19.79 19.79 0 015.1 5.71c-1.2 2-5.15 7.76-11 7.76a9.26 9.26 0 01-3.08-.53l-1.76 2.54a12.26 12.26 0 004.81 1c8.94 0 13.88-9.68 14.09-10.09a1.5 1.5 0 000-1.35zM8.31 16.47a19.72 19.72 0 01-5.09-5.7c1.2-2 5.15-7.77 11-7.77a9.27 9.27 0 013.06.53L19.06 1a12.31 12.31 0 00-4.82-1C5.31 0 .36 9.68.16 10.1a1.5 1.5 0 000 1.34 22.64 22.64 0 006.44 7.5z"
+                      />
+                      <path
+                        d="M12.27 10.77a2 2 0 011.28-1.85l2-2.92a4.88 4.88 0 00-1.34-.21 5 5 0 00-4 7.9zM16.22 10.76a2 2 0 01-1.29 1.84l-2 2.92a4.63 4.63 0 001.34.21 5 5 0 005-5 5 5 0 00-1-2.93zM7.48 21.38a1 1 0 01-.48-.16.94.94 0 01-.23-1.3L20.27.45a.92.92 0 011.29-.24.93.93 0 01.23 1.3L8.25 21a.93.93 0 01-.77.38z"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button
+            class="button button secondary button button--small"
+            color="SECONDARY"
+            type="submit"
+          >
+            Change Password
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container  container container--dark"
+    >
+      <h2
+        class="headline headline"
+      >
+        security
+      </h2>
+      <form
+        class="form"
+      >
+        <div
+          class="inputField__container"
+        >
+          <div
+            class="inputField__wrapper"
+          >
+            <div
+              class="inputField__group"
+            >
+              <label
+                class="inputField__label"
+              >
+                current password
+              </label>
+              <input
+                autocomplete="off"
+                class="inputField"
+                name="oldPassword"
+                type="password"
+                value=""
+              />
+            </div>
+            <button
+              class="inputField__icon"
+              tabindex="-1"
+              type="button"
+            >
+              <svg
+                class="fill inputField__icon--invisible"
+                viewBox="0 0 28.49 21.53"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  data-name="Layer 2"
+                  id="Layer_2"
+                >
+                  <g
+                    data-name="Layer 1"
+                    id="Layer_1-2"
+                  >
+                    <path
+                      d="M28.33 10.1a22.8 22.8 0 00-6.44-7.51l-1.72 2.47a19.79 19.79 0 015.1 5.71c-1.2 2-5.15 7.76-11 7.76a9.26 9.26 0 01-3.08-.53l-1.76 2.54a12.26 12.26 0 004.81 1c8.94 0 13.88-9.68 14.09-10.09a1.5 1.5 0 000-1.35zM8.31 16.47a19.72 19.72 0 01-5.09-5.7c1.2-2 5.15-7.77 11-7.77a9.27 9.27 0 013.06.53L19.06 1a12.31 12.31 0 00-4.82-1C5.31 0 .36 9.68.16 10.1a1.5 1.5 0 000 1.34 22.64 22.64 0 006.44 7.5z"
+                    />
+                    <path
+                      d="M12.27 10.77a2 2 0 011.28-1.85l2-2.92a4.88 4.88 0 00-1.34-.21 5 5 0 00-4 7.9zM16.22 10.76a2 2 0 01-1.29 1.84l-2 2.92a4.63 4.63 0 001.34.21 5 5 0 005-5 5 5 0 00-1-2.93zM7.48 21.38a1 1 0 01-.48-.16.94.94 0 01-.23-1.3L20.27.45a.92.92 0 011.29-.24.93.93 0 01.23 1.3L8.25 21a.93.93 0 01-.77.38z"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div
+          class="inputField__container"
+        >
+          <div
+            class="inputField__wrapper"
+          >
+            <div
+              class="inputField__group"
+            >
+              <label
+                class="inputField__label"
+              >
+                New password
+              </label>
+              <input
+                autocomplete="off"
+                class="inputField"
+                name="newPassword"
+                type="password"
+                value=""
+              />
+            </div>
+            <button
+              class="inputField__icon"
+              tabindex="-1"
+              type="button"
+            >
+              <svg
+                class="fill inputField__icon--invisible"
+                viewBox="0 0 28.49 21.53"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  data-name="Layer 2"
+                  id="Layer_2"
+                >
+                  <g
+                    data-name="Layer 1"
+                    id="Layer_1-2"
+                  >
+                    <path
+                      d="M28.33 10.1a22.8 22.8 0 00-6.44-7.51l-1.72 2.47a19.79 19.79 0 015.1 5.71c-1.2 2-5.15 7.76-11 7.76a9.26 9.26 0 01-3.08-.53l-1.76 2.54a12.26 12.26 0 004.81 1c8.94 0 13.88-9.68 14.09-10.09a1.5 1.5 0 000-1.35zM8.31 16.47a19.72 19.72 0 01-5.09-5.7c1.2-2 5.15-7.77 11-7.77a9.27 9.27 0 013.06.53L19.06 1a12.31 12.31 0 00-4.82-1C5.31 0 .36 9.68.16 10.1a1.5 1.5 0 000 1.34 22.64 22.64 0 006.44 7.5z"
+                    />
+                    <path
+                      d="M12.27 10.77a2 2 0 011.28-1.85l2-2.92a4.88 4.88 0 00-1.34-.21 5 5 0 00-4 7.9zM16.22 10.76a2 2 0 01-1.29 1.84l-2 2.92a4.63 4.63 0 001.34.21 5 5 0 005-5 5 5 0 00-1-2.93zM7.48 21.38a1 1 0 01-.48-.16.94.94 0 01-.23-1.3L20.27.45a.92.92 0 011.29-.24.93.93 0 01.23 1.3L8.25 21a.93.93 0 01-.77.38z"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div
+          class="inputField__container"
+        >
+          <div
+            class="inputField__wrapper"
+          >
+            <div
+              class="inputField__group"
+            >
+              <label
+                class="inputField__label"
+              >
+                Confirm new password
+              </label>
+              <input
+                autocomplete="off"
+                class="inputField"
+                name="newPasswordConfirm"
+                type="password"
+                value=""
+              />
+            </div>
+            <button
+              class="inputField__icon"
+              tabindex="-1"
+              type="button"
+            >
+              <svg
+                class="fill inputField__icon--invisible"
+                viewBox="0 0 28.49 21.53"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  data-name="Layer 2"
+                  id="Layer_2"
+                >
+                  <g
+                    data-name="Layer 1"
+                    id="Layer_1-2"
+                  >
+                    <path
+                      d="M28.33 10.1a22.8 22.8 0 00-6.44-7.51l-1.72 2.47a19.79 19.79 0 015.1 5.71c-1.2 2-5.15 7.76-11 7.76a9.26 9.26 0 01-3.08-.53l-1.76 2.54a12.26 12.26 0 004.81 1c8.94 0 13.88-9.68 14.09-10.09a1.5 1.5 0 000-1.35zM8.31 16.47a19.72 19.72 0 01-5.09-5.7c1.2-2 5.15-7.77 11-7.77a9.27 9.27 0 013.06.53L19.06 1a12.31 12.31 0 00-4.82-1C5.31 0 .36 9.68.16 10.1a1.5 1.5 0 000 1.34 22.64 22.64 0 006.44 7.5z"
+                    />
+                    <path
+                      d="M12.27 10.77a2 2 0 011.28-1.85l2-2.92a4.88 4.88 0 00-1.34-.21 5 5 0 00-4 7.9zM16.22 10.76a2 2 0 01-1.29 1.84l-2 2.92a4.63 4.63 0 001.34.21 5 5 0 005-5 5 5 0 00-1-2.93zM7.48 21.38a1 1 0 01-.48-.16.94.94 0 01-.23-1.3L20.27.45a.92.92 0 011.29-.24.93.93 0 01.23 1.3L8.25 21a.93.93 0 01-.77.38z"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <button
+          class="button button secondary button button--small"
+          color="SECONDARY"
+          type="submit"
+        >
+          Change Password
+        </button>
+      </form>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

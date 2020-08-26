@@ -92,6 +92,7 @@ Object {
                       </div>
                       <button
                         class="inputField__icon"
+                        tabindex="-1"
                         type="button"
                       >
                         <svg
@@ -288,6 +289,7 @@ Object {
                     </div>
                     <button
                       class="inputField__icon"
+                      tabindex="-1"
                       type="button"
                     >
                       <svg

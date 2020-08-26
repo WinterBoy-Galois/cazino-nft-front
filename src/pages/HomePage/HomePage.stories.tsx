@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Teaser from '.';
+import Teaser from './components/Teaser';
 import { LocationProvider } from '@reach/router';
 import Layout from '../../components/Layout';
 
