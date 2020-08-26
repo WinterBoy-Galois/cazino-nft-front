@@ -8,7 +8,7 @@ import Loading from '../Loading';
 import Error from '../Error';
 import { ApolloError, useQuery } from '@apollo/client';
 import DetailsContainer from '../DetailsContainer';
-import { useLocation, Redirect } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 import UserStatistics from '../UserStatistics';
 
 interface IProps {
@@ -81,9 +81,11 @@ const UserInfoModalWithData: React.FC<IWithDataProps> = ({
 }: IWithDataProps) => {
   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
   const location = useLocation();
+  const navigate = useNavigate();
 
   if (!userId && show) {
-    return <Redirect noThrow to={`${location.pathname}`} />;
+    navigate(location.pathname);
+    return null;
   }
 
   return (

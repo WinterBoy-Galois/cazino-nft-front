@@ -17,7 +17,7 @@ import SpinnerButton from '../SpinnerButton';
 import ApplicationError from '../../models/applicationError.model';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { validationSchema } from './lib/validationSchema';
-import { useLocation, useNavigate, Redirect } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -167,7 +167,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
 
     dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn, remember } });
 
-    navigate(`${location.pathname}`);
+    navigate(location.pathname);
   };
 
   const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
@@ -181,7 +181,8 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
   };
 
   if (show && auth.state === 'SIGNED_IN') {
-    return <Redirect noThrow to={location.pathname} />;
+    navigate(location.pathname);
+    return null;
   }
 
   return (

@@ -14,7 +14,7 @@ import { useFormik } from 'formik';
 import { validationSchema } from './lib/validationSchema';
 import SpinnerButton from '../SpinnerButton';
 import { useQueryParams } from '../../hooks/useQueryParams.hook';
-import { Redirect, useLocation, useNavigate } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -154,7 +154,8 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
   }, [params, dispatch]);
 
   if (show && (state === 'SIGNED_IN' || !params?.token)) {
-    return <Redirect noThrow to={location.pathname} />;
+    navigate(location.pathname);
+    return null;
   }
 
   return (

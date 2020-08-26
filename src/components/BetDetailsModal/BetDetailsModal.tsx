@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { BetDetailsPageWithData } from './components/BetDetailsPage/BetDetailsPage';
 import { BetResultsPageWithData } from './components/BetResultsPage/BetResultsPage';
 import { ServerSeedPageWithData } from './components/ServerSeedPage/ServerSeedPage';
-import { useLocation, Redirect } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -16,6 +16,7 @@ interface IProps {
 const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet }) => {
   const { t } = useTranslation(['modals']);
   const location = useLocation();
+  const navigate = useNavigate();
   const pages = useMemo(
     () => [
       <BetDetailsPageWithData key={1} bet={bet} />,
@@ -28,7 +29,8 @@ const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet }) => {
   if (!bet && !show) {
     return null;
   } else if (!bet) {
-    return <Redirect noThrow to={`${location.pathname}`} />;
+    navigate(location.pathname);
+    return null;
   }
 
   return (

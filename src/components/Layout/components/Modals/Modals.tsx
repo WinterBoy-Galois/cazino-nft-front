@@ -70,17 +70,17 @@ const Modals: React.FC = () => {
         {...modal.data}
       />
       <AccountActivationModalWithData
-        show={modal.type === 'ACCOUNT_ACTIVATION_MODAL'}
+        show={handleShow('ACCOUNT_ACTIVATION_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />
       <PasswordResetModalWithData
-        show={modal.type === 'PASSWORD_RESET_MODAL'}
+        show={handleShow('PASSWORD_RESET_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />
       <PasswordRecoveryModalWithData
-        show={modal.type === 'PASSWORD_RECOVERY_MODAL'}
+        show={handleShow('PASSWORD_RECOVERY_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />

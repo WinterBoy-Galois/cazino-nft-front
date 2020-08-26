@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { RouteComponentProps, Redirect } from '@reach/router';
+import { RouteComponentProps, useNavigate } from '@reach/router';
 import PageHeadline from '../../components/PageHeadline';
 import PageContentContainer from '../../components/PageContentContainer';
 import styles from './ProfilePage.module.scss';
@@ -41,9 +41,11 @@ const ProfilePage: React.SFC<IProps> = ({
 }) => {
   const { t } = useTranslation('profile');
   const [{ auth }] = useStateValue();
+  const navigate = useNavigate();
 
   if (!auth.user) {
-    return <Redirect noThrow to={'/'} />;
+    navigate('/');
+    return null;
   }
 
   return (

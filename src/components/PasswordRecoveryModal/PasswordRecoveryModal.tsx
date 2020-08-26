@@ -16,7 +16,7 @@ import passwordRecoveryIllustration from '../../assets/images/auth/password-reco
 import Uppercase from '../Uppercase';
 import Link from '../Link';
 import { useStateValue } from '../../state';
-import { useLocation, useNavigate, Redirect } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -155,7 +155,8 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
   const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
 
   if (show && auth.state === 'SIGNED_IN') {
-    return <Redirect noThrow to={location.pathname} />;
+    navigate(location.pathname);
+    return null;
   }
 
   return (
