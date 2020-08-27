@@ -4,7 +4,7 @@ import Bet from '../../../../../../models/bet.model';
 
 import styles from './MyBetsTab.module.scss';
 import { ViewMode } from '../../../../../MyBetsTable/MyBetsTable';
-import { ApolloError } from 'apollo-client';
+import { ApolloError } from '@apollo/client';
 
 interface IProps {
   bets?: Bet[];

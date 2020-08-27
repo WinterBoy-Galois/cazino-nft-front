@@ -1,22 +1,42 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
+import { MockedProvider } from '@apollo/client/testing';
+
 import AuthOverlay from './AuthOverlay';
-import { createMockClient } from 'mock-apollo-client';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ME } from '../../graphql/queries';
+
+const mocks = [
+  {
+    request: {
+      query: ME,
+    },
+    result: {
+      data: {
+        me: {
+          id: '204',
+          username: 'tiyogi9473',
+          avatarUrl: 'https://staging.jinglebets.com/ava/m5.svg',
+          balance: 10,
+          email: 'tiyogi9473@ioxmail.net',
+          isActivated: true,
+        },
+      },
+    },
+  },
+];
 
 describe('AuthOverlay', () => {
-  it('should match snapshot', () => {
+  it('should match snapshot', async () => {
     // Arrange
-    const mockClient = createMockClient();
 
     // Act
     const container = render(
-      <ApolloProvider client={mockClient}>
+      <MockedProvider mocks={mocks} addTypename={false}>
         <AuthOverlay>Test</AuthOverlay>
-      </ApolloProvider>
+      </MockedProvider>
     );
 
-    wait();
+    await wait();
 
     // Assert
     expect(container).toMatchSnapshot();

@@ -1,23 +1,19 @@
 import React from 'react';
 import { render, wait, act } from '@testing-library/react';
 import Layout from './Layout';
-import { ApolloProvider } from '@apollo/react-hooks';
 import { USER_INFO, USER_INFO_AVATAR_URL } from '../../graphql/queries';
-import { createMockClient } from 'mock-apollo-client';
-import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
-import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
+import { createMockClient } from '@apollo/client/testing';
+import possibleTypes from '../../graphql/possibleTypes.json';
+import { InMemoryCache, ApolloProvider } from '@apollo/client';
 import { BET_ADDED } from '../../graphql/subscriptions';
 import { LocationProvider } from '@reach/router';
 
 describe('Layout', () => {
   xit('should match snapshot', async () => {
     // Arrange
-    const fragmentMatcher = new IntrospectionFragmentMatcher({
-      introspectionQueryResultData,
-    });
     const cache = new InMemoryCache({
       addTypename: false,
-      fragmentMatcher,
+      possibleTypes,
     });
 
     const mockClient = createMockClient({ cache });

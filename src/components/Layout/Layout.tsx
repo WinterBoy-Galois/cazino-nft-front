@@ -7,7 +7,7 @@ import Footer from '../Footer';
 import { useStateValue } from '../../state';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { transitionTimeout } from '../Modal';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { SIGN_OUT } from '../../graphql/mutations';
 import Modals from './components/Modals';
 import { navigate, useLocation } from '@reach/router';

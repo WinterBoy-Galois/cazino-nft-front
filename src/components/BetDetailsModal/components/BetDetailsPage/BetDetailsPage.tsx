@@ -10,9 +10,8 @@ import BitcoinProfit from '../../../BitcoinProfit';
 import { useTranslation } from 'react-i18next';
 import DetailsContainer from '../../../DetailsContainer';
 import { datetimeFromEpoch } from '../../../../common/util/date.util';
-import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO_AVATAR_URL } from '../../../../graphql/queries';
-import { ApolloError } from 'apollo-client';
+import { ApolloError, useQuery } from '@apollo/client';
 import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {

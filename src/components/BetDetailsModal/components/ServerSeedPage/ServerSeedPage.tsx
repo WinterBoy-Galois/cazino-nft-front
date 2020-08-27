@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './ServerSeedPage.module.scss';
-import { useQuery, useMutation } from '@apollo/react-hooks';
 import { BET_DETAILS_SERVER_SEED } from '../../../../graphql/queries';
-import { ApolloError } from 'apollo-client';
+import { ApolloError, useQuery, useMutation } from '@apollo/client';
 import Loading from '../../../Loading';
 import Error from '../../../Error';
 import {

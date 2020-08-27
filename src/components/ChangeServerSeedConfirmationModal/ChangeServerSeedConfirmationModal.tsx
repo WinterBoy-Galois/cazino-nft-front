@@ -1,6 +1,6 @@
 import React from 'react';
 import ConfirmationModal from '../ConfirmationModal';
-import { Redirect, useLocation } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -14,9 +14,11 @@ const ChangeServerSeedConfirmationModal: React.FC<IProps> = ({
   onCancel,
 }: IProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   if (show && (!onConfirm || !onCancel)) {
-    return <Redirect noThrow to={`${location.pathname}`} />;
+    navigate(location.pathname);
+    return null;
   }
 
   return (

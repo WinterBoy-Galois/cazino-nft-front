@@ -2,7 +2,7 @@ import React, { Fragment, useRef, useCallback, MutableRefObject, useMemo } from 
 import styles from './UserMenu.module.scss';
 import { Link } from '@reach/router';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
-import Div100vh from 'react-div-100vh';
+import { use100vh } from 'react-div-100vh';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { useTranslation } from 'react-i18next';
 
@@ -32,21 +32,21 @@ const UserMenu: React.SFC<IProps> = ({
   }, [onClose, onSignOutClick]);
 
   const breakpoint = useBreakpoint();
-
+  const height = use100vh();
   const wrapperStyle = useMemo(() => {
     switch (breakpoint) {
       case 'xs':
       case 'sm':
-        return { height: 'calc(100rvh - 50px)' };
+        return { height: `calc(${height}px - 50px)` };
       default:
-        return { height: 'calc(100rvh - 50px - 74px)' };
+        return { height: `calc(${height}px - 50px - 74px)` };
     }
-  }, [breakpoint]);
+  }, [breakpoint, height]);
 
   return (
     <Fragment>
       {show && (
-        <Div100vh className={styles.wrapper} style={wrapperStyle}>
+        <div className={styles.wrapper} style={wrapperStyle}>
           <div className={styles.arrow} />
 
           <div className={styles.container} ref={wrapperRef}>
@@ -63,7 +63,7 @@ const UserMenu: React.SFC<IProps> = ({
               </li>
             </ul>
           </div>
-        </Div100vh>
+        </div>
       )}
     </Fragment>
   );

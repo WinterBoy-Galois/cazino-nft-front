@@ -12,8 +12,11 @@ Object {
           class="swiper-container swiper-container-initialized swiper-container-horizontal"
         >
           <div
+            class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"
+          />
+          <div
             class="swiper-wrapper"
-            style="webkit-transition-duration: 0ms; transition-duration: 0ms; webkit-transform: translate3d(NaNpx, 0px, 0px); transform: translate3d(NaNpx, 0px, 0px);"
+            style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
           >
             <div
               class="swiper-slide slide swiper-slide-duplicate"
@@ -162,9 +165,6 @@ Object {
               </div>
             </div>
           </div>
-          <div
-            class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"
-          />
         </div>
       </div>
     </div>
@@ -177,8 +177,11 @@ Object {
         class="swiper-container swiper-container-initialized swiper-container-horizontal"
       >
         <div
+          class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"
+        />
+        <div
           class="swiper-wrapper"
-          style="webkit-transition-duration: 0ms; transition-duration: 0ms; webkit-transform: translate3d(NaNpx, 0px, 0px); transform: translate3d(NaNpx, 0px, 0px);"
+          style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
         >
           <div
             class="swiper-slide slide swiper-slide-duplicate"
@@ -327,9 +330,6 @@ Object {
             </div>
           </div>
         </div>
-        <div
-          class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"
-        />
       </div>
     </div>
   </div>,

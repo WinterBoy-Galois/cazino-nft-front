@@ -1,14 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { RouteComponentProps, Redirect } from '@reach/router';
+import { RouteComponentProps, useNavigate } from '@reach/router';
 import PageHeadline from '../../components/PageHeadline';
 import PageContentContainer from '../../components/PageContentContainer';
 import styles from './ProfilePage.module.scss';
-import { useQuery, useMutation } from '@apollo/react-hooks';
 import { ME_STATISTICS_PREFERENCES } from '../../graphql/queries';
 import { useStateValue } from '../../state';
 import Statistics from './components/Statistics';
 import { useTranslation } from 'react-i18next';
-import { ApolloError } from 'apollo-client';
+import { ApolloError, useQuery, useMutation } from '@apollo/client';
 import UserInfo from './components/UserInfo';
 import { UserStatistic } from '../../models/userStatistics.model';
 import Preferences from './components/Preferences';
@@ -42,9 +41,11 @@ const ProfilePage: React.SFC<IProps> = ({
 }) => {
   const { t } = useTranslation('profile');
   const [{ auth }] = useStateValue();
+  const navigate = useNavigate();
 
   if (!auth.user) {
-    return <Redirect noThrow to={'/'} />;
+    navigate('/');
+    return null;
   }
 
   return (
