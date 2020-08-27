@@ -6,13 +6,14 @@ import LeaderboardTable from '../../../../../LeaderboardTable';
 import { useQuery } from '@apollo/client';
 import { LEADERBOARDS_SUBSCRIPTION } from '../../../../../../graphql/subscriptions';
 import { LEADERBOARDS } from '../../../../../../graphql/queries';
-import { useStateValue } from '../../../../../../state';
+import { useLocation, useNavigate } from '@reach/router';
 
 const LeaderboardsTab: React.SFC = () => {
   const [selectedTime, setSelectedTime] = useState<TimeAggregation>('daily');
   const { t } = useTranslation(['sidebar']);
   const { loading, error, data, subscribeToMore } = useQuery(LEADERBOARDS);
-  const [, dispatch] = useStateValue();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     return subscribeToMore({
@@ -42,10 +43,7 @@ const LeaderboardsTab: React.SFC = () => {
           error={error ? true : false}
           signInUserId="15"
           onUsernameClicked={userId =>
-            dispatch({
-              type: 'MODAL_SHOW',
-              payload: { type: 'USER_INFO_MODAL', data: { userId } },
-            })
+            navigate(`${pathname}?dialog=user-info`, { state: { userId } })
           }
         />
       </div>

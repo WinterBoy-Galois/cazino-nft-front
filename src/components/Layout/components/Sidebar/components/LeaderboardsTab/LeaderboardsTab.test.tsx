@@ -5,6 +5,7 @@ import { MockedProvider } from '@apollo/client/testing';
 import LeaderboardsTab from './LeaderboardsTab';
 import { LEADERBOARDS_SUBSCRIPTION } from '../../../../../../graphql/subscriptions';
 import { LEADERBOARDS } from '../../../../../../graphql/queries';
+import { LocationProvider } from '@reach/router';
 
 const mocks = [
   {
@@ -31,9 +32,11 @@ describe('LeaderboardsTab', () => {
 
     // Act
     const container = render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <LeaderboardsTab />
-      </MockedProvider>
+      <LocationProvider>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <LeaderboardsTab />
+        </MockedProvider>
+      </LocationProvider>
     );
 
     await waitForDomChange();
