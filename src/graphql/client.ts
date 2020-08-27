@@ -11,8 +11,6 @@ import { AuthType } from '../state/models/auth.model';
 import { appConfig } from '../common/config';
 
 const cache = new InMemoryCache({
-  // dataIdFromObject: { return o => o.id },
-  // switche to https://www.apollographql.com/docs/react/caching/cache-configuration/#data-normalization
   dataIdFromObject(responseObject) {
     switch (responseObject.__typename) {
       default:
