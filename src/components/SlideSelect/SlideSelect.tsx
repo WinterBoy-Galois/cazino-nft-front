@@ -8,7 +8,7 @@ interface IProps {
   }[];
 }
 
-const SlideSelect: React.SFC<IProps> = ({ selectItems }) => {
+const SlideSelect: React.FC<IProps> = ({ selectItems }) => {
   const [tabWidth, setTabWidth] = useState<string>();
   const [tabSelectedTranslate, setTabSelectedTranslate] = useState<string>('0');
 

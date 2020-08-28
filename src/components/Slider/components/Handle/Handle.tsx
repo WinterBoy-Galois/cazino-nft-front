@@ -21,7 +21,7 @@ const getValue = (value: number) => {
   return value.toFixed(2);
 };
 
-const Handle: React.SFC<IProps> = ({
+const Handle: React.FC<IProps> = ({
   domain: [min, max],
   handle: { id, value, percent },
   getHandleProps,

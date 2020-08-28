@@ -12,7 +12,7 @@ interface IProps {
   onClick?: () => void;
 }
 
-const DicesGameButton: React.SFC<IProps> = ({ onClick }) => {
+const DicesGameButton: React.FC<IProps> = ({ onClick }) => {
   const { t } = useTranslation();
   const [
     {

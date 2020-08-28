@@ -5,7 +5,7 @@ interface IProps {
   innerClassName?: string;
 }
 
-const Bitcoin: React.SFC<IProps> = ({ className, innerClassName }) => {
+const Bitcoin: React.FC<IProps> = ({ className, innerClassName }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className={className}>
       <g transform="translate(0.00630876,-0.00301984)">

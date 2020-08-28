@@ -10,7 +10,7 @@ interface IProps {
   disabled?: boolean;
 }
 
-const Track: React.SFC<IProps> = ({ source, target, getTrackProps, switchColors, disabled }) => {
+const Track: React.FC<IProps> = ({ source, target, getTrackProps, switchColors, disabled }) => {
   return (
     <div
       className={`${styles.track} ${switchColors ? styles['track--green'] : styles['track--red']} ${

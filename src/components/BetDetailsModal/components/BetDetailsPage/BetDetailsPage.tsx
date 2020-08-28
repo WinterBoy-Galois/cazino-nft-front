@@ -21,7 +21,7 @@ interface IProps {
   error?: ApolloError;
 }
 
-const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
+const BetDetailsPage: React.FC<IProps> = ({ bet, avatarUrl, loading }) => {
   const { t } = useTranslation(['modals']);
   const location = useLocation();
   const navigate = useNavigate();
@@ -85,7 +85,7 @@ interface IWithDataProps {
   bet: Bet;
 }
 
-export const BetDetailsPageWithData: React.SFC<IWithDataProps> = props => {
+export const BetDetailsPageWithData: React.FC<IWithDataProps> = props => {
   const { data, loading, error } = useQuery(USER_INFO_AVATAR_URL, {
     variables: { userId: props.bet?.userid },
   });

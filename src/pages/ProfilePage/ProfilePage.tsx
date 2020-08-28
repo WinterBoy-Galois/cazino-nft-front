@@ -29,7 +29,7 @@ interface IProps extends RouteComponentProps {
   onPreferenceChange?: (preferences: PreferencesModel) => void;
 }
 
-const ProfilePage: React.SFC<IProps> = ({
+const ProfilePage: React.FC<IProps> = ({
   userStatistic,
   statisticsLoading,
   statisticsError,

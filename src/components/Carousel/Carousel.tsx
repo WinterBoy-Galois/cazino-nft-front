@@ -4,7 +4,7 @@ import SwiperCore, { Autoplay, Pagination } from 'swiper';
 import styles from './Carousel.module.scss';
 import { useStateValue } from '../../state';
 
-const Carousel: React.SFC = () => {
+const Carousel: React.FC = () => {
   const [swiper, setSwiper] = useState<SwiperCore | null>();
 
   const [

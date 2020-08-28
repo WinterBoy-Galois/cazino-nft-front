@@ -19,7 +19,7 @@ const getLanguageCode = (code: string) => {
   return code.substr(0, 2);
 };
 
-const LanguageSelect: React.SFC = () => {
+const LanguageSelect: React.FC = () => {
   const wrapperRef = useRef(null);
   const [showList, setShowList] = useState(false);
   const { t, i18n } = useTranslation();

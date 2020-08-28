@@ -9,7 +9,7 @@ interface IProps {
   className?: string;
 }
 
-const Avatar: React.SFC<IProps> = ({ loading = false, avatarUrl, username, className = '' }) => {
+const Avatar: React.FC<IProps> = ({ loading = false, avatarUrl, username, className = '' }) => {
   return (
     <div className={`${styles.avatar} ${className}`}>
       {!loading && avatarUrl ? (

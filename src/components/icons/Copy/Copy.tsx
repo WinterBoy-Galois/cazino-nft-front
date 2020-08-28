@@ -5,7 +5,7 @@ interface IProps {
   className?: string;
 }
 
-const Copy: React.SFC<IProps> = ({ className = styles.default }) => {
+const Copy: React.FC<IProps> = ({ className = styles.default }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.14 13.88" className={className}>
       <g data-name="Layer 2">

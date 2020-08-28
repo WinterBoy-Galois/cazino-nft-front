@@ -13,7 +13,7 @@ interface IProps {
   userStatistic: UserStatistic;
 }
 
-const UserStatistics: React.SFC<IProps> = ({
+const UserStatistics: React.FC<IProps> = ({
   userStatistic: { totalWager, luckyBets, mostPlayed, totalBets, totalProfit },
 }) => {
   const { t } = useTranslation();

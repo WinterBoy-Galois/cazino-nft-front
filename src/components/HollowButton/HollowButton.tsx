@@ -9,7 +9,7 @@ interface IProps {
   size?: ButtonSize;
 }
 
-const HollowButton: React.SFC<IProps> = props => {
+const HollowButton: React.FC<IProps> = props => {
   return (
     <Button {...props} className={`${props.className ?? ''} ${styles.hollow}`}>
       {props.children}

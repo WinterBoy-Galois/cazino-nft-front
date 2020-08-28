@@ -5,7 +5,7 @@ interface IProps {
   luckyBets: number;
 }
 
-const LostBets: React.SFC<IProps> = ({ totalBets, luckyBets }) => {
+const LostBets: React.FC<IProps> = ({ totalBets, luckyBets }) => {
   let lostBets = 0;
 
   if (totalBets && luckyBets) {

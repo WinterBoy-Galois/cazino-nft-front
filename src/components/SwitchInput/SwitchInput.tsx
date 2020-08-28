@@ -9,7 +9,7 @@ interface IProps {
   onChangeValue?: (value: boolean) => void;
 }
 
-const SwitchInput: React.SFC<IProps> = ({
+const SwitchInput: React.FC<IProps> = ({
   className = '',
   label = 'label',
   id = 'id',

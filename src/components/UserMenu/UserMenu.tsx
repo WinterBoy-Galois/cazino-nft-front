@@ -14,7 +14,7 @@ interface IProps {
   toggleRef?: MutableRefObject<any>;
 }
 
-const UserMenu: React.SFC<IProps> = ({
+const UserMenu: React.FC<IProps> = ({
   show = false,
   username = '',
   onSignOutClick = () => null,

@@ -10,7 +10,7 @@ interface IProps {
   disabled?: boolean;
 }
 
-const SecondaryButton: React.SFC<IProps> = props => {
+const SecondaryButton: React.FC<IProps> = props => {
   return (
     <Button {...props} className={`${props.className ?? ''} ${styles.secondary}`}>
       {props.children}

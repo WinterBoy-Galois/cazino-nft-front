@@ -26,7 +26,7 @@ interface IProps {
   className?: string;
 }
 
-const ${vsc.toPascalCase(inputs.name)}: React.SFC<IProps> = ({ message = undefined, className = '' }) => {
+const ${vsc.toPascalCase(inputs.name)}: React.FC<IProps> = ({ message = undefined, className = '' }) => {
   return <div className={\`\${styles.container} \${className}\`}>{message}</div>;
 };
 

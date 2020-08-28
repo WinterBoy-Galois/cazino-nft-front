@@ -18,7 +18,7 @@ interface IProps {
 
 export const transitionTimeout = 200;
 
-const Modal: React.SFC<IProps> = ({
+const Modal: React.FC<IProps> = ({
   title = '',
   show,
   children,

@@ -75,7 +75,7 @@ interface IWithDataProps {
   betId: string;
 }
 
-export const ServerSeedPageWithData: React.SFC<IWithDataProps> = props => {
+export const ServerSeedPageWithData: React.FC<IWithDataProps> = props => {
   const { data, loading, error } = useQuery<{
     betDetails: { seedDetails: ServerSeedDetailsOwn | ServerSeedDetailsOther };
   }>(BET_DETAILS_SERVER_SEED, {

@@ -28,7 +28,7 @@ interface IProps {
   onNavigateToSignUp?: () => void;
 }
 
-const PasswordRecoveryModal: React.SFC<IProps> = ({
+const PasswordRecoveryModal: React.FC<IProps> = ({
   show,
   loading,
   errors,

@@ -10,7 +10,7 @@ interface IProps {
   disabled?: boolean;
 }
 
-const Button: React.SFC<IProps> = props => {
+const Button: React.FC<IProps> = props => {
   const { type = 'button', className = '', size = ButtonSize.SMALL } = props;
   return (
     <button

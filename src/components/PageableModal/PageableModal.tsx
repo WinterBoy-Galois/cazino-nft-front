@@ -15,7 +15,7 @@ interface IProps {
 
 const exitTimeout = 100;
 
-const PageableModal: React.SFC<IProps> = ({
+const PageableModal: React.FC<IProps> = ({
   show,
   pages,
   title: initialTitle,

@@ -15,7 +15,7 @@ const renderTeaser = (trans: string, t: TFunction) => (
   />
 );
 
-const Teaser: React.SFC = () => {
+const Teaser: React.FC = () => {
   const { t } = useTranslation(['home']);
 
   return (

@@ -4,7 +4,7 @@ import GameButtonList from '../../components/GameButtonList';
 import Teaser from './components/Teaser';
 import Carousel from '../../components/Carousel';
 
-const HomePage: React.SFC<RouteComponentProps> = () => {
+const HomePage: React.FC<RouteComponentProps> = () => {
   return (
     <div className="container">
       <Carousel />

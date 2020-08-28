@@ -14,7 +14,7 @@ interface IProps {
   error?: ApolloError | undefined;
 }
 
-const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
+const LatestBetsTab: React.FC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
   const [
     {
       auth: { user },

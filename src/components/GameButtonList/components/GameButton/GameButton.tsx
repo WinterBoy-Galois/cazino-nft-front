@@ -8,7 +8,7 @@ interface IProps {
   className?: string;
 }
 
-const GameButton: React.SFC<IProps> = ({ onClick, children, headline, className }) => {
+const GameButton: React.FC<IProps> = ({ onClick, children, headline, className }) => {
   const { t } = useTranslation();
 
   return (

@@ -5,7 +5,7 @@ interface IProps {
   className?: string;
 }
 
-const AccountVerified: React.SFC<IProps> = ({ className = '' }) => {
+const AccountVerified: React.FC<IProps> = ({ className = '' }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.13 23.13" className={className}>
       <g>

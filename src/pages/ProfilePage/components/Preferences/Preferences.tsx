@@ -18,7 +18,7 @@ interface IProps {
   preferences?: PreferencesModel;
 }
 
-const Preferences: React.SFC<IProps> = ({
+const Preferences: React.FC<IProps> = ({
   className = '',
   onPreferenceChange = () => null,
   loading,
