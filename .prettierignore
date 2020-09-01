@@ -1,5 +1,4 @@
 build/
 node-modules/
-.vsc-templates
 
 src/graphql/possibleTypes.json

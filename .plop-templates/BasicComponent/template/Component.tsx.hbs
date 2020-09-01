@@ -3,12 +3,12 @@ import React from 'react';
 import styles from './{{pascalCase name}}.module.scss';
 
 interface IProps {
-message?: string;
-className?: string;
+  message?: string;
+  className?: string;
 }
 
 const {{pascalCase name}}: React.FC<IProps> = ({ message = undefined, className = '' }) => {
   return <div className={`${styles.container} ${className}`}>{message}</div>;
-  };
+};
 
-  export default {{pascalCase name}};
+export default {{pascalCase name}};
