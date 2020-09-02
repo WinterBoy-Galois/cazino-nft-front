@@ -14,7 +14,7 @@ interface IProps {
   className?: string;
 }
 
-const UserInfo: React.SFC<IProps> = ({ user, className = '' }) => {
+const UserInfo: React.FC<IProps> = ({ user, className = '' }) => {
   const { t } = useTranslation(['profile']);
   const navigate = useNavigate();
   const { pathname } = useLocation();

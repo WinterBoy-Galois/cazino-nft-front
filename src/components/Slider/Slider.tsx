@@ -14,7 +14,7 @@ interface IProps {
 
 const domain = [0, 100];
 
-const Slider: React.SFC<IProps> = ({
+const Slider: React.FC<IProps> = ({
   value = 50,
   disabled = false,
   onUpdate,

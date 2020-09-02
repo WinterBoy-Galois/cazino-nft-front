@@ -8,7 +8,7 @@ describe('{{pascalCase name}}', () => {
     // Arrange
 
     // Act
-    const container = render(<{{name}} message="Hello World!" />);
+    const container = render(<{{pascalCase name}} message="Hello World!" />);
 
     // Assert
     expect(container).toMatchSnapshot();

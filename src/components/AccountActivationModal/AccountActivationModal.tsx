@@ -24,7 +24,7 @@ interface IProps {
   onResendEmail?: () => void;
 }
 
-const AccountActivationModal: React.SFC<IProps> = ({
+const AccountActivationModal: React.FC<IProps> = ({
   show,
   onClose,
   onActivateUser,

@@ -112,39 +112,39 @@
 .fade {
   &--enter {
     opacity: 0;
-    transition: opacity 200ms ease-in-out;
   }
 
   &--enter-active {
     opacity: 1;
+    transition: opacity 200ms ease-in-out;
   }
 
   &--exit {
     opacity: 1;
-    transition: opacity 200ms ease-in-out;
   }
 
   &--exit-active {
     opacity: 0;
+    transition: opacity 200ms ease-in-out;
   }
 }
 
 .scale {
   &--enter {
     transform: scale(0.6);
-    transition: transform 200ms ease-in-out;
   }
 
   &--enter-active {
     transform: scale(1);
+    transition: transform 200ms ease-in-out;
   }
 
   &--exit {
     transform: scale(1);
-    transition: transform 200ms ease-in-out;
   }
 
   &--exit-active {
     transform: scale(0);
+    transition: transform 200ms ease-in-out;
   }
 }

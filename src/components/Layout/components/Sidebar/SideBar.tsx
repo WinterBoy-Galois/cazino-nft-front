@@ -61,7 +61,7 @@ const renderTab = (
   }
 };
 
-const SideBar: React.SFC = () => {
+const SideBar: React.FC = () => {
   const [
     {
       sidebar: { isOpen, selectedTab },

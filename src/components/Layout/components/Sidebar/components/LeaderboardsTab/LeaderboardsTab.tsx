@@ -8,7 +8,7 @@ import { LEADERBOARDS_SUBSCRIPTION } from '../../../../../../graphql/subscriptio
 import { LEADERBOARDS } from '../../../../../../graphql/queries';
 import { useLocation, useNavigate } from '@reach/router';
 
-const LeaderboardsTab: React.SFC = () => {
+const LeaderboardsTab: React.FC = () => {
   const [selectedTime, setSelectedTime] = useState<TimeAggregation>('daily');
   const { t } = useTranslation(['sidebar']);
   const { loading, error, data, subscribeToMore } = useQuery(LEADERBOARDS);

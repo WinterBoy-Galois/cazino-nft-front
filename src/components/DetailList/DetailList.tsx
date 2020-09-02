@@ -6,7 +6,7 @@ interface IProps {
   details?: Detail[];
 }
 
-const DetailList: React.SFC<IProps> = ({ details }) => {
+const DetailList: React.FC<IProps> = ({ details }) => {
   if (!details) {
     return null;
   }

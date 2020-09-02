@@ -11,7 +11,7 @@ interface IProps {
   onClick?: () => void;
 }
 
-const ClamGameButton: React.SFC<IProps> = ({ onClick }) => {
+const ClamGameButton: React.FC<IProps> = ({ onClick }) => {
   const { t } = useTranslation();
   const [
     {

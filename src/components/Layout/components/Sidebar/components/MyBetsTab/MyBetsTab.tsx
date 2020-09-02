@@ -13,7 +13,7 @@ interface IProps {
   isSignedIn?: boolean;
 }
 
-const MyBetsTab: React.SFC<IProps> = ({
+const MyBetsTab: React.FC<IProps> = ({
   bets = [],
   isLoading = false,
   error,

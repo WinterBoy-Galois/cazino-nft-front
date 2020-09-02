@@ -12,7 +12,7 @@ interface IProps {
   onCancelled?: () => void;
 }
 
-const ConfirmationModal: React.SFC<IProps> = ({ show, onConfirmed, onCancelled, text }) => {
+const ConfirmationModal: React.FC<IProps> = ({ show, onConfirmed, onCancelled, text }) => {
   return (
     <Modal show={show} title={<Title />} onClose={onCancelled} modalClassName={styles.modal}>
       <div className={styles.container}>

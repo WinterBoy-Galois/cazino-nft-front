@@ -11,7 +11,7 @@ interface IProps {
   loading: boolean;
 }
 
-const Username: React.SFC<IProps> = ({ username, avatarUrl, className = '', onClick, loading }) => {
+const Username: React.FC<IProps> = ({ username, avatarUrl, className = '', onClick, loading }) => {
   const { t } = useTranslation(['common']);
 
   const getUsername = () => {

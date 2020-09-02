@@ -5,7 +5,7 @@ interface IProps {
   className?: string;
 }
 
-const Uppercase: React.SFC<IProps> = ({ children, className = '' }) => {
+const Uppercase: React.FC<IProps> = ({ children, className = '' }) => {
   return <div className={`${styles.container} ${className}`}>{children}</div>;
 };
 

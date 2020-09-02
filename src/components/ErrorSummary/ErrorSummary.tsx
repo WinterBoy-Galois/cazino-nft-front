@@ -10,7 +10,7 @@ interface IProps {
   className?: string;
 }
 
-const ErrorSummary: React.SFC<IProps> = ({
+const ErrorSummary: React.FC<IProps> = ({
   errors,
   showGeneralErrorsOnly = true,
   showBorder = true,

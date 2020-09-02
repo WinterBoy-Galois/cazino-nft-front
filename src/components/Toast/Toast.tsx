@@ -8,7 +8,7 @@ interface IProps {
   type?: 'SUCCESS' | 'INFO' | 'ERROR';
 }
 
-const Toast: React.SFC<IProps> = ({ children, type = 'INFO' }) => {
+const Toast: React.FC<IProps> = ({ children, type = 'INFO' }) => {
   let icon;
 
   switch (type) {

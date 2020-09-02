@@ -143,7 +143,7 @@ interface IWithDataProps {
   betId: string;
 }
 
-export const BetResultsPageWithData: React.SFC<IWithDataProps> = props => {
+export const BetResultsPageWithData: React.FC<IWithDataProps> = props => {
   const { data, loading, error } = useQuery<{ betDetails: BetDetails }>(BET_DETAILS, {
     variables: { betId: props.betId },
   });

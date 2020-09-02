@@ -5,7 +5,7 @@ interface IProps {
   className?: string;
 }
 
-const Eye: React.SFC<IProps> = ({ className = styles.fill }) => {
+const Eye: React.FC<IProps> = ({ className = styles.fill }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

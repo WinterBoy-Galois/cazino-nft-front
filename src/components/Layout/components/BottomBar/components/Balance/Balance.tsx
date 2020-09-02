@@ -6,7 +6,7 @@ interface IProps {
   value: string;
 }
 
-const Balance: React.SFC<IProps> = ({ value }) => {
+const Balance: React.FC<IProps> = ({ value }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>

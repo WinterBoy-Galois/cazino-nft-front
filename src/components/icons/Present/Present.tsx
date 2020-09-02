@@ -4,7 +4,7 @@ interface IProps {
   className?: string;
 }
 
-const Present: React.SFC<IProps> = ({ className }) => {
+const Present: React.FC<IProps> = ({ className }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.45 34.81" className={className}>
       <g id="Layer_2" data-name="Layer 2">

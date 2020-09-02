@@ -17,7 +17,7 @@ interface IProps {
   onPasswordChange?: (oldPassword: string, newPassword: string) => Promise<boolean>;
 }
 
-const Security: React.SFC<IProps> = ({
+const Security: React.FC<IProps> = ({
   errors,
   className = '',
   onPasswordChange = () => Promise.resolve(false),

@@ -14,7 +14,7 @@ interface IProps {
   className?: string;
 }
 
-const Statistics: React.SFC<IProps> = ({
+const Statistics: React.FC<IProps> = ({
   userStatistic: userStatistics,
   loading,
   error,

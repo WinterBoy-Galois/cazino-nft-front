@@ -10,7 +10,7 @@ interface IProps {
   className?: string;
 }
 
-const EmailActivationStatus: React.SFC<IProps> = ({ email, className = '', isActivated }) => {
+const EmailActivationStatus: React.FC<IProps> = ({ email, className = '', isActivated }) => {
   return (
     <div className={`${styles.container} ${className}`}>
       {isActivated ? (

@@ -24,7 +24,7 @@ interface IProps {
   onPasswordReset?: (newPassword: string) => void;
 }
 
-const PasswordResetModal: React.SFC<IProps> = ({
+const PasswordResetModal: React.FC<IProps> = ({
   show,
   loading,
   errors,

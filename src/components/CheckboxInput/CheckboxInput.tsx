@@ -12,7 +12,7 @@ interface IProps {
   onBlur?: ({ target }: { target: EventTarget | null }) => void;
 }
 
-const CheckboxInput: React.SFC<IProps> = ({
+const CheckboxInput: React.FC<IProps> = ({
   name,
   label,
   className = '',

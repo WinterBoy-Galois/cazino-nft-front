@@ -7,7 +7,7 @@ interface IProps {
   className?: string;
 }
 
-const BitcoinProfit: React.SFC<IProps> = ({ value, className = '' }) => {
+const BitcoinProfit: React.FC<IProps> = ({ value, className = '' }) => {
   const profitClassName = () => {
     if (value === 0) {
       return '';

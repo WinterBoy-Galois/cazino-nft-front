@@ -13,7 +13,7 @@ interface IProps {
   onClose?: () => void;
 }
 
-const BetDetailsModal: React.SFC<IProps> = ({ show, onClose, bet }) => {
+const BetDetailsModal: React.FC<IProps> = ({ show, onClose, bet }) => {
   const { t } = useTranslation(['modals']);
   const location = useLocation();
   const navigate = useNavigate();
