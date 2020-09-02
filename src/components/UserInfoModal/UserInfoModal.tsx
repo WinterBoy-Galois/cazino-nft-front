@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Modal from '../Modal';
 import styles from './UserInfoModal.module.scss';
 import { USER_INFO } from '../../graphql/queries';
@@ -70,21 +70,28 @@ interface IWithDataProps {
   show: boolean;
   userId: string;
   onClose?: () => void;
-  onBack?: () => void;
+  backPath?: string;
+  backState?: any;
 }
 
 const UserInfoModalWithData: React.FC<IWithDataProps> = ({
   show,
   userId,
   onClose,
-  onBack,
+  backPath,
+  backState,
 }: IWithDataProps) => {
   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
-  const location = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
+  const handleBack = useCallback(
+    () => backPath && backState && navigate(backPath, { state: backState }),
+    [backPath, backState, navigate]
+  );
+
   if (!userId && show) {
-    navigate(location.pathname);
+    navigate(pathname);
     return null;
   }
 
@@ -95,7 +102,7 @@ const UserInfoModalWithData: React.FC<IWithDataProps> = ({
       loading={loading}
       error={error}
       onClose={onClose}
-      onBack={onBack}
+      onBack={handleBack}
     />
   );
 };
