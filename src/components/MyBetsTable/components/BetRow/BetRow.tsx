@@ -7,7 +7,6 @@ import Dice from '../../../icons/games/Dice';
 import Clams from '../../../icons/games/Clams';
 import Goals from '../../../icons/games/Goals';
 import Mines from '../../../icons/games/Mines';
-
 import styles from './BetRow.module.scss';
 import BitcoinValue from '../../../BitcoinValue';
 import { ViewMode } from '../../MyBetsTable';
@@ -17,9 +16,15 @@ interface IProps {
   bet: Bet;
   highlight?: boolean;
   viewMode?: ViewMode;
+  onRowClicked?: () => void;
 }
 
-const BetRow: React.FC<IProps> = ({ bet, highlight = false, viewMode = ViewMode.RESPONSIVE }) => {
+const BetRow: React.FC<IProps> = ({
+  bet,
+  highlight = false,
+  viewMode = ViewMode.RESPONSIVE,
+  onRowClicked,
+}) => {
   let gameIcon;
 
   switch (bet.gameid) {
@@ -38,7 +43,11 @@ const BetRow: React.FC<IProps> = ({ bet, highlight = false, viewMode = ViewMode.
   }
 
   return (
-    <tr key={bet.id} className={`${highlight ? styles['row--highlight'] : ''}`}>
+    <tr
+      key={bet.id}
+      className={`${styles.row} ${highlight ? styles['row--highlight'] : ''}`}
+      onClick={onRowClicked}
+    >
       <td>
         <div>{gameIcon}</div>
       </td>

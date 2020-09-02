@@ -67,7 +67,7 @@ const BetRow: React.FC<IProps> = ({
     <tr
       key={bet.id}
       className={`${styles.row} ${highlight ? styles['row--highlight'] : ''}`}
-      onClick={onRowClicked}
+      onMouseDown={onRowClicked}
     >
       <td>
         <div>{gameIcon}</div>

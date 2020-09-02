@@ -10,7 +10,7 @@ import styles from './LatestBetsTable.module.scss';
 import SpacerRow from './components/SpacerRow';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { useTranslation } from 'react-i18next';
-import { useLocation, navigate } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 export enum ViewMode {
   RESPONSIVE,
@@ -41,7 +41,8 @@ const LatestBetsTable: React.FC<IProps> = ({
 }) => {
   const breakpoint = useBreakpoint();
   const { t } = useTranslation(['sidebar']);
-  const location = useLocation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const renderBetColumn = () => {
     switch (true) {
@@ -68,7 +69,7 @@ const LatestBetsTable: React.FC<IProps> = ({
   }
 
   const handleRowClick = (bet: Bet) => {
-    navigate(`${location.pathname}?dialog=bet-details`, { state: { bet } });
+    navigate(`${pathname}?dialog=bet-details`, { state: { bet } });
   };
 
   return (
