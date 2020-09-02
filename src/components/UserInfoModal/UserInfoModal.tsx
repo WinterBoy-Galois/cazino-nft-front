@@ -102,7 +102,7 @@ const UserInfoModalWithData: React.FC<IWithDataProps> = ({
       loading={loading}
       error={error}
       onClose={onClose}
-      onBack={handleBack}
+      onBack={backPath ? handleBack : undefined}
     />
   );
 };
