@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, wait, act } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import Layout from './Layout';
 import { USER_INFO, USER_INFO_AVATAR_URL } from '../../graphql/queries';
 import { createMockClient } from '@apollo/client/testing';
@@ -55,11 +55,7 @@ describe('Layout', () => {
       </LocationProvider>
     );
 
-    await act(wait);
-
     // Assert
-    expect(container).toMatchSnapshot();
-
-    await wait();
+    await waitFor(() => expect(container).toMatchSnapshot());
   });
 });

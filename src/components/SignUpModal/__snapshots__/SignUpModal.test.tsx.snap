@@ -4,8 +4,6 @@ exports[`SignUpModal should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body
-    data-react-helmet="data-recaptcha"
-    data-recaptcha="true"
     style="overflow: hidden;"
   >
     <div>
@@ -233,7 +231,6 @@ Object {
                   <button
                     class="button button secondary button button--small"
                     color="SECONDARY"
-                    disabled=""
                     type="submit"
                   >
                     Create account
@@ -494,7 +491,6 @@ Object {
                 <button
                   class="button button secondary button button--small"
                   color="SECONDARY"
-                  disabled=""
                   type="submit"
                 >
                   Create account

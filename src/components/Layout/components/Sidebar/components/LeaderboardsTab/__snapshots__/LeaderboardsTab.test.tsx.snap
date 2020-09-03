@@ -67,9 +67,15 @@ Object {
             />
           </table>
           <div
-            class="undefined container"
+            class=" container"
           >
-            Sorry, received no data.
+            <div
+              class="spinner"
+            >
+              <span
+                class="spinner spinner--white "
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -138,9 +144,15 @@ Object {
           />
         </table>
         <div
-          class="undefined container"
+          class=" container"
         >
-          Sorry, received no data.
+          <div
+            class="spinner"
+          >
+            <span
+              class="spinner spinner--white "
+            />
+          </div>
         </div>
       </div>
     </div>

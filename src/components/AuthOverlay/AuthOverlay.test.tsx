@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, wait } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 
 import AuthOverlay from './AuthOverlay';
@@ -36,9 +36,7 @@ describe('AuthOverlay', () => {
       </MockedProvider>
     );
 
-    await wait();
-
     // Assert
-    expect(container).toMatchSnapshot();
+    await waitFor(() => expect(container).toMatchSnapshot());
   });
 });
