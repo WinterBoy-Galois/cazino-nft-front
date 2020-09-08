@@ -1,5 +1,4 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import { LocationProvider } from '@reach/router';
 
 import ChangeServerSeedConfirmationModal from '.';
@@ -13,9 +12,5 @@ export default {
 };
 
 export const Default = () => (
-  <ChangeServerSeedConfirmationModal
-    show={true}
-    onConfirm={action('Confirm')}
-    onCancel={action('Cancel')}
-  />
+  <ChangeServerSeedConfirmationModal show={true} confirmPath="/" cancelPath="/" />
 );

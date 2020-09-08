@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { UserInfoModalWithData } from '../../../UserInfoModal';
 import BetDetailsModal from '../../../BetDetailsModal';
-import ChangeServerSeedConfirmationModal from '../../../ChangeServerSeedConfirmationModal';
 import { SignInModalWithData } from '../../../SignInModal';
 import { SignUpModalWithData } from '../../../SignUpModal';
 import { useStateValue } from '../../../../state';
@@ -13,6 +12,7 @@ import { PasswordResetModalWithData } from '../../../PasswordResetModal/Password
 import { PasswordRecoveryModalWithData } from '../../../PasswordRecoveryModal/PasswordRecoveryModal';
 import { closeModal, replaceModal, showModal } from '../../../Modal';
 import { useLocation, useNavigate } from '@reach/router';
+import { ChangeServerSeedConfirmationModalWithData } from '../../../ChangeServerSeedConfirmationModal/ChangeServerSeedConfirmationModal';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
@@ -54,7 +54,7 @@ const Modals: React.FC = () => {
         onClose={handleClose}
         {...modal.data}
       />
-      <ChangeServerSeedConfirmationModal
+      <ChangeServerSeedConfirmationModalWithData
         show={handleShow('CHANGE_SERVER_SEED_CONFIRMATION')}
         onClose={handleClose}
         {...modal.data}

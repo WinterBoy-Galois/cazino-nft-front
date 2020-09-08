@@ -78,7 +78,7 @@ Object {
               >
                 <div>
                   <button
-                    class="button button__confirm button button--large"
+                    class="button button button__confirm button button--large"
                     type="button"
                   >
                     Yes
@@ -171,7 +171,7 @@ Object {
             >
               <div>
                 <button
-                  class="button button__confirm button button--large"
+                  class="button button button__confirm button button--large"
                   type="button"
                 >
                   Yes

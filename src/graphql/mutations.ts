@@ -5,10 +5,9 @@ export const CHANGE_SERVER_SEED = gql`
     changeServerSeed {
       ... on GenericErrorArray {
         errors {
-          type
-          field
-          severity
-          messageKey
+          source
+          code
+          message
           args
         }
       }

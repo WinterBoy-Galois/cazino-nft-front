@@ -11,9 +11,12 @@ interface IProps {
   show: boolean;
   bet: Bet;
   onClose?: () => void;
+  activePage?: number;
+  confirmed?: boolean;
+  cancelled?: boolean;
 }
 
-const BetDetailsModal: React.FC<IProps> = ({ show, onClose, bet }) => {
+const BetDetailsModal: React.FC<IProps> = ({ show, onClose, bet, activePage }) => {
   const { t } = useTranslation(['modals']);
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +24,7 @@ const BetDetailsModal: React.FC<IProps> = ({ show, onClose, bet }) => {
     () => [
       <BetDetailsPageWithData key={1} bet={bet} />,
       <BetResultsPageWithData key={2} gameType={bet?.gameid} betId={bet?.id} />,
-      <ServerSeedPageWithData key={3} betId={bet?.id} />,
+      <ServerSeedPageWithData key={3} bet={bet} />,
     ],
     [bet]
   );
@@ -39,6 +42,7 @@ const BetDetailsModal: React.FC<IProps> = ({ show, onClose, bet }) => {
       title={[t('betDetails.title'), t('betResults.title'), t('serverSeed.title')]}
       onClose={onClose}
       pages={pages}
+      activePage={activePage}
     />
   );
 };
