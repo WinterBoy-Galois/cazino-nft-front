@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styles from './Layout.module.scss';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
@@ -17,17 +17,22 @@ const Layout: React.FC = ({ children }) => {
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
   const [signOut] = useMutation(SIGN_OUT);
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   const hideContent = () =>
     breakpoint === 'xs' || breakpoint === 'sm' ? modal.type !== 'NONE' : false;
 
-  const handleSignInClick = () => navigate(`${location.pathname}?dialog=sign-in`);
+  const handleSignInClick = useCallback(() => navigate(`${pathname}?dialog=sign-in`), [pathname]);
 
   const handleSignOutClick = async () => {
     await signOut();
     dispatch({ type: 'AUTH_SIGN_OUT' });
   };
+
+  const handleBalanceClick = useCallback(
+    () => auth.state === 'SIGNED_IN' && navigate(`${pathname}?dialog=cashier`),
+    [pathname, auth.state]
+  );
 
   return (
     <>
@@ -60,7 +65,7 @@ const Layout: React.FC = ({ children }) => {
               transition: modal.type !== 'NONE' ? 'none' : '',
             }}
           >
-            <BottomBar balance={auth.user?.balance} />
+            <BottomBar balance={auth.user?.balance} onClick={handleBalanceClick} />
           </div>
         </div>
       </div>

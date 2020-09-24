@@ -38,7 +38,7 @@ const getApolloClient = (
     options: {
       reconnect: true,
       connectionParams: {
-        authToken: accessToken ?? '',
+        authToken: accessToken ?? undefined,
       },
     },
   });

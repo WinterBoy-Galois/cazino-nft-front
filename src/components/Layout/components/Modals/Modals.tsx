@@ -13,6 +13,7 @@ import { PasswordRecoveryModalWithData } from '../../../PasswordRecoveryModal/Pa
 import { closeModal, replaceModal, showModal } from '../../../Modal';
 import { useLocation, useNavigate } from '@reach/router';
 import { ChangeServerSeedConfirmationModalWithData } from '../../../ChangeServerSeedConfirmationModal/ChangeServerSeedConfirmationModal';
+import { CashierModalWithData } from '../../../CashierModal/CashierModal';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
@@ -81,6 +82,11 @@ const Modals: React.FC = () => {
       />
       <PasswordRecoveryModalWithData
         show={handleShow('PASSWORD_RECOVERY_MODAL')}
+        onClose={handleClose}
+        {...modal.data}
+      />
+      <CashierModalWithData
+        show={handleShow('CASHIER_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />

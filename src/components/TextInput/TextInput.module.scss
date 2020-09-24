@@ -4,7 +4,6 @@
   text-align: left;
   background-color: $form-background;
   color: $white;
-  font-weight: 300;
   font-size: 18px;
   line-height: 24px;
   margin-left: 0;
@@ -12,6 +11,10 @@
   transition: all 0.2s ease-in;
   outline: none;
   border: none;
+
+  &:disabled {
+    background-color: $read-only-input-bg;
+  }
 
   &__container {
     min-width: 250px;
@@ -31,6 +34,11 @@
     height: 57px;
     vertical-align: bottom;
     transition: all 0.2s ease-in;
+
+    &--disabled {
+      background-color: $read-only-input-bg;
+      border-color: $read-only-input-bg;
+    }
 
     &:focus-within {
       border: 2px solid $bitcoinYellow;
@@ -68,7 +76,6 @@
     text-transform: uppercase;
     display: block;
     font-size: 14px;
-    font-weight: 300;
     line-height: 19px;
     color: $live-updates-light-blue;
     user-select: none;
@@ -79,7 +86,6 @@
     text-transform: uppercase;
     display: block;
     font-size: 14px;
-    font-weight: 300;
     line-height: 19px;
     color: $red;
     user-select: none;

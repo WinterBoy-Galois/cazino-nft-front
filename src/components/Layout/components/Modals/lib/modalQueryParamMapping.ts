@@ -26,6 +26,9 @@ export const mapQueryParamToModal = (param: string): ModalType | undefined => {
     case 'seed-confirm':
       return 'CHANGE_SERVER_SEED_CONFIRMATION';
 
+    case 'cashier':
+      return 'CASHIER_MODAL';
+
     default:
       return undefined;
   }

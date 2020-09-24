@@ -169,6 +169,7 @@ export const ME = gql`
       balance
       email
       isActivated
+      depositAddress
     }
   }
 `;
@@ -185,6 +186,20 @@ export const ME_STATISTICS_PREFERENCES = gql`
       hideUsername
       hideTotalProfit
       hideTotalWager
+    }
+  }
+`;
+
+export const SETUP_CASHIER = gql`
+  query SetupCashier {
+    setupCashier {
+      networkFee
+      depositConfirmations
+      minWithdraw
+    }
+    me {
+      id
+      depositAddress
     }
   }
 `;

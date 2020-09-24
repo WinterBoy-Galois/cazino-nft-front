@@ -43,5 +43,12 @@
     "verificationText": "REPL.IT is third party interactive programming environment. In order for you to allow verify bet results, we have created scripts for each game, which takes as input set of seeds, nonce, generating result.",
     "verificationLinkText": "Verify on REPL.IT",
     "clientSeed": "client seed"
+  },
+  "cashier": {
+    "title": "Cashier",
+    "depositNullError": "Deposit address is not set.",
+    "bitcoinWalletAddress": "Bitcoin Wallet Address",
+    "requiredConfirmations": "Required Confirmation(s)",
+    "transactionsLinkText": "Deposit Transactions"
   }
 }
