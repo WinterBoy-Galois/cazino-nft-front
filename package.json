@@ -32,7 +32,7 @@
     "react-compound-slider": "^2.5.0",
     "react-div-100vh": "^0.5.0",
     "react-dom": "^16.13.1",
-    "react-google-recaptcha-v3": "^1.5.2",
+    "react-google-recaptcha-v3": "^1.5.4",
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.7.3",
     "react-scripts": "3.4.3",
