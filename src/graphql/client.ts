@@ -89,10 +89,7 @@ const getApolloClient = (
   const link = split(
     ({ query }) => {
       const definition = getMainDefinition(query);
-      return (
-        definition.kind === 'OperationDefinition' &&
-        (definition.operation === 'subscription' || definition.operation === 'query')
-      );
+      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
     },
     wsLink,
     authLink.concat(httpLink)
