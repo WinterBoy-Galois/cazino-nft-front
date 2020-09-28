@@ -30,6 +30,7 @@
   },
   "menu": {
     "profile": "profile",
+    "transactions": "transactions",
     "signOut": "sign out"
   }
 }
