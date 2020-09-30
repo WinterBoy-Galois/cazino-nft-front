@@ -1,0 +1,7 @@
+{
+  "pageHeadline": "transactions",
+  "table": {
+    "rowsPerPage": "Rows per page",
+    "rangeSeparator": "of"
+  }
+}

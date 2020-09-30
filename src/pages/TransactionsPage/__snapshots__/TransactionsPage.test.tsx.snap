@@ -11,7 +11,7 @@ Object {
         <h1
           class="headline"
         >
-          Transactions
+          transactions
         </h1>
         <div
           class="container "
@@ -44,7 +44,7 @@ Object {
       <h1
         class="headline"
       >
-        Transactions
+        transactions
       </h1>
       <div
         class="container "
