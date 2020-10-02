@@ -5,7 +5,7 @@ import DetailsContainer from '../../components/DetailsContainer';
 import NavLink from '../../components/NavLink';
 import PageContentContainer from '../../components/PageContentContainer';
 import PageHeadline from '../../components/PageHeadline';
-import Deposits from './components/Deposits';
+import { DepositsWithData } from './components/Deposits';
 import styles from './TransactionsPage.module.scss';
 
 const TransactionsPage: React.FC<RouteComponentProps> = () => {
@@ -29,7 +29,7 @@ const TransactionsPage: React.FC<RouteComponentProps> = () => {
         <DetailsContainer className={styles['details-container']}>
           <Router>
             <Redirect from={'/'} to={'deposits'} noThrow />
-            <Deposits path={'deposits'} />
+            <DepositsWithData path={'deposits'} />
           </Router>
         </DetailsContainer>
       </PageContentContainer>

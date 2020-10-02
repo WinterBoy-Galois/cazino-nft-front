@@ -203,3 +203,19 @@ export const SETUP_CASHIER = gql`
     }
   }
 `;
+
+export const DEPOSITS = gql`
+  query Deposits($page: Int, $limit: Int) {
+    transactionsDeposit(page: $page, limit: $limit) {
+      page
+      limit
+      total
+      items {
+        status
+        time
+        hash
+        amount
+      }
+    }
+  }
+`;

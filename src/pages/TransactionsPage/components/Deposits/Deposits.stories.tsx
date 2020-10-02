@@ -7,4 +7,4 @@ export default {
   component: Deposits,
 };
 
-export const Default = () => <Deposits />;
+export const Default = () => <Deposits deposits={[]} />;

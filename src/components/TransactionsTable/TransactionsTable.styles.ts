@@ -18,6 +18,7 @@ export const styles = {
     style: {
       backgroundColor: '#113352',
       borderBottom: 'none',
+      padding: '0 8px',
     },
   },
   headCells: {
@@ -49,6 +50,7 @@ export const styles = {
       '@media screen and (max-width: 768px)': {
         minHeight: '40px',
       },
+      padding: '0 8px',
     },
     stripedStyle: {
       color: '#fff',

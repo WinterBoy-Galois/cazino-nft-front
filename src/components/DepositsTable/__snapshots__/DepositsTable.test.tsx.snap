@@ -1,38 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Deposits should match snapshot 1`] = `
+exports[`DepositsTable should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="container"
-      >
-        <div
-          class="sc-hHEjAm iECIgJ"
-        >
-          <div
-            class="sc-kfYqjs ezVbOX"
-          >
-            <div
-              class="sc-bdnylx ejLVfJ rdt_Table"
-              role="table"
-            >
-              <div
-                class="sc-bCwgka iCHBAi"
-              >
-                There is no data to display.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="container"
-    >
       <div
         class="sc-hHEjAm iECIgJ"
       >
@@ -48,6 +20,26 @@ Object {
             >
               There is no data to display.
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="sc-hHEjAm iECIgJ"
+    >
+      <div
+        class="sc-kfYqjs ezVbOX"
+      >
+        <div
+          class="sc-bdnylx ejLVfJ rdt_Table"
+          role="table"
+        >
+          <div
+            class="sc-bCwgka iCHBAi"
+          >
+            There is no data to display.
           </div>
         </div>
       </div>
