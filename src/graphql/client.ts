@@ -29,6 +29,8 @@ const getApolloClient = (
   authType: AuthType,
   accessToken?: string
 ) => {
+  cache.reset();
+
   if (wsLink) {
     (wsLink as any).subscriptionClient.close();
   }
