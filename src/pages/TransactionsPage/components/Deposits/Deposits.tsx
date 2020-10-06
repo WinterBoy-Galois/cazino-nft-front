@@ -3,6 +3,7 @@ import { RouteComponentProps } from '@reach/router';
 import React, { useState } from 'react';
 import DepositsTable from '../../../../components/DepositsTable';
 import { DEPOSITS } from '../../../../graphql/queries';
+import useRefetchOnPageEnter from '../../../../hooks/useRefetchOnPageEnter.hook';
 import { DepositItem } from '../../../../models/depositItem.model';
 import styles from './Deposits.module.scss';
 
@@ -39,7 +40,9 @@ export default Deposits;
 export const DepositsWithData: React.FC<RouteComponentProps> = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const { data, loading } = useQuery(DEPOSITS, { variables: { page: page - 1, limit } });
+  const { data, loading, refetch } = useQuery(DEPOSITS, { variables: { page: page - 1, limit } });
+
+  useRefetchOnPageEnter(refetch, loading);
 
   return (
     <Deposits
