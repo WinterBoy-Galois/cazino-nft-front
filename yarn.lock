@@ -12949,10 +12949,10 @@ react-fast-compare@^3.0.1, react-fast-compare@^3.1.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-google-recaptcha-v3@^1.5.4:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/react-google-recaptcha-v3/-/react-google-recaptcha-v3-1.5.4.tgz#cce401563edc345352617b28fa2321857722d971"
-  integrity sha512-0RNsRX5uAr8loRcTWAOpYUhp6SBLGlk37/7a3XU9QNWz68Pe7Va4jVCjx1eijfGIDVXnXX8/yLJCJwNr9IKnqg==
+react-google-recaptcha-v3@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-google-recaptcha-v3/-/react-google-recaptcha-v3-1.6.1.tgz#a263139efa75617efb034d355bf926b4991426a1"
+  integrity sha512-vR0zgvwDc+281qVQULYz5GR7vG/qsaoQnNdhmikFB7rNcgod8mqfKRRpEekfCvLbu26h4Z4bkGuEG7Ay2ulZxg==
   dependencies:
     hoist-non-react-statics "3.3.2"
 
