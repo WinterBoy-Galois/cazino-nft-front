@@ -21,7 +21,7 @@
     "formik": "2.1.7",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
-    "i18next": "^19.8.1",
+    "i18next": "^19.8.2",
     "i18next-browser-languagedetector": "^6.0.1",
     "jwt-decode": "^3.0.0",
     "lodash.sample": "^4.2.1",
