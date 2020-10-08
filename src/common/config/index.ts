@@ -12,4 +12,5 @@ export const appConfig = {
   apiBasePathWS: env('REACT_APP_API_BASE_PATH_WS'),
   reCaptchaSiteKey: env('REACT_APP_RECAPTCHA'),
   reduceMotion: /true/i.test(env('REACT_APP_REDUCE_MOTION')),
+  blockchainExplorerUrl: env('REACT_APP_BLOCKCHAIN_EXPLORER_URL'),
 };

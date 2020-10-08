@@ -6,14 +6,22 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="status status--confirmed"
-      />
+        class="container"
+      >
+        <div
+          class="status status--confirmed"
+        />
+      </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="status status--confirmed"
-    />
+      class="container"
+    >
+      <div
+        class="status status--confirmed"
+      />
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

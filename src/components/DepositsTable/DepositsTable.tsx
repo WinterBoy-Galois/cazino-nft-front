@@ -1,4 +1,6 @@
+import { useLocation, useNavigate } from '@reach/router';
 import React from 'react';
+import { appConfig } from '../../common/config';
 import { datetimeFromEpoch } from '../../common/util/date.util';
 import { formatBitcoin } from '../../common/util/format.util';
 import { DepositItem } from '../../models/depositItem.model';
@@ -6,8 +8,7 @@ import BitcoinValue from '../BitcoinValue';
 import ExternalLink from '../ExternalLink';
 import TransactionsTable from '../TransactionsTable';
 import { TableColumn } from '../TransactionsTable/lib/tableColumn';
-import TransactionStatus from './components/TransactionStatus';
-// import styles from './DepositsTable.module.scss';
+import TransactionStatus from '../TransactionStatus';
 
 interface IProps {
   data: DepositItem[];
@@ -39,7 +40,7 @@ const DepositsTable: React.FC<IProps> = props => {
       hideAtBreakpoint: 'md',
       // eslint-disable-next-line
       cell: r => (
-        <ExternalLink href={`https://live.blockcypher.com/btc/tx/${r.hash}`}>{r.hash}</ExternalLink>
+        <ExternalLink href={`${appConfig.blockchainExplorerUrl}/${r.hash}`}>{r.hash}</ExternalLink>
       ),
     },
     {
@@ -51,7 +52,20 @@ const DepositsTable: React.FC<IProps> = props => {
     },
   ];
 
-  return <TransactionsTable {...props} columns={columns} progressPending={props.loading} />;
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const handleRowClicked = (row: DepositItem) => {
+    navigate(`${pathname}?dialog=deposit-details`, { state: { item: row } });
+  };
+
+  return (
+    <TransactionsTable<DepositItem>
+      {...props}
+      columns={columns}
+      progressPending={props.loading}
+      onRowClicked={handleRowClicked}
+    />
+  );
 };
 
 export default DepositsTable;

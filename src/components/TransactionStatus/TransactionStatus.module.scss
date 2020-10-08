@@ -1,4 +1,4 @@
-@import '../../../../styles/shared';
+@import '../../styles/shared';
 
 .status {
   width: 15px;
@@ -16,4 +16,13 @@
   &--rejected {
     background-color: $lightRed;
   }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  margin-left: 0.5rem;
 }

@@ -1,11 +1,14 @@
 import React from 'react';
-import { text } from '@storybook/addon-knobs';
 
 import DepositsTable from '.';
+import { LocationProvider } from '@reach/router';
 
 export default {
   title: 'Components/DepositsTable',
   component: DepositsTable,
+  decorators: [
+    (storyFn: () => React.ReactElement) => <LocationProvider>{storyFn()}</LocationProvider>,
+  ],
 };
 
 const data = {

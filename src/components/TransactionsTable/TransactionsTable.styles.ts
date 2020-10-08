@@ -51,6 +51,9 @@ export const styles = {
         minHeight: '40px',
       },
       padding: '0 8px',
+      '&:hover': {
+        cursor: 'pointer',
+      },
     },
     stripedStyle: {
       color: '#fff',

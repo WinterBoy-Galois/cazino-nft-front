@@ -1,5 +1,5 @@
 import React from 'react';
-import { TransactionStatus as Status } from '../../../../models/transactionStatus.model';
+import { TransactionStatus as Status } from '../../models/transactionStatus.model';
 
 import TransactionStatus from '.';
 

@@ -14,6 +14,7 @@ import { closeModal, replaceModal, showModal } from '../../../Modal';
 import { useLocation, useNavigate } from '@reach/router';
 import { ChangeServerSeedConfirmationModalWithData } from '../../../ChangeServerSeedConfirmationModal/ChangeServerSeedConfirmationModal';
 import { CashierModalWithData } from '../../../CashierModal/CashierModal';
+import DepositsDetailsModal from '../../../DepositsDetailsModal';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
@@ -87,6 +88,11 @@ const Modals: React.FC = () => {
       />
       <CashierModalWithData
         show={handleShow('CASHIER_MODAL')}
+        onClose={handleClose}
+        {...modal.data}
+      />
+      <DepositsDetailsModal
+        show={handleShow('DEPOSIT_DETAILS_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />

@@ -15,6 +15,7 @@ interface IProps<T> {
   onChangeRowsPerPage?: (rowsPerPage: number) => void;
   paginationRowsPerPageOptions?: number[];
   progressPending?: boolean;
+  onRowClicked?: (row: T, event: MouseEvent) => void;
 }
 
 function TransactionsTable<T>(props: IProps<T>) {
