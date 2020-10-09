@@ -120,7 +120,7 @@
     "prettier": "^2.1.2",
     "preval.macro": "^5.0.0",
     "react-test-renderer": "^16.13.1",
-    "serverless-s3-sync": "^1.14.4",
+    "serverless-s3-sync": "^1.15.0",
     "source-map-explorer": "^2.5.0",
     "stylelint": "^13.7.2",
     "stylelint-config-prettier": "^8.0.2",

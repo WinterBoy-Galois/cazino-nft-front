@@ -13705,10 +13705,10 @@ serve-static@1.14.1:
     parseurl "~1.3.3"
     send "0.17.1"
 
-serverless-s3-sync@^1.14.4:
-  version "1.14.4"
-  resolved "https://registry.yarnpkg.com/serverless-s3-sync/-/serverless-s3-sync-1.14.4.tgz#9822e109d65d82d79ba7112b96c836f42867fbbb"
-  integrity sha512-FGPso9hwKG8qAjmlOTOzjBibUUCRhCH4KOoUjYcsiYKfj9t8bg0wC2DE1XpYU/h8rCurRuy45hNq5bKB7Nlvvw==
+serverless-s3-sync@^1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/serverless-s3-sync/-/serverless-s3-sync-1.15.0.tgz#3bf83380af20aac8a0bfcf9016c2550494450adf"
+  integrity sha512-OvNYrQSN/2Nk6mesg8jA4IIigckkTCKigjiC1ECQyPVDgSUHDeOIaLsOCV/4Cj+55OGIyVZRlYuvmkd4BASUIQ==
   dependencies:
     "@auth0/s3" "^1.0.0"
     bluebird "^3.5.4"
