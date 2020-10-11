@@ -5,7 +5,7 @@ import { env } from '../util/environment.util';
 export const appConfig = {
   bitcoinFractionDigits: 8,
   multiplierFractionDigits: 4,
-  toastAutoCloseDuration: 3000,
+  toastAutoCloseDuration: 5000,
   toastHideProgressbar: true,
   toastPosition: toast.POSITION.BOTTOM_LEFT,
   apiBasePath: env('REACT_APP_API_BASE_PATH'),

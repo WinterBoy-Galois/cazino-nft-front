@@ -3,5 +3,8 @@
   "table": {
     "rowsPerPage": "Rows per page",
     "rangeSeparator": "of"
-  }
+  },
+  "depositConfirmed": "{{amount}} BTC Deposit credited.",
+  "depositPending": "Deposit of {{amount}} BTC has been registered. Awaiting confirmation...",
+  "depositRejected": "Deposit of {{amount}} BTC was rejected."
 }

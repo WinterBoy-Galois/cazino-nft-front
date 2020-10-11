@@ -11,8 +11,11 @@ import { useMutation } from '@apollo/client';
 import { SIGN_OUT } from '../../graphql/mutations';
 import Modals from './components/Modals';
 import { navigate, useLocation } from '@reach/router';
+import useRealtimeBalance from '../../hooks/useRealtimeBalance.hook';
 
 const Layout: React.FC = ({ children }) => {
+  useRealtimeBalance();
+
   const [{ sidebar, modal, auth }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
