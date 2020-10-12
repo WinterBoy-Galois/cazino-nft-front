@@ -187,7 +187,7 @@ interface IWithDataProps {
 const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
   const [signUp, { loading }] = useMutation(SIGN_UP);
-  const [{ auth, referral }, dispatch] = useStateValue();
+  const [{ referral }, dispatch] = useStateValue();
   const [errors, setErrors] = useState<ApplicationError[]>();
   const location = useLocation();
   const navigate = useNavigate();
@@ -220,11 +220,6 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       onClose();
     }
   };
-
-  if (show && auth.state === 'SIGNED_IN') {
-    navigate(location.pathname);
-    return null;
-  }
 
   return (
     <SignUpModal
