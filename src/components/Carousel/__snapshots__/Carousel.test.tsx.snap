@@ -19,7 +19,7 @@ Object {
             style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
           >
             <div
-              class="swiper-slide slide swiper-slide-duplicate"
+              class="swiper-slide swiper-slide-duplicate slide"
               data-swiper-slide-index="4"
             >
               <div
@@ -137,7 +137,7 @@ Object {
               </div>
             </div>
             <div
-              class="swiper-slide slide swiper-slide-duplicate"
+              class="swiper-slide swiper-slide-duplicate slide"
               data-swiper-slide-index="0"
             >
               <div
@@ -184,7 +184,7 @@ Object {
           style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
         >
           <div
-            class="swiper-slide slide swiper-slide-duplicate"
+            class="swiper-slide swiper-slide-duplicate slide"
             data-swiper-slide-index="4"
           >
             <div
@@ -302,7 +302,7 @@ Object {
             </div>
           </div>
           <div
-            class="swiper-slide slide swiper-slide-duplicate"
+            class="swiper-slide swiper-slide-duplicate slide"
             data-swiper-slide-index="0"
           >
             <div
