@@ -61,6 +61,7 @@
     "build-storybook": "build-storybook -s .storybook/public -o build/storybook",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "deploy-dev": "yarn build && yarn build-storybook && sls deploy -v -s dev",
+    "postinstall": "patch-package",
     "apollo": "node ./scripts/apollo/generatePossibleTypes.js"
   },
   "eslintConfig": {
@@ -116,6 +117,8 @@
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "lint-staged": "^10.4.0",
     "node-sass": "^4.14.1",
+    "patch-package": "^6.2.2",
+    "postinstall-postinstall": "^2.1.0",
     "playwright": "^1.4.2",
     "prettier": "^2.1.2",
     "preval.macro": "^5.0.0",

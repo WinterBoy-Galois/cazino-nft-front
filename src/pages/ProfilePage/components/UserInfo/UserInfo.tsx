@@ -4,26 +4,39 @@ import CardHeadline from '../../../../components/CardHeadline';
 import User from '../../../../models/user.model';
 import SecondaryButton from '../../../../components/SecondaryButton';
 import { useNavigate, useLocation } from '@reach/router';
-import Avatar from '../../../../components/Avatar';
+// import Avatar from '../../../../components/Avatar';
 import EmailActivationStatus from './component/EmailActivationStatus';
 import DetailsContainer from '../../../../components/DetailsContainer';
 import { useTranslation } from 'react-i18next';
+import AvatarSelector from '../../../../components/AvatarSelector';
+import { appConfig } from '../../../../common/config';
 
 interface IProps {
   user: User;
   className?: string;
+  onAvatarChange?: (index: number) => void;
 }
 
-const UserInfo: React.FC<IProps> = ({ user, className = '' }) => {
+const UserInfo: React.FC<IProps> = ({ user, className = '', onAvatarChange }) => {
   const { t } = useTranslation(['profile']);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const handleAvatarSelection = (index: number) => {
+    if (onAvatarChange) {
+      onAvatarChange(index);
+    }
+  };
 
   return (
     <DetailsContainer background={'DARK'} className={className}>
       <CardHeadline>{t('userInfo.headline')}</CardHeadline>
       <div className={styles.container}>
-        <Avatar avatarUrl={user.avatarUrl} />
+        <AvatarSelector
+          avatarUrls={appConfig.avatarUrls}
+          avatarUrl={user.avatarUrl}
+          onAvatarChange={handleAvatarSelection}
+        />
 
         <h3 className={styles.username}>{user.username}</h3>
 

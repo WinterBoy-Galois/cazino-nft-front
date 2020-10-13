@@ -200,3 +200,22 @@ export const UPDATE_PREFERENCES = gql`
     }
   }
 `;
+
+export const UPDATE_AVATAR = gql`
+  mutation updateAvatar($index: Int!) {
+    modifyAvatar(index: $index) {
+      ... on User {
+        id
+        avatarUrl
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

@@ -1,50 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Username should match snapshot 1`] = `
+exports[`AvatarSelector should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div>
-      <div
-        class="container "
-      >
-        <div
-          class="avatar  avatar"
-        >
-          <img
-            alt=""
-            class="w-100 h-100"
-            src="testurl"
-          />
-        </div>
-        <span
-          class="text--bold username "
-        >
-          test
-        </span>
-      </div>
-    </div>
+    <div />
   </body>,
-  "container": <div>
-    <div
-      class="container "
-    >
-      <div
-        class="avatar  avatar"
-      >
-        <img
-          alt=""
-          class="w-100 h-100"
-          src="testurl"
-        />
-      </div>
-      <span
-        class="text--bold username "
-      >
-        test
-      </span>
-    </div>
-  </div>,
+  "container": <div />,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],

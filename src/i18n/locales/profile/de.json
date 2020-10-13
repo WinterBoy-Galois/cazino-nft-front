@@ -19,6 +19,7 @@
   "userInfo": {
     "headline": "Benutzer info",
     "activateButton": "Aktivieren",
-    "notActivatedText": "Ihre E-Mail ist nicht verifiziert. Klick auf den Button, um den Aktivierungscode zu senden."
+    "notActivatedText": "Ihre E-Mail ist nicht verifiziert. Klick auf den Button, um den Aktivierungscode zu senden.",
+    "errorToast": "Es ist ein unerwarteter Fehler aufgetreten. Bitte erneut versuchen."
   }
 }

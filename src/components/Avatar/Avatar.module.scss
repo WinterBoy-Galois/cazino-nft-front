@@ -6,6 +6,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+  &__editable {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &__clickable {
+    cursor: pointer;
+  }
 
   &__spinner {
     width: 24px;

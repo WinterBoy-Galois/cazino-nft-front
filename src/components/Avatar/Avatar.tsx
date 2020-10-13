@@ -1,23 +1,52 @@
 import React from 'react';
-import styles from './Avatar.module.scss';
+
 import Spinner from '../Spinner';
+import Edit from '../icons/Edit';
+
+import styles from './Avatar.module.scss';
 
 interface IProps {
   loading?: boolean;
   avatarUrl?: string;
   username?: string;
+  isEditable?: boolean;
   className?: string;
+  ref?: any;
+  onClick?: () => void;
 }
 
-const Avatar: React.FC<IProps> = ({ loading = false, avatarUrl, username, className = '' }) => {
+const Avatar: React.FC<IProps> = ({
+  loading = false,
+  avatarUrl,
+  username,
+  isEditable = false,
+  className = '',
+  ref,
+  onClick,
+}) => {
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <div className={`${styles.avatar} ${className}`}>
+    <div
+      ref={ref}
+      {...(onClick ? { role: 'button' } : {})}
+      className={`${styles.avatar} ${onClick ? styles.avatar__clickable : ''} ${className}`}
+      onClick={handleClick}
+    >
       {!loading && avatarUrl ? (
-        <img
-          className="w-100 h-100"
-          src={avatarUrl}
-          alt={username?.substr(0, 2).toUpperCase() ?? ''}
-        />
+        <>
+          {isEditable && <Edit className={styles.avatar__editable} />}
+
+          <img
+            className="w-100 h-100"
+            src={avatarUrl}
+            alt={username?.substr(0, 2).toUpperCase() ?? ''}
+          />
+        </>
       ) : (
         <div className={styles.avatar__spinner}>
           <Spinner color={'WHITE'} />
