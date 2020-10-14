@@ -1,0 +1,31 @@
+@import '../../styles/shared';
+
+.slide-select {
+  max-width: 428px;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+}
+
+.spacing {
+  margin-bottom: 1rem;
+}
+
+.link {
+  font-size: 18px;
+  font-weight: 400;
+
+  &__container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.qrcode {
+  &__container {
+    width: 200px;
+    padding: 1rem;
+    background-color: $white;
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+}

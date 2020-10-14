@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForDomChange } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 
 import LeaderboardsTab from './LeaderboardsTab';
@@ -38,8 +38,6 @@ describe('LeaderboardsTab', () => {
         </MockedProvider>
       </LocationProvider>
     );
-
-    await waitForDomChange();
 
     // Assert
     expect(container).toMatchSnapshot();

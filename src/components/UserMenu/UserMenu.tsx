@@ -59,6 +59,11 @@ const UserMenu: React.FC<IProps> = ({
                 </Link>
               </li>
               <li className={styles.menu__list__item}>
+                <Link onClick={onClose} to="/transactions">
+                  {t('menu.transactions')}
+                </Link>
+              </li>
+              <li className={styles.menu__list__item}>
                 <button onClick={handleSignOutClick}>{t('menu.signOut')}</button>
               </li>
             </ul>

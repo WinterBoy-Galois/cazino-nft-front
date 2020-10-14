@@ -17,15 +17,294 @@ Object {
           class="container"
         >
           <div
-            class="avatar "
+            class="container "
           >
-            <div
-              class="avatar__spinner"
-            >
-              <span
-                class="spinner spinner--white "
-              />
+            <div>
+              <div
+                class="avatar avatar__clickable avatar avatar__current"
+                role="button"
+              >
+                <svg
+                  class="avatar__editable"
+                  viewBox="0 0 16 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    data-name="Layer 2"
+                    id="Layer_2"
+                  >
+                    <g
+                      data-name="Layer 1"
+                      id="Layer_1-2"
+                    >
+                      <path
+                        d="M8 0a8 8 0 108 8 8 8 0 00-8-8zM5.8 12H4v-1.8l5.32-5.32 1.8 1.8zm6.72-6.71l-.88.88-1.8-1.8.88-.88a.48.48 0 01.68 0l1.12 1.13a.48.48 0 010 .67z"
+                        fill="#f59f66"
+                      />
+                      <path
+                        class="fill"
+                        d="M12.52 4.61L11.4 3.48a.48.48 0 00-.68 0l-.88.88 1.8 1.8.88-.88a.48.48 0 000-.68zM4 10.2V12h1.8l5.32-5.32-1.8-1.8L4 10.2z"
+                      />
+                    </g>
+                  </g>
+                </svg>
+                <img
+                  alt=""
+                  class="w-100 h-100"
+                  src="https://staging.jinglebets.com/ava/m1.svg"
+                />
+              </div>
             </div>
+            <button
+              class="navigation__button--prev"
+              style="visibility: hidden;"
+            >
+              <svg
+                class="navigation__icon--prev"
+                viewBox="0 0 12 26"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <style>
+                    .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+                  </style>
+                </defs>
+                <g
+                  data-name="Layer 2"
+                  id="Layer_2"
+                >
+                  <g
+                    data-name="Layer 1"
+                    id="Layer_1-2"
+                  >
+                    <g
+                      data-name="Group 197"
+                      id="Group_197"
+                    >
+                      <path
+                        class="cls-1"
+                        d="M1.5 24.5l9-11"
+                        data-name="Line 23"
+                        id="Line_23"
+                      />
+                      <path
+                        class="cls-1"
+                        d="M1.5 1.5l9 12"
+                        data-name="Line 24"
+                        id="Line_24"
+                      />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </button>
+            <div
+              class="swiper-container swiper-container-initialized swiper-container-horizontal swiper"
+              style="visibility: hidden;"
+            >
+              <div
+                class="swiper-wrapper"
+                style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
+              >
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m2.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m3.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m4.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m5.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m6.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m7.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m8.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m9.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m10.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m11.svg"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m12.svg"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="navigation__button--next"
+              style="visibility: hidden;"
+            >
+              <svg
+                class="navigation__icon--next"
+                viewBox="0 0 12 26"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <style>
+                    .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+                  </style>
+                </defs>
+                <g
+                  data-name="Layer 2"
+                  id="Layer_2"
+                >
+                  <g
+                    data-name="Layer 1"
+                    id="Layer_1-2"
+                  >
+                    <g
+                      data-name="Group 197"
+                      id="Group_197"
+                    >
+                      <path
+                        class="cls-1"
+                        d="M1.5 24.5l9-11"
+                        data-name="Line 23"
+                        id="Line_23"
+                      />
+                      <path
+                        class="cls-1"
+                        d="M1.5 1.5l9 12"
+                        data-name="Line 24"
+                        id="Line_24"
+                      />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </button>
           </div>
           <h3
             class="username"
@@ -76,15 +355,294 @@ Object {
         class="container"
       >
         <div
-          class="avatar "
+          class="container "
         >
-          <div
-            class="avatar__spinner"
-          >
-            <span
-              class="spinner spinner--white "
-            />
+          <div>
+            <div
+              class="avatar avatar__clickable avatar avatar__current"
+              role="button"
+            >
+              <svg
+                class="avatar__editable"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  data-name="Layer 2"
+                  id="Layer_2"
+                >
+                  <g
+                    data-name="Layer 1"
+                    id="Layer_1-2"
+                  >
+                    <path
+                      d="M8 0a8 8 0 108 8 8 8 0 00-8-8zM5.8 12H4v-1.8l5.32-5.32 1.8 1.8zm6.72-6.71l-.88.88-1.8-1.8.88-.88a.48.48 0 01.68 0l1.12 1.13a.48.48 0 010 .67z"
+                      fill="#f59f66"
+                    />
+                    <path
+                      class="fill"
+                      d="M12.52 4.61L11.4 3.48a.48.48 0 00-.68 0l-.88.88 1.8 1.8.88-.88a.48.48 0 000-.68zM4 10.2V12h1.8l5.32-5.32-1.8-1.8L4 10.2z"
+                    />
+                  </g>
+                </g>
+              </svg>
+              <img
+                alt=""
+                class="w-100 h-100"
+                src="https://staging.jinglebets.com/ava/m1.svg"
+              />
+            </div>
           </div>
+          <button
+            class="navigation__button--prev"
+            style="visibility: hidden;"
+          >
+            <svg
+              class="navigation__icon--prev"
+              viewBox="0 0 12 26"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <style>
+                  .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+                </style>
+              </defs>
+              <g
+                data-name="Layer 2"
+                id="Layer_2"
+              >
+                <g
+                  data-name="Layer 1"
+                  id="Layer_1-2"
+                >
+                  <g
+                    data-name="Group 197"
+                    id="Group_197"
+                  >
+                    <path
+                      class="cls-1"
+                      d="M1.5 24.5l9-11"
+                      data-name="Line 23"
+                      id="Line_23"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M1.5 1.5l9 12"
+                      data-name="Line 24"
+                      id="Line_24"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button>
+          <div
+            class="swiper-container swiper-container-initialized swiper-container-horizontal swiper"
+            style="visibility: hidden;"
+          >
+            <div
+              class="swiper-wrapper"
+              style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
+            >
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m2.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m3.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m4.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m5.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m6.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m7.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m8.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m9.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m10.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m11.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m12.svg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="navigation__button--next"
+            style="visibility: hidden;"
+          >
+            <svg
+              class="navigation__icon--next"
+              viewBox="0 0 12 26"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <style>
+                  .cls-1{fill:none;stroke:#f4feff;stroke-linecap:round;stroke-width:3px}
+                </style>
+              </defs>
+              <g
+                data-name="Layer 2"
+                id="Layer_2"
+              >
+                <g
+                  data-name="Layer 1"
+                  id="Layer_1-2"
+                >
+                  <g
+                    data-name="Group 197"
+                    id="Group_197"
+                  >
+                    <path
+                      class="cls-1"
+                      d="M1.5 24.5l9-11"
+                      data-name="Line 23"
+                      id="Line_23"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M1.5 1.5l9 12"
+                      data-name="Line 24"
+                      id="Line_24"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button>
         </div>
         <h3
           class="username"

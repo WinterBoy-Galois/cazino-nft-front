@@ -1,0 +1,16 @@
+@import '../../../../styles/shared';
+
+.container {
+  display: flex;
+}
+
+.icon {
+  width: 22px;
+  margin-right: 0.5rem;
+  fill: $white;
+
+  @include media-breakpoint-up(md) {
+    width: 32px;
+    margin-right: 1rem;
+  }
+}

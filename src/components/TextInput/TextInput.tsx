@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { useState, useEffect } from 'react';
 
 import styles from './TextInput.module.scss';
@@ -9,6 +10,7 @@ interface IProps {
   validationMessage?: string;
   onChangeValue?: (value: string) => void;
   onBlur?: ({ target }: { target: EventTarget | null }) => void;
+  disabled?: boolean;
 }
 
 const TextInput = ({
@@ -18,6 +20,7 @@ const TextInput = ({
   validationMessage,
   onChangeValue,
   onBlur,
+  disabled,
 }: IProps) => {
   const [value, setValue] = useState(initialValue);
 
@@ -53,11 +56,11 @@ const TextInput = ({
   return (
     <div className={styles.inputField__container}>
       <div
-        className={
-          !isError()
-            ? `${styles['inputField__wrapper']}`
-            : `${styles['inputField__wrapper']} ${styles['inputField__wrapper--error']}`
-        }
+        className={clsx(
+          styles['inputField__wrapper'],
+          isError() && styles['inputField__wrapper--error'],
+          disabled && styles['inputField__wrapper--disabled']
+        )}
       >
         <label className={styles.inputField__label}>{label}</label>
         <input
@@ -69,6 +72,7 @@ const TextInput = ({
           onChange={handleOnChange}
           onKeyPress={keypressHandler}
           onBlur={handleBlur}
+          disabled={disabled}
         />
       </div>
       {isError() && <div className={styles.inputField__error}>{validationMessage}</div>}

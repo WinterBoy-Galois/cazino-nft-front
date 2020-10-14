@@ -15,4 +15,5 @@ export default interface User {
   mostPlayed?: GameTypes;
   totalBets?: number;
   luckyBets?: number;
+  depositAddress?: string;
 }

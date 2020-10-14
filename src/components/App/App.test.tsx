@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, wait } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import App from './App';
 import { MockedProvider } from '@apollo/client/testing';
 
 describe('App', () => {
-  xit('should match snapshot', () => {
+  xit('should match snapshot', async () => {
     // Arrange
 
     // Act
@@ -14,9 +14,7 @@ describe('App', () => {
       </MockedProvider>
     );
 
-    wait();
-
     // Assert
-    expect(container).toMatchSnapshot();
+    await waitFor(() => expect(container).toMatchSnapshot());
   });
 });

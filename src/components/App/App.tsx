@@ -11,6 +11,8 @@ import { appConfig } from '../../common/config';
 import Referrals from '../Referrals';
 import { ProfilePageWithData } from '../../pages/ProfilePage/ProfilePage';
 import ScrollToTop from '../ScrollToTop';
+import TransactionsPage from '../../pages/TransactionsPage';
+import AuthRoute from '../AuthRoute';
 
 const App: React.FC = () => {
   const client = useApolloClient();
@@ -25,7 +27,8 @@ const App: React.FC = () => {
             <Layout>
               <Router>
                 <HomePage path="/" />
-                <ProfilePageWithData path="/profile" />
+                <AuthRoute path="/profile" component={ProfilePageWithData} />
+                <AuthRoute path="/transactions/*" component={TransactionsPage} />
               </Router>
             </Layout>
 

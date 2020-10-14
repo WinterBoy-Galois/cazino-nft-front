@@ -38,7 +38,7 @@ const MyBetsTable: React.FC<IProps> = ({
 }) => {
   const breakpoint = useBreakpoint();
   const { t } = useTranslation(['sidebar', 'auth']);
-  const location = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const renderTimeAndMultiplierColumn = () => {
@@ -62,6 +62,10 @@ const MyBetsTable: React.FC<IProps> = ({
   if (animationSpeed === DispatchSpeed.VERY_FAST) {
     speed = 250;
   }
+
+  const handleRowClick = (bet: Bet) => {
+    navigate(`${pathname}?dialog=bet-details`, { state: { bet } });
+  };
 
   return (
     <div className={styles['bet-table__wrapper']}>
@@ -95,7 +99,7 @@ const MyBetsTable: React.FC<IProps> = ({
                       timeout={speed / 2}
                       mountOnEnter={true}
                     >
-                      <BetRow bet={b} viewMode={viewMode} />
+                      <BetRow bet={b} viewMode={viewMode} onRowClicked={() => handleRowClick(b)} />
                     </CSSTransition>
                   ))}
                 </TransitionGroup>
@@ -111,10 +115,7 @@ const MyBetsTable: React.FC<IProps> = ({
       )}
       {!isLoading && !isSignedIn && (
         <Error>
-          <Button
-            onClick={() => navigate(`${location.pathname}?dialog=sign-in`)}
-            className={styles.button}
-          >
+          <Button onClick={() => navigate(`${pathname}?dialog=sign-in`)} className={styles.button}>
             {t('auth:signIn.headline')}
           </Button>
         </Error>

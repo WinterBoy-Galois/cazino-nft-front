@@ -5,10 +5,9 @@ export const CHANGE_SERVER_SEED = gql`
     changeServerSeed {
       ... on GenericErrorArray {
         errors {
-          type
-          field
-          severity
-          messageKey
+          source
+          code
+          message
           args
         }
       }
@@ -43,6 +42,7 @@ export const SIGN_IN = gql`
           balance
           email
           isActivated
+          depositAddress
         }
       }
       ... on GenericErrorArray {
@@ -79,6 +79,7 @@ export const SIGN_UP = gql`
           username
           avatarUrl
           balance
+          depositAddress
         }
       }
       ... on GenericErrorArray {
@@ -127,6 +128,7 @@ export const RESET_PASSWORD = gql`
           username
           avatarUrl
           balance
+          depositAddress
         }
       }
       ... on GenericErrorArray {
@@ -186,6 +188,25 @@ export const UPDATE_PREFERENCES = gql`
         hideUsername
         hideTotalProfit
         hideTotalWager
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_AVATAR = gql`
+  mutation updateAvatar($index: Int!) {
+    modifyAvatar(index: $index) {
+      ... on User {
+        id
+        avatarUrl
       }
       ... on GenericErrorArray {
         errors {

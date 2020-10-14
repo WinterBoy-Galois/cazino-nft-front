@@ -1,22 +1,25 @@
 import React, { useState, useMemo } from 'react';
 import { RouteComponentProps, useNavigate } from '@reach/router';
-import PageHeadline from '../../components/PageHeadline';
-import PageContentContainer from '../../components/PageContentContainer';
-import styles from './ProfilePage.module.scss';
-import { ME_STATISTICS_PREFERENCES } from '../../graphql/queries';
-import { useStateValue } from '../../state';
-import Statistics from './components/Statistics';
 import { useTranslation } from 'react-i18next';
 import { ApolloError, useQuery, useMutation } from '@apollo/client';
+
+import { appConfig } from '../../common/config';
+import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
+import { useStateValue } from '../../state';
+import PageHeadline from '../../components/PageHeadline';
+import Statistics from './components/Statistics';
 import UserInfo from './components/UserInfo';
 import { UserStatistic } from '../../models/userStatistics.model';
+import ApplicationError from '../../models/applicationError.model';
+import PageContentContainer from '../../components/PageContentContainer';
 import Preferences from './components/Preferences';
 import Security from './components/Security';
-import ApplicationError from '../../models/applicationError.model';
-import { UPDATE_PASSWORD, UPDATE_PREFERENCES } from '../../graphql/mutations';
-import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { success, error } from '../../components/Toast';
 import { Preferences as PreferencesModel } from './components/Preferences/lib/preferences';
+import { ME_STATISTICS_PREFERENCES } from '../../graphql/queries';
+import { UPDATE_PASSWORD, UPDATE_PREFERENCES, UPDATE_AVATAR } from '../../graphql/mutations';
+
+import styles from './ProfilePage.module.scss';
 
 interface IProps extends RouteComponentProps {
   userStatistic?: UserStatistic;
@@ -24,9 +27,11 @@ interface IProps extends RouteComponentProps {
   statisticsError?: ApolloError;
   securityLoading: boolean;
   securityErrors?: ApplicationError[];
-  onPasswordChange?: (oldPassword: string, newPassword: string) => Promise<boolean>;
   preferences?: PreferencesModel;
+  avatarUrl?: string;
+  onPasswordChange?: (oldPassword: string, newPassword: string) => Promise<boolean>;
   onPreferenceChange?: (preferences: PreferencesModel) => void;
+  onAvatarChange?: (index: number) => void;
 }
 
 const ProfilePage: React.FC<IProps> = ({
@@ -35,9 +40,10 @@ const ProfilePage: React.FC<IProps> = ({
   statisticsError,
   securityLoading,
   securityErrors,
-  onPasswordChange,
   preferences,
+  onPasswordChange,
   onPreferenceChange,
+  onAvatarChange,
 }) => {
   const { t } = useTranslation('profile');
   const [{ auth }] = useStateValue();
@@ -54,7 +60,11 @@ const ProfilePage: React.FC<IProps> = ({
       <PageContentContainer>
         <div className="row">
           <div className={`col-12 col-lg-6 ${styles.column}`}>
-            <UserInfo user={auth.user} className={styles['user-info']} />
+            <UserInfo
+              user={auth.user}
+              className={styles['user-info']}
+              onAvatarChange={onAvatarChange}
+            />
 
             <Statistics
               loading={statisticsLoading}
@@ -85,6 +95,8 @@ const ProfilePage: React.FC<IProps> = ({
 
 const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['auth', 'profile']);
+  const [, dispatch] = useStateValue();
+  const [{ auth }] = useStateValue();
 
   const { data, loading: statisticsLoading, error: statisticsError } = useQuery(
     ME_STATISTICS_PREFERENCES
@@ -109,6 +121,7 @@ const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
 
   const [preferences, setPreferences] = useState<PreferencesModel>();
   const [updatePreferences] = useMutation(UPDATE_PREFERENCES);
+  const [updateAvatar] = useMutation(UPDATE_AVATAR);
   const onUpdatePreferences = async ({ hideUsername, hideProfit, hideWager }: PreferencesModel) => {
     const oldPreferences = preferences;
     setPreferences({
@@ -137,6 +150,29 @@ const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
     [data]
   );
 
+  const onAvatarChange = async (index: number) => {
+    const oldAvatarUrl = auth?.user?.avatarUrl;
+
+    const { data, errors } = await updateAvatar({
+      variables: { index },
+    });
+
+    dispatch({
+      type: 'AUTH_UPDATE_USER',
+      payload: { avatarUrl: appConfig.avatarUrls[index - 1] },
+    });
+
+    if (errors || data?.modifyAvatar.errors) {
+      dispatch({
+        type: 'AUTH_UPDATE_USER',
+        payload: { avatarUrl: oldAvatarUrl },
+      });
+      return error(t('profile:userInfo.errorToast'));
+    }
+
+    return true;
+  };
+
   return (
     <ProfilePage
       userStatistic={data?.me}
@@ -147,6 +183,7 @@ const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
       preferences={preferences}
       onPasswordChange={onPasswordChange}
       onPreferenceChange={onUpdatePreferences}
+      onAvatarChange={onAvatarChange}
     />
   );
 };

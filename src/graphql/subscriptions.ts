@@ -39,3 +39,16 @@ export const BET_ADDED = gql`
     }
   }
 `;
+
+export const BALANCE = gql`
+  subscription balance {
+    balance {
+      user {
+        id
+        balance
+      }
+      amount
+      event
+    }
+  }
+`;

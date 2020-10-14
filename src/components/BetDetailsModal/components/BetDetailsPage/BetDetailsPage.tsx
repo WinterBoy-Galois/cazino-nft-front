@@ -23,7 +23,7 @@ interface IProps {
 
 const BetDetailsPage: React.FC<IProps> = ({ bet, avatarUrl, loading }) => {
   const { t } = useTranslation(['modals']);
-  const location = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   if (!bet) {
@@ -31,7 +31,9 @@ const BetDetailsPage: React.FC<IProps> = ({ bet, avatarUrl, loading }) => {
   }
 
   const handleUsernameClick = () => {
-    navigate(`${location.pathname}?dialog=user-info`, { state: { userId: bet.userid } });
+    navigate(`${pathname}?dialog=user-info`, {
+      state: { userId: bet.userid, backPath: `${pathname}?dialog=bet-details`, backState: { bet } },
+    });
   };
 
   return (

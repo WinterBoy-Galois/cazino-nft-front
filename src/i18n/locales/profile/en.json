@@ -19,6 +19,7 @@
   "userInfo": {
     "headline": "User info",
     "activateButton": "Activate",
-    "notActivatedText": "Your e-mail is not verified. Press the button to send activation code."
+    "notActivatedText": "Your e-mail is not verified. Press the button to send activation code.",
+    "errorToast": "There was an unexpected error. Please try again."
   }
 }

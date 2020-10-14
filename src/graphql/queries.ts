@@ -169,6 +169,7 @@ export const ME = gql`
       balance
       email
       isActivated
+      depositAddress
     }
   }
 `;
@@ -185,6 +186,36 @@ export const ME_STATISTICS_PREFERENCES = gql`
       hideUsername
       hideTotalProfit
       hideTotalWager
+    }
+  }
+`;
+
+export const SETUP_CASHIER = gql`
+  query SetupCashier {
+    setupCashier {
+      networkFee
+      depositConfirmations
+      minWithdraw
+    }
+    me {
+      id
+      depositAddress
+    }
+  }
+`;
+
+export const DEPOSITS = gql`
+  query Deposits($page: Int, $limit: Int) {
+    transactionsDeposit(page: $page, limit: $limit) {
+      page
+      limit
+      total
+      items {
+        status
+        time
+        hash
+        amount
+      }
     }
   }
 `;

@@ -29,6 +29,8 @@ const getApolloClient = (
   authType: AuthType,
   accessToken?: string
 ) => {
+  cache.reset();
+
   if (wsLink) {
     (wsLink as any).subscriptionClient.close();
   }
@@ -38,7 +40,7 @@ const getApolloClient = (
     options: {
       reconnect: true,
       connectionParams: {
-        authToken: accessToken ?? '',
+        authToken: accessToken ?? undefined,
       },
     },
   });
@@ -89,10 +91,7 @@ const getApolloClient = (
   const link = split(
     ({ query }) => {
       const definition = getMainDefinition(query);
-      return (
-        definition.kind === 'OperationDefinition' &&
-        (definition.operation === 'subscription' || definition.operation === 'query')
-      );
+      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
     },
     wsLink,
     authLink.concat(httpLink)

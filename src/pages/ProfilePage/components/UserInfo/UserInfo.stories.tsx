@@ -21,3 +21,8 @@ const data = {
 };
 
 export const Default = () => <UserInfo user={data.user} />;
+export const WithPadding = () => (
+  <div style={{ padding: '15px' }}>
+    <UserInfo user={data.user} />
+  </div>
+);

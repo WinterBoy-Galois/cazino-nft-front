@@ -2,7 +2,7 @@ import { useWindowDimensions } from './useWindowDimensions.hook';
 
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-const breakpoints: { name: Breakpoint; minWidth: number }[] = [
+export const breakpoints: { name: Breakpoint; minWidth: number }[] = [
   {
     name: 'xs',
     minWidth: 0,

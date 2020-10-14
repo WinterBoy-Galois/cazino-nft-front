@@ -70,9 +70,12 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
               ) : (
                 <Fragment>
                   <span className={styles['details--spacing']}>{auth.user.username}</span>
-                  <div role="button" onClick={handleToggleMenu} ref={avatarRef}>
-                    <Avatar avatarUrl={auth.user.avatarUrl} username={auth.user.username} />
-                  </div>
+                  <Avatar
+                    avatarUrl={auth.user.avatarUrl}
+                    username={auth.user.username}
+                    ref={avatarRef}
+                    onClick={handleToggleMenu}
+                  />
                 </Fragment>
               )}
             </div>
