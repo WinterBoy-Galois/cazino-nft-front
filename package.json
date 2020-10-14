@@ -1,6 +1,6 @@
 {
-  "name": "cazzino",
-  "version": "0.4.5",
+  "name": "cazzzino",
+  "version": "0.6.0",
   "private": true,
   "dependencies": {
     "@apollo/client": "3.2.2",
