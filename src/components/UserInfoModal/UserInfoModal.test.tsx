@@ -1,34 +1,24 @@
 import React from 'react';
-import { render, waitForDomChange } from '@testing-library/react';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { createMockClient } from 'mock-apollo-client';
+import { render } from '@testing-library/react';
+import { MockedProvider } from '@apollo/client/testing';
 import { UserInfoModalWithData } from './UserInfoModal';
 import { USER_INFO } from '../../graphql/queries';
-import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
-import introspectionQueryResultData from '../../graphql/fragmentTypes.json';
 import { GameTypes } from '../../models/gameTypes.model';
 import { LocationProvider } from '@reach/router';
 
-describe('LeaderboardsTab', () => {
-  it('should match snapshot', async () => {
-    // Arrange
-    const fragmentMatcher = new IntrospectionFragmentMatcher({
-      introspectionQueryResultData,
-    });
-
-    const cache = new InMemoryCache({
-      addTypename: false,
-      fragmentMatcher,
-    });
-
-    const mockClient = createMockClient({ cache });
-    const queryHandler = jest.fn().mockResolvedValue({
+const mocks = [
+  {
+    request: {
+      query: USER_INFO,
+      variables: { userId: '1' },
+    },
+    result: {
       data: {
         userInfo: {
           __typename: 'PublicUser',
           id: '1',
           username: 'NIDHjQ',
-          avatarUrl: 'https://dev.gambilife.com/ava/m1.svg',
+          avatarUrl: 'https://staging.jinglebets.com/ava/m1.svg',
           totalWager: 0,
           totalProfit: 0,
           mostPlayed: GameTypes.CLAMS,
@@ -36,19 +26,22 @@ describe('LeaderboardsTab', () => {
           luckyBets: 0,
         },
       },
-    });
-    mockClient.setRequestHandler(USER_INFO, queryHandler);
+    },
+  },
+];
+
+describe('LeaderboardsTab', () => {
+  it('should match snapshot', async () => {
+    // Arrange
 
     // Act
     const container = render(
       <LocationProvider>
-        <ApolloProvider client={mockClient}>
+        <MockedProvider mocks={mocks} addTypename={false}>
           <UserInfoModalWithData show={true} userId="1" />
-        </ApolloProvider>
+        </MockedProvider>
       </LocationProvider>
     );
-
-    await waitForDomChange();
 
     // Assert
     expect(container).toMatchSnapshot();

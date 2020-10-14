@@ -7,7 +7,7 @@ interface IProps {
   multiplier: number;
 }
 
-const ProfitLabel: React.SFC<IProps> = ({ label, multiplier }) => {
+const ProfitLabel: React.FC<IProps> = ({ label, multiplier }) => {
   return (
     <Fragment>
       {label} (<span className={styles['profit-label']}>{formatMultiplier(multiplier)}</span>)

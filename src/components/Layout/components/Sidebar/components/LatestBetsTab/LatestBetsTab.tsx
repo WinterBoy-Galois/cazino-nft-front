@@ -3,7 +3,7 @@ import LatestBetsTable from '../../../../../LatestBetsTable';
 import styles from './LatestBetsTab.module.scss';
 import { ViewMode } from '../../../../../LatestBetsTable/LatestBetsTable';
 import Bet from '../../../../../../models/bet.model';
-import { ApolloError } from 'apollo-client';
+import { ApolloError } from '@apollo/client';
 import { navigate, useLocation } from '@reach/router';
 import { useStateValue } from '../../../../../../state';
 import { appConfig } from '../../../../../../common/config';
@@ -14,7 +14,7 @@ interface IProps {
   error?: ApolloError | undefined;
 }
 
-const LatestBetsTab: React.SFC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
+const LatestBetsTab: React.FC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
   const [
     {
       auth: { user },

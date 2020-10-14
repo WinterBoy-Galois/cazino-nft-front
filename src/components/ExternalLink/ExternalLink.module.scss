@@ -1,0 +1,17 @@
+@import '../../styles/shared';
+
+.icon {
+  width: 12px;
+  height: 12px;
+  margin-left: 0.4rem;
+}
+
+.link {
+  color: $white;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    color: $white;
+  }
+}

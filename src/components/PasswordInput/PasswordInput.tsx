@@ -71,7 +71,12 @@ const PasswordInput = ({
             onBlur={handleBlur}
           />
         </div>
-        <button type="button" className={`${styles['inputField__icon']}`} onClick={handleClick}>
+        <button
+          type="button"
+          className={`${styles['inputField__icon']}`}
+          onClick={handleClick}
+          tabIndex={-1}
+        >
           {isPasswordVisible ? (
             <Eye className={`${styles['inputField__icon--visible']}`} />
           ) : (

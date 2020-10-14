@@ -2,3 +2,24 @@
 
 @import '~bootstrap-scss/reboot';
 @import '~bootstrap-scss/grid';
+@import '~bootstrap-scss/custom-forms';
+
+.custom-control-label {
+  &::before {
+    border: $custom-control-indicator-bg solid $custom-control-indicator-border-width;
+  }
+}
+
+.custom-switch {
+  .custom-control-label {
+    &::after {
+      background-color: $white;
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label {
+    &::after {
+      background-color: $white;
+    }
+  }
+}

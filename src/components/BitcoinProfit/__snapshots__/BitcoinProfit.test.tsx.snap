@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="text--positive"
+        class="container text--positive "
       >
         <svg
           class="icon"
@@ -25,7 +25,9 @@ Object {
             />
           </g>
         </svg>
-        <span>
+        <span
+          class="truncate"
+        >
           +0.00123230
         </span>
       </div>
@@ -33,7 +35,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="text--positive"
+      class="container text--positive "
     >
       <svg
         class="icon"
@@ -52,7 +54,9 @@ Object {
           />
         </g>
       </svg>
-      <span>
+      <span
+        class="truncate"
+      >
         +0.00123230
       </span>
     </div>

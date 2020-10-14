@@ -4,7 +4,7 @@ interface IProps {
   className?: string;
 }
 
-const Instagram: React.SFC<IProps> = ({ className }) => {
+const Instagram: React.FC<IProps> = ({ className }) => {
   return (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className={className}>
       <path d="M12.004 5.838a6.157 6.157 0 00-6.158 6.158 6.157 6.157 0 006.158 6.158 6.157 6.157 0 006.158-6.158 6.157 6.157 0 00-6.158-6.158zm0 10.155a3.996 3.996 0 113.997-3.997 3.995 3.995 0 01-3.997 3.997z" />

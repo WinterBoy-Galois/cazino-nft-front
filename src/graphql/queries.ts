@@ -83,6 +83,7 @@ export const USER_INFO_AVATAR_URL = gql`
     userInfo(id: $userId) {
       __typename
       ... on PublicUser {
+        id
         avatarUrl
       }
       ... on GenericErrorArray {
@@ -166,6 +167,55 @@ export const ME = gql`
       username
       avatarUrl
       balance
+      email
+      isActivated
+      depositAddress
+    }
+  }
+`;
+
+export const ME_STATISTICS_PREFERENCES = gql`
+  query Me {
+    me {
+      id
+      totalWager
+      totalProfit
+      mostPlayed
+      totalBets
+      luckyBets
+      hideUsername
+      hideTotalProfit
+      hideTotalWager
+    }
+  }
+`;
+
+export const SETUP_CASHIER = gql`
+  query SetupCashier {
+    setupCashier {
+      networkFee
+      depositConfirmations
+      minWithdraw
+    }
+    me {
+      id
+      depositAddress
+    }
+  }
+`;
+
+export const DEPOSITS = gql`
+  query Deposits($page: Int, $limit: Int) {
+    transactionsDeposit(page: $page, limit: $limit) {
+      page
+      limit
+      total
+      items {
+        status
+        time
+        hash
+        amount
+      }
     }
   }
 `;

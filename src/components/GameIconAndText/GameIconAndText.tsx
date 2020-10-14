@@ -7,7 +7,7 @@ interface IProps {
   game: GameTypes;
 }
 
-const GameIconAndText: React.SFC<IProps> = ({ game }) => {
+const GameIconAndText: React.FC<IProps> = ({ game }) => {
   return (
     <Fragment>
       <GameIcon game={game} className={styles['icon']} />

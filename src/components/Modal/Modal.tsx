@@ -18,7 +18,7 @@ interface IProps {
 
 export const transitionTimeout = 200;
 
-const Modal: React.SFC<IProps> = ({
+const Modal: React.FC<IProps> = ({
   title = '',
   show,
   children,
@@ -60,19 +60,19 @@ const Modal: React.SFC<IProps> = ({
         exit: styles['fade--exit'],
         exitActive: styles['fade--exit-active'],
       }}
-      unmountOnExit={true}
+      unmountOnExit
     >
       <Div100vh className={styles.container}>
         <CSSTransition
           in={show}
-          timeout={200}
+          timeout={transitionTimeout}
           classNames={{
             appear: styles['scale--enter'],
             appearActive: styles['scale--enter-active'],
             exit: styles['scale--exit'],
             exitActive: styles['scale--exit-active'],
           }}
-          appear={true}
+          appear
         >
           <div
             role="dialog"

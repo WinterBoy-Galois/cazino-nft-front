@@ -9,7 +9,7 @@ interface IProps {
   arrowLeft?: boolean;
 }
 
-const SidebarToggle: React.SFC<IProps> = ({ show, arrowLeft }) => {
+const SidebarToggle: React.FC<IProps> = ({ show, arrowLeft }) => {
   const [, dispatch] = useStateValue();
 
   return (

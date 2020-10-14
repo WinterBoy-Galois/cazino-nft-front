@@ -1,25 +1,17 @@
 @import '../../styles/shared';
 @import 'swiper/swiper.scss';
+@import 'swiper/components/pagination/pagination.scss';
 
-.swiper-container {
-  @extend .swiper-container;
+.swiper-wrapper {
+  padding-bottom: 42px;
 
-  z-index: 0;
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 55px;
+  }
 }
 
 .swiper-pagination {
   text-align: center;
-  margin-top: 8px;
-  margin-bottom: 8px;
-
-  span:first-of-type {
-    margin-left: 0;
-  }
-
-  @include media-breakpoint-up(lg) {
-    margin-top: 21px;
-    margin-bottom: 21px;
-  }
 
   &-bullet {
     height: 16px;
@@ -35,7 +27,6 @@
     display: inline-block;
 
     @include media-breakpoint-up(lg) {
-      margin-top: 0;
       height: 21px;
       width: 21px;
       border-radius: 21px;
@@ -50,6 +41,17 @@
 
     &:hover {
       opacity: 1;
+    }
+  }
+}
+
+.swiper-container-horizontal {
+  > .swiper-pagination-bullets {
+    span:first-of-type {
+      margin-left: 0;
+    }
+    .swiper-pagination-bullet {
+      margin: 0 0 0 16px;
     }
   }
 }

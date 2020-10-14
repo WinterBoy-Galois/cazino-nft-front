@@ -1,0 +1,28 @@
+@import '../../styles/shared';
+
+.status {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+
+  &--confirmed {
+    background-color: $lightGreen;
+  }
+
+  &--pending {
+    background-color: $lightYellow;
+  }
+
+  &--rejected {
+    background-color: $lightRed;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  margin-left: 0.5rem;
+}

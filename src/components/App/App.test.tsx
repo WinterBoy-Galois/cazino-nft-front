@@ -1,24 +1,20 @@
 import React from 'react';
-import { render, wait } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import App from './App';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { createMockClient } from 'mock-apollo-client';
+import { MockedProvider } from '@apollo/client/testing';
 
 describe('App', () => {
-  xit('should match snapshot', () => {
+  xit('should match snapshot', async () => {
     // Arrange
-    const mockClient = createMockClient();
 
     // Act
     const container = render(
-      <ApolloProvider client={mockClient}>
+      <MockedProvider>
         <App />
-      </ApolloProvider>
+      </MockedProvider>
     );
 
-    wait();
-
     // Assert
-    expect(container).toMatchSnapshot();
+    await waitFor(() => expect(container).toMatchSnapshot());
   });
 });

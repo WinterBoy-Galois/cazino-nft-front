@@ -4,11 +4,12 @@ import Bitcoin from '../../../../../icons/social/Bitcoin';
 
 interface IProps {
   value: string;
+  onClick?: () => void;
 }
 
-const Balance: React.SFC<IProps> = ({ value }) => {
+const Balance: React.FC<IProps> = ({ value, onClick }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} onClick={onClick}>
       <div className={styles.container}>
         <div className={styles.border} />
         <div className={styles.value}>

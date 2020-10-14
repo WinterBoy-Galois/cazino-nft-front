@@ -1,22 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Modal from '../Modal';
 import styles from './UserInfoModal.module.scss';
-import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO } from '../../graphql/queries';
 import Username from '../Username';
-import BitcoinValue from '../BitcoinValue';
-import { formatBitcoin } from '../../common/util/format.util';
 import Button from '../Button';
 import Loading from '../Loading';
 import Error from '../Error';
-import DetailList from '../DetailList';
-import GameIconAndText from '../GameIconAndText';
-import BitcoinProfit from '../BitcoinProfit';
-import LostBets from '../LostBets';
-import { ApolloError } from 'apollo-client';
-import { useTranslation } from 'react-i18next';
+import { ApolloError, useQuery } from '@apollo/client';
 import DetailsContainer from '../DetailsContainer';
-import { useLocation, Redirect } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
+import UserStatistics from '../UserStatistics';
 
 interface IProps {
   show: boolean;
@@ -35,8 +28,6 @@ const UserInfoModal: React.FC<IProps> = ({
   error,
   onBack,
 }: IProps) => {
-  const { t } = useTranslation(['common']);
-
   return (
     <Modal show={show} onClose={onClose} title="User Info">
       {loading ? <Loading /> : null}
@@ -59,49 +50,7 @@ const UserInfoModal: React.FC<IProps> = ({
               loading={loading}
             />
 
-            <DetailList
-              details={[
-                {
-                  label: 'Total Wager',
-                  value:
-                    data.userInfo.totalWager !== null ? (
-                      <BitcoinValue value={formatBitcoin(data.userInfo.totalWager)} />
-                    ) : (
-                      <div className={styles.username__hidden}>{t('hidden')}</div>
-                    ),
-                },
-                {
-                  label: 'Total Profit',
-                  value:
-                    data.userInfo.totalProfit !== null ? (
-                      <BitcoinProfit value={data.userInfo.totalProfit} />
-                    ) : (
-                      <div className={styles.username__hidden}>{t('hidden')}</div>
-                    ),
-                },
-                {
-                  label: 'Most Played',
-                  value: <GameIconAndText game={data.userInfo.mostPlayed} />,
-                },
-                {
-                  label: 'Total Bets',
-                  value: data.userInfo.totalBets,
-                },
-                {
-                  label: 'Won Bets',
-                  value: data.userInfo.luckyBets,
-                },
-                {
-                  label: 'Lost Bets',
-                  value: (
-                    <LostBets
-                      totalBets={data.userInfo.totalBets}
-                      luckyBets={data.userInfo.luckyBets}
-                    />
-                  ),
-                },
-              ]}
-            />
+            <UserStatistics userStatistic={{ ...data.userInfo }} />
           </DetailsContainer>
 
           <div className={styles.button}>
@@ -121,20 +70,29 @@ interface IWithDataProps {
   show: boolean;
   userId: string;
   onClose?: () => void;
-  onBack?: () => void;
+  backPath?: string;
+  backState?: any;
 }
 
 const UserInfoModalWithData: React.FC<IWithDataProps> = ({
   show,
   userId,
   onClose,
-  onBack,
+  backPath,
+  backState,
 }: IWithDataProps) => {
   const { data, loading, error } = useQuery(USER_INFO, { variables: { userId } });
-  const location = useLocation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const handleBack = useCallback(
+    () => backPath && backState && navigate(backPath, { state: backState }),
+    [backPath, backState, navigate]
+  );
 
   if (!userId && show) {
-    return <Redirect noThrow to={`${location.pathname}`} />;
+    navigate(pathname);
+    return null;
   }
 
   return (
@@ -144,7 +102,7 @@ const UserInfoModalWithData: React.FC<IWithDataProps> = ({
       loading={loading}
       error={error}
       onClose={onClose}
-      onBack={onBack}
+      onBack={backPath ? handleBack : undefined}
     />
   );
 };

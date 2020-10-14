@@ -1,8 +1,14 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import GameButton from '.';
 import { action } from '@storybook/addon-actions';
+import { text } from '@storybook/addon-knobs';
 
-storiesOf('Components/GameButtons/GoalGameButton', module).add('Goal', () => (
-  <GameButton headline="goal" onClick={action('click')} />
-));
+import GameButton from '.';
+
+export default {
+  title: 'Components/GameButtons/GameButton',
+  component: GameButton,
+};
+
+export const Custom = () => (
+  <GameButton headline={text('Headline', 'Game Name')} onClick={action('click')} />
+);

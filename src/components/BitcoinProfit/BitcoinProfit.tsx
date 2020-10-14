@@ -4,20 +4,23 @@ import { formatProfit } from '../../common/util/format.util';
 
 interface IProps {
   value: number;
+  className?: string;
 }
 
-const BitcoinProfit: React.SFC<IProps> = ({ value }) => {
+const BitcoinProfit: React.FC<IProps> = ({ value, className = '' }) => {
   const profitClassName = () => {
     if (value === 0) {
       return '';
     } else if (value < 0) {
-      return 'text--negative';
+      return `text--negative`;
     } else if (value > 0) {
-      return 'text--positive';
+      return `text--positive`;
     }
   };
 
-  return <BitcoinValue className={profitClassName()} value={formatProfit(value)} />;
+  return (
+    <BitcoinValue className={`${profitClassName()} ${className}`} value={formatProfit(value)} />
+  );
 };
 
 export default BitcoinProfit;

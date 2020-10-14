@@ -10,7 +10,7 @@ interface IProps {
   className?: string;
 }
 
-const GameIcon: React.SFC<IProps> = ({ game, className }) => {
+const GameIcon: React.FC<IProps> = ({ game, className }) => {
   switch (game) {
     case GameTypes.CLAMS:
       return <Clams className={className} />;

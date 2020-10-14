@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class=" container"
+        class=" container container--light"
       >
         <ul
           class="list"
@@ -15,7 +15,7 @@ Object {
             class="list__item"
           >
             <div
-              class="list__item__label"
+              class="list__item__label truncate"
             >
               bet
             </div>
@@ -23,7 +23,7 @@ Object {
               class="list__item__value"
             >
               <div
-                class=""
+                class="container "
               >
                 <svg
                   class="icon"
@@ -42,7 +42,9 @@ Object {
                     />
                   </g>
                 </svg>
-                <span>
+                <span
+                  class="truncate"
+                >
                   0.00001219
                 </span>
               </div>
@@ -52,7 +54,7 @@ Object {
             class="list__item"
           >
             <div
-              class="list__item__label"
+              class="list__item__label truncate"
             >
               roll over
             </div>
@@ -66,7 +68,7 @@ Object {
             class="list__item"
           >
             <div
-              class="list__item__label"
+              class="list__item__label truncate"
             >
               win chance
             </div>
@@ -80,7 +82,7 @@ Object {
             class="list__item"
           >
             <div
-              class="list__item__label"
+              class="list__item__label truncate"
             >
               Profit
                (
@@ -95,7 +97,7 @@ Object {
               class="list__item__value"
             >
               <div
-                class="text--positive"
+                class="container text--positive "
               >
                 <svg
                   class="icon"
@@ -114,7 +116,9 @@ Object {
                     />
                   </g>
                 </svg>
-                <span>
+                <span
+                  class="truncate"
+                >
                   +0.00043540
                 </span>
               </div>
@@ -126,7 +130,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class=" container"
+      class=" container container--light"
     >
       <ul
         class="list"
@@ -135,7 +139,7 @@ Object {
           class="list__item"
         >
           <div
-            class="list__item__label"
+            class="list__item__label truncate"
           >
             bet
           </div>
@@ -143,7 +147,7 @@ Object {
             class="list__item__value"
           >
             <div
-              class=""
+              class="container "
             >
               <svg
                 class="icon"
@@ -162,7 +166,9 @@ Object {
                   />
                 </g>
               </svg>
-              <span>
+              <span
+                class="truncate"
+              >
                 0.00001219
               </span>
             </div>
@@ -172,7 +178,7 @@ Object {
           class="list__item"
         >
           <div
-            class="list__item__label"
+            class="list__item__label truncate"
           >
             roll over
           </div>
@@ -186,7 +192,7 @@ Object {
           class="list__item"
         >
           <div
-            class="list__item__label"
+            class="list__item__label truncate"
           >
             win chance
           </div>
@@ -200,7 +206,7 @@ Object {
           class="list__item"
         >
           <div
-            class="list__item__label"
+            class="list__item__label truncate"
           >
             Profit
              (
@@ -215,7 +221,7 @@ Object {
             class="list__item__value"
           >
             <div
-              class="text--positive"
+              class="container text--positive "
             >
               <svg
                 class="icon"
@@ -234,7 +240,9 @@ Object {
                   />
                 </g>
               </svg>
-              <span>
+              <span
+                class="truncate"
+              >
                 +0.00043540
               </span>
             </div>

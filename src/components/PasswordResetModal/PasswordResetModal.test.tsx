@@ -1,18 +1,16 @@
 import React from 'react';
-import { render, wait } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 
 import PasswordResetModal from '.';
 
 describe('PasswordResetModal', () => {
-  it('should match snapshot', () => {
+  it('should match snapshot', async () => {
     // Arrange
 
     // Act
     const container = render(<PasswordResetModal show loading={false} />);
 
-    wait();
-
     // Assert
-    expect(container).toMatchSnapshot();
+    await waitFor(() => expect(container).toMatchSnapshot());
   });
 });

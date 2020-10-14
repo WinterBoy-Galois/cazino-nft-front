@@ -38,7 +38,7 @@ const MyBetsTable: React.FC<IProps> = ({
 }) => {
   const breakpoint = useBreakpoint();
   const { t } = useTranslation(['sidebar', 'auth']);
-  const location = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const renderTimeAndMultiplierColumn = () => {
@@ -63,6 +63,10 @@ const MyBetsTable: React.FC<IProps> = ({
     speed = 250;
   }
 
+  const handleRowClick = (bet: Bet) => {
+    navigate(`${pathname}?dialog=bet-details`, { state: { bet } });
+  };
+
   return (
     <div className={styles['bet-table__wrapper']}>
       <table className={styles['bet-table']}>
@@ -76,7 +80,7 @@ const MyBetsTable: React.FC<IProps> = ({
           </tr>
         </thead>
         <tbody className={styles['bet-table__body']}>
-          {bets && bets.length > 0 ? (
+          {bets && bets.length > 0 && isSignedIn ? (
             <>
               <SpacerRow />
               {reduceMotion ? (
@@ -95,7 +99,7 @@ const MyBetsTable: React.FC<IProps> = ({
                       timeout={speed / 2}
                       mountOnEnter={true}
                     >
-                      <BetRow bet={b} viewMode={viewMode} />
+                      <BetRow bet={b} viewMode={viewMode} onRowClicked={() => handleRowClick(b)} />
                     </CSSTransition>
                   ))}
                 </TransitionGroup>
@@ -106,13 +110,12 @@ const MyBetsTable: React.FC<IProps> = ({
         </tbody>
       </table>
       {!error && isLoading && (bets.length <= 0 || !bets) && <Loading />}
-      {error && !isLoading && (bets.length <= 0 || !bets) && <Error>Unexpected error</Error>}
+      {error && !isLoading && (bets.length <= 0 || !bets) && isSignedIn && (
+        <Error>Unexpected error</Error>
+      )}
       {!isLoading && !isSignedIn && (
         <Error>
-          <Button
-            onClick={() => navigate(`${location.pathname}?dialog=sign-in`)}
-            className={styles.button}
-          >
+          <Button onClick={() => navigate(`${pathname}?dialog=sign-in`)} className={styles.button}>
             {t('auth:signIn.headline')}
           </Button>
         </Error>

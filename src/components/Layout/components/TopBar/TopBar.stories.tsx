@@ -24,7 +24,7 @@ storiesOf('Components/TopBar', module)
             id: '123',
             isActivated: true,
             username: 'testuser',
-            avatarUrl: 'https://dev.gambilife.com/ava/m1.svg',
+            avatarUrl: 'https://staging.jinglebets.com/ava/m1.svg',
           },
         },
         referral: {},

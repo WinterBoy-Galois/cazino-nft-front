@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styles from './SlideSelect.module.scss';
+import clsx from 'clsx';
 
 interface IProps {
   selectItems: {
     label: string;
     onClick: () => void;
   }[];
+  className?: string;
 }
 
-const SlideSelect: React.SFC<IProps> = ({ selectItems }) => {
+const SlideSelect: React.FC<IProps> = ({ selectItems, className }) => {
   const [tabWidth, setTabWidth] = useState<string>();
   const [tabSelectedTranslate, setTabSelectedTranslate] = useState<string>('0');
 
@@ -21,7 +23,7 @@ const SlideSelect: React.SFC<IProps> = ({ selectItems }) => {
   }, [selectItems]);
 
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, className)}>
       <span
         className={`${styles.tab} ${styles['tab--selected']}`}
         style={{ width: tabWidth, transform: `translateX(${tabSelectedTranslate})` }}

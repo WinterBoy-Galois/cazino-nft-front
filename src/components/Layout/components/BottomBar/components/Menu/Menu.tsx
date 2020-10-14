@@ -8,7 +8,7 @@ interface IProps {
   hasUnclaimedBonus?: boolean;
 }
 
-const Menu: React.SFC<IProps> = ({ hasUnclaimedBonus }) => {
+const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
   const [, dispatch] = useStateValue();
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './PasswordRecoveryModal.module.scss';
 import Modal, { transitionTimeout } from '../Modal';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { RECOVER_PASSWORD } from '../../graphql/mutations';
 import { info } from '../Toast';
 import ApplicationError from '../../models/applicationError.model';
@@ -16,7 +16,7 @@ import passwordRecoveryIllustration from '../../assets/images/auth/password-reco
 import Uppercase from '../Uppercase';
 import Link from '../Link';
 import { useStateValue } from '../../state';
-import { useLocation, useNavigate, Redirect } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -28,7 +28,7 @@ interface IProps {
   onNavigateToSignUp?: () => void;
 }
 
-const PasswordRecoveryModal: React.SFC<IProps> = ({
+const PasswordRecoveryModal: React.FC<IProps> = ({
   show,
   loading,
   errors,
@@ -155,7 +155,8 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
   const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
 
   if (show && auth.state === 'SIGNED_IN') {
-    return <Redirect noThrow to={location.pathname} />;
+    navigate(location.pathname);
+    return null;
   }
 
   return (

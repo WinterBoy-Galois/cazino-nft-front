@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './PasswordResetModal.module.scss';
 import Modal, { transitionTimeout } from '../Modal';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { RESET_PASSWORD } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
 import { success } from '../Toast';
@@ -14,7 +14,7 @@ import { useFormik } from 'formik';
 import { validationSchema } from './lib/validationSchema';
 import SpinnerButton from '../SpinnerButton';
 import { useQueryParams } from '../../hooks/useQueryParams.hook';
-import { Redirect, useLocation, useNavigate } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
   show: boolean;
@@ -24,7 +24,7 @@ interface IProps {
   onPasswordReset?: (newPassword: string) => void;
 }
 
-const PasswordResetModal: React.SFC<IProps> = ({
+const PasswordResetModal: React.FC<IProps> = ({
   show,
   loading,
   errors,
@@ -154,7 +154,8 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
   }, [params, dispatch]);
 
   if (show && (state === 'SIGNED_IN' || !params?.token)) {
-    return <Redirect noThrow to={location.pathname} />;
+    navigate(location.pathname);
+    return null;
   }
 
   return (

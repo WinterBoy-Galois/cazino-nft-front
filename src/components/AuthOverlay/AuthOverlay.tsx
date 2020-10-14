@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { useStateValue } from '../../state';
 import { ME } from '../../graphql/queries';
 import styles from './AuthOverlay.module.scss';
@@ -12,13 +12,13 @@ const AuthOverlay: React.FC = ({ children }) => {
   useEffect(() => {
     if (error && auth.state === 'SIGNED_IN') {
       dispatch({ type: 'AUTH_SIGN_OUT' });
-    } else if (!error && data && auth.state === 'SIGNED_IN') {
+    } else if (!error && data && auth.state === 'SIGNED_IN' && !auth.user) {
       dispatch({
         type: 'AUTH_SIGN_IN',
         payload: { user: { ...data.me } },
       });
     }
-  }, [dispatch, data, error, auth.state]);
+  }, [dispatch, data, error, auth.state, auth.user]);
 
   return auth.state === 'SIGNED_IN' && !auth.user ? (
     <div className={styles.container}>

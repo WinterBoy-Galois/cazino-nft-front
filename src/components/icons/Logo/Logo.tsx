@@ -5,7 +5,7 @@ interface IProps {
   fillClassName?: string;
 }
 
-const Logo: React.SFC<IProps> = ({ className, fillClassName }) => {
+const Logo: React.FC<IProps> = ({ className, fillClassName }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 282.04 138.52" className={className}>
       <g id="Layer_2" data-name="Layer 2">

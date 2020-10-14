@@ -4,13 +4,26 @@ import ServerSeedPage from '.';
 import PageableModal from '../../../PageableModal';
 import { withKnobs, text, array, select, boolean } from '@storybook/addon-knobs';
 import { GameTypes } from '../../../../models/gameTypes.model';
-import { action } from '@storybook/addon-actions';
+import { LocationProvider } from '@reach/router';
+
+const bet = {
+  id: '278192',
+  username: 'gutierrezbrian',
+  time: 1591032136876,
+  userid: 67,
+  gameid: GameTypes.MINES,
+  bet: 0.00009425,
+  profit: 0.00002852,
+  multiplier: 1.3026315789473684,
+};
 
 storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
   .addDecorator(withKnobs)
+  .addDecorator(storyFn => <LocationProvider>{storyFn()}</LocationProvider>)
   .addDecorator(storyFn => <PageableModal show={true} pages={[storyFn()]} />)
   .add('Own bet', () => (
     <ServerSeedPage
+      bet={bet}
       loading={boolean('Loading', false)}
       ownDetails={{
         __typename: '',
@@ -38,11 +51,11 @@ storiesOf('Components/BetDetailsModal/ServerSeedPage', module)
           []
         ) as GameTypes[],
       }}
-      onChangeServerSeed={action('change server seed')}
     />
   ))
   .add('Others bet', () => (
     <ServerSeedPage
+      bet={bet}
       loading={boolean('Loading', false)}
       otherDetails={{
         __typename: '',

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { UserInfoModalWithData } from '../../../UserInfoModal';
 import BetDetailsModal from '../../../BetDetailsModal';
-import ChangeServerSeedConfirmationModal from '../../../ChangeServerSeedConfirmationModal';
 import { SignInModalWithData } from '../../../SignInModal';
 import { SignUpModalWithData } from '../../../SignUpModal';
 import { useStateValue } from '../../../../state';
@@ -13,6 +12,9 @@ import { PasswordResetModalWithData } from '../../../PasswordResetModal/Password
 import { PasswordRecoveryModalWithData } from '../../../PasswordRecoveryModal/PasswordRecoveryModal';
 import { closeModal, replaceModal, showModal } from '../../../Modal';
 import { useLocation, useNavigate } from '@reach/router';
+import { ChangeServerSeedConfirmationModalWithData } from '../../../ChangeServerSeedConfirmationModal/ChangeServerSeedConfirmationModal';
+import { CashierModalWithData } from '../../../CashierModal/CashierModal';
+import DepositsDetailsModal from '../../../DepositsDetailsModal';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
@@ -54,7 +56,7 @@ const Modals: React.FC = () => {
         onClose={handleClose}
         {...modal.data}
       />
-      <ChangeServerSeedConfirmationModal
+      <ChangeServerSeedConfirmationModalWithData
         show={handleShow('CHANGE_SERVER_SEED_CONFIRMATION')}
         onClose={handleClose}
         {...modal.data}
@@ -70,17 +72,27 @@ const Modals: React.FC = () => {
         {...modal.data}
       />
       <AccountActivationModalWithData
-        show={modal.type === 'ACCOUNT_ACTIVATION_MODAL'}
+        show={handleShow('ACCOUNT_ACTIVATION_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />
       <PasswordResetModalWithData
-        show={modal.type === 'PASSWORD_RESET_MODAL'}
+        show={handleShow('PASSWORD_RESET_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />
       <PasswordRecoveryModalWithData
-        show={modal.type === 'PASSWORD_RECOVERY_MODAL'}
+        show={handleShow('PASSWORD_RECOVERY_MODAL')}
+        onClose={handleClose}
+        {...modal.data}
+      />
+      <CashierModalWithData
+        show={handleShow('CASHIER_MODAL')}
+        onClose={handleClose}
+        {...modal.data}
+      />
+      <DepositsDetailsModal
+        show={handleShow('DEPOSIT_DETAILS_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />

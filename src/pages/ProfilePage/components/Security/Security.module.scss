@@ -1,0 +1,36 @@
+@import '../../../../styles/shared';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.errors {
+  margin-bottom: 1rem;
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 1.5rem;
+  }
+}
+
+.button {
+  margin: 1rem auto 0;
+  max-width: 320px;
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 2rem;
+  }
+}
+
+.form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.headline {
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 0;
+  }
+}

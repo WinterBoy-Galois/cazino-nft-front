@@ -16,7 +16,7 @@ interface IProps {
   loadingText?: string;
 }
 
-const SpinnerButton: React.SFC<IProps> = props => {
+const SpinnerButton: React.FC<IProps> = props => {
   const { t } = useTranslation();
 
   const color = props.color ?? 'PRIMARY';

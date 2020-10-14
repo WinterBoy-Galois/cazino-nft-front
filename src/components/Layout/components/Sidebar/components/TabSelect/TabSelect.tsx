@@ -18,7 +18,7 @@ const tabs = [
   },
 ];
 
-const TabSelect: React.SFC = () => {
+const TabSelect: React.FC = () => {
   const { t } = useTranslation(['sidebar']);
   const [
     {

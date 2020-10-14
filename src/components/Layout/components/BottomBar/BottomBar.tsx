@@ -7,9 +7,10 @@ import { formatBitcoin } from '../../../../common/util/format.util';
 interface IProps {
   hasUnclaimedBonus?: boolean;
   balance?: number;
+  onClick?: () => void;
 }
 
-const BottomBar: React.FC<IProps> = ({ hasUnclaimedBonus = true, balance = 0.0 }) => {
+const BottomBar: React.FC<IProps> = ({ hasUnclaimedBonus = true, balance = 0.0, onClick }) => {
   return (
     <div className={`container-fluid h-100`}>
       <div className={`row h-100`}>
@@ -18,7 +19,7 @@ const BottomBar: React.FC<IProps> = ({ hasUnclaimedBonus = true, balance = 0.0 }
             <BottomBarMenu hasUnclaimedBonus={hasUnclaimedBonus} />
           </div>
           <div className={styles.balance}>
-            <Balance value={formatBitcoin(balance)} />
+            <Balance value={formatBitcoin(balance)} onClick={onClick} />
           </div>
         </div>
       </div>

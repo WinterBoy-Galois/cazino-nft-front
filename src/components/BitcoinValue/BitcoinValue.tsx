@@ -7,11 +7,11 @@ interface IProps {
   className?: string;
 }
 
-const BitcoinValue: React.SFC<IProps> = ({ value, className = '' }) => {
+const BitcoinValue: React.FC<IProps> = ({ value, className = '' }) => {
   return (
-    <div className={className}>
+    <div className={`${styles.container} ${className}`}>
       <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
-      <span>{value}</span>
+      <span className="truncate">{value}</span>
     </div>
   );
 };

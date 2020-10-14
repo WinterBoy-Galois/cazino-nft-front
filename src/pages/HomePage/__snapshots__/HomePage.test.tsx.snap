@@ -1,0 +1,878 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <div
+          class="container"
+        >
+          <div
+            class="swiper-container swiper-container-initialized swiper-container-horizontal"
+          >
+            <div
+              class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"
+            />
+            <div
+              class="swiper-wrapper"
+              style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
+            >
+              <div
+                class="swiper-slide swiper-slide-duplicate slide"
+                data-swiper-slide-index="4"
+              >
+                <div
+                  class="carousel__slide-inner"
+                >
+                  <div
+                    class="headline"
+                  >
+                    I'm the 
+                    <strong>
+                      FIFTH
+                    </strong>
+                     Slide.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="swiper-slide slide"
+                data-swiper-slide-index="0"
+              >
+                <div
+                  class="carousel__slide-inner"
+                >
+                  <div
+                    class="headline"
+                  >
+                    Your friends make 
+                    <strong>
+                      BETS
+                    </strong>
+                    <br />
+                     you get 
+                    <strong>
+                      BITS
+                    </strong>
+                    !
+                  </div>
+                  <div
+                    class="subline"
+                  >
+                    Best referral program comissions you will ever find
+                  </div>
+                </div>
+              </div>
+              <div
+                class="swiper-slide slide"
+                data-swiper-slide-index="1"
+              >
+                <div
+                  class="carousel__slide-inner"
+                >
+                  <div
+                    class="headline"
+                  >
+                    I'm the 
+                    <strong>
+                      SECOND
+                    </strong>
+                     Slide.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="swiper-slide slide"
+                data-swiper-slide-index="2"
+              >
+                <div
+                  class="carousel__slide-inner"
+                >
+                  <div
+                    class="headline"
+                  >
+                    I'm the 
+                    <strong>
+                      THIRD
+                    </strong>
+                     Slide.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="swiper-slide slide"
+                data-swiper-slide-index="3"
+              >
+                <div
+                  class="carousel__slide-inner"
+                >
+                  <div
+                    class="headline"
+                  >
+                    I'm the 
+                    <strong>
+                      FOURTH
+                    </strong>
+                     Slide.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="swiper-slide slide"
+                data-swiper-slide-index="4"
+              >
+                <div
+                  class="carousel__slide-inner"
+                >
+                  <div
+                    class="headline"
+                  >
+                    I'm the 
+                    <strong>
+                      FIFTH
+                    </strong>
+                     Slide.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="swiper-slide swiper-slide-duplicate slide"
+                data-swiper-slide-index="0"
+              >
+                <div
+                  class="carousel__slide-inner"
+                >
+                  <div
+                    class="headline"
+                  >
+                    Your friends make 
+                    <strong>
+                      BETS
+                    </strong>
+                    <br />
+                     you get 
+                    <strong>
+                      BITS
+                    </strong>
+                    !
+                  </div>
+                  <div
+                    class="subline"
+                  >
+                    Best referral program comissions you will ever find
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="row"
+        >
+          <div
+            class="col-12 col-md-6 col-xl-6 "
+          >
+            <div
+              class="container container"
+            >
+              <h2
+                class="headline"
+              >
+                Goals
+              </h2>
+              <span
+                class="subline"
+              >
+                Play
+              </span>
+              <div
+                class="highlight"
+              >
+                <img
+                  alt="Ball"
+                  class="highlight__animated"
+                  src="goal-ball.svg"
+                />
+                <img
+                  alt="Field"
+                  class="highlight__static"
+                  src="goal-field-home-button.svg"
+                />
+              </div>
+              <img
+                alt="Goal Keeper"
+                class="character "
+                src="goal-character-home-button.svg"
+              />
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-6 col-xl-6 "
+          >
+            <div
+              class="container container"
+            >
+              <h2
+                class="headline"
+              >
+                Mines
+              </h2>
+              <span
+                class="subline"
+              >
+                Play
+              </span>
+              <div
+                class="highlight"
+              >
+                <img
+                  alt="Bomb"
+                  class="highlight__animated"
+                  src="mines-bomb.svg"
+                />
+                <img
+                  alt="Shadow"
+                  class="highlight__static"
+                  src="mines-shadow-home-button.svg"
+                />
+              </div>
+              <img
+                alt="Soldier"
+                class="character "
+                src="mines-character-home-button.svg"
+              />
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-6 col-xl-6 "
+          >
+            <div
+              class="container container"
+            >
+              <h2
+                class="headline"
+              >
+                Clams
+              </h2>
+              <span
+                class="subline"
+              >
+                Play
+              </span>
+              <div
+                class="highlight"
+              >
+                <img
+                  alt="Pearl"
+                  class="highlight__animated"
+                  src="clam-pearl.svg"
+                />
+              </div>
+              <img
+                alt="Clam"
+                class="character "
+                src="clams-character-home-button.svg"
+              />
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-6 col-xl-6 "
+          >
+            <div
+              class="container container"
+            >
+              <h2
+                class="headline"
+              >
+                Dice
+              </h2>
+              <span
+                class="subline"
+              >
+                Play
+              </span>
+              <div
+                class="highlight"
+              >
+                <img
+                  alt="Bomb"
+                  class="highlight__animated"
+                  src="dices-dices.svg"
+                />
+                <img
+                  alt="Shadow"
+                  class="highlight__static"
+                  src="dice-shadow-button.svg"
+                />
+              </div>
+              <img
+                alt="Soldier"
+                class="character "
+                src="dice-character-home-button.svg"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="container"
+        >
+          <div
+            class="row"
+          >
+            <div
+              class="col-12 col-md-6 teaser"
+            >
+              <div
+                class="dot"
+              />
+              <div>
+                The 
+                <span
+                  class="highlight"
+                >
+                  time
+                </span>
+                 has come to 
+                <span
+                  class="highlight"
+                >
+                  increase
+                </span>
+                 quality of online crypto gambling
+              </div>
+            </div>
+            <div
+              class="col-12 col-md-6 teaser"
+            >
+              <div
+                class="dot"
+              />
+              <div>
+                We at 
+                <span
+                  class="highlight"
+                >
+                  CaZZZino
+                </span>
+                 re-design and re-invent online games
+              </div>
+            </div>
+          </div>
+          <div
+            class="row"
+          >
+            <div
+              class="col-12 col-md-6 teaser"
+            >
+              <div
+                class="dot"
+              />
+              <div>
+                Online gambling industry goes through changes with the rise of 
+                <span
+                  class="highlight"
+                >
+                  new
+                </span>
+                 technologies
+              </div>
+            </div>
+            <div
+              class="col-12 col-md-6 teaser"
+            >
+              <div
+                class="dot"
+              />
+              <div>
+                Challenge your 
+                <span
+                  class="highlight"
+                >
+                  luck
+                </span>
+                 and 
+                <span
+                  class="highlight"
+                >
+                  win big
+                </span>
+                , while feeling 
+                <span
+                  class="highlight"
+                >
+                  secure
+                </span>
+                 with fair gambling!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <div
+        class="container"
+      >
+        <div
+          class="swiper-container swiper-container-initialized swiper-container-horizontal"
+        >
+          <div
+            class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"
+          />
+          <div
+            class="swiper-wrapper"
+            style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
+          >
+            <div
+              class="swiper-slide swiper-slide-duplicate slide"
+              data-swiper-slide-index="4"
+            >
+              <div
+                class="carousel__slide-inner"
+              >
+                <div
+                  class="headline"
+                >
+                  I'm the 
+                  <strong>
+                    FIFTH
+                  </strong>
+                   Slide.
+                </div>
+              </div>
+            </div>
+            <div
+              class="swiper-slide slide"
+              data-swiper-slide-index="0"
+            >
+              <div
+                class="carousel__slide-inner"
+              >
+                <div
+                  class="headline"
+                >
+                  Your friends make 
+                  <strong>
+                    BETS
+                  </strong>
+                  <br />
+                   you get 
+                  <strong>
+                    BITS
+                  </strong>
+                  !
+                </div>
+                <div
+                  class="subline"
+                >
+                  Best referral program comissions you will ever find
+                </div>
+              </div>
+            </div>
+            <div
+              class="swiper-slide slide"
+              data-swiper-slide-index="1"
+            >
+              <div
+                class="carousel__slide-inner"
+              >
+                <div
+                  class="headline"
+                >
+                  I'm the 
+                  <strong>
+                    SECOND
+                  </strong>
+                   Slide.
+                </div>
+              </div>
+            </div>
+            <div
+              class="swiper-slide slide"
+              data-swiper-slide-index="2"
+            >
+              <div
+                class="carousel__slide-inner"
+              >
+                <div
+                  class="headline"
+                >
+                  I'm the 
+                  <strong>
+                    THIRD
+                  </strong>
+                   Slide.
+                </div>
+              </div>
+            </div>
+            <div
+              class="swiper-slide slide"
+              data-swiper-slide-index="3"
+            >
+              <div
+                class="carousel__slide-inner"
+              >
+                <div
+                  class="headline"
+                >
+                  I'm the 
+                  <strong>
+                    FOURTH
+                  </strong>
+                   Slide.
+                </div>
+              </div>
+            </div>
+            <div
+              class="swiper-slide slide"
+              data-swiper-slide-index="4"
+            >
+              <div
+                class="carousel__slide-inner"
+              >
+                <div
+                  class="headline"
+                >
+                  I'm the 
+                  <strong>
+                    FIFTH
+                  </strong>
+                   Slide.
+                </div>
+              </div>
+            </div>
+            <div
+              class="swiper-slide swiper-slide-duplicate slide"
+              data-swiper-slide-index="0"
+            >
+              <div
+                class="carousel__slide-inner"
+              >
+                <div
+                  class="headline"
+                >
+                  Your friends make 
+                  <strong>
+                    BETS
+                  </strong>
+                  <br />
+                   you get 
+                  <strong>
+                    BITS
+                  </strong>
+                  !
+                </div>
+                <div
+                  class="subline"
+                >
+                  Best referral program comissions you will ever find
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col-12 col-md-6 col-xl-6 "
+        >
+          <div
+            class="container container"
+          >
+            <h2
+              class="headline"
+            >
+              Goals
+            </h2>
+            <span
+              class="subline"
+            >
+              Play
+            </span>
+            <div
+              class="highlight"
+            >
+              <img
+                alt="Ball"
+                class="highlight__animated"
+                src="goal-ball.svg"
+              />
+              <img
+                alt="Field"
+                class="highlight__static"
+                src="goal-field-home-button.svg"
+              />
+            </div>
+            <img
+              alt="Goal Keeper"
+              class="character "
+              src="goal-character-home-button.svg"
+            />
+          </div>
+        </div>
+        <div
+          class="col-12 col-md-6 col-xl-6 "
+        >
+          <div
+            class="container container"
+          >
+            <h2
+              class="headline"
+            >
+              Mines
+            </h2>
+            <span
+              class="subline"
+            >
+              Play
+            </span>
+            <div
+              class="highlight"
+            >
+              <img
+                alt="Bomb"
+                class="highlight__animated"
+                src="mines-bomb.svg"
+              />
+              <img
+                alt="Shadow"
+                class="highlight__static"
+                src="mines-shadow-home-button.svg"
+              />
+            </div>
+            <img
+              alt="Soldier"
+              class="character "
+              src="mines-character-home-button.svg"
+            />
+          </div>
+        </div>
+        <div
+          class="col-12 col-md-6 col-xl-6 "
+        >
+          <div
+            class="container container"
+          >
+            <h2
+              class="headline"
+            >
+              Clams
+            </h2>
+            <span
+              class="subline"
+            >
+              Play
+            </span>
+            <div
+              class="highlight"
+            >
+              <img
+                alt="Pearl"
+                class="highlight__animated"
+                src="clam-pearl.svg"
+              />
+            </div>
+            <img
+              alt="Clam"
+              class="character "
+              src="clams-character-home-button.svg"
+            />
+          </div>
+        </div>
+        <div
+          class="col-12 col-md-6 col-xl-6 "
+        >
+          <div
+            class="container container"
+          >
+            <h2
+              class="headline"
+            >
+              Dice
+            </h2>
+            <span
+              class="subline"
+            >
+              Play
+            </span>
+            <div
+              class="highlight"
+            >
+              <img
+                alt="Bomb"
+                class="highlight__animated"
+                src="dices-dices.svg"
+              />
+              <img
+                alt="Shadow"
+                class="highlight__static"
+                src="dice-shadow-button.svg"
+              />
+            </div>
+            <img
+              alt="Soldier"
+              class="character "
+              src="dice-character-home-button.svg"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="container"
+      >
+        <div
+          class="row"
+        >
+          <div
+            class="col-12 col-md-6 teaser"
+          >
+            <div
+              class="dot"
+            />
+            <div>
+              The 
+              <span
+                class="highlight"
+              >
+                time
+              </span>
+               has come to 
+              <span
+                class="highlight"
+              >
+                increase
+              </span>
+               quality of online crypto gambling
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-6 teaser"
+          >
+            <div
+              class="dot"
+            />
+            <div>
+              We at 
+              <span
+                class="highlight"
+              >
+                CaZZZino
+              </span>
+               re-design and re-invent online games
+            </div>
+          </div>
+        </div>
+        <div
+          class="row"
+        >
+          <div
+            class="col-12 col-md-6 teaser"
+          >
+            <div
+              class="dot"
+            />
+            <div>
+              Online gambling industry goes through changes with the rise of 
+              <span
+                class="highlight"
+              >
+                new
+              </span>
+               technologies
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-6 teaser"
+          >
+            <div
+              class="dot"
+            />
+            <div>
+              Challenge your 
+              <span
+                class="highlight"
+              >
+                luck
+              </span>
+               and 
+              <span
+                class="highlight"
+              >
+                win big
+              </span>
+              , while feeling 
+              <span
+                class="highlight"
+              >
+                secure
+              </span>
+               with fair gambling!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

@@ -5,10 +5,9 @@ export const CHANGE_SERVER_SEED = gql`
     changeServerSeed {
       ... on GenericErrorArray {
         errors {
-          type
-          field
-          severity
-          messageKey
+          source
+          code
+          message
           args
         }
       }
@@ -41,6 +40,9 @@ export const SIGN_IN = gql`
           username
           avatarUrl
           balance
+          email
+          isActivated
+          depositAddress
         }
       }
       ... on GenericErrorArray {
@@ -77,6 +79,7 @@ export const SIGN_UP = gql`
           username
           avatarUrl
           balance
+          depositAddress
         }
       }
       ... on GenericErrorArray {
@@ -125,6 +128,7 @@ export const RESET_PASSWORD = gql`
           username
           avatarUrl
           balance
+          depositAddress
         }
       }
       ... on GenericErrorArray {
@@ -144,6 +148,65 @@ export const RECOVER_PASSWORD = gql`
     forgotPassword(email: $email) {
       ... on GenericBoolean {
         result
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_PASSWORD = gql`
+  mutation UpdatePassword($oldPassword: String!, $newPassword: String!) {
+    modifyPassword(oldPassword: $oldPassword, newPassword: $newPassword) {
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_PREFERENCES = gql`
+  mutation UpdatePreferences($hideUsername: Boolean!, $hideProfit: Boolean!, $hideWager: Boolean!) {
+    modifyPreferences(
+      hideUsername: $hideUsername
+      hideTotalProfit: $hideProfit
+      hideTotalWager: $hideWager
+    ) {
+      ... on User {
+        id
+        hideUsername
+        hideTotalProfit
+        hideTotalWager
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_AVATAR = gql`
+  mutation updateAvatar($index: Int!) {
+    modifyAvatar(index: $index) {
+      ... on User {
+        id
+        avatarUrl
       }
       ... on GenericErrorArray {
         errors {

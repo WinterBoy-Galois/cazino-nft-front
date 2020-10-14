@@ -16,6 +16,7 @@ $border: 4px;
   height: calc(#{$bar-height} + (#{$border} * 2));
   width: 190px;
   overflow: hidden;
+  cursor: pointer;
 
   @include media-breakpoint-up(lg) {
     height: calc(#{$bar-height-lg} + (#{$border} * 2));

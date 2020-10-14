@@ -1,0 +1,25 @@
+{
+  "pageHeadline": "profile",
+  "statistics": "statistics",
+  "security": {
+    "headline": "security",
+    "oldPassword": "current password",
+    "newPassword": "New password",
+    "newPasswordConfirm": "Confirm new password",
+    "button": "Change Password",
+    "successToast": "Your password has been changed."
+  },
+  "preferences": {
+    "headline": "Preferences",
+    "hideUsernameLabel": "hide my username",
+    "hideProfitLabel": "hide my total profit",
+    "hideWagerLabel": "hide my total wager",
+    "errorToast": "There was an unexpected error. Please try again."
+  },
+  "userInfo": {
+    "headline": "User info",
+    "activateButton": "Activate",
+    "notActivatedText": "Your e-mail is not verified. Press the button to send activation code.",
+    "errorToast": "There was an unexpected error. Please try again."
+  }
+}

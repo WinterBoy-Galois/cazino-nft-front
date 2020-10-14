@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useQueryParams } from '../../hooks/useQueryParams.hook';
-import { Redirect, useLocation } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 import { useStateValue } from '../../state';
 
 const Referrals: React.FC = () => {
   const [, dispatch] = useStateValue();
   const location = useLocation();
+  const navigate = useNavigate();
   const params = useQueryParams();
 
   useEffect(() => {
@@ -15,7 +16,8 @@ const Referrals: React.FC = () => {
   }, [dispatch, params.ref]);
 
   if (params.ref) {
-    return <Redirect noThrow to={location.pathname} />;
+    navigate(location.pathname);
+    return null;
   }
 
   return null;

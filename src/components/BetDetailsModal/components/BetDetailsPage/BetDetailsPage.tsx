@@ -10,9 +10,8 @@ import BitcoinProfit from '../../../BitcoinProfit';
 import { useTranslation } from 'react-i18next';
 import DetailsContainer from '../../../DetailsContainer';
 import { datetimeFromEpoch } from '../../../../common/util/date.util';
-import { useQuery } from '@apollo/react-hooks';
 import { USER_INFO_AVATAR_URL } from '../../../../graphql/queries';
-import { ApolloError } from 'apollo-client';
+import { ApolloError, useQuery } from '@apollo/client';
 import { useLocation, useNavigate } from '@reach/router';
 
 interface IProps {
@@ -22,9 +21,9 @@ interface IProps {
   error?: ApolloError;
 }
 
-const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
+const BetDetailsPage: React.FC<IProps> = ({ bet, avatarUrl, loading }) => {
   const { t } = useTranslation(['modals']);
-  const location = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   if (!bet) {
@@ -32,7 +31,9 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
   }
 
   const handleUsernameClick = () => {
-    navigate(`${location.pathname}?dialog=user-info`, { state: { userId: bet.userid } });
+    navigate(`${pathname}?dialog=user-info`, {
+      state: { userId: bet.userid, backPath: `${pathname}?dialog=bet-details`, backState: { bet } },
+    });
   };
 
   return (
@@ -59,7 +60,10 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
             { label: t('betDetails.date'), value: datetimeFromEpoch(bet.time) },
             { label: t('betDetails.betId'), value: bet.id },
             { label: t('betDetails.game'), value: <GameIconAndText game={bet.gameid} /> },
-            { label: t('betDetails.bet'), value: <BitcoinValue value={formatBitcoin(bet.bet)} /> },
+            {
+              label: t('betDetails.bet'),
+              value: <BitcoinValue value={formatBitcoin(bet.bet)} className={styles.value} />,
+            },
             {
               label: (
                 <span>
@@ -68,7 +72,7 @@ const BetDetailsPage: React.SFC<IProps> = ({ bet, avatarUrl, loading }) => {
                   )
                 </span>
               ),
-              value: <BitcoinProfit value={bet.profit} />,
+              value: <BitcoinProfit value={bet.profit} className={styles.value} />,
             },
           ]}
         />
@@ -83,7 +87,7 @@ interface IWithDataProps {
   bet: Bet;
 }
 
-export const BetDetailsPageWithData: React.SFC<IWithDataProps> = props => {
+export const BetDetailsPageWithData: React.FC<IWithDataProps> = props => {
   const { data, loading, error } = useQuery(USER_INFO_AVATAR_URL, {
     variables: { userId: props.bet?.userid },
   });

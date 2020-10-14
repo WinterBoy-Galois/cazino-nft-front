@@ -7,7 +7,7 @@ interface IProps {
   details?: Detail[];
 }
 
-const BetResultDetails: React.SFC<IProps> = ({ details }) => {
+const BetResultDetails: React.FC<IProps> = ({ details }) => {
   return (
     <DetailsContainer>
       <DetailList details={details} />

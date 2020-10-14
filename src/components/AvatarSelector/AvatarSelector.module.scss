@@ -1,0 +1,69 @@
+@import '../../styles/shared';
+
+$avatarsPerView: 3;
+$avatarWidth: 58px;
+$avatarPadding: 16px;
+
+$sliderWidth: ($avatarWidth * $avatarsPerView) + ($avatarPadding * ($avatarsPerView - 1)) +
+  (2 * $avatarWidth);
+
+.container {
+  display: flex;
+  margin: auto;
+  max-width: $avatarWidth;
+  overflow: hidden;
+  user-select: none;
+  transition: max-width 0.1s ease-out;
+
+  &__open {
+    max-width: $sliderWidth;
+  }
+}
+
+.avatar {
+  width: $avatarWidth;
+  height: $avatarWidth;
+
+  &__current {
+    cursor: pointer;
+  }
+}
+
+.slider {
+  width: 67px;
+}
+
+.navigation {
+  &__button {
+    &--prev {
+      background-color: unset;
+      border: none;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      margin-right: 8px;
+    }
+
+    &--next {
+      background-color: unset;
+      border: none;
+      width: $avatarWidth;
+      height: $avatarWidth;
+    }
+  }
+
+  &__icon {
+    &--prev {
+      transform: rotate(180deg);
+    }
+
+    &--next {
+      transform: rotate(0deg);
+    }
+  }
+
+  &__disabled {
+    opacity: 0.35;
+    cursor: auto;
+    pointer-events: none;
+  }
+}

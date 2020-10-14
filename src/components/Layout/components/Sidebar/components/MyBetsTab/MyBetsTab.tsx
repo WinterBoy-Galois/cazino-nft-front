@@ -4,7 +4,7 @@ import Bet from '../../../../../../models/bet.model';
 
 import styles from './MyBetsTab.module.scss';
 import { ViewMode } from '../../../../../MyBetsTable/MyBetsTable';
-import { ApolloError } from 'apollo-client';
+import { ApolloError } from '@apollo/client';
 
 interface IProps {
   bets?: Bet[];
@@ -13,7 +13,7 @@ interface IProps {
   isSignedIn?: boolean;
 }
 
-const MyBetsTab: React.SFC<IProps> = ({
+const MyBetsTab: React.FC<IProps> = ({
   bets = [],
   isLoading = false,
   error,

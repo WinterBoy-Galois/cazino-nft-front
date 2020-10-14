@@ -6,7 +6,7 @@ import MinesGameButton from './components/MinesGameButton';
 import ClamGameButton from './components/ClamGameButton';
 import DicesGameButton from './components/DicesGameButton';
 
-const GameButtonList: React.SFC = () => {
+const GameButtonList: React.FC = () => {
   const navigate = useNavigate();
   const [
     {

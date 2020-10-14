@@ -1,26 +1,24 @@
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
-import { WebSocketLink } from 'apollo-link-ws';
-import { from, split } from 'apollo-link';
+import { ApolloClient, InMemoryCache, from, split } from '@apollo/client';
+import { WebSocketLink } from '@apollo/client/link/ws';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
-import introspectionQueryResultData from './fragmentTypes.json';
-import { getMainDefinition } from 'apollo-utilities';
-import { HttpLink } from 'apollo-link-http';
+import possibleTypes from './possibleTypes.json';
+import { getMainDefinition } from '@apollo/client/utilities';
+import { HttpLink, defaultDataIdFromObject } from '@apollo/client';
 import jwtDecode from 'jwt-decode';
 import { getEpoch } from '../common/util/date.util';
-import { setContext } from 'apollo-link-context';
+import { setContext } from '@apollo/client/link/context';
 import { AuthType } from '../state/models/auth.model';
 import { appConfig } from '../common/config';
 
-// https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-});
-
 const cache = new InMemoryCache({
-  dataIdFromObject: o => o.id,
+  dataIdFromObject(responseObject) {
+    switch (responseObject.__typename) {
+      default:
+        return defaultDataIdFromObject(responseObject);
+    }
+  },
   addTypename: true,
-  fragmentMatcher,
+  possibleTypes,
 });
 
 let wsLink: WebSocketLink;
@@ -31,6 +29,8 @@ const getApolloClient = (
   authType: AuthType,
   accessToken?: string
 ) => {
+  cache.reset();
+
   if (wsLink) {
     (wsLink as any).subscriptionClient.close();
   }
@@ -40,7 +40,7 @@ const getApolloClient = (
     options: {
       reconnect: true,
       connectionParams: {
-        authToken: accessToken ?? '',
+        authToken: accessToken ?? undefined,
       },
     },
   });
@@ -91,10 +91,7 @@ const getApolloClient = (
   const link = split(
     ({ query }) => {
       const definition = getMainDefinition(query);
-      return (
-        definition.kind === 'OperationDefinition' &&
-        (definition.operation === 'subscription' || definition.operation === 'query')
-      );
+      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
     },
     wsLink,
     authLink.concat(httpLink)

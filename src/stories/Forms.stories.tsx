@@ -11,10 +11,9 @@ export default {
     (storyFn: () => React.ReactNode) => <div style={{ padding: '1rem' }}>{storyFn()}</div>,
   ],
   parameters: {
-    backgrounds: [
-      { name: 'Primary', value: '#091b33' },
-      { name: 'Secondary', value: '#2d4560', default: true },
-    ],
+    backgrounds: {
+      default: 'Secondary',
+    },
   },
 };
 

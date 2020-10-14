@@ -107,7 +107,7 @@ const getFooterData = (t: TFunction): FooterList[] => [
   },
 ];
 
-const Footer: React.SFC = () => {
+const Footer: React.FC = () => {
   const { t } = useTranslation(['footer']);
   const year = new Date().getFullYear();
   const [
