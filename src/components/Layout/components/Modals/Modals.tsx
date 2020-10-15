@@ -35,9 +35,9 @@ const Modals: React.FC = () => {
       }
 
       if (currentModalType !== 'NONE' && newModalType !== currentModalType) {
-        replaceModal(dispatch, newModalType, { ...location.state, key: undefined });
+        replaceModal(dispatch, newModalType, { ...(location.state as any), key: undefined });
       } else if (currentModalType === 'NONE' && !modal.isReplace) {
-        showModal(dispatch, newModalType, { ...location.state, key: undefined });
+        showModal(dispatch, newModalType, { ...(location.state as any), key: undefined });
       }
     } else if (!params?.dialog && currentModalType !== 'NONE') {
       closeModal(dispatch);
