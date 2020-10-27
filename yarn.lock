@@ -4295,10 +4295,10 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-bootstrap-scss@^4.5.2:
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/bootstrap-scss/-/bootstrap-scss-4.5.2.tgz#c2df80ca1bdff0986dd6d86e3dcb3e53795f0e10"
-  integrity sha512-+eDYEFEri/byFAOkSCF2ZnAf7Zyml8Q3YSB8kn/Lviqqi2D1XKhfJCizqgcxqXncgRElk1WNnESRa50GQSVZjA==
+bootstrap-scss@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/bootstrap-scss/-/bootstrap-scss-4.5.3.tgz#5a46cd7d3b3efff7ca9d541e70e766d2d1a5b29e"
+  integrity sha512-sWnHNg9oFHGWPOIm5j8WkuSLZVWFbfL4OssNe1rsTADzRhKTNCM8mmeRMhhezz8bu+WjJ9xCuEeTZ2lkxolq6A==
 
 boxen@^4.1.0:
   version "4.2.0"

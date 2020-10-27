@@ -15,7 +15,7 @@
     "@types/react-transition-group": "^4.4.0",
     "@types/swiper": "^5.4.0",
     "apollo-link-token-refresh": "^0.3.2",
-    "bootstrap-scss": "^4.5.2",
+    "bootstrap-scss": "^4.5.3",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
     "formik": "2.2.0",
