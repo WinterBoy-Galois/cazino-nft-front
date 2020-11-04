@@ -66,7 +66,7 @@ const SideBar: React.FC = () => {
     {
       sidebar: { isOpen, selectedTab },
       modal: { type: modalType },
-      auth: { state },
+      auth: { state, user },
     },
   ] = useStateValue();
   const breakpoint = useBreakpoint();
@@ -91,7 +91,7 @@ const SideBar: React.FC = () => {
   const { addBets } = useBetBuffer({
     bufferSize: 100,
     dispatchSpeed: DispatchSpeed.AUTO,
-    currentUserId: 15,
+    currentUserId: user?.id ? +user?.id : 0,
     onBetDispatched: handleBetAdded,
     onBetAddedForCurrentUser: handleAddedForCurrentUser,
   });

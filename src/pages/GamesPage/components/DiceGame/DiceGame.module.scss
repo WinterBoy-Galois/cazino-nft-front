@@ -2,4 +2,36 @@
 
 .container {
   display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.board {
+  width: 90%;
+  max-width: 500px;
+
+  @include media-breakpoint-up(md) {
+    width: 100%;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.controls {
+  display: flex;
+  margin-top: 2rem;
+  background-color: $user-info-main-blue;
+  padding: 3rem 0;
+
+  &__button {
+    width: 100%;
+    max-width: 412px;
+  }
+}
+
+.loading {
+  height: 500px;
 }

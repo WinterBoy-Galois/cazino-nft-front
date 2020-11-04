@@ -219,3 +219,15 @@ export const DEPOSITS = gql`
     }
   }
 `;
+
+export const SETUP_DICE = gql`
+  query SetupDice {
+    setupDice {
+      ... on DiceGameSetup {
+        minProbability
+        maxProbability
+        he
+      }
+    }
+  }
+`;
