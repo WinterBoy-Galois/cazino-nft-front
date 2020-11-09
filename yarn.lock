@@ -1847,19 +1847,6 @@
     ts-dedent "^1.1.1"
     util-deprecate "^1.0.2"
 
-"@storybook/channel-postmessage@6.0.27":
-  version "6.0.27"
-  resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-6.0.27.tgz#42641312e0453d848ae899ad92b4a998f1905440"
-  integrity sha512-ygLbzJ/WbllPL4albJUSRoiRC3M+Q/stq66PWkLBlb1NhoXanPbmLBFaAiGsypXyH/E9Z6bQT88eUyzM5IlTmw==
-  dependencies:
-    "@storybook/channels" "6.0.27"
-    "@storybook/client-logger" "6.0.27"
-    "@storybook/core-events" "6.0.27"
-    core-js "^3.0.1"
-    global "^4.3.2"
-    qs "^6.6.0"
-    telejson "^5.0.2"
-
 "@storybook/channel-postmessage@6.0.28":
   version "6.0.28"
   resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-6.0.28.tgz#82028e368d440d49e3c4ad4e6d0166d044f0a35b"
@@ -1888,29 +1875,6 @@
   integrity sha512-Ow1fR0GGdlfAQlagOrXHs7QQlCQ0xTKoznQgUFv1KxKw/bMwMtTJcpCYGSAuDzCzypCIR4EHtIHZxJsd/A2ieg==
   dependencies:
     core-js "^3.0.1"
-    ts-dedent "^1.1.1"
-    util-deprecate "^1.0.2"
-
-"@storybook/client-api@6.0.27":
-  version "6.0.27"
-  resolved "https://registry.yarnpkg.com/@storybook/client-api/-/client-api-6.0.27.tgz#665b49ef6723162f2a570b54e9ddfdf9f77fe85f"
-  integrity sha512-4AaBZCds2dr4JVVlOVa2LF3Vjv0VcLVWaqibydPRO6Ch2shDw2ImwQxYBEq0WygfHR7VzG1cmOK8D92C7goPKA==
-  dependencies:
-    "@storybook/addons" "6.0.27"
-    "@storybook/channel-postmessage" "6.0.27"
-    "@storybook/channels" "6.0.27"
-    "@storybook/client-logger" "6.0.27"
-    "@storybook/core-events" "6.0.27"
-    "@storybook/csf" "0.0.1"
-    "@types/qs" "^6.9.0"
-    "@types/webpack-env" "^1.15.2"
-    core-js "^3.0.1"
-    global "^4.3.2"
-    lodash "^4.17.15"
-    memoizerific "^1.11.3"
-    qs "^6.6.0"
-    stable "^0.1.8"
-    store2 "^2.7.1"
     ts-dedent "^1.1.1"
     util-deprecate "^1.0.2"
 
@@ -2508,10 +2472,10 @@
     "@svgr/plugin-svgo" "^5.4.0"
     loader-utils "^2.0.0"
 
-"@testing-library/dom@^7.26.0":
-  version "7.26.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.26.0.tgz#da4d052dc426a4ccc916303369c6e7552126f680"
-  integrity sha512-fyKFrBbS1IigaE3FV21LyeC7kSGF84lqTlSYdKmGaHuK2eYQ/bXVPM5vAa2wx/AU1iPD6oQHsxy2QQ17q9AMCg==
+"@testing-library/dom@^7.26.4":
+  version "7.26.5"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.26.5.tgz#804a74fc893bf6da1a7970dbca7b94c2bbfe983d"
+  integrity sha512-2v/fv0s4keQjJIcD4bjfJMFtvxz5icartxUWdIZVNJR539WD9oxVrvIAPw+3Ydg4RLgxt0rvQx3L9cAjCci0Kg==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/runtime" "^7.10.3"
@@ -2544,13 +2508,13 @@
     "@babel/runtime" "^7.5.4"
     "@types/testing-library__react-hooks" "^3.4.0"
 
-"@testing-library/react@*", "@testing-library/react@^11.0.4":
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-11.1.0.tgz#dfb4b3177d05a8ccf156b5fd14a5550e91d7ebe4"
-  integrity sha512-Nfz58jGzW0tgg3irmTB7sa02JLkLnCk+QN3XG6WiaGQYb0Qc4Ok00aujgjdxlIQWZHbb4Zj5ZOIeE9yKFSs4sA==
+"@testing-library/react@*", "@testing-library/react@^11.1.1":
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-11.1.1.tgz#226d8dc7491b702fcaac2d7d88d42892e655893a"
+  integrity sha512-DT/P2opE9o4NWCd/oIL73b6VF/Xk9AY8iYSstKfz9cXw0XYPQ5IhA/cuYfoN9nU+mAynW8DpAVfEWdM6e7zF6g==
   dependencies:
-    "@babel/runtime" "^7.11.2"
-    "@testing-library/dom" "^7.26.0"
+    "@babel/runtime" "^7.12.1"
+    "@testing-library/dom" "^7.26.4"
 
 "@testing-library/user-event@^12.2.0":
   version "12.2.0"
