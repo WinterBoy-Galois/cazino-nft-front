@@ -12566,10 +12566,10 @@ react-color@^2.17.0:
     reactcss "^1.2.0"
     tinycolor2 "^1.4.1"
 
-react-compound-slider@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-compound-slider/-/react-compound-slider-3.1.0.tgz#cd0b3c8bca1a462b7d93b43b4c809e7bc0daf208"
-  integrity sha512-wFScTW1QixawyZUkiP9ST7OIg9IB+Et45c7zvwjUrlMV42eFgEaF7/er7VOgcxZP8dBtTlZSrLJW3BlJ9DoOLg==
+react-compound-slider@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-compound-slider/-/react-compound-slider-3.1.1.tgz#22b47ad32ba987c6e1e8367327452f65c2d882c1"
+  integrity sha512-agH8U8BeD1Rtcg1hnqv54pFLPNzWmkshJJTN8DDBu3BkQV1tvkTU7496RV5Wu4sMQF9F4jE5v7LGHOJBIGcl0A==
   dependencies:
     "@babel/runtime" "^7.12.1"
     d3-array "^2.8.0"
