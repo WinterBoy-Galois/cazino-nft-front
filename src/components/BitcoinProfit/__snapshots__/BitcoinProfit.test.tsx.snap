@@ -27,6 +27,7 @@ Object {
         </svg>
         <span
           class="truncate"
+          data-tag="allowRowEvents"
         >
           +0.00123230
         </span>
@@ -56,6 +57,7 @@ Object {
       </svg>
       <span
         class="truncate"
+        data-tag="allowRowEvents"
       >
         +0.00123230
       </span>
