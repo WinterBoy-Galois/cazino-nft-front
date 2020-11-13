@@ -35,6 +35,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'no-console': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
   overrides: [
     // Override some TypeScript rules just for .js files

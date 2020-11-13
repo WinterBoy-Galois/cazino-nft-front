@@ -1,17 +1,20 @@
+import { renderHook } from '@testing-library/react-hooks';
 import { useBreakpoint } from './useBreakpoint.hook';
 
-jest.mock('./useWindowDimensions.hook', () => ({
-  useWindowDimensions: jest.fn().mockReturnValue({ width: 800 }),
-}));
-
 describe('useBreakpoint hook', () => {
+  beforeAll(() => {
+    jest.mock('./useWindowDimensions.hook', () => ({
+      useWindowDimensions: jest.fn().mockReturnValue({ width: 1024 }),
+    }));
+  });
+
   it('should return expected breakpoint name', () => {
     // Arrange
 
     // Act
-    const b = useBreakpoint();
+    const { result } = renderHook(() => useBreakpoint());
 
     // Assert
-    expect(b).toBe('md');
+    expect(result.current).toBe('lg');
   });
 });
