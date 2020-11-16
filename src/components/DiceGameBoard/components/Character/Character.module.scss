@@ -1,0 +1,14 @@
+@import '../../../../styles/shared';
+
+.character {
+  position: absolute;
+  left: -9%;
+  bottom: 0;
+  width: 46%;
+
+  &__hitting {
+    left: -7.7%;
+    bottom: 2.4%;
+    width: 70%;
+  }
+}

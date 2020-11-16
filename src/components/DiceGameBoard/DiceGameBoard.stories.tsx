@@ -1,7 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import DiceGameBoard from '.';
-import { withKnobs, number, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, boolean, select } from '@storybook/addon-knobs';
+import { DiceGameState } from '../../models/diceGameState.model';
 
 storiesOf('Components/DiceGameBoard', module)
   .addDecorator(withKnobs)
@@ -12,5 +13,15 @@ storiesOf('Components/DiceGameBoard', module)
       target={number('Target', 65)}
       disabled={boolean('Disabled', false)}
       over={boolean('Over', false)}
+      gameState={select(
+        'GameState',
+        {
+          IDLE: DiceGameState.IDLE,
+          WON: DiceGameState.WON,
+          LOST: DiceGameState.LOST,
+          HITTING: DiceGameState.HITTING,
+        },
+        DiceGameState.IDLE
+      )}
     />
   ));

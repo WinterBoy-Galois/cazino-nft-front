@@ -2,10 +2,9 @@ import React from 'react';
 import styles from './DiceGameBoard.module.scss';
 import DiceResultScale from '../icons/DiceResultScale';
 import Slider from '../Slider';
-import happyCharacter from '../../assets/images/games/dice/dice-char-happy.svg';
-import sadCharacter from '../../assets/images/games/dice/dice-char-sad.svg';
 import clsx from 'clsx';
-import { formatGameResult } from '../../common/util/format.util';
+import { DiceGameState } from '../../models/diceGameState.model';
+import Character from './components/Character';
 
 interface IProps {
   className?: string;
@@ -16,6 +15,7 @@ interface IProps {
   onChangeTarget?: (target: number) => void;
   maxValue?: number;
   minValue?: number;
+  gameState?: DiceGameState;
 }
 
 const DiceGameBoard: React.FC<IProps> = ({
@@ -27,12 +27,11 @@ const DiceGameBoard: React.FC<IProps> = ({
   onChangeTarget,
   maxValue,
   minValue,
+  gameState,
 }) => {
-  const hasWon = over ? result >= target : result < target;
-
   return (
     <div className={clsx(styles.container, className)}>
-      <DiceResultScale result={formatGameResult(result)} />
+      <DiceResultScale result={result} />
       <div className={styles.slider}>
         <Slider
           disabled={disabled}
@@ -43,11 +42,7 @@ const DiceGameBoard: React.FC<IProps> = ({
           minValue={minValue}
         />
       </div>
-      {result ? (
-        <div className={styles.character}>
-          <img src={hasWon ? happyCharacter : sadCharacter} alt={hasWon ? 'happy' : 'sad'} />
-        </div>
-      ) : null}
+      <Character gameState={gameState ?? DiceGameState.IDLE} />
     </div>
   );
 };

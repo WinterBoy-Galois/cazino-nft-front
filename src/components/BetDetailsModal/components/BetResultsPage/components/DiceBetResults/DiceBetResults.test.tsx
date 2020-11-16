@@ -7,7 +7,7 @@ describe('DiceBetResults', () => {
     // Arrange
 
     // Act
-    const container = render(<DiceBetResults result={45} rollOver={22} hasWon={false} />);
+    const container = render(<DiceBetResults result={45} target={50} over={false} />);
 
     // Assert
     expect(container).toMatchSnapshot();
