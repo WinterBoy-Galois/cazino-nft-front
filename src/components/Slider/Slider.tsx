@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Slider.module.scss';
 import { Slider as ReactSlider, Rail, Handles, Tracks } from 'react-compound-slider';
 import Handle from './components/Handle';
@@ -22,9 +22,17 @@ const Slider: React.FC<IProps> = ({
   onChange,
   switchColors = false,
   valueRange = [0, 100],
-  maxValue,
-  minValue,
+  maxValue = 100,
+  minValue = 0,
 }: IProps) => {
+  const [steps, setSteps] = useState(0.01);
+
+  useEffect(() => {
+    if (value % 1 != 0) {
+      setSteps(0.01);
+    }
+  }, [value]);
+
   return (
     <div className={styles.slider__wrapper}>
       <ReactSlider
@@ -56,10 +64,14 @@ const Slider: React.FC<IProps> = ({
         }}
         vertical
         reversed
-        step={1}
+        step={steps}
         domain={valueRange}
-        onUpdate={(u: any) => onUpdate && onUpdate(u.length > 0 ? u[0] : 0)}
-        onChange={(c: any) => onChange && onChange(c.length > 0 ? c[0] : 0)}
+        onUpdate={(u: any) =>
+          onUpdate && u.length > 0 && u[0] !== +value.toFixed(2) && u[0] !== 0 && onUpdate(u[0])
+        }
+        onChange={(c: any) =>
+          onChange && c.length > 0 && c[0] !== +value.toFixed(2) && c[0] !== 0 && onChange(c[0])
+        }
         values={[value]}
         className={styles.slider}
         disabled={disabled}
@@ -84,6 +96,17 @@ const Slider: React.FC<IProps> = ({
                   domain={valueRange}
                   getHandleProps={getHandleProps}
                   disabled={disabled}
+                  onTouchHandle={() => {
+                    if (value < minValue) {
+                      onUpdate && onUpdate(minValue);
+                    }
+
+                    if (value > maxValue) {
+                      onUpdate && onUpdate(maxValue);
+                    }
+
+                    setSteps(1);
+                  }}
                 />
               ))}
             </div>

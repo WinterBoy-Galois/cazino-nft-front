@@ -1,0 +1,10 @@
+{
+  "dice": {
+    "profit": "Gewinn",
+    "probability": "Chance",
+    "multiplier": "Multiplikator",
+    "rollOver": "roll over",
+    "rollUnder": "roll under",
+    "amount": "Einsatz"
+  }
+}

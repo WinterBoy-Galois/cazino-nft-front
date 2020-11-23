@@ -3,7 +3,10 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 2rem;
+  }
 }
 
 .board {
@@ -21,17 +24,47 @@
 }
 
 .controls {
-  display: flex;
-  margin-top: 2rem;
-  background-color: $user-info-main-blue;
-  padding: 3rem 0;
+  &__wrapper {
+    width: 100%;
+    margin-top: 2rem;
+    background-color: $user-info-main-blue;
+    padding: 0 0 2rem;
+
+    @include media-breakpoint-up(md) {
+      padding: 3.5rem;
+    }
+  }
 
   &__button {
     width: 100%;
-    max-width: 412px;
+    display: flex;
+    align-items: center;
   }
 }
 
 .loading {
   height: 500px;
+}
+
+.profit {
+  &__label {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    line-height: 19px;
+    color: $control-label;
+    user-select: none;
+    margin: 0;
+  }
+
+  &__container {
+    margin: -1.2rem 0 1rem;
+
+    @include media-breakpoint-up(md) {
+      margin: -4.7rem 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 }

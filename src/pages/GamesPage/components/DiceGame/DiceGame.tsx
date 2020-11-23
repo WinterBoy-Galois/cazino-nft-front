@@ -16,6 +16,11 @@ import useTargetSliderMax from '../../../../hooks/useTargetSliderMax.hook';
 import { DiceGameAction, diceGameReducer, DiceGameState } from './lib/reducer';
 import { DiceGameState as GameState } from '../../../../models/diceGameState.model';
 import { appConfig } from '../../../../common/config';
+import BetControl from '../../../../components/BetControl';
+import { calcMultiplier, calcProbability, calcProfit } from '../../../../common/util/betCalc.util';
+import BitcoinValue from '../../../../components/BitcoinValue';
+import { formatBitcoin } from '../../../../common/util/format.util';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   loadingBet?: boolean;
@@ -37,19 +42,23 @@ const DiceGame: React.FC<IProps> = ({
   errorSetup,
   minProbability = 0,
   maxProbability = 100,
+  he = 0.01,
 }) => {
   const [{ auth }] = useStateValue();
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { t } = useTranslation(['games']);
   const [state, dispatch] = useReducer<Reducer<DiceGameState, DiceGameAction>>(diceGameReducer, {
     target: 50,
     result,
     amount: 0.0001,
-    multiplier: 0,
-    probability: 0,
+    multiplier: calcMultiplier(calcProbability(50, false), he),
+    probability: calcProbability(50, false),
     gameState: GameState.IDLE,
     over: false,
     isRunning: false,
+    he,
+    profit: calcProfit(calcMultiplier(calcProbability(50, false), he), 0.0001),
   });
 
   const minTarget = useTargetSliderMin(minProbability, maxProbability);
@@ -88,7 +97,7 @@ const DiceGame: React.FC<IProps> = ({
     dispatch({ type: 'SET_RESULT', payload: { result: 0 } });
     dispatch({ type: 'CALC_GAME_STATE' });
 
-    onPlaceBet(state.amount, state.target, false);
+    onPlaceBet(state.amount, +state.target.toFixed(2), state.over);
   };
 
   if (loadingSetup) {
@@ -114,12 +123,61 @@ const DiceGame: React.FC<IProps> = ({
         />
       </div>
 
-      <div className={styles.controls}>
+      <div className={styles.controls__wrapper}>
         <div className="container">
-          <div className={styles.controls__button}>
-            <SpinnerButton onClick={handlePlaceBet} loading={loadingBet || state.isRunning}>
-              start
-            </SpinnerButton>
+          <div className="row">
+            <div className="col-12">
+              <div className={styles.profit__container}>
+                <div className={styles.profit__label}>{t('dice.profit')}</div>
+                <div>
+                  <BitcoinValue value={formatBitcoin(state.profit)} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-4 col-xl-2">
+              <BetControl
+                label={t('dice.probability')}
+                icon="PROBABILITY"
+                value={state.probability}
+                onChange={probability =>
+                  dispatch({ type: 'SET_PROBABILITY', payload: { probability } })
+                }
+                min={minProbability}
+                max={maxProbability}
+              />
+            </div>
+            <div className="col-4 col-xl-2">
+              <BetControl
+                label={t('dice.multiplier')}
+                icon="MULTIPLIER"
+                value={state.multiplier}
+                decimalPlaces={3}
+                onChange={multiplier =>
+                  dispatch({ type: 'SET_MULTIPLIER', payload: { multiplier } })
+                }
+                min={calcMultiplier(maxProbability, state.he)}
+                max={calcMultiplier(minProbability, state.he)}
+              />
+            </div>
+            <div className="col-4 col-xl-2">
+              <BetControl
+                label={state.over ? t('dice.rollOver') : t('dice.rollUnder')}
+                icon="OVER_UNDER"
+                value={state.target}
+                readonly
+                onClick={() => dispatch({ type: 'TOGGLE_OVER' })}
+              />
+            </div>
+            <div className="col-12 col-xl-3">
+              {t('dice.amount')} {state.amount}
+            </div>
+            <div className={clsx(styles.controls__button, 'col-12 col-xl-3')}>
+              <SpinnerButton onClick={handlePlaceBet} loading={loadingBet || state.isRunning}>
+                start
+              </SpinnerButton>
+            </div>
           </div>
         </div>
       </div>
@@ -138,8 +196,8 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const handlePlaceBet = async (amount: number, target: number, over: boolean) => {
     const { data, errors } = await makeBetDice({ variables: { betAmount: amount, target, over } });
 
-    if (errors) {
-      error("Your bet couldn't be placed, please try again.");
+    if (errors || data.makeBetDice?.errors) {
+      return error("Your bet couldn't be placed, please try again.");
     }
 
     setResult(data?.makeBetDice?.result);

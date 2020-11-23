@@ -1,0 +1,98 @@
+import React, { useEffect, useState } from 'react';
+import styles from './BetControl.module.scss';
+import clsx from 'clsx';
+import { isValid } from './lib/util';
+import Icon from './components/Icon';
+
+interface IProps {
+  label?: string;
+  value?: number;
+  className?: string;
+  onChange?: (value: number) => void;
+  min?: number;
+  max?: number;
+  icon?: 'PROBABILITY' | 'MULTIPLIER' | 'OVER_UNDER';
+  decimalPlaces?: number;
+  readonly?: boolean;
+  onClick?: () => void;
+}
+
+const BetControl: React.FC<IProps> = ({
+  label,
+  value: defaultValue = 0.0,
+  className,
+  onChange,
+  min = 0,
+  max = 100,
+  icon,
+  decimalPlaces = 2,
+  readonly,
+  onClick,
+}) => {
+  const formatValue = (v: number) => v.toFixed(decimalPlaces);
+  const [value, setValue] = useState(defaultValue);
+  const [internalValue, setInternalValue] = useState(formatValue(defaultValue));
+  const [editing, setEditing] = useState(false);
+
+  useEffect(() => {
+    if (!editing) {
+      setValue(defaultValue);
+      setInternalValue(formatValue(defaultValue));
+    }
+  }, [defaultValue]);
+
+  const handleChange = (newValue: string) => {
+    setEditing(true);
+
+    setInternalValue(newValue);
+
+    if (isValid(newValue, +min.toFixed(3), +max.toFixed(3))) {
+      setValue(+newValue);
+      onChange && onChange(+newValue);
+    }
+  };
+
+  const handleBlur = () => {
+    let newValue: number;
+
+    if (min && +internalValue < min) {
+      newValue = min;
+    } else if (max && +internalValue > max) {
+      newValue = max;
+    } else {
+      newValue = value;
+    }
+
+    setInternalValue(formatValue(newValue));
+    setValue(+newValue);
+    onChange && onChange(+newValue);
+
+    setEditing(false);
+  };
+
+  return (
+    <div
+      className={clsx(styles.container, className, readonly && styles.readonly)}
+      onClick={onClick}
+    >
+      <label htmlFor={label}>{label}</label>
+      <div className={clsx(styles.container__value, readonly && styles.readonly)}>
+        <Icon className={styles.icon} icon={icon} />
+        <input
+          id={label}
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          value={internalValue}
+          autoComplete="off"
+          onChange={e => handleChange(e.target.value)}
+          data-testid="value"
+          onBlur={handleBlur}
+          disabled={readonly}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default BetControl;

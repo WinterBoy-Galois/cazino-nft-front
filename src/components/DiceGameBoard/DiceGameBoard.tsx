@@ -38,6 +38,7 @@ const DiceGameBoard: React.FC<IProps> = ({
           value={target}
           switchColors={over}
           onChange={onChangeTarget}
+          onUpdate={onChangeTarget}
           maxValue={maxValue}
           minValue={minValue}
         />
