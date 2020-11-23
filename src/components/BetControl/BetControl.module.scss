@@ -1,0 +1,74 @@
+@import '../../styles/shared';
+
+$background-color: $control-background;
+$label-color: $control-label;
+$border-radius: 8px;
+$border-width: 2px;
+$border-focus-color: #fec41c;
+$border-hover-color: #80a2cc;
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  padding: 5px 10px;
+  border: $border-width solid $background-color;
+  transition: all 0.2s ease-in;
+
+  &__value {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  label {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    line-height: 19px;
+    color: $label-color;
+    user-select: none;
+    margin: 0;
+  }
+
+  input {
+    color: $white;
+    background-color: $background-color;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 18px;
+    border: 0;
+    width: 100%;
+
+    &:disabled {
+      -webkit-text-fill-color: $white;
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    border: $border-width solid $border-hover-color;
+  }
+
+  &:focus-within {
+    border: $border-width solid $border-focus-color;
+  }
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  vertical-align: baseline;
+  fill: $white;
+}
+
+.readonly {
+  > * {
+    cursor: pointer;
+  }
+}

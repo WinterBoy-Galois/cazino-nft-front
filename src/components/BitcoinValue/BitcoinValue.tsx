@@ -11,7 +11,9 @@ const BitcoinValue: React.FC<IProps> = ({ value, className = '' }) => {
   return (
     <div className={`${styles.container} ${className}`}>
       <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
-      <span className="truncate">{value}</span>
+      <span className="truncate" data-tag="allowRowEvents">
+        {value}
+      </span>
     </div>
   );
 };

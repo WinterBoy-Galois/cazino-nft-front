@@ -26,7 +26,7 @@ const GameButtonList: React.FC = () => {
         <ClamGameButton onClick={() => navigate('/games/clam')} />
       </div>
       <div className={`col-12 ${isOpen ? 'col-md-12' : 'col-md-6'} col-xl-6 `}>
-        <DicesGameButton onClick={() => navigate('/games/dices')} />
+        <DicesGameButton onClick={() => navigate('/games/dice')} />
       </div>
     </div>
   );

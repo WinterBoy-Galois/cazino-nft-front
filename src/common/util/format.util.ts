@@ -59,6 +59,14 @@ const formatWinChance = (value?: number) => {
   return `${value.toFixed(1)}%`;
 };
 
+const formatGameResult = (value?: number) => {
+  if (!value) {
+    return '—.—';
+  }
+
+  return value.toFixed(2);
+};
+
 export {
   formatBet,
   formatMultiplier,
@@ -66,4 +74,5 @@ export {
   formatBitcoin,
   formatBitcoinSmart,
   formatWinChance,
+  formatGameResult,
 };

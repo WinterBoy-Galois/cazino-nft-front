@@ -17,6 +17,8 @@ import profileEN from './locales/profile/en.json';
 import profileDE from './locales/profile/de.json';
 import transactionsEN from './locales/transactions/en.json';
 import transactionsDE from './locales/transactions/de.json';
+import gamesEN from './locales/games/en.json';
+import gamesDE from './locales/games/de.json';
 
 i18n
   .use(LanguageDetector)
@@ -32,6 +34,7 @@ i18n
         auth: authEN,
         profile: profileEN,
         transactions: transactionsEN,
+        games: gamesEN,
       },
       de: {
         common: commonDE,
@@ -42,13 +45,24 @@ i18n
         auth: authDE,
         profile: profileDE,
         transactions: transactionsDE,
+        games: gamesDE,
       },
     },
 
     fallbackLng: 'en',
     debug: false,
 
-    ns: ['common', 'home', 'footer', 'sidebar', 'modals', 'auth', 'profile', 'transactions'],
+    ns: [
+      'common',
+      'home',
+      'footer',
+      'sidebar',
+      'modals',
+      'auth',
+      'profile',
+      'transactions',
+      'games',
+    ],
     defaultNS: 'common',
 
     keySeparator: '.',

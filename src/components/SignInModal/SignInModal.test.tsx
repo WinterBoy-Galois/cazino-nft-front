@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import SignInModal from './SignInModal';
 
 describe('SignInModal', () => {
@@ -10,6 +10,6 @@ describe('SignInModal', () => {
     const container = render(<SignInModal show={true} loading={false} />);
 
     // Assert
-    await waitFor(() => expect(container).toMatchSnapshot());
+    expect(container).toMatchSnapshot();
   });
 });

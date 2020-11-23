@@ -8,7 +8,7 @@ describe('Statistics', () => {
     // Arrange
 
     // Act
-    const container = render(<Statistics message="Hello World!" />);
+    const container = render(<Statistics loading={false} />);
 
     // Assert
     expect(container).toMatchSnapshot();
