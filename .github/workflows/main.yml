@@ -95,19 +95,27 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Install dependencies
-      run: yarn
+    # - name: Install dependencies
+    #   run: yarn
       
-    - name: Build
-      run: yarn build
+    # - name: Build
+    #   run: yarn build
 
-    - name: Build image
-      run: docker build . --file Dockerfile --tag $IMAGE_NAME
+    # - name: Build image
+    #   run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
     - name: Get release version
       id: get_version
       # run: echo ::set-env name=RELEASE_TAG::$(echo ${{ github.sha }})
       run: echo ${{ github.event.release.tag_name }}
+
+
+    - name: Dump env
+      run: env | sort
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"      
     
     # - run: echo ${{env.RELEASE_TAG}}
     
