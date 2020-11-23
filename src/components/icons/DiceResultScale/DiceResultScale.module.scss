@@ -26,3 +26,13 @@
   font-size: 60px;
   font-weight: 900;
 }
+
+.diamond {
+  &__container {
+    position: absolute;
+    width: 15%;
+    right: 24%;
+    height: 72.6%;
+    top: 7.8%;
+  }
+}

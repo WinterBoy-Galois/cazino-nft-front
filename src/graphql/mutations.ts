@@ -219,3 +219,26 @@ export const UPDATE_AVATAR = gql`
     }
   }
 `;
+
+export const MAKE_BET_DICE = gql`
+  mutation makeBetDice($betAmount: Float!, $over: Boolean!, $target: Float!) {
+    makeBetDice(betAmount: $betAmount, over: $over, target: $target) {
+      ... on BetResultDice {
+        id
+        result
+        lucky
+        multiplier
+        profit
+        balance
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

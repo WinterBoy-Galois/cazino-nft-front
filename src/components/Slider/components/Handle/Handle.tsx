@@ -7,6 +7,7 @@ interface IProps {
   handle: SliderItem;
   getHandleProps: GetHandleProps;
   disabled?: boolean;
+  onTouchHandle?: () => void;
 }
 
 const getValue = (value: number) => {
@@ -26,6 +27,7 @@ const Handle: React.FC<IProps> = ({
   handle: { id, value, percent },
   getHandleProps,
   disabled = false,
+  onTouchHandle,
 }) => (
   <div
     role="slider"
@@ -37,6 +39,14 @@ const Handle: React.FC<IProps> = ({
     }}
     className={`${styles.handle} ${disabled ? styles['handle--disabled'] : ''}`}
     {...getHandleProps(id)}
+    onMouseDown={e => {
+      onTouchHandle && onTouchHandle();
+      getHandleProps(id).onMouseDown(e);
+    }}
+    onTouchStart={e => {
+      onTouchHandle && onTouchHandle();
+      getHandleProps(id).onTouchStart(e);
+    }}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -10,6 +10,7 @@ Object {
       >
         <div
           class="status status--confirmed"
+          data-tag="allowRowEvents"
         />
       </div>
     </div>
@@ -20,6 +21,7 @@ Object {
     >
       <div
         class="status status--confirmed"
+        data-tag="allowRowEvents"
       />
     </div>
   </div>,

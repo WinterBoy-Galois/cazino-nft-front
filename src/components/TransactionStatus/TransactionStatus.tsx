@@ -32,7 +32,7 @@ const TransactionStatus: React.FC<IProps> = ({ status, showText = false }) => {
 
   return (
     <div className={styles.container}>
-      <div className={clsx(styles.status, className)} />
+      <div className={clsx(styles.status, className)} data-tag="allowRowEvents" />
       {showText && <div className={styles.text}>{statusText}</div>}
     </div>
   );

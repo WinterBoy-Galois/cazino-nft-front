@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import PasswordResetModal from '.';
 
@@ -11,6 +11,6 @@ describe('PasswordResetModal', () => {
     const container = render(<PasswordResetModal show loading={false} />);
 
     // Assert
-    await waitFor(() => expect(container).toMatchSnapshot());
+    expect(container).toMatchSnapshot();
   });
 });
