@@ -95,55 +95,47 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    # - name: Install dependencies
-    #   run: yarn
+    - name: Install dependencies
+      run: yarn
       
-    # - name: Build
-    #   run: yarn build
+    - name: Build
+      run: yarn build
 
-    # - name: Build image
-    #   run: docker build . --file Dockerfile --tag $IMAGE_NAME
+    - name: Build image
+      run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
-    - name: Get release version
-      id: get_version
-      # run: echo ::set-env name=RELEASE_TAG::$(echo ${{ github.sha }})
-      run: echo ${{ github.event.release.tag_name }}
+    # - name: Dump env
+    #   run: env | sort
+    # - name: Dump GitHub context
+    #   env:
+    #     GITHUB_CONTEXT: ${{ toJson(github) }}
+    #   run: echo "$GITHUB_CONTEXT"      
+    
+    
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: gambilife/cc-front-dev
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        tags: "latest,${{ github.sha }}"
 
-
-    - name: Dump env
-      run: env | sort
-    - name: Dump GitHub context
+    - name: Deploy to cluster
+      uses: steebchen/kubectl@master
       env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"      
-    
-    # - run: echo ${{env.RELEASE_TAG}}
-    
-    # - name: Publish to Registry
-    #   uses: elgohr/Publish-Docker-Github-Action@master
-    #   with:
-    #     name: gambilife/front
-    #     username: ${{ secrets.DOCKER_USERNAME }}
-    #     password: ${{ secrets.DOCKER_PASSWORD }}
-    #     tags: "latest,${{ env.RELEASE_TAG }}"
-
-    # - name: Deploy to cluster
-    #   uses: steebchen/kubectl@master
-    #   env:
-    #     KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-    #   with:
-    #     args: set image deployment/cc-react-app-v1 cc-react-app-v1=gambilife/front:${{ github.sha }} -n dev
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: set image deployment/cc-react-app-v1 cc-react-app-v1=$IMAGE_NAME -n dev
 
 
-    # - uses: 8398a7/action-slack@v3
-    #   with:
-    #     status: ${{ job.status }}
-    #     fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
-    #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-    #   if: always()
-
+    - uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+      if: always()
 
 
   # staging-build:
