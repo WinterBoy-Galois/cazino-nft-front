@@ -15,7 +15,7 @@ const mocks = [
         me: {
           id: '204',
           username: 'tiyogi9473',
-          avatarUrl: 'https://staging.jinglebets.com/ava/m5.svg',
+          avatarUrl: `https://test.de/ava/m5.svg`,
           balance: 10,
           email: 'tiyogi9473@ioxmail.net',
           isActivated: true,

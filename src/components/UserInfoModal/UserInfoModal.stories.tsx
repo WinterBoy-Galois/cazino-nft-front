@@ -5,13 +5,14 @@ import { action } from '@storybook/addon-actions';
 import { ApolloError } from '@apollo/client';
 
 import UserInfoModal from '.';
+import { appConfig } from '../../common/config';
 
 const mockData = {
   userInfo: {
     __typename: 'PublicUser',
     id: '1',
     username: 'AuYHKS',
-    avatarUrl: 'https://staging.jinglebets.com/ava/m2.svg',
+    avatarUrl: `${appConfig.apiBasePath}/ava/m1.svg`,
     totalWager: 0,
     totalProfit: 0,
     mostPlayed: 'CLAMS',
@@ -41,7 +42,7 @@ storiesOf('Components/UserInfoModal', module)
           ...mockData,
           userInfo: {
             ...mockData.userInfo,
-            avatarUrl: 'https://staging.jinglebets.com/ava/ano.svg',
+            avatarUrl: `${appConfig.apiBasePath}/ava/m1.svg`,
             username: null,
             totalWager: null,
             totalProfit: null,
@@ -110,7 +111,7 @@ storiesOf('Components/UserInfoModal', module)
       userInfo: {
         __typename: 'PublicUser',
         id: '1',
-        avatarUrl: text('Avatar URL', 'https://staging.jinglebets.com/ava/m2.svg'),
+        avatarUrl: text('Avatar URL', `${appConfig.apiBasePath}/ava/m1.svg`),
         username: text('Username:', 'AuYHKS'),
         totalWager: number('Total Wager:', 0),
         totalProfit: number('Total Profit:', 0),

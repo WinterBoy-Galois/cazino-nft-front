@@ -1,6 +1,7 @@
 import React from 'react';
 import UserInfo from '.';
 import { LocationProvider } from '@reach/router';
+import { appConfig } from '../../../../common/config';
 
 export default {
   title: 'Components/Profile/UserInfo',
@@ -14,7 +15,7 @@ const data = {
   user: {
     id: '',
     username: 'name',
-    avatarUrl: 'https://staging.jinglebets.com/ava/m6.svg',
+    avatarUrl: `${appConfig.apiBasePath}/ava/m1.svg`,
     isActivated: true,
     email: 'test@test.de',
   },

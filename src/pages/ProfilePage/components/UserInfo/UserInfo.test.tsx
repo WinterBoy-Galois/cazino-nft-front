@@ -11,7 +11,14 @@ describe('UserInfo', () => {
     // Act
     const container = render(
       <LocationProvider>
-        <UserInfo user={{ id: '123', avatarUrl: '', isActivated: true, username: 'test' }} />
+        <UserInfo
+          user={{
+            id: '123',
+            avatarUrl: `https://test.de/ava/m1.svg`,
+            isActivated: true,
+            username: 'test',
+          }}
+        />
       </LocationProvider>
     );
 

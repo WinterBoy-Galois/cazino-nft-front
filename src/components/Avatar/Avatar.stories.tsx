@@ -3,6 +3,7 @@ import { text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import Avatar from '.';
+import { appConfig } from '../../common/config';
 
 export default {
   title: 'Components/Avatar',
@@ -13,7 +14,7 @@ export default {
 };
 
 const data = {
-  url: 'https://staging.jinglebets.com/ava/m1.svg',
+  url: `${appConfig.apiBasePath}/ava/m1.svg`,
   isEditable: true,
 };
 
