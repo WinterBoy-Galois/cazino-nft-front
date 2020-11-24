@@ -23,7 +23,7 @@ describe('Layout', () => {
           __typename: 'PublicUser',
           id: '1',
           username: 'NIDHjQ',
-          avatarUrl: 'https://staging.jinglebets.com/ava/m1.svg',
+          avatarUrl: 'https://test.de/ava/m1.svg',
           totalWager: 0,
           totalProfit: 0,
           mostPlayed: 'DICE',

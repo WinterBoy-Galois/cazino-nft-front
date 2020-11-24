@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import TopBar from '.';
 import { StateProvider } from '../../../../state';
 import { action } from '@storybook/addon-actions';
+import { appConfig } from '../../../../common/config';
 
 storiesOf('Components/TopBar', module)
   .add('default', () => <TopBar />)
@@ -24,7 +25,7 @@ storiesOf('Components/TopBar', module)
             id: '123',
             isActivated: true,
             username: 'testuser',
-            avatarUrl: 'https://staging.jinglebets.com/ava/m1.svg',
+            avatarUrl: `${appConfig.apiBasePath}/ava/m1.svg`,
           },
         },
         referral: {},

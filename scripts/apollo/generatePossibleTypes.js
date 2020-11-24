@@ -1,7 +1,7 @@
 const fetch = require('cross-fetch');
 const fs = require('fs');
 
-fetch(`https://staging.jinglebets.com/graphql`, {
+fetch(`${process.env.REACT_APP_API_BASE_PATH}/graphql`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
