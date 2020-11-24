@@ -4,7 +4,6 @@ import { MockedProvider } from '@apollo/client/testing';
 
 import AuthOverlay from './AuthOverlay';
 import { ME } from '../../graphql/queries';
-import { appConfig } from '../../common/config';
 
 const mocks = [
   {
@@ -16,7 +15,7 @@ const mocks = [
         me: {
           id: '204',
           username: 'tiyogi9473',
-          avatarUrl: `${appConfig.apiBasePath}/ava/m5.svg`,
+          avatarUrl: `https://test.de/ava/m5.svg`,
           balance: 10,
           email: 'tiyogi9473@ioxmail.net',
           isActivated: true,
