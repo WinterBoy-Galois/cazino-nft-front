@@ -24,35 +24,13 @@ Object {
                 class="avatar avatar__clickable avatar avatar__current"
                 role="button"
               >
-                <svg
-                  class="avatar__editable"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
+                <div
+                  class="avatar__spinner"
                 >
-                  <g
-                    data-name="Layer 2"
-                    id="Layer_2"
-                  >
-                    <g
-                      data-name="Layer 1"
-                      id="Layer_1-2"
-                    >
-                      <path
-                        d="M8 0a8 8 0 108 8 8 8 0 00-8-8zM5.8 12H4v-1.8l5.32-5.32 1.8 1.8zm6.72-6.71l-.88.88-1.8-1.8.88-.88a.48.48 0 01.68 0l1.12 1.13a.48.48 0 010 .67z"
-                        fill="#f59f66"
-                      />
-                      <path
-                        class="fill"
-                        d="M12.52 4.61L11.4 3.48a.48.48 0 00-.68 0l-.88.88 1.8 1.8.88-.88a.48.48 0 000-.68zM4 10.2V12h1.8l5.32-5.32-1.8-1.8L4 10.2z"
-                      />
-                    </g>
-                  </g>
-                </svg>
-                <img
-                  alt=""
-                  class="w-100 h-100"
-                  src="https://staging.jinglebets.com/ava/m1.svg"
-                />
+                  <span
+                    class="spinner spinner--white "
+                  />
+                </div>
               </div>
             </div>
             <button
@@ -106,6 +84,20 @@ Object {
                 class="swiper-wrapper"
                 style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
               >
+                <div
+                  class="swiper-slide slider"
+                >
+                  <div
+                    class="avatar avatar__clickable avatar"
+                    role="button"
+                  >
+                    <img
+                      alt=""
+                      class="w-100 h-100"
+                      src="https://staging.jinglebets.com/ava/m1.svg"
+                    />
+                  </div>
+                </div>
                 <div
                   class="swiper-slide slider"
                 >
@@ -362,35 +354,13 @@ Object {
               class="avatar avatar__clickable avatar avatar__current"
               role="button"
             >
-              <svg
-                class="avatar__editable"
-                viewBox="0 0 16 16"
-                xmlns="http://www.w3.org/2000/svg"
+              <div
+                class="avatar__spinner"
               >
-                <g
-                  data-name="Layer 2"
-                  id="Layer_2"
-                >
-                  <g
-                    data-name="Layer 1"
-                    id="Layer_1-2"
-                  >
-                    <path
-                      d="M8 0a8 8 0 108 8 8 8 0 00-8-8zM5.8 12H4v-1.8l5.32-5.32 1.8 1.8zm6.72-6.71l-.88.88-1.8-1.8.88-.88a.48.48 0 01.68 0l1.12 1.13a.48.48 0 010 .67z"
-                      fill="#f59f66"
-                    />
-                    <path
-                      class="fill"
-                      d="M12.52 4.61L11.4 3.48a.48.48 0 00-.68 0l-.88.88 1.8 1.8.88-.88a.48.48 0 000-.68zM4 10.2V12h1.8l5.32-5.32-1.8-1.8L4 10.2z"
-                    />
-                  </g>
-                </g>
-              </svg>
-              <img
-                alt=""
-                class="w-100 h-100"
-                src="https://staging.jinglebets.com/ava/m1.svg"
-              />
+                <span
+                  class="spinner spinner--white "
+                />
+              </div>
             </div>
           </div>
           <button
@@ -444,6 +414,20 @@ Object {
               class="swiper-wrapper"
               style="transition: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
             >
+              <div
+                class="swiper-slide slider"
+              >
+                <div
+                  class="avatar avatar__clickable avatar"
+                  role="button"
+                >
+                  <img
+                    alt=""
+                    class="w-100 h-100"
+                    src="https://staging.jinglebets.com/ava/m1.svg"
+                  />
+                </div>
+              </div>
               <div
                 class="swiper-slide slider"
               >

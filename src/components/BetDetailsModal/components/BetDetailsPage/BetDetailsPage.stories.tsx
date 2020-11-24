@@ -4,6 +4,7 @@ import BetDetailsPage from '.';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import PageableModal from '../../../PageableModal';
 import { LocationProvider } from '@reach/router';
+import { appConfig } from '../../../../common/config';
 
 storiesOf('Components/BetDetailsModal/BetDetailsPage', module)
   .addDecorator(storyFn => <LocationProvider>{storyFn()}</LocationProvider>)
@@ -20,7 +21,7 @@ storiesOf('Components/BetDetailsModal/BetDetailsPage', module)
         profit: 0.00002852,
         multiplier: 1.3026315789473684,
       }}
-      avatarUrl={'https://staging.jinglebets.com/ava/m1.svg'}
+      avatarUrl={`${appConfig.apiBasePath}/ava/m1.svg`}
       loading={false}
     />
   ));
