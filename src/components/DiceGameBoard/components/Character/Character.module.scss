@@ -4,7 +4,11 @@
   position: absolute;
   left: -9%;
   bottom: 0;
-  width: 46%;
+  width: 48%;
+
+  @include media-breakpoint-up(md) {
+    width: 46%;
+  }
 
   &__hitting {
     left: -7.7%;

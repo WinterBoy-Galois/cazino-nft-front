@@ -1,4 +1,4 @@
-export const isValid = (value: string, min?: number, max?: number): boolean => {
+export const isValid = (value: string | number, min?: number, max?: number): boolean => {
   const v = Number(value);
 
   return (

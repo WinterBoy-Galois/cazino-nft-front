@@ -10,7 +10,7 @@ import { MAKE_BET_DICE } from '../../../../graphql/mutations';
 import { useStateValue } from '../../../../state';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
-import { error, info, success } from '../../../../components/Toast';
+import { error as errorToast, info, success } from '../../../../components/Toast';
 import useTargetSliderMin from '../../../../hooks/useTargetSliderMin.hook';
 import useTargetSliderMax from '../../../../hooks/useTargetSliderMax.hook';
 import { DiceGameAction, diceGameReducer, DiceGameState } from './lib/reducer';
@@ -21,6 +21,7 @@ import { calcMultiplier, calcProbability, calcProfit } from '../../../../common/
 import BitcoinValue from '../../../../components/BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import { useTranslation } from 'react-i18next';
+import BetAmountControl from '../../../../components/BetAmountControl';
 
 interface IProps {
   loadingBet?: boolean;
@@ -31,6 +32,7 @@ interface IProps {
   onPlaceBet?: (amount: number, target: number, over: boolean) => void;
   result?: number;
   errorSetup?: any;
+  errorBet?: any;
   over?: boolean;
 }
 
@@ -43,6 +45,7 @@ const DiceGame: React.FC<IProps> = ({
   minProbability = 0,
   maxProbability = 100,
   he = 0.01,
+  errorBet,
 }) => {
   const [{ auth }] = useStateValue();
   const navigate = useNavigate();
@@ -51,18 +54,24 @@ const DiceGame: React.FC<IProps> = ({
   const [state, dispatch] = useReducer<Reducer<DiceGameState, DiceGameAction>>(diceGameReducer, {
     target: 50,
     result,
-    amount: 0.0001,
+    amount: 0.00000001,
     multiplier: calcMultiplier(calcProbability(50, false), he),
     probability: calcProbability(50, false),
     gameState: GameState.IDLE,
     over: false,
     isRunning: false,
     he,
-    profit: calcProfit(calcMultiplier(calcProbability(50, false), he), 0.0001),
+    profit: calcProfit(calcMultiplier(calcProbability(50, false), he), 0.00000001),
   });
 
   const minTarget = useTargetSliderMin(minProbability, maxProbability);
   const maxTarget = useTargetSliderMax(minProbability, maxProbability);
+
+  useEffect(() => {
+    if (errorBet) {
+      dispatch({ type: 'END' });
+    }
+  }, [errorBet]);
 
   useEffect(() => {
     if (result) {
@@ -170,9 +179,16 @@ const DiceGame: React.FC<IProps> = ({
                 onClick={() => dispatch({ type: 'TOGGLE_OVER' })}
               />
             </div>
-            <div className="col-12 col-xl-3">
-              {t('dice.amount')} {state.amount}
+
+            <div className={clsx('col-12 col-xl-3', styles.amount__container)}>
+              <BetAmountControl
+                amount={state.amount}
+                min={0.00000001}
+                max={auth.user?.balance ?? 15}
+                onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
+              />
             </div>
+
             <div className={clsx(styles.controls__button, 'col-12 col-xl-3')}>
               <SpinnerButton onClick={handlePlaceBet} loading={loadingBet || state.isRunning}>
                 start
@@ -192,20 +208,27 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_DICE);
   const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE);
   const [result, setResult] = useState();
+  const [error, setError] = useState();
 
   const handlePlaceBet = async (amount: number, target: number, over: boolean) => {
     const { data, errors } = await makeBetDice({ variables: { betAmount: amount, target, over } });
 
     if (errors || data.makeBetDice?.errors) {
-      return error("Your bet couldn't be placed, please try again.");
+      setError(errors ?? data.makeBetDice?.errors);
+
+      if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
+        return errorToast('Your bet may reaches the profit limit.');
+      }
+
+      return errorToast("Your bet couldn't be placed, please try again.");
     }
 
     setResult(data?.makeBetDice?.result);
 
     setTimeout(() => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
-      const toast = `Your balance has been updated: ${+data?.makeBetDice?.profit}`;
-      if (+data?.makeBetDice?.profit > 0) {
+      const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetDice?.profit)}`;
+      if (+data?.makeBetDice?.profit >= 0) {
         success(toast);
       } else {
         info(toast);
@@ -223,6 +246,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
       onPlaceBet={handlePlaceBet}
       result={result}
       errorSetup={errorSetup}
+      errorBet={error}
     />
   );
 };

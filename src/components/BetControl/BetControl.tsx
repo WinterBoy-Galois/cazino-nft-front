@@ -3,6 +3,7 @@ import styles from './BetControl.module.scss';
 import clsx from 'clsx';
 import { isValid } from './lib/util';
 import Icon from './components/Icon';
+import { IconType } from './components/Icon/Icon';
 
 interface IProps {
   label?: string;
@@ -11,7 +12,7 @@ interface IProps {
   onChange?: (value: number) => void;
   min?: number;
   max?: number;
-  icon?: 'PROBABILITY' | 'MULTIPLIER' | 'OVER_UNDER';
+  icon?: IconType;
   decimalPlaces?: number;
   readonly?: boolean;
   onClick?: () => void;
@@ -77,7 +78,7 @@ const BetControl: React.FC<IProps> = ({
     >
       <label htmlFor={label}>{label}</label>
       <div className={clsx(styles.container__value, readonly && styles.readonly)}>
-        <Icon className={styles.icon} icon={icon} />
+        <Icon icon={icon} />
         <input
           id={label}
           type="text"

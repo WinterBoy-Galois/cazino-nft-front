@@ -7,10 +7,14 @@
   @include media-breakpoint-up(md) {
     margin-top: 2rem;
   }
+
+  > * {
+    user-select: none;
+  }
 }
 
 .board {
-  width: 90%;
+  width: 75%;
   max-width: 500px;
 
   @include media-breakpoint-up(md) {
@@ -58,13 +62,23 @@
   }
 
   &__container {
-    margin: -1.2rem 0 1rem;
+    margin: -1.2rem 0 0.1rem;
 
     @include media-breakpoint-up(md) {
       margin: -4.7rem 0 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+  }
+}
+
+.amount {
+  &__container {
+    margin: 0.5rem 0;
+
+    @include media-breakpoint-up(xl) {
+      margin: 0;
     }
   }
 }
