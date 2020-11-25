@@ -30,7 +30,8 @@ export interface DiceGameAction {
     | 'END'
     | 'SET_PROBABILITY'
     | 'TOGGLE_OVER'
-    | 'SET_MULTIPLIER';
+    | 'SET_MULTIPLIER'
+    | 'SET_AMOUNT';
   payload?: any;
 }
 
@@ -110,6 +111,13 @@ export const diceGameReducer = (state: DiceGameState, action: DiceGameAction): D
         ...state,
         over: !state.over,
         target: calcTarget(state.probability, !state.over),
+      };
+
+    case 'SET_AMOUNT':
+      return {
+        ...state,
+        profit: calcProfit(state.multiplier, payload.amount),
+        amount: payload.amount,
       };
 
     default:

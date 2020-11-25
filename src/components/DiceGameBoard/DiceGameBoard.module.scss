@@ -2,6 +2,10 @@
 
 .container {
   position: relative;
+
+  > * {
+    user-select: none;
+  }
 }
 
 .slider {
