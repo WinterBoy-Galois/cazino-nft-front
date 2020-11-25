@@ -50,7 +50,7 @@ $slide-transition: all 200ms ease-in-out;
 
   &__content {
     margin: $bar-height 0;
-    padding: 1rem 0 0 0;
+    padding: 0.5rem 0 0 0;
 
     @include media-breakpoint-up(lg) {
       margin: $bar-height-lg 0;

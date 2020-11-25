@@ -1,0 +1,13 @@
+@import '../../../../styles/shared';
+
+.icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  vertical-align: baseline;
+  fill: $white;
+
+  &__bitcoin {
+    fill: $bitcoinYellow;
+  }
+}
