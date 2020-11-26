@@ -231,3 +231,21 @@ export const SETUP_DICE = gql`
     }
   }
 `;
+
+export const TRANSACTION_BETS = gql`
+  query Bets($page: Int, $limit: Int) {
+    transactionsBet(page: $page, limit: $limit) {
+      page
+      limit
+      total
+      items {
+        id
+        time
+        game
+        amount
+        multiplier
+        profit
+      }
+    }
+  }
+`;

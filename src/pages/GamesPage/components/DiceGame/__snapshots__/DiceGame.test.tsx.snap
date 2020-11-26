@@ -445,6 +445,7 @@ Object {
                   <div>
                     <div
                       class="container "
+                      data-tag="allowRowEvents"
                     >
                       <svg
                         class="icon"
@@ -1126,6 +1127,7 @@ Object {
                 <div>
                   <div
                     class="container "
+                    data-tag="allowRowEvents"
                   >
                     <svg
                       class="icon"

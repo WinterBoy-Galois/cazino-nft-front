@@ -9,7 +9,7 @@ interface IProps {
 
 const BitcoinValue: React.FC<IProps> = ({ value, className = '' }) => {
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div className={`${styles.container} ${className}`} data-tag="allowRowEvents">
       <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
       <span className="truncate" data-tag="allowRowEvents">
         {value}

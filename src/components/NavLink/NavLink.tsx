@@ -12,9 +12,8 @@ const NavLink: React.FC<IProps> = ({ children, to, className, activeClassName })
   return (
     <Link
       to={to}
-      className={clsx(className)}
       getProps={({ isCurrent }) => ({
-        className: isCurrent ? clsx(className, activeClassName) : undefined,
+        className: isCurrent ? clsx(className, activeClassName) : clsx(className),
       })}
     >
       {children}
