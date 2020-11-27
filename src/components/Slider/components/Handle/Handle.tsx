@@ -1,6 +1,7 @@
 import React from 'react';
 import { SliderItem, GetHandleProps } from 'react-compound-slider';
 import styles from './Handle.module.scss';
+import Hammer from 'react-hammerjs';
 
 interface IProps {
   domain: ReadonlyArray<number>;
@@ -32,7 +33,7 @@ const Handle: React.FC<IProps> = ({
   const handleProps = getHandleProps(id);
 
   return (
-    <div
+    <Hammer
       role="slider"
       aria-valuemin={min}
       aria-valuemax={max}
@@ -42,14 +43,15 @@ const Handle: React.FC<IProps> = ({
       }}
       className={`${styles.handle} ${disabled ? styles['handle--disabled'] : ''}`}
       {...handleProps}
-      onMouseDown={e => {
+      onMouseDown={(e: any) => {
         onTouchHandle && onTouchHandle();
         handleProps.onMouseDown(e);
       }}
-      onTouchStart={e => {
+      onTouchStart={(e: any) => {
         onTouchHandle && onTouchHandle();
         handleProps.onTouchStart(e);
       }}
+      options={{ touchAction: 'none' }}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +67,7 @@ const Handle: React.FC<IProps> = ({
           {getValue(value)}
         </text>
       </svg>
-    </div>
+    </Hammer>
   );
 };
 
