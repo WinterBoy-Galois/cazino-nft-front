@@ -1,44 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TransactionsPage should match snapshot 1`] = `
+exports[`BetsTable should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="container"
+        class="sc-hHEjAm iECIgJ"
       >
-        <h1
-          class="headline"
-        >
-          transactions
-        </h1>
         <div
-          class="container "
+          class="sc-kfYqjs ezVbOX"
         >
-          <nav
-            class="nav"
-          >
-            <a
-              class="nav__link"
-              href="/deposits"
-            >
-              Deposits
-            </a>
-            <a
-              class="nav__link"
-              href="/bets"
-            >
-              Bets
-            </a>
-          </nav>
           <div
-            class="details-container container container--light"
+            class="sc-bdnylx ejLVfJ rdt_Table"
+            role="table"
           >
             <div
-              style="outline: none;"
-              tabindex="-1"
-            />
+              class="sc-bCwgka iCHBAi"
+            >
+              There is no data to display.
+            </div>
           </div>
         </div>
       </div>
@@ -46,39 +27,20 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="container"
+      class="sc-hHEjAm iECIgJ"
     >
-      <h1
-        class="headline"
-      >
-        transactions
-      </h1>
       <div
-        class="container "
+        class="sc-kfYqjs ezVbOX"
       >
-        <nav
-          class="nav"
-        >
-          <a
-            class="nav__link"
-            href="/deposits"
-          >
-            Deposits
-          </a>
-          <a
-            class="nav__link"
-            href="/bets"
-          >
-            Bets
-          </a>
-        </nav>
         <div
-          class="details-container container container--light"
+          class="sc-bdnylx ejLVfJ rdt_Table"
+          role="table"
         >
           <div
-            style="outline: none;"
-            tabindex="-1"
-          />
+            class="sc-bCwgka iCHBAi"
+          >
+            There is no data to display.
+          </div>
         </div>
       </div>
     </div>

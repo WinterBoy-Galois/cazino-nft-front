@@ -7,6 +7,7 @@ Object {
     <div>
       <div
         class="container "
+        data-tag="allowRowEvents"
       >
         <svg
           class="icon"
@@ -37,6 +38,7 @@ Object {
   "container": <div>
     <div
       class="container "
+      data-tag="allowRowEvents"
     >
       <svg
         class="icon"

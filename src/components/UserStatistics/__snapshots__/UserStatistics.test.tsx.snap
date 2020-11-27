@@ -21,6 +21,7 @@ Object {
           >
             <div
               class="container value"
+              data-tag="allowRowEvents"
             >
               <svg
                 class="icon"
@@ -61,6 +62,7 @@ Object {
           >
             <div
               class="container  value"
+              data-tag="allowRowEvents"
             >
               <svg
                 class="icon"
@@ -190,6 +192,7 @@ Object {
         >
           <div
             class="container value"
+            data-tag="allowRowEvents"
           >
             <svg
               class="icon"
@@ -230,6 +233,7 @@ Object {
         >
           <div
             class="container  value"
+            data-tag="allowRowEvents"
           >
             <svg
               class="icon"

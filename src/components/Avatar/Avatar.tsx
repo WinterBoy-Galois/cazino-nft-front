@@ -11,49 +11,44 @@ interface IProps {
   username?: string;
   isEditable?: boolean;
   className?: string;
-  ref?: any;
   onClick?: () => void;
 }
 
-const Avatar: React.FC<IProps> = ({
-  loading = false,
-  avatarUrl,
-  username,
-  isEditable = false,
-  className = '',
-  ref,
-  onClick,
-}) => {
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-    }
-  };
+const Avatar = React.forwardRef<HTMLDivElement, IProps>(
+  ({ loading = false, avatarUrl, username, isEditable = false, className = '', onClick }, ref) => {
+    const handleClick = () => {
+      if (onClick) {
+        onClick();
+      }
+    };
 
-  return (
-    <div
-      ref={ref}
-      {...(onClick ? { role: 'button' } : {})}
-      className={`${styles.avatar} ${onClick ? styles.avatar__clickable : ''} ${className}`}
-      onClick={handleClick}
-    >
-      {!loading && avatarUrl ? (
-        <>
-          {isEditable && <Edit className={styles.avatar__editable} />}
+    return (
+      <div
+        ref={ref}
+        {...(onClick ? { role: 'button' } : {})}
+        className={`${styles.avatar} ${onClick ? styles.avatar__clickable : ''} ${className}`}
+        onClick={handleClick}
+      >
+        {!loading && avatarUrl ? (
+          <>
+            {isEditable && <Edit className={styles.avatar__editable} />}
 
-          <img
-            className="w-100 h-100"
-            src={avatarUrl}
-            alt={username?.substr(0, 2).toUpperCase() ?? ''}
-          />
-        </>
-      ) : (
-        <div className={styles.avatar__spinner}>
-          <Spinner color={'WHITE'} />
-        </div>
-      )}
-    </div>
-  );
-};
+            <img
+              className="w-100 h-100"
+              src={avatarUrl}
+              alt={username?.substr(0, 2).toUpperCase() ?? ''}
+            />
+          </>
+        ) : (
+          <div className={styles.avatar__spinner}>
+            <Spinner color={'WHITE'} />
+          </div>
+        )}
+      </div>
+    );
+  }
+);
+
+Avatar.displayName = 'Avatar';
 
 export default Avatar;
