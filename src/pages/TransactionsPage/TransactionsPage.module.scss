@@ -1,7 +1,7 @@
 @import '../../styles/shared';
 
 .details-container {
-  margin: 0 -1rem 0 -1rem;
+  margin: 0 -0.5rem 0 -0.5rem;
   border-radius: 0;
   background-color: $blue;
 
@@ -23,6 +23,11 @@
     color: $table-ultra-light-blue;
     padding-bottom: 0.1rem;
     display: inline-block;
+    margin-right: 1rem;
+
+    &:last-of-type {
+      margin: 0;
+    }
 
     &:hover {
       color: $live-updates-tab-select-active;
@@ -32,6 +37,7 @@
     @include media-breakpoint-up(md) {
       font-size: 20px;
       padding-bottom: 0.2rem;
+      margin-right: 2rem;
     }
 
     &--active {

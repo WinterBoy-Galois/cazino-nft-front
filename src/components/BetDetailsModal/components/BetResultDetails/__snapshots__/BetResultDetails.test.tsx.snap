@@ -24,6 +24,7 @@ Object {
             >
               <div
                 class="container "
+                data-tag="allowRowEvents"
               >
                 <svg
                   class="icon"
@@ -99,6 +100,7 @@ Object {
             >
               <div
                 class="container text--positive "
+                data-tag="allowRowEvents"
               >
                 <svg
                   class="icon"
@@ -150,6 +152,7 @@ Object {
           >
             <div
               class="container "
+              data-tag="allowRowEvents"
             >
               <svg
                 class="icon"
@@ -225,6 +228,7 @@ Object {
           >
             <div
               class="container text--positive "
+              data-tag="allowRowEvents"
             >
               <svg
                 class="icon"
