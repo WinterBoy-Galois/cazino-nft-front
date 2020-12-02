@@ -68,6 +68,12 @@ const DiceGame: React.FC<IProps> = ({
   const maxTarget = useTargetSliderMax(minProbability, maxProbability);
 
   useEffect(() => {
+    if (auth.state !== 'SIGNED_IN') {
+      dispatch({ type: 'SET_TARGET', payload: { target: 50 } });
+    }
+  }, [auth.state]);
+
+  useEffect(() => {
     if (errorBet) {
       dispatch({ type: 'END' });
     }
