@@ -13,11 +13,11 @@ import Error from '../../../../components/Error';
 import { error as errorToast, info, success } from '../../../../components/Toast';
 import useTargetSliderMin from '../../../../hooks/useTargetSliderMin.hook';
 import useTargetSliderMax from '../../../../hooks/useTargetSliderMax.hook';
-import { DiceGameAction, diceGameReducer, DiceGameState } from './lib/reducer';
+import { DiceGameAction, diceGameReducer, DiceGameState, getInitialState } from './lib/reducer';
 import { DiceGameState as GameState } from '../../../../models/diceGameState.model';
 import { appConfig } from '../../../../common/config';
 import BetControl from '../../../../components/BetControl';
-import { calcMultiplier, calcProbability, calcProfit } from '../../../../common/util/betCalc.util';
+import { calcMultiplier } from '../../../../common/util/betCalc.util';
 import BitcoinValue from '../../../../components/BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import { useTranslation } from 'react-i18next';
@@ -51,21 +51,19 @@ const DiceGame: React.FC<IProps> = ({
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { t } = useTranslation(['games']);
-  const [state, dispatch] = useReducer<Reducer<DiceGameState, DiceGameAction>>(diceGameReducer, {
-    target: 50,
-    result,
-    amount: 0.00000001,
-    multiplier: calcMultiplier(calcProbability(50, false), he),
-    probability: calcProbability(50, false),
-    gameState: GameState.IDLE,
-    over: false,
-    isRunning: false,
-    he,
-    profit: calcProfit(calcMultiplier(calcProbability(50, false), he), 0.00000001),
-  });
+  const [state, dispatch] = useReducer<Reducer<DiceGameState, DiceGameAction>>(
+    diceGameReducer,
+    getInitialState(he)
+  );
 
   const minTarget = useTargetSliderMin(minProbability, maxProbability);
   const maxTarget = useTargetSliderMax(minProbability, maxProbability);
+
+  useEffect(() => {
+    if (auth.state !== 'SIGNED_IN') {
+      dispatch({ type: 'RESET' });
+    }
+  }, [auth.state]);
 
   useEffect(() => {
     if (errorBet) {

@@ -27,7 +27,7 @@ const BetAmountControl: React.FC<IProps> = props => {
     const newValue = amount / 2;
 
     if (!isValid(newValue, min, max)) {
-      return setAmount(min);
+      return updateAmount(min);
     }
 
     updateAmount(+newValue.toFixed(appConfig.bitcoinFractionDigits));
@@ -37,7 +37,7 @@ const BetAmountControl: React.FC<IProps> = props => {
     const newValue = amount * 2;
 
     if (!isValid(newValue, min, max)) {
-      return setAmount(max);
+      return updateAmount(max);
     }
 
     updateAmount(+newValue.toFixed(appConfig.bitcoinFractionDigits));

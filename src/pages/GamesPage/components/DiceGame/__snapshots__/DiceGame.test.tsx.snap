@@ -464,7 +464,7 @@ Object {
                         class="truncate"
                         data-tag="allowRowEvents"
                       >
-                        0.00000002
+                        0.00000001
                       </span>
                     </div>
                   </div>
@@ -1142,7 +1142,7 @@ Object {
                       class="truncate"
                       data-tag="allowRowEvents"
                     >
-                      0.00000002
+                      0.00000001
                     </span>
                   </div>
                 </div>
