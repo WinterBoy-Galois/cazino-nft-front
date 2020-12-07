@@ -15,4 +15,4 @@ export const calcProbabilityByMultiplier = (multiplier: number, he: number) =>
 export const calcMultiplier = (probability: number, he: number) =>
   probability > 0 ? (1 / probability) * (1 - he) * 100 : 0;
 
-export const calcProfit = (multiplier: number, amount: number) => multiplier * amount;
+export const calcProfit = (multiplier: number, amount: number) => multiplier * amount - amount;
