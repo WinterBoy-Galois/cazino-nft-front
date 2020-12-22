@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import { appConfig } from '../../common/config';
 import BetControl from '../BetControl';
-import { isValid } from '../BetControl/lib/util';
 import styles from './WithdrawAmountControl.module.scss';
 
 interface IProps {

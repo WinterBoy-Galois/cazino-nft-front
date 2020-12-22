@@ -1,5 +1,5 @@
-import React, { Reducer, useEffect, useReducer, useState } from 'react';
-import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
+import React from 'react';
+import { RouteComponentProps } from '@reach/router';
 import ClamGameBoard from '../../../../components/ClamGameBoard';
 import SpinnerButton from '../../../../components/SpinnerButton';
 import BitcoinValue from '../../../../components/BitcoinValue';

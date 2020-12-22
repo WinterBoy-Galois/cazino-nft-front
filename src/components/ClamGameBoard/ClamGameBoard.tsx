@@ -5,10 +5,9 @@ import ClamNoSelect from '../../components/icons/games/ClamNoSelect';
 
 interface IProps {
   className?: string;
-  disabled?: boolean;
 }
 
-const ClamGameBoard: React.FC<IProps> = ({ className, disabled = false }) => {
+const ClamGameBoard: React.FC<IProps> = ({ className }) => {
   return (
     <div className={clsx(styles.container, className)}>
       <div className={styles.clam__grid}>

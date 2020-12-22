@@ -161,7 +161,8 @@ const CashierModal: React.FC<IProps> = ({
                       variables: { amount: amount, address: depositAddress },
                     });
 
-                    if (data?.withdraw?.result) success('Withdraw is completed.');
+                    if (errors) errorToast('Withdraw is failed.');
+                    else if (data?.withdraw?.result) success('Withdraw is completed.');
                     else errorToast('Withdraw is failed.');
                   }}
                 >
