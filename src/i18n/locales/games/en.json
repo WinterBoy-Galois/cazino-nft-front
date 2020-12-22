@@ -6,5 +6,8 @@
     "rollOver": "Roll over",
     "rollUnder": "Roll under",
     "amount": "Amount:"
+  },
+  "clam": {
+    "profit": "Profit (x49.748)"
   }
 }
