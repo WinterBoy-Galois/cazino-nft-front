@@ -29,3 +29,78 @@
     margin: 0 auto;
   }
 }
+
+.icon {
+  width: 18px;
+  margin: 0 0.9rem 0 1rem;
+  fill: $bitcoinYellow;
+
+  &__inner {
+    fill: $light-blue;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 31px;
+    margin: 0 1rem 0 1.5rem;
+  }
+}
+
+.withdraw {
+  &__container {
+    background-color: #14233a;
+    margin: 0;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 15px;
+    font-size: 18px;
+    line-height: 1.3;
+
+    & > div {
+      margin: 10px 0px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__row {
+    margin: auto;
+  }
+
+  &__label {
+    align-items: center;
+    display: flex;
+  }
+
+  &__value {
+    text-align: right;
+
+    @include media-breakpoint-up(md) {
+      text-align: left;
+    }
+  }
+
+  &__amount_control {
+    margin-bottom: 1rem;
+  }
+
+  &__button {
+    width: 100%;
+    display: block;
+    margin: auto;
+    background-color: #f19e65;
+
+    &:hover {
+      background-color: #f3b489;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 40%;
+    }
+  }
+}

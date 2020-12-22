@@ -1,0 +1,31 @@
+@import '../../styles/shared';
+
+.container {
+  position: relative;
+
+  > * {
+    user-select: none;
+  }
+}
+
+.clam {
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-image: url('../../assets/images/games/clams/clam-sharks.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 75%;
+  }
+
+  flex: 0 0 33%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+  @include media-breakpoint-up(md) {
+    flex: 0 0 30%;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+}

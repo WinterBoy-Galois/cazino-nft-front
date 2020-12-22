@@ -7,6 +7,7 @@ import styles from './BetAmountControl.module.scss';
 
 interface IProps {
   className?: string;
+  label?: string;
   min?: number;
   max?: number;
   amount?: number;
@@ -14,7 +15,7 @@ interface IProps {
 }
 
 const BetAmountControl: React.FC<IProps> = props => {
-  const { amount: initialAmount = 0.0004, className, onChange, min = 0, max = 9 } = props;
+  const { amount: initialAmount = 0.0004, className, onChange, min = 0, max = 9, label } = props;
   const [amount, setAmount] = useState(initialAmount);
   useEffect(() => setAmount(initialAmount), [initialAmount]);
 
@@ -48,7 +49,7 @@ const BetAmountControl: React.FC<IProps> = props => {
       <BetControl
         {...props}
         className={clsx(className, styles.control)}
-        label={'Amount'}
+        label={label ?? 'Amount'}
         icon={'BITCOIN'}
         value={amount}
         decimalPlaces={appConfig.bitcoinFractionDigits}

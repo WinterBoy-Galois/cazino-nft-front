@@ -1,0 +1,31 @@
+@import '../../styles/shared';
+
+.container {
+  display: flex;
+}
+
+.control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.button {
+  background-color: $control-button-bg;
+  color: $white;
+  border: 0;
+  margin-right: 1px;
+  min-width: 80px;
+  text-align: center;
+  padding: 0;
+  touch-action: manipulation;
+  text-transform: uppercase;
+
+  &:last-of-type {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  &:hover {
+    background-color: $button-primary;
+  }
+}

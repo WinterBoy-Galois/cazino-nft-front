@@ -242,3 +242,21 @@ export const MAKE_BET_DICE = gql`
     }
   }
 `;
+
+export const WITHDRAW = gql`
+  mutation withdraw($amount: Float!, $address: String!) {
+    withdraw(amount: $amount, address: $address) {
+      ... on GenericBoolean {
+        result
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
