@@ -4,36 +4,48 @@ import clsx from 'clsx';
 import ClamNoSelect from '../../components/icons/games/ClamNoSelect';
 import ClamSelected from '../../components/icons/games/ClamSelected';
 
-interface IProps {
+interface IClamProps {
   className?: string;
-}
-
-interface ClamProps {
   selectedClamsCount?: number;
   onClickHandler?: (selected: boolean) => void;
 }
 
-const Clam: React.FC<ClamProps> = ({ selectedClamsCount, onClickHandler }) => {
+const Clam: React.FC<IClamProps> = ({
+  className,
+  selectedClamsCount,
+  onClickHandler = () => null,
+}) => {
   const [selected, setSelected] = useState(false);
 
   const onClamClick = () => {
     if (!selected && selectedClamsCount == 8) return;
 
-    if (onClickHandler) onClickHandler(!selected);
+    onClickHandler(!selected);
 
     setSelected(!selected);
   };
 
   return (
-    <a className={clsx(styles.clam, selected ? null : styles.clam__idle)} onClick={onClamClick}>
+    <a
+      className={clsx(styles.clam, selected ? null : styles.clam__idle, className)}
+      onClick={onClamClick}
+    >
       {selected ? <ClamSelected /> : <ClamNoSelect />}
     </a>
   );
 };
 
-const ClamGameBoard: React.FC<IProps> = ({ className }) => {
-  const [selectedClams, setSelectedClams] = useState<number[]>([]);
+interface IProps {
+  className?: string;
+  selectedClams?: number[];
+  setSelectedClams?: (selection: number[]) => void;
+}
 
+const ClamGameBoard: React.FC<IProps> = ({
+  className,
+  selectedClams = [],
+  setSelectedClams = () => null,
+}) => {
   return (
     <div className={clsx(styles.container, className)}>
       <div className={styles.clam__grid}>
