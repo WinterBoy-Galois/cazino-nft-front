@@ -8,6 +8,8 @@
     "amount": "Amount:"
   },
   "clam": {
-    "profit": "Profit (x49.748)"
+    "profit": "Profit (x49.748)",
+    "selected": "Selected",
+    "amount": "Bet Amount"
   }
 }

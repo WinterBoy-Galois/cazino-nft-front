@@ -232,6 +232,16 @@ export const SETUP_DICE = gql`
   }
 `;
 
+export const SETUP_CLAMS = gql`
+  query setupClams {
+    setupClams {
+      ... on ClamsGameSetup {
+        he
+      }
+    }
+  }
+`;
+
 export const TRANSACTION_BETS = gql`
   query Bets($page: Int, $limit: Int) {
     transactionsBet(page: $page, limit: $limit) {
