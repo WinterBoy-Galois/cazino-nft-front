@@ -9,13 +9,16 @@ interface IProps {
 }
 
 interface ClamProps {
+  selectedClamsCount?: number;
   onClickHandler?: (selected: boolean) => void;
 }
 
-const Clam: React.FC<ClamProps> = ({ onClickHandler }) => {
+const Clam: React.FC<ClamProps> = ({ selectedClamsCount, onClickHandler }) => {
   const [selected, setSelected] = useState(false);
 
   const onClamClick = () => {
+    if (!selected && selectedClamsCount == 8) return;
+
     if (onClickHandler) onClickHandler(!selected);
 
     setSelected(!selected);
@@ -31,14 +34,13 @@ const Clam: React.FC<ClamProps> = ({ onClickHandler }) => {
 const ClamGameBoard: React.FC<IProps> = ({ className }) => {
   const [selectedClams, setSelectedClams] = useState<number[]>([]);
 
-  console.log(selectedClams);
-
   return (
     <div className={clsx(styles.container, className)}>
       <div className={styles.clam__grid}>
         {Array.from(Array(9).keys()).map(cIdx => (
           <Clam
             key={`clam-${cIdx}`}
+            selectedClamsCount={selectedClams.length}
             onClickHandler={selected => {
               if (selected) setSelectedClams([...selectedClams, cIdx]);
               else setSelectedClams(selectedClams.filter(scIdx => scIdx !== cIdx));
