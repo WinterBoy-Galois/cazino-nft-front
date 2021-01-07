@@ -243,6 +243,29 @@ export const MAKE_BET_DICE = gql`
   }
 `;
 
+export const MAKE_BET_CLAMS = gql`
+  mutation makeBetClams($betAmount: Float!, $selection: [Int]) {
+    makeBetClams(betAmount: $betAmount, selection: $selection) {
+      ... on BetResultClams {
+        id
+        result
+        lucky
+        multiplier
+        profit
+        balance
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
 export const WITHDRAW = gql`
   mutation withdraw($amount: Float!, $address: String!) {
     withdraw(amount: $amount, address: $address) {

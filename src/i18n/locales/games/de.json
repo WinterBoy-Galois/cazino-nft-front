@@ -6,5 +6,9 @@
     "rollOver": "roll over",
     "rollUnder": "roll under",
     "amount": "Einsatz"
+  },
+  "clam": {
+    "profit": "Gewinn",
+    "amount": "Einsatz"
   }
 }
