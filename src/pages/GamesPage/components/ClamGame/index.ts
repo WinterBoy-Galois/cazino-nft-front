@@ -1,3 +1,1 @@
-import ClamGame, { ClamGameWithData } from './ClamGame';
-
-export { ClamGame, ClamGameWithData };
+export { default } from './ClamGame';

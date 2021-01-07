@@ -17,6 +17,8 @@ import { error as errorToast, info, success } from '../../../../components/Toast
 import { appConfig } from '../../../../common/config';
 import { ClamsGameState as GameState } from '../../../../models/clamsGameState.model';
 import Bitcoin from '../../../../components/icons/social/Bitcoin';
+import Loading from '../../../../components/Loading';
+import Error from '../../../../components/Error';
 
 interface IProps {
   loadingBet?: boolean;
@@ -63,8 +65,6 @@ const ClamGame: React.FC<IProps> = ({
   }, [errorBet]);
 
   useEffect(() => {
-    console.log('result=', result);
-
     if (result !== -1) {
       const gameStateTimer = setTimeout(() => {
         dispatch({ type: 'END' });
@@ -82,6 +82,14 @@ const ClamGame: React.FC<IProps> = ({
       };
     }
   }, [result]);
+
+  if (loadingSetup) {
+    return <Loading className={styles.loading} />;
+  }
+
+  if (errorSetup) {
+    return <Error />;
+  }
 
   const handlePlaceBet = async () => {
     if (auth.state !== 'SIGNED_IN') {
@@ -260,7 +268,8 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
   return (
     <ClamGame
       he={data?.setupDice?.he}
-      loadingBet={loadingSetup}
+      loadingSetup={loadingSetup}
+      loadingBet={loadingBet}
       errorSetup={errorSetup}
       onPlaceBet={handlePlaceBet}
       errorBet={error}
