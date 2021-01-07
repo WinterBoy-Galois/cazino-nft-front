@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import ClamGame from './ClamGame';
+import ClamGame from '.';
 import { LocationProvider } from '@reach/router';
 
 describe('ClamGame', () => {
