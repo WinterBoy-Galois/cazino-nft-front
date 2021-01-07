@@ -36,14 +36,14 @@ export const getInitialState = (he: number): ClamGameState => ({
 
 export interface ClamGameAction {
   type:
-    | 'SET_AMOUNT'
-    | 'RESET'
-    | 'START'
-    | 'END'
-    | 'SET_RESULT'
-    | 'CALC_GAME_STATE'
-    | 'SELECT_CLAMS'
-    | 'SET_GAME_STATE';
+  | 'SET_AMOUNT'
+  | 'RESET'
+  | 'START'
+  | 'END'
+  | 'SET_RESULT'
+  | 'CALC_GAME_STATE'
+  | 'SELECT_CLAMS'
+  | 'SET_GAME_STATE';
   payload?: any;
 }
 
