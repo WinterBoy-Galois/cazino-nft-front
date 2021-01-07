@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './ClamGameBoard.module.scss';
 import clsx from 'clsx';
 import ClamNoSelect from '../../components/icons/games/ClamNoSelect';
