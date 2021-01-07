@@ -9,9 +9,9 @@ import ClamWon from '../../components/icons/games/ClamWon';
 interface IClamProps {
   className?: string;
   selection?: number[];
-  onClickHandler?: (selected: boolean) => void;
-  isOpening?: boolean;
-  selected?: boolean;
+  onClickHandler?: (isSelected: boolean) => void;
+  isEnded?: boolean;
+  isSelected?: boolean;
   winningClam?: boolean;
 }
 
@@ -19,23 +19,24 @@ const Clam: React.FC<IClamProps> = ({
   className,
   selection = [],
   onClickHandler = () => null,
-  isOpening = false,
-  selected = false,
+  isEnded = false,
+  isSelected = false,
   winningClam = false,
 }) => {
-  const [isSelected, setSelected] = useState(selected);
-
   const onClamClick = () => {
     if (!isSelected && selection.length == 8) return;
 
     onClickHandler(!isSelected);
-
-    setSelected(!isSelected);
   };
 
-  if (isOpening) {
+  if (isEnded) {
     return (
-      <a className={clsx(styles.clam, className, isSelected ? null : styles.clam__fade)}>
+      <a
+        className={clsx(styles.clam, className, isSelected ? null : styles.clam__fade)}
+        onClick={() => {
+          onClickHandler(true);
+        }}
+      >
         {winningClam ? <ClamWon /> : <ClamLost />}
       </a>
     );
@@ -55,7 +56,7 @@ interface IProps {
   className?: string;
   selection?: number[];
   setSelection?: (selection: number[]) => void;
-  isOpening?: boolean;
+  isEnded?: boolean;
   winningIndex?: number;
 }
 
@@ -63,7 +64,7 @@ const ClamGameBoard: React.FC<IProps> = ({
   className,
   selection = [],
   setSelection = () => null,
-  isOpening = false,
+  isEnded = false,
   winningIndex = -1,
 }) => {
   return (
@@ -73,12 +74,13 @@ const ClamGameBoard: React.FC<IProps> = ({
           <Clam
             key={`clam-${cIdx}`}
             selection={selection}
-            onClickHandler={selected => {
-              if (selected) setSelection([...selection, cIdx]);
+            onClickHandler={isSelected => {
+              if (isEnded) setSelection([cIdx]);
+              else if (isSelected) setSelection([...selection, cIdx]);
               else setSelection(selection.filter(scIdx => scIdx !== cIdx));
             }}
-            isOpening={isOpening}
-            selected={selection.includes(cIdx)}
+            isEnded={isEnded}
+            isSelected={selection.includes(cIdx)}
             winningClam={winningIndex === cIdx}
           />
         ))}

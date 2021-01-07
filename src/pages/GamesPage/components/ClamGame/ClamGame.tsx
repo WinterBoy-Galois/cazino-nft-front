@@ -123,7 +123,7 @@ const ClamGame: React.FC<IProps> = ({
 
               <div className={clsx('col', styles.text_align__left)}>
                 <Bitcoin className={clsx(styles.icon, styles.icon__bitcoin)} />
-                {profit}
+                {formatBitcoin(profit)}
               </div>
             </div>
           </div>
@@ -156,9 +156,13 @@ const ClamGame: React.FC<IProps> = ({
           className={styles.board}
           selection={state.selection}
           setSelection={selection => {
+            if (state.gameState !== GameState.IDLE) {
+              dispatch({ type: 'RESET' });
+            }
+
             dispatch({ type: 'SELECT_CLAMS', payload: { selection } });
           }}
-          isOpening={state.gameState !== GameState.IDLE}
+          isEnded={state.gameState !== GameState.IDLE}
           winningIndex={state.winningIndex}
         />
       </div>
