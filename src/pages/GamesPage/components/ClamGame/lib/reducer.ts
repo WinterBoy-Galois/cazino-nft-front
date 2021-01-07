@@ -1,4 +1,3 @@
-import { stat } from 'fs';
 import { ClamsGameState as GameState } from '../../../../../models/clamsGameState.model';
 
 const calcProfit = (HE: number, SELECTED: number, BETAMOUNT: number) => {
@@ -6,8 +5,6 @@ const calcProfit = (HE: number, SELECTED: number, BETAMOUNT: number) => {
 
   const WINCHANCE = SELECTED / 9;
   const MULTIPLIER = (1 / WINCHANCE) * (1 - HE);
-
-  console.log(HE, SELECTED, BETAMOUNT);
 
   return BETAMOUNT * MULTIPLIER - BETAMOUNT;
 };
@@ -17,10 +14,10 @@ export interface ClamGameState {
   he: number;
   isRunning: boolean;
   over: boolean;
-  result: number;
   gameState: GameState;
   profit: number;
   selection: number[];
+  winningIndex: number;
 }
 
 export const getInitialState = (he: number): ClamGameState => ({
@@ -28,22 +25,14 @@ export const getInitialState = (he: number): ClamGameState => ({
   he,
   isRunning: false,
   over: false,
-  result: 0,
   gameState: GameState.IDLE,
   profit: calcProfit(he, 0, 0.00000001),
   selection: [],
+  winningIndex: -1,
 });
 
 export interface ClamGameAction {
-  type:
-  | 'SET_AMOUNT'
-  | 'RESET'
-  | 'START'
-  | 'END'
-  | 'SET_RESULT'
-  | 'CALC_GAME_STATE'
-  | 'SELECT_CLAMS'
-  | 'SET_GAME_STATE';
+  type: 'SET_AMOUNT' | 'RESET' | 'START' | 'END' | 'SELECT_CLAMS' | 'SET_GAME_STATE';
   payload?: any;
 }
 
@@ -68,12 +57,6 @@ export const clamGameReducer = (state: ClamGameState, action: ClamGameAction): C
         profit: calcProfit(state.he, payload.selection.length, state.amount),
       };
 
-    case 'SET_RESULT':
-      return {
-        ...state,
-        result: payload.result,
-      };
-
     case 'START':
       return { ...state, isRunning: true };
 
@@ -81,7 +64,11 @@ export const clamGameReducer = (state: ClamGameState, action: ClamGameAction): C
       return { ...state, isRunning: false };
 
     case 'SET_GAME_STATE':
-      return { ...state, gameState: payload.gameState };
+      return {
+        ...state,
+        gameState: payload.gameState,
+        winningIndex: 'result' in payload ? payload.result : -1,
+      };
 
     default:
       return state;

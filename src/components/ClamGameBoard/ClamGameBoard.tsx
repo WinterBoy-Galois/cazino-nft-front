@@ -3,48 +3,68 @@ import styles from './ClamGameBoard.module.scss';
 import clsx from 'clsx';
 import ClamNoSelect from '../../components/icons/games/ClamNoSelect';
 import ClamSelected from '../../components/icons/games/ClamSelected';
+import ClamLost from '../../components/icons/games/ClamLost';
+import ClamWon from '../../components/icons/games/ClamWon';
 
 interface IClamProps {
   className?: string;
-  selectedClamsCount?: number;
+  selection?: number[];
   onClickHandler?: (selected: boolean) => void;
+  isOpening?: boolean;
+  selected?: boolean;
+  winningClam?: boolean;
 }
 
 const Clam: React.FC<IClamProps> = ({
   className,
-  selectedClamsCount,
+  selection = [],
   onClickHandler = () => null,
+  isOpening = false,
+  selected = false,
+  winningClam = false,
 }) => {
-  const [selected, setSelected] = useState(false);
+  const [isSelected, setSelected] = useState(selected);
 
   const onClamClick = () => {
-    if (!selected && selectedClamsCount == 8) return;
+    if (!isSelected && selection.length == 8) return;
 
-    onClickHandler(!selected);
+    onClickHandler(!isSelected);
 
-    setSelected(!selected);
+    setSelected(!isSelected);
   };
+
+  if (isOpening) {
+    return (
+      <a className={clsx(styles.clam, className, isSelected ? null : styles.clam__fade)}>
+        {winningClam ? <ClamWon /> : <ClamLost />}
+      </a>
+    );
+  }
 
   return (
     <a
-      className={clsx(styles.clam, selected ? null : styles.clam__idle, className)}
+      className={clsx(styles.clam, isSelected ? null : styles.clam__idle, className)}
       onClick={onClamClick}
     >
-      {selected ? <ClamSelected /> : <ClamNoSelect />}
+      {isSelected ? <ClamSelected /> : <ClamNoSelect />}
     </a>
   );
 };
 
 interface IProps {
   className?: string;
-  selectedClams?: number[];
-  setSelectedClams?: (selection: number[]) => void;
+  selection?: number[];
+  setSelection?: (selection: number[]) => void;
+  isOpening?: boolean;
+  winningIndex?: number;
 }
 
 const ClamGameBoard: React.FC<IProps> = ({
   className,
-  selectedClams = [],
-  setSelectedClams = () => null,
+  selection = [],
+  setSelection = () => null,
+  isOpening = false,
+  winningIndex = -1,
 }) => {
   return (
     <div className={clsx(styles.container, className)}>
@@ -52,11 +72,14 @@ const ClamGameBoard: React.FC<IProps> = ({
         {Array.from(Array(9).keys()).map(cIdx => (
           <Clam
             key={`clam-${cIdx}`}
-            selectedClamsCount={selectedClams.length}
+            selection={selection}
             onClickHandler={selected => {
-              if (selected) setSelectedClams([...selectedClams, cIdx]);
-              else setSelectedClams(selectedClams.filter(scIdx => scIdx !== cIdx));
+              if (selected) setSelection([...selection, cIdx]);
+              else setSelection(selection.filter(scIdx => scIdx !== cIdx));
             }}
+            isOpening={isOpening}
+            selected={selection.includes(cIdx)}
+            winningClam={winningIndex === cIdx}
           />
         ))}
       </div>

@@ -19,6 +19,10 @@
     background-size: 75%;
   }
 
+  &__fade {
+    opacity: 0.5;
+  }
+
   flex: 0 0 33%;
   margin-bottom: 10px;
   margin-top: 10px;

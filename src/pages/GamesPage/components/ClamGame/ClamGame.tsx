@@ -16,6 +16,7 @@ import { MAKE_BET_CLAMS } from '../../../../graphql/mutations';
 import { error as errorToast, info, success } from '../../../../components/Toast';
 import { appConfig } from '../../../../common/config';
 import { ClamsGameState as GameState } from '../../../../models/clamsGameState.model';
+import Bitcoin from '../../../../components/icons/social/Bitcoin';
 
 interface IProps {
   loadingBet?: boolean;
@@ -25,6 +26,8 @@ interface IProps {
   onPlaceBet?: (betAmount: number, selection: number[]) => void;
   errorBet?: any;
   result?: number;
+  multiplier?: number;
+  profit?: number;
 }
 
 const ClamGame: React.FC<IProps> = ({
@@ -34,7 +37,9 @@ const ClamGame: React.FC<IProps> = ({
   errorSetup,
   onPlaceBet = () => null,
   errorBet,
-  result = 0,
+  result = -1,
+  multiplier = 49.748,
+  profit = 0.00773,
 }) => {
   const [{ auth }] = useStateValue();
   const { t } = useTranslation(['games']);
@@ -44,7 +49,6 @@ const ClamGame: React.FC<IProps> = ({
   );
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [selectedClams, setSelectedClams] = useState<number[]>([]);
 
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
@@ -59,27 +63,24 @@ const ClamGame: React.FC<IProps> = ({
   }, [errorBet]);
 
   useEffect(() => {
-    if (result) {
-      const resultTimer = setTimeout(() => {
-        dispatch({
-          type: 'SET_GAME_STATE',
-          payload: { gameState: GameState.OPENING },
-        });
-        dispatch({ type: 'SET_RESULT', payload: { result } });
-      }, appConfig.clamsGameTimeout / 2);
+    console.log('result=', result);
 
+    if (result !== -1) {
       const gameStateTimer = setTimeout(() => {
         dispatch({ type: 'END' });
-        dispatch({ type: 'CALC_GAME_STATE' });
+        dispatch({
+          type: 'SET_GAME_STATE',
+          payload: {
+            gameState: state.selection.includes(result) ? GameState.WON : GameState.LOST,
+            result,
+          },
+        });
       }, appConfig.clamsGameTimeout);
 
       return () => {
-        clearTimeout(resultTimer);
         clearTimeout(gameStateTimer);
       };
     }
-
-    dispatch({ type: 'CALC_GAME_STATE' });
   }, [result]);
 
   const handlePlaceBet = async () => {
@@ -88,10 +89,64 @@ const ClamGame: React.FC<IProps> = ({
     }
 
     dispatch({ type: 'START' });
-    dispatch({ type: 'SET_RESULT', payload: { result: 0 } });
-    dispatch({ type: 'CALC_GAME_STATE' });
 
-    onPlaceBet(state.amount, selectedClams);
+    onPlaceBet(state.amount, state.selection);
+  };
+
+  const renderGameResultMessage = () => {
+    if (state.gameState === GameState.WON)
+      return (
+        <div className={clsx('row', styles.game_result__row)}>
+          <div
+            className={clsx(
+              'col-12 col-xl-4 col-md-6',
+              styles.game_result__message_box,
+              styles.game_result__message_box__won
+            )}
+          >
+            <div className="row">
+              <div className={clsx('col', styles.game_result__message_box__won__title)}>
+                You Win!
+              </div>
+            </div>
+
+            <div className="row">
+              <div
+                className={clsx(
+                  'col',
+                  styles.text_align__right,
+                  styles.game_result__message_box__won__multiplier
+                )}
+              >
+                &times;&nbsp;{multiplier}
+              </div>
+
+              <div className={clsx('col', styles.text_align__left)}>
+                <Bitcoin className={clsx(styles.icon, styles.icon__bitcoin)} />
+                {profit}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+
+    return (
+      <div className={clsx('row', styles.game_result__row)}>
+        <div
+          className={clsx(
+            'col-12 col-xl-4 col-md-6',
+            styles.game_result__message_box,
+            styles.game_result__message_box__lost
+          )}
+        >
+          <div className="row">
+            <div className={clsx('col', styles.game_result__message_box__lost__title)}>
+              Uh, oh... Try again!
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -99,33 +154,38 @@ const ClamGame: React.FC<IProps> = ({
       <div className={clsx('container', styles.board__container)}>
         <ClamGameBoard
           className={styles.board}
-          selectedClams={selectedClams}
-          setSelectedClams={selection => {
+          selection={state.selection}
+          setSelection={selection => {
             dispatch({ type: 'SELECT_CLAMS', payload: { selection } });
-            setSelectedClams(selection);
           }}
+          isOpening={state.gameState !== GameState.IDLE}
+          winningIndex={state.winningIndex}
         />
       </div>
 
       <div className={styles.controls__wrapper}>
         <div className="container">
-          <div className="row">
-            <div className="col-6">
-              <div className={clsx(styles.profit__container, styles.align_items__left)}>
-                <div className={styles.profit__label}>{t('clam.profit')}</div>
-                <div>
-                  <BitcoinValue value={formatBitcoin(state.profit)} />
+          {state.gameState === GameState.IDLE ? (
+            <div className="row">
+              <div className="col-6">
+                <div className={clsx(styles.profit__container, styles.align_items__left)}>
+                  <div className={styles.profit__label}>{t('clam.profit')}</div>
+                  <div>
+                    <BitcoinValue value={formatBitcoin(state.profit)} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-6">
+                <div className={clsx(styles.profit__container, styles.align_items__right)}>
+                  <div className={styles.profit__label}>{t('clam.selected')}</div>
+                  <div>{state.selection.length}</div>
                 </div>
               </div>
             </div>
-
-            <div className="col-6">
-              <div className={clsx(styles.profit__container, styles.align_items__right)}>
-                <div className={styles.profit__label}>{t('clam.selected')}</div>
-                <div>{state.selection.length}</div>
-              </div>
-            </div>
-          </div>
+          ) : (
+            renderGameResultMessage()
+          )}
 
           <div className={clsx('row', styles.justify_content__center)}>
             <div className={clsx('col-12 col-xl-4', styles.amount__container)}>
@@ -139,7 +199,11 @@ const ClamGame: React.FC<IProps> = ({
             </div>
 
             <div className={clsx(styles.controls__button, 'col-12 col-xl-4')}>
-              <SpinnerButton onClick={handlePlaceBet} loading={loadingBet || state.isRunning}>
+              <SpinnerButton
+                onClick={handlePlaceBet}
+                loading={loadingBet || state.isRunning}
+                disabled={state.selection.length < 1 || state.gameState !== GameState.IDLE}
+              >
                 start
               </SpinnerButton>
             </div>
@@ -157,6 +221,8 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_CLAMS);
   const [makeBetClams, { loading: loadingBet }] = useMutation(MAKE_BET_CLAMS);
   const [result, setResult] = useState();
+  const [multiplier, setMultiplier] = useState();
+  const [profit, setProfit] = useState();
   const [error, setError] = useState();
 
   const handlePlaceBet = async (betAmount: number, selection: number[]) => {
@@ -173,6 +239,8 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
     }
 
     setResult(data?.makeBetClams?.result);
+    setMultiplier(data?.makeBetClams?.multiplier);
+    setProfit(data?.makeBetClams?.profit);
 
     setTimeout(() => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetClams?.balance } });
@@ -193,6 +261,8 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
       onPlaceBet={handlePlaceBet}
       errorBet={error}
       result={result}
+      multiplier={multiplier}
+      profit={profit}
     />
   );
 };
