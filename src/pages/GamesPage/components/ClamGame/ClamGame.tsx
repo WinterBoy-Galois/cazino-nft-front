@@ -13,6 +13,9 @@ import { SETUP_CLAMS } from '../../../../graphql/queries';
 import { useStateValue } from '../../../../state';
 import { ClamGameAction, clamGameReducer, ClamGameState, getInitialState } from './lib/reducer';
 import { MAKE_BET_CLAMS } from '../../../../graphql/mutations';
+import { error as errorToast, info, success } from '../../../../components/Toast';
+import { appConfig } from '../../../../common/config';
+import { ClamsGameState as GameState } from '../../../../models/clamsGameState.model';
 
 interface IProps {
   loadingBet?: boolean;
@@ -20,6 +23,8 @@ interface IProps {
   loadingSetup?: boolean;
   errorSetup?: any;
   onPlaceBet?: (betAmount: number, selection: number[]) => void;
+  errorBet?: any;
+  result?: number;
 }
 
 const ClamGame: React.FC<IProps> = ({
@@ -28,6 +33,8 @@ const ClamGame: React.FC<IProps> = ({
   he = 0.01,
   errorSetup,
   onPlaceBet = () => null,
+  errorBet,
+  result = 0,
 }) => {
   const [{ auth }] = useStateValue();
   const { t } = useTranslation(['games']);
@@ -45,10 +52,44 @@ const ClamGame: React.FC<IProps> = ({
     }
   }, [auth.state]);
 
+  useEffect(() => {
+    if (errorBet) {
+      dispatch({ type: 'END' });
+    }
+  }, [errorBet]);
+
+  useEffect(() => {
+    if (result) {
+      const resultTimer = setTimeout(() => {
+        dispatch({
+          type: 'SET_GAME_STATE',
+          payload: { gameState: GameState.OPENING },
+        });
+        dispatch({ type: 'SET_RESULT', payload: { result } });
+      }, appConfig.clamsGameTimeout / 2);
+
+      const gameStateTimer = setTimeout(() => {
+        dispatch({ type: 'END' });
+        dispatch({ type: 'CALC_GAME_STATE' });
+      }, appConfig.clamsGameTimeout);
+
+      return () => {
+        clearTimeout(resultTimer);
+        clearTimeout(gameStateTimer);
+      };
+    }
+
+    dispatch({ type: 'CALC_GAME_STATE' });
+  }, [result]);
+
   const handlePlaceBet = async () => {
     if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
+
+    dispatch({ type: 'START' });
+    dispatch({ type: 'SET_RESULT', payload: { result: 0 } });
+    dispatch({ type: 'CALC_GAME_STATE' });
 
     onPlaceBet(state.amount, selectedClams);
   };
@@ -59,7 +100,10 @@ const ClamGame: React.FC<IProps> = ({
         <ClamGameBoard
           className={styles.board}
           selectedClams={selectedClams}
-          setSelectedClams={selection => setSelectedClams(selection)}
+          setSelectedClams={selection => {
+            dispatch({ type: 'SELECT_CLAMS', payload: { selection } });
+            setSelectedClams(selection);
+          }}
         />
       </div>
 
@@ -70,7 +114,7 @@ const ClamGame: React.FC<IProps> = ({
               <div className={clsx(styles.profit__container, styles.align_items__left)}>
                 <div className={styles.profit__label}>{t('clam.profit')}</div>
                 <div>
-                  <BitcoinValue value={formatBitcoin(0.04885313)} />
+                  <BitcoinValue value={formatBitcoin(state.profit)} />
                 </div>
               </div>
             </div>
@@ -78,7 +122,7 @@ const ClamGame: React.FC<IProps> = ({
             <div className="col-6">
               <div className={clsx(styles.profit__container, styles.align_items__right)}>
                 <div className={styles.profit__label}>{t('clam.selected')}</div>
-                <div>3</div>
+                <div>{state.selection.length}</div>
               </div>
             </div>
           </div>
@@ -87,9 +131,9 @@ const ClamGame: React.FC<IProps> = ({
             <div className={clsx('col-12 col-xl-4', styles.amount__container)}>
               <BetAmountControl
                 label={t('clam.amount')}
-                amount={0}
-                min={0}
-                max={auth.user?.balance || 0}
+                amount={state.amount}
+                min={0.00000001}
+                max={auth.user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
               />
             </div>
@@ -109,11 +153,36 @@ const ClamGame: React.FC<IProps> = ({
 export default ClamGame;
 
 export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
+  const [, dispatch] = useStateValue();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_CLAMS);
   const [makeBetClams, { loading: loadingBet }] = useMutation(MAKE_BET_CLAMS);
+  const [result, setResult] = useState();
+  const [error, setError] = useState();
 
   const handlePlaceBet = async (betAmount: number, selection: number[]) => {
     const { data, errors } = await makeBetClams({ variables: { betAmount, selection } });
+
+    if (errors || data.makeBetClams?.errors) {
+      setError(errors ?? data.makeBetClams?.errors);
+
+      if (data.makeBetClams?.errors[0]?.code === 'MAX_PROFIT') {
+        return errorToast('Your bet may reaches the profit limit.');
+      }
+
+      return errorToast("Your bet couldn't be placed, please try again.");
+    }
+
+    setResult(data?.makeBetClams?.result);
+
+    setTimeout(() => {
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetClams?.balance } });
+      const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetClams?.profit)}`;
+      if (+data?.makeBetClams?.profit >= 0) {
+        success(toast);
+      } else {
+        info(toast);
+      }
+    }, appConfig.clamsGameTimeout);
   };
 
   return (
@@ -122,6 +191,8 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
       loadingBet={loadingSetup}
       errorSetup={errorSetup}
       onPlaceBet={handlePlaceBet}
+      errorBet={error}
+      result={result}
     />
   );
 };
