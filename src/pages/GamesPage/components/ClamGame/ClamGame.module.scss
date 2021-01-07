@@ -14,7 +14,7 @@
 }
 
 .board {
-  width: 75%;
+  width: 90%;
   max-width: 500px;
 
   @include media-breakpoint-up(md) {
@@ -98,7 +98,8 @@
 .game_result {
   &__row {
     justify-content: center;
-    margin-bottom: 1rem;
+    margin: 1rem;
+    margin-top: -2rem;
 
     @include media-breakpoint-up(md) {
       margin-top: -4.7rem;
