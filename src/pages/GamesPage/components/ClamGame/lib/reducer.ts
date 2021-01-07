@@ -47,7 +47,7 @@ export const clamGameReducer = (state: ClamGameState, action: ClamGameAction): C
       return {
         ...state,
         amount: payload.amount,
-        profit: calcProfit(state.he, state.selection.length, state.amount),
+        profit: calcProfit(state.he, state.selection.length, payload.amount),
       };
 
     case 'SELECT_CLAMS':
