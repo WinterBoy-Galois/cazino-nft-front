@@ -67,7 +67,6 @@ export const clamGameReducer = (state: ClamGameState, action: ClamGameAction): C
       };
 
     case 'SELECT_CLAMS':
-      console.log('state.he=', state.he);
       return {
         ...state,
         selection: payload.selection,
