@@ -85,6 +85,8 @@ const ClamGame: React.FC<IProps> = ({
 
   if (loadingSetup) {
     return <Loading className={styles.loading} />;
+  } else if (state.he !== he) {
+    dispatch({ type: 'SET_HE', payload: { he } });
   }
 
   if (errorSetup) {
@@ -181,7 +183,9 @@ const ClamGame: React.FC<IProps> = ({
             <div className="row">
               <div className="col-6">
                 <div className={clsx(styles.profit__container, styles.align_items__left)}>
-                  <div className={styles.profit__label}>{t('clam.profit')}</div>
+                  <div className={styles.profit__label}>
+                    {t('clam.profit')}&nbsp;(&times;&nbsp;{state.multiplier})
+                  </div>
                   <div>
                     <BitcoinValue value={formatBitcoin(state.profit)} />
                   </div>
@@ -196,8 +200,8 @@ const ClamGame: React.FC<IProps> = ({
               </div>
             </div>
           ) : (
-              renderGameResultMessage()
-            )}
+            renderGameResultMessage()
+          )}
 
           <div className={clsx('row', styles.justify_content__center)}>
             <div className={clsx('col-12 col-xl-4', styles.amount__container)}>
@@ -267,7 +271,7 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
 
   return (
     <ClamGame
-      he={data?.setupDice?.he}
+      he={data?.setupClams?.he}
       loadingSetup={loadingSetup}
       loadingBet={loadingBet}
       errorSetup={errorSetup}
