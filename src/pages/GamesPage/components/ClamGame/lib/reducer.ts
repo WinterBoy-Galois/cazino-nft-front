@@ -20,13 +20,13 @@ export interface ClamGameState {
   winningIndex: number;
 }
 
-export const getInitialState = (he: number): ClamGameState => ({
-  amount: 0.00000001,
+export const getInitialState = (he: number, amount = 0.00000001): ClamGameState => ({
+  amount,
   he,
   isRunning: false,
   over: false,
   gameState: GameState.IDLE,
-  profit: calcProfit(he, 0, 0.00000001),
+  profit: calcProfit(he, 0, amount),
   selection: [],
   winningIndex: -1,
 });
@@ -41,7 +41,7 @@ export const clamGameReducer = (state: ClamGameState, action: ClamGameAction): C
 
   switch (type) {
     case 'RESET':
-      return getInitialState(state.he);
+      return payload?.restart ? getInitialState(state.he, state.amount) : getInitialState(state.he);
 
     case 'SET_AMOUNT':
       return {

@@ -165,7 +165,7 @@ const ClamGame: React.FC<IProps> = ({
           selection={state.selection}
           setSelection={selection => {
             if (state.gameState !== GameState.IDLE) {
-              dispatch({ type: 'RESET' });
+              dispatch({ type: 'RESET', payload: { restart: true } });
             }
 
             dispatch({ type: 'SELECT_CLAMS', payload: { selection } });
@@ -196,8 +196,8 @@ const ClamGame: React.FC<IProps> = ({
               </div>
             </div>
           ) : (
-            renderGameResultMessage()
-          )}
+              renderGameResultMessage()
+            )}
 
           <div className={clsx('row', styles.justify_content__center)}>
             <div className={clsx('col-12 col-xl-4', styles.amount__container)}>
