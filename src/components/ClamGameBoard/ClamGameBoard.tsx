@@ -47,7 +47,7 @@ const Clam: React.FC<IClamProps> = ({
       className={clsx(styles.clam, isSelected ? null : styles.clam__idle, className)}
       onClick={onClamClick}
     >
-      {isSelected ? <ClamSelected /> : <ClamWin />}
+      {isSelected ? <ClamSelected /> : <ClamIdle />}
     </a>
   );
 };
