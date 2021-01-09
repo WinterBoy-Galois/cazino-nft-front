@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './ClamGameBoard.module.scss';
 import clsx from 'clsx';
-import ClamNoSelect from '../../components/icons/games/ClamNoSelect';
+import ClamIdle from '../icons/games/ClamIdle';
 import ClamSelected from '../../components/icons/games/ClamSelected';
 import ClamLost from '../../components/icons/games/ClamLost';
-import ClamWon from '../../components/icons/games/ClamWon';
+import ClamWin from '../../components/icons/games/ClamWin';
 
 interface IClamProps {
   className?: string;
@@ -37,7 +37,7 @@ const Clam: React.FC<IClamProps> = ({
           onClickHandler(true);
         }}
       >
-        {winningClam ? <ClamWon /> : <ClamLost />}
+        {winningClam ? <ClamWin /> : <ClamLost />}
       </a>
     );
   }
@@ -47,7 +47,7 @@ const Clam: React.FC<IClamProps> = ({
       className={clsx(styles.clam, isSelected ? null : styles.clam__idle, className)}
       onClick={onClamClick}
     >
-      {isSelected ? <ClamSelected /> : <ClamNoSelect />}
+      {isSelected ? <ClamSelected /> : <ClamWin />}
     </a>
   );
 };
