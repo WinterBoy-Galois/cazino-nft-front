@@ -28,6 +28,7 @@ interface IProps {
   onPlaceBet?: (betAmount: number, selection: number[]) => void;
   errorBet?: any;
   result?: number;
+  setResult?: (result: number) => void;
   multiplier?: number;
   profit?: number;
 }
@@ -40,6 +41,7 @@ const ClamGame: React.FC<IProps> = ({
   onPlaceBet = () => null,
   errorBet,
   result = -1,
+  setResult = () => null,
   multiplier = 49.748,
   profit = 0.00773,
 }) => {
@@ -66,8 +68,7 @@ const ClamGame: React.FC<IProps> = ({
 
   useEffect(() => {
     if (result !== -1) {
-      const gameStateTimer = setTimeout(() => {
-        dispatch({ type: 'END' });
+      const resultTimer = setTimeout(() => {
         dispatch({
           type: 'SET_GAME_STATE',
           payload: {
@@ -75,11 +76,15 @@ const ClamGame: React.FC<IProps> = ({
             result,
           },
         });
+      }, appConfig.clamsGameTimeout / 2);
+
+      const gameStateTimer = setTimeout(() => {
+        dispatch({ type: 'END' });
       }, appConfig.clamsGameTimeout);
 
       return () => {
+        clearTimeout(resultTimer);
         clearTimeout(gameStateTimer);
-        dispatch({ type: 'END' });
       };
     }
   }, [result]);
@@ -168,6 +173,7 @@ const ClamGame: React.FC<IProps> = ({
           selection={state.selection}
           setSelection={selection => {
             if (state.gameState !== GameState.IDLE) {
+              setResult(-1);
               dispatch({ type: 'RESET', payload: { restart: true } });
             }
 
@@ -185,7 +191,7 @@ const ClamGame: React.FC<IProps> = ({
               <div className="col-6">
                 <div className={clsx(styles.profit__container, styles.align_items__left)}>
                   <div className={styles.profit__label}>
-                    {t('clam.profit')}&nbsp;(&times;&nbsp;{state.multiplier})
+                    {t('clam.profit')}&nbsp;(&times;&nbsp;{state.multiplier.toFixed(3)})
                   </div>
                   <div>
                     <BitcoinValue value={formatBitcoin(state.profit)} />
@@ -237,7 +243,7 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
   const [, dispatch] = useStateValue();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_CLAMS);
   const [makeBetClams, { loading: loadingBet }] = useMutation(MAKE_BET_CLAMS);
-  const [result, setResult] = useState();
+  const [result, setResult] = useState<number>(-1);
   const [multiplier, setMultiplier] = useState();
   const [profit, setProfit] = useState();
   const [error, setError] = useState();
@@ -279,6 +285,7 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
       onPlaceBet={handlePlaceBet}
       errorBet={error}
       result={result}
+      setResult={setResult}
       multiplier={multiplier}
       profit={profit}
     />
