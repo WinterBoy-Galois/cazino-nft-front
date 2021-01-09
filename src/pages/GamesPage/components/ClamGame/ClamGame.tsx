@@ -79,6 +79,7 @@ const ClamGame: React.FC<IProps> = ({
 
       return () => {
         clearTimeout(gameStateTimer);
+        dispatch({ type: 'END' });
       };
     }
   }, [result]);
