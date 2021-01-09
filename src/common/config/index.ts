@@ -19,7 +19,7 @@ export const appConfig = {
   ],
   bitcoinFractionDigits: 8,
   multiplierFractionDigits: 4,
-  toastAutoCloseDuration: 5000,
+  toastAutoCloseDuration: 1000,
   toastHideProgressbar: true,
   toastPosition: toast.POSITION.BOTTOM_LEFT,
   apiBasePath: env('REACT_APP_API_BASE_PATH'),
