@@ -1,1 +1,1 @@
-export { default } from './ClamPearl'
+export { default } from './ClamPearl';
