@@ -149,7 +149,7 @@ const ClamGame: React.FC<IProps> = ({
       );
 
     return (
-      <div className={clsx('row', styles.game_result__row)}>
+      <div className={clsx('row', styles.game_result__row, styles.margin__horizontal_auto)}>
         <div
           className={clsx(
             'col-12 col-xl-4 col-md-6',

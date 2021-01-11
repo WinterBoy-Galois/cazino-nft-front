@@ -32,7 +32,7 @@
     width: 100%;
     margin-top: 2rem;
     background-color: $user-info-main-blue;
-    padding: 3.5rem 0 2rem;
+    padding: 0 0 2rem;
 
     @include media-breakpoint-up(md) {
       padding: 3.5rem;
@@ -113,7 +113,12 @@
     position: absolute;
 
     &__lost {
-      top: -4.7rem;
+      top: -2.5rem;
+      
+      @include media-breakpoint-up(md) {
+        top: -4.5rem;
+      }
+
       &__title {
         font-size: 1.25rem;
         font-weight: bold;
@@ -123,7 +128,11 @@
     }
 
     &__won {
-      top: -5rem;
+      top: -3.5rem;
+
+      @include media-breakpoint-up(md) {
+        top: -5rem;
+      }
 
       &__title {
         font-size: 1.25rem;
