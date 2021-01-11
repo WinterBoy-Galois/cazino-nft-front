@@ -193,13 +193,7 @@ const ClamGame: React.FC<IProps> = ({
             style={{ visibility: state.gameState === GameState.IDLE ? 'visible' : 'hidden' }}
           >
             <div className="col-6">
-              <div
-                className={clsx(
-                  styles.profit__container,
-                  styles.align_items,
-                  styles.align_items__left
-                )}
-              >
+              <div className={clsx(styles.profit__container, styles.align_items__left)}>
                 <div className={styles.profit__label}>
                   {t('clam.profit')}&nbsp;(&times;&nbsp;{state.multiplier.toFixed(3)})
                 </div>
@@ -210,13 +204,7 @@ const ClamGame: React.FC<IProps> = ({
             </div>
 
             <div className="col-6">
-              <div
-                className={clsx(
-                  styles.profit__container,
-                  styles.align_items,
-                  styles.align_items__right
-                )}
-              >
+              <div className={clsx(styles.profit__container, styles.align_items__right)}>
                 <div className={styles.profit__label}>{t('clam.selected')}</div>
                 <div>{state.selection.length}</div>
               </div>
