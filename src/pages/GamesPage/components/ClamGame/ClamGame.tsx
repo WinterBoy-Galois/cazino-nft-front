@@ -110,6 +110,8 @@ const ClamGame: React.FC<IProps> = ({
   };
 
   const renderGameResultMessage = () => {
+    if (state.gameState === GameState.IDLE) return null;
+
     if (state.gameState === GameState.WON)
       return (
         <div className={clsx('row', styles.game_result__row, styles.margin__horizontal_auto)}>
@@ -186,41 +188,42 @@ const ClamGame: React.FC<IProps> = ({
 
       <div className={styles.controls__wrapper}>
         <div className="container">
-          {state.gameState === GameState.IDLE ? (
-            <div className={clsx('row', styles.margin__horizontal_auto)}>
-              <div className="col-6">
-                <div
-                  className={clsx(
-                    styles.profit__container,
-                    styles.align_items,
-                    styles.align_items__left
-                  )}
-                >
-                  <div className={styles.profit__label}>
-                    {t('clam.profit')}&nbsp;(&times;&nbsp;{state.multiplier.toFixed(3)})
-                  </div>
-                  <div>
-                    <BitcoinValue value={formatBitcoin(state.profit)} />
-                  </div>
+          <div
+            className={clsx('row', styles.margin__horizontal_auto)}
+            style={{ visibility: state.gameState === GameState.IDLE ? 'visible' : 'hidden' }}
+          >
+            <div className="col-6">
+              <div
+                className={clsx(
+                  styles.profit__container,
+                  styles.align_items,
+                  styles.align_items__left
+                )}
+              >
+                <div className={styles.profit__label}>
+                  {t('clam.profit')}&nbsp;(&times;&nbsp;{state.multiplier.toFixed(3)})
                 </div>
-              </div>
-
-              <div className="col-6">
-                <div
-                  className={clsx(
-                    styles.profit__container,
-                    styles.align_items,
-                    styles.align_items__right
-                  )}
-                >
-                  <div className={styles.profit__label}>{t('clam.selected')}</div>
-                  <div>{state.selection.length}</div>
+                <div>
+                  <BitcoinValue value={formatBitcoin(state.profit)} />
                 </div>
               </div>
             </div>
-          ) : (
-            renderGameResultMessage()
-          )}
+
+            <div className="col-6">
+              <div
+                className={clsx(
+                  styles.profit__container,
+                  styles.align_items,
+                  styles.align_items__right
+                )}
+              >
+                <div className={styles.profit__label}>{t('clam.selected')}</div>
+                <div>{state.selection.length}</div>
+              </div>
+            </div>
+          </div>
+
+          {renderGameResultMessage()}
 
           <div className={clsx('row', styles.justify_content__center)}>
             <div className={clsx('col-12 col-xl-4', styles.amount__container)}>
