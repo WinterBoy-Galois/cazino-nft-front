@@ -2302,7 +2302,7 @@ Object {
                 class="col-6"
               >
                 <div
-                  class="profit__container align_items align_items__left"
+                  class="profit__container align_items__left"
                 >
                   <div
                     class="profit__label"
@@ -2348,7 +2348,7 @@ Object {
                 class="col-6"
               >
                 <div
-                  class="profit__container align_items align_items__right"
+                  class="profit__container align_items__right"
                 >
                   <div
                     class="profit__label"
@@ -4738,7 +4738,7 @@ Object {
               class="col-6"
             >
               <div
-                class="profit__container align_items align_items__left"
+                class="profit__container align_items__left"
               >
                 <div
                   class="profit__label"
@@ -4784,7 +4784,7 @@ Object {
               class="col-6"
             >
               <div
-                class="profit__container align_items align_items__right"
+                class="profit__container align_items__right"
               >
                 <div
                   class="profit__label"
