@@ -70,9 +70,6 @@
 }
 
 .align_items {
-  display: flex;
-  flex-direction: column;
-
   &__left {
     align-items: flex-end;
   }
