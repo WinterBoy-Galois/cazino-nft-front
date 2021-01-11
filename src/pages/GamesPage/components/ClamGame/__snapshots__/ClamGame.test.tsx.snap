@@ -2296,6 +2296,7 @@ Object {
           >
             <div
               class="row margin__horizontal_auto"
+              style="visibility: visible;"
             >
               <div
                 class="col-6"
@@ -4731,6 +4732,7 @@ Object {
         >
           <div
             class="row margin__horizontal_auto"
+            style="visibility: visible;"
           >
             <div
               class="col-6"
