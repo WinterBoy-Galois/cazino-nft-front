@@ -1,4 +1,4 @@
-@import "../../../../styles/shared";
+@import '../../../../styles/shared';
 
 .container {
   display: flex;
@@ -111,7 +111,7 @@
 
     &__lost {
       top: -2.5rem;
-      
+
       @include media-breakpoint-up(md) {
         top: -4.5rem;
       }

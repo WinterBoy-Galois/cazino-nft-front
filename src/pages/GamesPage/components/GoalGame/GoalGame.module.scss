@@ -1,0 +1,28 @@
+@import '../../../../styles/shared';
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 2rem;
+  }
+
+  > * {
+    user-select: none;
+  }
+}
+
+.board {
+  width: 90%;
+  max-width: 500px;
+
+  @include media-breakpoint-up(md) {
+    width: 100%;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+}
