@@ -242,6 +242,45 @@ export const SETUP_CLAMS = gql`
   }
 `;
 
+export const SETUP_GOAL = gql`
+  query setupGoals {
+    setupGoals {
+      ... on GoalsGameSetup {
+        session {
+          betId
+          betAmount
+          currentStep
+          selections {
+            step
+            luckySpots
+            selected
+          }
+          difficulty
+          profits {
+            step
+            multiplier
+            profit
+          }
+          totalProfit {
+            multiplier
+            profit
+          }
+          nextProfit {
+            multiplier
+            profit
+          }
+          allowNext
+          profitCut {
+            location
+            messageKey
+          }
+        }
+        balance
+      }
+    }
+  }
+`;
+
 export const TRANSACTION_BETS = gql`
   query Bets($page: Int, $limit: Int) {
     transactionsBet(page: $page, limit: $limit) {
