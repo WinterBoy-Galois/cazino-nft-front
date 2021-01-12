@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer, Reducer } from 'react';
 import GoalGameBoard from '../../../../components/GoalGameBoard';
-import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 import { useMutation, useQuery } from '@apollo/client';
 import clsx from 'clsx';
 import ButtonGroup from '../../../../components/ButtonGroup';
@@ -47,7 +47,7 @@ const probabilities = [
   },
 ];
 
-const GoalGame: React.FC<IProps> = ({ loadingBet, loadingSetup, errorSetup, errorBet }) => {
+const GoalGame: React.FC<IProps> = ({ loadingBet, loadingSetup, errorSetup }) => {
   const [{ auth }] = useStateValue();
   const [probability, setProbability] = useState(PROBABILITES.HIGH);
   const { t } = useTranslation(['games']);
@@ -55,8 +55,6 @@ const GoalGame: React.FC<IProps> = ({ loadingBet, loadingSetup, errorSetup, erro
     goalGameReducer,
     getInitialState()
   );
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
@@ -130,10 +128,9 @@ const GoalGame: React.FC<IProps> = ({ loadingBet, loadingSetup, errorSetup, erro
 export default GoalGame;
 
 export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
-  const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
-  const [, dispatch] = useStateValue();
-  const [makeBetClams, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
-  const [error, setError] = useState();
+  const { loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
+  const [, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
+  const [error] = useState();
 
   return (
     <GoalGame
