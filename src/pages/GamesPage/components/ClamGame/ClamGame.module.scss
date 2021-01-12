@@ -1,4 +1,4 @@
-@import '../../../../styles/shared';
+@import "../../../../styles/shared";
 
 .container {
   display: flex;
@@ -43,6 +43,10 @@
     width: 100%;
     display: flex;
     align-items: center;
+
+    & > button {
+      height: 100%;
+    }
   }
 }
 
