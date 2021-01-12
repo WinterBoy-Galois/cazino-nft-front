@@ -10,7 +10,6 @@ interface IProps {
 const ClamIdle: React.FC<IProps> = ({ className }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 312 230" className={clsx(className)}>
-      <title>clam-idle</title>
       <g id="Layer_2" data-name="Layer 2">
         <g id="clam_pearl">
           <path

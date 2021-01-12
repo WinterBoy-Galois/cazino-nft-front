@@ -1,4 +1,4 @@
-@import "../../../../styles/shared";
+@import '../../../../styles/shared';
 
 .container {
   display: flex;
@@ -43,6 +43,10 @@
     width: 100%;
     display: flex;
     align-items: center;
+
+    & > button {
+      height: 100%;
+    }
   }
 }
 
@@ -111,7 +115,7 @@
 
     &__lost {
       top: -2.5rem;
-      
+
       @include media-breakpoint-up(md) {
         top: -4.5rem;
       }

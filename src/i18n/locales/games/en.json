@@ -11,5 +11,8 @@
     "profit": "Profit",
     "selected": "Selected",
     "amount": "Bet Amount"
+  },
+  "goal": {
+    "amount": "Bet Amount"
   }
 }

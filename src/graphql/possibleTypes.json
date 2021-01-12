@@ -1,1 +1,90 @@
-{"PublicUserOrError":["PublicUser","GenericErrorArray"],"BetDetailsOrError":["BetDetails","GenericErrorArray"],"GameResultUnion":["DiceResult","MinesResult","GoalsResult","ClamsResult"],"SeedDetailsUnion":["SeedDetailsOther","SeedDetailsOwn"],"GoalsGameSetupOrError":["GoalsGameSetup","GenericErrorArray"],"DiceGameSetupOrError":["DiceGameSetup","GenericErrorArray"],"ClamsGameSetupOrError":["ClamsGameSetup","GenericErrorArray"],"MinesGameSetupOrError":["MinesGameSetup","GenericErrorArray"],"LoginResultOrError":["LoginResult","GenericErrorArray"],"UserOrError":["User","GenericErrorArray"],"BooleanOrError":["GenericBoolean","GenericErrorArray"],"SignedInTokenOrError":["LoginResult","GenericErrorArray"],"SeedsOrError":["Seeds","GenericErrorArray"],"BetResultDiceOrError":["BetResultDice","GenericErrorArray"],"BetResultClamsOrError":["BetResultClams","GenericErrorArray"],"GoalsAdvanceResultUnion":["GoalsStep","GoalsComplete","GenericErrorArray"],"GoalsCashoutResultUnion":["GoalsComplete","GenericErrorArray"],"MinesAdvanceResultUnion":["MinesStep","MinesComplete","GenericErrorArray"],"MinesCashoutResultUnion":["MinesComplete","GenericErrorArray"],"BetResultGoalsOrError":["BetResultGoals","GenericErrorArray"],"BetResultMinesOrError":["BetResultMines","GenericErrorArray"]}
+{
+  "PublicUserOrError": [
+    "PublicUser",
+    "GenericErrorArray"
+  ],
+  "BetDetailsOrError": [
+    "BetDetails",
+    "GenericErrorArray"
+  ],
+  "GameResultUnion": [
+    "DiceResult",
+    "MinesResult",
+    "GoalsResult",
+    "ClamsResult"
+  ],
+  "SeedDetailsUnion": [
+    "SeedDetailsOther",
+    "SeedDetailsOwn"
+  ],
+  "GoalsGameSetupOrError": [
+    "GoalsGameSetup",
+    "GenericErrorArray"
+  ],
+  "DiceGameSetupOrError": [
+    "DiceGameSetup",
+    "GenericErrorArray"
+  ],
+  "ClamsGameSetupOrError": [
+    "ClamsGameSetup",
+    "GenericErrorArray"
+  ],
+  "MinesGameSetupOrError": [
+    "MinesGameSetup",
+    "GenericErrorArray"
+  ],
+  "LoginResultOrError": [
+    "LoginResult",
+    "GenericErrorArray"
+  ],
+  "UserOrError": [
+    "User",
+    "GenericErrorArray"
+  ],
+  "BooleanOrError": [
+    "GenericBoolean",
+    "GenericErrorArray"
+  ],
+  "SignedInTokenOrError": [
+    "LoginResult",
+    "GenericErrorArray"
+  ],
+  "SeedsOrError": [
+    "Seeds",
+    "GenericErrorArray"
+  ],
+  "BetResultDiceOrError": [
+    "BetResultDice",
+    "GenericErrorArray"
+  ],
+  "BetResultClamsOrError": [
+    "BetResultClams",
+    "GenericErrorArray"
+  ],
+  "GoalsAdvanceResultUnion": [
+    "GoalsStep",
+    "GoalsComplete",
+    "GenericErrorArray"
+  ],
+  "GoalsCashoutResultUnion": [
+    "GoalsComplete",
+    "GenericErrorArray"
+  ],
+  "MinesAdvanceResultUnion": [
+    "MinesStep",
+    "MinesComplete",
+    "GenericErrorArray"
+  ],
+  "MinesCashoutResultUnion": [
+    "MinesComplete",
+    "GenericErrorArray"
+  ],
+  "BetResultGoalsOrError": [
+    "BetResultGoals",
+    "GenericErrorArray"
+  ],
+  "BetResultMinesOrError": [
+    "BetResultMines",
+    "GenericErrorArray"
+  ]
+}

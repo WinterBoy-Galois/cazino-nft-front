@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './ClamGameBoard.module.scss';
 import clsx from 'clsx';
 import ClamIdle from '../icons/games/ClamIdle';
-import ClamSelected from '../../components/icons/games/ClamSelected';
-import ClamLost from '../../components/icons/games/ClamLost';
-import ClamWin from '../../components/icons/games/ClamWin';
+import ClamSelected from '../icons/games/ClamSelected';
+import ClamLost from '../icons/games/ClamLost';
+import ClamWin from '../icons/games/ClamWin';
 
 interface IClamProps {
   className?: string;

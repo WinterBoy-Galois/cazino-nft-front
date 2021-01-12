@@ -163,7 +163,6 @@ const ClamPearl: React.FC<IProps> = ({ className }) => {
           xlinkHref="#Безымянный_градиент_14"
         />
       </defs>
-      <title>clam-pearl</title>
       <g id="Layer_2" data-name="Layer 2">
         <g id="clam_pearl">
           <path

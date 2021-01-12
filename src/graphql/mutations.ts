@@ -266,6 +266,53 @@ export const MAKE_BET_CLAMS = gql`
   }
 `;
 
+export const MAKE_BET_GOALS = gql`
+  mutation makeBetGoals($betAmount: Float!, $difficulty: GoalsDifficulty!) {
+    makeBetGoals(betAmount: $betAmount, difficulty: $difficulty) {
+      ... on GoalsGameSetup {
+        session {
+          betId
+          betAmount
+          currentStep
+          selections {
+            step
+            luckySpots
+            selected
+          }
+          difficulty
+          profits {
+            step
+            multiplier
+            profit
+          }
+          totalProfit {
+            multiplier
+            profit
+          }
+          nextProfit {
+            multiplier
+            profit
+          }
+          allowNext
+          profitCut {
+            location
+            messageKey
+          }
+        }
+        balance
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
 export const WITHDRAW = gql`
   mutation withdraw($amount: Float!, $address: String!) {
     withdraw(amount: $amount, address: $address) {

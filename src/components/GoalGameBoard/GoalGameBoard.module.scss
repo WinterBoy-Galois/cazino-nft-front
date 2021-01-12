@@ -1,0 +1,25 @@
+@import '../../styles/shared';
+
+.container {
+  position: relative;
+  width: 100%;
+
+  > * {
+    user-select: none;
+  }
+}
+
+.goal {
+  &__background {
+  }
+
+  &__keeper {
+    position: absolute;
+
+    &__idle {
+      left: 40%;
+      top: 27%;
+      width: 20%;
+    }
+  }
+}
