@@ -151,12 +151,12 @@ jobs:
     
     # - run: echo ${{env.RELEASE_TAG}}
 
-      - name: Dump env
-        run: env | sort
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+    - name: Dump env
+      run: env | sort
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
 
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
