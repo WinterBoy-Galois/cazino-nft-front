@@ -19,7 +19,7 @@ export const appConfig = {
   ],
   bitcoinFractionDigits: 8,
   multiplierFractionDigits: 4,
-  toastAutoCloseDuration: 5000,
+  toastAutoCloseDuration: 1000,
   toastHideProgressbar: true,
   toastPosition: toast.POSITION.BOTTOM_LEFT,
   apiBasePath: env('REACT_APP_API_BASE_PATH'),
@@ -27,6 +27,8 @@ export const appConfig = {
   reCaptchaSiteKey: env('REACT_APP_RECAPTCHA'),
   reduceMotion: /true/i.test(env('REACT_APP_REDUCE_MOTION')),
   blockchainExplorerUrl: env('REACT_APP_BLOCKCHAIN_EXPLORER_URL'),
+  clamsGameTimeout: 1000,
+  clamsGameTransitionTime: 300,
   diceGameTimeout: 1000,
   diceGameDiamondTransitionTime: 300,
 };

@@ -1,0 +1,59 @@
+@import '../../styles/shared';
+
+.button_group {
+  &__container {
+    display: flex;
+    border: 2px solid #163153;
+    border-radius: 4px;
+  }
+
+  &__button {
+    display: flex;
+    flex: 1 1 0px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    flex-direction: column;
+    cursor: pointer;
+
+    &:first-child {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    &__checked {
+      background-color: #163153;
+    }
+
+    &__input {
+      display: none;
+    }
+
+    &__label {
+      margin: 0px;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      width: 100%;
+      cursor: pointer;
+
+      span:first-child {
+        font-size: 1.25rem;
+      }
+
+      span:last-child {
+        font-weight: lighter;
+        font-size: 0.75rem;
+        color: #7493bd;
+      }
+    }
+  }
+}

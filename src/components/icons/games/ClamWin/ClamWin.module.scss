@@ -1,0 +1,117 @@
+@import '../../../../styles/shared';
+
+.cls-1 {
+  fill: #07a;
+}
+
+.cls-2 {
+  fill: #3392bb;
+}
+
+.cls-3 {
+  fill: #051323;
+}
+
+.cls-4,
+.cls-5,
+.cls-6,
+.cls-7 {
+  fill: #ffde76;
+}
+
+.cls-4 {
+  opacity: 0.1;
+}
+
+.cls-6 {
+  opacity: 0.2;
+}
+
+.cls-11,
+.cls-22,
+.cls-7 {
+  opacity: 0.5;
+}
+
+.cls-8 {
+  fill: #dd711f;
+}
+
+.cls-22,
+.cls-9 {
+  fill: #f2842a;
+}
+
+.cls-10 {
+  fill: #ff9739;
+}
+
+.cls-11 {
+  fill: #fad399;
+}
+
+.cls-12 {
+  fill: #ffc23b;
+}
+
+.cls-13 {
+  fill: #edaa24;
+}
+
+.cls-14 {
+  fill: #92352e;
+}
+
+.cls-15 {
+  fill: #772322;
+}
+
+.cls-16 {
+  fill: #e26154;
+}
+
+.cls-17 {
+  fill: #ededed;
+}
+
+.cls-18 {
+  fill: #060610;
+}
+
+.cls-19 {
+  fill: #fd8471;
+}
+
+.cls-20 {
+  fill: #e57f45;
+}
+
+.cls-21 {
+  fill: #f59e66;
+}
+
+.cls-23 {
+  fill: #000005;
+}
+
+.cls-24 {
+  fill: #fff;
+}
+
+.cls-25 {
+  fill: none;
+}
+
+.clam_win {
+  &__container {
+    position: relative;
+  }
+
+  &__pearl {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    left: -10%;
+    top: -5%;
+  }
+}
