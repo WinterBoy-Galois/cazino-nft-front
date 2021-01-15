@@ -310,6 +310,36 @@ export const MAKE_BET_GOALS = gql`
   }
 `;
 
+export const CASH_OUT_GOALS = gql`
+  mutation cashoutGoals($betId: ID!) {
+    cashoutGoals(betId: $betId) {
+      ... on GoalsComplete {
+        id
+        lucky
+        balance
+        profit {
+          multiplier
+          profit
+        }
+        profitCut
+        result {
+          step
+          luckySpots
+          selected
+        }
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
 export const WITHDRAW = gql`
   mutation withdraw($amount: Float!, $address: String!) {
     withdraw(amount: $amount, address: $address) {

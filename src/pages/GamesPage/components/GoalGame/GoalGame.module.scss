@@ -1,15 +1,31 @@
-@import "../../../../styles/shared";
-@import "../../../../styles/game-general.scss";
+@import '../../../../styles/shared';
+@import '../../../../styles/game-general.scss';
+
+.stages {
+  &__container {
+    position: absolute;
+    left: 0;
+    top: -2.5rem;
+    bottom: -2rem;
+  }
+}
 
 .board {
   &__container {
     flex-direction: column;
+    position: relative;
   }
 }
 
 .probability {
   &__container {
     margin: 1.5rem auto;
+
+    &__visibility {
+      &__hidden {
+        visibility: hidden;
+      }
+    }
   }
 
   &__label {
@@ -29,7 +45,7 @@
 .amount {
   &__disabled {
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       right: 0;

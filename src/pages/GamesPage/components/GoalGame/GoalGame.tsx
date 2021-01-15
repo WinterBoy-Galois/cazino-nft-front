@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useReducer, Reducer } from 'react';
 import GoalGameBoard from '../../../../components/GoalGameBoard';
+import GoalGameStages from '../../../../components/GoalGameStages';
 import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
 import { useMutation, useQuery } from '@apollo/client';
 import clsx from 'clsx';
 import ButtonGroup from '../../../../components/ButtonGroup';
 import styles from './GoalGame.module.scss';
+import BitcoinValue from '../../../../components/BitcoinValue';
 import BetAmountControl from '../../../../components/BetAmountControl';
 import SpinnerButton from '../../../../components/SpinnerButton';
 import { useStateValue } from '../../../../state';
 import { useTranslation } from 'react-i18next';
 import { SETUP_GOAL } from '../../../../graphql/queries';
-import { MAKE_BET_GOALS } from '../../../../graphql/mutations';
+import { MAKE_BET_GOALS, CASH_OUT_GOALS } from '../../../../graphql/mutations';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 import {
@@ -21,6 +23,7 @@ import {
   getInitialState,
 } from './lib/reducer';
 import { GoalGameState as GameState } from '../../../../models/goalGameState.model';
+import { formatBitcoin } from '../../../../common/util/format.util';
 
 interface IProps {
   loadingBet?: boolean;
@@ -111,7 +114,15 @@ const GoalGame: React.FC<IProps> = ({
         </div>
 
         <div className="row">
-          <div className={clsx('col-12 col-md-6 col-lg-4', styles.probability__container)}>
+          <div
+            className={clsx(
+              'col-12 col-md-6 col-lg-4',
+              styles.probability__container,
+              state.gameState === GameState.IDLE
+                ? null
+                : styles.probability__container__visibility__hidden
+            )}
+          >
             <div className={styles.probability__label}>Probability</div>
 
             <ButtonGroup
@@ -128,6 +139,10 @@ const GoalGame: React.FC<IProps> = ({
             />
           </div>
         </div>
+
+        {state.gameState !== GameState.IDLE ? (
+          <GoalGameStages profits={session.profits} className={styles.stages__container} />
+        ) : null}
       </div>
 
       <div className={styles.controls__wrapper}>
@@ -141,8 +156,27 @@ const GoalGame: React.FC<IProps> = ({
           >
             <div className="col-6">
               <div className={clsx(styles.profit__container, styles.align_items__left)}>
-                <div className={styles.profit__label}>{t('goal.profitTotal')}</div>
-                <div>{/* <BitcoinValue value={formatBitcoin()} /> */}</div>
+                <div className={styles.profit__label}>
+                  {t('goal.profitTotal')}&nbsp;(&times;&nbsp;
+                  {session?.profits[session.currentStep].multiplier.toFixed(3)})
+                </div>
+                <div>
+                  <BitcoinValue
+                    value={formatBitcoin(session?.profits[session.currentStep].profit)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="col-6">
+              <div className={clsx(styles.profit__container, styles.align_items__right)}>
+                <div className={styles.profit__label}>
+                  {t('goal.profitNext')}&nbsp;(&times;&nbsp;
+                  {session?.nextProfit.multiplier.toFixed(3)})
+                </div>
+                <div>
+                  <BitcoinValue value={formatBitcoin(session?.nextProfit.profit)} />
+                </div>
               </div>
             </div>
           </div>
@@ -152,7 +186,7 @@ const GoalGame: React.FC<IProps> = ({
               className={clsx(
                 'col-12 col-xl-4',
                 styles.amount__container,
-                state.gameState !== GameState.IDLE ? styles.amount__disabled : null
+                state.gameState == GameState.IDLE ? null : styles.amount__disabled
               )}
             >
               <BetAmountControl
@@ -187,6 +221,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
   const [, dispatch] = useStateValue();
   const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
+  const [cashoutGoals] = useMutation(CASH_OUT_GOALS);
   const [error, setError] = useState();
   const [session, setSession] = useState(null);
   const [maxProfit, setMaxProfit] = useState(data?.setupGoals.maxProfit);

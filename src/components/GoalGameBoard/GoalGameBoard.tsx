@@ -11,10 +11,8 @@ interface IProps {
 const GoalGameBoard: React.FC<IProps> = ({ className }) => {
   return (
     <div className={clsx(styles.container, className)}>
-      <div className="goal-container">
-        <GoalBackground className={styles.goal__background} />
-        <GoalKeeperIdle className={clsx(styles.goal__keeper, styles.goal__keeper__idle)} />
-      </div>
+      <GoalBackground className={styles.goal__background} />
+      <GoalKeeperIdle className={clsx(styles.goal__keeper, styles.goal__keeper__idle)} />
     </div>
   );
 };
