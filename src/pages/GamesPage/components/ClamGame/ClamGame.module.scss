@@ -1,103 +1,5 @@
-@import '../../../../styles/shared';
-
-.container {
-  display: flex;
-  flex-direction: column;
-
-  @include media-breakpoint-up(md) {
-    margin-top: 2rem;
-  }
-
-  > * {
-    user-select: none;
-  }
-}
-
-.board {
-  width: 90%;
-  max-width: 500px;
-
-  @include media-breakpoint-up(md) {
-    width: 100%;
-  }
-
-  &__container {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-.controls {
-  &__wrapper {
-    width: 100%;
-    margin-top: 2rem;
-    background-color: $user-info-main-blue;
-    padding: 0 0 2rem;
-
-    @include media-breakpoint-up(md) {
-      padding: 3.5rem;
-    }
-  }
-
-  &__button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-
-    & > button {
-      height: 100%;
-    }
-  }
-}
-
-.profit {
-  &__label {
-    text-transform: uppercase;
-    display: block;
-    font-size: 14px;
-    line-height: 19px;
-    color: $control-label;
-    user-select: none;
-    margin: 0;
-  }
-
-  &__container {
-    margin: -1.2rem 0 0.1rem;
-
-    @include media-breakpoint-up(md) {
-      margin: -4.7rem 0 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-}
-
-.align_items {
-  &__left {
-    align-items: flex-end;
-  }
-
-  &__right {
-    align-items: flex-start;
-  }
-}
-
-.amount {
-  &__container {
-    margin: 0.5rem 0;
-
-    @include media-breakpoint-up(xl) {
-      margin: 0;
-    }
-  }
-}
-
-.justify_content {
-  &__center {
-    justify-content: center;
-  }
-}
+@import "../../../../styles/shared";
+@import "../../../../styles/game-general.scss";
 
 .game_result {
   &__row {
@@ -150,16 +52,6 @@
   }
 }
 
-.text_align {
-  &__left {
-    text-align: left;
-  }
-
-  &__right {
-    text-align: right;
-  }
-}
-
 .icon {
   width: 12px;
   height: 12px;
@@ -168,12 +60,5 @@
 
   &__bitcoin {
     fill: $bitcoinYellow;
-  }
-}
-
-.margin {
-  &__horizontal_auto {
-    margin-left: auto;
-    margin-right: auto;
   }
 }

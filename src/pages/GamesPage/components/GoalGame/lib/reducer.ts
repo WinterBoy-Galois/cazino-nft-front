@@ -45,10 +45,10 @@ export const goalGameReducer = (state: GoalGameState, action: GoalGameAction) =>
       return getInitialState();
 
     case 'START':
-      return { ...state, isRunning: true };
+      return { ...state, gameState: GameState.IN_PROGRESS };
 
     case 'END':
-      return { ...state, isRunning: false };
+      return { ...state };
 
     default:
       return state;

@@ -13,6 +13,8 @@
     "amount": "Bet Amount"
   },
   "goal": {
-    "amount": "Bet Amount"
+    "amount": "Bet Amount",
+    "profitTotal": "Total Profit",
+    "profitNext": "On Next Win"
   }
 }

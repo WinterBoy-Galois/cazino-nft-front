@@ -294,10 +294,7 @@ export const MAKE_BET_GOALS = gql`
             profit
           }
           allowNext
-          profitCut {
-            location
-            messageKey
-          }
+          profitCut
         }
         balance
       }
