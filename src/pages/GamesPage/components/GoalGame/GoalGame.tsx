@@ -12,7 +12,8 @@ import SpinnerButton from '../../../../components/SpinnerButton';
 import { useStateValue } from '../../../../state';
 import { useTranslation } from 'react-i18next';
 import { SETUP_GOAL } from '../../../../graphql/queries';
-import { MAKE_BET_GOALS, CASH_OUT_GOALS } from '../../../../graphql/mutations';
+import { MAKE_BET_GOALS } from '../../../../graphql/mutations';
+// import { MAKE_BET_GOALS, CASH_OUT_GOALS } from '../../../../graphql/mutations';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 import {
@@ -59,10 +60,10 @@ const GoalGame: React.FC<IProps> = ({
   loadingBet,
   loadingSetup,
   errorSetup,
-  errorBet,
+  // errorBet,
   startGame = () => null,
   session,
-  maxProfit,
+  // maxProfit,
 }) => {
   const [{ auth }] = useStateValue();
   const { t } = useTranslation(['games']);
@@ -221,15 +222,16 @@ export default GoalGame;
 
 export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
-  const [, dispatch] = useStateValue();
+  // const [, dispatch] = useStateValue();
   const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
-  const [cashoutGoals] = useMutation(CASH_OUT_GOALS);
-  const [error, setError] = useState();
+  // const [cashoutGoals] = useMutation(CASH_OUT_GOALS);
+  // const [error, setError] = useState();
   const [session, setSession] = useState(null);
-  const [maxProfit, setMaxProfit] = useState(data?.setupGoals.maxProfit);
+  // const [maxProfit, setMaxProfit] = useState(data?.setupGoals.maxProfit);
 
   const startGame = async (betAmount: number, probability: string) => {
-    const { data, errors } = await makeBetGoals({
+    /* const { data, errors } =  */
+    await makeBetGoals({
       variables: { betAmount, difficulty: probability },
     });
   };
@@ -245,10 +247,10 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       loadingSetup={loadingSetup}
       loadingBet={loadingBet}
       errorSetup={errorSetup}
-      errorBet={error}
+      // errorBet={error}
       startGame={startGame}
       session={session}
-      maxProfit={maxProfit}
+      // maxProfit={maxProfit}
     />
   );
 };
