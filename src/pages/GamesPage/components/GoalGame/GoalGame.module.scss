@@ -46,6 +46,31 @@
   }
 }
 
+.profit {
+  display: flex;
+
+  &__row {
+    margin: -1.2rem 0 0.1rem;
+
+    @include media-breakpoint-up(md) {
+      margin: -4.7rem 0 1rem;
+    }
+  }
+
+  &__item {
+    display: inline-flex;
+    flex-direction: column;
+
+    &__left {
+      margin-left: auto;
+    }
+
+    &__right {
+      margin-right: auto;
+    }
+  }
+}
+
 .amount {
   &__disabled {
     &::after {

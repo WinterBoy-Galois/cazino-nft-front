@@ -12,8 +12,7 @@ import SpinnerButton from '../../../../components/SpinnerButton';
 import { useStateValue } from '../../../../state';
 import { useTranslation } from 'react-i18next';
 import { SETUP_GOAL } from '../../../../graphql/queries';
-import { MAKE_BET_GOALS } from '../../../../graphql/mutations';
-// import { MAKE_BET_GOALS, CASH_OUT_GOALS } from '../../../../graphql/mutations';
+import { MAKE_BET_GOALS, CASH_OUT_GOALS } from '../../../../graphql/mutations';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 import {
@@ -60,10 +59,10 @@ const GoalGame: React.FC<IProps> = ({
   loadingBet,
   loadingSetup,
   errorSetup,
-  // errorBet,
+  errorBet,
   startGame = () => null,
   session,
-  // maxProfit,
+  maxProfit,
 }) => {
   const [{ auth }] = useStateValue();
   const { t } = useTranslation(['games']);
@@ -94,7 +93,7 @@ const GoalGame: React.FC<IProps> = ({
     return <Error />;
   }
 
-  const handlePlaceBet = async () => {
+  const handlePlaceBet = async (selection?: number) => {
     if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
@@ -106,13 +105,21 @@ const GoalGame: React.FC<IProps> = ({
 
       return;
     }
+
+    if (state.gameState === GameState.IN_PROGRESS) {
+      return;
+    }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.board__container}>
         <div className="row">
-          <GoalGameBoard className="col-12" gameState={state.gameState} />
+          <GoalGameBoard
+            className="col-12"
+            gameState={state.gameState}
+            handlePlaceBet={handlePlaceBet}
+          />
         </div>
 
         <div className="row">
@@ -155,12 +162,13 @@ const GoalGame: React.FC<IProps> = ({
           <div
             className={clsx(
               'row',
+              styles.profit__row,
               styles.margin__horizontal_auto,
               state.gameState === GameState.IN_PROGRESS ? null : styles.profit__visibility__hidden
             )}
           >
-            <div className="col-6">
-              <div className={clsx(styles.profit__container, styles.align_items__left)}>
+            <div className={clsx('col-6', styles.profit)}>
+              <div className={clsx(styles.profit__item, styles.profit__item__left)}>
                 <div className={styles.profit__label}>
                   {t('goal.profitTotal')}&nbsp;(&times;&nbsp;
                   {session?.totalProfit.multiplier.toFixed(3)})
@@ -171,8 +179,8 @@ const GoalGame: React.FC<IProps> = ({
               </div>
             </div>
 
-            <div className="col-6">
-              <div className={clsx(styles.profit__container, styles.align_items__right)}>
+            <div className={clsx('col-6', styles.profit)}>
+              <div className={clsx(styles.profit__item, styles.profit__right)}>
                 <div className={styles.profit__label}>
                   {t('goal.profitNext')}&nbsp;(&times;&nbsp;
                   {session?.nextProfit.multiplier.toFixed(3)})
@@ -222,16 +230,15 @@ export default GoalGame;
 
 export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
-  // const [, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
-  // const [cashoutGoals] = useMutation(CASH_OUT_GOALS);
-  // const [error, setError] = useState();
+  const [cashoutGoals] = useMutation(CASH_OUT_GOALS);
+  const [error, setError] = useState();
   const [session, setSession] = useState(null);
-  // const [maxProfit, setMaxProfit] = useState(data?.setupGoals.maxProfit);
+  const [maxProfit, setMaxProfit] = useState(data?.setupGoals.maxProfit);
 
   const startGame = async (betAmount: number, probability: string) => {
-    /* const { data, errors } =  */
-    await makeBetGoals({
+    const { data, errors } = await makeBetGoals({
       variables: { betAmount, difficulty: probability },
     });
   };
@@ -247,10 +254,10 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       loadingSetup={loadingSetup}
       loadingBet={loadingBet}
       errorSetup={errorSetup}
-      // errorBet={error}
+      errorBet={error}
       startGame={startGame}
       session={session}
-      // maxProfit={maxProfit}
+      maxProfit={maxProfit}
     />
   );
 };
