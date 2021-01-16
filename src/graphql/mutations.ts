@@ -294,12 +294,39 @@ export const MAKE_BET_GOALS = gql`
             profit
           }
           allowNext
-          profitCut {
-            location
-            messageKey
-          }
+          profitCut
         }
         balance
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const CASH_OUT_GOALS = gql`
+  mutation cashoutGoals($betId: ID!) {
+    cashoutGoals(betId: $betId) {
+      ... on GoalsComplete {
+        id
+        lucky
+        balance
+        profit {
+          multiplier
+          profit
+        }
+        profitCut
+        result {
+          step
+          luckySpots
+          selected
+        }
       }
       ... on GenericErrorArray {
         errors {

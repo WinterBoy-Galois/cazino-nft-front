@@ -12,6 +12,7 @@ interface IProps {
   max?: number;
   amount?: number;
   onChange?: (value: number) => void;
+  readonly?: boolean;
 }
 
 const BetAmountControl: React.FC<IProps> = props => {

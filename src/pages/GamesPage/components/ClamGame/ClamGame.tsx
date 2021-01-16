@@ -189,8 +189,11 @@ const ClamGame: React.FC<IProps> = ({
       <div className={styles.controls__wrapper}>
         <div className="container">
           <div
-            className={clsx('row', styles.margin__horizontal_auto)}
-            style={{ visibility: state.gameState === GameState.IDLE ? 'visible' : 'hidden' }}
+            className={clsx(
+              'row',
+              styles.margin__horizontal_auto,
+              state.gameState === GameState.IDLE ? null : styles.profit__visibility__hidden
+            )}
           >
             <div className="col-6">
               <div className={clsx(styles.profit__container, styles.align_items__left)}>

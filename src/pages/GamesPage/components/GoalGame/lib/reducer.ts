@@ -1,10 +1,8 @@
 import { GoalGameState as GameState } from '../../../../../models/goalGameState.model';
 
-export const PROBABILITES = {
-  HIGH: 'GOALS2OUT3',
-  MIDDLE: 'GOALS1OUT2',
-  LOW: 'GOALS1OUT3',
-};
+export const PROBABILITY_HIGH = 'GOALS2OUT3';
+export const PROBABILITY_MIDDLE = 'GOALS1OUT2';
+export const PROBABILITY_LOW = 'GOALS1OUT3';
 
 export interface GoalGameState {
   amount: number;
@@ -15,7 +13,7 @@ export interface GoalGameState {
 
 export const getInitialState = (): GoalGameState => ({
   amount: 0.00000001,
-  probability: PROBABILITES.HIGH,
+  probability: PROBABILITY_HIGH,
   isRunning: false,
   gameState: GameState.IDLE,
 });
@@ -45,10 +43,18 @@ export const goalGameReducer = (state: GoalGameState, action: GoalGameAction) =>
       return getInitialState();
 
     case 'START':
-      return { ...state, isRunning: true };
+      if (payload?.session)
+        return {
+          ...state,
+          gameState: GameState.IN_PROGRESS,
+          amount: payload.session.betAmount,
+          probability: payload.session.difficulty,
+        };
+
+      return { ...state, gameState: GameState.IN_PROGRESS };
 
     case 'END':
-      return { ...state, isRunning: false };
+      return { ...state };
 
     default:
       return state;

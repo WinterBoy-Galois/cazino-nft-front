@@ -270,12 +270,10 @@ export const SETUP_GOAL = gql`
             profit
           }
           allowNext
-          profitCut {
-            location
-            messageKey
-          }
+          profitCut
         }
         balance
+        maxProfit
       }
     }
   }
