@@ -1,4 +1,4 @@
-@import '../../styles/shared';
+@import "../../styles/shared";
 
 .container {
   position: relative;
@@ -10,16 +10,39 @@
 }
 
 .goal {
-  &__background {
-  }
-
   &__keeper {
     position: absolute;
 
     &__idle {
-      left: 40%;
-      top: 27%;
-      width: 20%;
+      left: calc(50% - 142.5px);
+      top: 29%;
+      width: 285px;
     }
+  }
+
+  &__selection {
+    &__container {
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      width: 40%;
+      top: 10px;
+      left: 30%;
+    }
+
+    &__ball {
+      width: 120px;
+      height: 120px;
+      cursor: pointer;
+    }
+  }
+
+  &__main_ball {
+    position: absolute;
+    left: 0;
+    width: 250px;
+    left: calc(50% - 125px);
+    bottom: -7.5rem;
+    cursor: pointer;
   }
 }

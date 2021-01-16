@@ -16,7 +16,9 @@ import { MAKE_BET_GOALS, CASH_OUT_GOALS } from '../../../../graphql/mutations';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 import {
-  PROBABILITES,
+  PROBABILITY_HIGH,
+  PROBABILITY_MIDDLE,
+  PROBABILITY_LOW,
   GoalGameState,
   GoalGameAction,
   goalGameReducer,
@@ -24,6 +26,24 @@ import {
 } from './lib/reducer';
 import { GoalGameState as GameState } from '../../../../models/goalGameState.model';
 import { formatBitcoin } from '../../../../common/util/format.util';
+
+const PROBABILITES = [
+  {
+    label: 'High',
+    value: PROBABILITY_HIGH,
+    summary: '2 of 3 wins',
+  },
+  {
+    label: 'Middle',
+    value: PROBABILITY_MIDDLE,
+    summary: '1 of 2 wins',
+  },
+  {
+    label: 'Low',
+    value: PROBABILITY_LOW,
+    summary: '1 of 3 wins',
+  },
+];
 
 interface IProps {
   loadingBet?: boolean;
@@ -35,24 +55,6 @@ interface IProps {
   maxProfit?: number;
 }
 
-const probabilities = [
-  {
-    label: 'High',
-    value: PROBABILITES.HIGH,
-    summary: '2 of 3 wins',
-  },
-  {
-    label: 'Middle',
-    value: PROBABILITES.MIDDLE,
-    summary: '1 of 2 wins',
-  },
-  {
-    label: 'Low',
-    value: PROBABILITES.LOW,
-    summary: '1 of 3 wins',
-  },
-];
-
 const GoalGame: React.FC<IProps> = ({
   loadingBet,
   loadingSetup,
@@ -63,7 +65,6 @@ const GoalGame: React.FC<IProps> = ({
   maxProfit,
 }) => {
   const [{ auth }] = useStateValue();
-  const [probability, setProbability] = useState(PROBABILITES.HIGH);
   const { t } = useTranslation(['games']);
   const [state, dispatch] = useReducer<Reducer<GoalGameState, GoalGameAction>>(
     goalGameReducer,
@@ -80,7 +81,7 @@ const GoalGame: React.FC<IProps> = ({
 
   useEffect(() => {
     if (session?.betId) {
-      dispatch({ type: 'START' });
+      dispatch({ type: 'START', payload: { session } });
     }
   }, [session]);
 
@@ -100,7 +101,7 @@ const GoalGame: React.FC<IProps> = ({
     if (state.gameState === GameState.IDLE) {
       dispatch({ type: 'START' });
 
-      startGame(state.amount, probability);
+      startGame(state.amount, state.probability);
 
       return;
     }
@@ -108,9 +109,9 @@ const GoalGame: React.FC<IProps> = ({
 
   return (
     <div className={styles.container}>
-      <div className={clsx('container', styles.board__container)}>
+      <div className={styles.board__container}>
         <div className="row">
-          <GoalGameBoard className="col-12" />
+          <GoalGameBoard className="col-12" gameState={state.gameState} />
         </div>
 
         <div className="row">
@@ -127,13 +128,12 @@ const GoalGame: React.FC<IProps> = ({
 
             <ButtonGroup
               name="probability"
-              items={probabilities.map(item => ({
+              items={PROBABILITES.map(item => ({
                 ...item,
                 onClick: () => {
-                  setProbability(item.value);
                   dispatch({ type: 'SET_PROBABILITY', payload: { probability: item.value } });
                 },
-                checked: probability === item.value,
+                checked: state.probability === item.value,
               }))}
               className={styles.probability__button_group}
             />
@@ -141,7 +141,11 @@ const GoalGame: React.FC<IProps> = ({
         </div>
 
         {state.gameState !== GameState.IDLE ? (
-          <GoalGameStages profits={session.profits} className={styles.stages__container} />
+          <GoalGameStages
+            profits={session.profits}
+            className={styles.stages__container}
+            currentStep={session?.currentStep}
+          />
         ) : null}
       </div>
 
@@ -158,12 +162,10 @@ const GoalGame: React.FC<IProps> = ({
               <div className={clsx(styles.profit__container, styles.align_items__left)}>
                 <div className={styles.profit__label}>
                   {t('goal.profitTotal')}&nbsp;(&times;&nbsp;
-                  {session?.profits[session.currentStep].multiplier.toFixed(3)})
+                  {session?.totalProfit.multiplier.toFixed(3)})
                 </div>
                 <div>
-                  <BitcoinValue
-                    value={formatBitcoin(session?.profits[session.currentStep].profit)}
-                  />
+                  <BitcoinValue value={formatBitcoin(session?.totalProfit.profit)} />
                 </div>
               </div>
             </div>

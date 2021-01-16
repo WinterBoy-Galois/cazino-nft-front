@@ -1,7 +1,7 @@
-@import '../../styles/shared';
+@import "../../styles/shared";
 
 .container {
-  width: 200px;
+  width: 300px;
   background-color: rgba(19, 34, 58, 0.5);
   display: flex;
   flex-direction: column;
@@ -10,25 +10,56 @@
 .single_stage {
   display: flex;
   align-items: center;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 5px;
-  font-size: 0.75rem;
+  padding: 0px 15px;
+  margin: 5px 0px;
   justify-content: space-between;
   width: 100%;
 
   &:first-child {
-    margin-top: 5rem;
+    margin-top: 7rem;
   }
 
   &:last-child {
     margin-bottom: auto;
   }
 
+  &__current {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  & > div {
+    display: block;
+  }
+
   &__status {
-    min-width: 40px;
-    min-height: 25px;
+    min-width: 60px;
+    min-height: 35px;
     border: 1px solid #a0a0a0;
-    border-radius: 10px;
+    border-radius: 15px;
+    margin-right: 10px;
+
+    &__current {
+      border-color: #FFD800;
+    }
+
+    &__lost {
+      border-color: #fd7979;
+    }
+
+    &__win {
+      border-color: #73fc7f;
+    }
+  }
+
+  &__multiplier {
+    font-size: 13px;
+    font-weight: normal;
+  }
+
+  &__profit {
+    margin-left: auto;
+    width: 120px;
+    font-size: 13px;
+    font-weight: 900;
   }
 }
