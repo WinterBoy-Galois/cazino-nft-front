@@ -55,7 +55,7 @@ interface IProps {
   startGame?: (betAmount: number, probability: string) => void;
   session?: any;
   maxProfit?: number;
-  onPlaceBet?: (betId: string, selection: number) => void;
+  onPlaceBet?: (betId: string, selection: number, currentStep: number) => void;
   showProfitCutModal?: () => void;
 }
 
@@ -123,7 +123,7 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     if (typeof selection === 'number' && state.gameState === GameState.IN_PROGRESS) {
-      onPlaceBet(session.betId, selection);
+      onPlaceBet(session.betId, selection, session.currentStep);
       return;
     }
   };
@@ -168,6 +168,7 @@ const GoalGame: React.FC<IProps> = ({
         {state.gameState !== GameState.IDLE ? (
           <GoalGameStages
             profits={session?.profits}
+            isEnded={state.gameState !== GameState.IN_PROGRESS}
             className={styles.stages__container}
             currentStep={session?.currentStep}
             selections={session?.selections}
@@ -258,9 +259,11 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const [maxProfit, setMaxProfit] = useState(0);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [selections, setSelections] = useState([]);
 
   const updateSession = (newSession: any) => {
     setSession(newSession);
+    setSelections(newSession.selections);
     if (newSession?.profitCut) setProfitCut(newSession.profitCut);
   };
 
@@ -288,7 +291,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     updateSession(data.makeBetGoals.session);
   };
 
-  const handlePlaceBet = async (betId: string, selection: number) => {
+  const handlePlaceBet = async (betId: string, selection: number, currentStep: number) => {
     const { data, errors } = await advanceGoals({
       variables: { betId, selection },
     });
@@ -298,7 +301,12 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     if (data.advanceGoals?.balance)
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
 
-    updateSession(Object.assign({}, session, data.advanceGoals));
+    updateSession(
+      Object.assign({}, session, data.advanceGoals, {
+        currentStep: data.advanceGoals.nextStep,
+        selections: [...selections, { selected: selection, step: currentStep }],
+      })
+    );
   };
 
   useEffect(() => {

@@ -9,6 +9,7 @@ interface IProps {
   profits?: any[];
   currentStep?: number;
   selections?: any[];
+  isEnded?: boolean;
 }
 
 const GoalGameStages: React.FC<IProps> = ({
@@ -16,7 +17,25 @@ const GoalGameStages: React.FC<IProps> = ({
   profits = [],
   currentStep = 0,
   selections = [],
+  isEnded,
 }) => {
+  const getStatusClsx = (selection: any, index: number) => {
+    if (isEnded)
+      return clsx(
+        styles.single_stage__status__spot,
+        selection?.selected === index ? styles.single_stage__status__spot__selected : null,
+        selection?.luckySpots.includes(index)
+          ? styles.single_stage__status__spot__lucky
+          : styles.single_stage__status__spot__unlucky
+      );
+
+    return clsx(
+      styles.single_stage__status__spot,
+      selection?.selected === index ? styles.single_stage__status__spot__selected : null,
+      selection?.selected === index ? styles.single_stage__status__spot__lucky : null
+    );
+  };
+
   return (
     <div className={clsx(styles.container, className)}>
       {profits.map((item, step) => {
@@ -40,18 +59,7 @@ const GoalGameStages: React.FC<IProps> = ({
               {step < currentStep
                 ? Array.from(Array(3).keys()).map(index => {
                     return (
-                      <span
-                        key={`status-${index}`}
-                        className={clsx(
-                          styles.single_stage__status__spot,
-                          selection?.selected === index
-                            ? styles.single_stage__status__spot__selected
-                            : null,
-                          selection?.luckySpots.includes(index)
-                            ? styles.single_stage__status__spot__lucky
-                            : styles.single_stage__status__spot__unlucky
-                        )}
-                      />
+                      <span key={`status-${index}`} className={getStatusClsx(selection, index)} />
                     );
                   })
                 : null}
