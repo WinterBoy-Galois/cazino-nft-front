@@ -1,0 +1,56 @@
+import React from 'react';
+import styles from './ProfitCutModal.module.scss';
+import Modal from '../Modal';
+import { useStateValue } from '../../state';
+import { useNavigate, useLocation } from '@reach/router';
+import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
+import Button from '../../components/Button';
+
+interface IProps {
+  show: boolean;
+  onClose?: () => void;
+  maxProfit: number;
+  profitCut: string;
+}
+
+const ProfitCutModal: React.FC<IProps> = ({ show, onClose, maxProfit, profitCut }) => {
+  const { t } = useTranslation(['modals']);
+
+  return (
+    <Modal show={show} onClose={onClose} title={t('profitCut.title')}>
+      <div className={clsx(styles.modal__row, 'row')}>
+        <div className={clsx(styles.modal__content)}>
+          {t(profitCut === 'WARNING' ? 'profitCut.warningMessage' : 'profitCut.cutMessage')
+            .split('\n')
+            .map((message, index) => (
+              <p key={`message-${index}`}>
+                {message.replace('MAX_PROFIT', maxProfit?.toFixed(1).toString())}
+              </p>
+            ))}
+        </div>
+
+        <div className={clsx(styles.modal__footer)}>
+          <Button className={styles.modal__footer__button} onClick={onClose}>
+            OK
+          </Button>
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+export default ProfitCutModal;
+
+export const ProfitCutModalWithData: React.FC<IProps> = props => {
+  const [{ auth }] = useStateValue();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  if (props.show && auth.state !== 'SIGNED_IN') {
+    navigate(pathname);
+    return null;
+  }
+
+  return <ProfitCutModal {...props} />;
+};

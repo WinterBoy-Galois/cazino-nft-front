@@ -14,6 +14,7 @@ import { closeModal, replaceModal, showModal } from '../../../Modal';
 import { useLocation, useNavigate } from '@reach/router';
 import { ChangeServerSeedConfirmationModalWithData } from '../../../ChangeServerSeedConfirmationModal/ChangeServerSeedConfirmationModal';
 import { CashierModalWithData } from '../../../CashierModal/CashierModal';
+import { ProfitCutModalWithData } from '../../../ProfitCutModal/ProfitCutModal';
 import DepositsDetailsModal from '../../../DepositsDetailsModal';
 
 const Modals: React.FC = () => {
@@ -93,6 +94,11 @@ const Modals: React.FC = () => {
       />
       <DepositsDetailsModal
         show={handleShow('DEPOSIT_DETAILS_MODAL')}
+        onClose={handleClose}
+        {...modal.data}
+      />
+      <ProfitCutModalWithData
+        show={handleShow('PROFIT_CUT_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />
