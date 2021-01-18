@@ -290,13 +290,14 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     if (data?.setupGoals) {
       setSession(data.setupGoals.session);
       setMaxProfit(data.setupGoals.maxProfit);
-      setProfitCut(data.setupGoals.session.profitCut);
+
+      if (data.setupGoals.session?.profitCut) setProfitCut(data.setupGoals.session.profitCut);
     }
   }, [data]);
 
   const showProfitCutModal = useCallback(
     () =>
-      profitCut &&
+      // profitCut &&
       auth.state === 'SIGNED_IN' &&
       navigate(`${pathname}?dialog=profit-cut`, {
         state: {
