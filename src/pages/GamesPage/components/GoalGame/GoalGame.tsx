@@ -297,7 +297,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
   const showProfitCutModal = useCallback(
     () =>
-      // profitCut &&
+      profitCut &&
       auth.state === 'SIGNED_IN' &&
       navigate(`${pathname}?dialog=profit-cut`, {
         state: {
