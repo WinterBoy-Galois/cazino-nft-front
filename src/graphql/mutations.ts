@@ -310,6 +310,50 @@ export const MAKE_BET_GOALS = gql`
   }
 `;
 
+export const ADVANCE_GOALS = gql`
+  mutation advanceGoals($betId: ID!, $selection: Int!) {
+    advanceGoals(betId: $betId, selection: $selection) {
+      ... on GoalsStep {
+        id
+        totalProfit {
+          multiplier
+          profit
+        }
+        nextProfit {
+          multiplier
+          profit
+        }
+        nextStep
+        profitCut
+        allowNext
+      }
+      ... on GoalsComplete {
+        id
+        lucky
+        profit {
+          multiplier
+          profit
+        }
+        balance
+        profitCut
+        result {
+          step
+          luckySpots
+          selected
+        }
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
 export const CASH_OUT_GOALS = gql`
   mutation cashoutGoals($betId: ID!) {
     cashoutGoals(betId: $betId) {

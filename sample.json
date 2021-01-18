@@ -1,0 +1,21 @@
+{
+  "data": {
+    "advanceGoals": {
+      "id": "1129",
+      "totalProfit": {
+        "multiplier": 1.45,
+        "profit": 0.00045,
+        "__typename": "Profit"
+      },
+      "nextProfit": {
+        "multiplier": 2.11,
+        "profit": 0.00111,
+        "__typename": "Profit"
+      },
+      "nextStep": 1,
+      "profitCut": null,
+      "allowNext": true,
+      "__typename": "GoalsStep"
+    }
+  }
+}

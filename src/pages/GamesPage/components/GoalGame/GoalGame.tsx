@@ -12,7 +12,7 @@ import SpinnerButton from '../../../../components/SpinnerButton';
 import { useStateValue } from '../../../../state';
 import { useTranslation } from 'react-i18next';
 import { SETUP_GOAL } from '../../../../graphql/queries';
-import { MAKE_BET_GOALS, CASH_OUT_GOALS } from '../../../../graphql/mutations';
+import { MAKE_BET_GOALS, CASH_OUT_GOALS, ADVANCE_GOALS } from '../../../../graphql/mutations';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 import {
@@ -53,6 +53,7 @@ interface IProps {
   startGame?: (betAmount: number, probability: string) => void;
   session?: any;
   maxProfit?: number;
+  onPlaceBet?: (betId: string, selection: number) => void;
 }
 
 const GoalGame: React.FC<IProps> = ({
@@ -63,6 +64,7 @@ const GoalGame: React.FC<IProps> = ({
   startGame = () => null,
   session,
   maxProfit,
+  onPlaceBet = () => null,
 }) => {
   const [{ auth }] = useStateValue();
   const { t } = useTranslation(['games']);
@@ -106,7 +108,8 @@ const GoalGame: React.FC<IProps> = ({
       return;
     }
 
-    if (state.gameState === GameState.IN_PROGRESS) {
+    if (typeof selection === 'number' && state.gameState === GameState.IN_PROGRESS) {
+      onPlaceBet(session.betId, selection);
       return;
     }
   };
@@ -150,9 +153,10 @@ const GoalGame: React.FC<IProps> = ({
 
         {state.gameState !== GameState.IDLE ? (
           <GoalGameStages
-            profits={session.profits}
+            profits={session?.profits}
             className={styles.stages__container}
             currentStep={session?.currentStep}
+            selections={session?.selections}
           />
         ) : null}
       </div>
@@ -232,6 +236,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
   const [, dispatch] = useStateValue();
   const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
+  const [advanceGoals, { loading: loadingAdvance }] = useMutation(ADVANCE_GOALS);
   const [cashoutGoals] = useMutation(CASH_OUT_GOALS);
   const [error, setError] = useState();
   const [session, setSession] = useState(null);
@@ -240,6 +245,12 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const startGame = async (betAmount: number, probability: string) => {
     const { data, errors } = await makeBetGoals({
       variables: { betAmount, difficulty: probability },
+    });
+  };
+
+  const onPlaceBet = async (betId: string, selection: number) => {
+    const { data, errors } = await advanceGoals({
+      variables: { betId, selection },
     });
   };
 
@@ -258,6 +269,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       startGame={startGame}
       session={session}
       maxProfit={maxProfit}
+      onPlaceBet={onPlaceBet}
     />
   );
 };
