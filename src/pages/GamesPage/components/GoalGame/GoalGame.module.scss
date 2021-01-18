@@ -1,16 +1,22 @@
-@import '../../../../styles/shared';
-@import '../../../../styles/game-general.scss';
+@import "../../../../styles/shared";
+@import "../../../../styles/game-general.scss";
 
 .container {
   margin-top: 5rem;
+  overflow: hidden;
 }
 
 .stages {
   &__container {
+    display: none;
     position: absolute;
     left: 0;
     top: -5.5rem;
     bottom: -2rem;
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+    }
   }
 }
 
@@ -24,6 +30,10 @@
 .probability {
   &__container {
     margin: 1.5rem auto;
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
 
     &__visibility {
       &__hidden {
@@ -50,7 +60,7 @@
   display: flex;
 
   &__row {
-    margin: -1.2rem 0 0.1rem;
+    margin: -1.2rem 0 2rem;
 
     @include media-breakpoint-up(md) {
       margin: -4.7rem 0 1rem;
@@ -61,12 +71,14 @@
     display: inline-flex;
     flex-direction: column;
 
-    &__left {
-      margin-left: auto;
-    }
+    @include media-breakpoint-up(md) {
+      &__left {
+        margin-left: auto;
+      }
 
-    &__right {
-      margin-right: auto;
+      &__right {
+        margin-right: auto;
+      }
     }
   }
 }
@@ -74,7 +86,7 @@
 .amount {
   &__disabled {
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       right: 0;
@@ -82,6 +94,14 @@
       bottom: 0;
       background-color: #13223a;
       opacity: 0.5;
+    }
+  }
+}
+
+.controls {
+  &__wrapper {
+    @include media-breakpoint-down(md) {
+      margin-top: 5rem;
     }
   }
 }

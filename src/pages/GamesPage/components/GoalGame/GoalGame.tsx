@@ -259,39 +259,52 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const startGame = async (betAmount: number, probability: string) => {
-    const { data, errors } = await makeBetGoals({
-      variables: { betAmount, difficulty: probability },
-    });
+  const updateSession = (newSession: any) => {
+    setSession(newSession);
+    if (newSession?.profitCut) setProfitCut(newSession.profitCut);
+  };
 
-    if (errors || data.makeBetGoals?.errors) {
-      setError(errors ?? data.makeBetGoals?.errors);
+  const checkErrors = (dataRes: any, errors: any) => {
+    if (errors || dataRes?.errors) {
+      setError(errors ?? dataRes?.errors);
 
-      if (data.makeBetGoals?.errors[0]?.code === 'MAX_PROFIT') {
+      if (dataRes?.errors[0]?.code === 'MAX_PROFIT') {
         return errorToast('Your bet may reaches the profit limit.');
       }
 
       return errorToast("Your bet couldn't be placed, please try again.");
     }
-
-    dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetGoals?.balance } });
-
-    setSession(data?.makeBetGoals.session);
-    setProfitCut(data?.makeBetGoals.session.profitCut);
   };
 
-  const onPlaceBet = async (betId: string, selection: number) => {
+  const startGame = async (betAmount: number, probability: string) => {
+    const { data, errors } = await makeBetGoals({
+      variables: { betAmount, difficulty: probability },
+    });
+
+    checkErrors(data.makeBetGoals, errors);
+
+    dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetGoals.balance } });
+
+    updateSession(data.makeBetGoals.session);
+  };
+
+  const handlePlaceBet = async (betId: string, selection: number) => {
     const { data, errors } = await advanceGoals({
       variables: { betId, selection },
     });
+
+    checkErrors(data.advanceGoals, errors);
+
+    if (data.advanceGoals?.balance)
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
+
+    updateSession(Object.assign({}, session, data.advanceGoals));
   };
 
   useEffect(() => {
     if (data?.setupGoals) {
-      setSession(data.setupGoals.session);
+      updateSession(data.setupGoals.session);
       setMaxProfit(data.setupGoals.maxProfit);
-
-      if (data.setupGoals.session?.profitCut) setProfitCut(data.setupGoals.session.profitCut);
     }
   }, [data]);
 
@@ -317,7 +330,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       startGame={startGame}
       session={session}
       maxProfit={maxProfit}
-      onPlaceBet={onPlaceBet}
+      onPlaceBet={handlePlaceBet}
       showProfitCutModal={showProfitCutModal}
     />
   );
