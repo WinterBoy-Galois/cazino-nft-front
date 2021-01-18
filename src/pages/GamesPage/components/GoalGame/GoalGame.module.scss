@@ -1,5 +1,5 @@
-@import "../../../../styles/shared";
-@import "../../../../styles/game-general.scss";
+@import '../../../../styles/shared';
+@import '../../../../styles/game-general.scss';
 
 .container {
   margin-top: 5rem;
@@ -74,7 +74,7 @@
 .amount {
   &__disabled {
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       right: 0;

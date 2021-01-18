@@ -18,7 +18,7 @@ const ProfitCutModal: React.FC<IProps> = ({ show, onClose, maxProfit, profitCut 
   const { t } = useTranslation(['modals']);
 
   return (
-    <Modal show={show} onClose={onClose} title={t('profitCut.title')} modalClassName='warning'>
+    <Modal show={show} onClose={onClose} title={t('profitCut.title')} modalClassName="warning">
       <div className={clsx(styles.modal__row, 'row')}>
         <div className={clsx(styles.modal__content)}>
           {t(profitCut === 'WARNING' ? 'profitCut.warningMessage' : 'profitCut.cutMessage')
