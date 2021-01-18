@@ -20,7 +20,7 @@ const GoalGameStages: React.FC<IProps> = ({
   return (
     <div className={clsx(styles.container, className)}>
       {profits.map((item, step) => {
-        const selection = selections.filter(selection => selection.step === step)[0];
+        const selection = selections?.filter(selection => selection.step === step)[0];
 
         return (
           <div
@@ -44,10 +44,10 @@ const GoalGameStages: React.FC<IProps> = ({
                         key={`status-${index}`}
                         className={clsx(
                           styles.single_stage__status__spot,
-                          selection.selected === index
+                          selection?.selected === index
                             ? styles.single_stage__status__spot__selected
                             : null,
-                          selection.luckySpots.includes(index)
+                          selection?.luckySpots.includes(index)
                             ? styles.single_stage__status__spot__lucky
                             : styles.single_stage__status__spot__unlucky
                         )}

@@ -15,6 +15,8 @@ import { SETUP_GOAL } from '../../../../graphql/queries';
 import { MAKE_BET_GOALS, CASH_OUT_GOALS, ADVANCE_GOALS } from '../../../../graphql/mutations';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
+import { error as errorToast, info, success } from '../../../../components/Toast';
+import { appConfig } from '../../../../common/config';
 import {
   PROBABILITY_HIGH,
   PROBABILITY_MIDDLE,
@@ -246,6 +248,22 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     const { data, errors } = await makeBetGoals({
       variables: { betAmount, difficulty: probability },
     });
+
+    if (errors || data.makeBetGoals?.errors) {
+      setError(errors ?? data.makeBetGoals?.errors);
+
+      if (data.makeBetGoals?.errors[0]?.code === 'MAX_PROFIT') {
+        return errorToast('Your bet may reaches the profit limit.');
+      }
+
+      return errorToast("Your bet couldn't be placed, please try again.");
+    }
+
+    console.log('==================== Start Game =====================');
+    console.log(data);
+
+    dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetGoals?.balance } });
+    setSession(data?.makeBetGoals.session);
   };
 
   const onPlaceBet = async (betId: string, selection: number) => {

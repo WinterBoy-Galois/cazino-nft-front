@@ -272,9 +272,9 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
     setProfit(data?.makeBetClams?.profit);
 
     setTimeout(() => {
-      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetClams?.balance } });
-      const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetClams?.profit)}`;
-      if (+data?.makeBetClams?.profit >= 0) {
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetClams?.balance } });
+      const toast = `Your balance has been updated: ${formatBitcoin(+data.makeBetClams?.profit)}`;
+      if (+data.makeBetClams?.profit >= 0) {
         success(toast);
       } else {
         info(toast);
