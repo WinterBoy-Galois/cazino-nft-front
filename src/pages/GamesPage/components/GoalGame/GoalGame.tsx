@@ -13,12 +13,9 @@ import { useStateValue } from '../../../../state';
 import { useTranslation } from 'react-i18next';
 import { SETUP_GOAL } from '../../../../graphql/queries';
 import { MAKE_BET_GOALS, ADVANCE_GOALS } from '../../../../graphql/mutations';
-// import { MAKE_BET_GOALS, CASH_OUT_GOALS, ADVANCE_GOALS } from '../../../../graphql/mutations';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 import { error as errorToast } from '../../../../components/Toast';
-// import { error as errorToast, info, success } from '../../../../components/Toast';
-// import { appConfig } from '../../../../common/config';
 import {
   PROBABILITY_HIGH,
   PROBABILITY_MIDDLE,
@@ -50,25 +47,23 @@ const PROBABILITES = [
 ];
 
 interface IProps {
-  loadingBet?: boolean;
   loadingSetup?: boolean;
   errorSetup?: any;
+  loadingBet?: boolean;
   errorBet?: any;
   startGame?: (betAmount: number, probability: string) => void;
   session?: any;
-  maxProfit?: number;
   onPlaceBet?: (betId: string, selection: number, currentStep: number) => void;
   showProfitCutModal?: () => void;
 }
 
 const GoalGame: React.FC<IProps> = ({
-  loadingBet,
   loadingSetup,
   errorSetup,
-  // errorBet,
+  loadingBet,
+  errorBet,
   startGame = () => null,
   session,
-  // maxProfit,
   onPlaceBet = () => null,
   showProfitCutModal = () => null,
 }) => {
@@ -88,13 +83,16 @@ const GoalGame: React.FC<IProps> = ({
   }, [auth.state]);
 
   useEffect(() => {
+    if (errorBet) {
+      dispatch({ type: 'END' });
+    }
+  }, [errorBet]);
+
+  useEffect(() => {
     if (session?.betId) {
       dispatch({
         type: 'START',
-        payload: {
-          amount: session.betAmount,
-          probability: session.difficulty,
-        },
+        payload: { session },
       });
     }
 
@@ -253,11 +251,8 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
   const [{ auth }, dispatch] = useStateValue();
   const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
-  const [advanceGoals] = useMutation(ADVANCE_GOALS);
-  // const [advanceGoals, { loading: loadingAdvance }] = useMutation(ADVANCE_GOALS);
-  // const [cashoutGoals] = useMutation(CASH_OUT_GOALS);
-  const [, setError] = useState();
-  // const [error, setError] = useState();
+  const [advanceGoals, { loading: loadingAdvance }] = useMutation(ADVANCE_GOALS);
+  const [error, setError] = useState();
   const [session, setSession] = useState(null);
   const [profitCut, setProfitCut] = useState(null);
   const [maxProfit, setMaxProfit] = useState(0);
@@ -267,7 +262,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
   const updateSession = (newSession: any) => {
     setSession(newSession);
-    setSelections(newSession.selections);
+    if (newSession?.selections) setSelections(newSession.selections);
     if (newSession?.profitCut) setProfitCut(newSession.profitCut);
   };
 
@@ -336,12 +331,11 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   return (
     <GoalGame
       loadingSetup={loadingSetup}
-      loadingBet={loadingBet}
+      loadingBet={loadingBet || loadingAdvance}
       errorSetup={errorSetup}
-      // errorBet={error}
+      errorBet={error}
       startGame={startGame}
       session={session}
-      // maxProfit={maxProfit}
       onPlaceBet={handlePlaceBet}
       showProfitCutModal={showProfitCutModal}
     />
