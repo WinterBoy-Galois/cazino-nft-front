@@ -107,6 +107,15 @@
       width: 23px;
     }
   }
+
+  &__warning {
+    width: 20px;
+    margin-right: 1rem;
+
+    @include media-breakpoint-up(md) {
+      width: 30px;
+    }
+  }
 }
 
 .fade {

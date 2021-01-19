@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, ReactNode, RefObject } from 'react';
 import styles from './Modal.module.scss';
 import Close from '../icons/Close';
+import Warning from '../icons/Warning';
 import { CSSTransition } from 'react-transition-group';
 import { useScrollLock } from '../../hooks/useScrollLock.hook';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import Div100vh from 'react-div-100vh';
+import clsx from 'clsx';
 
 interface IProps {
   children: ReactNode;
@@ -81,7 +83,12 @@ const Modal: React.FC<IProps> = ({
             ref={modalRef}
           >
             <div className={styles.modal__header}>
-              <div className={styles.modal__header__headline}>{title}</div>
+              <div className={styles.modal__header__headline}>
+                {modalClassName === 'warning' ? (
+                  <Warning className={clsx(styles.icon, styles.icon__warning)} />
+                ) : null}
+                {title}
+              </div>
               <div className={styles.modal__header__close} onClick={handleClose}>
                 <Close className={`${styles.icon} ${styles.icon__close}`} />
               </div>

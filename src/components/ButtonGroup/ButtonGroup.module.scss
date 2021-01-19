@@ -4,7 +4,7 @@
   &__container {
     display: flex;
     border: 2px solid #163153;
-    border-radius: 4px;
+    border-radius: 10px;
   }
 
   &__button {
@@ -12,7 +12,7 @@
     flex: 1 1 0px;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: 10px;
     flex-direction: column;
     cursor: pointer;
 

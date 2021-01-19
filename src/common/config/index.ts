@@ -27,6 +27,8 @@ export const appConfig = {
   reCaptchaSiteKey: env('REACT_APP_RECAPTCHA'),
   reduceMotion: /true/i.test(env('REACT_APP_REDUCE_MOTION')),
   blockchainExplorerUrl: env('REACT_APP_BLOCKCHAIN_EXPLORER_URL'),
+  goalsGameTimeout: 1000,
+  goalsGameTransitionTime: 300,
   clamsGameTimeout: 1000,
   clamsGameTransitionTime: 300,
   diceGameTimeout: 1000,

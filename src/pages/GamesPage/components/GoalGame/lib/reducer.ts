@@ -47,8 +47,8 @@ export const goalGameReducer = (state: GoalGameState, action: GoalGameAction) =>
         return {
           ...state,
           gameState: GameState.IN_PROGRESS,
-          amount: payload.session.betAmount,
-          probability: payload.session.difficulty,
+          amount: payload.amount,
+          probability: payload.probability,
         };
 
       return { ...state, gameState: GameState.IN_PROGRESS };

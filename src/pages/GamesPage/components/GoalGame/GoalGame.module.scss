@@ -3,14 +3,20 @@
 
 .container {
   margin-top: 5rem;
+  overflow: hidden;
 }
 
 .stages {
   &__container {
+    display: none;
     position: absolute;
     left: 0;
     top: -5.5rem;
     bottom: -2rem;
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+    }
   }
 }
 
@@ -24,6 +30,10 @@
 .probability {
   &__container {
     margin: 1.5rem auto;
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
 
     &__visibility {
       &__hidden {
@@ -46,6 +56,33 @@
   }
 }
 
+.profit {
+  display: flex;
+
+  &__row {
+    margin: -1.2rem 0 2rem;
+
+    @include media-breakpoint-up(md) {
+      margin: -4.7rem 0 1rem;
+    }
+  }
+
+  &__item {
+    display: inline-flex;
+    flex-direction: column;
+
+    @include media-breakpoint-up(md) {
+      &__left {
+        margin-left: auto;
+      }
+
+      &__right {
+        margin-right: auto;
+      }
+    }
+  }
+}
+
 .amount {
   &__disabled {
     &::after {
@@ -57,6 +94,14 @@
       bottom: 0;
       background-color: #13223a;
       opacity: 0.5;
+    }
+  }
+}
+
+.controls {
+  &__wrapper {
+    @include media-breakpoint-down(md) {
+      margin-top: 5rem;
     }
   }
 }

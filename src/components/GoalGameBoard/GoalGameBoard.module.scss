@@ -10,13 +10,26 @@
 }
 
 .goal {
+  &__background {
+    @include media-breakpoint-down(md) {
+      width: 40rem;
+      margin-left: -7.5rem;
+    }
+  }
+
   &__keeper {
     position: absolute;
 
     &__idle {
-      left: calc(50% - 142.5px);
-      top: 29%;
-      width: 285px;
+      left: calc(50% - 65px);
+      top: 27%;
+      width: 130px;
+
+      @include media-breakpoint-up(md) {
+        width: 285px;
+        top: 29%;
+        left: calc(50% - 142.5px);
+      }
     }
   }
 
@@ -25,24 +38,39 @@
       position: absolute;
       display: flex;
       justify-content: space-between;
-      width: 40%;
-      top: 10px;
-      left: 30%;
+      top: 0px;
+      width: 68%;
+      left: 16%;
+
+      @include media-breakpoint-up(md) {
+        top: 10px;
+        width: 40%;
+        left: 30%;
+      }
     }
 
     &__ball {
-      width: 120px;
-      height: 120px;
+      width: 60px;
+      height: 60px;
       cursor: pointer;
+
+      @include media-breakpoint-up(md) {
+        width: 120px;
+        height: 120px;
+      }
     }
   }
 
   &__main_ball {
+    display: none;
     position: absolute;
     left: 0;
     width: 250px;
     left: calc(50% - 125px);
     bottom: -7.5rem;
-    cursor: pointer;
+
+    @include media-breakpoint-up(md) {
+      display: block;
+    }
   }
 }
