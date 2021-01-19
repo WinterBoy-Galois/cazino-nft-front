@@ -55,6 +55,8 @@ interface IProps {
   session?: any;
   onPlaceBet?: (betId: string, selection: number, currentStep: number) => void;
   showProfitCutModal?: () => void;
+  lastSelection?: number;
+  setLastSelection?: (selection: number) => void;
 }
 
 const GoalGame: React.FC<IProps> = ({
@@ -66,6 +68,8 @@ const GoalGame: React.FC<IProps> = ({
   session,
   onPlaceBet = () => null,
   showProfitCutModal = () => null,
+  lastSelection,
+  setLastSelection = () => null,
 }) => {
   const [{ auth }] = useStateValue();
   const { t } = useTranslation(['games']);
@@ -124,6 +128,7 @@ const GoalGame: React.FC<IProps> = ({
 
     if (typeof selection === 'number' && state.gameState === GameState.IN_PROGRESS) {
       onPlaceBet(session.betId, selection, session.currentStep);
+
       return;
     }
   };
@@ -135,6 +140,7 @@ const GoalGame: React.FC<IProps> = ({
           <GoalGameBoard
             className="col-12"
             gameState={state.gameState}
+            selection={lastSelection}
             handlePlaceBet={handlePlaceBet}
           />
         </div>
@@ -259,6 +265,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [selections, setSelections] = useState([]);
+  const [lastSelection, setLastSelection] = useState(-1);
 
   const updateSession = (newSession: any) => {
     setSession(newSession);
@@ -300,6 +307,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     if (data.advanceGoals?.balance)
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
 
+    setLastSelection(selection);
     updateSession(
       Object.assign({}, session, data.advanceGoals, {
         currentStep: data.advanceGoals.nextStep,
@@ -338,6 +346,8 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       session={session}
       onPlaceBet={handlePlaceBet}
       showProfitCutModal={showProfitCutModal}
+      lastSelection={lastSelection}
+      setLastSelection={setLastSelection}
     />
   );
 };

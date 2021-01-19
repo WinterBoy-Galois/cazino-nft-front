@@ -16,11 +16,10 @@ const GoalBallWon: React.FC<IProps> = ({ className }) => {
       className={clsx(className)}
     >
       <defs>
-        <clipPath id="clip-path-selected" transform="translate(22.45 28.01)">
+        <clipPath id="clip-path-won" transform="translate(22.45 28.01)">
           <circle className={styles['cls-1']} cx="82.82" cy="82.82" r="73.55" />
         </clipPath>
       </defs>
-      <title>goal-ball-win</title>
       <g id="Layer_2" data-name="Layer 2">
         <g id="balls">
           <circle className={styles['cls-2']} cx="105.28" cy="110.84" r="73.55" />

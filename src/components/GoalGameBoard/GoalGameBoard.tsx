@@ -3,7 +3,7 @@ import styles from './GoalGameBoard.module.scss';
 import clsx from 'clsx';
 import GoalBall from '../icons/games/GoalBall';
 import GoalBackground from '../icons/games/GoalBackground';
-import GoalKeeperIdle from '../icons/games/GoalKeeperIdle';
+import GoalKeeper from '../icons/games/GoalKeeper';
 import GoalMainBall from '../icons/games/GoalMainBall';
 import { GoalGameState as GameState } from '../../models/goalGameState.model';
 
@@ -12,6 +12,7 @@ interface IProps {
   gameState?: GameState;
   index?: number;
   handlePlaceBet?: (index: number) => void;
+  selection?: number;
 }
 
 const GoalBallSelect: React.FC<IProps> = ({
@@ -20,30 +21,36 @@ const GoalBallSelect: React.FC<IProps> = ({
   index = 0,
   handlePlaceBet = () => null,
 }) => {
-  if (gameState === GameState.IN_PROGRESS)
-    return (
-      <a
-        className={clsx(className, styles.goal__selection__ball)}
-        onClick={() => handlePlaceBet(index)}
-      >
-        <GoalBall className={className} />
-      </a>
-    );
+  return (
+    <a
+      className={clsx(className, styles.goal__selection__ball)}
+      onClick={() => {
+        if (gameState === GameState.IN_PROGRESS) return handlePlaceBet(index);
 
-  return null;
+        return null;
+      }}
+    >
+      <GoalBall className={className} gameState={gameState} />
+    </a>
+  );
 };
 
 const GoalGameBoard: React.FC<IProps> = props => {
-  const { className, gameState } = props;
+  const { className, gameState, selection } = props;
 
   return (
     <div className={clsx(styles.container, className)}>
       <GoalBackground className={styles.goal__background} />
-      <GoalKeeperIdle className={clsx(styles.goal__keeper, styles.goal__keeper__idle)} />
+      <GoalKeeper {...props} className={clsx(styles.goal__keeper, styles.goal__keeper__idle)} />
 
       <div className={styles.goal__selection__container}>
         {Array.from(Array(3).keys()).map(index => (
-          <GoalBallSelect {...props} className="" key={`ball-${index}`} index={index} />
+          <GoalBallSelect
+            className=""
+            key={`ball-${index}`}
+            index={index}
+            gameState={selection === index ? gameState : GameState.IDLE}
+          />
         ))}
       </div>
 

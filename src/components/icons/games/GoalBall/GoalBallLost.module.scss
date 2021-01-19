@@ -1,4 +1,4 @@
-@import '../../../../styles/shared';
+@import "../../../../styles/shared";
 
 .cls-1,
 .cls-5 {
@@ -24,9 +24,9 @@
 }
 
 .cls-6 {
-  clip-path: url(#clip-path-selected);
+  clip-path: url(#clip-path-lost);
 }
 
 .cls-7 {
-  fill: #84ea68;
+  fill: #f93a3a;
 }
