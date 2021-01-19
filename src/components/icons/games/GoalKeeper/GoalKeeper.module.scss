@@ -1,0 +1,21 @@
+@import "../../../../styles/shared";
+
+.goal_keeper {
+  &__left {
+    width: 210px;
+    top: 12%;
+    left: calc(43% - 105px);
+  }
+
+  &__middle {
+    width: 150px;
+    top: 21%;
+    left: calc(50% - 75px);
+  }
+
+  &__right {
+    width: 210px;
+    top: 12%;
+    left: calc(57% - 105px);
+  }
+}

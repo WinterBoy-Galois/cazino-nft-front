@@ -4,4 +4,5 @@ export enum GoalGameState {
   GAME_ENDED = 'GAME_ENDED',
   WON = 'WON',
   LOST = 'LOST',
+  CASH_OUT = 'CASH_OUT',
 }

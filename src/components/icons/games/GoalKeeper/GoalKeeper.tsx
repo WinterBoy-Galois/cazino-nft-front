@@ -1,5 +1,7 @@
 import React from 'react';
 import { GoalGameState as GameState } from '../../../../models/goalGameState.model';
+import clsx from 'clsx';
+import styles from './GoalKeeper.module.scss';
 import GoalKeeperIdle from './GoalKeeperIdle';
 import GoalKeeperWonLeft from './GoalKeeperWonLeft';
 import GoalKeeperLostLeft from './GoalKeeperLostLeft';
@@ -26,16 +28,22 @@ const GoalKeeper: React.FC<IProps> = ({
     case GameState.WON:
       const goalKeeperPosition = getGoalKeeperLostPosition(selection);
 
-      if (goalKeeperPosition === 0) return <GoalKeeperLostLeft className={className} />;
-      if (goalKeeperPosition === 1) return <GoalKeeperLostMiddle className={className} />;
-      if (goalKeeperPosition === 2) return <GoalKeeperLostRight className={className} />;
+      if (goalKeeperPosition === 0)
+        return <GoalKeeperLostLeft className={clsx(className, styles.goal_keeper__left)} />;
+      if (goalKeeperPosition === 1)
+        return <GoalKeeperLostMiddle className={clsx(className, styles.goal_keeper__middle)} />;
+      if (goalKeeperPosition === 2)
+        return <GoalKeeperLostRight className={clsx(className, styles.goal_keeper__right)} />;
 
       return null;
 
     case GameState.LOST:
-      if (selection === 0) return <GoalKeeperWonLeft className={className} />;
-      if (selection === 1) return <GoalKeeperWonMiddle className={className} />;
-      if (selection === 2) return <GoalKeeperWonRight className={className} />;
+      if (selection === 0)
+        return <GoalKeeperWonLeft className={clsx(className, styles.goal_keeper__left)} />;
+      if (selection === 1)
+        return <GoalKeeperWonMiddle className={clsx(className, styles.goal_keeper__middle)} />;
+      if (selection === 2)
+        return <GoalKeeperWonRight className={clsx(className, styles.goal_keeper__right)} />;
 
       return null;
 

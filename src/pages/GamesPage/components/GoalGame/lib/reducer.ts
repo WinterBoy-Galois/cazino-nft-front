@@ -19,7 +19,7 @@ export const getInitialState = (): GoalGameState => ({
 });
 
 export interface GoalGameAction {
-  type: 'SET_AMOUNT' | 'SET_PROBABILITY' | 'RESET' | 'START' | 'END';
+  type: 'SET_AMOUNT' | 'SET_PROBABILITY' | 'RESET' | 'START' | 'END' | 'SET_GAME_STATE';
   payload?: any;
 }
 
@@ -54,7 +54,13 @@ export const goalGameReducer = (state: GoalGameState, action: GoalGameAction) =>
       return { ...state, gameState: GameState.IN_PROGRESS };
 
     case 'END':
-      return { ...state };
+      return { ...state, gameState: GameState.GAME_ENDED };
+
+    case 'SET_GAME_STATE':
+      return {
+        ...state,
+        gameState: payload.gameState,
+      };
 
     default:
       return state;

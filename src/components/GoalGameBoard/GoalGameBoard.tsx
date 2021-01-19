@@ -25,9 +25,7 @@ const GoalBallSelect: React.FC<IProps> = ({
     <a
       className={clsx(className, styles.goal__selection__ball)}
       onClick={() => {
-        if (gameState === GameState.IN_PROGRESS) return handlePlaceBet(index);
-
-        return null;
+        if (gameState === GameState.IN_PROGRESS) handlePlaceBet(index);
       }}
     >
       <GoalBall className={className} gameState={gameState} />
@@ -46,10 +44,11 @@ const GoalGameBoard: React.FC<IProps> = props => {
       <div className={styles.goal__selection__container}>
         {Array.from(Array(3).keys()).map(index => (
           <GoalBallSelect
+            {...props}
             className=""
             key={`ball-${index}`}
             index={index}
-            gameState={selection === index ? gameState : GameState.IDLE}
+            gameState={selection === index ? gameState : GameState.IN_PROGRESS}
           />
         ))}
       </div>
