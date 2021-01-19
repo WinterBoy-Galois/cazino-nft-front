@@ -54,7 +54,7 @@ export const goalGameReducer = (state: GoalGameState, action: GoalGameAction) =>
       return { ...state, gameState: GameState.IN_PROGRESS };
 
     case 'END':
-      return { ...state, gameState: GameState.GAME_ENDED };
+      return { ...getInitialState(), gameState: GameState.GAME_ENDED };
 
     case 'SET_GAME_STATE':
       return {

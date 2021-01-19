@@ -312,7 +312,10 @@ const GoalGame: React.FC<IProps> = ({
                   state.gameState === GameState.IDLE ? handleStartGame() : handleCashOut();
                 }}
                 loading={loadingBet || state.isRunning}
-                disabled={![GameState.IDLE, GameState.IN_PROGRESS].includes(state.gameState)}
+                disabled={
+                  ![GameState.IDLE, GameState.IN_PROGRESS].includes(state.gameState) ||
+                  session?.currentStep === 0
+                }
               >
                 {state.gameState === GameState.IDLE ? 'start' : 'take money'}
               </SpinnerButton>
