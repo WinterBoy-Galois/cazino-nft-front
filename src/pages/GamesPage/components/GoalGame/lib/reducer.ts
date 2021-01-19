@@ -7,14 +7,12 @@ export const PROBABILITY_LOW = 'GOALS1OUT3';
 export interface GoalGameState {
   amount: number;
   probability: string;
-  isRunning: boolean;
   gameState: GameState;
 }
 
 export const getInitialState = (): GoalGameState => ({
   amount: 0.00000001,
   probability: PROBABILITY_HIGH,
-  isRunning: false,
   gameState: GameState.IDLE,
 });
 
@@ -54,7 +52,7 @@ export const goalGameReducer = (state: GoalGameState, action: GoalGameAction) =>
       return { ...state, gameState: GameState.IN_PROGRESS };
 
     case 'END':
-      return { ...getInitialState(), gameState: GameState.GAME_ENDED };
+      return { ...state, gameState: GameState.GAME_ENDED };
 
     case 'SET_GAME_STATE':
       return {

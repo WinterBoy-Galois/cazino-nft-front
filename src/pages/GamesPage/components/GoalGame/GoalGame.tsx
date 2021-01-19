@@ -311,7 +311,7 @@ const GoalGame: React.FC<IProps> = ({
                 onClick={() => {
                   state.gameState === GameState.IDLE ? handleStartGame() : handleCashOut();
                 }}
-                loading={loadingBet || state.isRunning}
+                loading={loadingBet}
                 disabled={
                   ![GameState.IDLE, GameState.IN_PROGRESS].includes(state.gameState) ||
                   session?.currentStep === 0
