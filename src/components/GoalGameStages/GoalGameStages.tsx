@@ -20,14 +20,15 @@ const GoalGameStages: React.FC<IProps> = ({
   isEnded,
 }) => {
   const getStatusClsx = (selection: any, index: number) => {
-    if (isEnded)
+    if (isEnded && selection) {
       return clsx(
         styles.single_stage__status__spot,
         selection?.selected === index ? styles.single_stage__status__spot__selected : null,
-        selection?.luckySpots.includes(index)
+        selection?.luckySpots?.includes(index)
           ? styles.single_stage__status__spot__lucky
           : styles.single_stage__status__spot__unlucky
       );
+    }
 
     return clsx(
       styles.single_stage__status__spot,
@@ -41,6 +42,21 @@ const GoalGameStages: React.FC<IProps> = ({
       {profits.map((item, step) => {
         const selection = selections?.filter(selection => selection.step === step)[0];
 
+        let singleStatusClassName = null;
+        if (selection) {
+          if (isEnded && selection.selected !== null) {
+            singleStatusClassName =
+              selection.step === item.step && selection.luckySpots?.includes(selection.selected)
+                ? styles.single_stage__status__won
+                : styles.single_stage__status__lost;
+          } else if (!isEnded) {
+            singleStatusClassName =
+              selection.step === item.step
+                ? styles.single_stage__status__won
+                : styles.single_stage__status__lost;
+          }
+        }
+
         return (
           <div
             className={clsx(
@@ -53,10 +69,10 @@ const GoalGameStages: React.FC<IProps> = ({
               className={clsx(
                 styles.single_stage__status,
                 currentStep === item.step ? styles.single_stage__status__current : null,
-                selection?.step === item.step ? styles.single_stage__status__won : null
+                singleStatusClassName
               )}
             >
-              {step < currentStep
+              {step <= currentStep
                 ? Array.from(Array(3).keys()).map(index => {
                     return (
                       <span key={`status-${index}`} className={getStatusClsx(selection, index)} />
