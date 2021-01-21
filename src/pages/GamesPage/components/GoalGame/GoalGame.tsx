@@ -183,13 +183,11 @@ const GoalGame: React.FC<IProps> = ({
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
-    if (session === null) return;
+    if (session?.currentStep) {
+      dispatch({ type: 'RESET' });
 
-    if (session.currentStep === 0) return;
-
-    dispatch({ type: 'END' });
-
-    onCashOut(session.betId);
+      onCashOut(session.betId);
+    }
   };
 
   const handlePlaceBet = async (selection?: number) => {
@@ -371,10 +369,8 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
     updateSession(data.makeBetGoals.session);
 
-    setTimeout(() => {
-      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetGoals.balance } });
-      info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
-    }, appConfig.goalsGameTimeout);
+    dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetGoals.balance } });
+    info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
   };
 
   const handlePlaceBet = async (betId: string, selection: number, currentStep: number) => {
@@ -405,21 +401,19 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     }
 
     if (data.advanceGoals?.balance) {
-      setTimeout(() => {
-        dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
 
-        if (data.advanceGoals?.profit.profit) {
-          const toast = `Your balance has been updated: ${formatBitcoin(
-            +data.advanceGoals.profit.profit
-          )}`;
+      if (data.advanceGoals?.profit.profit) {
+        const toast = `Your balance has been updated: ${formatBitcoin(
+          +data.advanceGoals.profit.profit
+        )}`;
 
-          if (+data.advanceGoals.profit.profit >= 0) {
-            success(toast);
-          } else {
-            info(toast);
-          }
+        if (+data.advanceGoals.profit.profit >= 0) {
+          success(toast);
+        } else {
+          info(toast);
         }
-      }, appConfig.goalsGameTimeout);
+      }
     }
   };
 
@@ -429,28 +423,21 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     checkErrors(data.cashoutGoals, errors);
 
     if (data.cashoutGoals?.balance) {
-      setTimeout(() => {
-        updateSession(
-          Object.assign({}, session, {
-            allowNext: false,
-            // selections: data.cashoutGoals.result,
-          })
-        );
+      updateSession(null);
 
-        dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutGoals.balance } });
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutGoals.balance } });
 
-        if (data.cashoutGoals?.profit.profit) {
-          const toast = `Your balance has been updated: ${formatBitcoin(
-            +data.cashoutGoals.profit.profit
-          )}`;
+      if (data.cashoutGoals?.profit.profit) {
+        const toast = `Your balance has been updated: ${formatBitcoin(
+          +data.cashoutGoals.profit.profit
+        )}`;
 
-          if (+data.cashoutGoals.profit.profit >= 0) {
-            success(toast);
-          } else {
-            info(toast);
-          }
+        if (+data.cashoutGoals.profit.profit >= 0) {
+          success(toast);
+        } else {
+          info(toast);
         }
-      }, appConfig.goalsGameTimeout);
+      }
     }
   };
 
