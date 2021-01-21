@@ -85,10 +85,16 @@ const GoalGameStages: React.FC<IProps> = ({
               &nbsp;&times;{item.multiplier.toFixed(3)}
             </div>
 
-            <BitcoinValue
-              className={styles.single_stage__profit}
-              value={formatBitcoin(item.profit)}
-            />
+            {item.profit !== null ? (
+              <BitcoinValue
+                className={styles.single_stage__profit}
+                value={formatBitcoin(item.profit)}
+              />
+            ) : (
+              <div className={styles.single_stage__profit}>
+                <span>Unavailable</span>
+              </div>
+            )}
           </div>
         );
       })}
