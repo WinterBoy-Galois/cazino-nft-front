@@ -12,21 +12,17 @@ import GoalKeeperWonRight from './GoalKeeperWonRight';
 
 interface IProps {
   className?: string;
-  gameState?: GameState;
-  selection?: number;
+  lastSpot?: any;
+  lastAdvanceStatus?: any;
 }
 
 const getGoalKeeperLostPosition = (selection: number) =>
   [0, 1, 2].filter(pos => pos != selection).sort(() => Math.random() - 0.5)[0];
 
-const GoalKeeper: React.FC<IProps> = ({
-  className,
-  gameState = GameState.IDLE,
-  selection = -1,
-}) => {
-  switch (gameState) {
-    case GameState.WON:
-      const goalKeeperPosition = getGoalKeeperLostPosition(selection);
+const GoalKeeper: React.FC<IProps> = ({ className, lastSpot, lastAdvanceStatus }) => {
+  switch (lastAdvanceStatus) {
+    case 'Won':
+      const goalKeeperPosition = getGoalKeeperLostPosition(lastSpot);
 
       if (goalKeeperPosition === 0)
         return <GoalKeeperLostLeft className={clsx(className, styles.goal_keeper__left)} />;
@@ -37,12 +33,12 @@ const GoalKeeper: React.FC<IProps> = ({
 
       return null;
 
-    case GameState.LOST:
-      if (selection === 0)
+    case 'Lost':
+      if (lastSpot === 0)
         return <GoalKeeperWonLeft className={clsx(className, styles.goal_keeper__left)} />;
-      if (selection === 1)
+      if (lastSpot === 1)
         return <GoalKeeperWonMiddle className={clsx(className, styles.goal_keeper__middle)} />;
-      if (selection === 2)
+      if (lastSpot === 2)
         return <GoalKeeperWonRight className={clsx(className, styles.goal_keeper__right)} />;
 
       return null;

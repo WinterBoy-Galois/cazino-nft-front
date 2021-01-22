@@ -11,7 +11,7 @@ export interface GoalGameState {
 }
 
 export const getInitialState = (): GoalGameState => ({
-  amount: 0.00000001,
+  amount: 0.0001,
   probability: PROBABILITY_HIGH,
   gameState: GameState.IDLE,
 });

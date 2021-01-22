@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './GoalGameStages.module.scss';
+import styles from './GoalGameAdvances.module.scss';
 import clsx from 'clsx';
 import BitcoinValue from '../BitcoinValue';
 import { formatBitcoin } from '../../common/util/format.util';
@@ -12,7 +12,7 @@ interface IProps {
   isEnded?: boolean;
 }
 
-const GoalGameStages: React.FC<IProps> = ({
+const GoalGameAdvances: React.FC<IProps> = ({
   className,
   profits = [],
   currentStep = 0,
@@ -30,11 +30,14 @@ const GoalGameStages: React.FC<IProps> = ({
       );
     }
 
-    return clsx(
-      styles.single_stage__status__spot,
-      selection?.selected === index ? styles.single_stage__status__spot__selected : null,
-      selection?.selected === index ? styles.single_stage__status__spot__lucky : null
-    );
+    if (selection?.selected === index)
+      return clsx(
+        styles.single_stage__status__spot,
+        styles.single_stage__status__spot__selected,
+        styles.single_stage__status__spot__lucky
+      );
+
+    return clsx(styles.single_stage__status__spot);
   };
 
   return (
@@ -61,7 +64,7 @@ const GoalGameStages: React.FC<IProps> = ({
           <div
             className={clsx(
               styles.single_stage,
-              currentStep === item.step ? styles.single_stage__current : null
+              currentStep === item.step && !isEnded ? styles.single_stage__current : null
             )}
             key={`stage-${step}`}
           >
@@ -102,4 +105,4 @@ const GoalGameStages: React.FC<IProps> = ({
   );
 };
 
-export default GoalGameStages;
+export default GoalGameAdvances;

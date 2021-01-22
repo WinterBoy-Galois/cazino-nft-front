@@ -1,4 +1,4 @@
-@import '../../styles/shared';
+@import "../../styles/shared";
 
 .container {
   position: relative;
@@ -43,20 +43,29 @@
       left: 16%;
 
       @include media-breakpoint-up(md) {
-        top: 10px;
+        top: 20px;
         width: 40%;
         left: 30%;
       }
     }
 
     &__ball {
-      width: 60px;
-      height: 60px;
-      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
 
       @include media-breakpoint-up(md) {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
+      }
+
+      &__clickable {
+        cursor: pointer;
+      }
+
+      &__svg {
+        transform: scale(1.25);
       }
     }
   }

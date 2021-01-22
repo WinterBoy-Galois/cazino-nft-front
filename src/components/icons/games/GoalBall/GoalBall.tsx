@@ -2,19 +2,24 @@ import React from 'react';
 import GoalBallIdle from './GoalBallIdle';
 import GoalBallWon from './GoalBallWon';
 import GoalBallLost from './GoalBallLost';
-import { GoalGameState as GameState } from '../../../../models/goalGameState.model';
 
 interface IProps {
   className?: string;
-  gameState?: GameState;
+  ballType?: string;
 }
 
-const GoalBall: React.FC<IProps> = ({ className, gameState }) => {
-  if (gameState === GameState.WON) return <GoalBallWon className={className} />;
+const GoalBall: React.FC<IProps> = ({ className, ballType }) => {
+  switch (ballType) {
+    case 'Won':
+      return <GoalBallWon className={className} />;
 
-  if (gameState === GameState.LOST) return <GoalBallLost className={className} />;
+    case 'Lost':
+      return <GoalBallLost className={className} />;
 
-  return <GoalBallIdle className={className} />;
+    case 'Idle':
+    default:
+      return <GoalBallIdle className={className} />;
+  }
 };
 
 export default GoalBall;

@@ -64,7 +64,7 @@
     margin: -1.2rem 0 2rem;
 
     @include media-breakpoint-up(md) {
-      margin: -4.7rem 0 1rem;
+      margin: -4.5rem 0 2rem;;
     }
   }
 
@@ -104,5 +104,67 @@
     @include media-breakpoint-down(md) {
       margin-top: 5rem;
     }
+  }
+}
+
+.game_result {
+  &__row {
+    position: relative;
+    justify-content: center;
+  }
+
+  &__message_box {
+    text-align: center;
+    background-color: #113452;
+    border: 1px solid #505e6b;
+    border-radius: 8px;
+    min-width: 275px;
+    position: absolute;
+
+    &__lost {
+      top: -2.5rem;
+
+      @include media-breakpoint-up(md) {
+        top: -4.5rem;
+      }
+
+      &__title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #ec7778;
+        text-transform: uppercase;
+      }
+    }
+
+    &__won {
+      top: -3.5rem;
+
+      @include media-breakpoint-up(md) {
+        top: -5rem;
+      }
+
+      &__title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #7df380;
+        text-transform: uppercase;
+      }
+
+      &__multiplier {
+        color: #c0c9d1;
+        font-weight: lighter;
+      }
+    }
+  }
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  vertical-align: baseline;
+
+  &__bitcoin {
+    fill: $bitcoinYellow;
   }
 }
