@@ -72,6 +72,10 @@
       border-radius: 50%;
       opacity: 0.4;
 
+      &__hidden {
+        opacity: 0;
+      }
+
       &__selected {
         opacity: 1;
       }

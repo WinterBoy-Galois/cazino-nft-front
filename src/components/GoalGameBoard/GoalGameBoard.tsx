@@ -6,15 +6,19 @@ import GoalBackground from '../icons/games/GoalBackground';
 import GoalKeeper from '../icons/games/GoalKeeper';
 import GoalMainBall from '../icons/games/GoalMainBall';
 
-interface IGBBProps {
-  className?: string;
+interface IDefaultProps {
   handlePlaceBet?: (index: number) => void;
   allowNext?: boolean;
-  lastSpot?: any;
-  lastAdvanceStatus?: any;
 }
 
-interface IGBSProps extends IGBBProps {
+interface IGBBProps extends IDefaultProps {
+  className?: string;
+  lastSpot?: any;
+  lastAdvanceStatus?: any;
+  hideMiddleBall?: boolean;
+}
+
+interface IGBSProps extends IDefaultProps {
   index?: number;
   ballType?: string;
 }
@@ -42,7 +46,7 @@ const GoalBallSelect: React.FC<IGBSProps> = ({
 };
 
 const GoalGameBoard: React.FC<IGBBProps> = props => {
-  const { className, allowNext, lastSpot, lastAdvanceStatus } = props;
+  const { className, allowNext, lastSpot, lastAdvanceStatus, hideMiddleBall } = props;
 
   return (
     <div className={clsx(styles.container, className)}>
@@ -50,14 +54,16 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
       <GoalKeeper {...props} className={styles.goal__keeper} />
 
       <div className={styles.goal__selection__container}>
-        {Array.from(Array(3).keys()).map(index => (
-          <GoalBallSelect
-            {...props}
-            key={`ball-${index}`}
-            index={index}
-            ballType={lastSpot === index ? lastAdvanceStatus : 'Idle'}
-          />
-        ))}
+        {Array.from(Array(3).keys()).map(index =>
+          hideMiddleBall && index === 1 ? null : (
+            <GoalBallSelect
+              {...props}
+              key={`ball-${index}`}
+              index={index}
+              ballType={lastSpot === index ? lastAdvanceStatus : 'Idle'}
+            />
+          )
+        )}
       </div>
 
       {allowNext && lastSpot === null ? (

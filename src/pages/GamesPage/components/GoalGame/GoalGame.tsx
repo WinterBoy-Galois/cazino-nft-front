@@ -327,6 +327,7 @@ const GoalGame: React.FC<IProps> = ({
             allowNext={session?.allowNext}
             lastSpot={lastSpot}
             lastAdvanceStatus={lastAdvanceStatus}
+            hideMiddleBall={state.probability === PROBABILITY_MIDDLE}
           />
         </div>
 
@@ -339,6 +340,7 @@ const GoalGame: React.FC<IProps> = ({
             className={styles.advances__container}
             currentStep={session?.currentStep}
             selections={session?.selections}
+            hideMiddleBall={state.probability === PROBABILITY_MIDDLE}
           />
         ) : null}
       </div>
@@ -417,6 +419,7 @@ const GoalGame: React.FC<IProps> = ({
                 className={styles.advances__container}
                 currentStep={session?.currentStep}
                 selections={session?.selections}
+                hideMiddleBall={state.probability === PROBABILITY_MIDDLE}
               />
             ) : null}
           </div>

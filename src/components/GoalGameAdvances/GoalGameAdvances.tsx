@@ -10,6 +10,7 @@ interface IProps {
   currentStep?: number;
   selections?: any[];
   isEnded?: boolean;
+  hideMiddleBall?: boolean;
 }
 
 const GoalGameAdvances: React.FC<IProps> = ({
@@ -18,11 +19,13 @@ const GoalGameAdvances: React.FC<IProps> = ({
   currentStep = 0,
   selections = [],
   isEnded,
+  hideMiddleBall = false,
 }) => {
-  const getStatusClsx = (selection: any, index: number) => {
+  const getStatusClsx = (selection: any, index: number, hideMiddleStatus: boolean) => {
     if (isEnded && selection) {
       return clsx(
         styles.single_advance__status__spot,
+        hideMiddleStatus && index == 1 ? styles.single_advance__status__spot__hidden : null,
         selection?.selected === index ? styles.single_advance__status__spot__selected : null,
         selection?.luckySpots?.includes(index)
           ? styles.single_advance__status__spot__lucky
@@ -33,11 +36,15 @@ const GoalGameAdvances: React.FC<IProps> = ({
     if (selection?.selected === index)
       return clsx(
         styles.single_advance__status__spot,
+        hideMiddleStatus && index == 1 ? styles.single_advance__status__spot__hidden : null,
         styles.single_advance__status__spot__selected,
         styles.single_advance__status__spot__lucky
       );
 
-    return clsx(styles.single_advance__status__spot);
+    return clsx(
+      styles.single_advance__status__spot,
+      hideMiddleStatus && index == 1 ? styles.single_advance__status__spot__hidden : null
+    );
   };
 
   return (
@@ -76,11 +83,12 @@ const GoalGameAdvances: React.FC<IProps> = ({
               )}
             >
               {step <= currentStep
-                ? Array.from(Array(3).keys()).map(index => {
-                    return (
-                      <span key={`status-${index}`} className={getStatusClsx(selection, index)} />
-                    );
-                  })
+                ? Array.from(Array(3).keys()).map(index => (
+                    <span
+                      key={`status-${index}`}
+                      className={getStatusClsx(selection, index, hideMiddleBall)}
+                    />
+                  ))
                 : null}
             </div>
 
