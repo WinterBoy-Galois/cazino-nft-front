@@ -128,7 +128,6 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     if (lastSpot !== null && session && lastAdvanceStatus === null && !isCashOut) {
-      debugger; // eslint-disable-line
       if (session?.lucky === true) setLastAdvanceStatus('Won');
       else if (session?.lucky === false) setLastAdvanceStatus('Lost');
       else setLastAdvanceStatus(session.allowNext ? 'Won' : 'Lost');
