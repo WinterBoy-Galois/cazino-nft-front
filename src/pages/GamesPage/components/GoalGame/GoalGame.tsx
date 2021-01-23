@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, Reducer, useCallback } from 'react';
+import React, { useState, useEffect, useReducer, Reducer } from 'react';
 import GoalGameBoard from '../../../../components/GoalGameBoard';
 import GoalGameAdvances from '../../../../components/GoalGameAdvances';
 import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
@@ -58,7 +58,8 @@ interface IProps {
   session?: any;
   onPlaceBet?: (betId: string, selection: number, currentStep: number) => void;
   onCashOut?: (betId: string) => void;
-  showProfitCutModal?: () => void;
+  maxProfit?: number;
+  profitCut?: any;
 }
 
 const GoalGame: React.FC<IProps> = ({
@@ -71,7 +72,8 @@ const GoalGame: React.FC<IProps> = ({
   session,
   onPlaceBet = () => null,
   onCashOut = () => null,
-  showProfitCutModal = () => null,
+  maxProfit,
+  profitCut,
 }) => {
   const [{ auth }] = useStateValue();
   const { t } = useTranslation(['games']);
@@ -103,6 +105,15 @@ const GoalGame: React.FC<IProps> = ({
   }, []);
 
   useEffect(() => {
+    if (auth.state === 'SIGNED_IN' && profitCut && maxProfit && !isAlerted) {
+      if (session.profitCut === 'CUT') setAlerted(true);
+
+      (async () =>
+        await navigate(`${pathname}?dialog=profit-cut`, { state: { maxProfit, profitCut } }))();
+    }
+  }, [profitCut, maxProfit]);
+
+  useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET' });
     }
@@ -110,16 +121,11 @@ const GoalGame: React.FC<IProps> = ({
 
   useEffect(() => {
     if (errorBet) {
-      alert(errorBet);
+      alert(errorBet[0].message);
     }
   }, [errorBet]);
 
   useEffect(() => {
-    if (session?.profitCut && !isAlerted) {
-      if (session.profitCut == 'CUT') setAlerted(true);
-      showProfitCutModal();
-    }
-
     if (session?.betId && state.gameState === GameState.IDLE) {
       dispatch({
         type: 'START',
@@ -130,7 +136,16 @@ const GoalGame: React.FC<IProps> = ({
     if (lastSpot !== null && session && lastAdvanceStatus === null && !isCashOut) {
       if (session?.lucky === true) setLastAdvanceStatus('Won');
       else if (session?.lucky === false) setLastAdvanceStatus('Lost');
-      else setLastAdvanceStatus(session.allowNext ? 'Won' : 'Lost');
+      else {
+        const isWon =
+          session.selections.filter(
+            (selection: any) =>
+              selection.step === session.currentStep - 1 &&
+              selection.luckySpots.includes(selection.selected)
+          ).length > 0;
+
+        setLastAdvanceStatus(isWon ? 'Won' : 'Lost');
+      }
 
       setLastStatusTimer(
         setTimeout(() => {
@@ -440,7 +455,7 @@ export default GoalGame;
 
 export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
-  const [{ auth }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
   const [advanceGoals, { loading: loadingAdvance }] = useMutation(ADVANCE_GOALS);
   const [cashoutGoals, { loading: loadingCashOut }] = useMutation(CASH_OUT_GOALS);
@@ -449,14 +464,11 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const [profitCut, setProfitCut] = useState<any>(null);
   const [maxProfit, setMaxProfit] = useState<any>(0);
   const [selections, setSelections] = useState<any>([]);
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const handleRestart = () => {
     setSession(null);
     setSelections([]);
     setProfitCut(null);
-    setMaxProfit(0);
   };
 
   const initSession = (goalsGameSetupObj: any) => {
@@ -465,7 +477,6 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     setSession(goalsGameSetupObj.session);
     setSelections(goalsGameSetupObj.session?.selections || []);
     setProfitCut(goalsGameSetupObj.session?.profitCut || null);
-    setMaxProfit(goalsGameSetupObj.maxProfit || 0);
 
     if (goalsGameSetupObj.balance)
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: goalsGameSetupObj.balance } });
@@ -590,21 +601,12 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     setSelections(data.cashoutGoals.result);
   };
 
-  const showProfitCutModal = useCallback(
-    () =>
-      profitCut &&
-      auth.state === 'SIGNED_IN' &&
-      navigate(`${pathname}?dialog=profit-cut`, {
-        state: {
-          maxProfit,
-          profitCut,
-        },
-      }),
-    [pathname, auth.state, maxProfit, profitCut]
-  );
-
   useEffect(() => {
-    if (data?.setupGoals) initSession(data.setupGoals);
+    if (data?.setupGoals) {
+      initSession(data.setupGoals);
+
+      setMaxProfit(data.setupGoals.maxProfit);
+    }
   }, [data]);
 
   return (
@@ -617,8 +619,9 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       session={session}
       onPlaceBet={handlePlaceBet}
       onCashOut={handleCashOutGoals}
-      showProfitCutModal={showProfitCutModal}
       onRestart={handleRestart}
+      maxProfit={maxProfit}
+      profitCut={profitCut}
     />
   );
 };
