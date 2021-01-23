@@ -22,22 +22,22 @@ const GoalGameAdvances: React.FC<IProps> = ({
   const getStatusClsx = (selection: any, index: number) => {
     if (isEnded && selection) {
       return clsx(
-        styles.single_stage__status__spot,
-        selection?.selected === index ? styles.single_stage__status__spot__selected : null,
+        styles.single_advance__status__spot,
+        selection?.selected === index ? styles.single_advance__status__spot__selected : null,
         selection?.luckySpots?.includes(index)
-          ? styles.single_stage__status__spot__lucky
-          : styles.single_stage__status__spot__unlucky
+          ? styles.single_advance__status__spot__lucky
+          : styles.single_advance__status__spot__unlucky
       );
     }
 
     if (selection?.selected === index)
       return clsx(
-        styles.single_stage__status__spot,
-        styles.single_stage__status__spot__selected,
-        styles.single_stage__status__spot__lucky
+        styles.single_advance__status__spot,
+        styles.single_advance__status__spot__selected,
+        styles.single_advance__status__spot__lucky
       );
 
-    return clsx(styles.single_stage__status__spot);
+    return clsx(styles.single_advance__status__spot);
   };
 
   return (
@@ -50,28 +50,28 @@ const GoalGameAdvances: React.FC<IProps> = ({
           if (isEnded && selection.selected !== null) {
             singleStatusClassName =
               selection.step === item.step && selection.luckySpots?.includes(selection.selected)
-                ? styles.single_stage__status__won
-                : styles.single_stage__status__lost;
+                ? styles.single_advance__status__won
+                : styles.single_advance__status__lost;
           } else if (!isEnded) {
             singleStatusClassName =
               selection.step === item.step
-                ? styles.single_stage__status__won
-                : styles.single_stage__status__lost;
+                ? styles.single_advance__status__won
+                : styles.single_advance__status__lost;
           }
         }
 
         return (
           <div
             className={clsx(
-              styles.single_stage,
-              currentStep === item.step && !isEnded ? styles.single_stage__current : null
+              styles.single_advance,
+              currentStep === item.step && !isEnded ? styles.single_advance__current : null
             )}
-            key={`stage-${step}`}
+            key={`advance-${step}`}
           >
             <div
               className={clsx(
-                styles.single_stage__status,
-                currentStep === item.step ? styles.single_stage__status__current : null,
+                styles.single_advance__status,
+                currentStep === item.step ? styles.single_advance__status__current : null,
                 singleStatusClassName
               )}
             >
@@ -84,17 +84,17 @@ const GoalGameAdvances: React.FC<IProps> = ({
                 : null}
             </div>
 
-            <div className={styles.single_stage__multiplier}>
+            <div className={styles.single_advance__multiplier}>
               &nbsp;&times;{item.multiplier.toFixed(3)}
             </div>
 
             {item.profit !== null ? (
               <BitcoinValue
-                className={styles.single_stage__profit}
+                className={styles.single_advance__profit}
                 value={formatBitcoin(item.profit)}
               />
             ) : (
-              <div className={styles.single_stage__profit}>
+              <div className={styles.single_advance__profit}>
                 <span>Unavailable</span>
               </div>
             )}

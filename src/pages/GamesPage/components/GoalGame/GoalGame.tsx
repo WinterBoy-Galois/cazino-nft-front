@@ -84,6 +84,21 @@ const GoalGame: React.FC<IProps> = ({
   const [lastSpot, setLastSpot] = useState<any>(null);
   const [lastAdvanceStatus, setLastAdvanceStatus] = useState<any>(null);
   const [lastStatusTimer, setLastStatusTimer] = useState<any>(null);
+  const [device, setDevice] = useState('desktop');
+
+  useEffect(() => {
+    const checkDeviceSize = () => {
+      if (window.innerWidth > 1366) setDevice('desktop');
+      else if (window.innerWidth > 1024) setDevice('laptop');
+      else if (window.innerWidth > 768) setDevice('tablet');
+      else setDevice('mobile');
+    };
+
+    checkDeviceSize();
+    window.addEventListener('resize', checkDeviceSize);
+
+    return () => window.removeEventListener('resize', checkDeviceSize);
+  }, []);
 
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
@@ -101,7 +116,9 @@ const GoalGame: React.FC<IProps> = ({
       });
 
     if (lastSpot !== null && session && lastAdvanceStatus === null) {
-      setLastAdvanceStatus(session.allowNext ? 'Won' : 'Lost');
+      if (session?.lucky === true) setLastAdvanceStatus('Won');
+      else if (session?.lucky === false) setLastAdvanceStatus('Lost');
+      else setLastAdvanceStatus(session.allowNext ? 'Won' : 'Lost');
 
       setLastStatusTimer(
         setTimeout(() => {
@@ -138,22 +155,22 @@ const GoalGame: React.FC<IProps> = ({
     return;
   };
 
+  const handleTryAgain = () => {
+    onRestart();
+
+    setLastSpot(null);
+    setLastAdvanceStatus(null);
+    setLastStatusTimer(null);
+    dispatch({ type: 'RESET' });
+  };
+
   const handleCashOut = async () => {
     if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
-    if (session?.currentStep) {
-      if (session?.__typename !== 'GoalsComplete') {
-        dispatch({ type: 'END' });
-      } else {
-        onRestart();
-
-        setLastSpot(null);
-        setLastAdvanceStatus(null);
-        setLastStatusTimer(null);
-        dispatch({ type: 'RESET' });
-      }
+    if (session?.currentStep && session?.__typename !== 'GoalsComplete') {
+      dispatch({ type: 'END' });
     }
   };
 
@@ -173,6 +190,14 @@ const GoalGame: React.FC<IProps> = ({
 
       return;
     }
+  };
+
+  const handleButtonClick = () => {
+    if (state.gameState === GameState.IDLE) return handleStartGame();
+
+    if (state.gameState === GameState.GAME_ENDED) return handleTryAgain();
+
+    return handleCashOut();
   };
 
   const renderGameResultMessage = () => {
@@ -234,6 +259,33 @@ const GoalGame: React.FC<IProps> = ({
     );
   };
 
+  const renderGameProbability = () => (
+    <div
+      className={clsx(
+        'col-12 col-md-6 col-lg-4',
+        styles.probability__container,
+        device === 'mobile' ? styles.probability__container__mobile : null,
+        state.gameState === GameState.IDLE
+          ? null
+          : styles.probability__container__visibility__hidden
+      )}
+    >
+      {device === 'mobile' ? null : <div className={styles.probability__label}>Probability</div>}
+
+      <ButtonGroup
+        name="probability"
+        items={PROBABILITES.map(item => ({
+          ...item,
+          onClick: () => {
+            dispatch({ type: 'SET_PROBABILITY', payload: { probability: item.value } });
+          },
+          checked: state.probability === item.value,
+        }))}
+        className={styles.probability__button_group}
+      />
+    </div>
+  );
+
   const getButtonLabel = () => {
     if (state.gameState === GameState.IDLE) return 'start';
     if (state.gameState === GameState.IN_PROGRESS) return 'take money';
@@ -263,37 +315,13 @@ const GoalGame: React.FC<IProps> = ({
           />
         </div>
 
-        <div className="row">
-          <div
-            className={clsx(
-              'col-12 col-md-6 col-lg-4',
-              styles.probability__container,
-              state.gameState === GameState.IDLE
-                ? null
-                : styles.probability__container__visibility__hidden
-            )}
-          >
-            <div className={styles.probability__label}>Probability</div>
+        {device !== 'mobile' ? <div className="row">{renderGameProbability()}</div> : null}
 
-            <ButtonGroup
-              name="probability"
-              items={PROBABILITES.map(item => ({
-                ...item,
-                onClick: () => {
-                  dispatch({ type: 'SET_PROBABILITY', payload: { probability: item.value } });
-                },
-                checked: state.probability === item.value,
-              }))}
-              className={styles.probability__button_group}
-            />
-          </div>
-        </div>
-
-        {state.gameState !== GameState.IDLE ? (
+        {state.gameState !== GameState.IDLE && device !== 'mobile' ? (
           <GoalGameAdvances
             profits={session?.profits}
             isEnded={state.gameState === GameState.GAME_ENDED}
-            className={styles.stages__container}
+            className={styles.advances__container}
             currentStep={session?.currentStep}
             selections={session?.selections}
           />
@@ -301,7 +329,7 @@ const GoalGame: React.FC<IProps> = ({
       </div>
 
       <div className={styles.controls__wrapper}>
-        <div className="container">
+        <div className={clsx('container', styles.controls__wrapper__container)}>
           <div
             className={clsx(
               'row',
@@ -337,6 +365,8 @@ const GoalGame: React.FC<IProps> = ({
 
           {renderGameResultMessage()}
 
+          {device === 'mobile' ? <div className="row">{renderGameProbability()}</div> : null}
+
           <div className={clsx('row', styles.justify_content__center)}>
             <div
               className={clsx(
@@ -357,15 +387,23 @@ const GoalGame: React.FC<IProps> = ({
 
             <div className={clsx(styles.controls__button, 'col-12 col-xl-4')}>
               <SpinnerButton
-                onClick={() => {
-                  state.gameState === GameState.IDLE ? handleStartGame() : handleCashOut();
-                }}
+                onClick={handleButtonClick}
                 loading={loadingBet}
-                disabled={session?.currentStep === 0}
+                disabled={state.gameState === GameState.IN_PROGRESS && session?.currentStep === 0}
               >
                 {getButtonLabel()}
               </SpinnerButton>
             </div>
+
+            {state.gameState !== GameState.IDLE && device === 'mobile' ? (
+              <GoalGameAdvances
+                profits={session?.profits}
+                isEnded={state.gameState === GameState.GAME_ENDED}
+                className={styles.advances__container}
+                currentStep={session?.currentStep}
+                selections={session?.selections}
+              />
+            ) : null}
           </div>
         </div>
       </div>
@@ -402,9 +440,10 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     setSession(goalsGameSetupObj.session);
     setSelections(goalsGameSetupObj.session?.selections || []);
     setProfitCut(goalsGameSetupObj.session?.profitCut || null);
-    setMaxProfit(goalsGameSetupObj.maxProfit);
+    setMaxProfit(goalsGameSetupObj.maxProfit || 0);
 
-    dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: goalsGameSetupObj.balance } });
+    if (goalsGameSetupObj.balance)
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: goalsGameSetupObj.balance } });
   };
 
   const handleStartGame = async (betAmount: number, probability: string) => {

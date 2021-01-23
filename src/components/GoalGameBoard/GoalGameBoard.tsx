@@ -47,7 +47,7 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
   return (
     <div className={clsx(styles.container, className)}>
       <GoalBackground className={styles.goal__background} />
-      <GoalKeeper {...props} className={clsx(styles.goal__keeper, styles.goal__keeper__idle)} />
+      <GoalKeeper {...props} className={styles.goal__keeper} />
 
       <div className={styles.goal__selection__container}>
         {Array.from(Array(3).keys()).map(index => (

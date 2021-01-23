@@ -1,13 +1,17 @@
-@import '../../styles/shared';
+@import "../../styles/shared";
 
 .container {
-  width: 300px;
   background-color: rgba(19, 34, 58, 0.5);
   display: flex;
   flex-direction: column-reverse;
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    max-width: 300px;
+  }
 }
 
-.single_stage {
+.single_advance {
   display: flex;
   align-items: center;
   padding: 0px 15px;
@@ -20,7 +24,11 @@
   }
 
   &:last-child {
-    margin-top: 7rem;
+    margin-top: 2rem;
+
+    @include media-breakpoint-up(md) {
+      margin-top: 7rem;
+    }
   }
 
   &__current {

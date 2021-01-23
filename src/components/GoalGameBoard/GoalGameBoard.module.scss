@@ -12,25 +12,13 @@
 .goal {
   &__background {
     @include media-breakpoint-down(md) {
-      width: 40rem;
-      margin-left: -7.5rem;
+      width: 160%;
+      margin-left: -30%;
     }
   }
 
   &__keeper {
     position: absolute;
-
-    &__idle {
-      left: calc(50% - 65px);
-      top: 27%;
-      width: 130px;
-
-      @include media-breakpoint-up(md) {
-        width: 285px;
-        top: 29%;
-        left: calc(50% - 142.5px);
-      }
-    }
   }
 
   &__selection {
@@ -38,9 +26,9 @@
       position: absolute;
       display: flex;
       justify-content: space-between;
-      top: 0px;
-      width: 68%;
-      left: 16%;
+      top: 10px;
+      width: 60%;
+      left: 20%;
 
       @include media-breakpoint-up(md) {
         top: 20px;

@@ -1,5 +1,5 @@
-@import '../../../../styles/shared';
-@import '../../../../styles/game-general.scss';
+@import "../../../../styles/shared";
+@import "../../../../styles/game-general.scss";
 
 .container {
   padding-top: 5rem;
@@ -7,15 +7,13 @@
   overflow: hidden;
 }
 
-.stages {
+.advances {
   &__container {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: -5.5rem;
-    bottom: -2rem;
-
     @include media-breakpoint-up(md) {
+      position: absolute;
+      left: 0;
+      top: -5.5rem;
+      bottom: -2rem;
       display: flex;
     }
   }
@@ -32,8 +30,16 @@
   &__container {
     margin: 1.5rem auto;
 
+    &__mobile {
+      display: none;
+    }
+
     @include media-breakpoint-down(md) {
       display: none;
+
+      &__mobile {
+        display: block;
+      }
     }
 
     &__visibility {
@@ -61,10 +67,12 @@
   display: flex;
 
   &__row {
+    position: absolute;
+    width: 100%;
     margin: -1.2rem 0 2rem;
 
     @include media-breakpoint-up(md) {
-      margin: -4.5rem 0 2rem;;
+      margin: -4.5rem 0 2rem;
     }
   }
 
@@ -87,7 +95,7 @@
 .amount {
   &__disabled {
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       right: 0;
@@ -103,6 +111,10 @@
   &__wrapper {
     @include media-breakpoint-down(md) {
       margin-top: 5rem;
+    }
+
+    &__container {
+      position: relative;
     }
   }
 }

@@ -1,21 +1,51 @@
-@import '../../../../styles/shared';
+@import "../../../../styles/shared";
 
 .goal_keeper {
+  &__idle {
+    left: calc(50% - 65px);
+    top: 27%;
+    width: 130px;
+
+    @include media-breakpoint-up(md) {
+      width: 285px;
+      top: 29%;
+      left: calc(50% - 142.5px);
+    }
+  }
+
   &__left {
-    width: 210px;
-    top: 12%;
-    left: calc(43% - 105px);
+    width: 100px;
+    top: 15%;
+    left: calc(40% - 50px);
+
+    @include media-breakpoint-up(md) {
+      width: 210px;
+      top: 12%;
+      left: calc(43% - 105px);
+    }
   }
 
   &__middle {
-    width: 150px;
-    top: 21%;
-    left: calc(50% - 75px);
+    width: 80px;
+    top: 17%;
+    left: calc(50% - 40px);
+
+    @include media-breakpoint-up(md) {
+      width: 150px;
+      top: 21%;
+      left: calc(50% - 75px);
+    }
   }
 
   &__right {
-    width: 210px;
-    top: 12%;
-    left: calc(57% - 105px);
+    width: 100px;
+    top: 15%;
+    left: calc(60% - 50px);
+
+    @include media-breakpoint-up(md) {
+      width: 210px;
+      top: 12%;
+      left: calc(57% - 105px);
+    }
   }
 }

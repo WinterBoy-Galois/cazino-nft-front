@@ -44,7 +44,7 @@ const GoalKeeper: React.FC<IProps> = ({ className, lastSpot, lastAdvanceStatus }
       return null;
 
     default:
-      return <GoalKeeperIdle className={className} />;
+      return <GoalKeeperIdle className={clsx(className, styles.goal_keeper__idle)} />;
   }
 };
 
