@@ -1,5 +1,4 @@
 import React from 'react';
-import { GoalGameState as GameState } from '../../../../models/goalGameState.model';
 import clsx from 'clsx';
 import styles from './GoalKeeper.module.scss';
 import GoalKeeperIdle from './GoalKeeperIdle';
