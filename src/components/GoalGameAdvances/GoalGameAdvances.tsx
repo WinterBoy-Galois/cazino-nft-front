@@ -66,7 +66,7 @@ const GoalGameAdvances: React.FC<IProps> = ({
                 singleStatusClassName
               )}
             >
-              {step <= currentStep
+              {step <= (isEnded && !selection ? currentStep - 1 : currentStep)
                 ? Array.from(Array(3).keys()).map(index => (
                     <span
                       key={`status-${index}`}
