@@ -85,6 +85,7 @@ const GoalGame: React.FC<IProps> = ({
   const [lastAdvanceStatus, setLastAdvanceStatus] = useState<any>(null);
   const [lastStatusTimer, setLastStatusTimer] = useState<any>(null);
   const [device, setDevice] = useState('desktop');
+  const [isCashOut, setCashOut] = useState(false);
 
   useEffect(() => {
     const checkDeviceSize = () => {
@@ -115,7 +116,7 @@ const GoalGame: React.FC<IProps> = ({
         payload: { session },
       });
 
-    if (lastSpot !== null && session && lastAdvanceStatus === null) {
+    if (lastSpot !== null && session && lastAdvanceStatus === null && !isCashOut) {
       if (session?.lucky === true) setLastAdvanceStatus('Won');
       else if (session?.lucky === false) setLastAdvanceStatus('Lost');
       else setLastAdvanceStatus(session.allowNext ? 'Won' : 'Lost');
@@ -124,8 +125,8 @@ const GoalGame: React.FC<IProps> = ({
         setTimeout(() => {
           setLastSpot(null);
           setLastAdvanceStatus(null);
-          clearTimeout(lastStatusTimer);
           setLastStatusTimer(null);
+          clearTimeout(lastStatusTimer);
         }, appConfig.goalsGameTimeout)
       );
     }
@@ -149,19 +150,16 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     dispatch({ type: 'START' });
-
+    setCashOut(false);
     onStartGame(state.amount, state.probability);
-
-    return;
   };
 
   const handleTryAgain = () => {
+    dispatch({ type: 'RESET' });
     onRestart();
-
     setLastSpot(null);
     setLastAdvanceStatus(null);
     setLastStatusTimer(null);
-    dispatch({ type: 'RESET' });
   };
 
   const handleCashOut = async () => {
@@ -170,7 +168,8 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     if (session?.currentStep && session?.__typename !== 'GoalsComplete') {
-      dispatch({ type: 'END' });
+      setCashOut(true);
+      onCashOut(session.betId);
     }
   };
 
@@ -187,9 +186,13 @@ const GoalGame: React.FC<IProps> = ({
     ) {
       setLastSpot(selection);
       onPlaceBet(session.betId, selection, session.currentStep);
-
-      return;
     }
+  };
+
+  const getButtonLabel = () => {
+    if (state.gameState === GameState.IDLE) return 'start';
+    if (state.gameState === GameState.IN_PROGRESS) return 'take money';
+    if (state.gameState === GameState.GAME_ENDED) return isCashOut ? 'play again' : 'try again';
   };
 
   const handleButtonClick = () => {
@@ -201,7 +204,11 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const renderGameResultMessage = () => {
-    if (state.gameState !== GameState.GAME_ENDED || session?.__typename !== 'GoalsComplete')
+    if (
+      state.gameState !== GameState.GAME_ENDED ||
+      session?.__typename !== 'GoalsComplete' ||
+      isCashOut
+    )
       return null;
 
     if (session.lucky)
@@ -285,12 +292,6 @@ const GoalGame: React.FC<IProps> = ({
       />
     </div>
   );
-
-  const getButtonLabel = () => {
-    if (state.gameState === GameState.IDLE) return 'start';
-    if (state.gameState === GameState.IN_PROGRESS) return 'take money';
-    if (state.gameState === GameState.GAME_ENDED) return 'try again';
-  };
 
   return (
     <div
@@ -419,13 +420,13 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
   const [advanceGoals, { loading: loadingAdvance }] = useMutation(ADVANCE_GOALS);
   const [cashoutGoals, { loading: loadingCashOut }] = useMutation(CASH_OUT_GOALS);
-  const [error, setError] = useState();
-  const [session, setSession] = useState(null);
-  const [profitCut, setProfitCut] = useState(null);
-  const [maxProfit, setMaxProfit] = useState(0);
+  const [error, setError] = useState<any>();
+  const [session, setSession] = useState<any>(null);
+  const [profitCut, setProfitCut] = useState<any>(null);
+  const [maxProfit, setMaxProfit] = useState<any>(0);
+  const [selections, setSelections] = useState<any>([]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [selections, setSelections] = useState<any>([]);
 
   const handleRestart = () => {
     setSession(null);
@@ -477,7 +478,12 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       case 'GoalsStep':
         const __selections = [
           ...selections,
-          { __typename: 'GoalsRow', selected: selection, step: currentStep, luckySpots: [] },
+          {
+            __typename: 'GoalsRow',
+            selected: selection,
+            step: currentStep,
+            luckySpots: [selection],
+          },
         ];
 
         setSession(
@@ -524,7 +530,40 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   };
 
   const handleCashOutGoals = async (betId: string) => {
-    console.log(betId);
+    const { data, errors } = await cashoutGoals({ variables: { betId } });
+
+    if (errors || data.cashoutGoals?.errors) {
+      setError(errors ?? data.cashoutGoals?.errors);
+
+      return errorToast("Your bet couldn't be placed, please try again.");
+    }
+
+    setSession(
+      Object.assign({}, session, {
+        ...data.cashoutGoals,
+        allowNext: false,
+        selections: data.cashoutGoals.result.slice(0, session.currentStep),
+      })
+    );
+
+    if (data.cashoutGoals.balance) {
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutGoals.balance } });
+
+      if (data.cashoutGoals.profit.profit) {
+        const toast = `Your balance has been updated: ${formatBitcoin(
+          +data.cashoutGoals.profit.profit
+        )}`;
+
+        if (+data.cashoutGoals.profit.profit >= 0) {
+          success(toast);
+        } else {
+          info(toast);
+        }
+      }
+    }
+
+    setProfitCut(data.cashoutGoals.profitCut);
+    setSelections(data.cashoutGoals.result);
   };
 
   const showProfitCutModal = useCallback(
