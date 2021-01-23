@@ -313,6 +313,14 @@ const GoalGame: React.FC<IProps> = ({
     >
       <div className={styles.board__container}>
         <div className="row">
+          <div className={clsx('col-12', styles.board__probability_text)}>
+            <span>
+              {
+                PROBABILITES.filter(probability => probability.value === state.probability)[0]
+                  .summary
+              }
+            </span>
+          </div>
           <GoalGameBoard
             className="col-12"
             handlePlaceBet={handlePlaceBet}
