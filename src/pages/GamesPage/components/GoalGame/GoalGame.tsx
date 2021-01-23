@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useReducer, Reducer, useCallback } from 'react';
 import GoalGameBoard from '../../../../components/GoalGameBoard';
-import GoalGameStages from '../../../../components/GoalGameStages';
+import GoalGameAdvances from '../../../../components/GoalGameAdvances';
 import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
 import { useMutation, useQuery } from '@apollo/client';
 import clsx from 'clsx';
 import ButtonGroup from '../../../../components/ButtonGroup';
 import styles from './GoalGame.module.scss';
 import BitcoinValue from '../../../../components/BitcoinValue';
+import Bitcoin from '../../../../components/icons/social/Bitcoin';
 import BetAmountControl from '../../../../components/BetAmountControl';
 import SpinnerButton from '../../../../components/SpinnerButton';
 import { useStateValue } from '../../../../state';
@@ -52,14 +53,12 @@ interface IProps {
   errorSetup?: any;
   loadingBet?: boolean;
   errorBet?: any;
+  onRestart?: () => void;
   onStartGame?: (betAmount: number, probability: string) => void;
   session?: any;
-  updateSession?: (session: any) => void;
   onPlaceBet?: (betId: string, selection: number, currentStep: number) => void;
   onCashOut?: (betId: string) => void;
   showProfitCutModal?: () => void;
-  lastSelection?: number;
-  setLastSelection?: (selection: number) => void;
 }
 
 const GoalGame: React.FC<IProps> = ({
@@ -67,14 +66,12 @@ const GoalGame: React.FC<IProps> = ({
   errorSetup,
   loadingBet,
   errorBet,
+  onRestart = () => null,
   onStartGame = () => null,
   session,
-  updateSession = () => null,
   onPlaceBet = () => null,
   onCashOut = () => null,
   showProfitCutModal = () => null,
-  lastSelection,
-  setLastSelection = () => null,
 }) => {
   const [{ auth }] = useStateValue();
   const { t } = useTranslation(['games']);
@@ -84,6 +81,25 @@ const GoalGame: React.FC<IProps> = ({
   );
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [lastSpot, setLastSpot] = useState<any>(null);
+  const [lastAdvanceStatus, setLastAdvanceStatus] = useState<any>(null);
+  const [lastStatusTimer, setLastStatusTimer] = useState<any>(null);
+  const [device, setDevice] = useState('desktop');
+  const [isCashOut, setCashOut] = useState(false);
+
+  useEffect(() => {
+    const checkDeviceSize = () => {
+      if (window.innerWidth > 1366) setDevice('desktop');
+      else if (window.innerWidth > 1024) setDevice('laptop');
+      else if (window.innerWidth > 768) setDevice('tablet');
+      else setDevice('mobile');
+    };
+
+    checkDeviceSize();
+    window.addEventListener('resize', checkDeviceSize);
+
+    return () => window.removeEventListener('resize', checkDeviceSize);
+  }, []);
 
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
@@ -93,68 +109,36 @@ const GoalGame: React.FC<IProps> = ({
 
   useEffect(() => {
     if (errorBet) {
-      dispatch({ type: 'END' });
+      alert(errorBet);
     }
   }, [errorBet]);
 
-  // Cash Out
   useEffect(() => {
-    if (session?.allowNext === false && state.gameState === GameState.GAME_ENDED) {
-      dispatch({ type: 'RESET' });
+    if (session?.profitCut) return showProfitCutModal();
 
-      return;
-    }
-  }, [session]);
-
-  // Start the game
-  useEffect(() => {
-    if (session?.betId && state.gameState === GameState.IDLE) {
-      dispatch({
+    if (session?.betId && state.gameState === GameState.IDLE)
+      return dispatch({
         type: 'START',
         payload: { session },
       });
 
-      return;
+    if (lastSpot !== null && session && lastAdvanceStatus === null && !isCashOut) {
+      if (session?.lucky === true) setLastAdvanceStatus('Won');
+      else if (session?.lucky === false) setLastAdvanceStatus('Lost');
+      else setLastAdvanceStatus(session.allowNext ? 'Won' : 'Lost');
+
+      setLastStatusTimer(
+        setTimeout(() => {
+          setLastSpot(null);
+          setLastAdvanceStatus(null);
+          setLastStatusTimer(null);
+          clearTimeout(lastStatusTimer);
+        }, appConfig.goalsGameTimeout)
+      );
     }
-  }, [session]);
 
-  // Show ProfitCut Modal
-  useEffect(() => {
-    if (session?.profitCut) {
-      showProfitCutModal();
-
-      return;
-    }
-  }, [session]);
-
-  // Show Won / Lost for each stage
-  useEffect(() => {
-    if (session && lastSelection !== -1) {
-      dispatch({
-        type: 'SET_GAME_STATE',
-        payload: {
-          gameState: session.allowNext ? GameState.WON : GameState.LOST,
-        },
-      });
-
-      const initTimer = setTimeout(() => {
-        setLastSelection(-1);
-
-        dispatch({ type: session.allowNext ? 'START' : 'END' });
-      }, appConfig.goalsGameTimeout);
-
-      const resetTimer = setTimeout(() => {
-        if (!session.allowNext) {
-          updateSession(null);
-
-          dispatch({ type: 'RESET' });
-        }
-      }, appConfig.goalsGameTimeout * 2);
-
-      return () => {
-        clearTimeout(initTimer);
-        clearTimeout(resetTimer);
-      };
+    if (session?.__typename === 'GoalsComplete') {
+      return dispatch({ type: 'END' });
     }
   }, [session]);
 
@@ -172,10 +156,16 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     dispatch({ type: 'START' });
-
+    setCashOut(false);
     onStartGame(state.amount, state.probability);
+  };
 
-    return;
+  const handleTryAgain = () => {
+    dispatch({ type: 'RESET' });
+    onRestart();
+    setLastSpot(null);
+    setLastAdvanceStatus(null);
+    setLastStatusTimer(null);
   };
 
   const handleCashOut = async () => {
@@ -183,9 +173,8 @@ const GoalGame: React.FC<IProps> = ({
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
-    if (session?.currentStep) {
-      dispatch({ type: 'RESET' });
-
+    if (session?.currentStep && session?.__typename !== 'GoalsComplete') {
+      setCashOut(true);
       onCashOut(session.betId);
     }
   };
@@ -195,56 +184,151 @@ const GoalGame: React.FC<IProps> = ({
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
-    if (typeof selection === 'number' && state.gameState === GameState.IN_PROGRESS) {
+    if (
+      lastSpot === null &&
+      lastAdvanceStatus === null &&
+      typeof selection === 'number' &&
+      state.gameState === GameState.IN_PROGRESS
+    ) {
+      setLastSpot(selection);
       onPlaceBet(session.betId, selection, session.currentStep);
-
-      return;
     }
   };
 
+  const getButtonLabel = () => {
+    if (state.gameState === GameState.IDLE) return 'start';
+    if (state.gameState === GameState.IN_PROGRESS) return 'take money';
+    if (state.gameState === GameState.GAME_ENDED) return isCashOut ? 'play again' : 'try again';
+  };
+
+  const handleButtonClick = () => {
+    if (state.gameState === GameState.IDLE) return handleStartGame();
+
+    if (state.gameState === GameState.GAME_ENDED) return handleTryAgain();
+
+    return handleCashOut();
+  };
+
+  const renderGameResultMessage = () => {
+    if (
+      state.gameState !== GameState.GAME_ENDED ||
+      session?.__typename !== 'GoalsComplete' ||
+      isCashOut
+    )
+      return null;
+
+    if (session.lucky)
+      return (
+        <div className={clsx('row', styles.game_result__row, styles.margin__horizontal_auto)}>
+          <div
+            className={clsx(
+              'col-12 col-xl-4 col-md-6',
+              styles.game_result__message_box,
+              styles.game_result__message_box__won
+            )}
+          >
+            <div className="row">
+              <div className={clsx('col', styles.game_result__message_box__won__title)}>
+                GOAAAL!!!
+              </div>
+            </div>
+
+            <div className="row">
+              <div
+                className={clsx(
+                  'col',
+                  styles.text_align__right,
+                  styles.game_result__message_box__won__multiplier
+                )}
+              >
+                &times;&nbsp;{session.profit.multiplier.toFixed(3)}
+              </div>
+
+              <div className={clsx('col', styles.text_align__left)}>
+                <Bitcoin className={clsx(styles.icon, styles.icon__bitcoin)} />
+                {formatBitcoin(session.profit.profit)}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+
+    return (
+      <div className={clsx('row', styles.game_result__row, styles.margin__horizontal_auto)}>
+        <div
+          className={clsx(
+            'col-12 col-xl-4 col-md-6',
+            styles.game_result__message_box,
+            styles.game_result__message_box__lost
+          )}
+        >
+          <div className="row">
+            <div className={clsx('col', styles.game_result__message_box__lost__title)}>
+              Uh, oh... Try again!
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderGameProbability = () => (
+    <div
+      className={clsx(
+        'col-12 col-md-6 col-lg-4',
+        styles.probability__container,
+        device === 'mobile' ? styles.probability__container__mobile : null,
+        state.gameState === GameState.IDLE
+          ? null
+          : styles.probability__container__visibility__hidden
+      )}
+    >
+      {device === 'mobile' ? null : <div className={styles.probability__label}>Probability</div>}
+
+      <ButtonGroup
+        name="probability"
+        items={PROBABILITES.map(item => ({
+          ...item,
+          onClick: () => {
+            dispatch({ type: 'SET_PROBABILITY', payload: { probability: item.value } });
+          },
+          checked: state.probability === item.value,
+        }))}
+        className={styles.probability__button_group}
+      />
+    </div>
+  );
+
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={() => {
+        if (lastStatusTimer !== null) {
+          setLastSpot(null);
+          setLastAdvanceStatus(null);
+          clearTimeout(lastStatusTimer);
+          setLastStatusTimer(null);
+        }
+      }}
+    >
       <div className={styles.board__container}>
         <div className="row">
           <GoalGameBoard
             className="col-12"
-            gameState={state.gameState}
-            selection={lastSelection}
             handlePlaceBet={handlePlaceBet}
+            allowNext={session?.allowNext}
+            lastSpot={lastSpot}
+            lastAdvanceStatus={lastAdvanceStatus}
           />
         </div>
 
-        <div className="row">
-          <div
-            className={clsx(
-              'col-12 col-md-6 col-lg-4',
-              styles.probability__container,
-              state.gameState === GameState.IDLE
-                ? null
-                : styles.probability__container__visibility__hidden
-            )}
-          >
-            <div className={styles.probability__label}>Probability</div>
+        {device !== 'mobile' ? <div className="row">{renderGameProbability()}</div> : null}
 
-            <ButtonGroup
-              name="probability"
-              items={PROBABILITES.map(item => ({
-                ...item,
-                onClick: () => {
-                  dispatch({ type: 'SET_PROBABILITY', payload: { probability: item.value } });
-                },
-                checked: state.probability === item.value,
-              }))}
-              className={styles.probability__button_group}
-            />
-          </div>
-        </div>
-
-        {state.gameState !== GameState.IDLE ? (
-          <GoalGameStages
+        {state.gameState !== GameState.IDLE && device !== 'mobile' ? (
+          <GoalGameAdvances
             profits={session?.profits}
-            isEnded={[GameState.GAME_ENDED, GameState.LOST].includes(state.gameState)}
-            className={styles.stages__container}
+            isEnded={state.gameState === GameState.GAME_ENDED}
+            className={styles.advances__container}
             currentStep={session?.currentStep}
             selections={session?.selections}
           />
@@ -252,7 +336,7 @@ const GoalGame: React.FC<IProps> = ({
       </div>
 
       <div className={styles.controls__wrapper}>
-        <div className="container">
+        <div className={clsx('container', styles.controls__wrapper__container)}>
           <div
             className={clsx(
               'row',
@@ -286,6 +370,10 @@ const GoalGame: React.FC<IProps> = ({
             </div>
           </div>
 
+          {renderGameResultMessage()}
+
+          {device === 'mobile' ? <div className="row">{renderGameProbability()}</div> : null}
+
           <div className={clsx('row', styles.justify_content__center)}>
             <div
               className={clsx(
@@ -306,18 +394,23 @@ const GoalGame: React.FC<IProps> = ({
 
             <div className={clsx(styles.controls__button, 'col-12 col-xl-4')}>
               <SpinnerButton
-                onClick={() => {
-                  state.gameState === GameState.IDLE ? handleStartGame() : handleCashOut();
-                }}
+                onClick={handleButtonClick}
                 loading={loadingBet}
-                disabled={
-                  ![GameState.IDLE, GameState.IN_PROGRESS].includes(state.gameState) ||
-                  session?.currentStep === 0
-                }
+                disabled={state.gameState === GameState.IN_PROGRESS && session?.currentStep === 0}
               >
-                {state.gameState === GameState.IDLE ? 'start' : 'take money'}
+                {getButtonLabel()}
               </SpinnerButton>
             </div>
+
+            {state.gameState !== GameState.IDLE && device === 'mobile' ? (
+              <GoalGameAdvances
+                profits={session?.profits}
+                isEnded={state.gameState === GameState.GAME_ENDED}
+                className={styles.advances__container}
+                currentStep={session?.currentStep}
+                selections={session?.selections}
+              />
+            ) : null}
           </div>
         </div>
       </div>
@@ -333,31 +426,31 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
   const [advanceGoals, { loading: loadingAdvance }] = useMutation(ADVANCE_GOALS);
   const [cashoutGoals, { loading: loadingCashOut }] = useMutation(CASH_OUT_GOALS);
-  const [error, setError] = useState();
-  const [session, setSession] = useState(null);
-  const [profitCut, setProfitCut] = useState(null);
-  const [maxProfit, setMaxProfit] = useState(0);
+  const [error, setError] = useState<any>();
+  const [session, setSession] = useState<any>(null);
+  const [profitCut, setProfitCut] = useState<any>(null);
+  const [maxProfit, setMaxProfit] = useState<any>(0);
+  const [selections, setSelections] = useState<any>([]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [selections, setSelections] = useState([]);
-  const [lastSelection, setLastSelection] = useState(-1);
 
-  const updateSession = (newSession: any) => {
-    setSession(newSession);
-    setSelections(newSession?.selections ? newSession.selections : []);
-    setProfitCut(newSession?.profitCut ? newSession.profitCut : null);
+  const handleRestart = () => {
+    setSession(null);
+    setSelections([]);
+    setProfitCut(null);
+    setMaxProfit(0);
   };
 
-  const checkErrors = (dataRes: any, errors: any) => {
-    if (errors || dataRes?.errors) {
-      setError(errors ?? dataRes?.errors);
+  const initSession = (goalsGameSetupObj: any) => {
+    if (goalsGameSetupObj.__typename !== 'GoalsGameSetup') return;
 
-      if (dataRes?.errors[0]?.code === 'MAX_PROFIT') {
-        return errorToast('Your bet may reaches the profit limit.');
-      }
+    setSession(goalsGameSetupObj.session);
+    setSelections(goalsGameSetupObj.session?.selections || []);
+    setProfitCut(goalsGameSetupObj.session?.profitCut || null);
+    setMaxProfit(goalsGameSetupObj.maxProfit || 0);
 
-      return errorToast("Your bet couldn't be placed, please try again.");
-    }
+    if (goalsGameSetupObj.balance)
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: goalsGameSetupObj.balance } });
   };
 
   const handleStartGame = async (betAmount: number, probability: string) => {
@@ -365,11 +458,14 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       variables: { betAmount, difficulty: probability },
     });
 
-    checkErrors(data.makeBetGoals, errors);
+    if (errors || data.makeBetGoals?.errors) {
+      setError(errors ?? data.makeBetGoals?.errors);
 
-    updateSession(data.makeBetGoals.session);
+      return errorToast("Your bet couldn't be placed, please try again.");
+    }
 
-    dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetGoals.balance } });
+    initSession(data.makeBetGoals);
+
     info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
   };
 
@@ -378,56 +474,88 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       variables: { betId, selection },
     });
 
-    checkErrors(data.advanceGoals, errors);
+    if (errors || data.advanceGoals?.errors) {
+      setError(errors ?? data.advanceGoals?.errors);
 
-    setLastSelection(selection);
-    if (data.advanceGoals?.allowNext) {
-      updateSession(
-        Object.assign({}, session, {
-          totalProfit: data.advanceGoals.totalProfit,
-          nextProfit: data.advanceGoals.nextProfit,
-          allowNext: data.advanceGoals.allowNext,
-          currentStep: data.advanceGoals.nextStep,
-          selections: [...selections, { selected: selection, step: currentStep }],
-        })
-      );
-    } else {
-      updateSession(
-        Object.assign({}, session, {
-          allowNext: false,
-          selections: data.advanceGoals.result,
-        })
-      );
+      return errorToast("Your bet couldn't be placed, please try again.");
     }
 
-    if (data.advanceGoals?.balance) {
-      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
+    switch (data.advanceGoals.__typename) {
+      case 'GoalsStep':
+        const __selections = [
+          ...selections,
+          {
+            __typename: 'GoalsRow',
+            selected: selection,
+            step: currentStep,
+            luckySpots: [selection],
+          },
+        ];
 
-      if (data.advanceGoals?.profit.profit) {
-        const toast = `Your balance has been updated: ${formatBitcoin(
-          +data.advanceGoals.profit.profit
-        )}`;
+        setSession(
+          Object.assign({}, session, {
+            ...data.advanceGoals,
+            currentStep: data.advanceGoals.nextStep,
+            selections: __selections,
+          })
+        );
 
-        if (+data.advanceGoals.profit.profit >= 0) {
-          success(toast);
-        } else {
-          info(toast);
+        setProfitCut(data.advanceGoals.profitCut);
+        setSelections(__selections);
+        break;
+
+      case 'GoalsComplete':
+        setSession(
+          Object.assign({}, session, {
+            ...data.advanceGoals,
+            allowNext: false,
+            selections: data.advanceGoals.result,
+          })
+        );
+
+        if (data.advanceGoals.balance) {
+          dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
+
+          if (data.advanceGoals.profit.profit) {
+            const toast = `Your balance has been updated: ${formatBitcoin(
+              +data.advanceGoals.profit.profit
+            )}`;
+
+            if (+data.advanceGoals.profit.profit >= 0) {
+              success(toast);
+            } else {
+              info(toast);
+            }
+          }
         }
-      }
+
+        setProfitCut(data.advanceGoals.profitCut);
+        setSelections(data.advanceGoals.result);
+        break;
     }
   };
 
   const handleCashOutGoals = async (betId: string) => {
     const { data, errors } = await cashoutGoals({ variables: { betId } });
 
-    checkErrors(data.cashoutGoals, errors);
+    if (errors || data.cashoutGoals?.errors) {
+      setError(errors ?? data.cashoutGoals?.errors);
 
-    if (data.cashoutGoals?.balance) {
-      updateSession(null);
+      return errorToast("Your bet couldn't be placed, please try again.");
+    }
 
+    setSession(
+      Object.assign({}, session, {
+        ...data.cashoutGoals,
+        allowNext: false,
+        selections: data.cashoutGoals.result.slice(0, session.currentStep),
+      })
+    );
+
+    if (data.cashoutGoals.balance) {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutGoals.balance } });
 
-      if (data.cashoutGoals?.profit.profit) {
+      if (data.cashoutGoals.profit.profit) {
         const toast = `Your balance has been updated: ${formatBitcoin(
           +data.cashoutGoals.profit.profit
         )}`;
@@ -439,14 +567,10 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
         }
       }
     }
-  };
 
-  useEffect(() => {
-    if (data?.setupGoals) {
-      updateSession(data.setupGoals.session);
-      setMaxProfit(data.setupGoals.maxProfit);
-    }
-  }, [data]);
+    setProfitCut(data.cashoutGoals.profitCut);
+    setSelections(data.cashoutGoals.result);
+  };
 
   const showProfitCutModal = useCallback(
     () =>
@@ -461,6 +585,10 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     [pathname, auth.state, maxProfit, profitCut]
   );
 
+  useEffect(() => {
+    if (data?.setupGoals) initSession(data.setupGoals);
+  }, [data]);
+
   return (
     <GoalGame
       loadingSetup={loadingSetup}
@@ -469,12 +597,10 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       errorBet={error}
       onStartGame={handleStartGame}
       session={session}
-      updateSession={updateSession}
       onPlaceBet={handlePlaceBet}
       onCashOut={handleCashOutGoals}
       showProfitCutModal={showProfitCutModal}
-      lastSelection={lastSelection}
-      setLastSelection={setLastSelection}
+      onRestart={handleRestart}
     />
   );
 };

@@ -5,55 +5,62 @@ import GoalBall from '../icons/games/GoalBall';
 import GoalBackground from '../icons/games/GoalBackground';
 import GoalKeeper from '../icons/games/GoalKeeper';
 import GoalMainBall from '../icons/games/GoalMainBall';
-import { GoalGameState as GameState } from '../../models/goalGameState.model';
 
-interface IProps {
+interface IGBBProps {
   className?: string;
-  gameState?: GameState;
-  index?: number;
   handlePlaceBet?: (index: number) => void;
-  selection?: number;
+  allowNext?: boolean;
+  lastSpot?: any;
+  lastAdvanceStatus?: any;
 }
 
-const GoalBallSelect: React.FC<IProps> = ({
-  className,
-  gameState,
+interface IGBSProps extends IGBBProps {
+  index?: number;
+  ballType?: string;
+}
+
+const GoalBallSelect: React.FC<IGBSProps> = ({
   index = 0,
   handlePlaceBet = () => null,
+  allowNext,
+  ballType,
 }) => {
   return (
-    <a
-      className={clsx(className, styles.goal__selection__ball)}
-      onClick={() => {
-        if (gameState === GameState.IN_PROGRESS) handlePlaceBet(index);
-      }}
+    <div
+      className={clsx(styles.goal__selection__ball)}
+      onClick={() => (allowNext ? handlePlaceBet(index) : null)}
     >
-      <GoalBall className={className} gameState={gameState} />
-    </a>
+      <GoalBall
+        className={clsx(
+          styles.goal__selection__ball__svg,
+          allowNext ? styles.goal__selection__ball__clickable : null
+        )}
+        ballType={ballType}
+      />
+    </div>
   );
 };
 
-const GoalGameBoard: React.FC<IProps> = props => {
-  const { className, gameState, selection } = props;
+const GoalGameBoard: React.FC<IGBBProps> = props => {
+  const { className, allowNext, lastSpot, lastAdvanceStatus } = props;
 
   return (
     <div className={clsx(styles.container, className)}>
       <GoalBackground className={styles.goal__background} />
-      <GoalKeeper {...props} className={clsx(styles.goal__keeper, styles.goal__keeper__idle)} />
+      <GoalKeeper {...props} className={styles.goal__keeper} />
 
       <div className={styles.goal__selection__container}>
         {Array.from(Array(3).keys()).map(index => (
           <GoalBallSelect
             {...props}
-            className=""
             key={`ball-${index}`}
             index={index}
-            gameState={selection === index ? gameState : GameState.IN_PROGRESS}
+            ballType={lastSpot === index ? lastAdvanceStatus : 'Idle'}
           />
         ))}
       </div>
 
-      {gameState === GameState.IN_PROGRESS ? (
+      {allowNext && lastSpot === null ? (
         <GoalMainBall className={clsx(styles.goal__main_ball)} />
       ) : null}
     </div>
