@@ -108,6 +108,12 @@ const GoalGame: React.FC<IProps> = ({
   }, [auth.state]);
 
   useEffect(() => {
+    if (errorBet) {
+      alert(errorBet);
+    }
+  }, [errorBet]);
+
+  useEffect(() => {
     if (session?.profitCut) return showProfitCutModal();
 
     if (session?.betId && state.gameState === GameState.IDLE)
