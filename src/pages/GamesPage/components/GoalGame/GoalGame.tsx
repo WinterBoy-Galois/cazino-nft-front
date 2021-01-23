@@ -86,6 +86,7 @@ const GoalGame: React.FC<IProps> = ({
   const [lastStatusTimer, setLastStatusTimer] = useState<any>(null);
   const [device, setDevice] = useState('desktop');
   const [isCashOut, setCashOut] = useState(false);
+  const [isAlerted, setAlerted] = useState(false);
 
   useEffect(() => {
     const checkDeviceSize = () => {
@@ -114,13 +115,17 @@ const GoalGame: React.FC<IProps> = ({
   }, [errorBet]);
 
   useEffect(() => {
-    if (session?.profitCut) return showProfitCutModal();
+    if (session?.profitCut && !isAlerted) {
+      if (session.profitCut == 'CUT') setAlerted(true);
+      showProfitCutModal();
+    }
 
-    if (session?.betId && state.gameState === GameState.IDLE)
-      return dispatch({
+    if (session?.betId && state.gameState === GameState.IDLE) {
+      dispatch({
         type: 'START',
         payload: { session },
       });
+    }
 
     if (lastSpot !== null && session && lastAdvanceStatus === null && !isCashOut) {
       if (session?.lucky === true) setLastAdvanceStatus('Won');
@@ -138,7 +143,7 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     if (session?.__typename === 'GoalsComplete') {
-      return dispatch({ type: 'END' });
+      dispatch({ type: 'END' });
     }
   }, [session]);
 
@@ -202,6 +207,8 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const handleButtonClick = () => {
+    setAlerted(false);
+
     if (state.gameState === GameState.IDLE) return handleStartGame();
 
     if (state.gameState === GameState.GAME_ENDED) return handleTryAgain();
