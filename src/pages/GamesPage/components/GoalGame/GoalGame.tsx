@@ -158,7 +158,7 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     if (session?.__typename === 'GoalsComplete') {
-      dispatch({ type: 'END' });
+      setTimeout(() => dispatch({ type: 'END' }), 500);
     }
   }, [session]);
 

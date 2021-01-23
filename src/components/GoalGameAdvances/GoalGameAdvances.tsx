@@ -22,7 +22,7 @@ const GoalGameAdvances: React.FC<IProps> = ({
   hideMiddleBall = false,
 }) => {
   const getStatusClsx = (selection: any, index: number, hideMiddleStatus: boolean) => {
-    if (isEnded && selection) {
+    if (isEnded || selection?.selected === index) {
       return clsx(
         styles.single_advance__status__spot,
         hideMiddleStatus && index == 1 ? styles.single_advance__status__spot__hidden : null,
@@ -32,14 +32,6 @@ const GoalGameAdvances: React.FC<IProps> = ({
           : styles.single_advance__status__spot__unlucky
       );
     }
-
-    if (selection?.selected === index)
-      return clsx(
-        styles.single_advance__status__spot,
-        hideMiddleStatus && index == 1 ? styles.single_advance__status__spot__hidden : null,
-        styles.single_advance__status__spot__selected,
-        styles.single_advance__status__spot__lucky
-      );
 
     return clsx(
       styles.single_advance__status__spot,
@@ -53,18 +45,10 @@ const GoalGameAdvances: React.FC<IProps> = ({
         const selection = selections?.filter(selection => selection.step === step)[0];
 
         let singleStatusClassName = null;
-        if (selection) {
-          if (isEnded && selection.selected !== null) {
-            singleStatusClassName =
-              selection.step === item.step && selection.luckySpots?.includes(selection.selected)
-                ? styles.single_advance__status__won
-                : styles.single_advance__status__lost;
-          } else if (!isEnded) {
-            singleStatusClassName =
-              selection.step === item.step
-                ? styles.single_advance__status__won
-                : styles.single_advance__status__lost;
-          }
+        if (selection && selection?.selected !== null) {
+          singleStatusClassName = selection.luckySpots?.includes(selection.selected)
+            ? styles.single_advance__status__won
+            : styles.single_advance__status__lost;
         }
 
         return (
