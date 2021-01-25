@@ -156,11 +156,16 @@ const GoalGame: React.FC<IProps> = ({
         }, appConfig.goalsGameTimeout)
       );
     }
-
-    if (session?.__typename === 'GoalsComplete') {
-      setTimeout(() => dispatch({ type: 'END' }), 500);
-    }
   }, [session]);
+
+  useEffect(() => {
+    if (lastSpot !== null) return;
+    if (lastAdvanceStatus !== null) return;
+    if (lastStatusTimer !== null) return;
+    if (session?.__typename !== 'GoalsComplete') return;
+
+    setTimeout(() => dispatch({ type: 'END' }), 500);
+  }, [session, lastSpot, lastAdvanceStatus, lastStatusTimer]);
 
   if (loadingSetup) {
     return <Loading className={styles.loading} />;
@@ -350,6 +355,7 @@ const GoalGame: React.FC<IProps> = ({
             lastSpot={lastSpot}
             lastAdvanceStatus={lastAdvanceStatus}
             hideMiddleBall={state.probability === PROBABILITY_MIDDLE}
+            gameState={state.gameState}
           />
         </div>
 
