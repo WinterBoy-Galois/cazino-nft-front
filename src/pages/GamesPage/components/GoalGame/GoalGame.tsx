@@ -237,14 +237,9 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const renderGameResultMessage = () => {
-    if (
-      state.gameState !== GameState.GAME_ENDED ||
-      session?.__typename !== 'GoalsComplete' ||
-      isCashOut
-    )
-      return null;
+    if (lastSpot === null || lastAdvanceStatus === null) return null;
 
-    if (session.lucky)
+    if (lastAdvanceStatus === 'Won')
       return (
         <div className={clsx('row', styles.game_result__row, styles.margin__horizontal_auto)}>
           <div
@@ -268,12 +263,13 @@ const GoalGame: React.FC<IProps> = ({
                   styles.game_result__message_box__won__multiplier
                 )}
               >
-                &times;&nbsp;{session.profit.multiplier.toFixed(3)}
+                &times;&nbsp;
+                {session?.totalProfit.multiplier.toFixed(3)}
               </div>
 
               <div className={clsx('col', styles.text_align__left)}>
                 <Bitcoin className={clsx(styles.icon, styles.icon__bitcoin)} />
-                {formatBitcoin(session.profit.profit)}
+                {formatBitcoin(session?.totalProfit.profit)}
               </div>
             </div>
           </div>
