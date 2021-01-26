@@ -53,7 +53,7 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
   return (
     <div className={clsx(styles.container, className)}>
       <GoalBackground className={styles.goal__background} />
-      <GoalKeeper {...props} className={styles.goal__keeper} />
+      <GoalKeeper {...props} className={styles.goal__keeper} hideMiddleBall={hideMiddleBall} />
 
       {gameState === GameState.IN_PROGRESS ? (
         <div className={styles.goal__selection__container}>
