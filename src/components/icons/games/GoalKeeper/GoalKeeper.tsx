@@ -13,15 +13,23 @@ interface IProps {
   className?: string;
   lastSpot?: any;
   lastAdvanceStatus?: any;
+  hideMiddleBall?: boolean;
 }
 
-const getGoalKeeperLostPosition = (selection: number) =>
-  [0, 1, 2].filter(pos => pos != selection).sort(() => Math.random() - 0.5)[0];
+const getGoalKeeperLostPosition = (selection: number, hideMiddleBall: boolean) =>
+  (hideMiddleBall ? [0, 2] : [0, 1, 2])
+    .filter(pos => pos != selection)
+    .sort(() => Math.random() - 0.5)[0];
 
-const GoalKeeper: React.FC<IProps> = ({ className, lastSpot, lastAdvanceStatus }) => {
+const GoalKeeper: React.FC<IProps> = ({
+  className,
+  lastSpot,
+  lastAdvanceStatus,
+  hideMiddleBall = false,
+}) => {
   switch (lastAdvanceStatus) {
     case 'Won':
-      const goalKeeperPosition = getGoalKeeperLostPosition(lastSpot);
+      const goalKeeperPosition = getGoalKeeperLostPosition(lastSpot, hideMiddleBall);
 
       if (goalKeeperPosition === 0)
         return <GoalKeeperLostLeft className={clsx(className, styles.goal_keeper__left)} />;
