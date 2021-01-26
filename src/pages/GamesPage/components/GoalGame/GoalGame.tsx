@@ -156,11 +156,16 @@ const GoalGame: React.FC<IProps> = ({
         }, appConfig.goalsGameTimeout)
       );
     }
-
-    if (session?.__typename === 'GoalsComplete') {
-      setTimeout(() => dispatch({ type: 'END' }), 500);
-    }
   }, [session]);
+
+  useEffect(() => {
+    if (lastSpot !== null) return;
+    if (lastAdvanceStatus !== null) return;
+    if (lastStatusTimer !== null) return;
+    if (session?.__typename !== 'GoalsComplete') return;
+
+    setTimeout(() => dispatch({ type: 'END' }), 500);
+  }, [session, lastSpot, lastAdvanceStatus, lastStatusTimer]);
 
   if (loadingSetup) {
     return <Loading className={styles.loading} />;
@@ -232,14 +237,9 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const renderGameResultMessage = () => {
-    if (
-      state.gameState !== GameState.GAME_ENDED ||
-      session?.__typename !== 'GoalsComplete' ||
-      isCashOut
-    )
-      return null;
+    if (lastSpot === null || lastAdvanceStatus === null) return null;
 
-    if (session.lucky)
+    if (lastAdvanceStatus === 'Won')
       return (
         <div className={clsx('row', styles.game_result__row, styles.margin__horizontal_auto)}>
           <div
@@ -263,12 +263,13 @@ const GoalGame: React.FC<IProps> = ({
                   styles.game_result__message_box__won__multiplier
                 )}
               >
-                &times;&nbsp;{session.profit.multiplier.toFixed(3)}
+                &times;&nbsp;
+                {session?.totalProfit.multiplier.toFixed(3)}
               </div>
 
               <div className={clsx('col', styles.text_align__left)}>
                 <Bitcoin className={clsx(styles.icon, styles.icon__bitcoin)} />
-                {formatBitcoin(session.profit.profit)}
+                {formatBitcoin(session?.totalProfit.profit)}
               </div>
             </div>
           </div>
@@ -350,6 +351,7 @@ const GoalGame: React.FC<IProps> = ({
             lastSpot={lastSpot}
             lastAdvanceStatus={lastAdvanceStatus}
             hideMiddleBall={state.probability === PROBABILITY_MIDDLE}
+            gameState={state.gameState}
           />
         </div>
 
