@@ -38,7 +38,10 @@ export const goalGameReducer = (state: GoalGameState, action: GoalGameAction) =>
       };
 
     case 'RESET':
-      return getInitialState();
+      return {
+        ...getInitialState(),
+        probability: state.probability,
+      };
 
     case 'START':
       if (payload?.session)
