@@ -231,8 +231,10 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const getButtonLabel = () => {
+    if (lastAdvanceStatus && lastAdvanceStatus !== 'Won') return 'try again';
     if (state.gameState === GameState.IDLE) return 'start';
-    if (state.gameState === GameState.IN_PROGRESS) return 'take money';
+    if (state.gameState === GameState.IN_PROGRESS)
+      return session?.lucky === false ? 'try again' : 'take money';
     if (state.gameState === GameState.GAME_ENDED) {
       return isCashOut || session?.lucky ? 'play again' : 'try again';
     }
