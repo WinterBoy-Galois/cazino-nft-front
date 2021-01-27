@@ -447,7 +447,9 @@ const GoalGame: React.FC<IProps> = ({
               <SpinnerButton
                 onClick={handleButtonClick}
                 loading={loadingBet}
-                disabled={state.gameState === GameState.IN_PROGRESS && session?.currentStep === 0}
+                disabled={
+                  state.gameState === GameState.IN_PROGRESS && session?.currentStep % 10 === 0
+                }
               >
                 {getButtonLabel()}
               </SpinnerButton>
