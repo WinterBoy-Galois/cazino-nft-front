@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const GoalsBetResults: React.FC<IProps> = ({ selections }) => {
-  selections = useMemo(() => selections.sort((s1, s2) => s2.step - s1.step), [selections]);
+  selections = useMemo(() => selections.slice().sort((s1, s2) => s2.step - s1.step), [selections]);
 
   const getHighlightClass = (selection: GoalSelection, index: number) => {
     return (!isNullOrUndefined(selection.selected) &&
