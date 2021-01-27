@@ -120,9 +120,16 @@ const GoalGame: React.FC<IProps> = ({
   }, [auth.state]);
 
   useEffect(() => {
-    if (errorBet) {
-      alert(errorBet[0].message);
-    }
+    if (!errorBet) return;
+
+    if (errorBet[0]?.code === 'MAX_PROFIT')
+      (async () => {
+        await navigate(`${pathname}?dialog=profit-cut`, {
+          state: { errorMessage: errorBet[0].message },
+        });
+
+        dispatch({ type: 'RESET' });
+      })();
   }, [errorBet]);
 
   useEffect(() => {
@@ -492,6 +499,8 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
     if (errors || data.makeBetGoals?.errors) {
       setError(errors ?? data.makeBetGoals?.errors);
+
+      if (data.makeBetGoals?.errors[0]?.code === 'MAX_PROFIT') return;
 
       return errorToast("Your bet couldn't be placed, please try again.");
     }
