@@ -120,9 +120,11 @@ const GoalGame: React.FC<IProps> = ({
   }, [auth.state]);
 
   useEffect(() => {
-    if (errorBet) {
-      alert(errorBet[0].message);
-    }
+    if (errorBet)
+      (async () =>
+        await navigate(`${pathname}?dialog=profit-cut`, {
+          state: { errorMessage: errorBet[0].message },
+        }))();
   }, [errorBet]);
 
   useEffect(() => {
