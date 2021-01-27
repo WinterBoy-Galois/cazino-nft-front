@@ -547,7 +547,9 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
         setSession(
           Object.assign({}, session, {
             ...data.advanceGoals,
-            currentStep: data.advanceGoals.nextStep,
+            currentStep: data.advanceGoals.allowNext
+              ? data.advanceGoals.nextStep
+              : session.currentStep,
             selections: __selections,
           })
         );
