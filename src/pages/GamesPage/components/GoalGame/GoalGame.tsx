@@ -44,6 +44,24 @@ interface IProps {
   profitCut?: any;
 }
 
+const PROBABILITIES = [
+  {
+    label: 'High',
+    value: PROBABILITY_HIGH,
+    summary: '2 of 3 win',
+  },
+  {
+    label: 'Middle',
+    value: PROBABILITY_MIDDLE,
+    summary: '1 of 2 win',
+  },
+  {
+    label: 'Low',
+    value: PROBABILITY_LOW,
+    summary: '1 of 3 win',
+  },
+];
+
 const GoalGame: React.FC<IProps> = ({
   loadingSetup,
   errorSetup,
@@ -71,7 +89,6 @@ const GoalGame: React.FC<IProps> = ({
   const [device, setDevice] = useState('desktop');
   const [isCashOut, setCashOut] = useState(false);
   const [isAlerted, setAlerted] = useState(false);
-  const [PROBABILITIES, set_PROBABILITIES] = useState<any>([]);
 
   useEffect(() => {
     const checkDeviceSize = () => {
@@ -86,26 +103,6 @@ const GoalGame: React.FC<IProps> = ({
 
     return () => window.removeEventListener('resize', checkDeviceSize);
   }, []);
-
-  useEffect(() => {
-    set_PROBABILITIES([
-      {
-        label: device === 'mobile' ? 'Junior' : 'High',
-        value: PROBABILITY_HIGH,
-        summary: '2 of 3 win',
-      },
-      {
-        label: device === 'mobile' ? 'Senior' : 'Middle',
-        value: PROBABILITY_MIDDLE,
-        summary: '1 of 2 win',
-      },
-      {
-        label: device === 'mobile' ? 'God' : 'Low',
-        value: PROBABILITY_LOW,
-        summary: '1 of 3 win',
-      },
-    ]);
-  }, [device]);
 
   useEffect(() => {
     if (auth.state === 'SIGNED_IN' && profitCut && maxProfit && !isAlerted) {
