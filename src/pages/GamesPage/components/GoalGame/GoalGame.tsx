@@ -358,7 +358,7 @@ const GoalGame: React.FC<IProps> = ({
               {
                 PROBABILITIES.filter(
                   (probability: any) => probability.value === state.probability
-                )[0].summary
+                )[0]?.summary
               }
             </span>
           </div>
