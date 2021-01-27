@@ -53,7 +53,7 @@
   },
   "profitCut": {
     "title": "Information",
-    "warningMessage": "You've been reached maximum profit limit of MAX_PROFIT BTC.\nThe game is ended.",
-    "cutMessage": "On next step profit may be cut to MAX_PROFIT BTC."
+    "warningMessage": "On next step profit may be cut to MAX_PROFIT BTC.",
+    "cutMessage": "You've been reached maximum profit limit of MAX_PROFIT BTC.\nThe game is ended."
   }
 }

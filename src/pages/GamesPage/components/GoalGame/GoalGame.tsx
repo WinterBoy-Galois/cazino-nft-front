@@ -89,6 +89,7 @@ const GoalGame: React.FC<IProps> = ({
   const [device, setDevice] = useState('desktop');
   const [isCashOut, setCashOut] = useState(false);
   const [isAlerted, setAlerted] = useState(false);
+  const [isGameStartedBtnClicked, setGameStartBtnClicked] = useState(false);
 
   useEffect(() => {
     const checkDeviceSize = () => {
@@ -120,15 +121,21 @@ const GoalGame: React.FC<IProps> = ({
   }, [auth.state]);
 
   useEffect(() => {
-    if (!errorBet) return;
+    if (!errorBet) {
+      if (isGameStartedBtnClicked) {
+        dispatch({ type: 'START' });
+        setGameStartBtnClicked(false);
+        setCashOut(false);
+      }
+
+      return;
+    }
 
     if (errorBet[0]?.code === 'MAX_PROFIT')
       (async () => {
         await navigate(`${pathname}?dialog=profit-cut`, {
           state: { errorMessage: errorBet[0].message },
         });
-
-        dispatch({ type: 'RESET' });
       })();
   }, [errorBet]);
 
@@ -183,12 +190,9 @@ const GoalGame: React.FC<IProps> = ({
   }
 
   const handleStartGame = async () => {
-    if (auth.state !== 'SIGNED_IN') {
-      return await navigate(`${pathname}?dialog=sign-in`);
-    }
+    if (auth.state !== 'SIGNED_IN') return await navigate(`${pathname}?dialog=sign-in`);
 
-    dispatch({ type: 'START' });
-    setCashOut(false);
+    setGameStartBtnClicked(true);
     onStartGame(state.amount, state.probability);
   };
 
