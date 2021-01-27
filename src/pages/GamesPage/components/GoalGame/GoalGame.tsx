@@ -190,7 +190,9 @@ const GoalGame: React.FC<IProps> = ({
   }
 
   const handleStartGame = async () => {
-    if (auth.state !== 'SIGNED_IN') return await navigate(`${pathname}?dialog=sign-in`);
+    if (auth.state !== 'SIGNED_IN') {
+      return await navigate(`${pathname}?dialog=sign-in`);
+    }
 
     setGameStartBtnClicked(true);
     onStartGame(state.amount, state.probability);
@@ -445,7 +447,9 @@ const GoalGame: React.FC<IProps> = ({
               <SpinnerButton
                 onClick={handleButtonClick}
                 loading={loadingBet}
-                disabled={state.gameState === GameState.IN_PROGRESS && session?.currentStep === 0}
+                disabled={
+                  state.gameState === GameState.IN_PROGRESS && session?.currentStep % 10 === 0
+                }
               >
                 {getButtonLabel()}
               </SpinnerButton>
