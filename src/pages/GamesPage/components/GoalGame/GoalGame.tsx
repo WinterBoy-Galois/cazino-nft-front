@@ -190,7 +190,9 @@ const GoalGame: React.FC<IProps> = ({
   }
 
   const handleStartGame = async () => {
-    if (auth.state !== 'SIGNED_IN') return await navigate(`${pathname}?dialog=sign-in`);
+    if (auth.state !== 'SIGNED_IN') {
+      return await navigate(`${pathname}?dialog=sign-in`);
+    }
 
     setGameStartBtnClicked(true);
     onStartGame(state.amount, state.probability);
