@@ -352,6 +352,7 @@ const GoalGame: React.FC<IProps> = ({
             lastAdvanceStatus={lastAdvanceStatus}
             hideMiddleBall={state.probability === PROBABILITY_MIDDLE}
             gameState={state.gameState}
+            isCashOut={isCashOut}
           />
         </div>
 

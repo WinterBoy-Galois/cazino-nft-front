@@ -77,7 +77,7 @@ const GoalGameAdvances: React.FC<IProps> = ({
             </div>
 
             <div className={styles.single_advance__multiplier}>
-              &nbsp;&times;{item.multiplier.toFixed(3)}
+              &nbsp;&times;{item.multiplier.toFixed(4)}
             </div>
 
             {item.profit !== null ? (
