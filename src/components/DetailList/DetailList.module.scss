@@ -19,7 +19,7 @@
       text-transform: uppercase;
 
       @include media-breakpoint-up(md) {
-        text-align: right;
+        // text-align: right;
         margin-right: 1rem;
       }
     }
