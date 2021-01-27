@@ -18,6 +18,7 @@ interface IGBBProps extends IDefaultProps {
   lastAdvanceStatus?: any;
   hideMiddleBall?: boolean;
   gameState?: GameState;
+  isCashOut?: boolean;
 }
 
 interface IGBSProps extends IDefaultProps {
@@ -48,14 +49,21 @@ const GoalBallSelect: React.FC<IGBSProps> = ({
 };
 
 const GoalGameBoard: React.FC<IGBBProps> = props => {
-  const { className, allowNext, lastSpot, lastAdvanceStatus, hideMiddleBall, gameState } = props;
+  const {
+    className,
+    allowNext,
+    lastSpot,
+    lastAdvanceStatus,
+    hideMiddleBall,
+    gameState,
+    isCashOut,
+  } = props;
 
-  return (
-    <div className={clsx(styles.container, className)}>
-      <GoalBackground className={styles.goal__background} />
-      <GoalKeeper {...props} className={styles.goal__keeper} hideMiddleBall={hideMiddleBall} />
+  const renderGoalBallSelections = () => {
+    if (isCashOut && !allowNext) return;
 
-      {gameState === GameState.IN_PROGRESS ? (
+    if (gameState === GameState.IN_PROGRESS)
+      return (
         <div className={styles.goal__selection__container}>
           {Array.from(Array(3).keys()).map(index =>
             hideMiddleBall && index === 1 ? null : (
@@ -68,7 +76,15 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
             )
           )}
         </div>
-      ) : null}
+      );
+  };
+
+  return (
+    <div className={clsx(styles.container, className)}>
+      <GoalBackground className={styles.goal__background} />
+      <GoalKeeper {...props} className={styles.goal__keeper} hideMiddleBall={hideMiddleBall} />
+
+      {renderGoalBallSelections()}
 
       {allowNext && lastSpot === null ? (
         <GoalMainBall className={clsx(styles.goal__main_ball)} />
