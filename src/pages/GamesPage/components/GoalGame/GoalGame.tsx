@@ -371,7 +371,7 @@ const GoalGame: React.FC<IProps> = ({
           />
         </div>
 
-        {device !== 'mobile' ? <div className="row">{renderGameProbability()}</div> : null}
+        <div className="row">{renderGameProbability()}</div>
 
         {state.gameState !== GameState.IDLE && device !== 'mobile' ? (
           <GoalGameAdvances
@@ -421,8 +421,6 @@ const GoalGame: React.FC<IProps> = ({
           </div>
 
           {renderGameResultMessage()}
-
-          {device === 'mobile' ? <div className="row">{renderGameProbability()}</div> : null}
 
           <div className={clsx('row', styles.justify_content__center)}>
             <div

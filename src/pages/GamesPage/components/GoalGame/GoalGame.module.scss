@@ -85,7 +85,7 @@
   &__row {
     position: absolute;
     width: 100%;
-    margin: -1.2rem 0 2rem;
+    margin: -3.2rem 0 2rem;
 
     @include media-breakpoint-up(md) {
       margin: -4.5rem 0 2rem;
@@ -126,7 +126,8 @@
 .controls {
   &__wrapper {
     @include media-breakpoint-down(md) {
-      margin-top: 5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
     }
 
     &__container {
