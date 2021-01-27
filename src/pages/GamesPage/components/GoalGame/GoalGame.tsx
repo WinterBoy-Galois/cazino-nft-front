@@ -120,11 +120,9 @@ const GoalGame: React.FC<IProps> = ({
   }, [auth.state]);
 
   useEffect(() => {
-    if (errorBet)
-      (async () =>
-        await navigate(`${pathname}?dialog=profit-cut`, {
-          state: { errorMessage: errorBet[0].message },
-        }))();
+    if (errorBet) {
+      alert(errorBet[0].message);
+    }
   }, [errorBet]);
 
   useEffect(() => {
@@ -543,6 +541,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
           Object.assign({}, session, {
             ...data.advanceGoals,
             allowNext: false,
+            currentStep: 10,
             selections: data.advanceGoals.result,
           })
         );
@@ -582,7 +581,8 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       Object.assign({}, session, {
         ...data.cashoutGoals,
         allowNext: false,
-        selections: data.cashoutGoals.result.slice(0, session.currentStep),
+        currentStep: 10,
+        selections: data.cashoutGoals.result,
       })
     );
 
