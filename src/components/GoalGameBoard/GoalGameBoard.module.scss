@@ -1,4 +1,4 @@
-@import '../../styles/shared';
+@import "../../styles/shared";
 
 .container {
   position: relative;
@@ -11,7 +11,7 @@
 
 .goal {
   &__background {
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
       width: 160%;
       margin-left: -30%;
     }
@@ -26,27 +26,20 @@
       position: absolute;
       display: flex;
       justify-content: space-between;
-      top: 10px;
-      width: 60%;
-      left: 20%;
+      top: 5%;
+      width: 40%;
+      left: 30%;
 
-      @include media-breakpoint-up(md) {
-        top: 20px;
-        width: 40%;
-        left: 30%;
+      @include media-breakpoint-down(lg) {
+        width: 64%;
+        left: 18%;
       }
     }
 
     &__ball {
-      width: 50px;
-      height: 50px;
       border-radius: 50%;
       overflow: hidden;
-
-      @include media-breakpoint-up(md) {
-        width: 100px;
-        height: 100px;
-      }
+      width: 17%;
 
       &__clickable {
         cursor: pointer;
@@ -61,12 +54,16 @@
   &__main_ball {
     display: none;
     position: absolute;
-    left: 0;
-    width: 250px;
-    left: calc(50% - 125px);
+    width: 15%;
+    left: 42.5%;
     bottom: -7.5rem;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-down(lg) {
+      width: 24%;
+      left: 38%;
+    }
+
+    @include media-breakpoint-up(xl) {
       display: block;
     }
   }

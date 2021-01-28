@@ -62,6 +62,8 @@ const PROBABILITIES = [
   },
 ];
 
+const deviceSize = { xl: 5, lg: 4, md: 3, sm: 2, xs: 1 };
+
 const GoalGame: React.FC<IProps> = ({
   loadingSetup,
   errorSetup,
@@ -86,17 +88,18 @@ const GoalGame: React.FC<IProps> = ({
   const [lastSpot, setLastSpot] = useState<any>(null);
   const [lastAdvanceStatus, setLastAdvanceStatus] = useState<any>(null);
   const [lastStatusTimer, setLastStatusTimer] = useState<any>(null);
-  const [device, setDevice] = useState('desktop');
+  const [device, setDevice] = useState(deviceSize.xl);
   const [isCashOut, setCashOut] = useState(false);
   const [isAlerted, setAlerted] = useState(false);
   const [isGameStartedBtnClicked, setGameStartBtnClicked] = useState(false);
 
   useEffect(() => {
     const checkDeviceSize = () => {
-      if (window.innerWidth > 1366) setDevice('desktop');
-      else if (window.innerWidth > 1024) setDevice('laptop');
-      else if (window.innerWidth > 768) setDevice('tablet');
-      else setDevice('mobile');
+      if (window.innerWidth >= 1200) setDevice(deviceSize.xl);
+      else if (window.innerWidth >= 992) setDevice(deviceSize.lg);
+      else if (window.innerWidth >= 768) setDevice(deviceSize.md);
+      else if (window.innerWidth >= 576) setDevice(deviceSize.sm);
+      else setDevice(deviceSize.xs);
     };
 
     checkDeviceSize();
@@ -315,15 +318,17 @@ const GoalGame: React.FC<IProps> = ({
   const renderGameProbability = () => (
     <div
       className={clsx(
-        'col-12 col-md-6 col-lg-4',
+        'col-12 col-md-10 col-lg-6 col-xl-4',
         styles.probability__container,
-        device === 'mobile' ? styles.probability__container__mobile : null,
+        device <= deviceSize.lg ? styles.probability__container__mobile : null,
         state.gameState === GameState.IDLE
           ? null
           : styles.probability__container__visibility__hidden
       )}
     >
-      {device === 'mobile' ? null : <div className={styles.probability__label}>Probability</div>}
+      {device <= deviceSize.lg ? null : (
+        <div className={styles.probability__label}>Probability</div>
+      )}
 
       <ButtonGroup
         name="probability"
@@ -376,7 +381,7 @@ const GoalGame: React.FC<IProps> = ({
 
         <div className="row">{renderGameProbability()}</div>
 
-        {state.gameState !== GameState.IDLE && device !== 'mobile' ? (
+        {state.gameState !== GameState.IDLE && device > deviceSize.lg ? (
           <GoalGameAdvances
             profits={session?.profits}
             isEnded={state.gameState === GameState.GAME_ENDED}
@@ -395,7 +400,8 @@ const GoalGame: React.FC<IProps> = ({
               'row',
               styles.profit__row,
               styles.margin__horizontal_auto,
-              state.gameState === GameState.IN_PROGRESS ? null : styles.profit__visibility__hidden
+              state.gameState === GameState.IN_PROGRESS ? null : styles.profit__visibility__hidden,
+              lastSpot || lastAdvanceStatus ? styles.profit__visibility__hidden : null
             )}
           >
             <div className={clsx('col-6', styles.profit)}>
@@ -455,7 +461,7 @@ const GoalGame: React.FC<IProps> = ({
               </SpinnerButton>
             </div>
 
-            {state.gameState !== GameState.IDLE && device === 'mobile' ? (
+            {state.gameState !== GameState.IDLE && device <= deviceSize.lg ? (
               <GoalGameAdvances
                 profits={session?.profits}
                 isEnded={state.gameState === GameState.GAME_ENDED}
