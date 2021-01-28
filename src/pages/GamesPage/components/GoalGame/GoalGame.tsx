@@ -62,7 +62,7 @@ const PROBABILITIES = [
   },
 ];
 
-const deviceSize = { xl: 5, lg: 4, md: 3, sm: 2, xs: 1 };
+const deviceSize = { xxl: 6, xl: 5, lg: 4, md: 3, sm: 2, xs: 1 };
 
 const GoalGame: React.FC<IProps> = ({
   loadingSetup,
@@ -95,7 +95,8 @@ const GoalGame: React.FC<IProps> = ({
 
   useEffect(() => {
     const checkDeviceSize = () => {
-      if (window.innerWidth >= 1200) setDevice(deviceSize.xl);
+      if (window.innerWidth >= 1500) setDevice(deviceSize.xxl);
+      else if (window.innerWidth >= 1200) setDevice(deviceSize.xl);
       else if (window.innerWidth >= 992) setDevice(deviceSize.lg);
       else if (window.innerWidth >= 768) setDevice(deviceSize.md);
       else if (window.innerWidth >= 576) setDevice(deviceSize.sm);
@@ -381,7 +382,7 @@ const GoalGame: React.FC<IProps> = ({
 
         <div className="row">{renderGameProbability()}</div>
 
-        {state.gameState !== GameState.IDLE && device > deviceSize.lg ? (
+        {state.gameState !== GameState.IDLE && device > deviceSize.xl ? (
           <GoalGameAdvances
             profits={session?.profits}
             isEnded={state.gameState === GameState.GAME_ENDED}
@@ -461,7 +462,7 @@ const GoalGame: React.FC<IProps> = ({
               </SpinnerButton>
             </div>
 
-            {state.gameState !== GameState.IDLE && device <= deviceSize.lg ? (
+            {state.gameState !== GameState.IDLE && device <= deviceSize.xl ? (
               <GoalGameAdvances
                 profits={session?.profits}
                 isEnded={state.gameState === GameState.GAME_ENDED}
