@@ -1,51 +1,50 @@
-@import '../../../../styles/shared';
+@import "../../../../styles/shared";
 
 .goal_keeper {
   &__idle {
-    left: calc(50% - 65px);
-    top: 27%;
-    width: 130px;
+    width: 20%;
+    top: 29%;
+    left: 40%;
+    height: 40%;
 
-    @include media-breakpoint-up(md) {
-      width: 285px;
-      top: 29%;
-      left: calc(50% - 142.5px);
+    @include media-breakpoint-down(lg) {
+      width: 32%;
+      left: 34%;
     }
   }
 
   &__left {
-    width: 100px;
+    width: 15%;
+    left: 36%;
+    height: 40%;
     top: 15%;
-    left: calc(40% - 50px);
 
-    @include media-breakpoint-up(md) {
-      width: 210px;
-      top: 12%;
-      left: calc(43% - 105px);
+    @include media-breakpoint-down(lg) {
+      width: 24%;
+      left: 27%;
     }
   }
 
   &__middle {
-    width: 80px;
-    top: 17%;
-    left: calc(50% - 40px);
+    width: 14%;
+    left: 43%;
+    height: 50%;
+    top: 19%;
 
-    @include media-breakpoint-up(md) {
-      width: 150px;
-      top: 21%;
-      left: calc(50% - 75px);
+    @include media-breakpoint-down(lg) {
+      width: 22.4%;
+      left: 38.8%;
     }
   }
 
   &__right {
-    width: 100px;
+    width: 15%;
+    height: 40%;
     top: 15%;
-    left: calc(60% - 50px);
+    left: 49%;
 
-    @include media-breakpoint-up(md) {
-      width: 210px;
-      top: 12%;
-      left: calc(57% - 105px);
+    @include media-breakpoint-down(lg) {
+      width: 24%;
     }
   }
 }
