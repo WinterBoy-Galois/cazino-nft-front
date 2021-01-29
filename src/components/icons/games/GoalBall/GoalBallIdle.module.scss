@@ -1,29 +1,21 @@
-@import '../../../../styles/shared';
+@import "../../../../styles/shared";
 
 .cls-1 {
-  fill: none;
+  opacity: 0.6;
 }
 
 .cls-2 {
-  opacity: 0.44;
-}
-
-.cls-3 {
   fill: #e1e3e2;
 }
 
-.cls-4 {
+.cls-3 {
   fill: #f9f9f9;
 }
 
-.cls-5 {
+.cls-4 {
   fill: #1d1d1b;
 }
 
-.cls-6 {
-  clip-path: url(#clip-path-idle);
-}
-
-.cls-7 {
+.cls-5 {
   fill: #009fe3;
 }
