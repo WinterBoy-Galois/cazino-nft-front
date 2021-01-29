@@ -205,6 +205,7 @@ const GoalGame: React.FC<IProps> = ({
   const handleTryAgain = () => {
     dispatch({ type: 'RESET' });
     onRestart();
+    setCashOut(false);
     setLastSpot(null);
     setLastAdvanceStatus(null);
     setLastStatusTimer(null);
