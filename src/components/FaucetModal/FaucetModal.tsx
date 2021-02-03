@@ -33,7 +33,13 @@ const secondsToHms = (d: number) => {
   return hDisplay + mDisplay + sDisplay;
 };
 
-const FaucetModal: React.FC<IProps> = ({ show, onClose, canClaim, every = 0, timestamp }) => {
+const FaucetModal: React.FC<IProps> = ({
+  show,
+  onClose = () => null,
+  canClaim,
+  every = 0,
+  timestamp,
+}) => {
   const { t } = useTranslation(['modals']);
   const [{ auth }, dispatch] = useStateValue();
   const [claimFaucet] = useMutation(CLAIM_FAUCET);
@@ -57,6 +63,7 @@ const FaucetModal: React.FC<IProps> = ({ show, onClose, canClaim, every = 0, tim
     if (data.claimFaucet.balance) {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.claimFaucet.balance } });
       success(`Your balance has been updated: ${formatBitcoin(+data.claimFaucet.balance)}`);
+      onClose();
     }
   };
 
