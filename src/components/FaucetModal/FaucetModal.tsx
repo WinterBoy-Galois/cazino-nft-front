@@ -16,6 +16,7 @@ import { useMutation } from '@apollo/client';
 interface IProps {
   show: boolean;
   onClose?: () => void;
+  amount?: number;
   canClaim?: boolean;
   every?: number;
   timestamp?: any;
@@ -36,12 +37,13 @@ const secondsToHms = (d: number) => {
 const FaucetModal: React.FC<IProps> = ({
   show,
   onClose = () => null,
+  amount = 0,
   canClaim,
   every = 0,
   timestamp,
 }) => {
   const { t } = useTranslation(['modals']);
-  const [{ auth }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [claimFaucet] = useMutation(CLAIM_FAUCET);
   const [errMessage, setErrMessage] = useState(null);
 
@@ -83,7 +85,7 @@ const FaucetModal: React.FC<IProps> = ({
 
               <BitcoinValue
                 className={clsx(styles.modal__content__right__info__balance)}
-                value={formatBitcoin(auth.user?.balance)}
+                value={formatBitcoin(amount)}
               />
             </div>
 
