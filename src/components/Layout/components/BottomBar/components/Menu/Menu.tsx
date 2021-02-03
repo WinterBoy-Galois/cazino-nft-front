@@ -22,7 +22,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
   const [isGamePage, setGamePage] = useState(false);
   const [{ auth }, dispatch] = useStateValue();
   const [isMenuOpened, setMenuOpened] = useState(false);
-  const { data: faucetData, refetch: refreshFaucetData } = useQuery(FAUCET_INFO);
+  const { refetch: refreshFaucetData } = useQuery(FAUCET_INFO);
 
   useEffect(() => {
     setGamePage(pathname.includes('/games'));
@@ -33,15 +33,15 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
-    await refreshFaucetData();
-
-    return await navigate(`${pathname}?dialog=faucet`, {
-      state: {
-        amount: faucetData?.faucetInfo.amount || 0,
-        canClaim: faucetData?.faucetInfo.canClaim || false,
-        every: faucetData?.faucetInfo.every || 0,
-        timestamp: new Date(),
-      },
+    refreshFaucetData().then(async response => {
+      await navigate(`${pathname}?dialog=faucet`, {
+        state: {
+          amount: response.data?.faucetInfo.amount || 0,
+          canClaim: response.data?.faucetInfo.canClaim || false,
+          every: response.data?.faucetInfo.every || 0,
+          timestamp: new Date(),
+        },
+      });
     });
   };
 
