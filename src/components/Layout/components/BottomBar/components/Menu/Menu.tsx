@@ -37,6 +37,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
 
     return await navigate(`${pathname}?dialog=faucet`, {
       state: {
+        amount: faucetData?.faucetInfo.amount || 0,
         canClaim: faucetData?.faucetInfo.canClaim || false,
         every: faucetData?.faucetInfo.every || 0,
         timestamp: new Date(),
