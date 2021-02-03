@@ -35,6 +35,9 @@ export const mapQueryParamToModal = (param: string): ModalType | undefined => {
     case 'profit-cut':
       return 'PROFIT_CUT_MODAL';
 
+    case 'faucet':
+      return 'FAUCET_MODAL';
+
     default:
       return undefined;
   }

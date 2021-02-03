@@ -296,3 +296,23 @@ export const TRANSACTION_BETS = gql`
     }
   }
 `;
+
+export const FAUCET_INFO = gql`
+  query faucetInfo {
+    faucetInfo {
+      ... on FaucetInfo {
+        amount
+        every
+        canClaim
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
