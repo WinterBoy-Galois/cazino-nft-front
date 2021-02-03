@@ -71,15 +71,6 @@
   background-position-y: bottom;
   padding: 0.5rem 0.5rem 1rem;
 
-  &::after {
-    content: '';
-    width: 56px;
-    position: absolute;
-    bottom: -54px;
-    border: 27px solid transparent;
-    border-top-color: #113352;
-  }
-
   @include media-breakpoint-down(md) {
     display: flex;
   }
