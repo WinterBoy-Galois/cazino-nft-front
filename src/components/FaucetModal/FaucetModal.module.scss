@@ -17,8 +17,13 @@
     }
 
     &__icon {
-      width: 15rem;
-      height: 15rem;
+      width: 8rem;
+      height: 8rem;
+
+      @include media-breakpoint-up(md) {
+        width: 15rem;
+        height: 15rem;
+      }
 
       @include media-breakpoint-up(lg) {
         width: 18rem;
@@ -35,7 +40,7 @@
       padding: 1rem 3.75rem 4rem 0;
 
       @include media-breakpoint-down(sm) {
-        margin: 1rem 0 2rem;
+        margin: 2rem 0 3rem;
         padding: 0;
       }
     }
@@ -53,7 +58,7 @@
         padding: 1rem;
 
         @include media-breakpoint-down(sm) {
-          margin-bottom: 1rem;
+          margin-bottom: 6rem;
         }
 
         &__row {
