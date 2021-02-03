@@ -89,6 +89,8 @@
 
       &__button {
         background-color: #f59e66;
+        color: #4D290F;
+        
         @include media-breakpoint-down(sm) {
           width: 80%;
           margin: 0 10%;
