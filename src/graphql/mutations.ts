@@ -401,3 +401,21 @@ export const WITHDRAW = gql`
     }
   }
 `;
+
+export const CLAIM_FAUCET = gql`
+  mutation claimFaucet {
+    claimFaucet {
+      ... on User {
+        balance
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

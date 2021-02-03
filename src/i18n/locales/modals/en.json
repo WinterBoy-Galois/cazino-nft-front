@@ -55,5 +55,12 @@
     "title": "Information",
     "warningMessage": "On next step profit may be cut to MAX_PROFIT BTC.",
     "cutMessage": "You've been reached maximum profit limit of MAX_PROFIT BTC.\nThe game is ended."
+  },
+  "faucet": {
+    "title": "Faucet",
+    "amount": "Amount",
+    "every": "Every",
+    "description": "Available only when balance is 0",
+    "buttonText": "Claim"
   }
 }

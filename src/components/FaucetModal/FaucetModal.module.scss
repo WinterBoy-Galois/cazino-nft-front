@@ -1,0 +1,103 @@
+@import '../../styles/shared';
+
+.modal {
+  &__row {
+    flex-direction: column;
+    margin: auto;
+    padding: 2.25rem;
+
+    @include media-breakpoint-down(sm) {
+      padding: 0;
+    }
+  }
+
+  &__content {
+    @include media-breakpoint-up(md) {
+      display: flex;
+    }
+
+    &__icon {
+      width: 15rem;
+      height: 15rem;
+
+      @include media-breakpoint-up(lg) {
+        width: 18rem;
+        height: 18rem;
+      }
+    }
+
+    &__left {
+      flex-basis: 0;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include media-breakpoint-down(sm) {
+        margin: 1rem 0 2rem;
+      }
+    }
+
+    &__right {
+      flex-basis: 0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &__info {
+        background-color: #152640;
+        border-radius: 8px;
+        padding: 1rem;
+
+        @include media-breakpoint-down(sm) {
+          margin-bottom: 1rem;
+        }
+
+        &__row {
+          font-family: 'Roboto';
+          font-weight: 300;
+          font-size: 1rem;
+          letter-spacing: 0px;
+          color: #7ea3cc;
+          text-transform: uppercase;
+          display: flex;
+          justify-content: space-between;
+
+          span:last-child:not(:first-child) {
+            color: #ffffff;
+          }
+        }
+
+        &__balance {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+      }
+
+      &__button {
+        background-color: #f59e66;
+        @include media-breakpoint-down(sm) {
+          width: 80%;
+          margin: 0 10%;
+        }
+
+        &:hover {
+          background-color: #f7b387;
+        }
+      }
+
+      &__description {
+        font-family: 'Roboto';
+        font-weight: 300;
+        font-size: 1rem;
+        font-style: italic;
+        letter-spacing: 0px;
+        color: #8e8e8e;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}

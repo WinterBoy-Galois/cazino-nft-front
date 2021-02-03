@@ -2,25 +2,31 @@
 
 .container {
   display: flex;
-}
-
-.menu {
-  display: none;
+  margin: 0px 0.5rem;
 }
 
 .item {
   width: 40px;
-  padding: 8px 10px 8px 0;
+  padding: 8px 5px;
   cursor: pointer;
   position: relative;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:last-child {
+    margin-right: 0px;
+  }
 
   @include media-breakpoint-up(lg) {
     width: 53px;
-    padding: 12px 12px 12px 0;
+    padding: 12px 6px;
   }
 
   &__icon {
-    width: 100%;
+    width: 35px;
+    height: 35px;
     fill: $orange;
   }
 
@@ -29,13 +35,56 @@
     height: 15px;
     position: absolute;
     bottom: 5px;
-    right: 6px;
+    right: -5px;
 
     @include media-breakpoint-up(lg) {
-      width: 18px;
-      height: 18px;
+      width: 15px;
+      height: 15px;
       bottom: 8px;
       right: 7px;
     }
+  }
+
+  &__hidden_md_down {
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }
+
+  &__hidden_lg_up {
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+}
+
+.hamburger_menu {
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../../../../../../assets/images/footer/mobile-hamburger-menu.svg);
+  flex-direction: column;
+  top: -11rem;
+  left: 0.5rem;
+  background-size: 100%;
+  background-position-y: bottom;
+  padding: 0.5rem 0.5rem 1rem;
+
+  &::after {
+    content: '';
+    width: 56px;
+    position: absolute;
+    bottom: -54px;
+    border: 27px solid transparent;
+    border-top-color: #113352;
+  }
+
+  @include media-breakpoint-down(md) {
+    display: flex;
+  }
+
+  &__item {
+    margin-right: 0px;
   }
 }
