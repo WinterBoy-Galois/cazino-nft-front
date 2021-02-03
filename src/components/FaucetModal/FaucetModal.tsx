@@ -8,7 +8,7 @@ import clsx from 'clsx';
 import Button from '../../components/Button';
 import FaucetModalIcon from '../../components/icons/Faucet/FaucetModal';
 import BitcoinValue from '../../components/BitcoinValue';
-import { error as errorToast, success, info } from '../../components/Toast';
+import { error as errorToast, success } from '../../components/Toast';
 import { formatBitcoin } from '../../common/util/format.util';
 import { CLAIM_FAUCET } from '../../graphql/mutations';
 import { useMutation } from '@apollo/client';
