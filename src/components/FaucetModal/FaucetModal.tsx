@@ -20,6 +20,7 @@ interface IProps {
   canClaim?: boolean;
   every?: number;
   timestamp?: any;
+  errMessage?: any;
 }
 
 const secondsToHms = (d: number) => {
@@ -41,11 +42,12 @@ const FaucetModal: React.FC<IProps> = ({
   canClaim,
   every = 0,
   timestamp,
+  errMessage: defaultErrMessage = '',
 }) => {
   const { t } = useTranslation(['modals']);
   const [, dispatch] = useStateValue();
   const [claimFaucet] = useMutation(CLAIM_FAUCET);
-  const [errMessage, setErrMessage] = useState(null);
+  const [errMessage, setErrMessage] = useState(defaultErrMessage);
 
   useEffect(() => setErrMessage(null), [timestamp]);
 
@@ -55,7 +57,7 @@ const FaucetModal: React.FC<IProps> = ({
     if (errors || data.claimFaucet?.errors) {
       const errorArr = errors ?? data.claimFaucet?.errors;
 
-      if (errorArr[0].code === 'FAUCET_CLAIM_NOT_ALLOWED') {
+      if (errorArr[0].code === 'FAUCET_CLAIM_DISABLED') {
         return setErrMessage(errorArr[0].message);
       } else {
         return errorToast(errorArr[0].message);

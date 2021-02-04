@@ -11,6 +11,7 @@ import clsx from 'clsx';
 import { useLocation, useNavigate } from '@reach/router';
 import { useQuery } from '@apollo/client';
 import { FAUCET_INFO } from '../../../../../../graphql/queries';
+import { error as errorToast } from '../../../../../../components/Toast';
 
 interface IProps {
   hasUnclaimedBonus?: boolean;
@@ -33,16 +34,30 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
-    refreshFaucetData().then(async response => {
-      await navigate(`${pathname}?dialog=faucet`, {
-        state: {
-          amount: response.data?.faucetInfo.amount || 0,
-          canClaim: response.data?.faucetInfo.canClaim || false,
-          every: response.data?.faucetInfo.every || 0,
-          timestamp: new Date(),
-        },
-      });
-    });
+    refreshFaucetData()
+      .then(async response => {
+        const { amount, canClaim, every, errors } = response.data.faucetInfo;
+
+        if (errors) {
+          if (errors[0].code === 'FAUCET_CLAIM_DISABLED') {
+            return await navigate(`${pathname}?dialog=faucet`, {
+              state: { errMessage: errors[0].message },
+            });
+          } else {
+            return errorToast(errors[0].message);
+          }
+        }
+
+        return await navigate(`${pathname}?dialog=faucet`, {
+          state: {
+            amount: amount || 0,
+            canClaim: canClaim || false,
+            every: every || 0,
+            timestamp: new Date(),
+          },
+        });
+      })
+      .catch(err => err);
   };
 
   return (
