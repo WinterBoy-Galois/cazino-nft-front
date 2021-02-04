@@ -47,9 +47,9 @@ const FaucetModal: React.FC<IProps> = ({
   const { t } = useTranslation(['modals']);
   const [, dispatch] = useStateValue();
   const [claimFaucet] = useMutation(CLAIM_FAUCET);
-  const [errMessage, setErrMessage] = useState(defaultErrMessage);
+  const [errMessage, setErrMessage] = useState(null);
 
-  useEffect(() => setErrMessage(null), [timestamp]);
+  useEffect(() => setErrMessage(defaultErrMessage), [timestamp, defaultErrMessage]);
 
   const onClaim = async () => {
     const { data, errors } = await claimFaucet();

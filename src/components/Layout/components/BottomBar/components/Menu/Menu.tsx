@@ -41,7 +41,10 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
         if (errors) {
           if (errors[0].code === 'FAUCET_CLAIM_DISABLED') {
             return await navigate(`${pathname}?dialog=faucet`, {
-              state: { errMessage: errors[0].message },
+              state: {
+                errMessage: errors[0].message,
+                timestamp: new Date(),
+              },
             });
           } else {
             return errorToast(errors[0].message);
