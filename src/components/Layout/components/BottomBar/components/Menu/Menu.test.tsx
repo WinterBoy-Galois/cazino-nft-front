@@ -17,6 +17,7 @@ const mocks = [
     },
   },
 ];
+
 describe('Menu', () => {
   it('should match snapshot', () => {
     // Arrange

@@ -21,6 +21,12 @@ Object {
           >
             <a
               class="nav__link"
+              href="/withdrawals"
+            >
+              WITHDRAWALS
+            </a>
+            <a
+              class="nav__link"
               href="/deposits"
             >
               Deposits
@@ -59,6 +65,12 @@ Object {
         <nav
           class="nav"
         >
+          <a
+            class="nav__link"
+            href="/withdrawals"
+          >
+            WITHDRAWALS
+          </a>
           <a
             class="nav__link"
             href="/deposits"
