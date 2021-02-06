@@ -1,9 +1,17 @@
-@import '../../styles/shared';
+@import "../../styles/shared";
 
 .slide-select {
   max-width: 428px;
   margin: 0 auto;
   margin-bottom: 3rem;
+}
+
+.slide-select-withdraw {
+  margin-bottom: 2.5rem;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 1rem;
+  }
 }
 
 .spacing {
@@ -52,8 +60,6 @@
     border-radius: 8px;
     margin-bottom: 1rem;
     padding: 15px;
-    font-size: 18px;
-    line-height: 1.3;
 
     & > div {
       margin: 10px 0px;
@@ -75,32 +81,35 @@
   &__label {
     align-items: center;
     display: flex;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 21px;
+    color: #7ea3cc;
+    user-select: none;
+    margin: 0;
   }
 
   &__value {
     text-align: right;
-
-    @include media-breakpoint-up(md) {
-      text-align: left;
-    }
   }
 
   &__amount_control {
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
   }
 
   &__button {
-    width: 100%;
+    width: 16rem;
     display: block;
     margin: auto;
     background-color: #f19e65;
+    color: #4d290f;
 
     &:hover {
       background-color: #f3b489;
     }
 
-    @include media-breakpoint-up(lg) {
-      width: 40%;
+    @include media-breakpoint-up(md) {
+      width: 16.67rem;
     }
   }
 }
