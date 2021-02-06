@@ -21,6 +21,7 @@ import WithdrawAmountControl from '../../components/WithdrawAmountControl';
 import { WITHDRAW } from '../../graphql/mutations';
 import { success, error as errorToast } from '../../components/Toast';
 import clsx from 'clsx';
+import validate from 'bitcoin-address-validation';
 
 interface IProps {
   show: boolean;
@@ -40,13 +41,22 @@ const CashierModal: React.FC<IProps> = ({
   balance,
   loading,
   error,
-  depositAddress = '',
+  depositAddress: defaultDepositAddress = '',
   onTransactionsLinkClick,
 }) => {
   const { t } = useTranslation(['modals']);
   const [modalType, setModalType] = useState('deposit');
   const [amount, setAmount] = useState(0);
   const [withdraw] = useMutation(WITHDRAW);
+  const [isValidated, setValidated] = useState(false);
+  const [depositAddress, setDepositAddress] = useState(defaultDepositAddress);
+
+  useEffect(() => {
+    if (validate(depositAddress)) setValidated(true);
+    else setValidated(false);
+  }, [depositAddress]);
+
+  useEffect(() => setDepositAddress(defaultDepositAddress), [defaultDepositAddress]);
 
   return (
     <Modal show={show} onClose={onClose} title={t('cashier.title')}>
@@ -57,7 +67,10 @@ const CashierModal: React.FC<IProps> = ({
       {!loading && !error && cashier && depositAddress && (
         <Fragment>
           <SlideSelect
-            className={styles['slide-select']}
+            className={clsx(
+              styles['slide-select'],
+              modalType === 'withdraw' ? styles['slide-select-withdraw'] : null
+            )}
             selectItems={[
               { label: 'deposit', onClick: () => setModalType('deposit') },
               { label: 'withdraw', onClick: () => setModalType('withdraw') },
@@ -93,12 +106,12 @@ const CashierModal: React.FC<IProps> = ({
             </div>
           ) : modalType === 'withdraw' ? (
             <div className="row">
-              <div className={clsx(styles.withdraw__row, 'col-12 col-md-10')}>
+              <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
                 <div className={clsx(styles.withdraw__container, 'row')}>
                   <div className="col-12">
                     <div className="row">
-                      <div className={clsx(styles.withdraw__label, 'col-12 col-md-8')}>Balance</div>
-                      <div className={clsx(styles.withdraw__value, 'col-12 col-md-4')}>
+                      <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>Balance</div>
+                      <div className={clsx(styles.withdraw__value, 'col-6 col-md-5')}>
                         <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
                         <span>{formatBitcoin(balance)}</span>
                       </div>
@@ -107,10 +120,10 @@ const CashierModal: React.FC<IProps> = ({
 
                   <div className="col-12">
                     <div className="row">
-                      <div className={clsx(styles.withdraw__label, 'col-12 col-md-8')}>
+                      <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>
                         Blockchain Fee
                       </div>
-                      <div className={clsx(styles.withdraw__value, 'col-12 col-md-4')}>
+                      <div className={clsx(styles.withdraw__value, 'col-6 col-md-5')}>
                         <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
                         <span>{formatBitcoin(cashier.networkFee)}</span>
                       </div>
@@ -119,10 +132,10 @@ const CashierModal: React.FC<IProps> = ({
 
                   <div className="col-12">
                     <div className="row">
-                      <div className={clsx(styles.withdraw__label, 'col-12 col-md-8')}>
+                      <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>
                         Minimum Withdraw Amount
                       </div>
-                      <div className={clsx(styles.withdraw__value, 'col-12 col-md-4')}>
+                      <div className={clsx(styles.withdraw__value, 'col-6 col-md-5')}>
                         <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
                         <span>{formatBitcoin(cashier.minWithdraw)}</span>
                       </div>
@@ -131,11 +144,12 @@ const CashierModal: React.FC<IProps> = ({
                 </div>
               </div>
 
-              <div className={clsx(styles.withdraw__row, 'col-12 col-md-10')}>
-                <CopyField
+              <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
+                <TextInput
                   label={t('cashier.bitcoinWalletAddress')}
                   value={depositAddress}
-                  className={styles.spacing}
+                  validationMessage={isValidated ? '' : 'Address is not valid.'}
+                  onChangeValue={depositAddress => setDepositAddress(depositAddress)}
                 />
               </div>
 
@@ -143,7 +157,7 @@ const CashierModal: React.FC<IProps> = ({
                 className={clsx(
                   styles.withdraw__row,
                   styles.withdraw__amount_control,
-                  'col-12 col-md-10'
+                  'col-12 col-md-10 col-lg-8'
                 )}
               >
                 <WithdrawAmountControl
@@ -153,7 +167,7 @@ const CashierModal: React.FC<IProps> = ({
                 />
               </div>
 
-              <div className={clsx(styles.withdraw__row, 'col-12 col-md-10')}>
+              <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
                 <Button
                   className={styles.withdraw__button}
                   onClick={async () => {
