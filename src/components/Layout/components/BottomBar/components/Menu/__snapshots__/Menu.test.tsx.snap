@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <div
+          class="item"
+        >
+          <svg
+            class="item__icon"
+            viewBox="0 0 34.45 34.81"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              data-name="Layer 2"
+              id="Layer_2"
+            >
+              <g
+                data-name="Слой 5"
+                id="Слой_5"
+              >
+                <path
+                  d="M34.43 16.07l-.49-3.34a1.77 1.77 0 00-1.76-1.53h-10v6.9h10.5a1.78 1.78 0 001.75-2.03zM.5 12.73L0 16.07a1.78 1.78 0 001.76 2h10.5V11.2h-10A1.78 1.78 0 00.5 12.73zM31.94 33V19.47h-9.77v15.34h7.9A1.87 1.87 0 0031.94 33zM2.51 19.47V33a1.86 1.86 0 001.86 1.86h7.91V19.47z"
+                />
+                <rect
+                  height="23.61"
+                  rx="1.29"
+                  width="7.19"
+                  x="13.63"
+                  y="11.2"
+                />
+                <path
+                  d="M26.47 5.66c-1.75-2.51-5.26.26-7 2.19a4 4 0 00-.67-.49C22.28 3.23 29.05-3.51 33 2.2c2.43 3.49-.38 7.4-11.67 8.11a3.76 3.76 0 00-.1-.66c4.77-.51 6.38-2.35 5.24-3.99z"
+                />
+                <path
+                  d="M13 10.31a4.19 4.19 0 018.34 0z"
+                />
+                <path
+                  d="M8 5.66c1.75-2.51 5.26.26 7 2.19a4 4 0 01.67-.49C12.16 3.23 5.38-3.51 1.4 2.2c-2.4 3.49.38 7.4 11.67 8.11a3.76 3.76 0 01.1-.66C8.45 9.14 6.83 7.3 8 5.66z"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <div
+        class="item"
+      >
+        <svg
+          class="item__icon"
+          viewBox="0 0 34.45 34.81"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            data-name="Layer 2"
+            id="Layer_2"
+          >
+            <g
+              data-name="Слой 5"
+              id="Слой_5"
+            >
+              <path
+                d="M34.43 16.07l-.49-3.34a1.77 1.77 0 00-1.76-1.53h-10v6.9h10.5a1.78 1.78 0 001.75-2.03zM.5 12.73L0 16.07a1.78 1.78 0 001.76 2h10.5V11.2h-10A1.78 1.78 0 00.5 12.73zM31.94 33V19.47h-9.77v15.34h7.9A1.87 1.87 0 0031.94 33zM2.51 19.47V33a1.86 1.86 0 001.86 1.86h7.91V19.47z"
+              />
+              <rect
+                height="23.61"
+                rx="1.29"
+                width="7.19"
+                x="13.63"
+                y="11.2"
+              />
+              <path
+                d="M26.47 5.66c-1.75-2.51-5.26.26-7 2.19a4 4 0 00-.67-.49C22.28 3.23 29.05-3.51 33 2.2c2.43 3.49-.38 7.4-11.67 8.11a3.76 3.76 0 00-.1-.66c4.77-.51 6.38-2.35 5.24-3.99z"
+              />
+              <path
+                d="M13 10.31a4.19 4.19 0 018.34 0z"
+              />
+              <path
+                d="M8 5.66c1.75-2.51 5.26.26 7 2.19a4 4 0 01.67-.49C12.16 3.23 5.38-3.51 1.4 2.2c-2.4 3.49.38 7.4 11.67 8.11a3.76 3.76 0 01.1-.66C8.45 9.14 6.83 7.3 8 5.66z"
+              />
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
