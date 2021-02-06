@@ -39,17 +39,12 @@
 }
 
 .icon {
-  width: 18px;
-  margin: 0 0.9rem 0 1rem;
+  width: 0.9rem;
   fill: $bitcoinYellow;
+  margin-right: 0.5rem;
 
   &__inner {
     fill: $light-blue;
-  }
-
-  @include media-breakpoint-up(lg) {
-    width: 31px;
-    margin: 0 1rem 0 1.5rem;
   }
 }
 
@@ -90,7 +85,9 @@
   }
 
   &__value {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   &__amount_control {

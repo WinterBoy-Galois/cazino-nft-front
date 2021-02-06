@@ -62,9 +62,11 @@ const CashierModal: React.FC<IProps> = ({
     <Modal show={show} onClose={onClose} title={t('cashier.title')}>
       {loading && <Loading />}
       {!loading && error && <Error />}
-      {!loading && !error && !depositAddress && <Error>{t('cashier.depositNullError')}</Error>}
+      {!loading && !error && !depositAddress && depositAddress !== '' && (
+        <Error>{t('cashier.depositNullError')}</Error>
+      )}
 
-      {!loading && !error && cashier && depositAddress && (
+      {!loading && !error && cashier && (depositAddress || depositAddress === '') && (
         <Fragment>
           <SlideSelect
             className={clsx(
@@ -162,7 +164,7 @@ const CashierModal: React.FC<IProps> = ({
               >
                 <WithdrawAmountControl
                   amount={0}
-                  max={balance}
+                  max={balance ? balance - cashier.networkFee : 0}
                   onChange={amount => setAmount(amount)}
                 />
               </div>

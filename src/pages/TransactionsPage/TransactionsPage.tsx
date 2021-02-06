@@ -19,6 +19,13 @@ const TransactionsPage: React.FC<RouteComponentProps> = () => {
       <PageContentContainer>
         <nav className={styles.nav}>
           <NavLink
+            to={'withdrawals'}
+            className={styles['nav__link']}
+            activeClassName={styles['nav__link--active']}
+          >
+            WITHDRAWALS
+          </NavLink>
+          <NavLink
             to={'deposits'}
             className={styles['nav__link']}
             activeClassName={styles['nav__link--active']}
@@ -36,7 +43,7 @@ const TransactionsPage: React.FC<RouteComponentProps> = () => {
 
         <DetailsContainer className={styles['details-container']}>
           <Router>
-            <Redirect from={'/'} to={'deposits'} noThrow />
+            <Redirect from={'/'} to={'withdrawals'} noThrow />
             <DepositsWithData path={'deposits'} />
             <BetsWithData path={'bets'} />
           </Router>
