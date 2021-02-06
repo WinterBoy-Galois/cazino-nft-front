@@ -1,4 +1,4 @@
-@import "../../styles/shared";
+@import '../../styles/shared';
 
 .modal {
   &__row {
@@ -62,7 +62,7 @@
         }
 
         &__row {
-          font-family: "Roboto";
+          font-family: 'Roboto';
           font-weight: 300;
           font-size: 1rem;
           letter-spacing: 0px;
@@ -89,8 +89,8 @@
 
       &__button {
         background-color: #f59e66;
-        color: #4D290F;
-        
+        color: #4d290f;
+
         @include media-breakpoint-down(sm) {
           width: 80%;
           margin: 0 10%;
@@ -102,7 +102,7 @@
       }
 
       &__description {
-        font-family: "Roboto";
+        font-family: 'Roboto';
         font-weight: 300;
         font-size: 1rem;
         font-style: italic;
