@@ -36,6 +36,7 @@ const WithdrawalsTable: React.FC<IProps> = props => {
       selector: 'status',
       name: ' ',
       minWidth: '165px',
+      // eslint-disable-next-line
       cell: r => (
         <span className={clsx(styles.withdrawal__status, getStatusClassName(r.status))}>
           &nbsp;
