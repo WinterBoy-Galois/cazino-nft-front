@@ -7,7 +7,7 @@
   "depositConfirmed": "{{amount}} BTC Deposit credited.",
   "depositPending": "Deposit of {{amount}} BTC has been registered. Awaiting confirmation...",
   "depositRejected": "Deposit of {{amount}} BTC was rejected.",
-  "withdrawPending": "Your withdraw is pending.",
-  "withdrawConfirmed": "Your withdraw is confirmed.",
-  "withdrawRejected": "Your withdraw is rejected."
+  "withdrawPending": "Withdraw of amount {{amount}} is pending.",
+  "withdrawConfirmed": "Withdraw of amount {{amount}} is confirmed",
+  "withdrawRejected": "Withdraw of amount {{amount}} is rejected."
 }

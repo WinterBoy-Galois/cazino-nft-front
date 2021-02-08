@@ -29,15 +29,15 @@ export default function useRealtimeBalance() {
           break;
 
         case TransactionStatus.WITHDRAW_PENDING:
-          info(t('withdrawPending'));
+          info(t('withdrawPending', { amount: data.balance.amount }));
           break;
 
         case TransactionStatus.WITHDRAW_CONFIRMED:
-          success(t('withdrawConfirmed'));
+          success(t('withdrawConfirmed', { amount: data.balance.amount }));
           break;
 
         case TransactionStatus.WITHDRAW_REJECTED:
-          error(t('withdrawRejected'));
+          error(t('withdrawRejected', { amount: data.balance.amount }));
           break;
       }
     }
