@@ -50,6 +50,7 @@ const CashierModal: React.FC<IProps> = ({
   const [withdraw] = useMutation(WITHDRAW);
   const [isValidated, setValidated] = useState(false);
   const [depositAddress, setDepositAddress] = useState(defaultDepositAddress);
+  const [isSmallAmount, setSmallAmount] = useState(false);
 
   useEffect(() => {
     if (validate(depositAddress)) setValidated(true);
@@ -57,6 +58,10 @@ const CashierModal: React.FC<IProps> = ({
   }, [depositAddress]);
 
   useEffect(() => setDepositAddress(defaultDepositAddress), [defaultDepositAddress]);
+
+  useEffect(() => {
+    if (cashier?.minWithdraw && amount) setSmallAmount(cashier.minWithdraw > amount);
+  }, [amount]);
 
   return (
     <Modal show={show} onClose={onClose} title={t('cashier.title')}>
@@ -166,7 +171,12 @@ const CashierModal: React.FC<IProps> = ({
                   amount={0}
                   max={balance ? balance - cashier.networkFee : 0}
                   onChange={amount => setAmount(amount)}
+                  isError={isSmallAmount}
                 />
+
+                {isSmallAmount ? (
+                  <div className={styles.withdraw__amount_control__error}>Amount is too small.</div>
+                ) : null}
               </div>
 
               <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
@@ -181,6 +191,7 @@ const CashierModal: React.FC<IProps> = ({
                     else if (data?.withdraw?.result) success('Withdraw is completed.');
                     else errorToast('Withdraw is failed.');
                   }}
+                  disabled={isSmallAmount || !isValidated}
                 >
                   Withdraw
                 </Button>

@@ -9,10 +9,11 @@ interface IProps {
   max?: number;
   amount?: number;
   onChange?: (value: number) => void;
+  isError?: boolean;
 }
 
 const WithdrawAmountControl: React.FC<IProps> = props => {
-  const { amount: initialAmount = 0.0004, className, onChange, max = 9 } = props;
+  const { amount: initialAmount = 0.0004, className, onChange, max = 9, isError = false } = props;
   const [amount, setAmount] = useState(initialAmount);
   useEffect(() => setAmount(initialAmount), [initialAmount]);
 
@@ -33,7 +34,7 @@ const WithdrawAmountControl: React.FC<IProps> = props => {
     <div className={styles.container}>
       <BetControl
         {...props}
-        className={clsx(className, styles.control)}
+        className={clsx(className, styles.control, isError ? styles.control__error : null)}
         label={'Amount'}
         icon={'BITCOIN'}
         value={amount}
