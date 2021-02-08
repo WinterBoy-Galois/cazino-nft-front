@@ -51,7 +51,7 @@ const CashierModal: React.FC<IProps> = ({
   const [amount, setAmount] = useState(0);
   const [isValidated, setValidated] = useState(true);
   const [depositAddress, setDepositAddress] = useState(defaultDepositAddress);
-  const [isSmallAmount, setSmallAmount] = useState(false);
+  const [isSmallAmount, setSmallAmount] = useState<any>(null);
   const [show, setShow] = useState(defaultShow);
   const [bitcoinWalletAddress, setBitcoinWalletAddress] = useState('');
 
@@ -202,7 +202,7 @@ const CashierModal: React.FC<IProps> = ({
                 <Button
                   className={styles.withdraw__button}
                   onClick={handleWithdraw}
-                  disabled={isSmallAmount || !isValidated}
+                  disabled={isSmallAmount === null || isSmallAmount || !isValidated}
                 >
                   Withdraw
                 </Button>

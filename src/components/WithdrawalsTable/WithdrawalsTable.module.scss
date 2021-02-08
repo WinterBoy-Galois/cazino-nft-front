@@ -1,1 +1,17 @@
-@import '../../styles/shared';
+@import "../../styles/shared";
+
+.withdrawal {
+  &__status {
+    &__yellow {
+    }
+
+    &__green {
+    }
+
+    &__red {
+    }
+
+    &__unknown {
+    }
+  }
+}

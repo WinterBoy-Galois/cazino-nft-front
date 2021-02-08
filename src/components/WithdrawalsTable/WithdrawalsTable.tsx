@@ -10,6 +10,8 @@ import BitcoinProfit from '../BitcoinProfit';
 import GameIcon from '../GameIcon';
 import styles from './WithdrawalsTable.module.scss';
 import { useStateValue } from '../../state';
+import clsx from 'clsx';
+
 interface IProps {
   data: TransactionsWithdraw[];
   paginationTotalRows?: number;
@@ -19,7 +21,48 @@ interface IProps {
 }
 
 const WithdrawalsTable: React.FC<IProps> = props => {
-  const columns: TableColumn<TransactionsWithdraw>[] = [];
+  const getStatusClassName = (status: string) => {
+    if (status === 'WITHDRAW_PENDING') return styles.withdrawal__status__yellow;
+
+    if (status === 'WITHDRAW_CONFIRMED') return styles.withdrawal__status__green;
+
+    if (status === 'WITHDRAW_REJECTED') return styles.withdrawal__status__red;
+
+    return styles.withdrawal__status__unknown;
+  };
+
+  const columns: TableColumn<TransactionsWithdraw>[] = [
+    {
+      selector: 'status',
+      name: ' ',
+      minWidth: '165px',
+      cell: r => (
+        <span className={clsx(styles.withdrawal__status, getStatusClassName(r.status))}>
+          &nbsp;
+        </span>
+      ),
+    },
+    {
+      selector: 'time',
+      name: 'Time',
+      minWidth: '165px',
+      format: r => datetimeFromEpoch(r.time),
+    },
+    {
+      selector: 'address',
+      name: 'Address',
+      hideAtBreakpoint: 'md',
+      // eslint-disable-next-line
+      format: r => r.address,
+    },
+    {
+      selector: 'amount',
+      name: 'Amount',
+      hideAtBreakpoint: 'md',
+      // eslint-disable-next-line
+      cell: r => <BitcoinValue value={formatBitcoin(r.amount)} />,
+    },
+  ];
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
