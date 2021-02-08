@@ -24,7 +24,7 @@ const TransactionsPage: React.FC<RouteComponentProps> = () => {
             className={styles['nav__link']}
             activeClassName={styles['nav__link--active']}
           >
-            WITHDRAWALS
+            Withdrawals
           </NavLink>
           <NavLink
             to={'deposits'}

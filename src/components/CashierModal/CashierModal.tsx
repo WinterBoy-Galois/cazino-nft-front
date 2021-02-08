@@ -49,17 +49,20 @@ const CashierModal: React.FC<IProps> = ({
   const { t } = useTranslation(['modals']);
   const [modalType, setModalType] = useState('deposit');
   const [amount, setAmount] = useState(0);
-  const [isValidated, setValidated] = useState(false);
+  const [isValidated, setValidated] = useState(true);
   const [depositAddress, setDepositAddress] = useState(defaultDepositAddress);
   const [isSmallAmount, setSmallAmount] = useState(false);
   const [show, setShow] = useState(defaultShow);
+  const [bitcoinWalletAddress, setBitcoinWalletAddress] = useState('');
 
   useEffect(() => setShow(defaultShow), [defaultShow]);
 
   useEffect(() => {
-    if (validate(depositAddress)) setValidated(true);
-    else setValidated(false);
-  }, [depositAddress]);
+    if (bitcoinWalletAddress !== '') {
+      if (validate(bitcoinWalletAddress)) setValidated(true);
+      else setValidated(false);
+    }
+  }, [bitcoinWalletAddress]);
 
   useEffect(() => setDepositAddress(defaultDepositAddress), [defaultDepositAddress]);
 
@@ -169,9 +172,9 @@ const CashierModal: React.FC<IProps> = ({
               <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
                 <TextInput
                   label={t('cashier.bitcoinWalletAddress')}
-                  value={depositAddress}
+                  value={bitcoinWalletAddress}
                   validationMessage={isValidated ? '' : 'Address is not valid.'}
-                  onChangeValue={depositAddress => setDepositAddress(depositAddress)}
+                  onChangeValue={depositAddress => setBitcoinWalletAddress(depositAddress)}
                 />
               </div>
 
