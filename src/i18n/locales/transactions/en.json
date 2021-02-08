@@ -6,5 +6,8 @@
   },
   "depositConfirmed": "{{amount}} BTC Deposit credited.",
   "depositPending": "Deposit of {{amount}} BTC has been registered. Awaiting confirmation...",
-  "depositRejected": "Deposit of {{amount}} BTC was rejected."
+  "depositRejected": "Deposit of {{amount}} BTC was rejected.",
+  "withdrawPending": "Your withdraw is pending.",
+  "withdrawConfirmed": "Your withdraw is confirmed.",
+  "withdrawRejected": "Your withdraw is rejected."
 }

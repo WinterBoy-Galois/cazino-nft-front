@@ -9,11 +9,6 @@ Object {
         class="container"
       >
         <div
-          class="menu"
-        >
-          Burger Menu
-        </div>
-        <div
           class="item"
         >
           <svg
@@ -59,11 +54,6 @@ Object {
     <div
       class="container"
     >
-      <div
-        class="menu"
-      >
-        Burger Menu
-      </div>
       <div
         class="item"
       >

@@ -27,6 +27,18 @@ export default function useRealtimeBalance() {
         case TransactionStatus.DEPOSIT_REJECTED:
           error(t('depositRejected', { amount: data.balance.amount }));
           break;
+
+        case TransactionStatus.WITHDRAW_PENDING:
+          info(t('withdrawPending'));
+          break;
+
+        case TransactionStatus.WITHDRAW_CONFIRMED:
+          success(t('withdrawConfirmed'));
+          break;
+
+        case TransactionStatus.WITHDRAW_REJECTED:
+          error(t('withdrawRejected'));
+          break;
       }
     }
   }, [data, dispatch, t]);

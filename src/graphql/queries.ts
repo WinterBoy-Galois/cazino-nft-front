@@ -297,6 +297,25 @@ export const TRANSACTION_BETS = gql`
   }
 `;
 
+export const TRANSACTION_WITHDRAWALS = gql`
+  query transactionsWithdraw($page: Int, $limit: Int) {
+    transactionsWithdraw(page: $page, limit: $limit) {
+      page
+      limit
+      total
+      items {
+        id
+        status
+        time
+        hash
+        address
+        amount
+        fee
+      }
+    }
+  }
+`;
+
 export const FAUCET_INFO = gql`
   query faucetInfo {
     faucetInfo {
