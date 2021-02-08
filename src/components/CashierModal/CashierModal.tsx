@@ -96,6 +96,7 @@ const CashierModal: React.FC<IProps> = ({
               styles['slide-select'],
               modalType === 'withdraw' ? styles['slide-select-withdraw'] : null
             )}
+            index={modalType === 'withdraw' ? 1 : 0}
             selectItems={[
               { label: 'deposit', onClick: () => setModalType('deposit') },
               { label: 'withdraw', onClick: () => setModalType('withdraw') },
