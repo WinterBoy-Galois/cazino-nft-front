@@ -7,5 +7,5 @@ export default interface TransactionsWithdraw {
   hash: string;
   address: string;
   amount: number;
-  fee: number
+  fee: number;
 }
