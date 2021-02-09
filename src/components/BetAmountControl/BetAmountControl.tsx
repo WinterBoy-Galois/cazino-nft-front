@@ -50,7 +50,7 @@ const BetAmountControl: React.FC<IProps> = props => {
       <BetControl
         {...props}
         className={clsx(className, styles.control)}
-        label={label ?? 'Amount'}
+        label={className?.includes('button_mine_game') ? 'BET AMOUNT' : label ?? 'Amount'}
         icon={'BITCOIN'}
         value={amount}
         decimalPlaces={appConfig.bitcoinFractionDigits}

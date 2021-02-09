@@ -86,8 +86,6 @@ const Modal: React.FC<IProps> = ({
               <div className={styles.modal__header__headline}>
                 {modalClassName === 'warning' ? (
                   <Warning className={clsx(styles.icon, styles.icon__warning)} />
-                ) : modalClassName === 'circle_warning' ? (
-                  <Warning className={clsx(styles.icon, styles.icon__warning)} circle />
                 ) : null}
                 {title}
               </div>
