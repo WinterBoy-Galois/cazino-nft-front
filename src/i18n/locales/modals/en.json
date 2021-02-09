@@ -27,6 +27,13 @@
     },
     "clams": "Clams"
   },
+  "withdrawalDetails": {
+    "title": "Withdrawal Details",
+    "time": "Date / time",
+    "address": "Address",
+    "amount": "Amount",
+    "status": "Status"
+  },
   "betResults": {
     "title": "Bet Results"
   },

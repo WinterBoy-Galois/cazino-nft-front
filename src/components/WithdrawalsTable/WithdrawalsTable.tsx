@@ -35,7 +35,7 @@ const WithdrawalsTable: React.FC<IProps> = props => {
     {
       selector: 'status',
       name: ' ',
-      minWidth: '165px',
+      width: '36px',
       // eslint-disable-next-line
       cell: r => (
         <span className={clsx(styles.withdrawal__status, getStatusClassName(r.status))}>
@@ -59,7 +59,7 @@ const WithdrawalsTable: React.FC<IProps> = props => {
     {
       selector: 'amount',
       name: 'Amount',
-      hideAtBreakpoint: 'md',
+      maxWidth: '150px',
       // eslint-disable-next-line
       cell: r => <BitcoinValue value={formatBitcoin(r.amount)} />,
     },
@@ -69,8 +69,13 @@ const WithdrawalsTable: React.FC<IProps> = props => {
   const { pathname } = useLocation();
   const [{ auth }] = useStateValue();
   const handleRowClicked = (row: TransactionsWithdraw) => {
-    navigate(`${pathname}?dialog=withdraw-details`, {
-      state: {},
+    navigate(`${pathname}?dialog=withdrawal-details`, {
+      state: {
+        address: row.address,
+        amount: row.amount,
+        status: row.status,
+        time: datetimeFromEpoch(row.time),
+      },
     });
   };
 
