@@ -22,6 +22,7 @@ const MineGameBoard: React.FC<IProps> = ({ className, value }) => {
       setResults(temp);
     }
   };
+
   return (
     <div className={clsx(styles.container, className, styles.bg_images)}>
       <div className={styles.grid_container}>

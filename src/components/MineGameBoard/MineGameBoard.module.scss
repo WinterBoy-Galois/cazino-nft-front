@@ -62,13 +62,20 @@
       box-shadow: 0 0 2px #0008;
 
       @include media-breakpoint-down(md) {
-        width: 75px;
-        height: 75px;
+        width: calc(20% - 20px);
+        min-width: 80px;
+        height: calc(20% - 22px);
+        min-height: 80px;
       }
-
+      @include media-breakpoint-down(sm) {
+        width: 85px;
+        height: 85px;
+      }
       @include media-breakpoint-down(xs) {
-        width: 55px;
-        height: 55px;
+        width: calc(20vw - 20px);
+        min-width: 45px;
+        height: calc(20vw - 22px);
+        min-height: 45px;
       }
     }
 

@@ -25,7 +25,6 @@ const MineGame: React.FC<IProps> = ({ loadingBet, loadingSetup, he = 0.01 }) => 
     diceGameReducer,
     getInitialState(he)
   );
-
   const [flagStart, setFlagStart] = useState(true);
   const [winCounts, setWinCounts] = useState(18);
   const handlePlaceBet = () => {
@@ -81,8 +80,8 @@ const MineGame: React.FC<IProps> = ({ loadingBet, loadingSetup, he = 0.01 }) => 
           <div className={styles.pt_profit_price} />
         )}
         <div className={clsx(styles.btn_group, 'container')}>
-          <div className="row">
-            <div className="col-4 col-xl-2" style={flagStart ? take_opacity_1 : take_opacity_3}>
+          <div className={styles.controls__wrapper__btn_grid}>
+            <div style={flagStart ? take_opacity_1 : take_opacity_3}>
               <div className={styles.win_counts}>
                 <div className={styles.win_counts__minus} onClick={onMinus}>
                   &mdash;
@@ -97,7 +96,7 @@ const MineGame: React.FC<IProps> = ({ loadingBet, loadingSetup, he = 0.01 }) => 
               </div>
             </div>
             <div
-              className={clsx('col-12 col-xl-4', styles.amount__container)}
+              className={styles.amount__container}
               style={flagStart ? take_opacity_1 : take_opacity_3}
             >
               <BetAmountControl
@@ -108,7 +107,7 @@ const MineGame: React.FC<IProps> = ({ loadingBet, loadingSetup, he = 0.01 }) => 
                 onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
               />
             </div>
-            <div className={clsx(styles.controls__button, 'col-12 col-xl-3')}>
+            <div className={styles.controls__button}>
               <SpinnerButton
                 className={`${styles.button}`}
                 onClick={handlePlaceBet}

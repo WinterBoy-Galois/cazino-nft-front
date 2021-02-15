@@ -35,21 +35,40 @@
     background-color: $user-info-main-blue;
     padding: 0 0 2rem;
 
+    &__btn_grid {
+      display: grid;
+      grid-template-columns: 1fr 2.5fr 2.5fr;
+      grid-auto-rows: 1fr;
+      grid-column-gap: 25px;
+      margin: 0 auto;
+      @include media-breakpoint-down(xl) {
+        width: 85%;
+      }
+      @include media-breakpoint-down(lg) {
+        grid-template-columns: 1.5fr 3fr 2.3fr;
+        grid-column-gap: 15px;
+        width: 90%;
+      }
+      @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr;
+        grid-column-gap: 10px;
+        width: 75%;
+      }
+      @include media-breakpoint-down(sm) {
+        width: 85%;
+      }
+      @include media-breakpoint-down(xs) {
+        width: 95%;
+      }
+    }
+
     .btn_group {
       @include media-breakpoint-down(xl) {
-        padding: 4rem 3.5rem 2rem 0;
-      }
-      @include media-breakpoint-down(xl) {
-        margin: 0 auto;
-        padding-left: 2rem;
+        padding: 3.95rem 0 2rem;
       }
       @include media-breakpoint-down(md) {
         margin: 0 auto;
         padding: 2rem 0 0 0;
-        width: 80%;
-      }
-      @include media-breakpoint-down(sm) {
-        width: 90%;
       }
       .win_counts {
         display: flex;
@@ -63,11 +82,19 @@
         @include media-breakpoint-down(sm){
           width: 200px;
         }
+        @include media-breakpoint-down(lg){
+          margin: 0.5rem 0;
+        }
+        @include media-breakpoint-down(md){
+          width: 35%;
+          min-width: 130px;
+        }
 
         &__minus,
         &__plus{
+          padding: 5px;
+          width: 35px;
           text-align: center;
-          width: 22%;
           font-size: 30px;
           background-color: $email-status-blue;
           cursor: pointer;
@@ -82,7 +109,8 @@
           border-top-right-radius: 8px;
           border-bottom-right-radius: 8px;
           justify-content: flex-end;
-          font-size: 37px;
+          font-size: 39px;
+          line-height: 1.2;
         }
         &__minus:hover,
         &__plus:hover {
@@ -110,7 +138,7 @@
     display: flex;
     margin-left: 8px;
     width: 100%;
-    min-width: 20vw;
+    //min-width: 20vw;
     align-items: center;
     @include media-breakpoint-down(xl) {
       margin-left: 0;
@@ -148,7 +176,6 @@
 .amount {
   &__container {
     margin: 0.5rem 0;
-
     @include media-breakpoint-up(xl) {
       margin: 0;
     }
