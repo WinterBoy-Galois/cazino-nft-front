@@ -87,3 +87,4 @@ While running `yarn start` the debugger can be attached by pressing F5.
 
 Note:
 You need to have to have [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) installed.
+#
