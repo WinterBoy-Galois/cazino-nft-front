@@ -335,3 +335,20 @@ export const FAUCET_INFO = gql`
     }
   }
 `;
+
+export const BONUSCLAIMS = gql`
+  query bonusClaims {
+    bonusClaims {
+      ... on BonusClaim {
+        id
+        givenAt
+        claimedAt
+        expiresAt
+        amount
+        position
+        type
+        wager
+      }
+    }
+  }
+`;

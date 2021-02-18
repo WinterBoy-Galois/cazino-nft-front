@@ -63,7 +63,7 @@ const getFooterData = (t: TFunction): FooterList[] => [
       },
       {
         label: t('links.about.bonuses'),
-        path: '/',
+        path: '/bonuses',
       },
       {
         label: t('links.about.affiliates'),

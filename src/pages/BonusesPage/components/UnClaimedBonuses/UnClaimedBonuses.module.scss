@@ -1,0 +1,146 @@
+@import '../../../../styles/shared.scss';
+
+.unclaimed_bonus {
+  &es {
+    background-color: #113352;
+    border-radius: 0.625rem;
+    margin: 0 auto 3.25rem;
+    max-width: 100%;
+    width: calc(100% - 2rem);
+    padding: 1.75rem;
+
+    &__title {
+      color: #80a2cc;
+      font-size: 1.25rem;
+      line-height: 1.625rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+
+    &__history {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &__link {
+        color: #4496ff;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding: 1.75rem 2.625rem;
+      width: 59.375rem;
+
+      &__title {
+        margin-bottom: 3.125rem;
+      }
+    }
+  }
+
+  & {
+    display: flex;
+    margin-bottom: 2rem;
+
+    &__position {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 47.5%;
+      height: 100%;
+      max-height: 8.5rem;
+      background-color: #2d4560;
+      border-radius: 9px;
+      margin-right: auto;
+      padding: 0.5rem;
+
+      @include media-breakpoint-up(xl) {
+        width: 12.5rem;
+        height: 5.75rem;
+        padding: 1rem;
+        margin-right: 1.25rem;
+      }
+    }
+
+    &__summary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-right: auto;
+
+      p {
+        width: 100%;
+        text-transform: uppercase;
+        color: #7ea3cc;
+        font-size: 1rem;
+        line-height: 1.25rem;
+        margin: 0.25rem 0;
+
+        &:nth-of-type(2) {
+          font-weight: bold;
+        }
+      }
+    }
+
+    &__button {
+      width: 47.5%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      @include media-breakpoint-up(xl) {
+        width: 15.1875rem;
+        height: 5.75rem;
+      }
+
+      &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        line-height: 1.25rem;
+        margin-top: 0.5rem;
+      }
+    }
+
+    &__mobile {
+      display: none;
+      margin-bottom: 3rem;
+
+      &__bonus_type {
+        color: #7ea3cc;
+        font-weight: bold;
+        font-size: 1rem;
+      }
+
+      &__pos_button {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.625rem;
+      }
+
+      &__summary {
+        p {
+          text-transform: uppercase;
+          color: #7ea3cc;
+          font-size: 1rem;
+          line-height: 1.25rem;
+          margin: 0.25rem 0;
+        }
+      }
+    }
+
+    @include media-breakpoint-down(lg) {
+      &__desktop {
+        display: none;
+      }
+
+      &__mobile {
+        display: block;
+      }
+    }
+  }
+}
