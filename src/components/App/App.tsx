@@ -14,6 +14,7 @@ import ScrollToTop from '../ScrollToTop';
 import TransactionsPage from '../../pages/TransactionsPage';
 import AuthRoute from '../AuthRoute';
 import GamesPage from '../../pages/GamesPage';
+import BonusesPage from '../../pages/BonusesPage/BonusesPage';
 
 const App: React.FC = () => {
   const client = useApolloClient();
@@ -34,6 +35,7 @@ const App: React.FC = () => {
                 {/* Protected Routes */}
                 <AuthRoute path="/profile" component={ProfilePageWithData} />
                 <AuthRoute path="/transactions/*" component={TransactionsPage} />
+                <BonusesPage path="/bonuses" />
               </Router>
             </Layout>
 

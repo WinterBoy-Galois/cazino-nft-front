@@ -13,7 +13,7 @@ Object {
         >
           <span
             class="tab tab--selected"
-            style="transform: translateX(0); width: 33.333333333333336%;"
+            style="transform: translateX(0%); width: 33.333333333333336%;"
           />
           <span
             class="tab"
@@ -90,7 +90,7 @@ Object {
       >
         <span
           class="tab tab--selected"
-          style="transform: translateX(0); width: 33.333333333333336%;"
+          style="transform: translateX(0%); width: 33.333333333333336%;"
         />
         <span
           class="tab"
