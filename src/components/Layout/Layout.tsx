@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './Layout.module.scss';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
@@ -12,15 +12,19 @@ import { SIGN_OUT } from '../../graphql/mutations';
 import Modals from './components/Modals';
 import { navigate, useLocation } from '@reach/router';
 import useRealtimeBalance from '../../hooks/useRealtimeBalance.hook';
+import { BONUSCLAIMS } from '../../graphql/queries';
+import { useQuery } from '@apollo/client';
 
 const Layout: React.FC = ({ children }) => {
   useRealtimeBalance();
 
+  const [hasUnclaimedBonus, setHasUnclaimedBonus] = useState(false);
   const [{ sidebar, modal, auth }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
   const [signOut] = useMutation(SIGN_OUT);
   const { pathname } = useLocation();
+  const { data: bonusClaims } = useQuery(BONUSCLAIMS);
 
   const hideContent = () =>
     breakpoint === 'xs' || breakpoint === 'sm' ? modal.type !== 'NONE' : false;
@@ -36,6 +40,11 @@ const Layout: React.FC = ({ children }) => {
     () => auth.state === 'SIGNED_IN' && navigate(`${pathname}?dialog=cashier`),
     [pathname, auth.state]
   );
+
+  useEffect(() => {
+    if (bonusClaims && bonusClaims?.bonusClaims.length) setHasUnclaimedBonus(true);
+    else setHasUnclaimedBonus(false);
+  }, [bonusClaims]);
 
   return (
     <>
@@ -68,7 +77,11 @@ const Layout: React.FC = ({ children }) => {
               transition: modal.type !== 'NONE' ? 'none' : '',
             }}
           >
-            <BottomBar balance={auth.user?.balance} onClick={handleBalanceClick} />
+            <BottomBar
+              hasUnclaimedBonus={hasUnclaimedBonus}
+              balance={auth.user?.balance}
+              onClick={handleBalanceClick}
+            />
           </div>
         </div>
       </div>
