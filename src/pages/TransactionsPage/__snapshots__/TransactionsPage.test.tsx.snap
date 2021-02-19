@@ -37,6 +37,12 @@ Object {
             >
               Bets
             </a>
+            <a
+              class="nav__link"
+              href="/bonuses"
+            >
+              Bonuses
+            </a>
           </nav>
           <div
             class="details-container container container--light"
@@ -82,6 +88,12 @@ Object {
             href="/bets"
           >
             Bets
+          </a>
+          <a
+            class="nav__link"
+            href="/bonuses"
+          >
+            Bonuses
           </a>
         </nav>
         <div

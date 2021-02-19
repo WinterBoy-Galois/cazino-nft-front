@@ -316,6 +316,26 @@ export const TRANSACTION_WITHDRAWALS = gql`
   }
 `;
 
+export const TRANSACTION_BONUSES = gql`
+  query transactionsBonus($page: Int, $limit: Int) {
+    transactionsBonus(page: $page, limit: $limit) {
+      page
+      limit
+      total
+      items {
+        id
+        givenAt
+        claimedAt
+        expiresAt
+        amount
+        position
+        type
+        wager
+      }
+    }
+  }
+`;
+
 export const FAUCET_INFO = gql`
   query faucetInfo {
     faucetInfo {

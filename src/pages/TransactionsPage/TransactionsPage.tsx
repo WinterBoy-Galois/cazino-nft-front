@@ -8,6 +8,7 @@ import PageHeadline from '../../components/PageHeadline';
 import { BetsWithData } from './components/Bets';
 import { DepositsWithData } from './components/Deposits';
 import { WithdrawalsWithData } from './components/Withdrawals';
+import { BonusesWithData } from './components/Bonuses';
 import styles from './TransactionsPage.module.scss';
 
 const TransactionsPage: React.FC<RouteComponentProps> = () => {
@@ -40,6 +41,13 @@ const TransactionsPage: React.FC<RouteComponentProps> = () => {
           >
             Bets
           </NavLink>
+          <NavLink
+            to={'bonuses'}
+            className={styles['nav__link']}
+            activeClassName={styles['nav__link--active']}
+          >
+            Bonuses
+          </NavLink>
         </nav>
 
         <DetailsContainer className={styles['details-container']}>
@@ -48,6 +56,7 @@ const TransactionsPage: React.FC<RouteComponentProps> = () => {
             <WithdrawalsWithData path={'withdrawals'} />
             <DepositsWithData path={'deposits'} />
             <BetsWithData path={'bets'} />
+            <BonusesWithData path={'bonuses'} />
           </Router>
         </DetailsContainer>
       </PageContentContainer>

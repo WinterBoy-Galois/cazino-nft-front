@@ -114,7 +114,9 @@ const UnClaimedBonuses: React.FC<IProps> = ({ bonusClaims: defaultBonusClaims = 
       ))}
 
       <div className={styles.unclaimed_bonuses__history}>
-        <a className={styles.unclaimed_bonuses__history__link}>HISTORY OF BONUS TRANSFERS</a>
+        <a href="/transactions/bonuses" className={styles.unclaimed_bonuses__history__link}>
+          HISTORY OF BONUS TRANSFERS
+        </a>
       </div>
     </div>
   );

@@ -1,49 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UnClaimedBonuses should match snapshot 1`] = `
+exports[`Bonuses should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="unclaimed_bonuses"
+        class="container"
       >
         <div
-          class="unclaimed_bonuses__title"
+          class="sc-hHEjAm iECIgJ"
         >
-          UNCLAIMED BONUSES
-        </div>
-        <div
-          class="unclaimed_bonuses__history"
-        >
-          <a
-            class="unclaimed_bonuses__history__link"
-            href="/transactions/bonuses"
+          <div
+            class="sc-kfYqjs ezVbOX"
           >
-            HISTORY OF BONUS TRANSFERS
-          </a>
+            <div
+              class="sc-bdnylx ejLVfJ rdt_Table"
+              role="table"
+            >
+              <div
+                class="sc-bCwgka iCHBAi"
+              >
+                There is no data to display.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="unclaimed_bonuses"
+      class="container"
     >
       <div
-        class="unclaimed_bonuses__title"
+        class="sc-hHEjAm iECIgJ"
       >
-        UNCLAIMED BONUSES
-      </div>
-      <div
-        class="unclaimed_bonuses__history"
-      >
-        <a
-          class="unclaimed_bonuses__history__link"
-          href="/transactions/bonuses"
+        <div
+          class="sc-kfYqjs ezVbOX"
         >
-          HISTORY OF BONUS TRANSFERS
-        </a>
+          <div
+            class="sc-bdnylx ejLVfJ rdt_Table"
+            role="table"
+          >
+            <div
+              class="sc-bCwgka iCHBAi"
+            >
+              There is no data to display.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>,
