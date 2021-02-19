@@ -7,7 +7,6 @@ import BitcoinValue from '../BitcoinValue';
 import TransactionsTable from '../TransactionsTable';
 import { TableColumn } from '../TransactionsTable/lib/tableColumn';
 import styles from './BonusesTable.module.scss';
-import { useStateValue } from '../../state';
 
 interface IProps {
   data: TransactionsBonus[];
@@ -66,14 +65,14 @@ const BonusesTable: React.FC<IProps> = props => {
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [{ auth }] = useStateValue();
   const handleRowClicked = (row: TransactionsBonus) => {
-    navigate(`${pathname}?dialog=withdrawal-details`, {
+    navigate(`${pathname}?dialog=bonus-details`, {
       state: {
-        // address: row.address,
-        // amount: row.amount,
-        // status: row.status,
-        // time: datetimeFromEpoch(row.time),
+        givenAt: datetimeFromEpoch(row.givenAt),
+        claimedAt: datetimeFromEpoch(row.claimedAt),
+        type: row.type,
+        wager: row.wager,
+        amount: row.amount,
       },
     });
   };

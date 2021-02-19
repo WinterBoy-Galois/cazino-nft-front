@@ -23,6 +23,9 @@ export const mapQueryParamToModal = (param: string): ModalType | undefined => {
     case 'withdrawal-details':
       return 'WITHDRAWAL_DETAILS_MODAL';
 
+    case 'bonus-details':
+      return 'BONUS_DETAILS_MODAL';
+
     case 'user-info':
       return 'USER_INFO_MODAL';
 
