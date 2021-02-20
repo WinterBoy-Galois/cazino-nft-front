@@ -10,21 +10,12 @@ interface IProps {
   show: boolean;
   onClose?: () => void;
   givenAt: string;
-  claimedAt: string;
   type: string;
   wager: number;
   amount: number;
 }
 
-const BonusDetailsModal: React.FC<IProps> = ({
-  show,
-  onClose,
-  givenAt,
-  claimedAt,
-  type,
-  wager,
-  amount,
-}) => {
+const BonusDetailsModal: React.FC<IProps> = ({ show, onClose, givenAt, type, wager, amount }) => {
   const { t } = useTranslation(['modals']);
 
   return (
@@ -38,11 +29,6 @@ const BonusDetailsModal: React.FC<IProps> = ({
         <div className={clsx(styles.section__row)}>
           <div className={clsx(styles.section__label)}>{t('bonusDetails.time')}</div>
           <div className={clsx(styles.section__value)}>{givenAt}</div>
-        </div>
-
-        <div className={clsx(styles.section__row)}>
-          <div className={clsx(styles.section__label)}>{t('bonusDetails.claimAt')}</div>
-          <div className={clsx(styles.section__value)}>{claimedAt}</div>
         </div>
 
         <div className={clsx(styles.section__row)}>

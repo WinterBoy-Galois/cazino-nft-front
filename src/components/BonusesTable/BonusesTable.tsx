@@ -25,13 +25,6 @@ const BonusesTable: React.FC<IProps> = props => {
       format: r => datetimeFromEpoch(r.givenAt),
     },
     {
-      selector: 'claimedAt',
-      name: 'Claimed At',
-      minWidth: '165px',
-      hideAtBreakpoint: 'xl',
-      format: r => datetimeFromEpoch(r.claimedAt),
-    },
-    {
       selector: 'position',
       name: 'Pos',
       maxWidth: '80px',
@@ -42,14 +35,14 @@ const BonusesTable: React.FC<IProps> = props => {
     {
       selector: 'type',
       name: 'Type',
-      maxWidth: '165px',
+      minWidth: '165px',
       hideAtBreakpoint: 'xl',
       format: r => r.type,
     },
     {
       selector: 'wager',
       name: 'Wager',
-      maxWidth: '165px',
+      minWidth: '165px',
       hideAtBreakpoint: 'xl',
       // eslint-disable-next-line
       cell: r => <BitcoinValue value={formatBitcoin(r.wager)} />,
@@ -57,7 +50,7 @@ const BonusesTable: React.FC<IProps> = props => {
     {
       selector: 'bonus',
       name: 'Bonus',
-      maxWidth: '165px',
+      minWidth: '165px',
       // eslint-disable-next-line
       cell: r => <BitcoinValue value={formatBitcoin(r.amount)} />,
     },
@@ -69,7 +62,6 @@ const BonusesTable: React.FC<IProps> = props => {
     navigate(`${pathname}?dialog=bonus-details`, {
       state: {
         givenAt: datetimeFromEpoch(row.givenAt),
-        claimedAt: datetimeFromEpoch(row.claimedAt),
         type: row.type,
         wager: row.wager,
         amount: row.amount,
