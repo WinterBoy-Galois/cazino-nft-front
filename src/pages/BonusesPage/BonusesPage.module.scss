@@ -1,12 +1,21 @@
 @import '../../styles/shared.scss';
 
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1500px,
+);
+
 .bonuses_page {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-up(xxl) {
     min-height: 110rem;
     justify-content: flex-start;
     background-image: url(../../assets/images/bonuses/bonuses-side-illustration.svg);
