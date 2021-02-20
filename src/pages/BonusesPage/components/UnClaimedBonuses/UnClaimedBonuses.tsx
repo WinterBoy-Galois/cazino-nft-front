@@ -13,6 +13,7 @@ import { useStateValue } from '../../../../state/index';
 
 interface IProps {
   bonusClaims?: any[];
+  onClaimBonus?: () => void;
 }
 
 interface IUnclaimedBonusProps {
@@ -92,13 +93,18 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   );
 };
 
-const UnClaimedBonuses: React.FC<IProps> = ({ bonusClaims: defaultBonusClaims = [] }) => {
+const UnClaimedBonuses: React.FC<IProps> = ({
+  bonusClaims: defaultBonusClaims = [],
+  onClaimBonus = () => null,
+}) => {
   const [bonusClaims, setBonusClaims] = useState(defaultBonusClaims);
 
   const onClaimBonusCompleted = (bonusId: string) => {
     setBonusClaims(
       ([] as any[]).concat(bonusClaims.filter(bonusClaim => bonusClaim.id !== bonusId))
     );
+
+    onClaimBonus();
   };
 
   return (

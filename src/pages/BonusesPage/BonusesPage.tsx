@@ -14,7 +14,8 @@ type TimeAggregation = 'daily' | 'weekly' | 'monthly';
 const BonusesPage: React.FC<RouteComponentProps> = () => {
   const [selectedTime, setSelectedTime] = useState<TimeAggregation>('daily');
   const { loading, error, data, subscribeToMore } = useQuery(LEADERBOARDS);
-  const { data: bonusClaims } = useQuery(BONUSCLAIMS);
+  const { data: __bonusClaims, refetch: refreshBonusClaims } = useQuery(BONUSCLAIMS);
+  const [bonusClaims, setBonusClaims] = useState<any>();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -30,12 +31,18 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
     });
   }, [subscribeToMore]);
 
+  useEffect(() => setBonusClaims(__bonusClaims), [__bonusClaims]);
+
+  const onClaimBonus = () =>
+    refreshBonusClaims().then(({ data: __bonusClaims }) => setBonusClaims(__bonusClaims));
+
+  console.log(bonusClaims?.bonusClaims.length);
   return (
     <div className={styles.bonuses_page}>
       <div className={styles.bonuses_title}>Bonuses</div>
 
       {bonusClaims && bonusClaims?.bonusClaims.length ? (
-        <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} />
+        <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />
       ) : null}
 
       <div className={styles.leaderboard}>
