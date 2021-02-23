@@ -521,3 +521,19 @@ export const CASH_OUT_MINES = gql`
     }
   }
 `;
+
+export const CLAIM_BONUS = gql`
+  mutation claimBonus($bonusId: ID!) {
+    claimBonus(bonusId: $bonusId) {
+      ... on User {
+        balance
+      }
+      ... on GenericErrorArray {
+        errors {
+          code
+          message
+        }
+      }
+    }
+  }
+`;

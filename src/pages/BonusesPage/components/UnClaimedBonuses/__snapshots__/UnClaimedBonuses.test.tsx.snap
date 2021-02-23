@@ -1,109 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TransactionsPage should match snapshot 1`] = `
+exports[`UnClaimedBonuses should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="container"
+        class="unclaimed_bonuses"
       >
-        <h1
-          class="headline"
-        >
-          transactions
-        </h1>
         <div
-          class="container "
+          class="unclaimed_bonuses__title"
         >
-          <nav
-            class="nav"
+          UNCLAIMED BONUSES
+        </div>
+        <div
+          class="unclaimed_bonuses__history"
+        >
+          <a
+            class="unclaimed_bonuses__history__link"
+            href="/transactions/bonuses"
           >
-            <a
-              class="nav__link"
-              href="/withdrawals"
-            >
-              WITHDRAWALS
-            </a>
-            <a
-              class="nav__link"
-              href="/deposits"
-            >
-              Deposits
-            </a>
-            <a
-              class="nav__link"
-              href="/bets"
-            >
-              Bets
-            </a>
-            <a
-              class="nav__link"
-              href="/bonuses"
-            >
-              Bonuses
-            </a>
-          </nav>
-          <div
-            class="details-container container container--light"
-          >
-            <div
-              style="outline: none;"
-              tabindex="-1"
-            />
-          </div>
+            HISTORY OF BONUS TRANSFERS
+          </a>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="container"
+      class="unclaimed_bonuses"
     >
-      <h1
-        class="headline"
-      >
-        transactions
-      </h1>
       <div
-        class="container "
+        class="unclaimed_bonuses__title"
       >
-        <nav
-          class="nav"
+        UNCLAIMED BONUSES
+      </div>
+      <div
+        class="unclaimed_bonuses__history"
+      >
+        <a
+          class="unclaimed_bonuses__history__link"
+          href="/transactions/bonuses"
         >
-          <a
-            class="nav__link"
-            href="/withdrawals"
-          >
-            WITHDRAWALS
-          </a>
-          <a
-            class="nav__link"
-            href="/deposits"
-          >
-            Deposits
-          </a>
-          <a
-            class="nav__link"
-            href="/bets"
-          >
-            Bets
-          </a>
-          <a
-            class="nav__link"
-            href="/bonuses"
-          >
-            Bonuses
-          </a>
-        </nav>
-        <div
-          class="details-container container container--light"
-        >
-          <div
-            style="outline: none;"
-            tabindex="-1"
-          />
-        </div>
+          HISTORY OF BONUS TRANSFERS
+        </a>
       </div>
     </div>
   </div>,
