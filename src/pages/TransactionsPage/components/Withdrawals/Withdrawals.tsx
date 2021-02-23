@@ -46,13 +46,15 @@ export const WithdrawalsWithData: React.FC<RouteComponentProps> = () => {
 
   useRefetchOnPageEnter(refetch, loading);
 
+  console.log(data);
+
   return (
     <Withdrawals
       withdrawls={data?.transactionsWithdraw?.items}
       onChangePage={p => setPage(p)}
       onChangeRowsPerPage={l => setLimit(l)}
       loading={loading}
-      paginationTotalRows={data?.transactionsWithdraw?.total}
+      paginationTotalRows={data?.transactionsBet?.total}
     />
   );
 };

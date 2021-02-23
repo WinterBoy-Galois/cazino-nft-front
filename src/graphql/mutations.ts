@@ -419,3 +419,105 @@ export const CLAIM_FAUCET = gql`
     }
   }
 `;
+
+export const MAKE_BET_MINES = gql`
+  mutation makeBetMines($betAmount: Float!, $mines: Int!) {
+    makeBetMines(betAmount: $betAmount, mines: $mines) {
+      __typename
+      ... on MinesGameSetup {
+        session {
+          ... on MinesGameSessionSetup {
+            betId
+            betAmount
+            mines
+            open
+            totalProfit {
+              multiplier
+              profit
+            }
+            nextProfit {
+              multiplier
+              profit
+            }
+            allowNext
+            profitCut
+          }
+        }
+        balance
+        maxProfit
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const ADVANCE_MINES = gql`
+  mutation advanceMines($betId: ID!, $selection: Int!) {
+    advanceMines(betId: $betId, selection: $selection) {
+      ... on MinesStep {
+        id
+        totalProfit {
+          multiplier
+          profit
+        }
+        nextProfit {
+          multiplier
+          profit
+        }
+        profitCut
+        allowNext
+        result
+      }
+      ... on MinesComplete {
+        id
+        lucky
+        balance
+        profit {
+          multiplier
+          profit
+        }
+        minePositions
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
+
+export const CASH_OUT_MINES = gql`
+  mutation cashoutMines($betId: ID!) {
+    cashoutMines(betId: $betId) {
+      ... on MinesComplete {
+        id
+        lucky
+        balance
+        profit {
+          multiplier
+          profit
+        }
+        minePositions
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

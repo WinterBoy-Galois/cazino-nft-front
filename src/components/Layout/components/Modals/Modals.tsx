@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { UserInfoModalWithData } from '../../../UserInfoModal';
 import BetDetailsModal from '../../../BetDetailsModal';
-import WithdrawalDetailsModal from '../../../WithdrawalDetailsModal';
 import { SignInModalWithData } from '../../../SignInModal';
 import { SignUpModalWithData } from '../../../SignUpModal';
 import { useStateValue } from '../../../../state';
@@ -56,11 +55,6 @@ const Modals: React.FC = () => {
       />
       <BetDetailsModal
         show={handleShow('BET_DETAILS_MODAL')}
-        onClose={handleClose}
-        {...modal.data}
-      />
-      <WithdrawalDetailsModal
-        show={handleShow('WITHDRAWAL_DETAILS_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />

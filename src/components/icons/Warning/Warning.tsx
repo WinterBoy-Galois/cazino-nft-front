@@ -4,25 +4,9 @@ import clsx from 'clsx';
 
 interface IProps {
   className?: string;
-  circle?: boolean;
 }
 
-const Info: React.FC<IProps> = ({ className, circle }) => {
-  if (circle) {
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" className={clsx(className)}>
-        <g id="Layer_2" data-name="Layer 2">
-          <g id="Слой_5" data-name="Слой 5">
-            <path
-              className={styles['cls-1']}
-              d="M17.5,0A17.5,17.5,0,1,0,35,17.5,17.51,17.51,0,0,0,17.5,0Zm2.56,24.54a2.14,2.14,0,0,1-2.14,2.14h-.83A2.14,2.14,0,0,1,15,24.54V17.69a2.14,2.14,0,0,1,2.14-2.15h.83a2.14,2.14,0,0,1,2.14,2.15ZM17.5,13.3a3.09,3.09,0,1,1,3.1-3.09A3.09,3.09,0,0,1,17.5,13.3Z"
-            />
-          </g>
-        </g>
-      </svg>
-    );
-  }
-
+const Info: React.FC<IProps> = ({ className }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.99 30.05" className={clsx(className)}>
       <g id="Layer_2" data-name="Layer 2">

@@ -8,14 +8,11 @@ interface IProps {
     onClick: () => void;
   }[];
   className?: string;
-  index?: number;
 }
 
-const SlideSelect: React.FC<IProps> = ({ selectItems, className, index = 0 }) => {
+const SlideSelect: React.FC<IProps> = ({ selectItems, className }) => {
   const [tabWidth, setTabWidth] = useState<string>();
   const [tabSelectedTranslate, setTabSelectedTranslate] = useState<string>('0');
-
-  useEffect(() => setTabSelectedTranslate(`${(index * 100).toString()}%`), [index]);
 
   const handleSelect = (index: number) => {
     setTabSelectedTranslate(`${(index * 100).toString()}%`);

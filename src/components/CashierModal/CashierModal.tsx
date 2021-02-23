@@ -19,7 +19,7 @@ import { formatBitcoin } from '../../common/util/format.util';
 import Button from '../../components/Button';
 import WithdrawAmountControl from '../../components/WithdrawAmountControl';
 import { WITHDRAW } from '../../graphql/mutations';
-import { error as errorToast, info } from '../../components/Toast';
+import { success, error as errorToast } from '../../components/Toast';
 import clsx from 'clsx';
 import validate from 'bitcoin-address-validation';
 
@@ -32,57 +32,34 @@ interface IProps {
   balance?: number;
   depositAddress?: string;
   onTransactionsLinkClick?: () => void;
-  onWithdraw?: (amount: number, depositAddress: string) => void;
 }
 
 const CashierModal: React.FC<IProps> = ({
-  show: defaultShow,
-  onClose = () => null,
+  show,
+  onClose,
   cashier,
   balance,
   loading,
   error,
   depositAddress: defaultDepositAddress = '',
   onTransactionsLinkClick,
-  onWithdraw = () => null,
 }) => {
   const { t } = useTranslation(['modals']);
   const [modalType, setModalType] = useState('deposit');
   const [amount, setAmount] = useState(0);
-  const [isValidated, setValidated] = useState(true);
+  const [withdraw] = useMutation(WITHDRAW);
+  const [isValidated, setValidated] = useState(false);
   const [depositAddress, setDepositAddress] = useState(defaultDepositAddress);
-  const [isSmallAmount, setSmallAmount] = useState<any>(null);
-  const [show, setShow] = useState(defaultShow);
-  const [bitcoinWalletAddress, setBitcoinWalletAddress] = useState('');
-
-  useEffect(() => setShow(defaultShow), [defaultShow]);
 
   useEffect(() => {
-    if (bitcoinWalletAddress !== '') {
-      if (validate(bitcoinWalletAddress)) setValidated(true);
-      else setValidated(false);
-    }
-  }, [bitcoinWalletAddress]);
+    if (validate(depositAddress)) setValidated(true);
+    else setValidated(false);
+  }, [depositAddress]);
 
   useEffect(() => setDepositAddress(defaultDepositAddress), [defaultDepositAddress]);
 
-  useEffect(() => {
-    if (cashier?.minWithdraw && amount) setSmallAmount(cashier.minWithdraw > amount);
-  }, [amount]);
-
-  const handleWithdraw = () => {
-    onWithdraw(amount, depositAddress);
-    handleClose();
-  };
-
-  const handleClose = () => {
-    setShow(false);
-    setModalType('deposit');
-    onClose();
-  };
-
   return (
-    <Modal show={show} onClose={handleClose} title={t('cashier.title')}>
+    <Modal show={show} onClose={onClose} title={t('cashier.title')}>
       {loading && <Loading />}
       {!loading && error && <Error />}
       {!loading && !error && !depositAddress && depositAddress !== '' && (
@@ -96,7 +73,6 @@ const CashierModal: React.FC<IProps> = ({
               styles['slide-select'],
               modalType === 'withdraw' ? styles['slide-select-withdraw'] : null
             )}
-            index={modalType === 'withdraw' ? 1 : 0}
             selectItems={[
               { label: 'deposit', onClick: () => setModalType('deposit') },
               { label: 'withdraw', onClick: () => setModalType('withdraw') },
@@ -173,9 +149,9 @@ const CashierModal: React.FC<IProps> = ({
               <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
                 <TextInput
                   label={t('cashier.bitcoinWalletAddress')}
-                  value={bitcoinWalletAddress}
+                  value={depositAddress}
                   validationMessage={isValidated ? '' : 'Address is not valid.'}
-                  onChangeValue={depositAddress => setBitcoinWalletAddress(depositAddress)}
+                  onChangeValue={depositAddress => setDepositAddress(depositAddress)}
                 />
               </div>
 
@@ -190,19 +166,21 @@ const CashierModal: React.FC<IProps> = ({
                   amount={0}
                   max={balance ? balance - cashier.networkFee : 0}
                   onChange={amount => setAmount(amount)}
-                  isError={isSmallAmount}
                 />
-
-                {isSmallAmount ? (
-                  <div className={styles.withdraw__amount_control__error}>Amount is too small.</div>
-                ) : null}
               </div>
 
               <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
                 <Button
                   className={styles.withdraw__button}
-                  onClick={handleWithdraw}
-                  disabled={isSmallAmount === null || isSmallAmount || !isValidated}
+                  onClick={async () => {
+                    const { data, errors } = await withdraw({
+                      variables: { amount: amount, address: depositAddress },
+                    });
+
+                    if (errors) errorToast('Withdraw is failed.');
+                    else if (data?.withdraw?.result) success('Withdraw is completed.');
+                    else errorToast('Withdraw is failed.');
+                  }}
                 >
                   Withdraw
                 </Button>
@@ -223,7 +201,6 @@ export const CashierModalWithData: React.FC<IProps> = props => {
   const { pathname } = useLocation();
   const { data, loading, error, refetch } = useQuery(SETUP_CASHIER);
   const handleTransactionsClick = useCallback(() => navigate('/transactions/deposits'), [navigate]);
-  const [withdraw] = useMutation(WITHDRAW);
 
   useEffect(() => {
     if (!data?.me.depositAddress && !loading && props.show) {
@@ -236,17 +213,6 @@ export const CashierModalWithData: React.FC<IProps> = props => {
     return null;
   }
 
-  const handleWithdraw = async (amount: number, depositAddress: string) => {
-    const { data, errors } = await withdraw({
-      variables: { amount: amount, address: depositAddress },
-    });
-
-    if (errors || data.withdraw?.errors)
-      errorToast('Your withdrawal is failed, please try again later.');
-    else if (data?.withdraw?.result) info('Withdraw transaction successfully submitted.');
-    else errorToast('Your withdrawal is failed, please try again later.');
-  };
-
   return (
     <CashierModal
       {...props}
@@ -256,7 +222,6 @@ export const CashierModalWithData: React.FC<IProps> = props => {
       balance={auth.user?.balance}
       depositAddress={data?.me.depositAddress}
       onTransactionsLinkClick={handleTransactionsClick}
-      onWithdraw={handleWithdraw}
     />
   );
 };

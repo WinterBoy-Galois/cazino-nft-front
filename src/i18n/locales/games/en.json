@@ -16,5 +16,19 @@
     "amount": "Bet Amount",
     "profitTotal": "Total Profit",
     "profitNext": "On Next Win"
+  },
+  "mines": {
+    "amount": "Bet Amount",
+    "profitTotal": "Total Profit",
+    "profitNext": "On Next Win",
+    "youWin": "You Win!",
+    "tryAgain": "Try Again",
+    "start": "Start",
+    "takeMoney": "Take Money",
+    "playAgain": "Play Again",
+    "errorMsg": "Your bet may result to profit more than 10 BTC. Please lower your bet or change number of mines.",
+    "errorTryAgain": "Your bet couldn't be placed, please try again.",
+    "errorProfitLimit": "Your bet may reaches the profit limit.",
+    "msgBalance": "Your balance has been updated: "
   }
 }

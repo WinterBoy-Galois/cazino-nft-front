@@ -33,6 +33,6 @@ export const appConfig = {
   clamsGameTransitionTime: 300,
   diceGameTimeout: 1000,
   diceGameDiamondTransitionTime: 300,
-  mineGameTimeout: 1000,
+  mineGameTimeout: 3000,
   mineGameDiamondTransitionTime: 300,
 };

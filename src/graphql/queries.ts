@@ -335,3 +335,38 @@ export const FAUCET_INFO = gql`
     }
   }
 `;
+
+export const SETUP_MINES = gql`
+  query setupMines {
+    setupMines {
+      ... on MinesGameSetup {
+        session {
+          betId
+          betAmount
+          mines
+          open
+          totalProfit {
+            multiplier
+            profit
+          }
+          nextProfit {
+            multiplier
+            profit
+          }
+          allowNext
+          profitCut
+        }
+        balance
+        maxProfit
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;
