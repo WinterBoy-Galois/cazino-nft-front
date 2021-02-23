@@ -13,7 +13,13 @@ export const getInitialState = (): MinesGameState => ({
 });
 
 export interface MinesGameAction {
-  type: 'SET_AMOUNT_MINES' | 'RESET_MINES' | 'START_MINES' | 'END_MINES' | 'SET_GAME_STATE_MINES' | 'SET_MINES';
+  type:
+    | 'SET_AMOUNT_MINES'
+    | 'RESET_MINES'
+    | 'START_MINES'
+    | 'END_MINES'
+    | 'SET_GAME_STATE_MINES'
+    | 'SET_MINES';
   payload?: any;
 }
 

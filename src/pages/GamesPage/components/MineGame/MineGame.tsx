@@ -90,7 +90,7 @@ const MineGame: React.FC<IProps> = ({
         await navigate(`${pathname}?dialog=profit-cut`, {
           // state: { errorMessage: errorBet[0].message },
           state: {
-            errorMessage: t('mines.errorMsg').toUpperCase(),
+            errorMessage: t('mines.errorMsg'),
           },
         });
       })();
