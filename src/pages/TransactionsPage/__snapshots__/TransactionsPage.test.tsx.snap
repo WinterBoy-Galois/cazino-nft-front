@@ -23,7 +23,7 @@ Object {
               class="nav__link"
               href="/withdrawals"
             >
-              Withdrawals
+              WITHDRAWALS
             </a>
             <a
               class="nav__link"
@@ -75,7 +75,7 @@ Object {
             class="nav__link"
             href="/withdrawals"
           >
-            Withdrawals
+            WITHDRAWALS
           </a>
           <a
             class="nav__link"

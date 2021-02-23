@@ -1,0 +1,128 @@
+@import '../../styles/shared';
+
+.container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+
+  > * {
+    user-select: none;
+  }
+}
+
+.bg_images {
+  min-height: 300px;
+  background-position: left 12px center, right 19px center;
+  background-repeat: no-repeat;
+  background-size: auto 70%;
+  transition: all 0.3s ease-out;
+  background-image: url("../../assets/images/games/mines/mines-char.svg"), url("../../assets/images/games/mines/mines-tnt.svg");
+
+  @include media-breakpoint-down(lg) {
+    background-image: unset;
+  }
+
+  .grid_container {
+    margin: 0 auto;
+
+    &_grid5 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-auto-rows: 1fr;
+      grid-column-gap: 20px;
+      grid-row-gap: 20px;
+      transition: all 0.3s ease-out;
+
+      @include media-breakpoint-down(md) {
+        margin-top: 20px;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+      }
+
+      @include media-breakpoint-down(xs) {
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+      }
+    }
+
+    .images,
+    .images_stop,
+    .win_show,
+    .bomb_show {
+      border-radius: 6px;
+      width: 85px;
+      height: 85px;
+      background-color: $table-dark-blue;
+      box-shadow: 0 0 2px #0008;
+
+      @include media-breakpoint-down(md) {
+        width: calc(20% - 20px);
+        min-width: 80px;
+        height: calc(20% - 22px);
+        min-height: 80px;
+      }
+      @include media-breakpoint-down(sm) {
+        width: 85px;
+        height: 85px;
+      }
+      @include media-breakpoint-down(xs) {
+        width: calc(20vw - 20px);
+        min-width: 45px;
+        height: calc(20vw - 22px);
+        min-height: 45px;
+      }
+    }
+
+    .win_show,
+    .bomb_show {
+      display: flex;
+      justify-content: center;
+    }
+
+    .win_gem,
+    .bomb_gem {
+      width: 60px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100%;
+
+      @include media-breakpoint-down(xs) {
+        width: 40px;
+      }
+    }
+
+    .win_show {
+      background-color: #346f56;
+
+      .win_gem {
+        background-image: url("../../assets/images/games/mines/mines-bitcoin.svg");
+      }
+    }
+
+    .bomb_show {
+      background-color: #4e2d2e;
+
+      .bomb_gem {
+        background-image: url("../../assets/images/games/mines/mines-boom.svg");
+      }
+    }
+
+    .images:hover {
+      transform: scale(0.9);
+      transition: all 0.05s ease-in;
+      cursor: pointer;
+    }
+
+    .images_stop,
+    .win_show,
+    .bomb_show {
+      cursor: grab;
+    }
+  }
+}

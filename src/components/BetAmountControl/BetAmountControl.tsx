@@ -4,6 +4,7 @@ import { appConfig } from '../../common/config';
 import BetControl from '../BetControl';
 import { isValid } from '../BetControl/lib/util';
 import styles from './BetAmountControl.module.scss';
+import { useStateValue } from '../../state';
 
 interface IProps {
   className?: string;
@@ -16,33 +17,44 @@ interface IProps {
 }
 
 const BetAmountControl: React.FC<IProps> = props => {
-  const { amount: initialAmount = 0.0004, className, onChange, min = 0, max = 9, label } = props;
+  const {
+    amount: initialAmount = 0.0004,
+    className,
+    onChange,
+    min = 0,
+    max = 9,
+    label,
+    readonly,
+  } = props;
   const [amount, setAmount] = useState(initialAmount);
   useEffect(() => setAmount(initialAmount), [initialAmount]);
-
+  const [{ auth }] = useStateValue();
   const updateAmount = (value: number) => {
     setAmount(value);
     onChange && onChange(value);
   };
 
   const handleHalve = () => {
-    const newValue = amount / 2;
+    if (!readonly && auth.state === 'SIGNED_IN') {
+      const newValue = amount / 2;
+      if (!isValid(newValue, min, max)) {
+        return updateAmount(min);
+      }
 
-    if (!isValid(newValue, min, max)) {
-      return updateAmount(min);
+      updateAmount(+newValue.toFixed(appConfig.bitcoinFractionDigits));
     }
-
-    updateAmount(+newValue.toFixed(appConfig.bitcoinFractionDigits));
   };
 
   const handleDouble = () => {
-    const newValue = amount * 2;
+    if (!readonly && auth.state === 'SIGNED_IN') {
+      const newValue = amount * 2;
 
-    if (!isValid(newValue, min, max)) {
-      return updateAmount(max);
+      if (!isValid(newValue, min, max)) {
+        return updateAmount(max);
+      }
+
+      updateAmount(+newValue.toFixed(appConfig.bitcoinFractionDigits));
     }
-
-    updateAmount(+newValue.toFixed(appConfig.bitcoinFractionDigits));
   };
 
   return (
@@ -50,7 +62,7 @@ const BetAmountControl: React.FC<IProps> = props => {
       <BetControl
         {...props}
         className={clsx(className, styles.control)}
-        label={label ?? 'Amount'}
+        label={className?.includes('button_mine_game') ? 'Bet Amount' : label ?? 'Amount'}
         icon={'BITCOIN'}
         value={amount}
         decimalPlaces={appConfig.bitcoinFractionDigits}

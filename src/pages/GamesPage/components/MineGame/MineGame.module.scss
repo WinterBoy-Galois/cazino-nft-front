@@ -1,0 +1,321 @@
+@import '../../../../styles/shared';
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up(md) {
+    //margin-top: 2rem;
+    margin-top: 1rem;
+  }
+
+  > * {
+    user-select: none;
+  }
+}
+
+.board {
+  width: 75%;
+  max-width: 500px;
+
+  @include media-breakpoint-up(md) {
+    width: 100%;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.controls {
+  &__wrapper {
+    width: 100%;
+    //margin-top: 2rem;
+    background-color: $user-info-main-blue;
+    padding: 0 0 2rem;
+
+    &__btn_grid {
+      display: grid;
+      grid-template-columns: 1fr 2.5fr 2.5fr;
+      grid-auto-rows: 1fr;
+      grid-column-gap: 25px;
+      margin: 0 auto;
+      @include media-breakpoint-down(xl) {
+        width: 85%;
+      }
+      @include media-breakpoint-down(lg) {
+        grid-template-columns: 1.5fr 3fr 2.3fr;
+        grid-column-gap: 15px;
+        width: 90%;
+      }
+      @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr;
+        grid-column-gap: 10px;
+        width: 75%;
+      }
+      @include media-breakpoint-down(sm) {
+        width: 85%;
+      }
+      @include media-breakpoint-down(xs) {
+        width: 95%;
+      }
+    }
+
+    .btn_group {
+      @include media-breakpoint-down(xl) {
+        padding: 3.95rem 0 2rem;
+      }
+      @include media-breakpoint-down(md) {
+        margin: 0 auto;
+        padding: 2rem 0 0 0;
+      }
+      .win_counts {
+        display: flex;
+        justify-content: space-between;
+        border-radius: 8px;
+        height: 50px;
+        font-size: 13px;
+        text-align: center;
+        background-color: $form-background;
+
+        @include media-breakpoint-down(sm){
+          width: 200px;
+        }
+        @include media-breakpoint-down(lg){
+          margin: 0.5rem 0;
+        }
+        @include media-breakpoint-down(md){
+          width: 35%;
+          min-width: 130px;
+        }
+
+        &__minus,
+        &__plus{
+          padding: 5px;
+          width: 35px;
+          text-align: center;
+          font-size: 30px;
+          background-color: $email-status-blue;
+          cursor: pointer;
+        }
+        &__minus {
+          border-top-left-radius: 8px;
+          border-bottom-left-radius: 8px;
+          justify-content: flex-start;
+          font-weight: 600;
+        }
+        &__plus {
+          border-top-right-radius: 8px;
+          border-bottom-right-radius: 8px;
+          justify-content: flex-end;
+          font-size: 39px;
+          line-height: 1.2;
+        }
+        &__minus:hover,
+        &__plus:hover {
+          background-color: $button-primary;
+        }
+        .count_font {
+          font-size: 18px;
+          font-weight: 600;
+        }
+        .mines_col {
+          padding-top: 5px;
+          color: $live-updates-light-blue;
+        }
+        .take_bg_color {
+          background-color: #26496f;
+        }
+        .take_color {
+          color: $toast-info;
+        }
+      }
+    }
+  }
+
+  &__button {
+    display: flex;
+    margin-left: 8px;
+    width: 100%;
+    //min-width: 20vw;
+    align-items: center;
+    @include media-breakpoint-down(xl) {
+      margin-left: 0;
+    }
+  }
+}
+
+.won-lost {
+  position: absolute;
+  margin-top: -40px;
+  width: 40%;
+}
+.loading {
+  height: 500px;
+}
+
+.profit {
+  &__label {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    line-height: 19px;
+    color: $control-label;
+    user-select: none;
+    margin: 0;
+  }
+
+  &__container {
+    margin: -1.2rem 0 0.1rem;
+
+    @include media-breakpoint-up(md) {
+      margin: -4.7rem 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+.amount {
+  &__container {
+    margin: 0.5rem 0;
+    @include media-breakpoint-up(xl) {
+      margin: 0;
+    }
+  }
+}
+
+.flex_left {
+  display: flex;
+  justify-content: left;
+  font-size: 14px;
+  color: $live-updates-tab-select-active;
+
+  .pl_15 {
+    padding-left: 15px;
+    color: $white;
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-image: url("../../../../assets/images/games/mines/bitcoin-icon.svg");
+  }
+}
+
+.total_profit,
+.total_price {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 700px;
+  font-size: 12px;
+  color: $control-label;
+}
+
+.total_profit {
+  margin-top: 2.3rem;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+
+  .pl_profit {
+    padding-left: 160px;
+  }
+
+  .pl_profit_win {
+    padding-left: 20px;
+  }
+
+  .pl_profit,
+  .pl_profit_win {
+    @include media-breakpoint-down(md) {
+      padding-left: 80px;
+    }
+    @include media-breakpoint-down(sm) {
+      padding-left: 10px;
+    }
+  }
+}
+
+.pt_profit {
+  padding-top: 55px;
+}
+
+.pt_profit_price {
+  padding-top: 20.5px;
+}
+
+.btn_mine_game {
+  padding: 20px !important;
+}
+.button {
+  padding: 0.6rem;
+  font-weight: 600;
+}
+.button_mine_game {
+  padding: 3px 10px;
+}
+
+/**
+ * won and lost message style
+ */
+.game_result {
+  &__row {
+    position: relative;
+    justify-content: center;
+  }
+
+  &__message_box {
+    text-align: center;
+    background-color: #113452;
+    border: 1px solid #505e6b;
+    border-radius: 8px;
+    min-width: 275px;
+    position: absolute;
+
+    &__lost {
+      top: -1.85rem;
+
+      &__title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #ec7778;
+        text-transform: uppercase;
+        min-height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__won {
+      top: -1.85rem;
+
+      &__title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #7df380;
+        text-transform: uppercase;
+      }
+
+      &__multiplier {
+        color: #c0c9d1;
+        font-weight: lighter;
+      }
+    }
+  }
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  vertical-align: baseline;
+
+  &__bitcoin {
+    fill: $bitcoinYellow;
+  }
+}

@@ -92,16 +92,6 @@
 
   &__amount_control {
     margin-bottom: 3rem;
-
-    &__error {
-      text-transform: uppercase;
-      display: block;
-      font-size: 14px;
-      line-height: 19px;
-      color: #fa6868;
-      user-select: none;
-      margin: 4px 8px 4px 8px;
-    }
   }
 
   &__button {
@@ -111,7 +101,6 @@
     background-color: #f19e65;
     color: #4d290f;
 
-    &:focus,
     &:hover {
       background-color: #f3b489;
     }
