@@ -10,7 +10,7 @@ interface IProps {
   handlePlaceBet?: (selection: number) => void;
 }
 const take_opacity = {
-  opacity: 0.1,
+  opacity: 0.2,
 };
 const scoreArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const MineGameBoard: React.FC<IProps> = ({
@@ -20,6 +20,7 @@ const MineGameBoard: React.FC<IProps> = ({
   handlePlaceBet = () => null,
 }) => {
   const [results, setResults] = useState(scoreArray);
+  const [bombId, setBombId] = useState<number>(0);
   useEffect(() => {
     const scoreArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     if (session?.allowNext) {
@@ -60,6 +61,7 @@ const MineGameBoard: React.FC<IProps> = ({
     }
   }, [gameState]);
   const gemSelect = (id: number) => {
+    setBombId(id);
     if (session?.allowNext) {
       if (results[id] === 0) {
         handlePlaceBet(id);
@@ -91,7 +93,12 @@ const MineGameBoard: React.FC<IProps> = ({
                     </div>
                   )}
                   {item === 2 && (
-                    <div className={styles.bomb_show}>
+                    <div
+                      className={styles.bomb_show}
+                      style={{
+                        opacity: index === bombId ? 1 : 0.2,
+                      }}
+                    >
                       <div className={styles.bomb_gem} />
                     </div>
                   )}
