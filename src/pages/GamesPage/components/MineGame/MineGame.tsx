@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import { error as errorToast, success, info } from '../../../../components/Toast';
 import { appConfig } from '../../../../common/config';
+import { transitionTimeout } from '../../../../components/Modal';
 
 interface IProps {
   loadingBet?: boolean;
@@ -62,6 +63,7 @@ const MineGame: React.FC<IProps> = ({
   const [lastAdvanceStatus, setLastAdvanceStatus] = useState<any>(null);
   const [lastStatusTimer, setLastStatusTimer] = useState<any>(null);
   const [lucky, setLucky] = useState<any>(null);
+  const [isShowAlert, setIsShowAlert] = useState<any>(true);
 
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
@@ -115,6 +117,10 @@ const MineGame: React.FC<IProps> = ({
     }
     if (session?.lucky === true) {
       setLucky(true);
+      setIsShowAlert(true);
+      setTimeout(() => {
+        setIsShowAlert(false);
+      }, 2000);
     } else if (session?.lucky === false) {
       setLucky(false);
     } else {
@@ -231,6 +237,44 @@ const MineGame: React.FC<IProps> = ({
       dispatch({ type: 'SET_MINES', payload: { mines } });
     }
   };
+  const renderGameResultMessage = () => {
+    return (
+      <div className={clsx('row', styles.game_result__row, styles.margin__horizontal_auto)}>
+        <div
+          className={clsx(
+            'col-12 col-xl-4 col-md-6',
+            styles.game_result__message_box,
+            styles.game_result__message_box__won
+          )}
+        >
+          <div className="row">
+            <div className={clsx('col', styles.game_result__message_box__won__title)}>
+              {t('mines.youWin').toUpperCase()}
+            </div>
+          </div>
+
+          <div className="row">
+            <div
+              className={clsx(
+                'col',
+                styles.text_align__right,
+                styles.game_result__message_box__won__multiplier
+              )}
+            >
+              &times;&nbsp;
+              {session?.totalProfit.multiplier.toFixed(3)}
+            </div>
+
+            <div className={clsx('col', styles.text_align__left)}>
+              <Bitcoin className={clsx(styles.icon, styles.icon__bitcoin)} />
+              {formatBitcoin(session?.totalProfit.profit)}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const take_opacity_3 = {
     opacity: 0.4,
   };
@@ -265,41 +309,7 @@ const MineGame: React.FC<IProps> = ({
         <div className={styles.pt_profit} />
       )}
       {/* Showing the result by lucky */}
-      {lucky === true && (
-        <div className={clsx('row', styles.game_result__row, styles.margin__horizontal_auto)}>
-          <div
-            className={clsx(
-              'col-12 col-xl-4 col-md-6',
-              styles.game_result__message_box,
-              styles.game_result__message_box__won
-            )}
-          >
-            <div className="row">
-              <div className={clsx('col', styles.game_result__message_box__won__title)}>
-                {t('mines.youWin').toUpperCase()}
-              </div>
-            </div>
-
-            <div className="row">
-              <div
-                className={clsx(
-                  'col',
-                  styles.text_align__right,
-                  styles.game_result__message_box__won__multiplier
-                )}
-              >
-                &times;&nbsp;
-                {session?.totalProfit.multiplier.toFixed(3)}
-              </div>
-
-              <div className={clsx('col', styles.text_align__left)}>
-                <Bitcoin className={clsx(styles.icon, styles.icon__bitcoin)} />
-                {formatBitcoin(session?.totalProfit.profit)}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {lucky === true && isShowAlert === true && renderGameResultMessage()}
 
       <div className={styles.controls__wrapper}>
         {isShowProfit && lucky === null ? (
