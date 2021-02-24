@@ -79,25 +79,24 @@
         text-align: center;
         background-color: $form-background;
 
-        @include media-breakpoint-down(sm){
+        @include media-breakpoint-down(sm) {
           width: 200px;
         }
-        @include media-breakpoint-down(lg){
+        @include media-breakpoint-down(lg) {
           margin: 0.5rem 0;
         }
-        @include media-breakpoint-down(md){
+        @include media-breakpoint-down(md) {
           width: 35%;
           min-width: 130px;
         }
 
         &__minus,
-        &__plus{
-          padding: 5px;
+        &__plus {
+          padding: 2px 5px 5px;
           width: 35px;
           text-align: center;
           font-size: 30px;
           background-color: $email-status-blue;
-          cursor: pointer;
         }
         &__minus {
           border-top-left-radius: 8px;
@@ -112,8 +111,7 @@
           font-size: 39px;
           line-height: 1.2;
         }
-        &__minus:hover,
-        &__plus:hover {
+        .control_disable:hover {
           background-color: $button-primary;
         }
         .count_font {
@@ -128,7 +126,8 @@
           background-color: #26496f;
         }
         .take_color {
-          color: $toast-info;
+          padding: 3px;
+          color: #80a2cc;
         }
       }
     }
@@ -190,7 +189,7 @@
 .flex_left {
   display: flex;
   justify-content: left;
-  font-size: 14px;
+  font-size: 16px;
   color: $live-updates-tab-select-active;
 
   .pl_15 {
@@ -199,7 +198,7 @@
     background-size: 12px;
     background-repeat: no-repeat;
     background-position: left;
-    background-image: url("../../../../assets/images/games/mines/bitcoin-icon.svg");
+    background-image: url('../../../../assets/images/games/mines/bitcoin-icon.svg');
   }
 }
 
@@ -208,12 +207,11 @@
   margin: 0 auto;
   width: 100%;
   max-width: 700px;
-  font-size: 12px;
+  font-size: 14px;
   color: $control-label;
 }
-
 .total_profit {
-  margin-top: 2.3rem;
+  margin-top: 2.25rem;
 }
 
 .grid2 {
@@ -222,26 +220,35 @@
   grid-auto-rows: 1fr;
 
   .pl_profit {
-    padding-left: 160px;
+    padding-left: 150px;
+    @include media-breakpoint-down(lg) {
+      padding-left: 110px;
+    }
   }
 
   .pl_profit_win {
-    padding-left: 20px;
+    padding-left: 40px;
+    @include media-breakpoint-down(lg) {
+      padding-left: 70px;
+    }
   }
 
   .pl_profit,
   .pl_profit_win {
     @include media-breakpoint-down(md) {
-      padding-left: 80px;
+      padding-left: 60px;
     }
     @include media-breakpoint-down(sm) {
+      padding-left: 90px;
+    }
+    @include media-breakpoint-down(xs) {
       padding-left: 10px;
     }
   }
 }
 
 .pt_profit {
-  padding-top: 55px;
+  padding-top: 60px;
 }
 
 .pt_profit_price {
@@ -257,6 +264,14 @@
 }
 .button_mine_game {
   padding: 3px 10px;
+}
+.bet_control_enable,
+.bet_control_disable {
+  cursor: unset !important;
+}
+.bet_control_enable:hover {
+  border: 2px solid $dark-blue;
+  cursor: unset !important;
 }
 
 /**

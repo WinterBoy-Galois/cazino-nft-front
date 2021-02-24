@@ -8,6 +8,7 @@ import { useStateValue } from '../../state';
 
 interface IProps {
   className?: string;
+  isControlDisable?: boolean;
   label?: string;
   min?: number;
   max?: number;
@@ -19,6 +20,7 @@ interface IProps {
 const BetAmountControl: React.FC<IProps> = props => {
   const {
     amount: initialAmount = 0.0004,
+    isControlDisable,
     className,
     onChange,
     min = 0,
@@ -68,10 +70,24 @@ const BetAmountControl: React.FC<IProps> = props => {
         decimalPlaces={appConfig.bitcoinFractionDigits}
         onChange={v => updateAmount(v)}
       />
-      <button type="button" className={styles.button} onClick={handleHalve}>
+      <button
+        type="button"
+        className={clsx(
+          styles.button,
+          !isControlDisable ? styles.bet_control_enable : styles.bet_control_disable
+        )}
+        onClick={handleHalve}
+      >
         1/2
       </button>
-      <button type="button" className={styles.button} onClick={handleDouble}>
+      <button
+        type="button"
+        className={clsx(
+          styles.button,
+          !isControlDisable ? styles.bet_control_enable : styles.bet_control_disable
+        )}
+        onClick={handleDouble}
+      >
         x2
       </button>
     </div>

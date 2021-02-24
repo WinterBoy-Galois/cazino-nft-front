@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './MineGameBoard.module.scss';
 import clsx from 'clsx';
 import { MinesGameState as GameState } from '../../models/minesGameState.model';
+import { useStateValue } from '../../state';
 
 interface IProps {
   className?: string;
@@ -10,7 +11,7 @@ interface IProps {
   handlePlaceBet?: (selection: number) => void;
 }
 const take_opacity = {
-  opacity: 0.2,
+  opacity: 0.5,
 };
 const scoreArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const MineGameBoard: React.FC<IProps> = ({
@@ -19,11 +20,14 @@ const MineGameBoard: React.FC<IProps> = ({
   gameState,
   handlePlaceBet = () => null,
 }) => {
+  const [{ sidebar }] = useStateValue();
   const [results, setResults] = useState(scoreArray);
   const [bombId, setBombId] = useState<number>(0);
+  const [isEndCut, setIsEndCut] = useState(false);
   useEffect(() => {
     const scoreArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     if (session?.allowNext) {
+      setIsEndCut(false);
       let tmp = [];
       tmp = scoreArray;
       if (session.open) {
@@ -31,24 +35,34 @@ const MineGameBoard: React.FC<IProps> = ({
           tmp.splice(session.open[k], 1, 1);
         }
       }
-      if (session.result) {
+      if (session?.result) {
         for (let k = 0; k < session.result.length; k++) {
           tmp.splice(session.result[k], 1, 1);
         }
       }
       setResults(tmp);
     }
-    if (!session?.allowNext && session?.minePositions) {
+    if (!session?.allowNext) {
+      if (session?.profitCut === 'CUT') {
+        setIsEndCut(true);
+      } else {
+        setIsEndCut(false);
+      }
       const tmp = scoreArray;
-      if (session.result) {
+      if (session?.result) {
         for (let k = 0; k < session.result.length; k++) {
           tmp.splice(session.result[k], 1, 1);
         }
       }
 
-      if (session.minePositions) {
+      if (session?.minePositions) {
         for (let k = 0; k < session.minePositions.length; k++) {
           tmp.splice(session.minePositions[k], 1, 2);
+        }
+        for (let k = 0; k < tmp.length; k++) {
+          if (tmp[k] === 0) {
+            tmp.splice(k, 1, 3);
+          }
         }
       }
       setResults(tmp);
@@ -68,9 +82,14 @@ const MineGameBoard: React.FC<IProps> = ({
       }
     }
   };
-
   return (
-    <div className={clsx(styles.container, className, styles.bg_images)}>
+    <div
+      className={clsx(
+        styles.container,
+        className,
+        sidebar?.isOpen ? styles.bg_images_open : styles.bg_images_close
+      )}
+    >
       <div className={styles.grid_container}>
         <div className={styles.grid_container_grid5}>
           {results.map((item, index) => {
@@ -79,10 +98,14 @@ const MineGameBoard: React.FC<IProps> = ({
                 <div>
                   {item === 0 && gameState !== GameState.GAME_ENDED && (
                     <div
-                      className={gameState === GameState.IDLE ? styles.images_stop : styles.images}
+                      className={
+                        gameState === GameState.IDLE || isEndCut
+                          ? styles.images_stop
+                          : styles.images
+                      }
                     />
                   )}
-                  {item === 0 && gameState === GameState.GAME_ENDED && (
+                  {item === 3 && (
                     <div className={styles.win_show} style={take_opacity}>
                       <div className={styles.win_gem} />
                     </div>
@@ -96,7 +119,7 @@ const MineGameBoard: React.FC<IProps> = ({
                     <div
                       className={styles.bomb_show}
                       style={{
-                        opacity: index === bombId ? 1 : 0.2,
+                        opacity: index === bombId ? 1 : 0.5,
                       }}
                     >
                       <div className={styles.bomb_gem} />
