@@ -15,9 +15,8 @@ import { MinesGameState as GameState } from '../../../../models/minesGameState.m
 import BetAmountControl from '../../../../components/BetAmountControl';
 import { useTranslation } from 'react-i18next';
 import { formatBitcoin } from '../../../../common/util/format.util';
-import { error as errorToast, success, info } from '../../../../components/Toast';
+import { error as errorToast } from '../../../../components/Toast'; // error as errorToast, success, info
 import { appConfig } from '../../../../common/config';
-import { transitionTimeout } from '../../../../components/Modal';
 
 interface IProps {
   loadingBet?: boolean;
@@ -440,12 +439,11 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     }
 
     initSession(data.makeBetMines);
-    info(`${t('mines.msgBalance')} ${formatBitcoin(data.makeBetMines.balance)}`);
+    errorToast(`${t('mines.msgBalance')} ${formatBitcoin(data.makeBetMines.balance)}`);
   };
 
   const handlePlaceBet = async (betId: string, selection: number) => {
     const { data, errors } = await advanceMines({ variables: { betId, selection } });
-    console.log('ADVANCE = ', data);
     if (errors || data.advanceMines?.errors) {
       setError(errors ?? data.advanceMines?.errors);
       if (data.makeBetMines?.errors[0]?.code === 'MAX_PROFIT') {
@@ -497,9 +495,9 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
             )}`;
 
             if (+data.advanceMines.profit.profit >= 0) {
-              success(toast);
+              errorToast(toast);
             } else {
-              info(toast);
+              errorToast(toast);
             }
           }
         }
@@ -528,9 +526,9 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
       if (data.cashoutMines.profit.profit) {
         const toast = `${t('mines.msgBalance')} ${formatBitcoin(+data.cashoutMines.profit.profit)}`;
         if (+data.cashoutMines.profit.profit >= 0) {
-          success(toast);
+          errorToast(toast);
         } else {
-          info(toast);
+          errorToast(toast);
         }
       }
     }
