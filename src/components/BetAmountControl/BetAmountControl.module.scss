@@ -28,3 +28,10 @@
     background-color: $button-primary;
   }
 }
+.bet_control_enable,
+.bet_control_disable {
+  cursor: unset !important;
+}
+.bet_control_enable:hover {
+  background-color: $control-button-bg;
+}

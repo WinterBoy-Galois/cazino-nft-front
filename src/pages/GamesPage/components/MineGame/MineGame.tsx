@@ -64,6 +64,7 @@ const MineGame: React.FC<IProps> = ({
   const [lastStatusTimer, setLastStatusTimer] = useState<any>(null);
   const [lucky, setLucky] = useState<any>(null);
   const [isShowAlert, setIsShowAlert] = useState<any>(true);
+  const [isControlDisable, setIsControlDisable] = useState<any>(false);
 
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
@@ -147,6 +148,11 @@ const MineGame: React.FC<IProps> = ({
     } else {
       setIsOpen(true);
       setShowProfit(false);
+    }
+    if (state.gameState === GameState.IDLE) {
+      setIsControlDisable(true);
+    } else {
+      setIsControlDisable(false);
     }
   }, [state.gameState, session]);
   useEffect(() => {
@@ -330,14 +336,26 @@ const MineGame: React.FC<IProps> = ({
           <div className={styles.controls__wrapper__btn_grid}>
             <div style={!isSetBet ? take_opacity_1 : take_opacity_3}>
               <div className={styles.win_counts}>
-                <div className={styles.win_counts__minus} onClick={onMinus}>
+                <div
+                  className={clsx(
+                    styles.win_counts__minus,
+                    isControlDisable && styles.control_disable
+                  )}
+                  onClick={onMinus}
+                >
                   &mdash;
                 </div>
                 <div>
                   <div className={styles.take_color}>MINES</div>
                   <div className={styles.count_font}>{state.mines}</div>
                 </div>
-                <div className={styles.win_counts__plus} onClick={onPlus}>
+                <div
+                  className={clsx(
+                    styles.win_counts__plus,
+                    isControlDisable && styles.control_disable
+                  )}
+                  onClick={onPlus}
+                >
                   +
                 </div>
               </div>
@@ -348,7 +366,11 @@ const MineGame: React.FC<IProps> = ({
             >
               <BetAmountControl
                 label={t('mines.amount')}
-                className={styles.button_mine_game}
+                isControlDisable={isControlDisable}
+                className={clsx(
+                  styles.button_mine_game,
+                  !isControlDisable ? styles.bet_control_enable : styles.bet_control_disable
+                )}
                 amount={state.amount}
                 min={0.00000001}
                 max={auth.user?.balance ?? 15}
@@ -423,6 +445,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
 
   const handlePlaceBet = async (betId: string, selection: number) => {
     const { data, errors } = await advanceMines({ variables: { betId, selection } });
+    console.log('ADVANCE = ', data);
     if (errors || data.advanceMines?.errors) {
       setError(errors ?? data.advanceMines?.errors);
       if (data.makeBetMines?.errors[0]?.code === 'MAX_PROFIT') {
