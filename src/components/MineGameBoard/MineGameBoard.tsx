@@ -49,9 +49,10 @@ const MineGameBoard: React.FC<IProps> = ({
         setIsEndCut(false);
       }
       const tmp = scoreArray;
-      if (session?.result) {
-        for (let k = 0; k < session.result.length; k++) {
-          tmp.splice(session.result[k], 1, 1);
+      if (session?.result || session?.open) {
+        const winArray = session?.result ? session?.result : session?.open;
+        for (let k = 0; k < winArray.length; k++) {
+          tmp.splice(winArray[k], 1, 1);
         }
       }
 
@@ -74,9 +75,10 @@ const MineGameBoard: React.FC<IProps> = ({
       setResults(scoreArray);
     }
   }, [gameState]);
+
   const gemSelect = (id: number) => {
-    setBombId(id);
     if (session?.allowNext) {
+      setBombId(id);
       if (results[id] === 0) {
         handlePlaceBet(id);
       }

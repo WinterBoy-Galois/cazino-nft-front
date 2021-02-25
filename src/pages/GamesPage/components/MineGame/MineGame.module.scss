@@ -213,7 +213,7 @@
   color: $control-label;
 }
 .total_profit {
-  margin-top: 2.25rem;
+  margin-top: 1.35rem;
 }
 
 .grid2 {
@@ -250,11 +250,11 @@
 }
 
 .pt_profit {
-  padding-top: 60px;
+  padding-top: 42px;
 }
 
 .pt_profit_price {
-  padding-top: 20.5px;
+  padding-top: 24.5px;
 }
 
 .btn_mine_game {
@@ -286,13 +286,17 @@
   }
 
   &__message_box {
-    text-align: center;
-    background-color: #113452;
-    border: 1px solid #505e6b;
-    border-radius: 8px;
-    min-width: 275px;
     position: absolute;
-
+    padding: 0 20px;
+    border: 1px solid #505e6b;
+    border-radius: 12px;
+    max-width: 300px;
+    background-color: #113452;
+    text-align: center;
+    @media screen and (max-width: 480px) {
+      width: 100%;
+      max-width: calc(100% - 55px);
+    }
     &__lost {
       top: -1.85rem;
 

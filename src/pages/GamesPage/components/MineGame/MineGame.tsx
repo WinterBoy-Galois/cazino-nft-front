@@ -16,7 +16,6 @@ import BetAmountControl from '../../../../components/BetAmountControl';
 import { useTranslation } from 'react-i18next';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import { error as errorToast } from '../../../../components/Toast'; // error as errorToast, success, info
-import { appConfig } from '../../../../common/config';
 
 interface IProps {
   loadingBet?: boolean;
@@ -90,7 +89,6 @@ const MineGame: React.FC<IProps> = ({
     if (errorBet[0]?.code === 'MAX_PROFIT')
       (async () => {
         await navigate(`${pathname}?dialog=profit-cut`, {
-          // state: { errorMessage: errorBet[0].message },
           state: {
             errorMessage: t('mines.errorMsg'),
           },
@@ -107,13 +105,9 @@ const MineGame: React.FC<IProps> = ({
     if (session && lastAdvanceStatus === null && !isCashOut) {
       if (session?.lucky === true) setLastAdvanceStatus('Won');
       else if (session?.lucky === false) setLastAdvanceStatus('Lost');
-      setLastStatusTimer(
-        setTimeout(() => {
-          setLastAdvanceStatus(null);
-          setLastStatusTimer(null);
-          clearTimeout(lastStatusTimer);
-        }, appConfig.mineGameTimeout)
-      );
+      setLastAdvanceStatus(null);
+      setLastStatusTimer(null);
+      clearTimeout(lastStatusTimer);
     }
     if (session?.lucky === true) {
       setLucky(true);
@@ -158,8 +152,9 @@ const MineGame: React.FC<IProps> = ({
     if (lastAdvanceStatus !== null) return;
     if (lastStatusTimer !== null) return;
     if (session?.__typename !== 'MinesComplete') return;
-
-    setTimeout(() => dispatch({ type: 'END_MINES' }), 500);
+    dispatch({
+      type: 'END_MINES',
+    });
   }, [session, lastAdvanceStatus, lastStatusTimer]);
   if (loadingSetup) {
     return <Loading className={styles.loading} />;
@@ -406,7 +401,6 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   const [makeBetMines, { loading: loadingBet }] = useMutation(MAKE_BET_MINES);
   const [advanceMines, { loading: loadingAdvance }] = useMutation(ADVANCE_MINES);
   const [cashoutMines, { loading: loadingCashOut }] = useMutation(CASH_OUT_MINES);
-
   const [error, setError] = useState();
   const [session, setSession] = useState<any>(null);
   const [profitCut, setProfitCut] = useState<any>(null);
@@ -418,6 +412,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     setSelections([]);
     setProfitCut(null);
   };
+
   const initSession = (minesGameSetupObj: any) => {
     if (minesGameSetupObj.__typename !== 'MinesGameSetup') return;
     setSession(minesGameSetupObj.session);
@@ -431,6 +426,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     const { data, errors } = await makeBetMines({
       variables: { betAmount, mines: mines },
     });
+    console.log('makeBetMines  = ', data);
     if (errors || data.makeBetMines?.errors) {
       setError(errors ?? data.makeBetMines?.errors);
 
@@ -540,7 +536,9 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   useEffect(() => {
     if (data?.setupMines) {
       initSession(data.setupMines);
-      setMaxProfit(data.setupMines.maxProfit);
+      if (data.setupMines.maxProfit === 2) {
+        setMaxProfit(2.5);
+      }
     }
   }, [data]);
 
