@@ -9,7 +9,7 @@ import { ButtonSize } from '../../../Button';
 import SignIn from '../../../icons/SignIn';
 import Avatar from '../../../Avatar';
 import UserMenu from '../../../UserMenu';
-import { Link } from '@reach/router';
+// import { Link } from '@reach/router';
 import { useBreakpoint } from '../../../../hooks/useBreakpoint.hook';
 
 interface IProps {
@@ -37,14 +37,22 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
     }
   }, [breakpoint]);
 
+  const onClickHome = () => {
+    window.location.href = '/';
+    // props.history.push('/');
+  };
+
   return (
     <Fragment>
       <div className={`container-fluid h-100`}>
         <div className={`row h-100`}>
           <div className={`col-4 ${styles.center}`}>
-            <Link to="/">
+            {/*<Link to="/">*/}
+            {/*  <Logo className={styles.logo__size} fillClassName={styles.logo__color} />*/}
+            {/*</Link>*/}
+            <div className={styles.mouse_cursor} onClick={onClickHome}>
               <Logo className={styles.logo__size} fillClassName={styles.logo__color} />
-            </Link>
+            </div>
           </div>
           <div className={`col-8 ${styles.center} ${styles.right}`}>
             <div
