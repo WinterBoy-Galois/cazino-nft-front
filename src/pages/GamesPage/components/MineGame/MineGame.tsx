@@ -407,12 +407,12 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   const [maxProfit, setMaxProfit] = useState<any>(0);
   const [selections, setSelections] = useState<any>([]);
   const { t } = useTranslation(['games']);
+
   const handleRestart = () => {
     setSession(null);
     setSelections([]);
     setProfitCut(null);
   };
-
   const initSession = (minesGameSetupObj: any) => {
     if (minesGameSetupObj.__typename !== 'MinesGameSetup') return;
     setSession(minesGameSetupObj.session);
@@ -426,7 +426,6 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     const { data, errors } = await makeBetMines({
       variables: { betAmount, mines: mines },
     });
-    console.log('makeBetMines  = ', data);
     if (errors || data.makeBetMines?.errors) {
       setError(errors ?? data.makeBetMines?.errors);
 
