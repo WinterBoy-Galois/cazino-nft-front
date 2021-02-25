@@ -535,12 +535,9 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   useEffect(() => {
     if (data?.setupMines) {
       initSession(data.setupMines);
-      if (data.setupMines.maxProfit === 2) {
-        setMaxProfit(2.5);
-      }
+      setMaxProfit(data.setupMines.maxProfit);
     }
   }, [data]);
-
   return (
     <MineGame
       loadingSetup={loadingSetup}
