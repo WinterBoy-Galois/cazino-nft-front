@@ -9,6 +9,7 @@ import { BetsWithData } from './components/Bets';
 import { DepositsWithData } from './components/Deposits';
 import { WithdrawalsWithData } from './components/Withdrawals';
 import { BonusesWithData } from './components/Bonuses';
+import { AffiliatesWithData } from './components/Affiliates';
 import styles from './TransactionsPage.module.scss';
 
 const TransactionsPage: React.FC<RouteComponentProps> = () => {
@@ -25,28 +26,42 @@ const TransactionsPage: React.FC<RouteComponentProps> = () => {
             className={styles['nav__link']}
             activeClassName={styles['nav__link--active']}
           >
-            WITHDRAWALS
+            {t('buttonName.withdrawals').toUpperCase()}
           </NavLink>
           <NavLink
             to={'deposits'}
             className={styles['nav__link']}
             activeClassName={styles['nav__link--active']}
           >
-            Deposits
+            {t('buttonName.deposits').toUpperCase()}
           </NavLink>
           <NavLink
             to={'bets'}
             className={styles['nav__link']}
             activeClassName={styles['nav__link--active']}
           >
-            Bets
+            {t('buttonName.bets').toUpperCase()}
           </NavLink>
           <NavLink
             to={'bonuses'}
             className={styles['nav__link']}
             activeClassName={styles['nav__link--active']}
           >
-            Bonuses
+            {t('buttonName.bonuses').toUpperCase()}
+          </NavLink>
+          {/*<NavLink*/}
+          {/*  to={'bonuses'}*/}
+          {/*  className={styles['nav__link']}*/}
+          {/*  activeClassName={styles['nav__link--active']}*/}
+          {/*>*/}
+          {/*  {t('buttonName.achievements').toUpperCase()}*/}
+          {/*</NavLink>*/}
+          <NavLink
+            to={'affiliates'}
+            className={styles['nav__link']}
+            activeClassName={styles['nav__link--active']}
+          >
+            {t('buttonName.affiliates').toUpperCase()}
           </NavLink>
         </nav>
 
@@ -57,6 +72,7 @@ const TransactionsPage: React.FC<RouteComponentProps> = () => {
             <DepositsWithData path={'deposits'} />
             <BetsWithData path={'bets'} />
             <BonusesWithData path={'bonuses'} />
+            <AffiliatesWithData path={'affiliates'} />
           </Router>
         </DetailsContainer>
       </PageContentContainer>

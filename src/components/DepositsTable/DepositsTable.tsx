@@ -9,6 +9,7 @@ import ExternalLink from '../ExternalLink';
 import TransactionsTable from '../TransactionsTable';
 import { TableColumn } from '../TransactionsTable/lib/tableColumn';
 import TransactionStatus from '../TransactionStatus';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   data: DepositItem[];
@@ -19,6 +20,7 @@ interface IProps {
 }
 
 const DepositsTable: React.FC<IProps> = props => {
+  const { t } = useTranslation(['transactions']);
   const columns: TableColumn<DepositItem>[] = [
     {
       selector: 'status',
@@ -29,13 +31,13 @@ const DepositsTable: React.FC<IProps> = props => {
     },
     {
       selector: 'time',
-      name: 'Date/Time',
+      name: t('deposits.time').toUpperCase(),
       maxWidth: '180px',
       format: r => datetimeFromEpoch(r.time),
     },
     {
       selector: 'hash',
-      name: 'Hash',
+      name: t('deposits.hash').toUpperCase(),
       grow: 1,
       hideAtBreakpoint: 'md',
       // eslint-disable-next-line
@@ -45,7 +47,7 @@ const DepositsTable: React.FC<IProps> = props => {
     },
     {
       selector: 'amount',
-      name: 'Amount',
+      name: t('deposits.amount').toUpperCase(),
       maxWidth: '120px',
       // eslint-disable-next-line
       cell: r => <BitcoinValue value={formatBitcoin(r.amount)} />,

@@ -10,6 +10,7 @@ import BitcoinProfit from '../BitcoinProfit';
 import GameIcon from '../GameIcon';
 import styles from './BetsTable.module.scss';
 import { useStateValue } from '../../state';
+import { useTranslation } from 'react-i18next';
 interface IProps {
   data: TransactionsBet[];
   paginationTotalRows?: number;
@@ -19,6 +20,7 @@ interface IProps {
 }
 
 const BetsTable: React.FC<IProps> = props => {
+  const { t } = useTranslation(['transactions']);
   const columns: TableColumn<TransactionsBet>[] = [
     {
       selector: 'gameid',
@@ -29,25 +31,25 @@ const BetsTable: React.FC<IProps> = props => {
     },
     {
       selector: 'time',
-      name: 'Date/Time',
+      name: t('bets.time').toUpperCase(),
       minWidth: '165px',
       format: r => datetimeFromEpoch(r.time),
     },
     {
       selector: 'id',
-      name: 'Bet Id',
+      name: t('bets.id').toUpperCase(),
       hideAtBreakpoint: 'md',
     },
     {
       selector: 'amount',
-      name: 'Amount',
+      name: t('bets.amount').toUpperCase(),
       hideAtBreakpoint: 'md',
       // eslint-disable-next-line
       cell: r => <BitcoinValue value={formatBitcoin(r.amount)} />,
     },
     {
       selector: 'profit',
-      name: 'Profit',
+      name: t('bets.profit').toUpperCase(),
       // eslint-disable-next-line
       cell: r => <BitcoinProfit value={r.profit} />,
     },
