@@ -9,5 +9,29 @@
   "depositRejected": "Deposit of {{amount}} BTC was rejected.",
   "withdrawPending": "Your withdraw is pending.",
   "withdrawConfirmed": "Your withdraw is confirmed.",
-  "withdrawRejected": "Your withdraw is rejected."
+  "withdrawRejected": "Your withdraw is rejected.",
+  "buttonName": {
+    "withdrawals": "Withdrawals",
+    "deposits": "Deposits",
+    "bets": "Bets",
+    "bonuses": "Bonuses",
+    "achievements": "Achievements",
+    "affiliates": "Affiliates"
+  },
+  "affiliates": {
+    "id": "ID",
+    "commission": "Commission",
+    "time": "Time"
+  },
+  "bets": {
+    "time": "Date/Time",
+    "id": "Bet Id",
+    "amount": "Amount",
+    "profit": "Profit"
+  },
+  "deposits": {
+    "time": "Date/Time",
+    "hash": "Hash",
+    "amount": "Amount"
+  }
 }
