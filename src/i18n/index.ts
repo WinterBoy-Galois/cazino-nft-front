@@ -17,6 +17,8 @@ import profileEN from './locales/profile/en.json';
 import profileDE from './locales/profile/de.json';
 import transactionsEN from './locales/transactions/en.json';
 import transactionsDE from './locales/transactions/de.json';
+import affiliatesEN from './locales/affiliates/en.json';
+import affiliatesDE from './locales/affiliates/de.json';
 import gamesEN from './locales/games/en.json';
 import gamesDE from './locales/games/de.json';
 
@@ -35,6 +37,7 @@ i18n
         profile: profileEN,
         transactions: transactionsEN,
         games: gamesEN,
+        affiliates: affiliatesEN,
       },
       de: {
         common: commonDE,
@@ -46,6 +49,7 @@ i18n
         profile: profileDE,
         transactions: transactionsDE,
         games: gamesDE,
+        affiliates: affiliatesDE,
       },
     },
 
@@ -62,6 +66,7 @@ i18n
       'profile',
       'transactions',
       'games',
+      'affiliates',
     ],
     defaultNS: 'common',
 

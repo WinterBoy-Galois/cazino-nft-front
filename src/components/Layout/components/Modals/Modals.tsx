@@ -19,6 +19,7 @@ import { CashierModalWithData } from '../../../CashierModal/CashierModal';
 import { ProfitCutModalWithData } from '../../../ProfitCutModal/ProfitCutModal';
 import { FaucetModalWithData } from '../../../FaucetModal/FaucetModal';
 import DepositsDetailsModal from '../../../DepositsDetailsModal';
+import AffiliatesDetailsModal from '../../../AffiliatesDettailsModal';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
@@ -67,6 +68,11 @@ const Modals: React.FC = () => {
       /> */}
       <BonusDetailsModal
         show={handleShow('BONUS_DETAILS_MODAL')}
+        onClose={handleClose}
+        {...modal.data}
+      />
+      <AffiliatesDetailsModal
+        show={handleShow('AFFILIATES_DETAILS_MODAL')}
         onClose={handleClose}
         {...modal.data}
       />
