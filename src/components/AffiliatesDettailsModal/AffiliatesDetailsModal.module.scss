@@ -1,0 +1,56 @@
+@import '../../styles/shared';
+
+.section {
+  background-color: #152640;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+
+  @include media-breakpoint-up(md) {
+    margin: 3rem 5rem;
+  }
+
+  &__row {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    color: #7ea3cc;
+    font: normal normal normal 16px/21px 'Roboto';
+    text-transform: uppercase;
+    flex-basis: 0;
+    flex-grow: 1;
+    width: 10rem;
+  }
+
+  &__value {
+    display: flex;
+    color: #ffffff;
+    font: normal normal 300 16px/21px 'Roboto';
+    text-transform: uppercase;
+    flex-basis: 0;
+    flex-grow: 1;
+    justify-content: flex-end;
+    word-break: break-all;
+
+    @include media-breakpoint-up(md) {
+      justify-content: flex-end;
+    }
+
+    &__amount {
+      align-items: center;
+
+      & > svg {
+        width: 0.8rem;
+        height: 0.8rem;
+        margin-right: 0.5rem;
+      }
+    }
+
+    &__bonus {
+      color: #73fc7f;
+    }
+  }
+}

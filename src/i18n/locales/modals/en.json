@@ -42,6 +42,11 @@
     "wager": "WAGER",
     "amount": "BONUS AMOUNT"
   },
+  "affiliatesDetails": {
+    "title": "Affiliate Details",
+    "time": "Date / time",
+    "commission": "Commission"
+  },
   "betResults": {
     "title": "Bet Results"
   },

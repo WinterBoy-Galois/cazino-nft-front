@@ -537,3 +537,37 @@ export const CLAIM_BONUS = gql`
     }
   }
 `;
+
+export const CLAIM_COMMISSION = gql`
+  mutation claimCommissions {
+    claimCommissions {
+      ... on User {
+        id
+        username
+        email
+        balance
+        hideUsername
+        hideTotalProfit
+        hideTotalWager
+        isActivated
+        avatarUrl
+        totalWager
+        totalProfit
+        mostPlayed
+        totalBets
+        luckyBets
+        depositAddress
+        refCode
+        refCommissions
+      }
+      ... on GenericErrorArray {
+        errors {
+          source
+          code
+          message
+          args
+        }
+      }
+    }
+  }
+`;

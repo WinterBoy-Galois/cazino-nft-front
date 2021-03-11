@@ -170,6 +170,18 @@ export const ME = gql`
       email
       isActivated
       depositAddress
+      refCommissions
+    }
+  }
+`;
+
+export const AFF_STATS = gql`
+  query affStats {
+    affStats {
+      bets
+      refs
+      wager
+      commissions
     }
   }
 `;

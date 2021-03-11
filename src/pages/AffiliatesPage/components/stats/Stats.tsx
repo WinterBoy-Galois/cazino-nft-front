@@ -1,47 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../AffiliatesPage.module.scss';
 import BitcoinValue from '../../../../components/BitcoinValue/BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
-import clsx from 'clsx';
-import { CLAIM_BONUS } from '../../../../graphql/mutations';
-import { useMutation } from '@apollo/client';
-import { useStateValue } from '../../../../state/index';
+// import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
-  bonusClaims?: any[];
+  data: any;
 }
 
-interface IUnclaimedBonusProps {
-  bonusClaim: any;
-}
-
-const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({ bonusClaim }) => {
-  const [claimBonus, { loading }] = useMutation(CLAIM_BONUS);
-  const [, dispatch] = useStateValue();
+const Stats: React.FC<IProps> = ({ data: data }) => {
+  const { t } = useTranslation(['affiliates']);
   return (
-    <>
-      <div className={clsx(styles.unclaimed_bonus, styles.unclaimed_bonus__desktop)}>
-        <div className={styles.unclaimed_bonus__summary}>
-          <p>{bonusClaim.type} Bonus</p>
+    <div>
+      <div className={styles.sub_title}>{t('stats')}</div>
+      <div className={styles.contents}>
+        <div className={styles.flex_between}>
+          <div>{t('total_wager')}</div>
+          <div>
+            <BitcoinValue value={formatBitcoin(data?.wager)} />
+          </div>
+        </div>
+        <div className={styles.flex_between}>
+          <div>{t('total_commissions')}</div>
+          <div>
+            <BitcoinValue value={formatBitcoin(data?.commissions)} />
+          </div>
+        </div>
+        <div className={styles.flex_between}>
+          <div>{t('referrals')}</div>
+          <div>{data?.refs}</div>
+        </div>
+        <div className={styles.flex_between}>
+          <div>{t('total_bets')}</div>
+          <div>{data?.bets}</div>
         </div>
       </div>
-      <div className={clsx(styles.unclaimed_bonus, styles.unclaimed_bonus__mobile)}>
-        <p className={styles.unclaimed_bonus__mobile__bonus_type}>{bonusClaim.type}</p>
-      </div>
-    </>
-  );
-};
-
-const Stats: React.FC<IProps> = ({ bonusClaims: defaultBonusClaims = [] }) => {
-  const [bonusClaims, setBonusClaims] = useState(defaultBonusClaims);
-  const { t } = useTranslation(['transactions']);
-  return (
-    <div className={styles.unclaimed_bonuses}>
-      <div className={styles.unclaimed_bonuses__title}>{t('stats').toUpperCase()}</div>
-      {bonusClaims.slice(0, 3).map((bonusClaim, index) => (
-        <UnClaimedBonus key={`unclaimed-bonus-${index}`} bonusClaim={bonusClaim} />
-      ))}
     </div>
   );
 };

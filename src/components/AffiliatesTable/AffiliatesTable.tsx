@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useLocation, useNavigate } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 import { datetimeFromEpoch } from '../../common/util/date.util';
 import { formatBitcoin } from '../../common/util/format.util';
 import TransactionsAffiliates from '../../models/transactionsAffiliates.model'; // replace while complete
@@ -7,10 +7,10 @@ import BitcoinValue from '../BitcoinValue';
 import TransactionsTable from '../TransactionsTable';
 import { TableColumn } from '../TransactionsTable/lib/tableColumn';
 import { useTranslation } from 'react-i18next';
-// import BitcoinProfit from '../BitcoinProfit';
-// import GameIcon from '../GameIcon';
-// import styles from './AffiliatesTable.module.scss';
-// import { useStateValue } from '../../state';
+import BitcoinProfit from '../BitcoinProfit';
+import GameIcon from '../GameIcon';
+import styles from './AffiliatesTable.module.scss';
+import { useStateValue } from '../../state';
 interface IProps {
   data: TransactionsAffiliates[];
   paginationTotalRows?: number;
@@ -42,29 +42,23 @@ const AffiliatesTable: React.FC<IProps> = props => {
     },
   ];
 
-  // const navigate = useNavigate();
-  // const { pathname } = useLocation();
-  // const [{ auth }] = useStateValue();
-  // const handleRowClicked = (row: TransactionsBet) => {
-  //   navigate(`${pathname}?dialog=bet-details`, {
-  //     state: {
-  //       bet: {
-  //         ...row,
-  //         userid: auth.user?.id,
-  //         username: auth.user?.username,
-  //         bet: row.amount,
-  //         gameid: row.game,
-  //       },
-  //     },
-  //   });
-  // };
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const handleRowClicked = (row: TransactionsAffiliates) => {
+    navigate(`${pathname}?dialog=affiliates-details`, {
+      state: {
+        time: datetimeFromEpoch(row.claimedAt),
+        commission: row.amount,
+      },
+    });
+  };
 
   return (
     <TransactionsTable<TransactionsAffiliates>
       {...props}
       columns={columns}
       progressPending={props.loading}
-      // onRowClicked={handleRowClicked}
+      onRowClicked={handleRowClicked}
     />
   );
 };
