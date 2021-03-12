@@ -31,7 +31,10 @@
   },
   "menu": {
     "profile": "profile",
+    "achievements": "achievements",
     "transactions": "transactions",
+    "affiliates": "affiliates",
+    "seeds": "seeds",
     "signOut": "sign out"
   }
 }

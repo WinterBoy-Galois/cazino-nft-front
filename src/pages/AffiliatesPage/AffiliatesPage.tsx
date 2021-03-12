@@ -9,9 +9,12 @@ import Commissions from './components/commissions';
 import Marketing from './components/marketing';
 import Stats from './components/stats';
 import { useTranslation } from 'react-i18next';
+import { useStateValue } from '../../state';
+import clsx from 'clsx';
 
 const AffiliatesPage: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['transactions']);
+  const [{ sidebar }] = useStateValue();
   const { loading, error, data: dataMe } = useQuery(ME);
   const { loading: loadingStats, error: errorStats, data: dataStats } = useQuery(AFF_STATS);
   const [claimCommissions] = useMutation(CLAIM_COMMISSION);
@@ -33,9 +36,9 @@ const AffiliatesPage: React.FC<RouteComponentProps> = () => {
   return (
     <div className={styles.affiliates_page}>
       <div className={styles.bonuses_title}>{t('affiliate').toUpperCase()}</div>
-      <div className={styles.container}>
-        <div className={styles.grid2}>
-          <div className={styles.card_bg}>
+      <div className={clsx(sidebar?.isOpen ? styles.container : styles.container_close)}>
+        <div className={clsx(sidebar?.isOpen ? styles.grid2 : styles.grid2_close)}>
+          <div className={clsx(sidebar?.isOpen ? styles.card_bg : styles.card_bg_close)}>
             <Commissions data={dataMe?.me} onTransferBalance={() => onTransferBalance} />
           </div>
           <div className={styles.card_bg}>

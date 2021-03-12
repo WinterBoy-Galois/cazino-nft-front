@@ -59,8 +59,23 @@ const UserMenu: React.FC<IProps> = ({
                 </Link>
               </li>
               <li className={styles.menu__list__item}>
+                <Link onClick={onClose} to="/">
+                  {t('menu.achievements')}
+                </Link>
+              </li>
+              <li className={styles.menu__list__item}>
                 <Link onClick={onClose} to="/transactions">
                   {t('menu.transactions')}
+                </Link>
+              </li>
+              <li className={styles.menu__list__item}>
+                <Link onClick={onClose} to="/affiliates">
+                  {t('menu.affiliates')}
+                </Link>
+              </li>
+              <li className={styles.menu__list__item}>
+                <Link onClick={onClose} to="/">
+                  {t('menu.seeds')}
                 </Link>
               </li>
               <li className={styles.menu__list__item}>
