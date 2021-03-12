@@ -2,8 +2,9 @@ import React from 'react';
 import styles from '../../AffiliatesPage.module.scss';
 import BitcoinValue from '../../../../components/BitcoinValue/BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
-// import clsx from 'clsx';
+import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { useStateValue } from '../../../../state';
 
 interface IProps {
   data: any;
@@ -11,6 +12,9 @@ interface IProps {
 
 const Stats: React.FC<IProps> = ({ data: data }) => {
   const { t } = useTranslation(['affiliates']);
+  const [{ sidebar }] = useStateValue();
+  console.log(sidebar?.isOpen, ' ================ ');
+
   return (
     <div>
       <div className={styles.sub_title}>{t('stats')}</div>
