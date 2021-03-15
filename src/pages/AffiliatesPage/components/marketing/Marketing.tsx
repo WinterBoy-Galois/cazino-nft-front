@@ -30,7 +30,12 @@ const Marketing: React.FC<IProps> = () => {
           </div>
           <div className={styles.btn_download}>
             <div className={clsx(styles.download_url, styles.link_col)}>{file_name}</div>
-            <a href={bundle_link} className={styles.clipboard_btn} />
+            <a
+              rel="noreferrer"
+              target={'_blank'}
+              href={bundle_link}
+              className={styles.clipboard_btn}
+            />
           </div>
         </div>
       </div>
