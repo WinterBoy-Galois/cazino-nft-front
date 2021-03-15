@@ -171,6 +171,7 @@ export const ME = gql`
       isActivated
       depositAddress
       refCommissions
+      refCode
     }
   }
 `;

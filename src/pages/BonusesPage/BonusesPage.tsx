@@ -36,7 +36,6 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   const onClaimBonus = () =>
     refreshBonusClaims().then(({ data: __bonusClaims }) => setBonusClaims(__bonusClaims));
 
-  console.log(bonusClaims?.bonusClaims.length);
   return (
     <div className={styles.bonuses_page}>
       <div className={styles.bonuses_title}>Bonuses</div>

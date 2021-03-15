@@ -43,6 +43,7 @@ export const SIGN_IN = gql`
           email
           isActivated
           depositAddress
+          refCode
         }
       }
       ... on GenericErrorArray {
@@ -80,6 +81,7 @@ export const SIGN_UP = gql`
           avatarUrl
           balance
           depositAddress
+          refCode
         }
       }
       ... on GenericErrorArray {

@@ -16,4 +16,5 @@ export default interface User {
   totalBets?: number;
   luckyBets?: number;
   depositAddress?: string;
+  refCode?: string;
 }
