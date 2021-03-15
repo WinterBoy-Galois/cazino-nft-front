@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { ME, AFF_STATS } from '../../graphql/queries';
 import { useMutation, useQuery } from '@apollo/client';
@@ -17,11 +17,17 @@ const AffiliatesPage: React.FC<RouteComponentProps> = () => {
   const { data: dataMe } = useQuery(ME);
   const { data: dataStats } = useQuery(AFF_STATS);
   const [claimCommissions, { loading: loadingSetup }] = useMutation(CLAIM_COMMISSION);
-
+  const [{ auth }, dispatch] = useStateValue();
   const [commissionData, setCommissionData] = useState(dataMe?.me);
   const onTransferBalance = async () => {
-    const { data } = await claimCommissions();
+    const { data, errors } = await claimCommissions();
     await setCommissionData(data?.claimCommissions);
+    if (!errors && data && auth.state === 'SIGNED_IN') {
+      dispatch({
+        type: 'AUTH_SIGN_IN',
+        payload: { user: { ...data?.claimCommissions } },
+      });
+    }
   };
 
   return (
