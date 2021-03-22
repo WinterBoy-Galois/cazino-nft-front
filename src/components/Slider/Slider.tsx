@@ -3,6 +3,10 @@ import styles from './Slider.module.scss';
 import { Slider as ReactSlider, Rail, Handles, Tracks } from 'react-compound-slider';
 import Handle from './components/Handle';
 import Track from './components/Track';
+import useSound from 'use-sound';
+
+import { useStateValue } from '../../state';
+const dice_slider_v1 = require('../../sounds/dice-slider-v1.mp3');
 
 interface IProps {
   value?: number;
@@ -27,11 +31,30 @@ const Slider: React.FC<IProps> = ({
 }: IProps) => {
   const [steps, setSteps] = useState(0.01);
 
+  const [playDiceSlider] = useSound(dice_slider_v1.default, { volume: 0.9 });
+  const [captureValue, setCaptureValue] = useState(0);
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
+
   useEffect(() => {
     if (value % 1 != 0) {
       setSteps(0.01);
     }
   }, [value]);
+
+  const onDownCapture = () => {
+    setCaptureValue(value);
+  };
+
+  const onUpCapture = () => {
+    if (isSound && captureValue !== value) {
+      playDiceSlider();
+    }
+    setCaptureValue(value);
+  };
 
   return (
     <div className={styles.slider__wrapper}>
@@ -88,7 +111,11 @@ const Slider: React.FC<IProps> = ({
 
         <Handles>
           {({ handles, getHandleProps }) => (
-            <div className={styles['slider-handles']}>
+            <div
+              className={styles['slider-handles']}
+              onMouseDownCapture={onDownCapture}
+              onMouseUpCapture={onUpCapture}
+            >
               {handles.map(handle => (
                 <Handle
                   key={handle.id}

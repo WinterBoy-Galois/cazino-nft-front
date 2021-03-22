@@ -69,9 +69,9 @@ const Layout: React.FC = ({ children }) => {
             <Footer />
           </div>
           <div
-            className={`${styles['main__bottom-bar']} ${
-              sidebar.isOpen && styles['main__bottom-bar--sidebar-open']
-            }`}
+            className={`${
+              sidebar.isOpen ? styles['main__bottom-bar'] : styles['main__bottom-bar-open']
+            } ${sidebar.isOpen && styles['main__bottom-bar--sidebar-open']}`}
             style={{
               width: modal.type !== 'NONE' ? `${mainWidth}px` : '',
               transition: modal.type !== 'NONE' ? 'none' : '',

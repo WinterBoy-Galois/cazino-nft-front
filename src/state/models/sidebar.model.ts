@@ -1,4 +1,5 @@
 export interface SidebarState {
+  isSound: boolean;
   isOpen: boolean;
   selectedTab: SidebarTab;
   selectedLeaderboardAggregation: LeaderboardAggregation;

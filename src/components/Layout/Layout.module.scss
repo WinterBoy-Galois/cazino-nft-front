@@ -57,7 +57,8 @@ $slide-transition: all 200ms ease-in-out;
     }
   }
 
-  &__bottom-bar {
+  &__bottom-bar,
+  &__bottom-bar-open {
     width: 100%;
     height: $bar-height;
     background-color: $blue;
@@ -67,10 +68,6 @@ $slide-transition: all 200ms ease-in-out;
     transition: $slide-transition;
     z-index: 3;
 
-    @include media-breakpoint-up(lg) {
-      height: $bar-height-lg;
-    }
-
     &--sidebar-open {
       @include media-breakpoint-up(md) {
         width: calc(100% - #{$sidebar-width-md});
@@ -79,6 +76,18 @@ $slide-transition: all 200ms ease-in-out;
       @include media-breakpoint-up(lg) {
         width: calc(100% - #{$sidebar-width-lg});
       }
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    &__bottom-bar {
+      height: $bar-height-lg;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    &__bottom-bar-open {
+      height: $bar-height-lg;
     }
   }
 }
