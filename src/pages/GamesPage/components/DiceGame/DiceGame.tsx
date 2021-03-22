@@ -26,6 +26,7 @@ import BetAmountControl from '../../../../components/BetAmountControl';
 import useSound from 'use-sound';
 const toast_v1 = require('../../../../sounds/toast-v1.mp3');
 const balance_updated_v1 = require('../../../../sounds/balance-updated-v1.mp3');
+const button_click_v1 = require('../../../../sounds/button-click-v1.mp3');
 
 const dice_hit_v1 = require('../../../../sounds/dice-hit-v1.mp3');
 const dice_win_v1 = require('../../../../sounds/dice-win-v1.mp3');
@@ -67,8 +68,7 @@ const DiceGame: React.FC<IProps> = ({
   const minTarget = useTargetSliderMin(minProbability, maxProbability);
   const maxTarget = useTargetSliderMax(minProbability, maxProbability);
 
-  const [playDiceHit] = useSound(dice_hit_v1.default, { volume: 0.9 });
-
+  const [playButtonClick] = useSound(button_click_v1.default, { volume: 0.9 });
   const [
     {
       sidebar: { isSound },
@@ -117,7 +117,7 @@ const DiceGame: React.FC<IProps> = ({
     }
 
     if (isSound) {
-      playDiceHit();
+      playButtonClick();
     }
     dispatch({ type: 'START' });
     dispatch({ type: 'SET_RESULT', payload: { result: 0 } });
@@ -231,6 +231,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const [playToastBalanceUpdated] = useSound(balance_updated_v1.default, { volume: 0.9 });
   const [playDiceWin] = useSound(dice_win_v1.default, { volume: 0.9 });
   const [playLoss] = useSound(universal_lost_v1.default, { volume: 0.9 });
+  const [playDiceHit] = useSound(dice_hit_v1.default, { volume: 0.9 });
   const [
     {
       sidebar: { isSound },
@@ -253,22 +254,32 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
     }
 
     setResult(data?.makeBetDice?.result);
-
+    setTimeout(() => {
+      if (isSound) {
+        playDiceHit();
+      }
+    }, appConfig.diceGameTimeout / 10);
     setTimeout(() => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
       const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetDice?.profit)}`;
       if (+data?.makeBetDice?.profit >= 0) {
+        success(toast);
+      } else {
+        info(toast);
+      }
+    }, appConfig.diceGameTimeout);
+
+    setTimeout(() => {
+      if (+data?.makeBetDice?.profit >= 0) {
         if (isSound) {
           playDiceWin();
         }
-        success(toast);
       } else {
         if (isSound) {
           playLoss();
         }
-        info(toast);
       }
-    }, appConfig.diceGameTimeout);
+    }, appConfig.diceGameTimeout / 2);
   };
 
   return (
