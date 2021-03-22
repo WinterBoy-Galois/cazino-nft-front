@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './ClamGameBoard.module.scss';
 import clsx from 'clsx';
 import ClamIdle from '../icons/games/ClamIdle';
 import ClamSelected from '../icons/games/ClamSelected';
 import ClamLost from '../icons/games/ClamLost';
 import ClamWin from '../icons/games/ClamWin';
+import { useStateValue } from '../../state';
+
+import useSound from 'use-sound';
+const clams_select_v1 = require('../../sounds/clams-select-v1.mp3');
 
 interface IClamProps {
   className?: string;
@@ -23,6 +27,20 @@ const Clam: React.FC<IClamProps> = ({
   isSelected = false,
   winningClam = false,
 }) => {
+  const [playSelect, { stop }] = useSound(clams_select_v1.default, { volume: 0.9 });
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
+
+  useEffect(() => {
+    if (isSound && selection?.length !== 0) {
+      stop();
+      playSelect();
+    }
+  }, [selection]);
+
   const onClamClick = () => {
     if (!isSelected && selection.length == 8) return;
 

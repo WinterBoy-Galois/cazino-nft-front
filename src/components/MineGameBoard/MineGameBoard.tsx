@@ -24,6 +24,7 @@ const MineGameBoard: React.FC<IProps> = ({
   const [results, setResults] = useState(scoreArray);
   const [bombId, setBombId] = useState<number>(0);
   const [isEndCut, setIsEndCut] = useState(false);
+  const [, dispatch] = useStateValue();
   useEffect(() => {
     const scoreArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     if (session?.allowNext) {
@@ -84,6 +85,7 @@ const MineGameBoard: React.FC<IProps> = ({
       }
     }
   };
+
   return (
     <div
       className={clsx(

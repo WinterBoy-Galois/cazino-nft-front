@@ -5,8 +5,9 @@ import { Action } from './actions';
 import { useBreakpoint, Breakpoint } from '../hooks/useBreakpoint.hook';
 import { readAuthState, readReferral } from '../common/util/storage.util';
 
-const getInitialState = (isSidebarOpen: boolean): State => ({
+const getInitialState = (isSidebarOpen: boolean, isSoundOpen: boolean): State => ({
   sidebar: {
+    isSound: isSoundOpen,
     isOpen: isSidebarOpen,
     selectedTab: 'LATEST_BETS',
     selectedLeaderboardAggregation: 'DAILY',
@@ -32,7 +33,7 @@ const isSidebarInitiallyOpen = (breakpoint: Breakpoint) => {
 };
 
 export const StateContext = createContext<[State, Dispatch<Action>]>([
-  getInitialState(false),
+  getInitialState(false, true),
   () => null,
 ]);
 
@@ -42,7 +43,7 @@ interface IProps {
 
 export const StateProvider: React.FC<IProps> = ({ children, state }) => {
   const breakpoint = useBreakpoint();
-  const initialState = state ?? getInitialState(isSidebarInitiallyOpen(breakpoint));
+  const initialState = state ?? getInitialState(isSidebarInitiallyOpen(breakpoint), true);
 
   return (
     <StateContext.Provider value={useReducer(mainReducer, initialState)}>

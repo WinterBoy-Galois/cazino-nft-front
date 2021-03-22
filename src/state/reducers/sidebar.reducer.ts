@@ -16,6 +16,11 @@ export const sidebarReducer: Reducer<SidebarState, Action> = (state, { type, pay
         selectedTab: payload,
       };
 
+    case 'SOUND_ON_OFF':
+      return {
+        ...state,
+        isSound: !state.isSound,
+      };
     default:
       return state;
   }

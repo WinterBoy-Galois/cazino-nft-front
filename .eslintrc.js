@@ -37,6 +37,7 @@ module.exports = {
     'no-console': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-case-declarations': 'off',
+    '@typescript-eslint/no-var-requires': 0,
   },
   overrides: [
     // Override some TypeScript rules just for .js files

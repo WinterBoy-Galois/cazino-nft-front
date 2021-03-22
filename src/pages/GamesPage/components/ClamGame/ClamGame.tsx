@@ -20,6 +20,14 @@ import Bitcoin from '../../../../components/icons/social/Bitcoin';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 
+import useSound from 'use-sound';
+const clams_win_v1 = require('../../../../sounds/clams-win-v1.mp3');
+const universal_lost_v1 = require('../../../../sounds/universal-lost-v1.mp3');
+
+const toast_v1 = require('../../../../sounds/toast-v1.mp3');
+const balance_updated_v1 = require('../../../../sounds/balance-updated-v1.mp3');
+const button_click_v1 = require('../../../../sounds/button-click-v1.mp3');
+
 interface IProps {
   loadingBet?: boolean;
   he?: number;
@@ -54,6 +62,15 @@ const ClamGame: React.FC<IProps> = ({
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  const [playStart] = useSound(button_click_v1.default, { volume: 0.9 });
+  const [playWin] = useSound(clams_win_v1.default, { volume: 0.9 });
+  const [playLost] = useSound(universal_lost_v1.default, { volume: 0.9 });
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
+
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET' });
@@ -76,6 +93,13 @@ const ClamGame: React.FC<IProps> = ({
             result,
           },
         });
+        if (isSound) {
+          if (state.selection.includes(result)) {
+            playWin();
+          } else {
+            playLost();
+          }
+        }
       }, appConfig.clamsGameTimeout / 2);
 
       const gameStateTimer = setTimeout(() => {
@@ -104,6 +128,9 @@ const ClamGame: React.FC<IProps> = ({
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
+    if (isSound) {
+      playStart();
+    }
     dispatch({ type: 'START' });
 
     onPlaceBet(state.amount, state.selection);
@@ -178,7 +205,6 @@ const ClamGame: React.FC<IProps> = ({
               setResult(-1);
               dispatch({ type: 'RESET', payload: { restart: true } });
             }
-
             dispatch({ type: 'SELECT_CLAMS', payload: { selection } });
           }}
           isEnded={state.gameState !== GameState.IDLE}
@@ -254,12 +280,25 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
   const [profit, setProfit] = useState();
   const [error, setError] = useState();
 
+  const [playToast] = useSound(toast_v1.default, { volume: 0.9 });
+  const [playToastBalanceUpdated] = useSound(balance_updated_v1.default, { volume: 0.9 });
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
+
   const handlePlaceBet = async (betAmount: number, selection: number[]) => {
     const { data, errors } = await makeBetClams({ variables: { betAmount, selection } });
 
     if (errors || data.makeBetClams?.errors) {
       setError(errors ?? data.makeBetClams?.errors);
 
+      if (isSound) {
+        setTimeout(() => {
+          playToast();
+        }, 500);
+      }
       if (data.makeBetClams?.errors[0]?.code === 'MAX_PROFIT') {
         return errorToast('Your bet may reaches the profit limit.');
       }
@@ -275,8 +314,18 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetClams?.balance } });
       const toast = `Your balance has been updated: ${formatBitcoin(+data.makeBetClams?.profit)}`;
       if (+data.makeBetClams?.profit >= 0) {
+        if (isSound) {
+          setTimeout(() => {
+            playToastBalanceUpdated();
+          }, 500);
+        }
         success(toast);
       } else {
+        if (isSound) {
+          setTimeout(() => {
+            playToast();
+          }, 500);
+        }
         info(toast);
       }
     }, appConfig.clamsGameTimeout);

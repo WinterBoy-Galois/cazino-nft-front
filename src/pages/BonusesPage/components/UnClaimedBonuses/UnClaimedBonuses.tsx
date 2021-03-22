@@ -11,6 +11,10 @@ import { useMutation } from '@apollo/client';
 import { success, error as errorToast } from '../../../../components/Toast';
 import { useStateValue } from '../../../../state/index';
 
+import useSound from 'use-sound';
+const bonus_claim_v1 = require('../../../../sounds/bonus-claim-v1.mp3');
+const toast_v1 = require('../../../../sounds/toast-v1.mp3');
+
 interface IProps {
   bonusClaims?: any[];
   onClaimBonus?: () => void;
@@ -27,10 +31,21 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
 }) => {
   const [claimBonus, { loading }] = useMutation(CLAIM_BONUS);
   const [, dispatch] = useStateValue();
+  const [playToast] = useSound(toast_v1.default, { volume: 0.5 });
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
 
   const onClaimBonus = async (bonusId: string) => {
     const { data, errors } = await claimBonus({ variables: { bonusId } });
 
+    if (isSound) {
+      setTimeout(() => {
+        playToast();
+      }, 500);
+    }
     if (errors || data.claimBonus?.errors) {
       return errorToast("It's failed, please try again later.");
     }
@@ -98,8 +113,18 @@ const UnClaimedBonuses: React.FC<IProps> = ({
   onClaimBonus = () => null,
 }) => {
   const [bonusClaims, setBonusClaims] = useState(defaultBonusClaims);
+  const [playBonusClaim, { stop }] = useSound(bonus_claim_v1.default, { volume: 0.9 });
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
 
   const onClaimBonusCompleted = (bonusId: string) => {
+    if (isSound) {
+      stop();
+      playBonusClaim();
+    }
     setBonusClaims(
       ([] as any[]).concat(bonusClaims.filter(bonusClaim => bonusClaim.id !== bonusId))
     );

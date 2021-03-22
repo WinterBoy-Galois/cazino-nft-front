@@ -23,6 +23,14 @@ import { formatBitcoin } from '../../../../common/util/format.util';
 import { useTranslation } from 'react-i18next';
 import BetAmountControl from '../../../../components/BetAmountControl';
 
+import useSound from 'use-sound';
+const toast_v1 = require('../../../../sounds/toast-v1.mp3');
+const balance_updated_v1 = require('../../../../sounds/balance-updated-v1.mp3');
+
+const dice_hit_v1 = require('../../../../sounds/dice-hit-v1.mp3');
+const dice_win_v1 = require('../../../../sounds/dice-win-v1.mp3');
+const universal_lost_v1 = require('../../../../sounds/universal-lost-v1.mp3');
+
 interface IProps {
   loadingBet?: boolean;
   loadingSetup?: boolean;
@@ -58,6 +66,14 @@ const DiceGame: React.FC<IProps> = ({
 
   const minTarget = useTargetSliderMin(minProbability, maxProbability);
   const maxTarget = useTargetSliderMax(minProbability, maxProbability);
+
+  const [playDiceHit] = useSound(dice_hit_v1.default, { volume: 0.9 });
+
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
 
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
@@ -100,6 +116,9 @@ const DiceGame: React.FC<IProps> = ({
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
+    if (isSound) {
+      playDiceHit();
+    }
     dispatch({ type: 'START' });
     dispatch({ type: 'SET_RESULT', payload: { result: 0 } });
     dispatch({ type: 'CALC_GAME_STATE' });
@@ -208,12 +227,24 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const [result, setResult] = useState();
   const [error, setError] = useState();
 
+  const [playToast] = useSound(toast_v1.default, { volume: 0.9 });
+  const [playToastBalanceUpdated] = useSound(balance_updated_v1.default, { volume: 0.9 });
+  const [playDiceWin] = useSound(dice_win_v1.default, { volume: 0.9 });
+  const [playLoss] = useSound(universal_lost_v1.default, { volume: 0.9 });
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
+
   const handlePlaceBet = async (amount: number, target: number, over: boolean) => {
     const { data, errors } = await makeBetDice({ variables: { betAmount: amount, target, over } });
 
     if (errors || data.makeBetDice?.errors) {
       setError(errors ?? data.makeBetDice?.errors);
-
+      if (isSound) {
+        playToast();
+      }
       if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
         return errorToast('Your bet may reaches the profit limit.');
       }
@@ -227,8 +258,14 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
       const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetDice?.profit)}`;
       if (+data?.makeBetDice?.profit >= 0) {
+        if (isSound) {
+          playDiceWin();
+        }
         success(toast);
       } else {
+        if (isSound) {
+          playLoss();
+        }
         info(toast);
       }
     }, appConfig.diceGameTimeout);

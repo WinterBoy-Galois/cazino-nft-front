@@ -18,6 +18,16 @@ import { appConfig } from '../../../../common/config';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 import { error as errorToast, success, info } from '../../../../components/Toast';
+
+import useSound from 'use-sound';
+const toast_v1 = require('../../../../sounds/toast-v1.mp3');
+const balance_updated_v1 = require('../../../../sounds/balance-updated-v1.mp3');
+const button_click_v1 = require('../../../../sounds/button-click-v1.mp3');
+
+const goal_select_v1 = require('../../../../sounds/goals-select-v1.mp3');
+const goal_win_v1 = require('../../../../sounds/goals-win-v1.mp3');
+const universal_lost_v1 = require('../../../../sounds/universal-lost-v1.mp3');
+
 import {
   PROBABILITY_HIGH,
   PROBABILITY_MIDDLE,
@@ -93,6 +103,16 @@ const GoalGame: React.FC<IProps> = ({
   const [isAlerted, setAlerted] = useState(false);
   const [isGameStartedBtnClicked, setGameStartBtnClicked] = useState(false);
 
+  const [play, { stop }] = useSound(button_click_v1.default, { volume: 0.9 });
+  const [playGoalSelect] = useSound(goal_select_v1.default, { volume: 0.9 });
+  const [playGoalWin] = useSound(goal_win_v1.default, { volume: 0.9 });
+  const [playLoss] = useSound(universal_lost_v1.default, { volume: 0.9 });
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
+
   useEffect(() => {
     const checkDeviceSize = () => {
       if (window.innerWidth >= 1500) setDevice(deviceSize.xxl);
@@ -152,8 +172,11 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     if (lastSpot !== null && session && lastAdvanceStatus === null && !isCashOut) {
-      if (session?.lucky === true) setLastAdvanceStatus('Won');
-      else if (session?.lucky === false) setLastAdvanceStatus('Lost');
+      let win_lost_flag = false;
+      if (session?.lucky === true) {
+        win_lost_flag = true;
+        setLastAdvanceStatus('Won');
+      } else if (session?.lucky === false) setLastAdvanceStatus('Lost');
       else {
         const isWon =
           session.selections.filter(
@@ -161,8 +184,20 @@ const GoalGame: React.FC<IProps> = ({
               selection.step === session.currentStep - 1 &&
               selection.luckySpots.includes(selection.selected)
           ).length > 0;
-
+        if (isWon) {
+          win_lost_flag = true;
+        }
         setLastAdvanceStatus(isWon ? 'Won' : 'Lost');
+      }
+
+      if (isSound) {
+        if (win_lost_flag) {
+          stop();
+          playGoalWin();
+        } else {
+          stop();
+          playLoss();
+        }
       }
 
       setLastStatusTimer(
@@ -233,6 +268,12 @@ const GoalGame: React.FC<IProps> = ({
       typeof selection === 'number' &&
       state.gameState === GameState.IN_PROGRESS
     ) {
+      if (isSound) {
+        setTimeout(() => {
+          stop();
+          playGoalSelect();
+        }, 500);
+      }
       setLastSpot(selection);
       onPlaceBet(session.betId, selection, session.currentStep);
     }
@@ -250,7 +291,10 @@ const GoalGame: React.FC<IProps> = ({
 
   const handleButtonClick = () => {
     setAlerted(false);
-
+    if (isSound) {
+      stop();
+      play();
+    }
     if (state.gameState === GameState.IDLE) return handleStartGame();
 
     if (state.gameState === GameState.GAME_ENDED) return handleTryAgain();
@@ -494,6 +538,14 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const [maxProfit, setMaxProfit] = useState<any>(0);
   const [selections, setSelections] = useState<any>([]);
 
+  const [playToast] = useSound(toast_v1.default, { volume: 0.9 });
+  const [playToastBalanceUpdated] = useSound(balance_updated_v1.default, { volume: 0.9 });
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
+
   const handleRestart = () => {
     setSession(null);
     setSelections([]);
@@ -521,11 +573,16 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
       if (data.makeBetGoals?.errors[0]?.code === 'MAX_PROFIT') return;
 
+      if (isSound) {
+        playToast();
+      }
       return errorToast("Your bet couldn't be placed, please try again.");
     }
 
     initSession(data.makeBetGoals);
-
+    if (isSound) {
+      playToastBalanceUpdated();
+    }
     info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
   };
 
@@ -537,6 +594,9 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     if (errors || data.advanceGoals?.errors) {
       setError(errors ?? data.advanceGoals?.errors);
 
+      if (isSound) {
+        playToast();
+      }
       return errorToast("Your bet couldn't be placed, please try again.");
     }
 
@@ -585,8 +645,14 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
             )}`;
 
             if (+data.advanceGoals.profit.profit >= 0) {
+              if (isSound) {
+                playToastBalanceUpdated();
+              }
               success(toast);
             } else {
+              if (isSound) {
+                playToast();
+              }
               info(toast);
             }
           }
@@ -604,6 +670,9 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     if (errors || data.cashoutGoals?.errors) {
       setError(errors ?? data.cashoutGoals?.errors);
 
+      if (isSound) {
+        playToast();
+      }
       return errorToast("Your bet couldn't be placed, please try again.");
     }
 
@@ -625,8 +694,14 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
         )}`;
 
         if (+data.cashoutGoals.profit.profit >= 0) {
+          if (isSound) {
+            playToastBalanceUpdated();
+          }
           success(toast);
         } else {
+          if (isSound) {
+            playToast();
+          }
           info(toast);
         }
       }
