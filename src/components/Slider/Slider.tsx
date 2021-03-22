@@ -32,7 +32,6 @@ const Slider: React.FC<IProps> = ({
   const [steps, setSteps] = useState(0.01);
 
   const [playDiceSlider] = useSound(dice_slider_v1.default, { volume: 0.9 });
-  const [captureValue, setCaptureValue] = useState(0);
   const [
     {
       sidebar: { isSound },
@@ -43,18 +42,10 @@ const Slider: React.FC<IProps> = ({
     if (value % 1 != 0) {
       setSteps(0.01);
     }
-  }, [value]);
-
-  const onDownCapture = () => {
-    setCaptureValue(value);
-  };
-
-  const onUpCapture = () => {
-    if (isSound && captureValue !== value) {
+    if (isSound) {
       playDiceSlider();
     }
-    setCaptureValue(value);
-  };
+  }, [value]);
 
   return (
     <div className={styles.slider__wrapper}>
@@ -111,11 +102,7 @@ const Slider: React.FC<IProps> = ({
 
         <Handles>
           {({ handles, getHandleProps }) => (
-            <div
-              className={styles['slider-handles']}
-              onMouseDownCapture={onDownCapture}
-              onMouseUpCapture={onUpCapture}
-            >
+            <div className={styles['slider-handles']}>
               {handles.map(handle => (
                 <Handle
                   key={handle.id}
