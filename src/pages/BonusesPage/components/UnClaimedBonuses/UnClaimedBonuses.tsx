@@ -14,6 +14,7 @@ import { useStateValue } from '../../../../state/index';
 import useSound from 'use-sound';
 const bonus_claim_v1 = require('../../../../sounds/bonus-claim-v1.mp3');
 const toast_v1 = require('../../../../sounds/toast-v1.mp3');
+const bonus_received_v1 = require('../../../../sounds/bonus-received-v1.mp3');
 
 interface IProps {
   bonusClaims?: any[];
@@ -32,6 +33,7 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   const [claimBonus, { loading }] = useMutation(CLAIM_BONUS);
   const [, dispatch] = useStateValue();
   const [playToast] = useSound(toast_v1.default, { volume: 0.5 });
+  const [playToastBonus] = useSound(bonus_received_v1.default, { volume: 0.5 });
   const [
     {
       sidebar: { isSound },
@@ -41,15 +43,19 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   const onClaimBonus = async (bonusId: string) => {
     const { data, errors } = await claimBonus({ variables: { bonusId } });
 
-    if (isSound) {
-      setTimeout(() => {
-        playToast();
-      }, 500);
-    }
     if (errors || data.claimBonus?.errors) {
+      if (isSound) {
+        setTimeout(() => {
+          playToast();
+        }, 500);
+      }
       return errorToast("It's failed, please try again later.");
     }
-
+    if (isSound) {
+      setTimeout(() => {
+        playToastBonus();
+      }, 500);
+    }
     success(`Your balance has been updated: ${formatBitcoin(data.claimBonus.balance)}`);
     dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.claimBonus.balance } });
 
