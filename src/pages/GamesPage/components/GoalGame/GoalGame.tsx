@@ -103,7 +103,7 @@ const GoalGame: React.FC<IProps> = ({
   const [isAlerted, setAlerted] = useState(false);
   const [isGameStartedBtnClicked, setGameStartBtnClicked] = useState(false);
 
-  const [play, { stop }] = useSound(button_click_v1.default, { volume: 0.9 });
+  const [play] = useSound(button_click_v1.default, { volume: 0.9 });
   const [playGoalSelect] = useSound(goal_select_v1.default, { volume: 0.9 });
   const [playGoalWin] = useSound(goal_win_v1.default, { volume: 0.9 });
   const [playLoss] = useSound(universal_lost_v1.default, { volume: 0.9 });
@@ -192,10 +192,8 @@ const GoalGame: React.FC<IProps> = ({
 
       if (isSound) {
         if (win_lost_flag) {
-          stop();
           playGoalWin();
         } else {
-          stop();
           playLoss();
         }
       }
@@ -268,14 +266,11 @@ const GoalGame: React.FC<IProps> = ({
       typeof selection === 'number' &&
       state.gameState === GameState.IN_PROGRESS
     ) {
-      if (isSound) {
-        setTimeout(() => {
-          stop();
-          playGoalSelect();
-        }, 500);
-      }
       setLastSpot(selection);
       onPlaceBet(session.betId, selection, session.currentStep);
+      if (isSound) {
+        playGoalSelect();
+      }
     }
   };
 
@@ -292,7 +287,6 @@ const GoalGame: React.FC<IProps> = ({
   const handleButtonClick = () => {
     setAlerted(false);
     if (isSound) {
-      stop();
       play();
     }
     if (state.gameState === GameState.IDLE) return handleStartGame();

@@ -4,6 +4,9 @@ import clsx from 'clsx';
 import { MinesGameState as GameState } from '../../models/minesGameState.model';
 import { useStateValue } from '../../state';
 
+import useSound from 'use-sound';
+const mines_win_v1 = require('../../sounds/mines-win-v1.mp3');
+
 interface IProps {
   className?: string;
   gameState?: GameState;
@@ -24,10 +27,20 @@ const MineGameBoard: React.FC<IProps> = ({
   const [results, setResults] = useState(scoreArray);
   const [bombId, setBombId] = useState<number>(0);
   const [isEndCut, setIsEndCut] = useState(false);
-  const [, dispatch] = useStateValue();
+
+  const [playMinesWin] = useSound(mines_win_v1.default, { volume: 0.5 });
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
+
   useEffect(() => {
     const scoreArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     if (session?.allowNext) {
+      if (isSound) {
+        playMinesWin();
+      }
       setIsEndCut(false);
       let tmp = [];
       tmp = scoreArray;
