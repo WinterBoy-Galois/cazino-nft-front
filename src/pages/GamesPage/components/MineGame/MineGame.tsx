@@ -16,11 +16,12 @@ import BetAmountControl from '../../../../components/BetAmountControl';
 import { useTranslation } from 'react-i18next';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import { error as errorToast } from '../../../../components/Toast'; // error as errorToast, success, info
+import { appConfig } from '../../../../common/config';
 
 import useSound from 'use-sound';
 const button_click_v1 = require('../../../../sounds/button-click-v1.mp3');
 const mines_win_v1 = require('../../../../sounds/mines-win-v1.mp3');
-const mines_lost_v1 = require('../../../../sounds/mines-lost-v1.mp3');
+const universal_lost_v1 = require('../../../../sounds/universal-lost-v1.mp3');
 
 const balance_updated_v1 = require('../../../../sounds/balance-updated-v1.mp3');
 const toast_v1 = require('../../../../sounds/toast-v1.mp3');
@@ -72,9 +73,9 @@ const MineGame: React.FC<IProps> = ({
   const [isShowAlert, setIsShowAlert] = useState<any>(true);
   const [isControlDisable, setIsControlDisable] = useState<any>(false);
 
-  const [play, { stop }] = useSound(button_click_v1.default, { volume: 0.5 });
+  const [play, { stop }] = useSound(button_click_v1.default, { volume: 0.9 });
   const [playMinesWin] = useSound(mines_win_v1.default, { volume: 0.9 });
-  const [playMinesLost] = useSound(mines_lost_v1.default, { volume: 0.9 });
+  const [playMinesLost] = useSound(universal_lost_v1.default, { volume: 0.9 });
   const [
     {
       sidebar: { isSound },
@@ -136,7 +137,7 @@ const MineGame: React.FC<IProps> = ({
         setTimeout(() => {
           stop();
           playMinesWin();
-        }, 500);
+        }, appConfig.mineGameTimeout / 20);
       }
     } else if (session?.lucky === false) {
       setLucky(false);
@@ -144,7 +145,7 @@ const MineGame: React.FC<IProps> = ({
         setTimeout(() => {
           stop();
           playMinesLost();
-        }, 500);
+        }, appConfig.mineGameTimeout / 20);
       }
     } else {
       setLucky(null);
@@ -441,13 +442,31 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   const [selections, setSelections] = useState<any>([]);
   const { t } = useTranslation(['games']);
 
-  const [playBalanceUpdated] = useSound(balance_updated_v1.default, { volume: 0.3 });
-  const [playToast] = useSound(toast_v1.default, { volume: 0.3 });
+  const [playBalanceUpdated] = useSound(balance_updated_v1.default, { volume: 0.9 });
+  const [playToast] = useSound(toast_v1.default, { volume: 0.9 });
   const [
     {
       sidebar: { isSound },
     },
   ] = useStateValue();
+
+  const onPlayBalanceUpdated = () => {
+    if (isSound) {
+      setTimeout(() => {
+        stop();
+        playBalanceUpdated();
+      }, appConfig.mineGameTimeout / 7);
+    }
+  };
+
+  const onPlayToast = () => {
+    if (isSound) {
+      setTimeout(() => {
+        stop();
+        playToast();
+      }, appConfig.mineGameTimeout / 7);
+    }
+  };
 
   const handleRestart = () => {
     setSession(null);
@@ -471,16 +490,12 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
       setError(errors ?? data.makeBetMines?.errors);
 
       if (data.makeBetMines?.errors[0]?.code === 'MAX_PROFIT') return;
-      if (isSound) {
-        playToast();
-      }
+      onPlayToast();
       return errorToast(t('mines.errorTryAgain'));
     }
 
     initSession(data.makeBetMines);
-    if (isSound) {
-      playToast();
-    }
+    onPlayToast();
     errorToast(`${t('mines.msgBalance')} ${formatBitcoin(data.makeBetMines.balance)}`);
   };
 
@@ -488,9 +503,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     const { data, errors } = await advanceMines({ variables: { betId, selection } });
     if (errors || data.advanceMines?.errors) {
       setError(errors ?? data.advanceMines?.errors);
-      if (isSound) {
-        playToast();
-      }
+      onPlayToast();
       if (data.makeBetMines?.errors[0]?.code === 'MAX_PROFIT') {
         return errorToast(t('mines.errorProfitLimit'));
       }
@@ -540,14 +553,10 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
             )}`;
 
             if (+data.advanceMines.profit.profit >= 0) {
-              if (isSound) {
-                playBalanceUpdated();
-              }
+              onPlayBalanceUpdated();
               errorToast(toast);
             } else {
-              if (isSound) {
-                playToast();
-              }
+              onPlayToast();
               errorToast(toast);
             }
           }
@@ -561,9 +570,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     const { data, errors } = await cashoutMines({ variables: { betId } });
     if (errors || data.cashoutMines?.errors) {
       setError(errors ?? data.cashoutMines?.errors);
-      if (isSound) {
-        playToast();
-      }
+      onPlayToast();
       return errorToast(t('mines.errorTryAgain'));
     }
 
@@ -580,14 +587,10 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
       if (data.cashoutMines.profit.profit) {
         const toast = `${t('mines.msgBalance')} ${formatBitcoin(+data.cashoutMines.profit.profit)}`;
         if (+data.cashoutMines.profit.profit >= 0) {
-          if (isSound) {
-            playBalanceUpdated();
-          }
+          onPlayBalanceUpdated();
           errorToast(toast);
         } else {
-          if (isSound) {
-            playToast();
-          }
+          onPlayToast();
           errorToast(toast);
         }
       }

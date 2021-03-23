@@ -105,8 +105,8 @@ const GoalGame: React.FC<IProps> = ({
 
   const [play, { stop }] = useSound(button_click_v1.default, { volume: 0.9 });
   const [playGoalSelect] = useSound(goal_select_v1.default, { volume: 0.9 });
-  const [playGoalWin] = useSound(goal_win_v1.default, { volume: 0.9 });
-  const [playLoss] = useSound(universal_lost_v1.default, { volume: 0.9 });
+  const [playGoalWin] = useSound(goal_win_v1.default, { volume: 0.7 });
+  const [playLoss] = useSound(universal_lost_v1.default, { volume: 0.7 });
   const [
     {
       sidebar: { isSound },
@@ -172,9 +172,7 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     if (lastSpot !== null && session && lastAdvanceStatus === null && !isCashOut) {
-      let win_lost_flag = false;
       if (session?.lucky === true) {
-        win_lost_flag = true;
         setLastAdvanceStatus('Won');
       } else if (session?.lucky === false) setLastAdvanceStatus('Lost');
       else {
@@ -184,22 +182,8 @@ const GoalGame: React.FC<IProps> = ({
               selection.step === session.currentStep - 1 &&
               selection.luckySpots.includes(selection.selected)
           ).length > 0;
-        if (isWon) {
-          win_lost_flag = true;
-        }
         setLastAdvanceStatus(isWon ? 'Won' : 'Lost');
       }
-
-      if (isSound) {
-        if (win_lost_flag) {
-          stop();
-          playGoalWin();
-        } else {
-          stop();
-          playLoss();
-        }
-      }
-
       setLastStatusTimer(
         setTimeout(() => {
           setLastSpot(null);
@@ -219,6 +203,18 @@ const GoalGame: React.FC<IProps> = ({
 
     setTimeout(() => dispatch({ type: 'END' }), 500);
   }, [session, lastSpot, lastAdvanceStatus, lastStatusTimer]);
+
+  useEffect(() => {
+    if (lastSpot !== null && isSound) {
+      if (lastAdvanceStatus === null) {
+        playGoalSelect();
+      } else if (lastAdvanceStatus === 'Won') {
+        playGoalWin();
+      } else {
+        playLoss();
+      }
+    }
+  }, [lastSpot, lastAdvanceStatus, lastStatusTimer]);
 
   if (loadingSetup) {
     return <Loading className={styles.loading} />;
@@ -268,12 +264,6 @@ const GoalGame: React.FC<IProps> = ({
       typeof selection === 'number' &&
       state.gameState === GameState.IN_PROGRESS
     ) {
-      if (isSound) {
-        setTimeout(() => {
-          stop();
-          playGoalSelect();
-        }, 500);
-      }
       setLastSpot(selection);
       onPlaceBet(session.betId, selection, session.currentStep);
     }
@@ -546,6 +536,22 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     },
   ] = useStateValue();
 
+  const onPlayToast = () => {
+    setTimeout(() => {
+      if (isSound) {
+        playToast();
+      }
+    }, appConfig.goalsGameTimeout / 10);
+  };
+
+  const onPlayToastBalanceUpdated = () => {
+    setTimeout(() => {
+      if (isSound) {
+        playToastBalanceUpdated();
+      }
+    }, appConfig.goalsGameTimeout / 10);
+  };
+
   const handleRestart = () => {
     setSession(null);
     setSelections([]);
@@ -573,16 +579,12 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
       if (data.makeBetGoals?.errors[0]?.code === 'MAX_PROFIT') return;
 
-      if (isSound) {
-        playToast();
-      }
+      onPlayToast();
       return errorToast("Your bet couldn't be placed, please try again.");
     }
 
     initSession(data.makeBetGoals);
-    if (isSound) {
-      playToastBalanceUpdated();
-    }
+    onPlayToastBalanceUpdated();
     info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
   };
 
@@ -594,9 +596,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     if (errors || data.advanceGoals?.errors) {
       setError(errors ?? data.advanceGoals?.errors);
 
-      if (isSound) {
-        playToast();
-      }
+      onPlayToast();
       return errorToast("Your bet couldn't be placed, please try again.");
     }
 
@@ -645,14 +645,10 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
             )}`;
 
             if (+data.advanceGoals.profit.profit >= 0) {
-              if (isSound) {
-                playToastBalanceUpdated();
-              }
+              onPlayToastBalanceUpdated();
               success(toast);
             } else {
-              if (isSound) {
-                playToast();
-              }
+              onPlayToast();
               info(toast);
             }
           }
@@ -670,9 +666,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     if (errors || data.cashoutGoals?.errors) {
       setError(errors ?? data.cashoutGoals?.errors);
 
-      if (isSound) {
-        playToast();
-      }
+      onPlayToast();
       return errorToast("Your bet couldn't be placed, please try again.");
     }
 
@@ -694,14 +688,10 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
         )}`;
 
         if (+data.cashoutGoals.profit.profit >= 0) {
-          if (isSound) {
-            playToastBalanceUpdated();
-          }
+          onPlayToastBalanceUpdated();
           success(toast);
         } else {
-          if (isSound) {
-            playToast();
-          }
+          onPlayToast();
           info(toast);
         }
       }
