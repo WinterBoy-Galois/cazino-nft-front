@@ -17,6 +17,24 @@ import GamesPage from '../../pages/GamesPage';
 import BonusesPage from '../../pages/BonusesPage/BonusesPage';
 import AffiliatesPage from '../../pages/AffiliatesPage';
 
+export const toast_v1 = require('../../sounds/toast-v1.mp3');
+export const balance_updated_v1 = require('../../sounds/balance-updated-v1.mp3');
+export const button_click_v1 = require('../../sounds/button-click-v1.mp3');
+
+export const goal_select_v1 = require('../../sounds/goals-select-v1.mp3');
+export const goal_win_v1 = require('../../sounds/goals-win-v1.mp3');
+export const goal_lost_v1 = require('../../sounds/goals-lost-v1.mp3');
+
+export const mines_win_v1 = require('../../sounds/mines-win-v1.mp3');
+export const mines_lost_v1 = require('../../sounds/mines-lost-v1.mp3');
+
+export const clams_win_v1 = require('../../sounds/clams-win-v1.mp3');
+export const clams_lost_v1 = require('../../sounds/clams-lost-v1.mp3');
+
+export const dice_hit_v1 = require('../../sounds/dice-hit-v1.mp3');
+export const dice_win_v1 = require('../../sounds/dice-win-v1.mp3');
+export const dice_lost_v1 = require('../../sounds/dice-lost-v1.mp3');
+
 const App: React.FC = () => {
   const client = useApolloClient();
 

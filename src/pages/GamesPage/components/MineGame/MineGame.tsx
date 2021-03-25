@@ -19,12 +19,12 @@ import { error as errorToast } from '../../../../components/Toast'; // error as 
 import { appConfig } from '../../../../common/config';
 
 import useSound from 'use-sound';
-const button_click_v1 = require('../../../../sounds/button-click-v1.mp3');
-const mines_win_v1 = require('../../../../sounds/mines-win-v1.mp3');
-const mines_lost_v1 = require('../../../../sounds/mines-lost-v1.mp3');
-
-const balance_updated_v1 = require('../../../../sounds/balance-updated-v1.mp3');
-const toast_v1 = require('../../../../sounds/toast-v1.mp3');
+import {
+  toast_v1,
+  balance_updated_v1,
+  button_click_v1,
+  mines_lost_v1,
+} from '../../../../components/App/App';
 
 interface IProps {
   loadingBet?: boolean;
@@ -73,9 +73,8 @@ const MineGame: React.FC<IProps> = ({
   const [isShowAlert, setIsShowAlert] = useState<any>(true);
   const [isControlDisable, setIsControlDisable] = useState<any>(false);
 
-  const [play, { stop }] = useSound(button_click_v1.default, { volume: 0.9 });
-  const [playMinesWin] = useSound(mines_win_v1.default, { volume: 0.9 });
-  const [playMinesLost] = useSound(mines_lost_v1.default, { volume: 0.9 });
+  const [play, { stop }] = useSound(button_click_v1.default);
+  const [playMinesLost] = useSound(mines_lost_v1.default);
   const [
     {
       sidebar: { isSound },
@@ -133,12 +132,6 @@ const MineGame: React.FC<IProps> = ({
       setTimeout(() => {
         setIsShowAlert(false);
       }, 2000);
-      if (isSound) {
-        setTimeout(() => {
-          stop();
-          playMinesWin();
-        }, appConfig.mineGameTimeout / 20);
-      }
     } else if (session?.lucky === false) {
       setLucky(false);
       if (isSound) {
@@ -442,8 +435,8 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   const [selections, setSelections] = useState<any>([]);
   const { t } = useTranslation(['games']);
 
-  const [playBalanceUpdated] = useSound(balance_updated_v1.default, { volume: 0.9 });
-  const [playToast] = useSound(toast_v1.default, { volume: 0.9 });
+  const [playBalanceUpdated] = useSound(balance_updated_v1.default);
+  const [playToast] = useSound(toast_v1.default);
   const [
     {
       sidebar: { isSound },
