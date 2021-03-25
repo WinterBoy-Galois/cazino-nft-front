@@ -30,7 +30,7 @@ const button_click_v1 = require('../../../../sounds/button-click-v1.mp3');
 
 const dice_hit_v1 = require('../../../../sounds/dice-hit-v1.mp3');
 const dice_win_v1 = require('../../../../sounds/dice-win-v1.mp3');
-const universal_lost_v1 = require('../../../../sounds/universal-lost-v1.mp3');
+const dice_lost_v1 = require('../../../../sounds/dice-lost-v1.mp3');
 
 interface IProps {
   loadingBet?: boolean;
@@ -69,6 +69,7 @@ const DiceGame: React.FC<IProps> = ({
   const maxTarget = useTargetSliderMax(minProbability, maxProbability);
 
   const [playButtonClick] = useSound(button_click_v1.default, { volume: 0.9 });
+  const [playDiceHit] = useSound(dice_hit_v1.default, { volume: 0.9 });
   const [
     {
       sidebar: { isSound },
@@ -90,6 +91,7 @@ const DiceGame: React.FC<IProps> = ({
   useEffect(() => {
     if (result) {
       const resultTimer = setTimeout(() => {
+        playDiceHit();
         dispatch({
           type: 'SET_GAME_STATE',
           payload: { gameState: GameState.HITTING },
@@ -116,9 +118,9 @@ const DiceGame: React.FC<IProps> = ({
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
-    if (isSound) {
-      playButtonClick();
-    }
+    // if (isSound) {
+    //   playButtonClick();
+    // }
     dispatch({ type: 'START' });
     dispatch({ type: 'SET_RESULT', payload: { result: 0 } });
     dispatch({ type: 'CALC_GAME_STATE' });
@@ -230,8 +232,8 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const [playToast] = useSound(toast_v1.default, { volume: 0.9 });
   const [playToastBalanceUpdated] = useSound(balance_updated_v1.default, { volume: 0.9 });
   const [playDiceWin] = useSound(dice_win_v1.default, { volume: 0.9 });
-  const [playLoss] = useSound(universal_lost_v1.default, { volume: 0.9 });
-  const [playDiceHit] = useSound(dice_hit_v1.default, { volume: 0.9 });
+  const [playLoss] = useSound(dice_lost_v1.default, { volume: 0.9 });
+
   const [
     {
       sidebar: { isSound },
@@ -240,7 +242,6 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
 
   const handlePlaceBet = async (amount: number, target: number, over: boolean) => {
     const { data, errors } = await makeBetDice({ variables: { betAmount: amount, target, over } });
-
     if (errors || data.makeBetDice?.errors) {
       setError(errors ?? data.makeBetDice?.errors);
       if (isSound) {
@@ -254,11 +255,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
     }
 
     setResult(data?.makeBetDice?.result);
-    setTimeout(() => {
-      if (isSound) {
-        playDiceHit();
-      }
-    }, appConfig.diceGameTimeout / 10);
+
     setTimeout(() => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
       const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetDice?.profit)}`;
@@ -279,7 +276,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
           playLoss();
         }
       }
-    }, appConfig.diceGameTimeout / 2);
+    }, appConfig.diceGameTimeout * 1.5);
   };
 
   return (

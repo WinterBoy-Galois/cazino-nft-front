@@ -21,7 +21,7 @@ import { appConfig } from '../../../../common/config';
 import useSound from 'use-sound';
 const button_click_v1 = require('../../../../sounds/button-click-v1.mp3');
 const mines_win_v1 = require('../../../../sounds/mines-win-v1.mp3');
-const universal_lost_v1 = require('../../../../sounds/universal-lost-v1.mp3');
+const mines_lost_v1 = require('../../../../sounds/mines-lost-v1.mp3');
 
 const balance_updated_v1 = require('../../../../sounds/balance-updated-v1.mp3');
 const toast_v1 = require('../../../../sounds/toast-v1.mp3');
@@ -75,7 +75,7 @@ const MineGame: React.FC<IProps> = ({
 
   const [play, { stop }] = useSound(button_click_v1.default, { volume: 0.9 });
   const [playMinesWin] = useSound(mines_win_v1.default, { volume: 0.9 });
-  const [playMinesLost] = useSound(universal_lost_v1.default, { volume: 0.9 });
+  const [playMinesLost] = useSound(mines_lost_v1.default, { volume: 0.9 });
   const [
     {
       sidebar: { isSound },
