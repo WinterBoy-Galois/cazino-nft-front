@@ -26,7 +26,7 @@ const button_click_v1 = require('../../../../sounds/button-click-v1.mp3');
 
 const goal_select_v1 = require('../../../../sounds/goals-select-v1.mp3');
 const goal_win_v1 = require('../../../../sounds/goals-win-v1.mp3');
-const universal_lost_v1 = require('../../../../sounds/universal-lost-v1.mp3');
+const goal_lost_v1 = require('../../../../sounds/goals-lost-v1.mp3');
 
 import {
   PROBABILITY_HIGH,
@@ -106,7 +106,7 @@ const GoalGame: React.FC<IProps> = ({
   const [play, { stop }] = useSound(button_click_v1.default, { volume: 0.9 });
   const [playGoalSelect] = useSound(goal_select_v1.default, { volume: 0.9 });
   const [playGoalWin] = useSound(goal_win_v1.default, { volume: 0.7 });
-  const [playLoss] = useSound(universal_lost_v1.default, { volume: 0.7 });
+  const [playLoss] = useSound(goal_lost_v1.default, { volume: 0.7 });
   const [
     {
       sidebar: { isSound },
@@ -170,7 +170,6 @@ const GoalGame: React.FC<IProps> = ({
         payload: { session },
       });
     }
-
     if (lastSpot !== null && session && lastAdvanceStatus === null && !isCashOut) {
       if (session?.lucky === true) {
         setLastAdvanceStatus('Won');
@@ -184,6 +183,7 @@ const GoalGame: React.FC<IProps> = ({
           ).length > 0;
         setLastAdvanceStatus(isWon ? 'Won' : 'Lost');
       }
+
       setLastStatusTimer(
         setTimeout(() => {
           setLastSpot(null);
@@ -196,21 +196,25 @@ const GoalGame: React.FC<IProps> = ({
   }, [session]);
 
   useEffect(() => {
+    // console.log(lastSpot, lastAdvanceStatus, lastStatusTimer, ' ** * ** ');
     if (lastSpot !== null) return;
     if (lastAdvanceStatus !== null) return;
     if (lastStatusTimer !== null) return;
     if (session?.__typename !== 'GoalsComplete') return;
 
-    setTimeout(() => dispatch({ type: 'END' }), 500);
+    setTimeout(() => dispatch({ type: 'END' }), appConfig.goalsGameTimeout / 6);
   }, [session, lastSpot, lastAdvanceStatus, lastStatusTimer]);
 
   useEffect(() => {
+    console.log(lastSpot, lastAdvanceStatus, lastStatusTimer, isAlerted, ' 00000000000000 ');
     if (lastSpot !== null && isSound) {
       if (lastAdvanceStatus === null) {
+        console.log('-------------', new Date().getTime());
         playGoalSelect();
-      } else if (lastAdvanceStatus === 'Won') {
+      } else if (lastAdvanceStatus === 'Won' && lastStatusTimer !== null) {
+        console.log('+++++++++++++', new Date().getTime());
         playGoalWin();
-      } else {
+      } else if (lastStatusTimer !== null) {
         playLoss();
       }
     }
@@ -257,7 +261,7 @@ const GoalGame: React.FC<IProps> = ({
     if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
-
+    if (session?.lucky) playGoalSelect();
     if (
       lastSpot === null &&
       lastAdvanceStatus === null &&
@@ -265,7 +269,8 @@ const GoalGame: React.FC<IProps> = ({
       state.gameState === GameState.IN_PROGRESS
     ) {
       setLastSpot(selection);
-      onPlaceBet(session.betId, selection, session.currentStep);
+      await onPlaceBet(session.betId, selection, session.currentStep);
+      console.log('==================');
     }
   };
 
@@ -282,7 +287,6 @@ const GoalGame: React.FC<IProps> = ({
   const handleButtonClick = () => {
     setAlerted(false);
     if (isSound) {
-      stop();
       play();
     }
     if (state.gameState === GameState.IDLE) return handleStartGame();

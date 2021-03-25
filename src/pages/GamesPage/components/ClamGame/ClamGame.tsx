@@ -22,7 +22,7 @@ import Error from '../../../../components/Error';
 
 import useSound from 'use-sound';
 const clams_win_v1 = require('../../../../sounds/clams-win-v1.mp3');
-const universal_lost_v1 = require('../../../../sounds/universal-lost-v1.mp3');
+const clams_lost_v1 = require('../../../../sounds/clams-lost-v1.mp3');
 
 const toast_v1 = require('../../../../sounds/toast-v1.mp3');
 const balance_updated_v1 = require('../../../../sounds/balance-updated-v1.mp3');
@@ -64,7 +64,7 @@ const ClamGame: React.FC<IProps> = ({
 
   const [playStart] = useSound(button_click_v1.default, { volume: 0.9 });
   const [playWin] = useSound(clams_win_v1.default, { volume: 0.9 });
-  const [playLost] = useSound(universal_lost_v1.default, { volume: 0.9 });
+  const [playLost] = useSound(clams_lost_v1.default, { volume: 0.9 });
   const [
     {
       sidebar: { isSound },
