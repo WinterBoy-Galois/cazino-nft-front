@@ -32,8 +32,8 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
 }) => {
   const [claimBonus, { loading }] = useMutation(CLAIM_BONUS);
   const [, dispatch] = useStateValue();
-  const [playToast] = useSound(toast_v1.default, { volume: 0.5 });
-  const [playToastBonus] = useSound(bonus_received_v1.default, { volume: 0.5 });
+  const [playToast] = useSound(toast_v1.default);
+  const [playToastBonus] = useSound(bonus_received_v1.default);
   const [
     {
       sidebar: { isSound },
@@ -119,7 +119,7 @@ const UnClaimedBonuses: React.FC<IProps> = ({
   onClaimBonus = () => null,
 }) => {
   const [bonusClaims, setBonusClaims] = useState(defaultBonusClaims);
-  const [playBonusClaim, { stop }] = useSound(bonus_claim_v1.default, { volume: 0.9 });
+  const [playBonusClaim, { stop }] = useSound(bonus_claim_v1.default);
   const [
     {
       sidebar: { isSound },

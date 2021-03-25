@@ -27,7 +27,7 @@ const Clam: React.FC<IClamProps> = ({
   isSelected = false,
   winningClam = false,
 }) => {
-  const [playSelect, { stop }] = useSound(clams_select_v1.default, { volume: 0.9 });
+  const [playSelect, { stop }] = useSound(clams_select_v1.default);
   const [
     {
       sidebar: { isSound },

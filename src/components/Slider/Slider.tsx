@@ -31,7 +31,7 @@ const Slider: React.FC<IProps> = ({
 }: IProps) => {
   const [steps, setSteps] = useState(0.01);
 
-  const [playDiceSlider] = useSound(dice_slider_v1.default, { volume: 0.9 });
+  const [playDiceSlider] = useSound(dice_slider_v1.default);
   const [
     {
       sidebar: { isSound },

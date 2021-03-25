@@ -21,12 +21,13 @@ import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
 
 import useSound from 'use-sound';
-const clams_win_v1 = require('../../../../sounds/clams-win-v1.mp3');
-const clams_lost_v1 = require('../../../../sounds/clams-lost-v1.mp3');
-
-const toast_v1 = require('../../../../sounds/toast-v1.mp3');
-const balance_updated_v1 = require('../../../../sounds/balance-updated-v1.mp3');
-const button_click_v1 = require('../../../../sounds/button-click-v1.mp3');
+import {
+  toast_v1,
+  balance_updated_v1,
+  button_click_v1,
+  clams_win_v1,
+  clams_lost_v1,
+} from '../../../../components/App/App';
 
 interface IProps {
   loadingBet?: boolean;
@@ -62,9 +63,9 @@ const ClamGame: React.FC<IProps> = ({
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const [playStart] = useSound(button_click_v1.default, { volume: 0.9 });
-  const [playWin] = useSound(clams_win_v1.default, { volume: 0.9 });
-  const [playLost] = useSound(clams_lost_v1.default, { volume: 0.9 });
+  const [playStart] = useSound(button_click_v1.default);
+  const [playWin] = useSound(clams_win_v1.default);
+  const [playLost] = useSound(clams_lost_v1.default);
   const [
     {
       sidebar: { isSound },
@@ -280,8 +281,8 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
   const [profit, setProfit] = useState();
   const [error, setError] = useState();
 
-  const [playToast] = useSound(toast_v1.default, { volume: 0.9 });
-  const [playToastBalanceUpdated] = useSound(balance_updated_v1.default, { volume: 0.9 });
+  const [playToast] = useSound(toast_v1.default);
+  const [playToastBalanceUpdated] = useSound(balance_updated_v1.default);
   const [
     {
       sidebar: { isSound },

@@ -4,10 +4,8 @@ import clsx from 'clsx';
 import { MinesGameState as GameState } from '../../models/minesGameState.model';
 import { useStateValue } from '../../state';
 
-import { appConfig } from '../../common/config';
-
 import useSound from 'use-sound';
-const mines_win_v1 = require('../../sounds/mines-win-v1.mp3');
+import { mines_win_v1 } from '../App/App';
 
 interface IProps {
   className?: string;
@@ -30,7 +28,7 @@ const MineGameBoard: React.FC<IProps> = ({
   const [bombId, setBombId] = useState<number>(0);
   const [isEndCut, setIsEndCut] = useState(false);
 
-  const [playMinesWin] = useSound(mines_win_v1.default, { volume: 0.5 });
+  const [playMinesWin] = useSound(mines_win_v1.default);
   const [
     {
       sidebar: { isSound },
