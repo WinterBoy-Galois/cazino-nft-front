@@ -6,7 +6,7 @@ import Track from './components/Track';
 import useSound from 'use-sound';
 
 import { useStateValue } from '../../state';
-const dice_slider_v1 = require('../../sounds/dice-slider-v1.mp3');
+import { dice_slider_v1 } from '../../components/App/App';
 
 interface IProps {
   value?: number;
@@ -43,7 +43,9 @@ const Slider: React.FC<IProps> = ({
       setSteps(0.01);
     }
     if (isSound) {
-      playDiceSlider();
+      (async () => {
+        await playDiceSlider();
+      })();
     }
   }, [value]);
 
