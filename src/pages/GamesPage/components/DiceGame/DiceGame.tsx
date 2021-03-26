@@ -124,7 +124,7 @@ const DiceGame: React.FC<IProps> = ({
     dispatch({ type: 'SET_RESULT', payload: { result: 0 } });
     dispatch({ type: 'CALC_GAME_STATE' });
 
-    onPlaceBet(state.amount, +state.target.toFixed(2), state.over);
+    await onPlaceBet(state.amount, +state.target.toFixed(2), state.over);
   };
 
   if (loadingSetup) {
@@ -228,12 +228,11 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const [result, setResult] = useState();
   const [error, setError] = useState();
 
-  const [playToast] = useSound(toast_v1.default);
-  const [playToastBalanceUpdated] = useSound(balance_updated_v1.default);
   const [playButtonClick] = useSound(button_click_v1.default);
   const [playDiceWin] = useSound(dice_win_v1.default);
   const [playLoss] = useSound(dice_lost_v1.default);
-
+  const [playToast] = useSound(toast_v1.default);
+  const [playToastBalance] = useSound(balance_updated_v1.default);
   const [
     {
       sidebar: { isSound },
@@ -248,16 +247,30 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
     if (errors || data.makeBetDice?.errors) {
       setError(errors ?? data.makeBetDice?.errors);
       if (isSound) {
-        playToast();
+        await playToast();
       }
       if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
         return errorToast('Your bet may reaches the profit limit.');
       }
-
       return errorToast("Your bet couldn't be placed, please try again.");
     }
-
     setResult(data?.makeBetDice?.result);
+
+    setTimeout(async () => {
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
+      const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetDice?.profit)}`;
+      if (+data?.makeBetDice?.profit >= 0) {
+        if (isSound) {
+          await playToastBalance();
+        }
+        await success(toast);
+      } else {
+        if (isSound) {
+          await playToast();
+        }
+        await info(toast);
+      }
+    }, appConfig.diceGameTimeout * 2);
 
     setTimeout(async () => {
       if (+data?.makeBetDice?.profit >= 0) {
@@ -268,18 +281,6 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
         if (isSound) {
           await playLoss();
         }
-      }
-    }, appConfig.diceGameTimeout / 3);
-
-    setTimeout(async () => {
-      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
-      const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetDice?.profit)}`;
-      if (+data?.makeBetDice?.profit >= 0) {
-        await playToastBalanceUpdated();
-        success(toast);
-      } else {
-        await playToast();
-        info(toast);
       }
     }, appConfig.diceGameTimeout);
   };

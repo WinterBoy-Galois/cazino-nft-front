@@ -20,7 +20,6 @@ import Error from '../../../../components/Error';
 import { error as errorToast, success, info } from '../../../../components/Toast';
 
 import useSound from 'use-sound';
-
 import {
   toast_v1,
   balance_updated_v1,
@@ -171,10 +170,10 @@ const GoalGame: React.FC<IProps> = ({
         payload: { session },
       });
     }
+
     if (lastSpot !== null && session && lastAdvanceStatus === null && !isCashOut) {
-      if (session?.lucky === true) {
-        setLastAdvanceStatus('Won');
-      } else if (session?.lucky === false) setLastAdvanceStatus('Lost');
+      if (session?.lucky === true) setLastAdvanceStatus('Won');
+      else if (session?.lucky === false) setLastAdvanceStatus('Lost');
       else {
         const isWon =
           session.selections.filter(
@@ -182,33 +181,32 @@ const GoalGame: React.FC<IProps> = ({
               selection.step === session.currentStep - 1 &&
               selection.luckySpots.includes(selection.selected)
           ).length > 0;
+
         setLastAdvanceStatus(isWon ? 'Won' : 'Lost');
       }
 
-      (async () => {
-        setLastStatusTimer(
-          setTimeout(() => {
-            setLastSpot(null);
-            setLastAdvanceStatus(null);
-            setLastStatusTimer(null);
-            clearTimeout(lastStatusTimer);
-          }, appConfig.goalsGameTimeout)
-        );
-      })();
+      setLastStatusTimer(
+        setTimeout(async () => {
+          setLastSpot(null);
+          setLastAdvanceStatus(null);
+          setLastStatusTimer(null);
+          clearTimeout(lastStatusTimer);
+        }, appConfig.goalsGameTimeout / 3)
+      );
     }
   }, [session]);
 
   useEffect(() => {
-    // console.log(lastSpot, lastAdvanceStatus, lastStatusTimer, ' ** * ** ');
     if (lastSpot !== null) return;
     if (lastAdvanceStatus !== null) return;
     if (lastStatusTimer !== null) return;
     if (session?.__typename !== 'GoalsComplete') return;
 
-    setTimeout(() => dispatch({ type: 'END' }), appConfig.goalsGameTimeout / 6);
+    setTimeout(() => dispatch({ type: 'END' }), 500);
   }, [session, lastSpot, lastAdvanceStatus, lastStatusTimer]);
 
   useEffect(() => {
+    console.log(lastSpot, lastAdvanceStatus);
     if (lastSpot !== null && isSound) {
       if (lastAdvanceStatus === null) {
         (async () => {
@@ -240,7 +238,7 @@ const GoalGame: React.FC<IProps> = ({
     }
 
     setGameStartBtnClicked(true);
-    onStartGame(state.amount, state.probability);
+    await onStartGame(state.amount, state.probability);
   };
 
   const handleTryAgain = () => {
@@ -267,11 +265,7 @@ const GoalGame: React.FC<IProps> = ({
     if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
-    if (session?.lucky) {
-      (async () => {
-        await playGoalSelect();
-      })();
-    }
+
     if (
       lastSpot === null &&
       lastAdvanceStatus === null &&
@@ -293,10 +287,10 @@ const GoalGame: React.FC<IProps> = ({
     }
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     setAlerted(false);
     if (isSound) {
-      play();
+      await play();
     }
     if (state.gameState === GameState.IDLE) return handleStartGame();
 
@@ -587,12 +581,11 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       setError(errors ?? data.makeBetGoals?.errors);
 
       if (data.makeBetGoals?.errors[0]?.code === 'MAX_PROFIT') return;
-
       await onPlayToast();
       return errorToast("Your bet couldn't be placed, please try again.");
     }
 
-    initSession(data.makeBetGoals);
+    await initSession(data.makeBetGoals);
     await onPlayToastBalanceUpdated();
     info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
   };
@@ -604,7 +597,6 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
     if (errors || data.advanceGoals?.errors) {
       setError(errors ?? data.advanceGoals?.errors);
-
       await onPlayToast();
       return errorToast("Your bet couldn't be placed, please try again.");
     }
@@ -674,7 +666,6 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
     if (errors || data.cashoutGoals?.errors) {
       setError(errors ?? data.cashoutGoals?.errors);
-
       await onPlayToast();
       return errorToast("Your bet couldn't be placed, please try again.");
     }
@@ -712,7 +703,9 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
   useEffect(() => {
     if (data?.setupGoals) {
-      initSession(data.setupGoals);
+      (async () => {
+        await initSession(data.setupGoals);
+      })();
 
       setMaxProfit(data.setupGoals.maxProfit);
     }
