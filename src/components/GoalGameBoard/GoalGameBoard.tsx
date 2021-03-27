@@ -92,12 +92,6 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
   const getGoalKeeperLostPosition = (selection: number) =>
     selection === 1 ? [0, 2].sort(() => Math.random() - 0.5)[0] : selection === 0 ? 2 : 0;
 
-  // old goalKeeperPosition
-  // const getGoalKeeperLostPosition = (selection: number, hideMiddleBall?: boolean) =>
-  //   (hideMiddleBall ? [0, 2] : [0, 1, 2])
-  //     .filter(pos => pos != selection)
-  //     .sort(() => Math.random() - 0.5)[0];
-
   return (
     <div className={clsx(styles.container, className)}>
       <GoalBackground className={styles.goal__background} />
