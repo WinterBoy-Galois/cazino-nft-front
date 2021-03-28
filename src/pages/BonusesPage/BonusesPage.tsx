@@ -43,7 +43,7 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
       <div className={styles.bonuses_title}>{t('title')}</div>
 
       {bonusClaims && bonusClaims?.bonusClaims.length ? (
-        <>
+        <div className={styles.body_p}>
           <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />
           <div className={styles.leaderboard}>
             <Leaderboard />
@@ -60,7 +60,7 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
               }
             />
           </div>
-        </>
+        </div>
       ) : null}
     </div>
   );

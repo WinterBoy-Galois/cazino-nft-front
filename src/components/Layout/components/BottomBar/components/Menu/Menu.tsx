@@ -70,6 +70,12 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
       .catch(err => err);
   };
 
+  const onBonusLink = () => {
+    dispatch({
+      type: 'MODAL_SHOW',
+      payload: { type: 'USER_INFO_MODAL' },
+    });
+  };
   const onClickSound = () => {
     dispatch({ type: 'SOUND_ON_OFF', payload: { isSound: !isSound } });
   };
@@ -141,9 +147,10 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
         </div>
       ) : null}
 
-      <div
+      <a
         className={clsx(isOpen ? styles.item_open : styles.item)}
-        onClick={() => dispatch({ type: 'MODAL_SHOW', payload: { type: 'USER_INFO_MODAL' } })}
+        onClick={onBonusLink}
+        href="/bonuses"
       >
         <Present className={styles.item__icon} />
         {hasUnclaimedBonus ? (
@@ -151,7 +158,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
             <Badge />
           </div>
         ) : null}
-      </div>
+      </a>
 
       {isGamePage ? (
         <>
