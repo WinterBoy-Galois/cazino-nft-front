@@ -21,6 +21,8 @@ import affiliatesEN from './locales/affiliates/en.json';
 import affiliatesDE from './locales/affiliates/de.json';
 import gamesEN from './locales/games/en.json';
 import gamesDE from './locales/games/de.json';
+import bonusesEN from './locales/bonuses/en.json';
+import bonusesDE from './locales/bonuses/de.json';
 
 i18n
   .use(LanguageDetector)
@@ -38,6 +40,7 @@ i18n
         transactions: transactionsEN,
         games: gamesEN,
         affiliates: affiliatesEN,
+        bonuses: bonusesEN,
       },
       de: {
         common: commonDE,
@@ -50,6 +53,7 @@ i18n
         transactions: transactionsDE,
         games: gamesDE,
         affiliates: affiliatesDE,
+        bonuses: bonusesDE,
       },
     },
 
@@ -67,6 +71,7 @@ i18n
       'transactions',
       'games',
       'affiliates',
+      'bonuses',
     ],
     defaultNS: 'common',
 

@@ -12,6 +12,7 @@ import { success, error as errorToast } from '../../../../components/Toast';
 import { useStateValue } from '../../../../state/index';
 
 import useSound from 'use-sound';
+import { useTranslation } from 'react-i18next';
 const bonus_claim_v1 = require('../../../../sounds/bonus-claim-v1.mp3');
 const toast_v1 = require('../../../../sounds/toast-v1.mp3');
 const bonus_received_v1 = require('../../../../sounds/bonus-received-v1.mp3');
@@ -34,9 +35,10 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   const [, dispatch] = useStateValue();
   const [playToast] = useSound(toast_v1.default);
   const [playToastBonus] = useSound(bonus_received_v1.default);
+  const { t } = useTranslation(['bonuses']);
   const [
     {
-      sidebar: { isSound },
+      sidebar: { isSound, isOpen },
     },
   ] = useStateValue();
 
@@ -64,50 +66,80 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
 
   return (
     <>
-      <div className={clsx(styles.unclaimed_bonus, styles.unclaimed_bonus__desktop)}>
-        <div className={styles.unclaimed_bonus__position}>
+      <div
+        className={clsx(
+          isOpen
+            ? clsx(styles.unclaimed_bonus, styles.sidebar_open)
+            : clsx(styles.unclaimed_bonus, styles.sidebar_close)
+        )}
+      >
+        <div
+          className={clsx(
+            isOpen ? styles.unclaimed_bonus__position : styles.unclaimed_bonus__position_close
+          )}
+        >
           <BonusPosition position={bonusClaim.position} />
         </div>
 
         <div className={styles.unclaimed_bonus__summary}>
           <p>{datetimeFromEpoch(bonusClaim.givenAt)}</p>
-          <p>{bonusClaim.type} Bonus</p>
-          <p>Expires on {datetimeFromEpoch(bonusClaim.expiresAt)}</p>
+          <p>
+            {bonusClaim.type} {t('unclaimed_bonuses.sub_name')}
+          </p>
+          <p>
+            {t('unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
+          </p>
         </div>
 
         <SpinnerButton
           onClick={() => onClaimBonus(bonusClaim.id)}
           loading={loading}
-          className={styles.unclaimed_bonus__button}
+          className={clsx(styles.unclaimed_bonus__button, styles.unclaimed_bonus__button_close)}
         >
-          <span>CLAIM MY BONUS!</span>
+          <span>{t('unclaimed_bonuses.claim_my_bonuses')}</span>
           <BitcoinValue
-            className={styles.unclaimed_bonus__button__icon}
+            className={styles.unclaimed_bonus__icon}
             value={formatBitcoin(bonusClaim.amount)}
           />
         </SpinnerButton>
       </div>
 
-      <div className={clsx(styles.unclaimed_bonus, styles.unclaimed_bonus__mobile)}>
-        <p className={styles.unclaimed_bonus__mobile__bonus_type}>{bonusClaim.type}</p>
+      <div
+        className={clsx(
+          isOpen
+            ? clsx(styles.unclaimed_bonus, styles.mobile_sidebar_open)
+            : clsx(styles.unclaimed_bonus, styles.mobile_sidebar_close)
+        )}
+      >
+        <div className={styles.mobile_width}>
+          <p className={styles.unclaimed_bonus__mobile__bonus_type}>{bonusClaim.type}</p>
 
-        <div className={styles.unclaimed_bonus__mobile__pos_button}>
-          <div className={styles.unclaimed_bonus__position}>
-            <BonusPosition position={bonusClaim.position} />
+          <div className={styles.unclaimed_bonus__mobile__pos_button}>
+            <div className={styles.unclaimed_bonus__position}>
+              <BonusPosition position={bonusClaim.position} />
+            </div>
+
+            <SpinnerButton
+              onClick={() => onClaimBonus(bonusClaim.id)}
+              loading={loading}
+              className={styles.unclaimed_bonus__button}
+            >
+              <span>CLAIM</span>
+              <BitcoinValue
+                className={styles.unclaimed_bonus__icon}
+                value={formatBitcoin(bonusClaim.amount)}
+              />
+            </SpinnerButton>
           </div>
 
-          <SpinnerButton className={styles.unclaimed_bonus__button}>
-            <span>CLAIM</span>
-            <BitcoinValue
-              className={styles.unclaimed_bonus__button__icon}
-              value={formatBitcoin(bonusClaim.amount)}
-            />
-          </SpinnerButton>
-        </div>
-
-        <div className={styles.unclaimed_bonus__mobile__summary}>
-          <p>Received on {datetimeFromEpoch(bonusClaim.givenAt)}</p>
-          <p>Expires on {datetimeFromEpoch(bonusClaim.expiresAt)}</p>
+          <div className={styles.unclaimed_bonus__mobile__summary}>
+            <p>
+              {t('unclaimed_bonuses.received_on')} {datetimeFromEpoch(bonusClaim.givenAt)}
+            </p>
+            <p>
+              {t('unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
+            </p>
+          </div>
         </div>
       </div>
     </>
@@ -120,9 +152,10 @@ const UnClaimedBonuses: React.FC<IProps> = ({
 }) => {
   const [bonusClaims, setBonusClaims] = useState(defaultBonusClaims);
   const [playBonusClaim, { stop }] = useSound(bonus_claim_v1.default);
+  const { t } = useTranslation(['bonuses']);
   const [
     {
-      sidebar: { isSound },
+      sidebar: { isSound, isOpen },
     },
   ] = useStateValue();
 
@@ -139,8 +172,8 @@ const UnClaimedBonuses: React.FC<IProps> = ({
   };
 
   return (
-    <div className={styles.unclaimed_bonuses}>
-      <div className={styles.unclaimed_bonuses__title}>UNCLAIMED BONUSES</div>
+    <div className={clsx(isOpen ? styles.unclaimed_bonuses : styles.unclaimed_bonuses_close)}>
+      <div className={styles.unclaimed_bonus__title}>{t('unclaimed_bonuses.title')}</div>
 
       {bonusClaims.slice(0, 3).map((bonusClaim, index) => (
         <UnClaimedBonus
@@ -150,9 +183,9 @@ const UnClaimedBonuses: React.FC<IProps> = ({
         />
       ))}
 
-      <div className={styles.unclaimed_bonuses__history}>
-        <a href="/transactions/bonuses" className={styles.unclaimed_bonuses__history__link}>
-          HISTORY OF BONUS TRANSFERS
+      <div className={styles.unclaimed_bonus__history}>
+        <a href="/transactions/bonuses" className={styles.unclaimed_bonus__history__link}>
+          {t('unclaimed_bonuses.history')}
         </a>
       </div>
     </div>
