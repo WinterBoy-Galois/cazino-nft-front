@@ -435,3 +435,13 @@ export const BONUSCLAIMS = gql`
     }
   }
 `;
+
+export const BONUSCOUNTDOWN = gql`
+  {
+    bonusCountdown {
+      daily
+      weekly
+      monthly
+    }
+  }
+`;
