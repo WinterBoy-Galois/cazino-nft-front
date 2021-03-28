@@ -1,42 +1,78 @@
 @import '../../../../styles/shared.scss';
+$grid-breakpoints: (
+        xs: 0,
+        tm: 480px,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1500px,
+);
 
 .unclaimed_bonus {
-  &es {
+  &es, &es_close {
     background-color: #113352;
     border-radius: 0.625rem;
     margin: 0 auto 3.25rem;
     max-width: 100%;
     width: calc(100% - 2rem);
     padding: 1.75rem;
+  }
 
-    &__title {
-      color: #80a2cc;
-      font-size: 1.25rem;
-      line-height: 1.625rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 1.75rem;
-    }
-
-    &__history {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &__link {
-        color: #4496ff;
-        text-decoration: underline;
-        cursor: pointer;
-      }
-    }
-
-    @include media-breakpoint-up(xl) {
+  @include media-breakpoint-down(xxl) {
+    &es_close {
       padding: 1.75rem 2.625rem;
       width: 59.375rem;
+    }
+  }
+  @include media-breakpoint-up(xl) {
+    &es {
+      padding: 1.75rem 2.625rem;
+      width: 59.375rem;
+    }
+    &es_close {
+      padding: 1.75rem 2.625rem;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    &es_close {
+      width: calc(100% - 30px);
+    }
+  }
+  @include media-breakpoint-down(xs) {
+    &es {
+      padding: 1.75rem 0.7rem;
+    }
+  }
+  @include media-breakpoint-down(tm) {
+    &es_close {
+      padding: 1.75rem 1rem;
+    }
+  }
 
-      &__title {
-        margin-bottom: 3.125rem;
-      }
+  &__title {
+    color: #80a2cc;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1.75rem;
+
+    @include media-breakpoint-up(xl) {
+      margin-bottom: 3.125rem;
+    }
+  }
+
+  &__history {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__link {
+      color: #4496ff;
+      text-decoration: underline;
+      cursor: pointer;
+      text-transform: uppercase;
     }
   }
 
@@ -44,7 +80,7 @@
     display: flex;
     margin-bottom: 2rem;
 
-    &__position {
+    &__position, &__position_close {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -55,8 +91,18 @@
       border-radius: 9px;
       margin-right: auto;
       padding: 0.5rem;
+    }
 
-      @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(xl) {
+      &__position {
+        width: 12.5rem;
+        height: 5.75rem;
+        padding: 1rem;
+        margin-right: 1.25rem;
+      }
+    }
+    @include media-breakpoint-up(md) {
+      &__position_close {
         width: 12.5rem;
         height: 5.75rem;
         padding: 1rem;
@@ -85,25 +131,39 @@
       }
     }
 
-    &__button {
+    &__button, &__button_close {
       width: 47.5%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      @include media-breakpoint-up(xl) {
+    }
+
+    @include media-breakpoint-up(xl) {
+      &__button {
         width: 15.1875rem;
         height: 5.75rem;
       }
-
-      &__icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        line-height: 1.25rem;
-        margin-top: 0.5rem;
+    }
+    @include media-breakpoint-up(md) {
+      &__button_close {
+        width: 15.1875rem;
+        height: 5.75rem;
       }
+    }
+    @include media-breakpoint-down(xs) {
+      &__button {
+        line-height: 1;
+      }
+    }
+
+    &__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      line-height: 1.25rem;
+      margin-top: 0.5rem;
     }
 
     &__mobile {
@@ -133,14 +193,33 @@
       }
     }
 
-    @include media-breakpoint-down(lg) {
-      &__desktop {
-        display: none;
-      }
-
-      &__mobile {
-        display: block;
-      }
+    .mobile_width {
+      margin: 0 auto;
+      width: 100%;
+      max-width: 600px;
     }
+  }
+}
+
+.sidebar_open {
+  @include media-breakpoint-down(lg) {
+    display: none;
+  }
+}
+.sidebar_close {
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
+.mobile_sidebar_open {
+  display: none;
+  @include media-breakpoint-down(lg) {
+    display: block;
+  }
+}
+.mobile_sidebar_close {
+  display: none;
+  @include media-breakpoint-down(sm) {
+    display: block;
   }
 }

@@ -31,7 +31,7 @@ $grid-breakpoints: (
   font-weight: bold;
   font-size: 1.5625rem;
   text-transform: uppercase;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   color: #80a2cc;
   padding: 0.625rem 1rem 1.875rem;
   width: 100%;
@@ -44,10 +44,15 @@ $grid-breakpoints: (
 
 .leaderboard {
   background-color: #113352;
-  padding: 2.625rem;
+  padding: 1.8rem 2.625rem 1rem;
   border-radius: 0.625rem;
   margin-bottom: 3.25rem;
-
+  @include media-breakpoint-down(lg) {
+    padding: 1.8rem 1.7rem 1rem;
+  }
+  @include media-breakpoint-down(xs) {
+    padding: 1.8rem 0.7rem 1rem;
+  }
   &,
   &__table {
     width: calc(100% - 2rem);

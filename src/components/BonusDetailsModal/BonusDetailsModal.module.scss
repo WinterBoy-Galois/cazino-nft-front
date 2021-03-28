@@ -34,9 +34,9 @@
     flex-grow: 1;
     justify-content: flex-end;
 
-    @include media-breakpoint-up(md) {
-      justify-content: flex-start;
-    }
+    //@include media-breakpoint-up(md) {
+    //  justify-content: flex-start;
+    //}
 
     &__amount {
       align-items: center;

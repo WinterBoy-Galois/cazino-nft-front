@@ -1,0 +1,27 @@
+{
+  "title": "Bonuses",
+  "unclaimed_bonuses": {
+    "sub_name": "Bonus",
+    "title": "Unclaimed Bonuses",
+    "bonuses": "Bonuses",
+    "claim_my_bonuses": "Claim My Bonus!",
+    "expires_on": "Expires On",
+    "received_on": "Received On",
+    "history": "History Of Bonus Transfers"
+  },
+  "leaderboard": {
+    "title": "ReaderBoard",
+    "times": {
+      "minutes": "Minutes",
+      "hours": "Hours",
+      "days": "Days",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "your_current_position": "Your Current Position",
+    "your_potential_bonus": "Your Potential Bonus",
+    "time_to_bonus": "Time To Bonus",
+    "reset_every": "Reset every day at 00:00 GMT +02"
+  }
+}

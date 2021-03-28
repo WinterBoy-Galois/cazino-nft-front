@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import { LEADERBOARDS_SUBSCRIPTION } from '../../graphql/subscriptions';
 import { useLocation, useNavigate } from '@reach/router';
 import styles from './BonusesPage.module.scss';
+import { useTranslation } from 'react-i18next';
 
 type TimeAggregation = 'daily' | 'weekly' | 'monthly';
 
@@ -18,6 +19,7 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   const [bonusClaims, setBonusClaims] = useState<any>();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation(['bonuses']);
 
   useEffect(() => {
     if (!subscribeToMore) return;
@@ -38,27 +40,28 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
 
   return (
     <div className={styles.bonuses_page}>
-      <div className={styles.bonuses_title}>Bonuses</div>
+      <div className={styles.bonuses_title}>{t('title')}</div>
 
       {bonusClaims && bonusClaims?.bonusClaims.length ? (
-        <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />
+        <>
+          <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />
+          <div className={styles.leaderboard}>
+            <Leaderboard />
+          </div>
+
+          <div className={styles.leaderboard__table}>
+            <LeaderboardTable
+              leaderboard={data ? data.leaderboards[selectedTime] : []}
+              isLoading={loading}
+              error={error ? true : false}
+              signInUserId="15"
+              onUsernameClicked={userId =>
+                navigate(`${pathname}?dialog=user-info`, { state: { userId } })
+              }
+            />
+          </div>
+        </>
       ) : null}
-
-      <div className={styles.leaderboard}>
-        <Leaderboard />
-      </div>
-
-      <div className={styles.leaderboard__table}>
-        <LeaderboardTable
-          leaderboard={data ? data.leaderboards[selectedTime] : []}
-          isLoading={loading}
-          error={error ? true : false}
-          signInUserId="15"
-          onUsernameClicked={userId =>
-            navigate(`${pathname}?dialog=user-info`, { state: { userId } })
-          }
-        />
-      </div>
     </div>
   );
 };
