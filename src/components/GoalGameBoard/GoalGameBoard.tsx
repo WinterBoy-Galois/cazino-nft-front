@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './GoalGameBoard.module.scss';
 import clsx from 'clsx';
 import GoalBall from '../icons/games/GoalBall';
@@ -24,18 +24,19 @@ interface IGBBProps extends IDefaultProps {
 interface IGBSProps extends IDefaultProps {
   index?: number;
   ballType?: string;
+  onPlaceBet?: (index: number) => void;
 }
 
 const GoalBallSelect: React.FC<IGBSProps> = ({
   index = 0,
-  handlePlaceBet = () => null,
+  onPlaceBet = () => null,
   allowNext,
   ballType,
 }) => {
   return (
     <div
       className={clsx(styles.goal__selection__ball)}
-      onClick={() => (allowNext ? handlePlaceBet(index) : null)}
+      onClick={() => (allowNext ? onPlaceBet(index) : null)}
     >
       <GoalBall
         className={clsx(
@@ -57,7 +58,15 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
     hideMiddleBall,
     gameState,
     isCashOut,
+    handlePlaceBet = () => null,
   } = props;
+
+  const [goalKeeperPosition, setGKP] = useState(-1);
+
+  const onSelectPlaceBet = (index: number) => {
+    setGKP(getGoalKeeperLostPosition(index));
+    handlePlaceBet(index);
+  };
 
   const renderGoalBallSelections = () => {
     if (isCashOut && !allowNext) return;
@@ -69,6 +78,7 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
             hideMiddleBall && index === 1 ? null : (
               <GoalBallSelect
                 {...props}
+                onPlaceBet={onSelectPlaceBet}
                 key={`ball-${index}`}
                 index={index}
                 ballType={lastSpot === index ? lastAdvanceStatus : 'Idle'}
@@ -79,10 +89,17 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
       );
   };
 
+  const getGoalKeeperLostPosition = (selection: number) =>
+    selection === 1 ? [0, 2].sort(() => Math.random() - 0.5)[0] : selection === 0 ? 2 : 0;
+
   return (
     <div className={clsx(styles.container, className)}>
       <GoalBackground className={styles.goal__background} />
-      <GoalKeeper {...props} className={styles.goal__keeper} hideMiddleBall={hideMiddleBall} />
+      <GoalKeeper
+        {...props}
+        goalKeeperPosition={goalKeeperPosition}
+        className={styles.goal__keeper}
+      />
 
       {renderGoalBallSelections()}
 
