@@ -9,6 +9,7 @@ import { LEADERBOARDS_SUBSCRIPTION } from '../../graphql/subscriptions';
 import { useLocation, useNavigate } from '@reach/router';
 import styles from './BonusesPage.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useStateValue } from '../../state';
 
 type TimeAggregation = 'daily' | 'weekly' | 'monthly';
 
@@ -20,6 +21,13 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation(['bonuses']);
+  const [positionBonus, setPositionBonus] = useState<any>();
+
+  const [
+    {
+      auth: { user },
+    },
+  ] = useStateValue();
 
   useEffect(() => {
     if (!subscribeToMore) return;
@@ -38,6 +46,20 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   const onClaimBonus = () =>
     refreshBonusClaims().then(({ data: __bonusClaims }) => setBonusClaims(__bonusClaims));
 
+  const onType = (t: TimeAggregation) => {
+    setSelectedTime(t);
+  };
+
+  useEffect(() => {
+    if (data && user) {
+      const _temp = data.leaderboards[selectedTime];
+      for (let k = 0; k < _temp.length; k++) {
+        if (user.id === _temp[k].id) {
+          setPositionBonus(_temp[k]);
+        }
+      }
+    }
+  }, [data]);
   return (
     <div className={styles.bonuses_page}>
       <div className={styles.bonuses_title}>{t('title')}</div>
@@ -46,7 +68,7 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
         <div className={styles.body_p}>
           <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />
           <div className={styles.leaderboard}>
-            <Leaderboard />
+            <Leaderboard onType={onType} positionBonus={positionBonus} />
           </div>
 
           <div className={styles.leaderboard__table}>

@@ -206,7 +206,6 @@ const GoalGame: React.FC<IProps> = ({
   }, [session, lastSpot, lastAdvanceStatus, lastStatusTimer]);
 
   useEffect(() => {
-    console.log(lastSpot, lastAdvanceStatus);
     if (lastSpot !== null && isSound) {
       if (lastAdvanceStatus === null) {
         (async () => {

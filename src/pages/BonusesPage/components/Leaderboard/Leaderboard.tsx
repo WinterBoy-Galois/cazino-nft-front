@@ -1,66 +1,125 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SlideSelect from '../../../../components/SlideSelect';
 import styles from './Leaderboard.module.scss';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import BitcoinValue from '../../../../components/BitcoinValue';
 import clsx from 'clsx';
+import { BONUSCOUNTDOWN } from '../../../../graphql/queries';
+import { useQuery } from '@apollo/client';
 
 interface IProps {
   loadingBet?: boolean;
+  onType?: (t: TimeAggregation) => void;
+  positionBonus?: any;
 }
 
-const Leaderboard: React.FC<IProps> = () => {
+const Leaderboard: React.FC<IProps> = ({ onType = () => null, positionBonus }) => {
   const [selectedTime, setSelectedTime] = useState<TimeAggregation>('daily');
+  const { data, refetch } = useQuery(BONUSCOUNTDOWN);
   const { t } = useTranslation(['bonuses']);
+  const [days, setDays] = useState<number>();
+  const [hours, setHours] = useState<number>();
+  const [minutes, setMinutes] = useState<number>();
+  const [waitingLoading, isWaitingLoading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      await refetch();
+    })();
+    if (data) {
+      const temp = data.bonusCountdown[selectedTime];
+      if (temp === 0) {
+        isWaitingLoading(true);
+      } else {
+        setDays(Math.floor(temp / (24 * 3600)));
+        setHours(Math.floor((temp % (24 * 3600)) / 3600));
+        setMinutes(Math.floor((temp % 3600) / 60));
+      }
+    }
+  }, [data, selectedTime, waitingLoading]);
+
+  useEffect(() => {
+    if (waitingLoading) {
+      setTimeout(() => {
+        isWaitingLoading(false);
+      }, 10000);
+    }
+  }, [waitingLoading]);
+
+  const onClickType = (t: TimeAggregation) => {
+    setSelectedTime(t);
+    onType(t);
+  };
   return (
     <div>
       <div className={styles.leaderboard__title}>{t('leaderboard.title')}</div>
-      <div className={styles.leaderboard__contents}>
-        <div className={styles.p_15}>
-          <SlideSelect
-            selectItems={[
-              { label: t('leaderboard.times.daily'), onClick: () => setSelectedTime('daily') },
-              { label: t('leaderboard.times.weekly'), onClick: () => setSelectedTime('weekly') },
-              { label: t('leaderboard.times.monthly'), onClick: () => setSelectedTime('monthly') },
-            ]}
-          />
-        </div>
-        <div className={styles.position_bonus}>
-          <div className={styles.container}>
-            <div className={styles.txt_color}>{t('leaderboard.your_current_position')}</div>
-            <div>
-              <div className={styles.bg_green}>2</div>
+      {!waitingLoading ? (
+        <div className={styles.leaderboard__contents}>
+          <div className={styles.p_15}>
+            <SlideSelect
+              selectItems={[
+                {
+                  label: t('leaderboard.times.daily'),
+                  onClick: () => onClickType('daily'),
+                },
+                {
+                  label: t('leaderboard.times.weekly'),
+                  onClick: () => onClickType('weekly'),
+                },
+                {
+                  label: t('leaderboard.times.monthly'),
+                  onClick: () => onClickType('monthly'),
+                },
+              ]}
+            />
+          </div>
+          <div className={styles.position_bonus}>
+            <div className={styles.container}>
+              <div className={styles.txt_color}>{t('leaderboard.your_current_position')}</div>
+              <div>
+                <div
+                  className={clsx(
+                    positionBonus
+                      ? styles.bg_green
+                      : clsx(styles.bg_green_position, styles.minus_font)
+                  )}
+                >
+                  {positionBonus ? positionBonus.position : '-'}
+                </div>
+              </div>
+              <div className={styles.txt_color}>{t('leaderboard.your_potential_bonus')}</div>
+              <div className={clsx(positionBonus ? null : clsx(styles.bg_dash, styles.minus_font))}>
+                {positionBonus ? <BitcoinValue value={formatBitcoin(positionBonus.amount)} /> : '-'}
+              </div>
             </div>
-            <div className={styles.txt_color}>{t('leaderboard.your_potential_bonus')}</div>
-            <div>
-              <BitcoinValue value={formatBitcoin(0.04885313)} />
+          </div>
+          <div className={clsx(styles.time_bonus, styles.txt_color)}>
+            <div>{t('leaderboard.time_to_bonus')}</div>
+            <div className={styles.time_block}>
+              <div className={styles.grid_time}>
+                <div>{days && days}</div>
+                <div className={styles.txt_black}>:</div>
+                <div>{hours && hours}</div>
+                <div className={styles.txt_black}>:</div>
+                <div>{minutes && minutes}</div>
+              </div>
+              <div className={styles.grid_time}>
+                <div className={styles.txt_small}>{t('leaderboard.times.days')}</div>
+                <div />
+                <div className={styles.txt_small}>{t('leaderboard.times.hours')}</div>
+                <div />
+                <div className={styles.txt_small}>{t('leaderboard.times.minutes')}</div>
+              </div>
+            </div>
+            <div className={clsx(styles.reset_every, styles.txt_small)}>
+              {t('leaderboard.reset_every')}
             </div>
           </div>
         </div>
-        <div className={clsx(styles.time_bonus, styles.txt_color)}>
-          <div>{t('leaderboard.time_to_bonus')}</div>
-          <div className={styles.time_block}>
-            <div className={styles.grid_time}>
-              <div>25</div>
-              <div className={styles.txt_black}>:</div>
-              <div>19</div>
-              <div className={styles.txt_black}>:</div>
-              <div>59</div>
-            </div>
-            <div className={styles.grid_time}>
-              <div className={styles.txt_small}>{t('leaderboard.times.days')}</div>
-              <div />
-              <div className={styles.txt_small}>{t('leaderboard.times.hours')}</div>
-              <div />
-              <div className={styles.txt_small}>{t('leaderboard.times.minutes')}</div>
-            </div>
-          </div>
-          <div className={clsx(styles.reset_every, styles.txt_small)}>
-            {t('leaderboard.reset_every')}
-          </div>
-        </div>
-      </div>
+      ) : (
+        <div className={styles.waiting_processing}>{t('leaderboard.waiting_processing')}</div>
+      )}
     </div>
   );
 };

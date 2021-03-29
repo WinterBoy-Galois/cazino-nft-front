@@ -64,11 +64,25 @@ $grid-breakpoints: (
           padding-top: 2rem;
         }
 
-        .bg_green {
+        .bg_green,
+        .bg_dash,
+        .bg_green_position {
           padding: 2.3px 16px;
           border-radius: 30px;
           line-height: 1;
           background-color: #1f741f;
+        }
+        .bg_green_position {
+          padding: 0 14px;
+          line-height: 0.7;
+        }
+        .bg_dash {
+          padding-top: 1.5rem;
+          background-color: unset;
+        }
+        .minus_font {
+          font-size: 30px;
+          font-weight: inherit;
         }
       }
     }
@@ -124,4 +138,16 @@ $grid-breakpoints: (
       text-transform: none;
     }
   }
+}
+
+.waiting_processing {
+  display: flex;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  width: 100%;
+  max-width: 100%;
+  min-height: 300px;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
 }
