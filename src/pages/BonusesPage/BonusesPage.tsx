@@ -5,7 +5,7 @@ import Leaderboard from './components/Leaderboard/Leaderboard';
 import LeaderboardTable from '../../components/LeaderboardTable/LeaderboardTable';
 import { LEADERBOARDS, BONUSCLAIMS } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
-import { LEADERBOARDS_SUBSCRIPTION } from '../../graphql/subscriptions';
+import { LEADERBOARDS_SUBSCRIPTION, BONUS_NOTIFICATION } from '../../graphql/subscriptions';
 import { useLocation, useNavigate } from '@reach/router';
 import styles from './BonusesPage.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -21,8 +21,8 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation(['bonuses']);
-  const [positionBonus, setPositionBonus] = useState<any>();
-
+  const [bonus, setBonus] = useState<any>();
+  const [position, setPosition] = useState<any>();
   const [
     {
       auth: { user },
@@ -51,15 +51,16 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   };
 
   useEffect(() => {
-    if (data && user) {
+    if (data) {
       const _temp = data.leaderboards[selectedTime];
       for (let k = 0; k < _temp.length; k++) {
-        if (user.id === _temp[k].id) {
-          setPositionBonus(_temp[k]);
+        if (user?.id === _temp[k].userid) {
+          setBonus(_temp[k]);
+          setPosition(k + 1);
         }
       }
     }
-  }, [data]);
+  }, [data, selectedTime]);
   return (
     <div className={styles.bonuses_page}>
       <div className={styles.bonuses_title}>{t('title')}</div>
@@ -68,7 +69,7 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
         <div className={styles.body_p}>
           <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />
           <div className={styles.leaderboard}>
-            <Leaderboard onType={onType} positionBonus={positionBonus} />
+            <Leaderboard onType={onType} bonus={bonus} position={position} />
           </div>
 
           <div className={styles.leaderboard__table}>

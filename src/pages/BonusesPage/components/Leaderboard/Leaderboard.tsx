@@ -11,10 +11,11 @@ import { useQuery } from '@apollo/client';
 interface IProps {
   loadingBet?: boolean;
   onType?: (t: TimeAggregation) => void;
-  positionBonus?: any;
+  bonus?: any;
+  position?: any;
 }
 
-const Leaderboard: React.FC<IProps> = ({ onType = () => null, positionBonus }) => {
+const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position }) => {
   const [selectedTime, setSelectedTime] = useState<TimeAggregation>('daily');
   const { data, refetch } = useQuery(BONUSCOUNTDOWN);
   const { t } = useTranslation(['bonuses']);
@@ -80,17 +81,15 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, positionBonus }) =
               <div>
                 <div
                   className={clsx(
-                    positionBonus
-                      ? styles.bg_green
-                      : clsx(styles.bg_green_position, styles.minus_font)
+                    position ? styles.bg_green : clsx(styles.bg_green_position, styles.minus_font)
                   )}
                 >
-                  {positionBonus ? positionBonus.position : '-'}
+                  {position ? position : '-'}
                 </div>
               </div>
               <div className={styles.txt_color}>{t('leaderboard.your_potential_bonus')}</div>
-              <div className={clsx(positionBonus ? null : clsx(styles.bg_dash, styles.minus_font))}>
-                {positionBonus ? <BitcoinValue value={formatBitcoin(positionBonus.amount)} /> : '-'}
+              <div className={clsx(bonus ? null : clsx(styles.bg_dash, styles.minus_font))}>
+                {bonus ? <BitcoinValue value={formatBitcoin(bonus.bonus)} /> : '-'}
               </div>
             </div>
           </div>
