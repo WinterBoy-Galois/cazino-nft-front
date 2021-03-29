@@ -22,6 +22,7 @@
     "your_current_position": "Your Current Position",
     "your_potential_bonus": "Your Potential Bonus",
     "time_to_bonus": "Time To Bonus",
-    "reset_every": "Reset every day at 00:00 GMT +02"
+    "reset_every": "Reset every day at 00:00 GMT +02",
+    "waiting_processing": "Processing Leaderboards, Please Wait..."
   }
 }

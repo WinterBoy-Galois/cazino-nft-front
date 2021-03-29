@@ -25,7 +25,7 @@ const UserStatistics: React.FC<IProps> = ({
           label: t('userStatistics.totalWager'),
           value:
             totalWager !== null ? (
-              <BitcoinValue value={formatBitcoin(totalWager)} className={styles.value} />
+              <BitcoinValue value={formatBitcoin(totalWager)} className={styles.wager_value} />
             ) : (
               <div className={styles.username__hidden}>{t('hidden')}</div>
             ),
@@ -34,7 +34,7 @@ const UserStatistics: React.FC<IProps> = ({
           label: t('userStatistics.totalProfit'),
           value:
             totalProfit !== null ? (
-              <BitcoinProfit value={totalProfit} className={styles.value} />
+              <BitcoinProfit value={totalProfit} className={styles.wager_value} />
             ) : (
               <div className={styles.username__hidden}>{t('hidden')}</div>
             ),

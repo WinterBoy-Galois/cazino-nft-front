@@ -158,7 +158,6 @@ const UnClaimedBonuses: React.FC<IProps> = ({
       sidebar: { isSound, isOpen },
     },
   ] = useStateValue();
-
   const onClaimBonusCompleted = (bonusId: string) => {
     if (isSound) {
       stop();
@@ -171,25 +170,29 @@ const UnClaimedBonuses: React.FC<IProps> = ({
     onClaimBonus();
   };
 
-  return (
-    <div className={clsx(isOpen ? styles.unclaimed_bonuses : styles.unclaimed_bonuses_close)}>
-      <div className={styles.unclaimed_bonus__title}>{t('unclaimed_bonuses.title')}</div>
+  if (bonusClaims?.length > 0) {
+    return (
+      <div className={clsx(isOpen ? styles.unclaimed_bonuses : styles.unclaimed_bonuses_close)}>
+        <div className={styles.unclaimed_bonus__title}>{t('unclaimed_bonuses.title')}</div>
 
-      {bonusClaims.slice(0, 3).map((bonusClaim, index) => (
-        <UnClaimedBonus
-          key={`unclaimed-bonus-${index}`}
-          bonusClaim={bonusClaim}
-          onClaimBonusCompleted={onClaimBonusCompleted}
-        />
-      ))}
+        {bonusClaims.slice(0, 3).map((bonusClaim, index) => (
+          <UnClaimedBonus
+            key={`unclaimed-bonus-${index}`}
+            bonusClaim={bonusClaim}
+            onClaimBonusCompleted={onClaimBonusCompleted}
+          />
+        ))}
 
-      <div className={styles.unclaimed_bonus__history}>
-        <a href="/transactions/bonuses" className={styles.unclaimed_bonus__history__link}>
-          {t('unclaimed_bonuses.history')}
-        </a>
+        <div className={styles.unclaimed_bonus__history}>
+          <a href="/transactions/bonuses" className={styles.unclaimed_bonus__history__link}>
+            {t('unclaimed_bonuses.history')}
+          </a>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return null;
+  }
 };
 
 export default UnClaimedBonuses;
