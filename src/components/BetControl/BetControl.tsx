@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './BetControl.module.scss';
 import clsx from 'clsx';
-import { isValid } from './lib/util';
+import { isValid, isNumber } from './lib/util';
 import Icon from './components/Icon';
 import { IconType } from './components/Icon/Icon';
 
@@ -43,13 +43,13 @@ const BetControl: React.FC<IProps> = ({
   }, [defaultValue]);
 
   const handleChange = (newValue: string) => {
+    if (!isNumber(newValue)) return;
     setEditing(true);
-
     setInternalValue(newValue);
-
-    if (isValid(newValue, +min.toFixed(3), +max.toFixed(3))) {
-      setValue(+newValue);
-      onChange && onChange(+newValue);
+    const val = newValue.toString().replace(',', '.');
+    if (isValid(val, +min.toFixed(3), +max.toFixed(3))) {
+      setValue(+val);
+      onChange && onChange(+val);
     }
   };
 

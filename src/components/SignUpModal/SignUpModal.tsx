@@ -38,6 +38,8 @@ const SignUpModal: React.FC<IProps> = ({
   loading,
   errors,
 }: IProps) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const { t } = useTranslation(['auth', 'common']);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -111,18 +113,22 @@ const SignUpModal: React.FC<IProps> = ({
             <PasswordInput
               label={t('labels.password')}
               name="password"
+              isForcePasswordVisible={isPasswordVisible}
               onChangeValue={v => formik.setFieldValue('password', v)}
               onBlur={formik.handleBlur}
               value={formik.values.password}
+              onChangePasswordVisible={visible => setIsPasswordVisible(visible)}
               {...(formik.touched.password ? { validationMessage: formik.errors.password } : {})}
             />
 
             <PasswordInput
               label={t('labels.confirmPassword')}
               name="confirmPassword"
+              isForcePasswordVisible={isPasswordVisible}
               onChangeValue={v => formik.setFieldValue('confirmPassword', v)}
               onBlur={formik.handleBlur}
               value={formik.values.confirmPassword}
+              onChangePasswordVisible={visible => setIsPasswordVisible(visible)}
               {...(formik.touched.confirmPassword
                 ? { validationMessage: formik.errors.confirmPassword }
                 : {})}
