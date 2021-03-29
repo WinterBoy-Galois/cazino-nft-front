@@ -8,8 +8,10 @@ interface IProps {
   value?: string;
   label?: string;
   validationMessage?: string;
+  isForcePasswordVisible?: boolean;
   onChangeValue?: (value: string) => void;
   onBlur?: ({ target }: { target: EventTarget | null }) => void;
+  onChangePasswordVisible?: (value: boolean) => void;
 }
 
 const PasswordInput = ({
@@ -17,15 +19,23 @@ const PasswordInput = ({
   value: initialValue,
   label,
   validationMessage,
+  isForcePasswordVisible,
   onChangeValue,
   onBlur,
+  onChangePasswordVisible,
 }: IProps) => {
   const [value, setValue] = useState(initialValue);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(isForcePasswordVisible || false);
 
   useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
+
+  useEffect(() => {
+    if (isForcePasswordVisible != null) {
+      setIsPasswordVisible(isForcePasswordVisible);
+    }
+  }, [isForcePasswordVisible]);
 
   const isError = () => {
     return !!validationMessage;
@@ -47,7 +57,9 @@ const PasswordInput = ({
   };
 
   const handleClick = () => {
-    setIsPasswordVisible(!isPasswordVisible);
+    const visible = !isPasswordVisible;
+    setIsPasswordVisible(visible);
+    onChangePasswordVisible && onChangePasswordVisible(visible);
   };
 
   return (

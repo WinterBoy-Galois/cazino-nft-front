@@ -151,7 +151,7 @@ const DiceGame: React.FC<IProps> = ({
       </div>
 
       <div className={styles.controls__wrapper}>
-        <div className="container">
+        <div className="container-xl">
           <div className="row">
             <div className="col-12">
               <div className={styles.profit__container}>
@@ -163,7 +163,7 @@ const DiceGame: React.FC<IProps> = ({
             </div>
           </div>
           <div className="row">
-            <div className="col-4 col-xl-2">
+            <div className="col-4 col-xxl-2">
               <BetControl
                 label={t('dice.probability')}
                 icon="PROBABILITY"
@@ -175,7 +175,7 @@ const DiceGame: React.FC<IProps> = ({
                 max={maxProbability}
               />
             </div>
-            <div className="col-4 col-xl-2">
+            <div className="col-4 col-xxl-2">
               <BetControl
                 label={t('dice.multiplier')}
                 icon="MULTIPLIER"
@@ -188,7 +188,7 @@ const DiceGame: React.FC<IProps> = ({
                 max={calcMultiplier(minProbability, state.he)}
               />
             </div>
-            <div className="col-4 col-xl-2">
+            <div className="col-4 col-xxl-2">
               <BetControl
                 label={state.over ? t('dice.rollOver') : t('dice.rollUnder')}
                 icon="OVER_UNDER"
@@ -198,7 +198,7 @@ const DiceGame: React.FC<IProps> = ({
               />
             </div>
 
-            <div className={clsx('col-12 col-xl-3', styles.amount__container)}>
+            <div className={clsx('col-12 col-xl-6 col-xxl-4 col-xxxl-3', styles.amount__container)}>
               <BetAmountControl
                 amount={state.amount}
                 min={0.00000001}
@@ -207,8 +207,12 @@ const DiceGame: React.FC<IProps> = ({
               />
             </div>
 
-            <div className={clsx(styles.controls__button, 'col-12 col-xl-3')}>
-              <SpinnerButton onClick={handlePlaceBet} loading={loadingBet || state.isRunning}>
+            <div className={clsx(styles.controls__button, 'col-12 col-xl-6 col-xxl-2 col-xxxl-3')}>
+              <SpinnerButton
+                className={`h-100`}
+                onClick={handlePlaceBet}
+                loading={loadingBet || state.isRunning}
+              >
                 start
               </SpinnerButton>
             </div>
