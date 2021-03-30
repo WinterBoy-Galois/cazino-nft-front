@@ -107,7 +107,7 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
       details = [
         {
           label: t('betDetails.bet'),
-          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} />,
+          value: <BitcoinValue value={formatBitcoin(betDetails.bet)} className={styles.value} />,
         },
         {
           label: t('betDetails.difficulty.label'),
@@ -115,7 +115,7 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
         },
         {
           label: <ProfitLabel label={t('betDetails.profit')} multiplier={betDetails.multiplier} />,
-          value: <BitcoinProfit value={betDetails.profit} />,
+          value: <BitcoinProfit value={betDetails.profit} className={styles.value} />,
         },
       ];
       break;

@@ -103,7 +103,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
 
   const onClickVerifyLast = () => {
     if (!userLastBet) return;
-    navigate(`${pathname}?dialog=bet-details`, { state: { bet: userLastBet } });
+    navigate(`${pathname}?dialog=bet-details`, { state: { bet: userLastBet, activePage: 2 } });
   };
 
   return (
