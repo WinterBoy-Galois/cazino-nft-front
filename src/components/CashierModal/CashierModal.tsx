@@ -56,6 +56,14 @@ const CashierModal: React.FC<IProps> = ({
     else setValidated(false);
   }, [depositAddress]);
 
+  useEffect(() => {
+    if (show) {
+      setModalType('deposit');
+      setAmount(0);
+      setDepositAddress(defaultDepositAddress);
+    }
+  }, [show]);
+
   useEffect(() => setDepositAddress(defaultDepositAddress), [defaultDepositAddress]);
 
   return (
@@ -171,6 +179,7 @@ const CashierModal: React.FC<IProps> = ({
 
               <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
                 <Button
+                  disabled={amount <= 0 || !isValidated}
                   className={styles.withdraw__button}
                   onClick={async () => {
                     const { data, errors } = await withdraw({

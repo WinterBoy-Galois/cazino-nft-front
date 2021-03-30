@@ -4,6 +4,7 @@ import { useStateValue } from '../../state';
 import { ME } from '../../graphql/queries';
 import styles from './AuthOverlay.module.scss';
 import Spinner from '../Spinner';
+import { navigate } from '@reach/router';
 
 const AuthOverlay: React.FC = ({ children }) => {
   const [{ auth }, dispatch] = useStateValue();
@@ -12,6 +13,7 @@ const AuthOverlay: React.FC = ({ children }) => {
   useEffect(() => {
     if (error && auth.state === 'SIGNED_IN') {
       dispatch({ type: 'AUTH_SIGN_OUT' });
+      navigate('/');
     } else if (!error && data && auth.state === 'SIGNED_IN' && !auth.user) {
       dispatch({
         type: 'AUTH_SIGN_IN',
