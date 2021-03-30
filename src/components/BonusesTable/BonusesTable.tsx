@@ -7,6 +7,7 @@ import BitcoinValue from '../BitcoinValue';
 import TransactionsTable from '../TransactionsTable';
 import { TableColumn } from '../TransactionsTable/lib/tableColumn';
 import styles from './BonusesTable.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   data: TransactionsBonus[];
@@ -17,16 +18,17 @@ interface IProps {
 }
 
 const BonusesTable: React.FC<IProps> = props => {
+  const { t } = useTranslation(['transactions']);
   const columns: TableColumn<TransactionsBonus>[] = [
     {
       selector: 'time',
-      name: 'Time',
+      name: t('bonuses.time'),
       minWidth: '165px',
       format: r => datetimeFromEpoch(r.givenAt),
     },
     {
       selector: 'position',
-      name: 'Pos',
+      name: t('bonuses.pos'),
       maxWidth: '80px',
       minWidth: '80px',
       // eslint-disable-next-line
@@ -34,14 +36,14 @@ const BonusesTable: React.FC<IProps> = props => {
     },
     {
       selector: 'type',
-      name: 'Type',
+      name: t('bonuses.type'),
       minWidth: '165px',
       hideAtBreakpoint: 'xl',
       format: r => r.type,
     },
     {
       selector: 'wager',
-      name: 'Wager',
+      name: t('bonuses.wager'),
       minWidth: '165px',
       hideAtBreakpoint: 'xl',
       // eslint-disable-next-line
@@ -49,7 +51,7 @@ const BonusesTable: React.FC<IProps> = props => {
     },
     {
       selector: 'bonus',
-      name: 'Bonus',
+      name: t('bonuses.bonus'),
       minWidth: '165px',
       // eslint-disable-next-line
       cell: r => <BitcoinValue value={formatBitcoin(r.amount)} />,

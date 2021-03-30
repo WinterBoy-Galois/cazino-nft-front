@@ -13,7 +13,6 @@ describe('BonusDetailsModal', () => {
         <BonusDetailsModal
           show={true}
           givenAt="02/16/2021 13:44:11"
-          claimedAt="02/18/2021 01:41:36"
           type="DAILY"
           wager={0.00069079}
           amount={0.00001234}
