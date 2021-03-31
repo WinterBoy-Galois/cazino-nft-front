@@ -5,13 +5,33 @@ import { success } from '../components/Toast';
 import { BONUS_NOTIFICATION } from '../graphql/subscriptions';
 import { useStateValue } from '../state';
 
+import useSound from 'use-sound';
+import { bonus_received_v1 } from '../components/App/App';
+
 export default function useRealtimeBonusNotification() {
   const { data } = useSubscription(BONUS_NOTIFICATION);
   const [, dispatch] = useStateValue();
   const { t } = useTranslation(['transactions']);
+  const [playBonusReceived] = useSound(bonus_received_v1.default);
+
+  const [{ auth }] = useStateValue();
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
 
   useEffect(() => {
-    if (data?.bonusReceived) {
+    if (
+      data?.bonusReceived &&
+      auth?.state === 'SIGNED_IN' &&
+      data?.bonusReceived.userid === auth?.user?.id
+    ) {
+      if (isSound) {
+        (async () => {
+          await playBonusReceived();
+        })();
+      }
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.bonusReceived.balance } });
       const position = data.bonusReceived.position;
       let position_string;
@@ -32,6 +52,7 @@ export default function useRealtimeBonusNotification() {
       }
 
       const type_temp = 'notificationEnum.' + data.bonusReceived.type;
+
       success(
         t('bonusNotification', {
           amount: data.bonusReceived.amount,
