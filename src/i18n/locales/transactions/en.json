@@ -10,6 +10,12 @@
   "withdrawPending": "Your withdraw is pending.",
   "withdrawConfirmed": "Your withdraw is confirmed.",
   "withdrawRejected": "Your withdraw is rejected.",
+  "bonusNotification": "Wow! You won {{amount}} BTC {{type}} bonus for {{position}} place.",
+  "notificationEnum": {
+    "DAILY": "daily",
+    "WEEKLY": "weekly",
+    "MONTHLY": "monthly"
+  },
   "buttonName": {
     "withdrawals": "Withdrawals",
     "deposits": "Deposits",
