@@ -159,7 +159,7 @@ const SideBar: React.FC = () => {
         <div className={styles['tab-select']}>
           <TabSelect />
         </div>
-        <div className={`container ${styles['tab-container']}`}>
+        <div className={`container-sm ${styles['tab-container']}`}>
           {renderTab(selectedTab, latestBets, myBets, loading, error, state === 'SIGNED_IN')}
         </div>
       </div>
