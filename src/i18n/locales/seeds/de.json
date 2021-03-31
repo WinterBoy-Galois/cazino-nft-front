@@ -1,0 +1,14 @@
+{
+  "pageHeadline": "seeds",
+  "current": "current",
+  "previous": "previous",
+  "serverSeedHash": "server seed hash",
+  "clientSeed": "client seed",
+  "nonce": "nonce",
+  "serverSeed": "server seed",
+  "endActiveGameError": "End active game(s) before changing server seed",
+  "activeGames": "active games",
+  "changeServerSeed": "change server seed",
+  "successUpdateMessage": "The seed is updated successfully",
+  "failedUpdateMessage": "The update has failed."
+}

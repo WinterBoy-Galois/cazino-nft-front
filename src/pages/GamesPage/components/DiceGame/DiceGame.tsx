@@ -77,6 +77,10 @@ const DiceGame: React.FC<IProps> = ({
   ] = useStateValue();
 
   useEffect(() => {
+    dispatch({ type: 'SET_AMOUNT', payload: { amount: appConfig.defaultBetAmount } });
+  }, []);
+
+  useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET' });
     }

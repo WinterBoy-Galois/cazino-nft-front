@@ -23,6 +23,8 @@ import gamesEN from './locales/games/en.json';
 import gamesDE from './locales/games/de.json';
 import bonusesEN from './locales/bonuses/en.json';
 import bonusesDE from './locales/bonuses/de.json';
+import seedsEN from './locales/seeds/en.json';
+import seedsDE from './locales/seeds/de.json';
 
 i18n
   .use(LanguageDetector)
@@ -41,6 +43,7 @@ i18n
         games: gamesEN,
         affiliates: affiliatesEN,
         bonuses: bonusesEN,
+        seeds: seedsEN,
       },
       de: {
         common: commonDE,
@@ -54,6 +57,7 @@ i18n
         games: gamesDE,
         affiliates: affiliatesDE,
         bonuses: bonusesDE,
+        seeds: seedsDE,
       },
     },
 
@@ -72,6 +76,7 @@ i18n
       'games',
       'affiliates',
       'bonuses',
+      'seeds',
     ],
     defaultNS: 'common',
 

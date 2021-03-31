@@ -115,6 +115,9 @@ const GoalGame: React.FC<IProps> = ({
   ] = useStateValue();
 
   useEffect(() => {
+    // init bet amount
+    dispatch({ type: 'SET_AMOUNT', payload: { amount: appConfig.defaultBetAmount } });
+
     const checkDeviceSize = () => {
       if (window.innerWidth >= 1500) setDevice(deviceSize.xxl);
       else if (window.innerWidth >= 1200) setDevice(deviceSize.xl);

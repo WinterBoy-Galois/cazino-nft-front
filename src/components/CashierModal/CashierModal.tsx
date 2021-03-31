@@ -179,7 +179,7 @@ const CashierModal: React.FC<IProps> = ({
 
               <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
                 <Button
-                  disabled={amount <= 0 || !isValidated}
+                  disabled={amount < cashier.minWithdraw || !isValidated}
                   className={styles.withdraw__button}
                   onClick={async () => {
                     const { data, errors } = await withdraw({

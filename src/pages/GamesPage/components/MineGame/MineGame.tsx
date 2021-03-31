@@ -82,6 +82,10 @@ const MineGame: React.FC<IProps> = ({
   ] = useStateValue();
 
   useEffect(() => {
+    dispatch({ type: 'SET_AMOUNT_MINES', payload: { amount: appConfig.defaultBetAmount } });
+  }, []);
+
+  useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET_MINES' });
     }
