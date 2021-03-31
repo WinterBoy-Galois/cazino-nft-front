@@ -64,13 +64,11 @@ const ChangeServerSeed: React.FC<IProps> = ({
           <SecondaryButton
             size={ButtonSize.SMALL}
             onClick={() => onClickChangeSeed(clientSeed)}
-            disabled={clientSeed.trim().length === 0}
+            disabled={clientSeed.trim().length === 0 || activeGames.length > 0}
           >
             {t('changeServerSeed')}
           </SecondaryButton>
-          {activeGames.length === 0 && (
-            <div className={styles.error}>{t('endActiveGameError')}</div>
-          )}
+          {activeGames.length > 0 && <div className={styles.error}>{t('endActiveGameError')}</div>}
         </div>
         {renderActiveGames()}
       </div>
