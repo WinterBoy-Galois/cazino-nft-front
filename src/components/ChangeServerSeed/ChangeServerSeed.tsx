@@ -23,12 +23,8 @@ const ChangeServerSeed: React.FC<IProps> = ({
   activeGames,
   onClickChangeSeed = () => null,
 }) => {
-  const [clientSeed, setClientSeed] = useState('');
+  const [clientSeed, setClientSeed] = useState(seeds.current.clientSeed);
   const { t } = useTranslation(['seeds']);
-
-  useEffect(() => {
-    setClientSeed('');
-  }, [seeds, activeGames]);
 
   const renderActiveGames = () => {
     return (
