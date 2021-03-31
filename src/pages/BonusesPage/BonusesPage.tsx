@@ -65,26 +65,27 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
     <div className={styles.bonuses_page}>
       <div className={styles.bonuses_title}>{t('title')}</div>
 
-      {bonusClaims && bonusClaims?.bonusClaims.length ? (
-        <div className={styles.body_p}>
+      <div className={styles.body_p}>
+        {bonusClaims && bonusClaims?.bonusClaims.length ? (
           <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />
-          <div className={styles.leaderboard}>
-            <Leaderboard onType={onType} bonus={bonus} position={position} />
-          </div>
+        ) : null}
 
-          <div className={styles.leaderboard__table}>
-            <LeaderboardTable
-              leaderboard={data ? data.leaderboards[selectedTime] : []}
-              isLoading={loading}
-              error={error ? true : false}
-              signInUserId="15"
-              onUsernameClicked={userId =>
-                navigate(`${pathname}?dialog=user-info`, { state: { userId } })
-              }
-            />
-          </div>
+        <div className={styles.leaderboard}>
+          <Leaderboard onType={onType} bonus={bonus} position={position} />
         </div>
-      ) : null}
+
+        <div className={styles.leaderboard__table}>
+          <LeaderboardTable
+            leaderboard={data ? data.leaderboards[selectedTime] : []}
+            isLoading={loading}
+            error={error ? true : false}
+            signInUserId="15"
+            onUsernameClicked={userId =>
+              navigate(`${pathname}?dialog=user-info`, { state: { userId } })
+            }
+          />
+        </div>
+      </div>
     </div>
   );
 };

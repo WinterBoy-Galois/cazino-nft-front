@@ -14,9 +14,11 @@ import { navigate, useLocation } from '@reach/router';
 import useRealtimeBalance from '../../hooks/useRealtimeBalance.hook';
 import { BONUSCLAIMS } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
+import useRealtimeBonusNotification from '../../hooks/useRealtimeBonusNotification.hook';
 
 const Layout: React.FC = ({ children }) => {
   useRealtimeBalance();
+  useRealtimeBonusNotification();
 
   const [hasUnclaimedBonus, setHasUnclaimedBonus] = useState(false);
   const [{ sidebar, modal, auth }, dispatch] = useStateValue();
