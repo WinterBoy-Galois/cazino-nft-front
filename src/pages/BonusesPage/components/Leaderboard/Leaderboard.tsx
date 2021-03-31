@@ -8,6 +8,10 @@ import clsx from 'clsx';
 import { BONUSCOUNTDOWN } from '../../../../graphql/queries';
 import { useQuery } from '@apollo/client';
 
+import useSound from 'use-sound';
+import { countdown_v1 } from '../../../../components/App/App';
+import { useStateValue } from '../../../../state';
+
 interface IProps {
   loadingBet?: boolean;
   onType?: (t: TimeAggregation) => void;
@@ -22,40 +26,68 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
   const [days, setDays] = useState<number>();
   const [hours, setHours] = useState<number>();
   const [minutes, setMinutes] = useState<number>();
-  const [waitingLoading, isWaitingLoading] = useState(false);
+  const [countDown, setCountDown] = useState<any>();
+  const [timer, setTimer] = useState<any>();
+
+  const [playCountDown] = useSound(countdown_v1.default);
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
 
   useEffect(() => {
-    (async () => {
-      await refetch();
-    })();
     if (data) {
+      clearInterval(timer);
       const temp = data.bonusCountdown[selectedTime];
-      if (temp === 0) {
-        isWaitingLoading(true);
-      } else {
-        setDays(Math.floor(temp / (24 * 3600)));
-        setHours(Math.floor((temp % (24 * 3600)) / 3600));
-        setMinutes(Math.floor((temp % 3600) / 60));
-      }
+      setCountDown(temp);
+      getCountData(temp);
     }
-  }, [data, selectedTime, waitingLoading]);
+  }, [data]);
 
   useEffect(() => {
-    if (waitingLoading) {
+    clearInterval(timer);
+    if (countDown !== 0) {
+      const t_temp = setInterval(() => {
+        setCountDown(countDown - 1);
+        getCountData(countDown - 1);
+      }, 1000);
+      setTimer(t_temp);
+    }
+  }, [countDown]);
+
+  const getCountData = (t: number) => {
+    setDays(Math.floor(t / (24 * 3600)));
+    setHours(Math.floor((t % (24 * 3600)) / 3600));
+    setMinutes(Math.floor((t % 3600) / 60));
+  };
+
+  useEffect(() => {
+    if (countDown === 0) {
+      if (isSound) {
+        (async () => {
+          await playCountDown();
+        })();
+      }
       setTimeout(() => {
-        isWaitingLoading(false);
+        (async () => {
+          await refetch();
+        })();
       }, 10000);
     }
-  }, [waitingLoading]);
+  }, [countDown]);
 
   const onClickType = (t: TimeAggregation) => {
     setSelectedTime(t);
     onType(t);
+    (async () => {
+      await refetch();
+    })();
   };
   return (
     <div>
       <div className={styles.leaderboard__title}>{t('leaderboard.title')}</div>
-      {!waitingLoading ? (
+      {countDown && countDown !== 0 ? (
         <div className={styles.leaderboard__contents}>
           <div className={styles.p_15}>
             <SlideSelect

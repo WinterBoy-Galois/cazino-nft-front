@@ -37,6 +37,9 @@ export const dice_slider_v1 = require('../../sounds/dice-slider-v1.mp3');
 export const dice_win_v1 = require('../../sounds/dice-win-v1.mp3');
 export const dice_lost_v1 = require('../../sounds/dice-lost-v1.mp3');
 
+export const bonus_received_v1 = require('../../sounds/bonus-received-v1.mp3');
+export const countdown_v1 = require('../../sounds/countdown-v1.mp3');
+
 const App: React.FC = () => {
   const client = useApolloClient();
 
