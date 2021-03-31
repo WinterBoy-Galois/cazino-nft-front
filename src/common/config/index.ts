@@ -35,4 +35,7 @@ export const appConfig = {
   diceGameDiamondTransitionTime: 300,
   mineGameTimeout: 3000,
   mineGameDiamondTransitionTime: 300,
+  defaultBetAmount: isNaN(parseFloat(env('REACT_APP_BET_DEFAULT_AMOUNT')))
+    ? 0
+    : parseFloat(env('REACT_APP_BET_DEFAULT_AMOUNT')),
 };

@@ -13,7 +13,7 @@ const OwnServerSeedDetails: React.FC<IProps> = ({ ownDetails, onChangeServerSeed
 
   return serverSeed &&
     clientSeed &&
-    nonce &&
+    nonce !== null &&
     results &&
     verificationUrl &&
     (!activeGames || activeGames.length <= 0) ? (

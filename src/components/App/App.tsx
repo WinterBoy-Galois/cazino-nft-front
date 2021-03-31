@@ -16,6 +16,7 @@ import AuthRoute from '../AuthRoute';
 import GamesPage from '../../pages/GamesPage';
 import BonusesPage from '../../pages/BonusesPage/BonusesPage';
 import AffiliatesPage from '../../pages/AffiliatesPage';
+import SeedPage from '../../pages/SeedPage';
 
 export const toast_v1 = require('../../sounds/toast-v1.mp3');
 export const balance_updated_v1 = require('../../sounds/balance-updated-v1.mp3');
@@ -57,6 +58,7 @@ const App: React.FC = () => {
                 <AuthRoute path="/transactions/*" component={TransactionsPage} />
                 <BonusesPage path="/bonuses" />
                 <AffiliatesPage path="/affiliates" />
+                <AuthRoute path="/seeds" component={SeedPage} />
               </Router>
             </Layout>
 
