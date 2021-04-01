@@ -12,6 +12,7 @@ interface IProps {
   gameState?: GameState;
   session?: any;
   handlePlaceBet?: (selection: number) => void;
+  loadingBet?: boolean;
 }
 const take_opacity = {
   opacity: 0.5,
@@ -22,6 +23,7 @@ const MineGameBoard: React.FC<IProps> = ({
   session,
   gameState,
   handlePlaceBet = () => null,
+  loadingBet,
 }) => {
   const [{ sidebar }] = useStateValue();
   const [results, setResults] = useState(scoreArray);
@@ -94,11 +96,11 @@ const MineGameBoard: React.FC<IProps> = ({
     }
   }, [gameState]);
 
-  const gemSelect = (id: number) => {
-    if (session?.allowNext) {
+  const gemSelect = async (id: number) => {
+    if (session?.allowNext && !loadingBet) {
       setBombId(id);
       if (results[id] === 0) {
-        handlePlaceBet(id);
+        await handlePlaceBet(id);
       }
     }
   };
@@ -117,10 +119,14 @@ const MineGameBoard: React.FC<IProps> = ({
             return (
               <div key={index} onClick={() => gemSelect(index)}>
                 <div>
-                  {item === 0 && gameState !== GameState.GAME_ENDED && (
+                  {/*{item === 0 && gameState !== GameState.GAME_ENDED && (*/}
+                  {item === 0 && (
                     <div
                       className={
-                        gameState === GameState.IDLE || isEndCut
+                        gameState === GameState.IDLE ||
+                        isEndCut ||
+                        loadingBet ||
+                        gameState === GameState.GAME_ENDED
                           ? styles.images_stop
                           : styles.images
                       }
