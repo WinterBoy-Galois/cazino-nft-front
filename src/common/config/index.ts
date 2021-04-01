@@ -38,4 +38,5 @@ export const appConfig = {
   defaultBetAmount: isNaN(parseFloat(env('REACT_APP_BET_DEFAULT_AMOUNT')))
     ? 0
     : parseFloat(env('REACT_APP_BET_DEFAULT_AMOUNT')),
+  toastShowTime: parseInt(env('REACT_APP_TOAST_SHOW_TIME')),
 };

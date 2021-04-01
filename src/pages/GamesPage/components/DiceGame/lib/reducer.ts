@@ -10,14 +10,14 @@ import { DiceGameState as GameState } from '../../../../../models/diceGameState.
 export const getInitialState: (he: number) => DiceGameState = he => ({
   target: 50,
   result: 0,
-  amount: 0.00000001,
+  amount: 0,
   multiplier: calcMultiplier(calcProbability(50, false), he),
   probability: calcProbability(50, false),
   gameState: GameState.IDLE,
   over: false,
   isRunning: false,
   he,
-  profit: calcProfit(calcMultiplier(calcProbability(50, false), he), 0.00000001),
+  profit: calcProfit(calcMultiplier(calcProbability(50, false), he), 0),
 });
 
 export interface DiceGameState {

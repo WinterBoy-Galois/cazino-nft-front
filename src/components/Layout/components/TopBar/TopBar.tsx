@@ -15,9 +15,10 @@ import { useBreakpoint } from '../../../../hooks/useBreakpoint.hook';
 interface IProps {
   onSignInClick?: () => void;
   onSignOutClick?: () => void;
+  isOnlyLeaveLogo?: boolean;
 }
 
-const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
+const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLogo }) => {
   const { t } = useTranslation(['auth']);
   const [{ sidebar, auth }] = useStateValue();
   const [showMenu, setShowMenu] = useState(false);
@@ -54,42 +55,44 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick }) => {
               <Logo className={styles.logo__size} fillClassName={styles.logo__color} />
             </div>
           </div>
-          <div className={`col-8 ${styles.center} ${styles.right}`}>
-            <div
-              className={`${styles.details} ${
-                !sidebar.isOpen || isMobileBreakpoint ? styles['details--spacing'] : ''
-              }`}
-            >
-              {!auth.user ? (
-                <Fragment>
-                  <div className={styles.details__button}>
-                    <SecondaryButton
-                      size={ButtonSize.SMALL}
-                      className={styles['sign-in__button']}
-                      onClick={onSignInClick}
-                    >
-                      {t('signIn.headline')}
-                    </SecondaryButton>
-                  </div>
-                  <div onClick={onSignInClick}>
-                    <SignIn className={styles['sign-in__icon']} />
-                  </div>
-                </Fragment>
-              ) : (
-                <Fragment>
-                  <span className={styles['details--spacing']}>{auth.user.username}</span>
-                  <Avatar
-                    avatarUrl={auth.user.avatarUrl}
-                    username={auth.user.username}
-                    ref={avatarRef}
-                    onClick={handleToggleMenu}
-                  />
-                </Fragment>
-              )}
-            </div>
+          {!isOnlyLeaveLogo && (
+            <div className={`col-8 ${styles.center} ${styles.right}`}>
+              <div
+                className={`${styles.details} ${
+                  !sidebar.isOpen || isMobileBreakpoint ? styles['details--spacing'] : ''
+                }`}
+              >
+                {!auth.user ? (
+                  <Fragment>
+                    <div className={styles.details__button}>
+                      <SecondaryButton
+                        size={ButtonSize.SMALL}
+                        className={styles['sign-in__button']}
+                        onClick={onSignInClick}
+                      >
+                        {t('signIn.headline')}
+                      </SecondaryButton>
+                    </div>
+                    <div onClick={onSignInClick}>
+                      <SignIn className={styles['sign-in__icon']} />
+                    </div>
+                  </Fragment>
+                ) : (
+                  <Fragment>
+                    <span className={styles['details--spacing']}>{auth.user.username}</span>
+                    <Avatar
+                      avatarUrl={auth.user.avatarUrl}
+                      username={auth.user.username}
+                      ref={avatarRef}
+                      onClick={handleToggleMenu}
+                    />
+                  </Fragment>
+                )}
+              </div>
 
-            <SidebarToggle arrowLeft={true} show={!sidebar.isOpen} />
-          </div>
+              <SidebarToggle arrowLeft={true} show={!sidebar.isOpen} />
+            </div>
+          )}
         </div>
       </div>
 

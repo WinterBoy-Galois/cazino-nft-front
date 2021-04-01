@@ -25,6 +25,8 @@ import bonusesEN from './locales/bonuses/en.json';
 import bonusesDE from './locales/bonuses/de.json';
 import seedsEN from './locales/seeds/en.json';
 import seedsDE from './locales/seeds/de.json';
+import errorEN from './locales/error/de.json';
+import errorDE from './locales/error/de.json';
 
 i18n
   .use(LanguageDetector)
@@ -44,6 +46,7 @@ i18n
         affiliates: affiliatesEN,
         bonuses: bonusesEN,
         seeds: seedsEN,
+        error: errorEN,
       },
       de: {
         common: commonDE,
@@ -58,6 +61,7 @@ i18n
         affiliates: affiliatesDE,
         bonuses: bonusesDE,
         seeds: seedsDE,
+        error: errorDE,
       },
     },
 
@@ -77,6 +81,7 @@ i18n
       'affiliates',
       'bonuses',
       'seeds',
+      'error',
     ],
     defaultNS: 'common',
 

@@ -36,6 +36,17 @@ const BetAmountControl: React.FC<IProps> = props => {
     onChange && onChange(value);
   };
 
+  const onHandleBlur = (value: number) => {
+    if (auth.state === 'SIGNED_OUT') {
+      // if no auth, set value zero
+      updateAmount(0);
+    } else if (value === 0) {
+      // if value is 0 for auth user
+      // it should be default value
+      updateAmount(appConfig.defaultBetAmount);
+    }
+  };
+
   const handleHalve = () => {
     if (!readonly && auth.state === 'SIGNED_IN') {
       const newValue = amount / 2;
@@ -49,7 +60,7 @@ const BetAmountControl: React.FC<IProps> = props => {
 
   const handleDouble = () => {
     if (!readonly && auth.state === 'SIGNED_IN') {
-      const newValue = amount * 2;
+      const newValue = amount === 0 ? 10 ** -appConfig.bitcoinFractionDigits : amount * 2;
 
       if (!isValid(newValue, min, max)) {
         return updateAmount(max);
@@ -69,6 +80,7 @@ const BetAmountControl: React.FC<IProps> = props => {
         value={amount}
         decimalPlaces={appConfig.bitcoinFractionDigits}
         onChange={v => updateAmount(v)}
+        onHandleBlur={onHandleBlur}
       />
       <button
         type="button"

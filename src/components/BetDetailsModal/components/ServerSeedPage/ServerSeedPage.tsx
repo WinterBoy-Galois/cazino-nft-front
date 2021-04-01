@@ -74,7 +74,6 @@ export const ServerSeedPageWithData: React.FC<IWithDataProps> = props => {
     variables: { betId: props.bet.id },
     fetchPolicy: 'network-only',
   });
-  console.log(data);
   const seedDetailsData = data?.betDetails.seedDetails;
   let seedDetails = {};
 

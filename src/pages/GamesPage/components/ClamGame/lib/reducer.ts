@@ -28,7 +28,7 @@ export interface ClamGameState {
   winningIndex: number;
 }
 
-export const getInitialState = (he: number, amount = 0.00000001): ClamGameState => ({
+export const getInitialState = (he: number, amount = 0): ClamGameState => ({
   amount,
   he,
   isRunning: false,
