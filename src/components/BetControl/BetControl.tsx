@@ -16,6 +16,7 @@ interface IProps {
   decimalPlaces?: number;
   readonly?: boolean;
   onClick?: () => void;
+  onHandleBlur?: (value: number) => void;
 }
 
 const BetControl: React.FC<IProps> = ({
@@ -29,6 +30,7 @@ const BetControl: React.FC<IProps> = ({
   decimalPlaces = 2,
   readonly,
   onClick,
+  onHandleBlur = () => null,
 }) => {
   const formatValue = (v: number) => v.toFixed(decimalPlaces);
   const [value, setValue] = useState(defaultValue);
@@ -69,6 +71,7 @@ const BetControl: React.FC<IProps> = ({
     onChange && onChange(+newValue);
 
     setEditing(false);
+    onHandleBlur(+internalValue);
   };
 
   return (

@@ -80,8 +80,12 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
                 {...props}
                 onPlaceBet={onSelectPlaceBet}
                 key={`ball-${index}`}
-                index={index}
-                ballType={lastSpot === index ? lastAdvanceStatus : 'Idle'}
+                index={hideMiddleBall && index > 1 ? index - 1 : index}
+                ballType={
+                  lastSpot === (hideMiddleBall && index > 1 ? index - 1 : index)
+                    ? lastAdvanceStatus
+                    : 'Idle'
+                }
               />
             )
           )}

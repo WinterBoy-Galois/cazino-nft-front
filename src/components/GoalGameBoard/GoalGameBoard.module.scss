@@ -15,6 +15,14 @@
       width: 160%;
       margin-left: -30%;
     }
+    @include media-breakpoint-down(md) {
+      width: 180%;
+      margin-left: -40%;
+    }
+    @include media-breakpoint-down(sm) {
+      width: 210%;
+      margin-left: -55%;
+    }
   }
 
   &__keeper {
@@ -33,6 +41,16 @@
       @include media-breakpoint-down(lg) {
         width: 64%;
         left: 18%;
+      }
+
+      @include media-breakpoint-down(md) {
+        top: 6%;
+        width: 70%;
+        left: 15%;
+      }
+      @include media-breakpoint-down(sm) {
+        width: 85%;
+        left: 8%;
       }
     }
 

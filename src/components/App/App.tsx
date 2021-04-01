@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../Layout/Layout';
-import { Router, LocationProvider } from '@reach/router';
+import { Router, LocationProvider, Redirect } from '@reach/router';
 import HomePage from '../../pages/HomePage';
 import { ApolloProvider } from '@apollo/client';
 import { ToastContainer } from '../Toast';
@@ -17,6 +17,8 @@ import GamesPage from '../../pages/GamesPage';
 import BonusesPage from '../../pages/BonusesPage/BonusesPage';
 import AffiliatesPage from '../../pages/AffiliatesPage';
 import SeedPage from '../../pages/SeedPage';
+import Page404 from '../../pages/Page404';
+import Page500 from '../../pages/Page500';
 
 export const toast_v1 = require('../../sounds/toast-v1.mp3');
 export const balance_updated_v1 = require('../../sounds/balance-updated-v1.mp3');
@@ -55,6 +57,8 @@ const App: React.FC = () => {
                 {/* Public Routes */}
                 <HomePage path="/" />
                 <GamesPage path="/games/*" />
+                <Page404 path="/notfound" />
+                <Page500 path="/servererror" />
 
                 {/* Protected Routes */}
                 <AuthRoute path="/profile" component={ProfilePageWithData} />
@@ -62,6 +66,7 @@ const App: React.FC = () => {
                 <BonusesPage path="/bonuses" />
                 <AffiliatesPage path="/affiliates" />
                 <AuthRoute path="/seeds" component={SeedPage} />
+                <Redirect from="/" to="/notfound" default noThrow />
               </Router>
             </Layout>
 

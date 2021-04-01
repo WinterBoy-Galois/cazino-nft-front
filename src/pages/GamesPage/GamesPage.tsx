@@ -1,4 +1,4 @@
-import { RouteComponentProps, Router } from '@reach/router';
+import { Redirect, RouteComponentProps, Router } from '@reach/router';
 import React from 'react';
 import { DiceGameWithData } from './components/DiceGame/DiceGame';
 import { ClamGameWithData } from './components/ClamGame/ClamGame';
@@ -11,6 +11,7 @@ const GamesPage: React.FC<RouteComponentProps> = () => {
       <ClamGameWithData path="clam" />
       <GoalGameWithData path="goal" />
       <MineGameWithData path="mines" />
+      <Redirect from="/" to="/notfound" default noThrow />
     </Router>
   );
 };

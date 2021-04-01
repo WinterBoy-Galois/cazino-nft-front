@@ -82,12 +82,24 @@ const MineGame: React.FC<IProps> = ({
   ] = useStateValue();
 
   useEffect(() => {
-    dispatch({ type: 'SET_AMOUNT_MINES', payload: { amount: appConfig.defaultBetAmount } });
+    dispatch({
+      type: 'SET_AMOUNT_MINES',
+      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
+    });
   }, []);
 
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET_MINES' });
+      dispatch({
+        type: 'SET_AMOUNT_MINES',
+        payload: { amount: 0 },
+      });
+    } else {
+      dispatch({
+        type: 'SET_AMOUNT_MINES',
+        payload: { amount: appConfig.defaultBetAmount },
+      });
     }
   }, [auth.state]);
   useEffect(() => {
@@ -358,7 +370,7 @@ const MineGame: React.FC<IProps> = ({
         ) : (
           <div className={styles.pt_profit_price} />
         )}
-        <div className={clsx(styles.btn_group, 'container')}>
+        <div className={clsx(styles.btn_group, 'container-sm')}>
           <div className={styles.controls__wrapper__btn_grid}>
             <div style={!isSetBet ? take_opacity_1 : take_opacity_3}>
               <div className={styles.win_counts}>
@@ -398,7 +410,7 @@ const MineGame: React.FC<IProps> = ({
                   !isControlDisable ? styles.bet_control_enable : styles.bet_control_disable
                 )}
                 amount={state.amount}
-                min={0.00000001}
+                min={0}
                 max={auth.user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT_MINES', payload: { amount } })}
                 readonly={state.gameState !== GameState.IDLE}

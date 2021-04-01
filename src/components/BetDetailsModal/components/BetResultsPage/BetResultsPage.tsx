@@ -103,7 +103,7 @@ const BetResultsPage: React.FC<IProps> = ({ gameType, betDetails, loading, error
     }
     case GameTypes.GOALS: {
       const { selections, difficulty } = betDetails.gameResult as GoalsBetResult;
-      results = <GoalsBetResults selections={selections} />;
+      results = <GoalsBetResults selections={selections} difficulty={difficulty} />;
       details = [
         {
           label: t('betDetails.bet'),

@@ -1,0 +1,54 @@
+@import '../../styles/shared';
+
+.logo_container {
+  background-color: $blue;
+  padding: 0.2rem 0;
+}
+
+.icon {
+  width: 180px;
+  @include media-breakpoint-down(sm) {
+    width: 150px;
+  }
+  @include media-breakpoint-down(xs) {
+    width: 120px;
+  }
+}
+
+.error_container {
+  display: flex;
+  justify-content: center;
+  padding: 10rem 7rem;
+  @include media-breakpoint-down(sm) {
+    padding: 5rem 2rem;
+  }
+  @include media-breakpoint-down(xs) {
+    padding: 3rem 1rem;
+  }
+}
+
+.label_container {
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include media-breakpoint-down(sm) {
+    margin-top: 1rem;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.label1 {
+  text-transform: uppercase;
+  font-size: 32px;
+  font-weight: 400;
+  color: rgba($color: $lightBlue, $alpha: 0.8);
+}
+
+.label2 {
+  font-size: 24px;
+  color: white;
+  font-weight: 400;
+}

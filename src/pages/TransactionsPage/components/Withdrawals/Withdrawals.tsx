@@ -46,8 +46,6 @@ export const WithdrawalsWithData: React.FC<RouteComponentProps> = () => {
 
   useRefetchOnPageEnter(refetch, loading);
 
-  console.log(data);
-
   return (
     <Withdrawals
       withdrawls={data?.transactionsWithdraw?.items}

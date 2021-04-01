@@ -4,12 +4,20 @@
   &__idle {
     width: 20%;
     top: 29%;
-    left: 40%;
+    left: 39.7%;
     height: 40%;
 
     @include media-breakpoint-down(lg) {
       width: 32%;
       left: 34%;
+    }
+    @include media-breakpoint-down(lg) {
+      top: 29.5%;
+    }
+    @include media-breakpoint-down(sm) {
+      width: 39%;
+      left: 30%;
+      top: 29%;
     }
   }
 
@@ -23,6 +31,14 @@
       width: 24%;
       left: 27%;
     }
+    @include media-breakpoint-down(md) {
+      width: 24%;
+      left: 25%;
+    }
+    @include media-breakpoint-down(sm) {
+      width: 29%;
+      left: 21%;
+    }
   }
 
   &__middle {
@@ -32,8 +48,8 @@
     top: 19%;
 
     @include media-breakpoint-down(lg) {
-      width: 22.4%;
-      left: 38.8%;
+      width: 23%;
+      left: 39%;
     }
   }
 
@@ -45,6 +61,14 @@
 
     @include media-breakpoint-down(lg) {
       width: 24%;
+    }
+    @include media-breakpoint-down(md) {
+      width: 24%;
+      left: 51%;
+    }
+    @include media-breakpoint-down(sm) {
+      width: 29%;
+      left: 52%;
     }
   }
 }

@@ -1,14 +1,15 @@
 import React, { useMemo } from 'react';
 import styles from './GoalsBetResults.module.scss';
-import { GoalSelection } from '../../../../../../models/betDetails.model';
+import { GoalsDifficulty, GoalSelection } from '../../../../../../models/betDetails.model';
 import { isNullOrUndefined } from 'util';
 import goal from '../../../../../../assets/images/games/goals/game-goals-icon.svg';
 
 interface IProps {
   selections: GoalSelection[];
+  difficulty: GoalsDifficulty;
 }
 
-const GoalsBetResults: React.FC<IProps> = ({ selections }) => {
+const GoalsBetResults: React.FC<IProps> = ({ selections, difficulty }) => {
   selections = useMemo(() => selections.slice().sort((s1, s2) => s2.step - s1.step), [selections]);
 
   const getHighlightClass = (selection: GoalSelection, index: number) => {
@@ -31,14 +32,14 @@ const GoalsBetResults: React.FC<IProps> = ({ selections }) => {
           >
             <div className={styles.step}>{s.step + 1}</div>
             <div className={styles.goals}>
-              {Array.from(new Array(3)).map((_, i) => (
+              {(difficulty === GoalsDifficulty.GOALS1OUT2 ? [0, 1] : [0, 1, 2]).map((v, i) => (
                 <div key={`goal_${i}`} className={styles.goal}>
-                  <div className={styles.goal__index}>{i}</div>
+                  <div className={styles.goal__index}>{v}</div>
                   <div
                     className={`${styles.goal__ball} ${
-                      s.luckySpots.includes(i) ? styles['goal__ball--win'] : ''
+                      s.luckySpots.includes(v) ? styles['goal__ball--win'] : ''
                     }
-                    ${s.selected === i ? styles['goal__ball--selected'] : ''}`}
+                    ${s.selected === v ? styles['goal__ball--selected'] : ''}`}
                   >
                     <img className={styles.goal__ball__icon} src={goal} alt="Goal" />
                   </div>

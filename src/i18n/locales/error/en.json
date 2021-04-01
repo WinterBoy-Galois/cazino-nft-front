@@ -1,0 +1,7 @@
+{
+  "notfoundTitle": "404 not found",
+  "notfoundContent": "Sorry but the page you are looking for is not available",
+  "serverErrorTitle": "500 server error",
+  "serverErrorContent1": "Sorry but our server encountered some error.",
+  "serverErrorContent2": "Our best engineers are looking into the problem."
+}

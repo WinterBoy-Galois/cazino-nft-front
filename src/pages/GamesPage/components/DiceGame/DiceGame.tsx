@@ -77,12 +77,24 @@ const DiceGame: React.FC<IProps> = ({
   ] = useStateValue();
 
   useEffect(() => {
-    dispatch({ type: 'SET_AMOUNT', payload: { amount: appConfig.defaultBetAmount } });
+    dispatch({
+      type: 'SET_AMOUNT',
+      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
+    });
   }, []);
 
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET' });
+      dispatch({
+        type: 'SET_AMOUNT',
+        payload: { amount: 0 },
+      });
+    } else {
+      dispatch({
+        type: 'SET_AMOUNT',
+        payload: { amount: appConfig.defaultBetAmount },
+      });
     }
   }, [auth.state]);
 
@@ -205,7 +217,7 @@ const DiceGame: React.FC<IProps> = ({
             <div className={clsx('col-12 col-xl-6 col-xxl-4 col-xxxl-3', styles.amount__container)}>
               <BetAmountControl
                 amount={state.amount}
-                min={0.00000001}
+                min={0}
                 max={auth.user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
               />

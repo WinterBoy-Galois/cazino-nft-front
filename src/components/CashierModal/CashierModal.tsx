@@ -49,7 +49,8 @@ const CashierModal: React.FC<IProps> = ({
   const [amount, setAmount] = useState(0);
   const [withdraw] = useMutation(WITHDRAW);
   const [isValidated, setValidated] = useState(false);
-  const [depositAddress, setDepositAddress] = useState(defaultDepositAddress);
+  const [depositAddress, setDepositAddress] = useState('');
+  const [isChangedAddress, setChangedAddress] = useState(false);
 
   useEffect(() => {
     if (validate(depositAddress)) setValidated(true);
@@ -60,11 +61,12 @@ const CashierModal: React.FC<IProps> = ({
     if (show) {
       setModalType('deposit');
       setAmount(0);
-      setDepositAddress(defaultDepositAddress);
+      setDepositAddress('');
+      setChangedAddress(false);
     }
   }, [show]);
 
-  useEffect(() => setDepositAddress(defaultDepositAddress), [defaultDepositAddress]);
+  // useEffect(() => setDepositAddress(defaultDepositAddress), [defaultDepositAddress]);
 
   return (
     <Modal show={show} onClose={onClose} title={t('cashier.title')}>
@@ -158,8 +160,13 @@ const CashierModal: React.FC<IProps> = ({
                 <TextInput
                   label={t('cashier.bitcoinWalletAddress')}
                   value={depositAddress}
-                  validationMessage={isValidated ? '' : 'Address is not valid.'}
-                  onChangeValue={depositAddress => setDepositAddress(depositAddress)}
+                  validationMessage={
+                    isValidated || !isChangedAddress ? '' : 'Address is not valid.'
+                  }
+                  onChangeValue={depositAddress => {
+                    setDepositAddress(depositAddress);
+                    setChangedAddress(true);
+                  }}
                 />
               </div>
 
