@@ -321,6 +321,7 @@ const MineGame: React.FC<IProps> = ({
           handlePlaceBet={handlePlaceBet}
           session={session}
           gameState={state.gameState}
+          loadingBet={loadingBet}
         />
       </div>
       {isShowProfit && lucky === null ? (
