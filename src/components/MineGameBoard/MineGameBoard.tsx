@@ -76,12 +76,23 @@ const MineGameBoard: React.FC<IProps> = ({
       }
 
       if (session?.minePositions) {
-        for (let k = 0; k < session.minePositions.length; k++) {
-          tmp.splice(session.minePositions[k], 1, 2);
-        }
-        for (let k = 0; k < tmp.length; k++) {
-          if (tmp[k] === 0) {
-            tmp.splice(k, 1, 3);
+        const minePositions = session?.minePositions;
+        if (session?.lucky && minePositions.length + session?.result.length === 24) {
+          for (let k = 0; k < 25; k++) {
+            if (minePositions.includes(k)) {
+              tmp.splice(minePositions[k], 1, 2);
+            } else {
+              tmp.splice(k, 1, 1);
+            }
+          }
+        } else {
+          for (let k = 0; k < minePositions.length; k++) {
+            tmp.splice(minePositions[k], 1, 2);
+          }
+          for (let k = 0; k < tmp.length; k++) {
+            if (tmp[k] === 0) {
+              tmp.splice(k, 1, 3);
+            }
           }
         }
       }
@@ -119,7 +130,6 @@ const MineGameBoard: React.FC<IProps> = ({
             return (
               <div key={index} onClick={() => gemSelect(index)}>
                 <div>
-                  {/*{item === 0 && gameState !== GameState.GAME_ENDED && (*/}
                   {item === 0 && (
                     <div
                       className={
