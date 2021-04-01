@@ -213,7 +213,7 @@ const ClamGame: React.FC<IProps> = ({
 
   return (
     <div className={styles.container}>
-      <div className={clsx('container', styles.board__container)}>
+      <div className={clsx('container-xs', styles.board__container)}>
         <ClamGameBoard
           className={styles.board}
           selection={state.selection}
