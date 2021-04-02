@@ -66,7 +66,7 @@ const App: React.FC = () => {
                 <BonusesPage path="/bonuses" />
                 <AffiliatesPage path="/affiliates" />
                 <AuthRoute path="/seeds" component={SeedPage} />
-                {/* <Redirect from="/" to="/notfound" default noThrow /> */}
+                <Redirect from="/" to="/notfound" default noThrow />
               </Router>
             </Layout>
 
