@@ -33,33 +33,8 @@ export default function useRealtimeBonusNotification() {
         })();
       }
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.bonusReceived.balance } });
-      const position = data.bonusReceived.position;
-      let position_string;
-      switch (position) {
-        case 1:
-          position_string = '1st';
-          break;
-        case 2:
-          position_string = '2nd';
-          break;
-        case 3:
-          position_string = '3rd';
-          break;
 
-        default:
-          position_string = position.toString() + 'th';
-          break;
-      }
-
-      const type_temp = 'notificationEnum.' + data.bonusReceived.type;
-
-      success(
-        t('bonusNotification', {
-          amount: data.bonusReceived.amount,
-          type: t(type_temp),
-          position: position_string,
-        })
-      );
+      success(t('bonusNotification'));
     }
   }, [data, dispatch, t]);
 }
