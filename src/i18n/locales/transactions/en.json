@@ -10,7 +10,7 @@
   "withdrawPending": "Your withdraw is pending.",
   "withdrawConfirmed": "Your withdraw is confirmed.",
   "withdrawRejected": "Your withdraw is rejected.",
-  "bonusNotification": "Wow! You won {{amount}} {{type}} bonus for {{position}} place.",
+  "bonusNotification": "Congratulations! You won new bonus!",
   "notificationEnum": {
     "DAILY": "daily",
     "WEEKLY": "weekly",
