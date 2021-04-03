@@ -210,3 +210,27 @@ $grid-breakpoints: (
     fill: $bitcoinYellow;
   }
 }
+
+.bet_amount_container {
+  @include media-breakpoint-up(lg) {
+    max-width: 600px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 300px;
+  }
+  @include media-breakpoint-up(xxl) {
+    max-width: 500px;
+  }
+}
+
+.action_button {
+  @include media-breakpoint-up(lg) {
+    max-width: 600px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 300px;
+  }
+  @include media-breakpoint-up(xxl) {
+    max-width: 500px;
+  }
+}

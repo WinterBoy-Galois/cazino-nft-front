@@ -46,7 +46,7 @@
         width: 85%;
       }
       @include media-breakpoint-down(lg) {
-        grid-template-columns: 1.5fr 3fr 2.3fr;
+        grid-template-columns: 1.5fr 3fr 1.9fr;
         grid-column-gap: 15px;
         width: 92%;
       }
@@ -64,12 +64,16 @@
     }
 
     .btn_group {
+      padding: 2rem 0 1rem;
       @include media-breakpoint-down(xl) {
-        padding: 3.95rem 0 2rem;
+        padding: 2rem 0 1rem;
+      }
+      @include media-breakpoint-down(lg) {
+        padding: 1.5rem 0 0.5rem;
       }
       @include media-breakpoint-down(md) {
         margin: 0 auto;
-        padding: 2rem 0 0 0;
+        padding: 1rem 0 0 0;
       }
       .win_counts {
         display: flex;

@@ -10,7 +10,7 @@ import TextInput from '../TextInput';
 import PasswordInput from '../PasswordInput';
 import { SIGN_IN } from '../../graphql/mutations';
 import { useStateValue } from '../../state';
-import { ErrorSummary, CheckboxInput } from '..';
+import { ErrorSummary } from '..';
 import Uppercase from '../Uppercase';
 import Link from '../Link';
 import SpinnerButton from '../SpinnerButton';
@@ -43,12 +43,12 @@ const SignInModal: React.FC<IProps> = ({
     initialValues: {
       email: '',
       password: '',
-      remember: false,
+      // remember: false,
     },
     validateOnMount: true,
     validationSchema: validationSchema(t),
     onSubmit: values => {
-      onSignIn(values.email, values.password, values.remember);
+      onSignIn(values.email, values.password, true);
     },
   });
 
@@ -101,10 +101,10 @@ const SignInModal: React.FC<IProps> = ({
             />
 
             <div className={`${styles['remember-me']} ${styles.spacing__bottom}`}>
-              <CheckboxInput
+              {/* <CheckboxInput
                 label={t('signIn.buttons.rememberMe')}
                 onChangeValue={v => formik.setFieldValue('remember', v)}
-              />
+              /> */}
               <Uppercase className={styles['forgot-password']}>
                 <Link onClick={onNavigateToForgotPassword}>
                   {t('signIn.buttons.goToForgotPassword')}

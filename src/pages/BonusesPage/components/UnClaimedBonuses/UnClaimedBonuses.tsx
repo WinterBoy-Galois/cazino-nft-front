@@ -35,7 +35,7 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   const [, dispatch] = useStateValue();
   const [playToast] = useSound(toast_v1.default);
   const [playToastBonus] = useSound(bonus_received_v1.default);
-  const { t } = useTranslation(['bonuses']);
+  const { t } = useTranslation(['bonuses', 'games', 'error']);
   const [
     {
       sidebar: { isSound, isOpen },
@@ -51,14 +51,16 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
           playToast();
         }, 500);
       }
-      return errorToast("It's failed, please try again later.");
+      return errorToast(t('error:its_failed_try_again_later'));
     }
     if (isSound) {
       setTimeout(() => {
         playToastBonus();
       }, 500);
     }
-    success(`Your balance has been updated: ${formatBitcoin(data.claimBonus.balance)}`);
+    success(
+      `${t('games:your_ballance_has_been_updated')}: ${formatBitcoin(data.claimBonus.balance)}`
+    );
     dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.claimBonus.balance } });
 
     onClaimBonusCompleted(bonusId);
@@ -84,10 +86,10 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
         <div className={styles.unclaimed_bonus__summary}>
           <p>{datetimeFromEpoch(bonusClaim.givenAt)}</p>
           <p>
-            {bonusClaim.type} {t('unclaimed_bonuses.sub_name')}
+            {bonusClaim.type} {t('bonuses:unclaimed_bonuses.sub_name')}
           </p>
           <p>
-            {t('unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
+            {t('bonuses:unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
           </p>
         </div>
 
@@ -96,7 +98,7 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
           loading={loading}
           className={clsx(styles.unclaimed_bonus__button, styles.unclaimed_bonus__button_close)}
         >
-          <span>{t('unclaimed_bonuses.claim_my_bonuses')}</span>
+          <span>{t('bonuses:unclaimed_bonuses.claim_my_bonuses')}</span>
           <BitcoinValue
             className={styles.unclaimed_bonus__icon}
             value={formatBitcoin(bonusClaim.amount)}
@@ -134,10 +136,10 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
 
           <div className={styles.unclaimed_bonus__mobile__summary}>
             <p>
-              {t('unclaimed_bonuses.received_on')} {datetimeFromEpoch(bonusClaim.givenAt)}
+              {t('bonuses:unclaimed_bonuses.received_on')} {datetimeFromEpoch(bonusClaim.givenAt)}
             </p>
             <p>
-              {t('unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
+              {t('bonuses:unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
             </p>
           </div>
         </div>
@@ -173,7 +175,7 @@ const UnClaimedBonuses: React.FC<IProps> = ({
   if (bonusClaims?.length > 0) {
     return (
       <div className={clsx(isOpen ? styles.unclaimed_bonuses : styles.unclaimed_bonuses_close)}>
-        <div className={styles.unclaimed_bonus__title}>{t('unclaimed_bonuses.title')}</div>
+        <div className={styles.unclaimed_bonus__title}>{t('bonuses:unclaimed_bonuses.title')}</div>
 
         {bonusClaims.slice(0, 3).map((bonusClaim, index) => (
           <UnClaimedBonus
@@ -185,7 +187,7 @@ const UnClaimedBonuses: React.FC<IProps> = ({
 
         <div className={styles.unclaimed_bonus__history}>
           <a href="/transactions/bonuses" className={styles.unclaimed_bonus__history__link}>
-            {t('unclaimed_bonuses.history')}
+            {t('bonuses:unclaimed_bonuses.history')}
           </a>
         </div>
       </div>

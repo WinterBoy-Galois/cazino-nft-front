@@ -1,6 +1,5 @@
 import React from 'react';
-import Layout from '../Layout/Layout';
-import { Router, LocationProvider, Redirect } from '@reach/router';
+import { Router, LocationProvider } from '@reach/router';
 import HomePage from '../../pages/HomePage';
 import { ApolloProvider } from '@apollo/client';
 import { ToastContainer } from '../Toast';
@@ -12,13 +11,13 @@ import Referrals from '../Referrals';
 import { ProfilePageWithData } from '../../pages/ProfilePage/ProfilePage';
 import ScrollToTop from '../ScrollToTop';
 import TransactionsPage from '../../pages/TransactionsPage';
-import AuthRoute from '../AuthRoute';
 import GamesPage from '../../pages/GamesPage';
 import BonusesPage from '../../pages/BonusesPage/BonusesPage';
 import AffiliatesPage from '../../pages/AffiliatesPage';
 import SeedPage from '../../pages/SeedPage';
 import Page404 from '../../pages/Page404';
 import Page500 from '../../pages/Page500';
+import LayoutPage from '../LayoutPage';
 
 export const toast_v1 = require('../../sounds/toast-v1.mp3');
 export const balance_updated_v1 = require('../../sounds/balance-updated-v1.mp3');
@@ -52,23 +51,20 @@ const App: React.FC = () => {
           <LocationProvider>
             <ScrollToTop />
 
-            <Layout>
-              <Router>
-                {/* Public Routes */}
-                <HomePage path="/" />
-                <GamesPage path="/games/*" />
-                <Page404 path="/notfound" />
-                <Page500 path="/servererror" />
+            <Router>
+              {/* Public Routes */}
+              <LayoutPage path="/" component={HomePage} />
+              <LayoutPage path="/games/*" component={GamesPage} />
+              <Page500 path="/servererror" />
+              <Page404 default />
 
-                {/* Protected Routes */}
-                <AuthRoute path="/profile" component={ProfilePageWithData} />
-                <AuthRoute path="/transactions/*" component={TransactionsPage} />
-                <BonusesPage path="/bonuses" />
-                <AffiliatesPage path="/affiliates" />
-                <AuthRoute path="/seeds" component={SeedPage} />
-                <Redirect from="/" to="/notfound" default noThrow />
-              </Router>
-            </Layout>
+              {/* Protected Routes */}
+              <LayoutPage path="/profile" isAuthNeeded component={ProfilePageWithData} />
+              <LayoutPage path="/transactions/*" isAuthNeeded component={TransactionsPage} />
+              <LayoutPage path="/seeds" isAuthNeeded component={SeedPage} />
+              <LayoutPage path="/bonuses" component={BonusesPage} />
+              <LayoutPage path="/affiliates" component={AffiliatesPage} />
+            </Router>
 
             <ToastContainer />
             <Referrals />

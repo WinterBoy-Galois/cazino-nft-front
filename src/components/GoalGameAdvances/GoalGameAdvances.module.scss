@@ -18,7 +18,7 @@ $grid-breakpoints: (
   max-width: 285px;
 
   @include media-breakpoint-down(xl) {
-    max-width: 400px;
+    max-width: 470px;
   }
 
   @include media-breakpoint-down(lg) {
