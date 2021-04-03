@@ -15,7 +15,7 @@ import { MinesGameState as GameState } from '../../../../models/minesGameState.m
 import BetAmountControl from '../../../../components/BetAmountControl';
 import { useTranslation } from 'react-i18next';
 import { formatBitcoin } from '../../../../common/util/format.util';
-import { error as errorToast } from '../../../../components/Toast'; // error as errorToast, success, info
+import { error as errorToast, success } from '../../../../components/Toast'; // error as errorToast, success, info
 import { appConfig } from '../../../../common/config';
 
 import useSound from 'use-sound';
@@ -305,12 +305,12 @@ const MineGame: React.FC<IProps> = ({
               )}
             >
               &times;&nbsp;
-              {session?.totalProfit.multiplier.toFixed(3)}
+              {session?.profit.multiplier.toFixed(appConfig.minesMultiplierPrecision)}
             </div>
 
             <div className={clsx('col', styles.text_align__left)}>
               <Bitcoin className={clsx(styles.icon, styles.icon__bitcoin)} />
-              {formatBitcoin(session?.totalProfit.profit)}
+              {formatBitcoin(session?.profit.profit)}
             </div>
           </div>
         </div>
@@ -341,11 +341,11 @@ const MineGame: React.FC<IProps> = ({
           <div className={styles.grid2}>
             <div className={styles.pl_profit}>
               {t('mines.profitTotal').toUpperCase()}&nbsp;(&times;&nbsp;
-              {session?.totalProfit.multiplier.toFixed(3)})
+              {session?.totalProfit.multiplier.toFixed(appConfig.minesMultiplierPrecision)})
             </div>
             <div className={styles.pl_profit_win}>
               {t('mines.profitNext').toUpperCase()}&nbsp;(&times;&nbsp;
-              {session?.nextProfit.multiplier.toFixed(3)})
+              {session?.nextProfit.multiplier.toFixed(appConfig.minesMultiplierPrecision)})
             </div>
           </div>
         </div>
@@ -505,8 +505,8 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     }
 
     initSession(data.makeBetMines);
-    onPlayToast();
-    errorToast(`${t('mines.msgBalance')} ${formatBitcoin(data.makeBetMines.balance)}`);
+    // onPlayToast();
+    // errorToast(`${t('mines.msgBalance')} ${formatBitcoin(data.makeBetMines.balance)}`);
   };
 
   const handlePlaceBet = async (betId: string, selection: number) => {
@@ -562,12 +562,12 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
               +data.advanceMines.profit.profit
             )}`;
 
-            if (+data.advanceMines.profit.profit >= 0) {
+            if (+data.advanceMines.profit.profit > 0) {
               onPlayBalanceUpdated();
-              errorToast(toast);
+              success(toast);
             } else {
-              onPlayToast();
-              errorToast(toast);
+              // onPlayToast();
+              // errorToast(toast);
             }
           }
         }

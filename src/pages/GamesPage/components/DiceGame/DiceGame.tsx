@@ -196,7 +196,7 @@ const DiceGame: React.FC<IProps> = ({
                 label={t('dice.multiplier')}
                 icon="MULTIPLIER"
                 value={state.multiplier}
-                decimalPlaces={3}
+                decimalPlaces={appConfig.diceMultiplierPrecision}
                 onChange={multiplier =>
                   dispatch({ type: 'SET_MULTIPLIER', payload: { multiplier } })
                 }
@@ -242,6 +242,7 @@ const DiceGame: React.FC<IProps> = ({
 export default DiceGame;
 
 export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
+  const { t } = useTranslation();
   const [, dispatch] = useStateValue();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_DICE);
   const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE);
@@ -270,25 +271,27 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
         await playToast();
       }
       if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
-        return errorToast('Your bet may reaches the profit limit.');
+        return errorToast(t('your_bet_may_reaches_the_profit_limit'));
       }
-      return errorToast("Your bet couldn't be placed, please try again.");
+      return errorToast(t('your_bet_could_not_be_placed'));
     }
     setResult(data?.makeBetDice?.result);
 
     setTimeout(async () => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
-      const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetDice?.profit)}`;
-      if (+data?.makeBetDice?.profit >= 0) {
+      const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
+        +data?.makeBetDice?.profit
+      )}`;
+      if (+data?.makeBetDice?.profit > 0) {
         if (isSound) {
           await playToastBalance();
         }
         await success(toast);
       } else {
-        if (isSound) {
-          await playToast();
-        }
-        await info(toast);
+        // if (isSound) {
+        //   await playToast();
+        // }
+        // await info(toast);
       }
     }, appConfig.diceGameTimeout * 2);
 

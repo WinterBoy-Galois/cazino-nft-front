@@ -49,14 +49,6 @@ const Layout: React.FC = ({ children }) => {
     else setHasUnclaimedBonus(false);
   }, [bonusClaims]);
 
-  if (pathname === '/notfound') {
-    return <>{children}</>;
-  }
-
-  if (pathname === '/servererror') {
-    return <>{children}</>;
-  }
-
   return (
     <>
       <div className={styles.wrapper} style={{ display: hideContent() ? 'none' : 'block' }}>

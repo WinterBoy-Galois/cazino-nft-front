@@ -39,4 +39,8 @@ export const appConfig = {
     ? 0
     : parseFloat(env('REACT_APP_BET_DEFAULT_AMOUNT')),
   toastShowTime: parseInt(env('REACT_APP_TOAST_SHOW_TIME')),
+  diceMultiplierPrecision: parseInt(env('REACT_APP_DICE_MULTIPLIER_PRECISION')),
+  clamsMultiplierPrecision: parseInt(env('REACT_APP_CLAMS_MULTIPLIER_PRECISION')),
+  goalsMultiplierPrecision: parseInt(env('REACT_APP_GOALS_MULTIPLIER_PRECISION')),
+  minesMultiplierPrecision: parseInt(env('REACT_APP_MINES_MULTIPLIER_PRECISION')),
 };

@@ -10,12 +10,24 @@
   "clam": {
     "profit": "Profit",
     "selected": "Selected",
-    "amount": "Bet Amount"
+    "amount": "Bet Amount",
+    "start": "start"
   },
   "goal": {
     "amount": "Bet Amount",
     "profitTotal": "Total Profit",
-    "profitNext": "On Next Win"
+    "profitNext": "On Next Win",
+    "high": "High",
+    "high_summary": "2 of 3 win",
+    "middle": "Middle",
+    "middle_summary": "1 of 2 win",
+    "low": "Low",
+    "low_summary": "1 of 3 win",
+    "try_again": "try again",
+    "start": "start",
+    "take_money": "take money",
+    "play_again": "play again",
+    "probability": "Probability"
   },
   "mines": {
     "amount": "Bet Amount",
@@ -30,5 +42,9 @@
     "errorTryAgain": "Your bet couldn't be placed, please try again.",
     "errorProfitLimit": "Your bet may reaches the profit limit.",
     "msgBalance": "Your balance has been updated: "
-  }
+  },
+  "your_bet_could_not_be_placed": "Your bet couldn't be placed, please try again.",
+  "your_bet_may_reaches_the_profit_limit": "Your bet may reaches the profit limit.",
+  "oh_try_again": "Uh, oh... Try again!",
+  "your_ballance_has_been_updated": "Your balance has been updated"
 }

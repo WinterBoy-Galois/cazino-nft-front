@@ -49,6 +49,8 @@
     "depositNullError": "Einzahlungsadresse ist nicht gesetzt.",
     "bitcoinWalletAddress": "Bitcoin Wallet Adresse",
     "requiredConfirmations": "Erforderliche Bestätigung(en)",
-    "transactionsLinkText": "Einzahlungen"
+    "transactionsLinkText": "Einzahlungen",
+    "withdraw_failed": "Withdraw is failed.",
+    "withdraw_completed": "Withdraw is completed."
   }
 }

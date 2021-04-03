@@ -13,7 +13,7 @@ import { SETUP_CLAMS } from '../../../../graphql/queries';
 import { useStateValue } from '../../../../state';
 import { ClamGameAction, clamGameReducer, ClamGameState, getInitialState } from './lib/reducer';
 import { MAKE_BET_CLAMS } from '../../../../graphql/mutations';
-import { error as errorToast, info, success } from '../../../../components/Toast';
+import { error as errorToast, success } from '../../../../components/Toast';
 import { appConfig } from '../../../../common/config';
 import { ClamsGameState as GameState } from '../../../../models/clamsGameState.model';
 import Bitcoin from '../../../../components/icons/social/Bitcoin';
@@ -180,7 +180,7 @@ const ClamGame: React.FC<IProps> = ({
                   styles.game_result__message_box__won__multiplier
                 )}
               >
-                &times;&nbsp;{multiplier}
+                &times;&nbsp;{multiplier.toFixed(appConfig.clamsMultiplierPrecision)}
               </div>
 
               <div className={clsx('col', styles.text_align__left)}>
@@ -203,7 +203,7 @@ const ClamGame: React.FC<IProps> = ({
         >
           <div className="row">
             <div className={clsx('col', styles.game_result__message_box__lost__title)}>
-              Uh, oh... Try again!
+              {t('oh_try_again')}
             </div>
           </div>
         </div>
@@ -241,7 +241,8 @@ const ClamGame: React.FC<IProps> = ({
             <div className="col-6">
               <div className={clsx(styles.profit__container, styles.align_items__left)}>
                 <div className={styles.profit__label}>
-                  {t('clam.profit')}&nbsp;(&times;&nbsp;{state.multiplier.toFixed(3)})
+                  {t('clam.profit')}&nbsp;(&times;&nbsp;
+                  {state.multiplier.toFixed(appConfig.clamsMultiplierPrecision)})
                 </div>
                 <div>
                   <BitcoinValue value={formatBitcoin(state.profit)} />
@@ -260,7 +261,13 @@ const ClamGame: React.FC<IProps> = ({
           {renderGameResultMessage()}
 
           <div className={clsx('row', styles.justify_content__center)}>
-            <div className={clsx('col-12 col-xl-4', styles.amount__container)}>
+            <div
+              className={clsx(
+                'col-12 col-xl-5',
+                styles.amount__container,
+                styles.bet_amount_container
+              )}
+            >
               <BetAmountControl
                 label={t('clam.amount')}
                 amount={state.amount}
@@ -270,13 +277,13 @@ const ClamGame: React.FC<IProps> = ({
               />
             </div>
 
-            <div className={clsx(styles.controls__button, 'col-12 col-xl-4')}>
+            <div className={clsx(styles.controls__button, styles.action_button, 'col-12 col-xl-5')}>
               <SpinnerButton
                 onClick={handlePlaceBet}
                 loading={loadingBet || state.isRunning}
                 disabled={state.selection.length < 1 || state.gameState !== GameState.IDLE}
               >
-                start
+                {t('clam.start')}
               </SpinnerButton>
             </div>
           </div>
@@ -290,6 +297,7 @@ export default ClamGame;
 
 export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
   const [, dispatch] = useStateValue();
+  const { t } = useTranslation(['games']);
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_CLAMS);
   const [makeBetClams, { loading: loadingBet }] = useMutation(MAKE_BET_CLAMS);
   const [result, setResult] = useState<number>(-1);
@@ -317,10 +325,10 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
         }, 500);
       }
       if (data.makeBetClams?.errors[0]?.code === 'MAX_PROFIT') {
-        return errorToast('Your bet may reaches the profit limit.');
+        return errorToast(t('your_bet_may_reaches_the_profit_limit'));
       }
 
-      return errorToast("Your bet couldn't be placed, please try again.");
+      return errorToast(t('your_bet_could_not_be_placed'));
     }
 
     setResult(data?.makeBetClams?.result);
@@ -329,8 +337,10 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
 
     setTimeout(() => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetClams?.balance } });
-      const toast = `Your balance has been updated: ${formatBitcoin(+data.makeBetClams?.profit)}`;
-      if (+data.makeBetClams?.profit >= 0) {
+      const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
+        +data.makeBetClams?.profit
+      )}`;
+      if (+data.makeBetClams?.profit > 0) {
         if (isSound) {
           setTimeout(() => {
             playToastBalanceUpdated();
@@ -338,12 +348,12 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
         }
         success(toast);
       } else {
-        if (isSound) {
-          setTimeout(() => {
-            playToast();
-          }, 500);
-        }
-        info(toast);
+        // if (isSound) {
+        //   setTimeout(() => {
+        //     playToast();
+        //   }, 500);
+        // }
+        // info(toast);
       }
     }, appConfig.clamsGameTimeout);
   };

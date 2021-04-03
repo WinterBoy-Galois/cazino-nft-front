@@ -62,3 +62,21 @@
     fill: $bitcoinYellow;
   }
 }
+
+.bet_amount_container {
+  @include media-breakpoint-up(lg) {
+    max-width: 600px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 300px;
+  }
+}
+
+.action_button {
+  @include media-breakpoint-up(lg) {
+    max-width: 600px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 300px;
+  }
+}

@@ -11,7 +11,7 @@ const formatBitcoin = (value?: number) => {
 };
 
 const formatBet = (value?: number) => {
-  if (!value) {
+  if (value === null || value === undefined) {
     return 'n/a';
   }
 

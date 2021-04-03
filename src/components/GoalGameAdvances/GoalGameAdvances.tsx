@@ -3,6 +3,7 @@ import styles from './GoalGameAdvances.module.scss';
 import clsx from 'clsx';
 import BitcoinValue from '../BitcoinValue';
 import { formatBitcoin } from '../../common/util/format.util';
+import { appConfig } from '../../common/config';
 
 interface IProps {
   className?: string;
@@ -77,7 +78,7 @@ const GoalGameAdvances: React.FC<IProps> = ({
             </div>
 
             <div className={styles.single_advance__multiplier}>
-              &nbsp;&times;{item.multiplier.toFixed(4)}
+              &nbsp;&times;{item.multiplier.toFixed(appConfig.goalsMultiplierPrecision)}
             </div>
 
             {item.profit !== null ? (

@@ -22,13 +22,13 @@
 
   &:first-of-type {
     @include media-breakpoint-up(xl) {
-      padding-right: 3rem;
+      padding: 0 3rem;
     }
   }
 
   &:last-of-type {
     @include media-breakpoint-up(xl) {
-      padding-left: 3rem;
+      padding: 0 3rem;
     }
   }
 }

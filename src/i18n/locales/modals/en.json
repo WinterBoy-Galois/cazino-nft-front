@@ -69,7 +69,9 @@
     "depositNullError": "Deposit address is not set.",
     "bitcoinWalletAddress": "Bitcoin Wallet Address",
     "requiredConfirmations": "Required Confirmation(s)",
-    "transactionsLinkText": "Deposit Transactions"
+    "transactionsLinkText": "Deposit Transactions",
+    "withdraw_failed": "Withdraw is failed.",
+    "withdraw_completed": "Withdraw is completed."
   },
   "profitCut": {
     "title": "Information",
