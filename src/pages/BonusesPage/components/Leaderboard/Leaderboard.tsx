@@ -7,6 +7,7 @@ import BitcoinValue from '../../../../components/BitcoinValue';
 import clsx from 'clsx';
 import { BONUSCOUNTDOWN } from '../../../../graphql/queries';
 import { useQuery } from '@apollo/client';
+import Loading from '../../../../components/Loading';
 
 import useSound from 'use-sound';
 import { countdown_v1 } from '../../../../components/App/App';
@@ -53,17 +54,7 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
         getCountData(countDown - 1);
       }, 1000);
       setTimer(t_temp);
-    }
-  }, [countDown]);
-
-  const getCountData = (t: number) => {
-    setDays(Math.floor(t / (24 * 3600)));
-    setHours(Math.floor((t % (24 * 3600)) / 3600));
-    setMinutes(Math.floor((t % 3600) / 60));
-  };
-
-  useEffect(() => {
-    if (countDown === 0) {
+    } else {
       if (isSound) {
         (async () => {
           await playCountDown();
@@ -77,6 +68,12 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
     }
   }, [countDown]);
 
+  const getCountData = (t: number) => {
+    setDays(Math.floor(t / (24 * 3600)));
+    setHours(Math.floor((t % (24 * 3600)) / 3600));
+    setMinutes(Math.ceil((t % 3600) / 60));
+  };
+
   const onClickType = (t: TimeAggregation) => {
     setSelectedTime(t);
     onType(t);
@@ -84,6 +81,9 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
       await refetch();
     })();
   };
+  // if (countDown === 0) {
+  //   return <Loading className={styles.loading} />;
+  // }
   return (
     <div>
       <div className={styles.leaderboard__title}>{t('leaderboard.title')}</div>

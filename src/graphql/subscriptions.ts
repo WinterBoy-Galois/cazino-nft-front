@@ -56,12 +56,8 @@ export const BALANCE = gql`
 export const BONUS_NOTIFICATION = gql`
   subscription bonusReceived {
     bonusReceived {
-      bonusid
       userid
-      position
-      amount
       balance
-      type
     }
   }
 `;
