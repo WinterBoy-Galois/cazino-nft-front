@@ -518,7 +518,8 @@ const GoalGame: React.FC<IProps> = ({
                 {getButtonLabel()}
               </SpinnerButton>
             </div>
-
+          </div>
+          <div className={clsx('row', styles.justify_content__center)}>
             {state.gameState !== GameState.IDLE && device <= deviceSize.xl ? (
               <GoalGameAdvances
                 profits={session?.profits}
