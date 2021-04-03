@@ -600,8 +600,8 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     }
 
     await initSession(data.makeBetGoals);
-    await onPlayToastBalanceUpdated();
-    info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
+    // await onPlayToastBalanceUpdated();
+    // info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
   };
 
   const handlePlaceBet = async (betId: string, selection: number, currentStep: number) => {
