@@ -7,7 +7,6 @@ import BitcoinValue from '../../../../components/BitcoinValue';
 import clsx from 'clsx';
 import { BONUSCOUNTDOWN } from '../../../../graphql/queries';
 import { useQuery } from '@apollo/client';
-import Loading from '../../../../components/Loading';
 
 import useSound from 'use-sound';
 import { countdown_v1 } from '../../../../components/App/App';
@@ -28,6 +27,7 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
   const [hours, setHours] = useState<number>();
   const [minutes, setMinutes] = useState<number>();
   const [countDown, setCountDown] = useState<any>();
+  const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [timer, setTimer] = useState<any>();
 
   const [playCountDown] = useSound(countdown_v1.default);
@@ -41,15 +41,23 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
     if (data) {
       clearInterval(timer);
       const temp = data.bonusCountdown[selectedTime];
-      setCountDown(temp);
-      getCountData(temp);
+      if (temp < elapsedTime) {
+        (async () => {
+          await refetch();
+          setElapsedTime(0);
+        })();
+      } else {
+        setCountDown(temp - elapsedTime);
+        getCountData(temp - elapsedTime);
+      }
     }
-  }, [data]);
+  }, [data, selectedTime]);
 
   useEffect(() => {
     clearInterval(timer);
     if (countDown !== 0) {
       const t_temp = setInterval(() => {
+        setElapsedTime(elapsedTime + 1);
         setCountDown(countDown - 1);
         getCountData(countDown - 1);
       }, 1000);
@@ -63,6 +71,7 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
       setTimeout(() => {
         (async () => {
           await refetch();
+          setElapsedTime(0);
         })();
       }, 10000);
     }
@@ -77,13 +86,9 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
   const onClickType = (t: TimeAggregation) => {
     setSelectedTime(t);
     onType(t);
-    (async () => {
-      await refetch();
-    })();
   };
-  // if (countDown === 0) {
-  //   return <Loading className={styles.loading} />;
-  // }
+  // console.log(position, ' = position');
+
   return (
     <div>
       <div className={styles.leaderboard__title}>{t('leaderboard.title')}</div>

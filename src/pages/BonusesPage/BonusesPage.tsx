@@ -5,7 +5,7 @@ import Leaderboard from './components/Leaderboard/Leaderboard';
 import LeaderboardTable from '../../components/LeaderboardTable/LeaderboardTable';
 import { LEADERBOARDS, BONUSCLAIMS } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
-import { LEADERBOARDS_SUBSCRIPTION, BONUS_NOTIFICATION } from '../../graphql/subscriptions';
+import { LEADERBOARDS_SUBSCRIPTION } from '../../graphql/subscriptions';
 import { useLocation, useNavigate } from '@reach/router';
 import styles from './BonusesPage.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -23,11 +23,7 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['bonuses']);
   const [bonus, setBonus] = useState<any>();
   const [position, setPosition] = useState<any>();
-  const [
-    {
-      auth: { user },
-    },
-  ] = useStateValue();
+  const [{ auth }] = useStateValue();
 
   useEffect(() => {
     if (!subscribeToMore) return;
@@ -53,14 +49,23 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   useEffect(() => {
     if (data) {
       const _temp = data.leaderboards[selectedTime];
-      for (let k = 0; k < _temp.length; k++) {
-        if (user?.id === _temp[k].userid) {
-          setBonus(_temp[k]);
-          setPosition(k + 1);
+      if (auth.state === 'SIGNED_IN') {
+        let flag_num = null;
+        for (let k = 0; k < _temp.length; k++) {
+          if (auth?.user?.id === _temp[k].userid) {
+            setBonus(_temp[k]);
+            setPosition(k + 1);
+            flag_num = k;
+            break;
+          }
         }
+        if (flag_num === null) setPosition(null);
+      } else {
+        setPosition(null);
       }
     }
-  }, [data, selectedTime]);
+  }, [data, selectedTime, auth.state]);
+
   return (
     <div className={styles.bonuses_page}>
       <div className={styles.bonuses_title}>{t('title')}</div>
