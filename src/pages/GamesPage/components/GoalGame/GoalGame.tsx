@@ -699,16 +699,16 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutGoals.balance } });
 
       if (data.cashoutGoals.profit.profit) {
-        const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
-          +data.cashoutGoals.profit.profit
-        )}`;
+        // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
+        //   +data.cashoutGoals.profit.profit
+        // )}`;
 
-        if (+data.cashoutGoals.profit.profit >= 0) {
+        if (+data.cashoutGoals.profit.profit > 0) {
           await onPlayToastBalanceUpdated();
-          success(toast);
+          // success(toast);
         } else {
           await onPlayToast();
-          info(toast);
+          // info(toast);
         }
       }
     }
