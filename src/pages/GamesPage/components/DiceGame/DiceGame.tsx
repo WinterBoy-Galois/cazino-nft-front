@@ -279,24 +279,24 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
 
     setTimeout(async () => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
-      const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
-        +data?.makeBetDice?.profit
-      )}`;
+      // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
+      //   +data?.makeBetDice?.profit
+      // )}`;
       if (+data?.makeBetDice?.profit > 0) {
         if (isSound) {
           await playToastBalance();
         }
-        await success(toast);
+        // await success(toast);
       } else {
-        // if (isSound) {
-        //   await playToast();
-        // }
+        if (isSound) {
+          await playToast();
+        }
         // await info(toast);
       }
     }, appConfig.diceGameTimeout * 2);
 
     setTimeout(async () => {
-      if (+data?.makeBetDice?.profit >= 0) {
+      if (+data?.makeBetDice?.lucky) {
         if (isSound) {
           await playDiceWin();
         }

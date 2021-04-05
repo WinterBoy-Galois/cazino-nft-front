@@ -558,13 +558,13 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
         if (data.advanceMines.balance) {
           dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceMines.balance } });
           if (data.advanceMines.profit.profit) {
-            const toast = `${t('mines.msgBalance')} ${formatBitcoin(
-              +data.advanceMines.profit.profit
-            )}`;
+            // const toast = `${t('mines.msgBalance')} ${formatBitcoin(
+            //   +data.advanceMines.profit.profit
+            // )}`;
 
             if (+data.advanceMines.profit.profit > 0) {
               onPlayBalanceUpdated();
-              success(toast);
+              // success(toast);
             } else {
               // onPlayToast();
               // errorToast(toast);
