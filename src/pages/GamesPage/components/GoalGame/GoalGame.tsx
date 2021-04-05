@@ -518,7 +518,8 @@ const GoalGame: React.FC<IProps> = ({
                 {getButtonLabel()}
               </SpinnerButton>
             </div>
-
+          </div>
+          <div className={clsx('row', styles.justify_content__center)}>
             {state.gameState !== GameState.IDLE && device <= deviceSize.xl ? (
               <GoalGameAdvances
                 profits={session?.profits}
@@ -657,12 +658,12 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
           dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
 
           if (data.advanceGoals.profit.profit) {
-            const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
-              +data.advanceGoals.profit.profit
-            )}`;
+            // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
+            //   +data.advanceGoals.profit.profit
+            // )}`;
             if (+data.advanceGoals.profit.profit > 0) {
               await onPlayToastBalanceUpdated();
-              success(toast);
+              // success(toast);
             } else {
               // await onPlayToast();
               // info(toast);
