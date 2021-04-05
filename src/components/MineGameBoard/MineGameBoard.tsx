@@ -13,6 +13,7 @@ interface IProps {
   session?: any;
   handlePlaceBet?: (selection: number) => void;
   loadingBet?: boolean;
+  isCashOut?: boolean;
 }
 const take_opacity = {
   opacity: 0.5,
@@ -24,6 +25,7 @@ const MineGameBoard: React.FC<IProps> = ({
   gameState,
   handlePlaceBet = () => null,
   loadingBet,
+  isCashOut,
 }) => {
   const [{ sidebar }] = useStateValue();
   const [results, setResults] = useState(scoreArray);
@@ -77,7 +79,12 @@ const MineGameBoard: React.FC<IProps> = ({
 
       if (session?.minePositions) {
         const minePositions = session?.minePositions;
-        if (session?.lucky && minePositions.length + session?.result.length === 24) {
+        if (
+          session?.lucky &&
+          session?.result &&
+          minePositions.length + session?.result.length === 24 &&
+          !isCashOut
+        ) {
           for (let k = 0; k < 25; k++) {
             if (minePositions.includes(k)) {
               tmp.splice(minePositions[k], 1, 2);

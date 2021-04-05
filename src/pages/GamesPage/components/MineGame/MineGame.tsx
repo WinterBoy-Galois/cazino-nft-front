@@ -334,6 +334,7 @@ const MineGame: React.FC<IProps> = ({
           session={session}
           gameState={state.gameState}
           loadingBet={loadingBet}
+          isCashOut={isCashOut}
         />
       </div>
       {isShowProfit && lucky === null ? (
@@ -424,9 +425,7 @@ const MineGame: React.FC<IProps> = ({
                 className={`${styles.button}`}
                 onClick={handleButtonClick}
                 loading={loadingBet}
-                disabled={
-                  state.gameState === GameState.IN_PROGRESS && session?.currentStep % 10 === 0
-                }
+                disabled={state.gameState === GameState.IN_PROGRESS && session?.lucky === false}
               >
                 {getButtonLabel()}
               </SpinnerButton>
@@ -449,7 +448,6 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   const [session, setSession] = useState<any>(null);
   const [profitCut, setProfitCut] = useState<any>(null);
   const [maxProfit, setMaxProfit] = useState<any>(0);
-  const [selections, setSelections] = useState<any>([]);
   const { t } = useTranslation(['games']);
 
   const [playBalanceUpdated] = useSound(balance_updated_v1.default);
@@ -480,13 +478,11 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
 
   const handleRestart = () => {
     setSession(null);
-    setSelections([]);
     setProfitCut(null);
   };
   const initSession = (minesGameSetupObj: any) => {
     if (minesGameSetupObj.__typename !== 'MinesGameSetup') return;
     setSession(minesGameSetupObj.session);
-    setSelections(minesGameSetupObj.session?.selections || []);
     setProfitCut(minesGameSetupObj.session?.profitCut || null);
     setSession(minesGameSetupObj.session || null);
     if (minesGameSetupObj.balance)
@@ -521,27 +517,13 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     }
     switch (data.advanceMines.__typename) {
       case 'MinesStep':
-        const __selections = [
-          ...selections,
-          {
-            __typename: 'MinesRow',
-            selected: selection,
-            luckySpots: [selection],
-          },
-        ];
-
         setSession(
           Object.assign({}, session, {
             ...data.advanceMines,
-            currentStep: data.advanceMines.allowNext
-              ? data.advanceMines.nextStep
-              : session.currentStep,
-            selections: __selections,
           })
         );
 
         setProfitCut(data.advanceMines.profitCut);
-        setSelections(__selections);
         break;
 
       case 'MinesComplete':
@@ -549,8 +531,6 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
           Object.assign({}, session, {
             ...data.advanceMines,
             allowNext: false,
-            currentStep: 10,
-            selections: data.advanceMines.result,
             lucky: data.advanceMines.lucky,
           })
         );
@@ -572,7 +552,6 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
           }
         }
         setProfitCut(data.advanceMines.profitCut);
-        setSelections(data.advanceMines.result);
         break;
     }
   };
@@ -588,7 +567,6 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
       Object.assign({}, session, {
         ...data.cashoutMines,
         allowNext: false,
-        selections: data.cashoutMines.result,
       })
     );
 
@@ -607,7 +585,6 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     }
 
     setProfitCut(data.cashoutMines.profitCut);
-    setSelections(data.cashoutMines.result);
   };
 
   useEffect(() => {
