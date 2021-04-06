@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { datetimeFromEpoch } from '../../../../common/util/date.util';
 import BonusPosition from '../../../../components/icons/BonusPosition';
 import styles from './UnClaimedBonuses.module.scss';
@@ -25,11 +25,15 @@ interface IProps {
 interface IUnclaimedBonusProps {
   bonusClaim: any;
   onClaimBonusCompleted: (bonusId: string) => void;
+  isClickId?: boolean;
+  onSetClick: (bonusId: string) => void;
 }
 
 const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   bonusClaim,
   onClaimBonusCompleted = () => null,
+  isClickId,
+  onSetClick = () => null,
 }) => {
   const [claimBonus, { loading }] = useMutation(CLAIM_BONUS);
   const [, dispatch] = useStateValue();
@@ -43,8 +47,9 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   ] = useStateValue();
 
   const onClaimBonus = async (bonusId: string) => {
+    console.log(' ========= ');
+    onSetClick(bonusId);
     const { data, errors } = await claimBonus({ variables: { bonusId } });
-
     if (errors || data.claimBonus?.errors) {
       if (isSound) {
         setTimeout(() => {
@@ -65,6 +70,9 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
 
     onClaimBonusCompleted(bonusId);
   };
+  useEffect(() => {
+    console.log(isClickId);
+  }, [isClickId]);
 
   return (
     <>
@@ -94,7 +102,7 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
         </div>
 
         <SpinnerButton
-          onClick={() => onClaimBonus(bonusClaim.id)}
+          onClick={() => (isClickId === null ? onClaimBonus(bonusClaim.id) : null)}
           loading={loading}
           className={clsx(styles.unclaimed_bonus__button, styles.unclaimed_bonus__button_close)}
         >
@@ -122,7 +130,7 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
             </div>
 
             <SpinnerButton
-              onClick={() => onClaimBonus(bonusClaim.id)}
+              onClick={() => (isClickId === null ? onClaimBonus(bonusClaim.id) : null)}
               loading={loading}
               className={styles.unclaimed_bonus__button}
             >
@@ -155,6 +163,7 @@ const UnClaimedBonuses: React.FC<IProps> = ({
   const [bonusClaims, setBonusClaims] = useState(defaultBonusClaims);
   const [playBonusClaim, { stop }] = useSound(bonus_claim_v1.default);
   const { t } = useTranslation(['bonuses']);
+  const [isClickId, setIsClickId] = useState<any>(null);
   const [
     {
       sidebar: { isSound, isOpen },
@@ -171,6 +180,14 @@ const UnClaimedBonuses: React.FC<IProps> = ({
 
     onClaimBonus();
   };
+  const onSetClick = (bonusId: string) => {
+    setIsClickId(bonusId);
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      setIsClickId(null);
+    }, 300);
+  }, [bonusClaims?.length]);
 
   if (bonusClaims?.length > 0) {
     return (
@@ -181,7 +198,9 @@ const UnClaimedBonuses: React.FC<IProps> = ({
           <UnClaimedBonus
             key={`unclaimed-bonus-${index}`}
             bonusClaim={bonusClaim}
+            isClickId={isClickId}
             onClaimBonusCompleted={onClaimBonusCompleted}
+            onSetClick={onSetClick}
           />
         ))}
 

@@ -7,9 +7,6 @@ import ClamLost from '../icons/games/ClamLost';
 import ClamWin from '../icons/games/ClamWin';
 import { useStateValue } from '../../state';
 
-import useSound from 'use-sound';
-const clams_select_v1 = require('../../sounds/clams-select-v1.mp3');
-
 interface IClamProps {
   className?: string;
   selection?: number[];
@@ -17,6 +14,7 @@ interface IClamProps {
   isEnded?: boolean;
   isSelected?: boolean;
   winningClam?: boolean;
+  onSelectSound?: () => void;
 }
 
 const Clam: React.FC<IClamProps> = ({
@@ -26,8 +24,8 @@ const Clam: React.FC<IClamProps> = ({
   isEnded = false,
   isSelected = false,
   winningClam = false,
+  onSelectSound = () => null,
 }) => {
-  const [playSelect, { stop }] = useSound(clams_select_v1.default);
   const [
     {
       sidebar: { isSound },
@@ -36,8 +34,7 @@ const Clam: React.FC<IClamProps> = ({
 
   useEffect(() => {
     if (isSound && selection?.length !== 0) {
-      stop();
-      playSelect();
+      onSelectSound();
     }
   }, [selection]);
 
@@ -76,6 +73,7 @@ interface IProps {
   setSelection?: (selection: number[]) => void;
   isEnded?: boolean;
   winningIndex?: number;
+  onSelectSound?: () => void;
 }
 
 const ClamGameBoard: React.FC<IProps> = ({
@@ -84,6 +82,7 @@ const ClamGameBoard: React.FC<IProps> = ({
   setSelection = () => null,
   isEnded = false,
   winningIndex = -1,
+  onSelectSound = () => null,
 }) => {
   return (
     <div className={clsx(styles.container, className)}>
@@ -100,6 +99,7 @@ const ClamGameBoard: React.FC<IProps> = ({
             isEnded={isEnded}
             isSelected={selection.includes(cIdx)}
             winningClam={winningIndex === cIdx}
+            onSelectSound={onSelectSound}
           />
         ))}
       </div>
