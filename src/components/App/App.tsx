@@ -30,6 +30,7 @@ export const mines_lost_v1 = require('../../sounds/mines-lost-v1.mp3');
 
 export const clams_win_v1 = require('../../sounds/clams-win-v1.mp3');
 export const clams_lost_v1 = require('../../sounds/clams-lost-v1.mp3');
+export const clams_select_v1 = require('../../sounds/clams-select-v1.mp3');
 
 export const dice_hit_v1 = require('../../sounds/dice-hit-v1.mp3');
 export const dice_slider_v1 = require('../../sounds/dice-slider-v1.mp3');

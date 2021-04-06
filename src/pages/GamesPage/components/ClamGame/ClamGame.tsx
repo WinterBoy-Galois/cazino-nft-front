@@ -27,6 +27,7 @@ import {
   button_click_v1,
   clams_win_v1,
   clams_lost_v1,
+  clams_select_v1,
 } from '../../../../components/App/App';
 
 interface IProps {
@@ -64,8 +65,9 @@ const ClamGame: React.FC<IProps> = ({
   const { pathname } = useLocation();
 
   const [playStart] = useSound(button_click_v1.default);
-  const [playWin] = useSound(clams_win_v1.default);
-  const [playLost] = useSound(clams_lost_v1.default);
+  const [playWin] = useSound(clams_win_v1.default, { volume: 0.7 });
+  const [playLost] = useSound(clams_lost_v1.default, { volume: 0.7 });
+  const [playSelect, { stop }] = useSound(clams_select_v1.default, { volume: 0.7 });
   const [
     {
       sidebar: { isSound },
@@ -137,6 +139,10 @@ const ClamGame: React.FC<IProps> = ({
     onPlaceBet(state.amount, state.selection);
   };
 
+  const onSelectSound = async () => {
+    stop();
+    playSelect();
+  };
   const renderGameResultMessage = () => {
     if (state.gameState === GameState.IDLE) return null;
 
@@ -210,6 +216,7 @@ const ClamGame: React.FC<IProps> = ({
           }}
           isEnded={state.gameState !== GameState.IDLE}
           winningIndex={state.winningIndex}
+          onSelectSound={onSelectSound}
         />
       </div>
 
