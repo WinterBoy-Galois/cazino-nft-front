@@ -13,9 +13,7 @@ import { useStateValue } from '../../../../state/index';
 
 import useSound from 'use-sound';
 import { useTranslation } from 'react-i18next';
-const bonus_claim_v1 = require('../../../../sounds/bonus-claim-v1.mp3');
-const toast_v1 = require('../../../../sounds/toast-v1.mp3');
-const bonus_received_v1 = require('../../../../sounds/bonus-received-v1.mp3');
+import { bonus_received_v1, bonus_claim_v1, toast_v1 } from '../../../../components/App/App';
 
 interface IProps {
   bonusClaims?: any[];
@@ -27,6 +25,7 @@ interface IUnclaimedBonusProps {
   onClaimBonusCompleted: (bonusId: string) => void;
   isClickId?: boolean;
   onSetClick: (bonusId: string) => void;
+  onToastErrorSound: () => void;
 }
 
 const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
@@ -34,34 +33,23 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   onClaimBonusCompleted = () => null,
   isClickId,
   onSetClick = () => null,
+  onToastErrorSound = () => null,
 }) => {
   const [claimBonus, { loading }] = useMutation(CLAIM_BONUS);
   const [, dispatch] = useStateValue();
-  const [playToast] = useSound(toast_v1.default);
-  const [playToastBonus] = useSound(bonus_received_v1.default);
   const { t } = useTranslation(['bonuses', 'games', 'error']);
   const [
     {
-      sidebar: { isSound, isOpen },
+      sidebar: { isOpen },
     },
   ] = useStateValue();
 
   const onClaimBonus = async (bonusId: string) => {
-    console.log(' ========= ');
     onSetClick(bonusId);
     const { data, errors } = await claimBonus({ variables: { bonusId } });
     if (errors || data.claimBonus?.errors) {
-      if (isSound) {
-        setTimeout(() => {
-          playToast();
-        }, 500);
-      }
+      onToastErrorSound();
       return errorToast(t('error:its_failed_try_again_later'));
-    }
-    if (isSound) {
-      setTimeout(() => {
-        playToastBonus();
-      }, 500);
     }
     success(
       `${t('games:your_ballance_has_been_updated')}: ${formatBitcoin(data.claimBonus.balance)}`
@@ -70,9 +58,6 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
 
     onClaimBonusCompleted(bonusId);
   };
-  useEffect(() => {
-    console.log(isClickId);
-  }, [isClickId]);
 
   return (
     <>
@@ -162,6 +147,8 @@ const UnClaimedBonuses: React.FC<IProps> = ({
 }) => {
   const [bonusClaims, setBonusClaims] = useState(defaultBonusClaims);
   const [playBonusClaim, { stop }] = useSound(bonus_claim_v1.default);
+  const [playToastBonus] = useSound(bonus_received_v1.default);
+  const [playToast] = useSound(toast_v1.default);
   const { t } = useTranslation(['bonuses']);
   const [isClickId, setIsClickId] = useState<any>(null);
   const [
@@ -169,10 +156,10 @@ const UnClaimedBonuses: React.FC<IProps> = ({
       sidebar: { isSound, isOpen },
     },
   ] = useStateValue();
-  const onClaimBonusCompleted = (bonusId: string) => {
+  const onClaimBonusCompleted = async (bonusId: string) => {
     if (isSound) {
-      stop();
-      playBonusClaim();
+      await stop();
+      await playBonusClaim();
     }
     setBonusClaims(
       ([] as any[]).concat(bonusClaims.filter(bonusClaim => bonusClaim.id !== bonusId))
@@ -180,9 +167,18 @@ const UnClaimedBonuses: React.FC<IProps> = ({
 
     onClaimBonus();
   };
-  const onSetClick = (bonusId: string) => {
+  const onSetClick = async (bonusId: string) => {
     setIsClickId(bonusId);
+    if (isSound) {
+      await playToastBonus();
+    }
   };
+  const onToastErrorSound = async () => {
+    if (isSound) {
+      await playToast();
+    }
+  };
+
   useEffect(() => {
     setTimeout(() => {
       setIsClickId(null);
@@ -201,6 +197,7 @@ const UnClaimedBonuses: React.FC<IProps> = ({
             isClickId={isClickId}
             onClaimBonusCompleted={onClaimBonusCompleted}
             onSetClick={onSetClick}
+            onToastErrorSound={onToastErrorSound}
           />
         ))}
 
