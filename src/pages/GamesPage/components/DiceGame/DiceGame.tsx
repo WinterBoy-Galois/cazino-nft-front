@@ -242,7 +242,7 @@ const DiceGame: React.FC<IProps> = ({
 export default DiceGame;
 
 export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('games');
   const [, dispatch] = useStateValue();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_DICE);
   const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE);
