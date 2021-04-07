@@ -71,8 +71,8 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
       setTimeout(() => {
         (async () => {
           await refetch();
-          setElapsedTime(0);
         })();
+        setElapsedTime(0);
       }, 10000);
     }
   }, [countDown]);
@@ -87,7 +87,6 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
     setSelectedTime(t);
     onType(t);
   };
-  // console.log(position, ' = position');
 
   return (
     <div>
