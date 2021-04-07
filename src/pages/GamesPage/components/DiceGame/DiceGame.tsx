@@ -279,7 +279,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
 
     setTimeout(async () => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
-    }, appConfig.diceGameTimeout * 2);
+    }, appConfig.diceGameTimeout);
 
     setTimeout(async () => {
       if (+data?.makeBetDice?.lucky) {

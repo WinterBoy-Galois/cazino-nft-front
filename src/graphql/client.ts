@@ -11,6 +11,7 @@ import { AuthType } from '../state/models/auth.model';
 import { appConfig } from '../common/config';
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
+import { error } from '../components/Toast';
 
 const cache = new InMemoryCache({
   dataIdFromObject(responseObject) {
@@ -99,7 +100,7 @@ const getApolloClient = (
     authLink.concat(httpLink)
   );
 
-  const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+  const errorLink = onError(({ graphQLErrors, operation, forward, networkError, response }) => {
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
         switch (err?.extensions?.code) {
@@ -129,6 +130,15 @@ const getApolloClient = (
       graphQLErrors.map(({ message, locations, path }) =>
         console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
       );
+    }
+    if (networkError) {
+      if (networkError && 'statusCode' in networkError && networkError.statusCode === 503) {
+        error(networkError.message);
+        if (response) {
+          response.errors = undefined;
+        }
+      }
+      console.log('Error--------------------', networkError);
     }
   });
 
