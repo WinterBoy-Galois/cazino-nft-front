@@ -69,7 +69,7 @@ const UserMenu: React.FC<IProps> = ({
                 </Link>
               </li>
               <li className={styles.menu__list__item}>
-                <Link onClick={onClose} to="/">
+                <Link onClick={onClose} to="/seeds">
                   {t('menu.seeds')}
                 </Link>
               </li>

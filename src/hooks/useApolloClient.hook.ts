@@ -1,6 +1,7 @@
 import { useStateValue } from '../state';
 import { useMemo } from 'react';
 import getApolloClient from '../graphql/client';
+import { navigate } from '@reach/router';
 
 export function useApolloClient() {
   const [
@@ -14,7 +15,10 @@ export function useApolloClient() {
     () =>
       getApolloClient(
         t => dispatch({ type: 'AUTH_TOKEN_REFRESH', payload: { accessToken: t } }),
-        () => dispatch({ type: 'AUTH_SIGN_OUT' }),
+        () => {
+          dispatch({ type: 'AUTH_SIGN_OUT' });
+          navigate('/');
+        },
         state,
         accessToken
       ),

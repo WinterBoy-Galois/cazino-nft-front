@@ -80,8 +80,12 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
                 {...props}
                 onPlaceBet={onSelectPlaceBet}
                 key={`ball-${index}`}
-                index={index}
-                ballType={lastSpot === index ? lastAdvanceStatus : 'Idle'}
+                index={hideMiddleBall && index > 1 ? index - 1 : index}
+                ballType={
+                  lastSpot === (hideMiddleBall && index > 1 ? index - 1 : index)
+                    ? lastAdvanceStatus
+                    : 'Idle'
+                }
               />
             )
           )}
@@ -89,8 +93,12 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
       );
   };
 
-  const getGoalKeeperLostPosition = (selection: number) =>
-    selection === 1 ? [0, 2].sort(() => Math.random() - 0.5)[0] : selection === 0 ? 2 : 0;
+  const getGoalKeeperLostPosition = (selection: number) => {
+    if (hideMiddleBall) {
+      return selection === 0 ? 2 : 0;
+    }
+    return selection === 1 ? [0, 2].sort(() => Math.random() - 0.5)[0] : selection === 0 ? 2 : 0;
+  };
 
   return (
     <div className={clsx(styles.container, className)}>

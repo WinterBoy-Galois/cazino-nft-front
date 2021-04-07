@@ -10,6 +10,7 @@ import Stats from './components/stats';
 import { useTranslation } from 'react-i18next';
 import { useStateValue } from '../../state';
 import clsx from 'clsx';
+import { success as successToast } from '../../components/Toast';
 
 const AffiliatesPage: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['transactions']);
@@ -21,7 +22,11 @@ const AffiliatesPage: React.FC<RouteComponentProps> = () => {
   const [commissionData, setCommissionData] = useState(dataMe?.me);
   const onTransferBalance = async () => {
     const { data, errors } = await claimCommissions();
-    await setCommissionData(data?.claimCommissions);
+    if (!errors && data) {
+      // show success toast
+      successToast(t('affiliates:commissions_transferred_successfully'));
+    }
+    setCommissionData(data?.claimCommissions);
     if (!errors && data && auth.state === 'SIGNED_IN') {
       dispatch({
         type: 'AUTH_SIGN_IN',

@@ -13,7 +13,9 @@ import { useStateValue } from '../../../../state/index';
 
 import useSound from 'use-sound';
 import { useTranslation } from 'react-i18next';
-import { bonus_received_v1, bonus_claim_v1, toast_v1 } from '../../../../components/App/App';
+const bonus_claim_v1 = require('../../../../sounds/bonus-claim-v1.mp3');
+const toast_v1 = require('../../../../sounds/toast-v1.mp3');
+const bonus_received_v1 = require('../../../../sounds/bonus-received-v1.mp3');
 
 interface IProps {
   bonusClaims?: any[];
@@ -25,7 +27,6 @@ interface IUnclaimedBonusProps {
   onClaimBonusCompleted: (bonusId: string) => void;
   isClickId?: boolean;
   onSetClick: (bonusId: string) => void;
-  onToastErrorSound: () => void;
 }
 
 const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
@@ -33,29 +34,45 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   onClaimBonusCompleted = () => null,
   isClickId,
   onSetClick = () => null,
-  onToastErrorSound = () => null,
 }) => {
   const [claimBonus, { loading }] = useMutation(CLAIM_BONUS);
   const [, dispatch] = useStateValue();
-  const { t } = useTranslation(['bonuses']);
+  const [playToast] = useSound(toast_v1.default);
+  const [playToastBonus] = useSound(bonus_received_v1.default);
+  const { t } = useTranslation(['bonuses', 'games', 'error']);
   const [
     {
-      sidebar: { isOpen },
+      sidebar: { isSound, isOpen },
     },
   ] = useStateValue();
 
   const onClaimBonus = async (bonusId: string) => {
+    console.log(' ========= ');
     onSetClick(bonusId);
     const { data, errors } = await claimBonus({ variables: { bonusId } });
     if (errors || data.claimBonus?.errors) {
-      onToastErrorSound();
-      return errorToast("It's failed, please try again later.");
+      if (isSound) {
+        setTimeout(() => {
+          playToast();
+        }, 500);
+      }
+      return errorToast(t('error:its_failed_try_again_later'));
     }
-    success(`Your balance has been updated: ${formatBitcoin(data.claimBonus.balance)}`);
+    if (isSound) {
+      setTimeout(() => {
+        playToastBonus();
+      }, 500);
+    }
+    success(
+      `${t('games:your_ballance_has_been_updated')}: ${formatBitcoin(data.claimBonus.balance)}`
+    );
     dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.claimBonus.balance } });
 
     onClaimBonusCompleted(bonusId);
   };
+  useEffect(() => {
+    console.log(isClickId);
+  }, [isClickId]);
 
   return (
     <>
@@ -77,10 +94,10 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
         <div className={styles.unclaimed_bonus__summary}>
           <p>{datetimeFromEpoch(bonusClaim.givenAt)}</p>
           <p>
-            {bonusClaim.type} {t('unclaimed_bonuses.sub_name')}
+            {bonusClaim.type} {t('bonuses:unclaimed_bonuses.sub_name')}
           </p>
           <p>
-            {t('unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
+            {t('bonuses:unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
           </p>
         </div>
 
@@ -89,7 +106,7 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
           loading={loading}
           className={clsx(styles.unclaimed_bonus__button, styles.unclaimed_bonus__button_close)}
         >
-          <span>{t('unclaimed_bonuses.claim_my_bonuses')}</span>
+          <span>{t('bonuses:unclaimed_bonuses.claim_my_bonuses')}</span>
           <BitcoinValue
             className={styles.unclaimed_bonus__icon}
             value={formatBitcoin(bonusClaim.amount)}
@@ -127,10 +144,10 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
 
           <div className={styles.unclaimed_bonus__mobile__summary}>
             <p>
-              {t('unclaimed_bonuses.received_on')} {datetimeFromEpoch(bonusClaim.givenAt)}
+              {t('bonuses:unclaimed_bonuses.received_on')} {datetimeFromEpoch(bonusClaim.givenAt)}
             </p>
             <p>
-              {t('unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
+              {t('bonuses:unclaimed_bonuses.expires_on')} {datetimeFromEpoch(bonusClaim.expiresAt)}
             </p>
           </div>
         </div>
@@ -145,8 +162,6 @@ const UnClaimedBonuses: React.FC<IProps> = ({
 }) => {
   const [bonusClaims, setBonusClaims] = useState(defaultBonusClaims);
   const [playBonusClaim, { stop }] = useSound(bonus_claim_v1.default);
-  const [playToastBonus] = useSound(bonus_received_v1.default);
-  const [playToast] = useSound(toast_v1.default);
   const { t } = useTranslation(['bonuses']);
   const [isClickId, setIsClickId] = useState<any>(null);
   const [
@@ -154,28 +169,20 @@ const UnClaimedBonuses: React.FC<IProps> = ({
       sidebar: { isSound, isOpen },
     },
   ] = useStateValue();
-  const onClaimBonusCompleted = async (bonusId: string) => {
+  const onClaimBonusCompleted = (bonusId: string) => {
     if (isSound) {
-      await stop();
-      await playBonusClaim();
+      stop();
+      playBonusClaim();
     }
     setBonusClaims(
       ([] as any[]).concat(bonusClaims.filter(bonusClaim => bonusClaim.id !== bonusId))
     );
+
     onClaimBonus();
   };
-  const onSetClick = async (bonusId: string) => {
+  const onSetClick = (bonusId: string) => {
     setIsClickId(bonusId);
-    if (isSound) {
-      await playToastBonus();
-    }
   };
-  const onToastErrorSound = async () => {
-    if (isSound) {
-      await playToast();
-    }
-  };
-
   useEffect(() => {
     setTimeout(() => {
       setIsClickId(null);
@@ -185,7 +192,7 @@ const UnClaimedBonuses: React.FC<IProps> = ({
   if (bonusClaims?.length > 0) {
     return (
       <div className={clsx(isOpen ? styles.unclaimed_bonuses : styles.unclaimed_bonuses_close)}>
-        <div className={styles.unclaimed_bonus__title}>{t('unclaimed_bonuses.title')}</div>
+        <div className={styles.unclaimed_bonus__title}>{t('bonuses:unclaimed_bonuses.title')}</div>
 
         {bonusClaims.slice(0, 3).map((bonusClaim, index) => (
           <UnClaimedBonus
@@ -194,13 +201,12 @@ const UnClaimedBonuses: React.FC<IProps> = ({
             isClickId={isClickId}
             onClaimBonusCompleted={onClaimBonusCompleted}
             onSetClick={onSetClick}
-            onToastErrorSound={onToastErrorSound}
           />
         ))}
 
         <div className={styles.unclaimed_bonus__history}>
           <a href="/transactions/bonuses" className={styles.unclaimed_bonus__history__link}>
-            {t('unclaimed_bonuses.history')}
+            {t('bonuses:unclaimed_bonuses.history')}
           </a>
         </div>
       </div>

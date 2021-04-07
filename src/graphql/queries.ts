@@ -172,6 +172,18 @@ export const ME = gql`
       depositAddress
       refCommissions
       refCode
+      seeds {
+        current {
+          serverSeedHash
+          clientSeed
+          nonce
+        }
+        previous {
+          serverSeed
+          serverSeedHash
+        }
+      }
+      activeGames
     }
   }
 `;

@@ -9,6 +9,8 @@ import { getEpoch } from '../common/util/date.util';
 import { setContext } from '@apollo/client/link/context';
 import { AuthType } from '../state/models/auth.model';
 import { appConfig } from '../common/config';
+import { onError } from '@apollo/client/link/error';
+import { RetryLink } from '@apollo/client/link/retry';
 
 const cache = new InMemoryCache({
   dataIdFromObject(responseObject) {
@@ -97,9 +99,54 @@ const getApolloClient = (
     authLink.concat(httpLink)
   );
 
+  const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+    if (graphQLErrors) {
+      for (const err of graphQLErrors) {
+        switch (err?.extensions?.code) {
+          case 'FORBIDDEN':
+            // error code is set to FORBIDDEN
+            // when AuthenticationError thrown in resolver
+
+            // if new accesstoken is valid
+            // retry request with it
+            if (accessToken) {
+              const { exp } = jwtDecode(accessToken);
+              if (exp > getEpoch()) {
+                // modify the operation context with a new token
+                const oldHeaders = operation.getContext().headers;
+                operation.setContext({
+                  headers: {
+                    ...oldHeaders,
+                    authorization: accessToken,
+                  },
+                });
+                // retry the request, returning the new observable
+                return forward(operation);
+              }
+            }
+        }
+      }
+      graphQLErrors.map(({ message, locations, path }) =>
+        console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+      );
+    }
+  });
+
+  const retryLink = new RetryLink({
+    delay: {
+      initial: 300,
+      max: Infinity,
+      jitter: true,
+    },
+    attempts: {
+      max: 10,
+      retryIf: error => !!error,
+    },
+  });
+
   return new ApolloClient({
     cache,
-    link: from([tokenLink, link]),
+    link: from([errorLink, tokenLink, link, retryLink]),
   });
 };
 

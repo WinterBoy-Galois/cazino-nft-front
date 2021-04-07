@@ -18,13 +18,14 @@ const Balance: React.FC<IProps> = ({ value, onClick }) => {
   return (
     <div className={styles.wrapper} onClick={onClick}>
       <div className={clsx(isOpen ? styles.container_open : styles.container)}>
-        <div className={clsx(isOpen ? styles.border_open : styles.border)} />
-        <div className={styles.value}>
-          <Bitcoin
-            className={clsx(isOpen ? styles.icon_open : styles.icon)}
-            innerClassName={styles.icon__inner}
-          />
-          <span>{value}</span>
+        <div className={clsx(isOpen ? styles.border_open : styles.border)}>
+          <div className={styles.value}>
+            <Bitcoin
+              className={clsx(isOpen ? styles.icon_open : styles.icon)}
+              innerClassName={styles.icon__inner}
+            />
+            <span>{value}</span>
+          </div>
         </div>
       </div>
     </div>

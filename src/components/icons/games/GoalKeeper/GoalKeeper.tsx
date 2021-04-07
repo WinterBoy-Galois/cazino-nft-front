@@ -14,19 +14,17 @@ interface IProps {
   lastSpot?: any;
   lastAdvanceStatus?: any;
   goalKeeperPosition?: number;
+  hideMiddleBall?: boolean;
 }
-
-// const getGoalKeeperLostPosition = (selection: number, hideMiddleBall: boolean) =>
-//   (hideMiddleBall ? [0, 2] : [0, 1, 2])
-//     .filter(pos => pos != selection)
-//     .sort(() => Math.random() - 0.5)[0];
 
 const GoalKeeper: React.FC<IProps> = ({
   className,
-  lastSpot,
+  lastSpot: defaultSpot,
   lastAdvanceStatus,
   goalKeeperPosition,
+  hideMiddleBall,
 }) => {
+  const lastSpot = hideMiddleBall === true && defaultSpot === 1 ? 2 : defaultSpot;
   switch (lastAdvanceStatus) {
     case 'Won':
       // const goalKeeperPosition = getGoalKeeperLostPosition(lastSpot, hideMiddleBall);

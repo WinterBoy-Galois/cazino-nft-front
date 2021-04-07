@@ -6,7 +6,7 @@ import Carousel from '../../components/Carousel';
 
 const HomePage: React.FC<RouteComponentProps> = () => {
   return (
-    <div className="container">
+    <div className="container-xs">
       <Carousel />
       <GameButtonList />
       <Teaser />

@@ -15,7 +15,7 @@ import { MinesGameState as GameState } from '../../../../models/minesGameState.m
 import BetAmountControl from '../../../../components/BetAmountControl';
 import { useTranslation } from 'react-i18next';
 import { formatBitcoin } from '../../../../common/util/format.util';
-import { error as errorToast } from '../../../../components/Toast'; // error as errorToast, success, info
+import { error as errorToast, success } from '../../../../components/Toast'; // error as errorToast, success, info
 import { appConfig } from '../../../../common/config';
 
 import useSound from 'use-sound';
@@ -82,8 +82,24 @@ const MineGame: React.FC<IProps> = ({
   ] = useStateValue();
 
   useEffect(() => {
+    dispatch({
+      type: 'SET_AMOUNT_MINES',
+      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
+    });
+  }, []);
+
+  useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET_MINES' });
+      dispatch({
+        type: 'SET_AMOUNT_MINES',
+        payload: { amount: 0 },
+      });
+    } else {
+      dispatch({
+        type: 'SET_AMOUNT_MINES',
+        payload: { amount: appConfig.defaultBetAmount },
+      });
     }
   }, [auth.state]);
   useEffect(() => {
@@ -289,12 +305,12 @@ const MineGame: React.FC<IProps> = ({
               )}
             >
               &times;&nbsp;
-              {session?.totalProfit.multiplier.toFixed(3)}
+              {session?.profit.multiplier.toFixed(appConfig.minesMultiplierPrecision)}
             </div>
 
             <div className={clsx('col', styles.text_align__left)}>
               <Bitcoin className={clsx(styles.icon, styles.icon__bitcoin)} />
-              {formatBitcoin(session?.totalProfit.profit)}
+              {formatBitcoin(session?.profit.profit)}
             </div>
           </div>
         </div>
@@ -326,11 +342,11 @@ const MineGame: React.FC<IProps> = ({
           <div className={styles.grid2}>
             <div className={styles.pl_profit}>
               {t('mines.profitTotal').toUpperCase()}&nbsp;(&times;&nbsp;
-              {session?.totalProfit.multiplier.toFixed(3)})
+              {session?.totalProfit.multiplier.toFixed(appConfig.minesMultiplierPrecision)})
             </div>
             <div className={styles.pl_profit_win}>
               {t('mines.profitNext').toUpperCase()}&nbsp;(&times;&nbsp;
-              {session?.nextProfit.multiplier.toFixed(3)})
+              {session?.nextProfit.multiplier.toFixed(appConfig.minesMultiplierPrecision)})
             </div>
           </div>
         </div>
@@ -355,7 +371,7 @@ const MineGame: React.FC<IProps> = ({
         ) : (
           <div className={styles.pt_profit_price} />
         )}
-        <div className={clsx(styles.btn_group, 'container')}>
+        <div className={clsx(styles.btn_group, 'container-sm')}>
           <div className={styles.controls__wrapper__btn_grid}>
             <div style={!isSetBet ? take_opacity_1 : take_opacity_3}>
               <div className={styles.win_counts}>
@@ -395,7 +411,7 @@ const MineGame: React.FC<IProps> = ({
                   !isControlDisable ? styles.bet_control_enable : styles.bet_control_disable
                 )}
                 amount={state.amount}
-                min={0.00000001}
+                min={0}
                 max={auth.user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT_MINES', payload: { amount } })}
                 readonly={state.gameState !== GameState.IDLE}
@@ -485,8 +501,8 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     }
 
     initSession(data.makeBetMines);
-    onPlayToast();
-    errorToast(`${t('mines.msgBalance')} ${formatBitcoin(data.makeBetMines.balance)}`);
+    // onPlayToast();
+    // errorToast(`${t('mines.msgBalance')} ${formatBitcoin(data.makeBetMines.balance)}`);
   };
 
   const handlePlaceBet = async (betId: string, selection: number) => {
@@ -522,16 +538,16 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
         if (data.advanceMines.balance) {
           dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceMines.balance } });
           if (data.advanceMines.profit.profit) {
-            const toast = `${t('mines.msgBalance')} ${formatBitcoin(
-              +data.advanceMines.profit.profit
-            )}`;
+            // const toast = `${t('mines.msgBalance')} ${formatBitcoin(
+            //   +data.advanceMines.profit.profit
+            // )}`;
 
-            if (+data.advanceMines.profit.profit >= 0) {
+            if (+data.advanceMines.profit.profit > 0) {
               onPlayBalanceUpdated();
-              errorToast(toast);
+              // success(toast);
             } else {
-              onPlayToast();
-              errorToast(toast);
+              // onPlayToast();
+              // errorToast(toast);
             }
           }
         }
@@ -557,13 +573,13 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     if (data.cashoutMines.balance) {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutMines.balance } });
       if (data.cashoutMines.profit.profit) {
-        const toast = `${t('mines.msgBalance')} ${formatBitcoin(+data.cashoutMines.profit.profit)}`;
-        if (+data.cashoutMines.profit.profit >= 0) {
+        // const toast = `${t('mines.msgBalance')} ${formatBitcoin(+data.cashoutMines.profit.profit)}`;
+        if (+data.cashoutMines.profit.profit > 0) {
           onPlayBalanceUpdated();
-          errorToast(toast);
+          // errorToast(toast);
         } else {
           onPlayToast();
-          errorToast(toast);
+          // errorToast(toast);
         }
       }
     }

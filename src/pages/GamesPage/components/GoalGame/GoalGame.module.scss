@@ -15,6 +15,9 @@ $grid-breakpoints: (
   padding-top: 5rem;
   margin-top: -0.5rem;
   overflow: hidden;
+  @include media-breakpoint-down(sm) {
+    padding-top: 3rem;
+  }
 }
 
 .advances {
@@ -77,6 +80,10 @@ $grid-breakpoints: (
       &__hidden {
         visibility: hidden;
       }
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin: 0.5rem auto;
     }
   }
 
@@ -201,5 +208,29 @@ $grid-breakpoints: (
 
   &__bitcoin {
     fill: $bitcoinYellow;
+  }
+}
+
+.bet_amount_container {
+  @include media-breakpoint-up(lg) {
+    max-width: 600px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 300px;
+  }
+  @include media-breakpoint-up(xxl) {
+    max-width: 500px;
+  }
+}
+
+.action_button {
+  @include media-breakpoint-up(lg) {
+    max-width: 600px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 300px;
+  }
+  @include media-breakpoint-up(xxl) {
+    max-width: 500px;
   }
 }

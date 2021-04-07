@@ -1,0 +1,46 @@
+@import '../../styles/shared';
+
+.container {
+  background-color: $blue;
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+
+  .title {
+    text-transform: uppercase;
+    font-size: 18px;
+    color: $live-updates-light-blue;
+    margin-bottom: 1rem;
+  }
+
+  .spacing {
+    margin-bottom: 1rem;
+  }
+
+  .spacing2 {
+    margin: 2rem 0 1rem 0;
+  }
+
+  .textColor {
+    color: rgba($color: #fff, $alpha: 0.8);
+  }
+
+  .button {
+    &__container {
+      margin-top: 1.4rem;
+    }
+  }
+
+  .error {
+    margin-top: 0.3rem;
+    color: $negative;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+.marginTop1 {
+  margin-top: 1rem;
+  @include media-breakpoint-up(lg) {
+    margin-top: 0;
+  }
+}

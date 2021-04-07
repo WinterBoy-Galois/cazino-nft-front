@@ -44,7 +44,7 @@ const FaucetModal: React.FC<IProps> = ({
   timestamp,
   errMessage: defaultErrMessage = '',
 }) => {
-  const { t } = useTranslation(['modals']);
+  const { t } = useTranslation(['modals', 'games']);
   const [, dispatch] = useStateValue();
   const [claimFaucet] = useMutation(CLAIM_FAUCET);
   const [errMessage, setErrMessage] = useState(null);
@@ -66,7 +66,9 @@ const FaucetModal: React.FC<IProps> = ({
 
     if (data.claimFaucet.balance) {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.claimFaucet.balance } });
-      success(`Your balance has been updated: ${formatBitcoin(+data.claimFaucet.balance)}`);
+      success(
+        `${t('games:your_ballance_has_been_updated')}: ${formatBitcoin(+data.claimFaucet.balance)}`
+      );
       onClose();
     }
   };
@@ -83,7 +85,7 @@ const FaucetModal: React.FC<IProps> = ({
         <div className={clsx(styles.modal__content__right)}>
           <div className={clsx(styles.modal__content__right__info)}>
             <div className={clsx(styles.modal__content__right__info__row)}>
-              <span>{t('faucet.amount')}</span>
+              <span>{t('modals:faucet.amount')}</span>
 
               <BitcoinValue
                 className={clsx(styles.modal__content__right__info__balance)}
@@ -92,7 +94,7 @@ const FaucetModal: React.FC<IProps> = ({
             </div>
 
             <div className={clsx(styles.modal__content__right__info__row)}>
-              <span>{t('faucet.every')}</span>
+              <span>{t('modals:faucet.every')}</span>
               <span>{secondsToHms(every)}</span>
             </div>
           </div>
@@ -103,10 +105,12 @@ const FaucetModal: React.FC<IProps> = ({
               className={styles.modal__content__right__button}
               onClick={onClaim}
             >
-              {t('faucet.buttonText')}
+              {t('modals:faucet.buttonText')}
             </Button>
 
-            <p className={styles.modal__content__right__description}>{t('faucet.description')}</p>
+            <p className={styles.modal__content__right__description}>
+              {t('modals:faucet.description')}
+            </p>
           </div>
         </div>
       </>
@@ -114,7 +118,7 @@ const FaucetModal: React.FC<IProps> = ({
   };
 
   return (
-    <Modal show={show} onClose={onClose} title={t('faucet.title')}>
+    <Modal show={show} onClose={onClose} title={t('modals:faucet.title')}>
       <div className={clsx(styles.modal__row, 'row')}>
         <div className={clsx(styles.modal__content)}>{renderModalContent()}</div>
       </div>

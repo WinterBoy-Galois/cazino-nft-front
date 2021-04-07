@@ -1,0 +1,22 @@
+@import '../../../../styles/shared';
+
+.container {
+  background-color: $read-only-input-bg;
+  padding: 0.6rem 0.7rem;
+  border-radius: 255px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
+
+.title {
+  color: #597fac;
+}

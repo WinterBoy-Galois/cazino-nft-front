@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './BetControl.module.scss';
 import clsx from 'clsx';
-import { isValid } from './lib/util';
+import { isValid, isNumber } from './lib/util';
 import Icon from './components/Icon';
 import { IconType } from './components/Icon/Icon';
 
@@ -16,6 +16,7 @@ interface IProps {
   decimalPlaces?: number;
   readonly?: boolean;
   onClick?: () => void;
+  onHandleBlur?: (value: number) => void;
 }
 
 const BetControl: React.FC<IProps> = ({
@@ -29,6 +30,7 @@ const BetControl: React.FC<IProps> = ({
   decimalPlaces = 2,
   readonly,
   onClick,
+  onHandleBlur = () => null,
 }) => {
   const formatValue = (v: number) => v.toFixed(decimalPlaces);
   const [value, setValue] = useState(defaultValue);
@@ -43,13 +45,13 @@ const BetControl: React.FC<IProps> = ({
   }, [defaultValue]);
 
   const handleChange = (newValue: string) => {
+    if (!isNumber(newValue)) return;
     setEditing(true);
-
     setInternalValue(newValue);
-
-    if (isValid(newValue, +min.toFixed(3), +max.toFixed(3))) {
-      setValue(+newValue);
-      onChange && onChange(+newValue);
+    const val = newValue.toString().replace(',', '.');
+    if (isValid(val, +min.toFixed(3), +max.toFixed(3))) {
+      setValue(+val);
+      onChange && onChange(+val);
     }
   };
 
@@ -69,6 +71,7 @@ const BetControl: React.FC<IProps> = ({
     onChange && onChange(+newValue);
 
     setEditing(false);
+    onHandleBlur(+internalValue);
   };
 
   return (

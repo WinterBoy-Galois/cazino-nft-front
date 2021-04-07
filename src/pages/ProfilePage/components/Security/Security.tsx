@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CardHeadline from '../../../../components/CardHeadline';
 import DetailsContainer from '../../../../components/DetailsContainer';
 import PasswordInput from '../../../../components/PasswordInput';
@@ -23,6 +23,7 @@ const Security: React.FC<IProps> = ({
   onPasswordChange = () => Promise.resolve(false),
   loading,
 }) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { t } = useTranslation(['profile', 'auth']);
   const formik = useFormik({
     initialValues: {
@@ -65,6 +66,8 @@ const Security: React.FC<IProps> = ({
           onChangeValue={v => formik.setFieldValue('newPassword', v)}
           onBlur={formik.handleBlur}
           value={formik.values.newPassword}
+          isForcePasswordVisible={isPasswordVisible}
+          onChangePasswordVisible={visible => setIsPasswordVisible(visible)}
           {...(formik.touched.newPassword ? { validationMessage: formik.errors.newPassword } : {})}
         />
 
@@ -73,6 +76,8 @@ const Security: React.FC<IProps> = ({
           name="newPasswordConfirm"
           onChangeValue={v => formik.setFieldValue('newPasswordConfirm', v)}
           onBlur={formik.handleBlur}
+          isForcePasswordVisible={isPasswordVisible}
+          onChangePasswordVisible={visible => setIsPasswordVisible(visible)}
           value={formik.values.newPasswordConfirm}
           {...(formik.touched.newPasswordConfirm
             ? { validationMessage: formik.errors.newPasswordConfirm }

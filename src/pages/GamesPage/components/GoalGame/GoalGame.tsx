@@ -55,24 +55,6 @@ interface IProps {
   profitCut?: any;
 }
 
-const PROBABILITIES = [
-  {
-    label: 'High',
-    value: PROBABILITY_HIGH,
-    summary: '2 of 3 win',
-  },
-  {
-    label: 'Middle',
-    value: PROBABILITY_MIDDLE,
-    summary: '1 of 2 win',
-  },
-  {
-    label: 'Low',
-    value: PROBABILITY_LOW,
-    summary: '1 of 3 win',
-  },
-];
-
 const deviceSize = { xxl: 6, xl: 5, lg: 4, md: 3, sm: 2, xs: 1 };
 
 const GoalGame: React.FC<IProps> = ({
@@ -114,7 +96,31 @@ const GoalGame: React.FC<IProps> = ({
     },
   ] = useStateValue();
 
+  const PROBABILITIES = [
+    {
+      label: t('goal.high'),
+      value: PROBABILITY_HIGH,
+      summary: t('goal.high_summary'),
+    },
+    {
+      label: t('goal.middle'),
+      value: PROBABILITY_MIDDLE,
+      summary: t('goal.middle_summary'),
+    },
+    {
+      label: t('goal.low'),
+      value: PROBABILITY_LOW,
+      summary: t('goal.low_summary'),
+    },
+  ];
+
   useEffect(() => {
+    // init bet amount
+    dispatch({
+      type: 'SET_AMOUNT',
+      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
+    });
+
     const checkDeviceSize = () => {
       if (window.innerWidth >= 1500) setDevice(deviceSize.xxl);
       else if (window.innerWidth >= 1200) setDevice(deviceSize.xl);
@@ -142,6 +148,15 @@ const GoalGame: React.FC<IProps> = ({
   useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET' });
+      dispatch({
+        type: 'SET_AMOUNT',
+        payload: { amount: 0 },
+      });
+    } else {
+      dispatch({
+        type: 'SET_AMOUNT',
+        payload: { amount: appConfig.defaultBetAmount },
+      });
     }
   }, [auth.state]);
 
@@ -277,12 +292,12 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const getButtonLabel = () => {
-    if (lastAdvanceStatus && lastAdvanceStatus !== 'Won') return 'try again';
-    if (state.gameState === GameState.IDLE) return 'start';
+    if (lastAdvanceStatus && lastAdvanceStatus !== 'Won') return t('goal.try_again');
+    if (state.gameState === GameState.IDLE) return t('goal.start');
     if (state.gameState === GameState.IN_PROGRESS)
-      return session?.lucky === false ? 'try again' : 'take money';
+      return session?.lucky === false ? t('goal.try_again') : t('goal.take_money');
     if (state.gameState === GameState.GAME_ENDED) {
-      return isCashOut || session?.lucky ? 'play again' : 'try again';
+      return isCashOut || session?.lucky ? t('goal.play_again') : t('goal.try_again');
     }
   };
 
@@ -326,7 +341,7 @@ const GoalGame: React.FC<IProps> = ({
                 )}
               >
                 &times;&nbsp;
-                {session?.totalProfit.multiplier.toFixed(3)}
+                {session?.totalProfit.multiplier.toFixed(appConfig.goalsMultiplierPrecision)}
               </div>
 
               <div className={clsx('col', styles.text_align__left)}>
@@ -349,7 +364,7 @@ const GoalGame: React.FC<IProps> = ({
         >
           <div className="row">
             <div className={clsx('col', styles.game_result__message_box__lost__title)}>
-              Uh, oh... Try again!
+              {t('oh_try_again')}
             </div>
           </div>
         </div>
@@ -369,7 +384,7 @@ const GoalGame: React.FC<IProps> = ({
       )}
     >
       {device <= deviceSize.lg ? null : (
-        <div className={styles.probability__label}>Probability</div>
+        <div className={styles.probability__label}>{t('goal.probability')}</div>
       )}
 
       <ButtonGroup
@@ -436,7 +451,7 @@ const GoalGame: React.FC<IProps> = ({
       </div>
 
       <div className={styles.controls__wrapper}>
-        <div className={clsx('container', styles.controls__wrapper__container)}>
+        <div className={clsx('container-sm', styles.controls__wrapper__container)}>
           <div
             className={clsx(
               'row',
@@ -450,7 +465,7 @@ const GoalGame: React.FC<IProps> = ({
               <div className={clsx(styles.profit__item, styles.profit__item__left)}>
                 <div className={styles.profit__label}>
                   {t('goal.profitTotal')}&nbsp;(&times;&nbsp;
-                  {session?.totalProfit.multiplier.toFixed(3)})
+                  {session?.totalProfit.multiplier.toFixed(appConfig.goalsMultiplierPrecision)})
                 </div>
                 <div>
                   <BitcoinValue value={formatBitcoin(session?.totalProfit.profit)} />
@@ -462,7 +477,7 @@ const GoalGame: React.FC<IProps> = ({
               <div className={clsx(styles.profit__item, styles.profit__right)}>
                 <div className={styles.profit__label}>
                   {t('goal.profitNext')}&nbsp;(&times;&nbsp;
-                  {session?.nextProfit.multiplier.toFixed(3)})
+                  {session?.nextProfit.multiplier.toFixed(appConfig.goalsMultiplierPrecision)})
                 </div>
                 <div>
                   <BitcoinValue value={formatBitcoin(session?.nextProfit.profit)} />
@@ -476,22 +491,23 @@ const GoalGame: React.FC<IProps> = ({
           <div className={clsx('row', styles.justify_content__center)}>
             <div
               className={clsx(
-                'col-12 col-xl-4',
+                'col-12 col-xl-5',
                 styles.amount__container,
-                state.gameState == GameState.IDLE ? null : styles.amount__disabled
+                state.gameState == GameState.IDLE ? null : styles.amount__disabled,
+                styles.bet_amount_container
               )}
             >
               <BetAmountControl
                 label={t('goal.amount')}
                 amount={state.amount}
-                min={0.00000001}
+                min={0}
                 max={auth.user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
                 readonly={state.gameState !== GameState.IDLE}
               />
             </div>
 
-            <div className={clsx(styles.controls__button, 'col-12 col-xl-4')}>
+            <div className={clsx(styles.controls__button, styles.action_button, 'col-12 col-xl-5')}>
               <SpinnerButton
                 onClick={handleButtonClick}
                 loading={loadingBet}
@@ -502,7 +518,8 @@ const GoalGame: React.FC<IProps> = ({
                 {getButtonLabel()}
               </SpinnerButton>
             </div>
-
+          </div>
+          <div className={clsx('row', styles.justify_content__center)}>
             {state.gameState !== GameState.IDLE && device <= deviceSize.xl ? (
               <GoalGameAdvances
                 profits={session?.profits}
@@ -533,6 +550,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const [profitCut, setProfitCut] = useState<any>(null);
   const [maxProfit, setMaxProfit] = useState<any>(0);
   const [selections, setSelections] = useState<any>([]);
+  const { t } = useTranslation(['games']);
 
   const [playToast] = useSound(toast_v1.default);
   const [playToastBalanceUpdated] = useSound(balance_updated_v1.default);
@@ -581,12 +599,12 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
       if (data.makeBetGoals?.errors[0]?.code === 'MAX_PROFIT') return;
       await onPlayToast();
-      return errorToast("Your bet couldn't be placed, please try again.");
+      return errorToast(t('your_bet_could_not_be_placed'));
     }
 
     await initSession(data.makeBetGoals);
-    await onPlayToastBalanceUpdated();
-    info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
+    // await onPlayToastBalanceUpdated();
+    // info(`Your balance has been updated: ${formatBitcoin(data.makeBetGoals.balance)}`);
   };
 
   const handlePlaceBet = async (betId: string, selection: number, currentStep: number) => {
@@ -597,7 +615,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     if (errors || data.advanceGoals?.errors) {
       setError(errors ?? data.advanceGoals?.errors);
       await onPlayToast();
-      return errorToast("Your bet couldn't be placed, please try again.");
+      return errorToast(t('your_bet_could_not_be_placed'));
     }
 
     switch (data.advanceGoals.__typename) {
@@ -640,16 +658,15 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
           dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
 
           if (data.advanceGoals.profit.profit) {
-            const toast = `Your balance has been updated: ${formatBitcoin(
-              +data.advanceGoals.profit.profit
-            )}`;
-
-            if (+data.advanceGoals.profit.profit >= 0) {
+            // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
+            //   +data.advanceGoals.profit.profit
+            // )}`;
+            if (+data.advanceGoals.profit.profit > 0) {
               await onPlayToastBalanceUpdated();
-              success(toast);
+              // success(toast);
             } else {
-              await onPlayToast();
-              info(toast);
+              // await onPlayToast();
+              // info(toast);
             }
           }
         }
@@ -666,7 +683,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     if (errors || data.cashoutGoals?.errors) {
       setError(errors ?? data.cashoutGoals?.errors);
       await onPlayToast();
-      return errorToast("Your bet couldn't be placed, please try again.");
+      return errorToast(t('your_bet_could_not_be_placed'));
     }
 
     setSession(
@@ -682,16 +699,16 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutGoals.balance } });
 
       if (data.cashoutGoals.profit.profit) {
-        const toast = `Your balance has been updated: ${formatBitcoin(
-          +data.cashoutGoals.profit.profit
-        )}`;
+        // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
+        //   +data.cashoutGoals.profit.profit
+        // )}`;
 
-        if (+data.cashoutGoals.profit.profit >= 0) {
+        if (+data.cashoutGoals.profit.profit > 0) {
           await onPlayToastBalanceUpdated();
-          success(toast);
+          // success(toast);
         } else {
           await onPlayToast();
-          info(toast);
+          // info(toast);
         }
       }
     }

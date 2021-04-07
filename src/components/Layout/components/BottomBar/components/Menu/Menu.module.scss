@@ -205,6 +205,10 @@
   }
   &__item {
     margin-right: 0;
+    &__disable {
+      opacity: 0.2;
+      cursor: default;
+    }
   }
 }
 
@@ -214,5 +218,9 @@
   }
   &__item {
     margin-right: 0;
+    &__disable {
+      opacity: 0.2;
+      cursor: default;
+    }
   }
 }

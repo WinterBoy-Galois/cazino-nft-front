@@ -50,11 +50,22 @@ const CashierModal: React.FC<IProps> = ({
   const [withdraw] = useMutation(WITHDRAW);
   const [isValidated, setValidated] = useState(false);
   const [depositAddress, setDepositAddress] = useState(defaultDepositAddress);
+  const [withdrawAddress, setWithdrawAddress] = useState('');
+  const [isChangedAddress, setChangedAddress] = useState(false);
 
   useEffect(() => {
-    if (validate(depositAddress)) setValidated(true);
+    if (validate(withdrawAddress)) setValidated(true);
     else setValidated(false);
-  }, [depositAddress]);
+  }, [withdrawAddress]);
+
+  useEffect(() => {
+    if (show) {
+      setModalType('deposit');
+      setAmount(0);
+      setWithdrawAddress('');
+      setChangedAddress(false);
+    }
+  }, [show]);
 
   useEffect(() => setDepositAddress(defaultDepositAddress), [defaultDepositAddress]);
 
@@ -149,9 +160,14 @@ const CashierModal: React.FC<IProps> = ({
               <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
                 <TextInput
                   label={t('cashier.bitcoinWalletAddress')}
-                  value={depositAddress}
-                  validationMessage={isValidated ? '' : 'Address is not valid.'}
-                  onChangeValue={depositAddress => setDepositAddress(depositAddress)}
+                  value={withdrawAddress}
+                  validationMessage={
+                    isValidated || !isChangedAddress ? '' : 'Address is not valid.'
+                  }
+                  onChangeValue={withdrawAddress => {
+                    setWithdrawAddress(withdrawAddress);
+                    setChangedAddress(true);
+                  }}
                 />
               </div>
 
@@ -171,15 +187,16 @@ const CashierModal: React.FC<IProps> = ({
 
               <div className={clsx(styles.withdraw__row, 'col-12 col-md-10 col-lg-8')}>
                 <Button
+                  disabled={amount < cashier.minWithdraw || !isValidated}
                   className={styles.withdraw__button}
                   onClick={async () => {
                     const { data, errors } = await withdraw({
                       variables: { amount: amount, address: depositAddress },
                     });
 
-                    if (errors) errorToast('Withdraw is failed.');
-                    else if (data?.withdraw?.result) success('Withdraw is completed.');
-                    else errorToast('Withdraw is failed.');
+                    if (errors) errorToast(t('withdraw_failed'));
+                    else if (data?.withdraw?.result) success(t('withdraw_completed'));
+                    else errorToast(t('withdraw_failed'));
                   }}
                 >
                   Withdraw

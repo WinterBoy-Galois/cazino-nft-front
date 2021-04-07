@@ -36,6 +36,7 @@ const Layout: React.FC = ({ children }) => {
   const handleSignOutClick = async () => {
     await signOut();
     dispatch({ type: 'AUTH_SIGN_OUT' });
+    navigate('/');
   };
 
   const handleBalanceClick = useCallback(

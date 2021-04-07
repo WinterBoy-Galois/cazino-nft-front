@@ -77,8 +77,24 @@ const DiceGame: React.FC<IProps> = ({
   ] = useStateValue();
 
   useEffect(() => {
+    dispatch({
+      type: 'SET_AMOUNT',
+      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
+    });
+  }, []);
+
+  useEffect(() => {
     if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET' });
+      dispatch({
+        type: 'SET_AMOUNT',
+        payload: { amount: 0 },
+      });
+    } else {
+      dispatch({
+        type: 'SET_AMOUNT',
+        payload: { amount: appConfig.defaultBetAmount },
+      });
     }
   }, [auth.state]);
 
@@ -151,7 +167,7 @@ const DiceGame: React.FC<IProps> = ({
       </div>
 
       <div className={styles.controls__wrapper}>
-        <div className="container">
+        <div className="container-xl">
           <div className="row">
             <div className="col-12">
               <div className={styles.profit__container}>
@@ -163,7 +179,7 @@ const DiceGame: React.FC<IProps> = ({
             </div>
           </div>
           <div className="row">
-            <div className="col-4 col-xl-2">
+            <div className="col-4 col-xxl-2">
               <BetControl
                 label={t('dice.probability')}
                 icon="PROBABILITY"
@@ -175,12 +191,12 @@ const DiceGame: React.FC<IProps> = ({
                 max={maxProbability}
               />
             </div>
-            <div className="col-4 col-xl-2">
+            <div className="col-4 col-xxl-2">
               <BetControl
                 label={t('dice.multiplier')}
                 icon="MULTIPLIER"
                 value={state.multiplier}
-                decimalPlaces={3}
+                decimalPlaces={appConfig.diceMultiplierPrecision}
                 onChange={multiplier =>
                   dispatch({ type: 'SET_MULTIPLIER', payload: { multiplier } })
                 }
@@ -188,7 +204,7 @@ const DiceGame: React.FC<IProps> = ({
                 max={calcMultiplier(minProbability, state.he)}
               />
             </div>
-            <div className="col-4 col-xl-2">
+            <div className="col-4 col-xxl-2">
               <BetControl
                 label={state.over ? t('dice.rollOver') : t('dice.rollUnder')}
                 icon="OVER_UNDER"
@@ -198,17 +214,21 @@ const DiceGame: React.FC<IProps> = ({
               />
             </div>
 
-            <div className={clsx('col-12 col-xl-3', styles.amount__container)}>
+            <div className={clsx('col-12 col-xl-6 col-xxl-4 col-xxxl-3', styles.amount__container)}>
               <BetAmountControl
                 amount={state.amount}
-                min={0.00000001}
+                min={0}
                 max={auth.user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
               />
             </div>
 
-            <div className={clsx(styles.controls__button, 'col-12 col-xl-3')}>
-              <SpinnerButton onClick={handlePlaceBet} loading={loadingBet || state.isRunning}>
+            <div className={clsx(styles.controls__button, 'col-12 col-xl-6 col-xxl-2 col-xxxl-3')}>
+              <SpinnerButton
+                className={`h-100`}
+                onClick={handlePlaceBet}
+                loading={loadingBet || state.isRunning}
+              >
                 start
               </SpinnerButton>
             </div>
@@ -222,6 +242,7 @@ const DiceGame: React.FC<IProps> = ({
 export default DiceGame;
 
 export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
+  const { t } = useTranslation();
   const [, dispatch] = useStateValue();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_DICE);
   const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE);
@@ -250,32 +271,21 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
         await playToast();
       }
       if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
-        return errorToast('Your bet may reaches the profit limit.');
+        return errorToast(t('your_bet_may_reaches_the_profit_limit'));
       }
-      return errorToast("Your bet couldn't be placed, please try again.");
+      return errorToast(t('your_bet_could_not_be_placed'));
     }
     setResult(data?.makeBetDice?.result);
 
     setTimeout(async () => {
       dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
-      const toast = `Your balance has been updated: ${formatBitcoin(+data?.makeBetDice?.profit)}`;
-      if (+data?.makeBetDice?.profit >= 0) {
-        if (isSound) {
-          await playToastBalance();
-        }
-        await success(toast);
-      } else {
-        if (isSound) {
-          await playToast();
-        }
-        await info(toast);
-      }
     }, appConfig.diceGameTimeout * 2);
 
     setTimeout(async () => {
-      if (+data?.makeBetDice?.profit >= 0) {
+      if (+data?.makeBetDice?.lucky) {
         if (isSound) {
           await playDiceWin();
+          await playToastBalance();
         }
       } else {
         if (isSound) {

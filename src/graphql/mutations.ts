@@ -1,8 +1,19 @@
 import gql from 'graphql-tag';
 
 export const CHANGE_SERVER_SEED = gql`
-  mutation ChangeServerSeed {
-    changeServerSeed {
+  mutation ChangeServerSeed($clientSeed: String) {
+    changeServerSeed(clientSeed: $clientSeed) {
+      ... on Seeds {
+        current {
+          serverSeedHash
+          clientSeed
+          nonce
+        }
+        previous {
+          serverSeed
+          serverSeedHash
+        }
+      }
       ... on GenericErrorArray {
         errors {
           source

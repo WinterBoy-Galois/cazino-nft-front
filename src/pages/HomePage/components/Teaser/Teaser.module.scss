@@ -15,20 +15,24 @@
   display: flex;
   align-items: center;
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     margin-top: 4rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    margin-top: 3rem;
     align-items: flex-start;
   }
 
   &:first-of-type {
     @include media-breakpoint-up(xl) {
-      padding-right: 3rem;
+      padding: 0 3rem;
     }
   }
 
   &:last-of-type {
     @include media-breakpoint-up(xl) {
-      padding-left: 3rem;
+      padding: 0 3rem;
     }
   }
 }
@@ -49,4 +53,9 @@
   @include media-breakpoint-up(md) {
     display: none;
   }
+}
+
+.openMenu {
+  display: flex;
+  align-items: center;
 }
