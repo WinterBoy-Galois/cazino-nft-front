@@ -22,11 +22,10 @@ const GoalGameAdvances: React.FC<IProps> = ({
   isEnded,
   hideMiddleBall = false,
 }) => {
-  const getStatusClsx = (selection: any, index: number, hideMiddleStatus: boolean) => {
+  const getStatusClsx = (selection: any, index: number) => {
     if (isEnded || selection?.selected === index) {
       return clsx(
         styles.single_advance__status__spot,
-        hideMiddleStatus && index == 1 ? styles.single_advance__status__spot__hidden : null,
         selection?.selected === index ? styles.single_advance__status__spot__selected : null,
         selection?.luckySpots?.includes(index)
           ? styles.single_advance__status__spot__lucky
@@ -34,10 +33,7 @@ const GoalGameAdvances: React.FC<IProps> = ({
       );
     }
 
-    return clsx(
-      styles.single_advance__status__spot,
-      hideMiddleStatus && index == 1 ? styles.single_advance__status__spot__hidden : null
-    );
+    return clsx(styles.single_advance__status__spot);
   };
 
   return (
@@ -68,11 +64,8 @@ const GoalGameAdvances: React.FC<IProps> = ({
               )}
             >
               {step <= (isEnded && !selection ? currentStep - 1 : currentStep)
-                ? Array.from(Array(3).keys()).map(index => (
-                    <span
-                      key={`status-${index}`}
-                      className={getStatusClsx(selection, index, hideMiddleBall)}
-                    />
+                ? Array.from(Array(hideMiddleBall ? 2 : 3).keys()).map(index => (
+                    <span key={`status-${index}`} className={getStatusClsx(selection, index)} />
                   ))
                 : null}
             </div>
