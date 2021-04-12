@@ -1,7 +1,6 @@
 import React from 'react';
 import { Detail } from './lib/detail';
 import styles from './DetailList.module.scss';
-import clsx from 'clsx';
 
 interface IProps {
   details?: Detail[];

@@ -1,0 +1,8 @@
+#tidio-chat > iframe {
+    bottom: 60px !important;
+}
+@media screen and (max-width: 768px) {
+    #tidio-chat > iframe {
+        bottom: 40px !important;
+    }
+}

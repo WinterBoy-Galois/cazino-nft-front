@@ -1,4 +1,5 @@
 export interface SidebarState {
+  isChatBot: boolean;
   isSound: boolean;
   isOpen: boolean;
   selectedTab: SidebarTab;

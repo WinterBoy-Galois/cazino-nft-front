@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './Toast.module.scss';
 import Info from '../icons/Info';
 import Check from '../icons/Check';

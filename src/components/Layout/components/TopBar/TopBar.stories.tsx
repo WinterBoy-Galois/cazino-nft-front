@@ -12,6 +12,7 @@ storiesOf('Components/TopBar', module)
       state={{
         sidebar: {
           isOpen: false,
+          isChatBot: true,
           isSound: true,
           selectedTab: 'LATEST_BETS',
           selectedLeaderboardAggregation: 'DAILY',

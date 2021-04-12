@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Router, LocationProvider } from '@reach/router';
 import HomePage from '../../pages/HomePage';
 import { ApolloProvider } from '@apollo/client';
@@ -18,6 +18,8 @@ import SeedPage from '../../pages/SeedPage';
 import Page404 from '../../pages/Page404';
 import Page500 from '../../pages/Page500';
 import LayoutPage from '../LayoutPage';
+import { useStateValue } from '../../state';
+import chatWidget from '../../customerSupport/CustomerSupport';
 
 export const toast_v1 = require('../../sounds/toast-v1.mp3');
 export const balance_updated_v1 = require('../../sounds/balance-updated-v1.mp3');
@@ -45,6 +47,17 @@ export const countdown_v1 = require('../../sounds/countdown-v1.mp3');
 
 const App: React.FC = () => {
   const client = useApolloClient();
+  const [
+    {
+      sidebar: { isChatBot },
+    },
+  ] = useStateValue();
+
+  useEffect(() => {
+    if (isChatBot) {
+      chatWidget();
+    }
+  }, []);
 
   return (
     <ApolloProvider client={client}>

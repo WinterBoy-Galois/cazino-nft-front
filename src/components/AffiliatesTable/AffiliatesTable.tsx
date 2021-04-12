@@ -7,10 +7,6 @@ import BitcoinValue from '../BitcoinValue';
 import TransactionsTable from '../TransactionsTable';
 import { TableColumn } from '../TransactionsTable/lib/tableColumn';
 import { useTranslation } from 'react-i18next';
-import BitcoinProfit from '../BitcoinProfit';
-import GameIcon from '../GameIcon';
-import styles from './AffiliatesTable.module.scss';
-import { useStateValue } from '../../state';
 interface IProps {
   data: TransactionsAffiliates[];
   paginationTotalRows?: number;

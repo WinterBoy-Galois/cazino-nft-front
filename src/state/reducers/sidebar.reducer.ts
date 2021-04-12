@@ -21,6 +21,11 @@ export const sidebarReducer: Reducer<SidebarState, Action> = (state, { type, pay
         ...state,
         isSound: !state.isSound,
       };
+    case 'CHAT_BOT_SHOW':
+      return {
+        ...state,
+        isChatBot: payload,
+      };
     default:
       return state;
   }
