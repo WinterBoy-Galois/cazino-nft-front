@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# sudo cp /home/ubuntu/.env /home/ubuntu/cc-srv/.env
+# sudo cp /home/ubuntu/env /home/ubuntu/cc-srv/env
 
 # cd /home/ubuntu
 # pm2 start ecosystem.config.js
