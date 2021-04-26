@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './SideBar.module.scss';
 import { useStateValue } from '../../../../state';
 import { CSSTransition } from 'react-transition-group';
@@ -18,6 +18,7 @@ import { RECENT_BETS } from '../../../../graphql/queries';
 import { BET_ADDED } from '../../../../graphql/subscriptions';
 import { ApolloError, useQuery, useSubscription } from '@apollo/client';
 import { GameTypes } from '../../../../models/gameTypes.model';
+import chatWidget from '../../../../customerSupport/CustomerSupport';
 
 const activateScrollLock = (breakpoint: Breakpoint): boolean => {
   switch (breakpoint) {
@@ -64,7 +65,7 @@ const renderTab = (
 const SideBar: React.FC = () => {
   const [
     {
-      sidebar: { isOpen, selectedTab },
+      sidebar: { isOpen, selectedTab, isChatBot },
       modal: { type: modalType },
       auth: { state, user },
     },
@@ -134,6 +135,19 @@ const SideBar: React.FC = () => {
     },
   });
 
+  useEffect(() => {
+    if (isChatBot) {
+      let user_info;
+      if (user) {
+        user_info = {
+          distinct_id: user.id, // Unique visitor ID in your system
+          email: user.email, // visitor email
+          name: user.username, // Visitor name
+        };
+      }
+      chatWidget(user_info);
+    }
+  }, []);
   return (
     <CSSTransition
       in={isOpen}
