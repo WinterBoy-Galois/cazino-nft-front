@@ -47,18 +47,6 @@ export const countdown_v1 = require('../../sounds/countdown-v1.mp3');
 
 const App: React.FC = () => {
   const client = useApolloClient();
-  const [
-    {
-      sidebar: { isChatBot },
-    },
-  ] = useStateValue();
-
-  useEffect(() => {
-    if (isChatBot) {
-      chatWidget();
-    }
-  }, []);
-
   return (
     <ApolloProvider client={client}>
       <GoogleReCaptchaProvider reCaptchaKey={appConfig.reCaptchaSiteKey}>
