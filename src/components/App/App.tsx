@@ -18,8 +18,6 @@ import SeedPage from '../../pages/SeedPage';
 import Page404 from '../../pages/Page404';
 import Page500 from '../../pages/Page500';
 import LayoutPage from '../LayoutPage';
-import { useStateValue } from '../../state';
-import chatWidget from '../../customerSupport/CustomerSupport';
 
 export const toast_v1 = require('../../sounds/toast-v1.mp3');
 export const balance_updated_v1 = require('../../sounds/balance-updated-v1.mp3');

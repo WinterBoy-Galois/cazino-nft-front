@@ -68,28 +68,36 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
 
   return (
     <div className={styles.bonuses_page}>
-      <div className={styles.bonuses_title}>{t('title')}</div>
+      <div className={styles.bonuses_title}>
+        {auth.state === 'SIGNED_IN' ? t('title') : t('promo.title')}
+      </div>
 
       <div className={styles.body_p}>
-        {bonusClaims && bonusClaims?.bonusClaims.length ? (
-          <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />
-        ) : null}
+        {auth.state === 'SIGNED_IN' ? (
+          <>
+            {bonusClaims && bonusClaims?.bonusClaims.length ? (
+              <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />
+            ) : null}
 
-        <div className={styles.leaderboard}>
-          <Leaderboard onType={onType} bonus={bonus} position={position} />
-        </div>
+            <div className={styles.leaderboard}>
+              <Leaderboard onType={onType} bonus={bonus} position={position} />
+            </div>
 
-        <div className={styles.leaderboard__table}>
-          <LeaderboardTable
-            leaderboard={data ? data.leaderboards[selectedTime] : []}
-            isLoading={loading}
-            error={error ? true : false}
-            signInUserId="15"
-            onUsernameClicked={userId =>
-              navigate(`${pathname}?dialog=user-info`, { state: { userId } })
-            }
-          />
-        </div>
+            <div className={styles.leaderboard__table}>
+              <LeaderboardTable
+                leaderboard={data ? data.leaderboards[selectedTime] : []}
+                isLoading={loading}
+                error={!!error}
+                signInUserId="15"
+                onUsernameClicked={userId =>
+                  navigate(`${pathname}?dialog=user-info`, { state: { userId } })
+                }
+              />
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
