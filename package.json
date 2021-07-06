@@ -54,7 +54,7 @@
     "build": "sh -ac '. ./.env.${REACT_APP_ENV}; react-scripts build'",
     "build:staging": "CI=false REACT_APP_ENV=staging react-scripts build",
     "build:dev": "CI=false REACT_APP_ENV=dev react-scripts build",
-    "build:all": "yarn build && yarn build-storybook",
+    "build:all": "CI=false yarn build && CI=false yarn build-storybook",
     "test": "TZ=UTC REACT_APP_API_BASE_PATH=https://jinglebets.com react-scripts test",
     "eject": "react-scripts eject",
     "test:single": "TZ=UTC CI=true REACT_APP_API_BASE_PATH=https://jinglebets.com react-scripts test --watchAll=false --verbose --colors",
