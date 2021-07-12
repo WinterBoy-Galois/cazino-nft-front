@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react';
+import logger from 'use-reducer-logger';
 import { State } from './models';
 import { mainReducer } from './reducers';
 import { Action } from './actions';
@@ -21,6 +22,7 @@ const getInitialState = (
     type: 'NONE',
   },
   auth: { state: readAuthState() },
+  newAuth: { state: readAuthState(), relogin: false },
   referral: {
     id: readReferral(),
   },
@@ -49,12 +51,9 @@ interface IProps {
 export const StateProvider: React.FC<IProps> = ({ children, state }) => {
   const breakpoint = useBreakpoint();
   const initialState = state ?? getInitialState(isSidebarInitiallyOpen(breakpoint), true, true);
+  const mainState = useReducer(logger(mainReducer), initialState);
 
-  return (
-    <StateContext.Provider value={useReducer(mainReducer, initialState)}>
-      {children}
-    </StateContext.Provider>
-  );
+  return <StateContext.Provider value={mainState}>{children}</StateContext.Provider>;
 };
 
 export const useStateValue = () => useContext(StateContext);

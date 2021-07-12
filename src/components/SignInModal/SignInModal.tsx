@@ -18,6 +18,7 @@ import ApplicationError from '../../models/applicationError.model';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { validationSchema } from './lib/validationSchema';
 import { useLocation, useNavigate } from '@reach/router';
+import { LoginAction } from '../../state/actions/newAuth.action';
 
 interface IProps {
   show: boolean;
@@ -140,7 +141,6 @@ const SignInModal: React.FC<IProps> = ({
 
 interface IWithDataProps {
   show: boolean;
-  userId: string;
   onClose?: () => void;
   onBack?: () => void;
 }
@@ -148,7 +148,7 @@ interface IWithDataProps {
 const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
   const [signIn, { loading }] = useMutation(SIGN_IN);
-  const [{ auth }, dispatch] = useStateValue();
+  const dispatch = useStateValue()[1];
   const [errors, setErrors] = useState<ApplicationError[]>();
   const location = useLocation();
   const navigate = useNavigate();
@@ -165,9 +165,10 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       return;
     }
 
-    dispatch({ type: 'AUTH_SIGN_IN', payload: { ...data.signIn, remember } });
+    dispatch({ type: LoginAction, payload: { ...data.signIn, remember } });
 
-    navigate(location.pathname);
+    await navigate(location.pathname);
+    return;
   };
 
   const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
@@ -179,11 +180,6 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
     setTimeout(() => setErrors([]), transitionTimeout);
     onClose && onClose();
   };
-
-  if (show && auth.state === 'SIGNED_IN') {
-    navigate(location.pathname);
-    return null;
-  }
 
   return (
     <SignInModal

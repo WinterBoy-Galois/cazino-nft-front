@@ -15,6 +15,7 @@ import { validationSchema } from './lib/validationSchema';
 import SpinnerButton from '../SpinnerButton';
 import { useQueryParams } from '../../hooks/useQueryParams.hook';
 import { useLocation, useNavigate } from '@reach/router';
+import { LoginAction, ResetPasswordAction } from '../../state/actions/newAuth.action';
 
 interface IProps {
   show: boolean;
@@ -115,7 +116,7 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
   const [errors, setErrors] = useState<ApplicationError[]>();
   const [
     {
-      auth: { passwordResetToken: token, state },
+      newAuth: { passwordResetToken: token, state },
     },
     dispatch,
   ] = useStateValue();
@@ -133,7 +134,7 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
       return setErrors(getFromGenericErrors(data.resetPassword.errors, t));
     }
 
-    dispatch({ type: 'AUTH_SIGN_IN', payload: data.resetPassword });
+    dispatch({ type: LoginAction, payload: data.resetPassword });
 
     navigate(location.pathname);
     success(t('passwordReset.success'));
@@ -149,7 +150,7 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
 
   useEffect(() => {
     if (params?.token) {
-      dispatch({ type: 'AUTH_ADD_PASSWORD_RESET_TOKEN', payload: params.token });
+      dispatch({ type: ResetPasswordAction, payload: params.token });
     }
   }, [params, dispatch]);
 

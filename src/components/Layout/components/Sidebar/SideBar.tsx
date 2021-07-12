@@ -67,7 +67,7 @@ const SideBar: React.FC = () => {
     {
       sidebar: { isOpen, selectedTab, isChatBot },
       modal: { type: modalType },
-      auth: { state, user },
+      newAuth: { state, user },
     },
   ] = useStateValue();
   const breakpoint = useBreakpoint();

@@ -1,28 +1,27 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useStateValue } from '../../state';
 import { ME } from '../../graphql/queries';
 import styles from './AuthOverlay.module.scss';
 import Spinner from '../Spinner';
-import { navigate } from '@reach/router';
+import { LoginAction, LogoutWithModalAction } from '../../state/actions/newAuth.action';
 
 const AuthOverlay: React.FC = ({ children }) => {
-  const [{ auth }, dispatch] = useStateValue();
+  const [{ newAuth }, dispatch] = useStateValue();
   const { data, error } = useQuery(ME, { fetchPolicy: 'network-only' });
 
   useEffect(() => {
-    if (error && auth.state === 'SIGNED_IN') {
-      dispatch({ type: 'AUTH_SIGN_OUT' });
-      navigate('/');
-    } else if (!error && data && auth.state === 'SIGNED_IN' && !auth.user) {
+    if (error && newAuth.state === 'SIGNED_IN') {
+      dispatch({ type: LogoutWithModalAction });
+    } else if (!error && data && newAuth.state === 'SIGNED_IN' && !newAuth.user) {
       dispatch({
-        type: 'AUTH_SIGN_IN',
+        type: LoginAction,
         payload: { user: { ...data.me } },
       });
     }
-  }, [dispatch, data, error, auth.state, auth.user]);
+  }, [dispatch, data, error, newAuth.state, newAuth.user]);
 
-  return auth.state === 'SIGNED_IN' && !auth.user ? (
+  return newAuth.state === 'SIGNED_IN' && !newAuth.user ? (
     <div className={styles.container}>
       <div className={styles.spinner}>
         <Spinner color={'WHITE'} />
@@ -30,7 +29,7 @@ const AuthOverlay: React.FC = ({ children }) => {
       <div>Just a moment</div>
     </div>
   ) : (
-    <Fragment>{children}</Fragment>
+    <>{children}</>
   );
 };
 

@@ -9,8 +9,8 @@ import { ButtonSize } from '../../../Button';
 import SignIn from '../../../icons/SignIn';
 import Avatar from '../../../Avatar';
 import UserMenu from '../../../UserMenu';
-// import { Link } from '@reach/router';
 import { useBreakpoint } from '../../../../hooks/useBreakpoint.hook';
+import { useNavigate } from '@reach/router';
 
 interface IProps {
   onSignInClick?: () => void;
@@ -20,10 +20,11 @@ interface IProps {
 
 const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLogo }) => {
   const { t } = useTranslation(['auth']);
-  const [{ sidebar, auth }] = useStateValue();
+  const [{ sidebar, newAuth }] = useStateValue();
   const [showMenu, setShowMenu] = useState(false);
   const avatarRef = useRef(null);
   const breakpoint = useBreakpoint();
+  const navigation = useNavigate();
 
   const handleCloseMenu = useCallback(() => setShowMenu(false), []);
   const handleToggleMenu = useCallback(() => setShowMenu(!showMenu), [showMenu]);
@@ -39,8 +40,7 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLo
   }, [breakpoint]);
 
   const onClickHome = () => {
-    window.location.href = '/';
-    // props.history.push('/');
+    navigation('/');
   };
 
   return (
@@ -62,7 +62,7 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLo
                   !sidebar.isOpen || isMobileBreakpoint ? styles['details--spacing'] : ''
                 }`}
               >
-                {!auth.user ? (
+                {!newAuth.user ? (
                   <Fragment>
                     <div className={styles.details__button}>
                       <SecondaryButton
@@ -79,10 +79,10 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLo
                   </Fragment>
                 ) : (
                   <Fragment>
-                    <span className={styles['details--spacing']}>{auth.user.username}</span>
+                    <span className={styles['details--spacing']}>{newAuth.user.username}</span>
                     <Avatar
-                      avatarUrl={auth.user.avatarUrl}
-                      username={auth.user.username}
+                      avatarUrl={newAuth.user.avatarUrl}
+                      username={newAuth.user.username}
                       ref={avatarRef}
                       onClick={handleToggleMenu}
                     />
@@ -98,7 +98,7 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLo
 
       <UserMenu
         show={showMenu}
-        username={auth.user?.username}
+        username={newAuth.user?.username}
         onSignOutClick={onSignOutClick}
         onClose={handleCloseMenu}
         toggleRef={avatarRef}

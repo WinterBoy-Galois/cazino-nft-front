@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, Reducer } from 'react';
+import React, { useState, useEffect, useReducer, Reducer, useMemo } from 'react';
 import GoalGameBoard from '../../../../components/GoalGameBoard';
 import GoalGameAdvances from '../../../../components/GoalGameAdvances';
 import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
@@ -40,6 +40,7 @@ import {
 } from './lib/reducer';
 import { GoalGameState as GameState } from '../../../../models/goalGameState.model';
 import { formatBitcoin } from '../../../../common/util/format.util';
+import { UpdateUserAction } from '../../../../state/actions/newAuth.action';
 
 interface IProps {
   loadingSetup?: boolean;
@@ -70,7 +71,7 @@ const GoalGame: React.FC<IProps> = ({
   maxProfit,
   profitCut,
 }) => {
-  const [{ auth }] = useStateValue();
+  const [{ newAuth }] = useStateValue();
   const { t } = useTranslation(['games']);
   const [state, dispatch] = useReducer<Reducer<GoalGameState, GoalGameAction>>(
     goalGameReducer,
@@ -85,6 +86,8 @@ const GoalGame: React.FC<IProps> = ({
   const [isCashOut, setCashOut] = useState(false);
   const [isAlerted, setAlerted] = useState(false);
   const [isGameStartedBtnClicked, setGameStartBtnClicked] = useState(false);
+  const isAuthorized = useMemo(() => newAuth.state === 'SIGNED_IN', [newAuth.state]);
+  console.log(isAuthorized);
 
   const [play] = useSound(button_click_v1.default);
   const [playGoalSelect] = useSound(goal_select_v1.default);
@@ -118,7 +121,7 @@ const GoalGame: React.FC<IProps> = ({
     // init bet amount
     dispatch({
       type: 'SET_AMOUNT',
-      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
+      payload: { amount: isAuthorized ? appConfig.defaultBetAmount : 0 },
     });
 
     const checkDeviceSize = () => {
@@ -137,7 +140,7 @@ const GoalGame: React.FC<IProps> = ({
   }, []);
 
   useEffect(() => {
-    if (auth.state === 'SIGNED_IN' && profitCut && maxProfit && !isAlerted) {
+    if (isAuthorized && profitCut && maxProfit && !isAlerted) {
       if (session.profitCut === 'CUT') setAlerted(true);
 
       (async () =>
@@ -146,7 +149,7 @@ const GoalGame: React.FC<IProps> = ({
   }, [profitCut, maxProfit]);
 
   useEffect(() => {
-    if (auth.state !== 'SIGNED_IN') {
+    if (!isAuthorized) {
       dispatch({ type: 'RESET' });
       dispatch({
         type: 'SET_AMOUNT',
@@ -158,7 +161,7 @@ const GoalGame: React.FC<IProps> = ({
         payload: { amount: appConfig.defaultBetAmount },
       });
     }
-  }, [auth.state]);
+  }, [newAuth.state]);
 
   useEffect(() => {
     if (!errorBet) {
@@ -247,7 +250,7 @@ const GoalGame: React.FC<IProps> = ({
   }
 
   const handleStartGame = async () => {
-    if (auth.state !== 'SIGNED_IN') {
+    if (!isAuthorized) {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
@@ -265,7 +268,7 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const handleCashOut = async () => {
-    if (auth.state !== 'SIGNED_IN') {
+    if (!isAuthorized) {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
@@ -276,10 +279,9 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const handlePlaceBet = async (selection?: number) => {
-    if (auth.state !== 'SIGNED_IN') {
+    if (!isAuthorized) {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
-
     if (
       lastSpot === null &&
       lastAdvanceStatus === null &&
@@ -501,7 +503,7 @@ const GoalGame: React.FC<IProps> = ({
                 label={t('goal.amount')}
                 amount={state.amount}
                 min={0}
-                max={auth.user?.balance ?? 15}
+                max={newAuth.user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
                 readonly={state.gameState !== GameState.IDLE}
               />
@@ -579,14 +581,14 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   };
 
   const initSession = (goalsGameSetupObj: any) => {
-    if (goalsGameSetupObj.__typename !== 'GoalsGameSetup') return;
+    if (goalsGameSetupObj?.__typename !== 'GoalsGameSetup') return;
 
     setSession(goalsGameSetupObj.session);
     setSelections(goalsGameSetupObj.session?.selections || []);
     setProfitCut(goalsGameSetupObj.session?.profitCut || null);
 
     if (goalsGameSetupObj.balance)
-      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: goalsGameSetupObj.balance } });
+      dispatch({ type: UpdateUserAction, payload: { balance: goalsGameSetupObj.balance } });
   };
 
   const handleStartGame = async (betAmount: number, probability: string) => {
@@ -655,7 +657,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
         );
 
         if (data.advanceGoals.balance) {
-          dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
+          dispatch({ type: UpdateUserAction, payload: { balance: data.advanceGoals.balance } });
 
           if (data.advanceGoals.profit.profit) {
             // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
@@ -696,7 +698,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     );
 
     if (data.cashoutGoals.balance) {
-      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutGoals.balance } });
+      dispatch({ type: UpdateUserAction, payload: { balance: data.cashoutGoals.balance } });
 
       if (data.cashoutGoals.profit.profit) {
         // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(

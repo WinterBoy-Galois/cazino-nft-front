@@ -12,21 +12,28 @@ const LayoutPage: React.FC<IProps> = ({ component: Component, isAuthNeeded, ...p
   const [, dispatch] = useStateValue();
   const [
     {
-      auth: { state },
+      newAuth: { state, relogin },
+      sidebar: { isChatBot },
     },
   ] = useStateValue();
 
   useEffect(() => {
-    dispatch({ type: 'CHAT_BOT_SHOW', payload: true });
+    if (!isChatBot) {
+      dispatch({ type: 'CHAT_BOT_SHOW', payload: true });
+    }
   }, []);
+
+  const isLoggined = state === 'SIGNED_IN';
 
   if (isAuthNeeded) {
     return (
       <Layout>
-        {state === 'SIGNED_IN' ? (
+        {isLoggined ? (
           <Component {...props} />
+        ) : relogin ? (
+          <div>skeleton</div>
         ) : (
-          <Redirect to={'/?dialog=sign-in'} noThrow />
+          <Redirect to={`/`} noThrow />
         )}
       </Layout>
     );
