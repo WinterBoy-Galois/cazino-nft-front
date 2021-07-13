@@ -4,7 +4,7 @@ import { useStateValue } from '../../state';
 import { ME } from '../../graphql/queries';
 import styles from './AuthOverlay.module.scss';
 import Spinner from '../Spinner';
-import { LoginAction, LogoutWithModalAction } from '../../state/actions/newAuth.action';
+import { LOGIN, LOGIN_WITH_MODAL } from '../../state/actions/newAuth.action';
 
 const AuthOverlay: React.FC = ({ children }) => {
   const [{ newAuth }, dispatch] = useStateValue();
@@ -12,10 +12,10 @@ const AuthOverlay: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (error && newAuth.state === 'SIGNED_IN') {
-      dispatch({ type: LogoutWithModalAction });
+      dispatch({ type: LOGIN_WITH_MODAL });
     } else if (!error && data && newAuth.state === 'SIGNED_IN' && !newAuth.user) {
       dispatch({
-        type: LoginAction,
+        type: LOGIN,
         payload: { user: { ...data.me } },
       });
     }

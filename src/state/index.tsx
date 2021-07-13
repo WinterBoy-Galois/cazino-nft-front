@@ -21,7 +21,6 @@ const getInitialState = (
   modal: {
     type: 'NONE',
   },
-  auth: { state: readAuthState() },
   newAuth: { state: readAuthState(), relogin: false },
   referral: {
     id: readReferral(),

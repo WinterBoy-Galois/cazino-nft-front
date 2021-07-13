@@ -20,6 +20,7 @@ import { ME_STATISTICS_PREFERENCES } from '../../graphql/queries';
 import { UPDATE_PASSWORD, UPDATE_PREFERENCES, UPDATE_AVATAR } from '../../graphql/mutations';
 
 import styles from './ProfilePage.module.scss';
+import { updateUserAction } from '../../state/actions/newAuth.action';
 
 interface IProps extends RouteComponentProps {
   userStatistic?: UserStatistic;
@@ -93,8 +94,7 @@ const ProfilePage: React.FC<IProps> = ({
 
 const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['auth', 'profile']);
-  const [, dispatch] = useStateValue();
-  const [{ newAuth }] = useStateValue();
+  const [{ newAuth }, dispatch] = useStateValue();
 
   const { data, loading: statisticsLoading, error: statisticsError } = useQuery(
     ME_STATISTICS_PREFERENCES
@@ -155,16 +155,10 @@ const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
       variables: { index },
     });
 
-    dispatch({
-      type: 'AUTH_UPDATE_USER',
-      payload: { avatarUrl: appConfig.avatarUrls[index - 1] },
-    });
+    dispatch(updateUserAction({ avatarUrl: appConfig.avatarUrls[index - 1] }));
 
     if (errors || data?.modifyAvatar.errors) {
-      dispatch({
-        type: 'AUTH_UPDATE_USER',
-        payload: { avatarUrl: oldAvatarUrl },
-      });
+      dispatch(updateUserAction({ avatarUrl: oldAvatarUrl }));
       return error(t('profile:userInfo.errorToast'));
     }
 

@@ -1,25 +1,16 @@
 import { Reducer } from 'react';
 import { Action } from '../actions';
-import User from '../../models/user.model';
-import { AuthType } from '../models/auth.model';
 import {
-  LoginAction,
-  LogoutAction,
-  LogoutWithModalAction,
-  RegisterAction,
-  ResetPasswordAction,
-  UpdateRefreshTokenAction,
-  UpdateUserAction,
-  ToggleReLoginAction,
+  LOGIN,
+  LOGOUT,
+  LOGIN_WITH_MODAL,
+  REGISTER,
+  RESET_PASSWORD,
+  UPDATE_REFRESH_TOKEN,
+  UPDATE_USER,
+  TOGGLE_RELOGIN,
 } from '../actions/newAuth.action';
-
-export interface NewAuthState {
-  state: AuthType;
-  user?: User;
-  accessToken?: string;
-  passwordResetToken?: string;
-  relogin: boolean;
-}
+import { NewAuthState } from '../models/newAuth.model';
 
 const logoutAction = (state: NewAuthState): NewAuthState => ({
   ...state,
@@ -30,7 +21,7 @@ const logoutAction = (state: NewAuthState): NewAuthState => ({
 
 export const newAuthReducer: Reducer<NewAuthState, Action> = (state, action) => {
   switch (action.type) {
-    case LoginAction:
+    case LOGIN:
       return {
         ...state,
         user: action.payload.user,
@@ -38,30 +29,30 @@ export const newAuthReducer: Reducer<NewAuthState, Action> = (state, action) => 
         relogin: false,
         accessToken: action.payload.accessToken ?? state.accessToken,
       };
-    case RegisterAction:
+    case REGISTER:
       return {
         ...state,
         ...action.payload,
         state: 'SIGNED_IN',
       };
-    case LogoutAction:
+    case LOGOUT:
       return logoutAction(state);
-    case LogoutWithModalAction:
+    case LOGIN_WITH_MODAL:
       return {
         ...logoutAction(state),
         relogin: true,
       };
-    case UpdateRefreshTokenAction:
+    case UPDATE_REFRESH_TOKEN:
       return {
         ...state,
         accessToken: action.payload.accessToken,
       };
-    case ResetPasswordAction:
+    case RESET_PASSWORD:
       return {
         ...state,
         passwordResetToken: action.payload,
       };
-    case UpdateUserAction:
+    case UPDATE_USER:
       return {
         ...state,
         user: {
@@ -69,7 +60,7 @@ export const newAuthReducer: Reducer<NewAuthState, Action> = (state, action) => 
           ...action.payload,
         },
       };
-    case ToggleReLoginAction:
+    case TOGGLE_RELOGIN:
       return {
         ...state,
         relogin: action.payload,

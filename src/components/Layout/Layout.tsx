@@ -15,7 +15,7 @@ import useRealtimeBalance from '../../hooks/useRealtimeBalance.hook';
 import { BONUSCLAIMS } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
 import useRealtimeBonusNotification from '../../hooks/useRealtimeBonusNotification.hook';
-import { LogoutAction } from '../../state/actions/newAuth.action';
+import { LOGOUT } from '../../state/actions/newAuth.action';
 
 const Layout: React.FC = ({ children }) => {
   useRealtimeBalance();
@@ -36,7 +36,7 @@ const Layout: React.FC = ({ children }) => {
 
   const handleSignOutClick = async () => {
     await signOut();
-    dispatch({ type: LogoutAction });
+    dispatch({ type: LOGOUT });
     navigate('/');
   };
 

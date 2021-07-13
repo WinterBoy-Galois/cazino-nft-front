@@ -17,16 +17,6 @@ const state: State = {
   modal: {
     type: 'NONE',
   },
-  auth: {
-    state: 'SIGNED_IN',
-    accessToken: 'token',
-    user: {
-      id: '123',
-      isActivated: true,
-      username: 'testuser',
-      avatarUrl: `${appConfig.apiBasePath}/ava/m1.svg`,
-    },
-  },
   newAuth: {
     relogin: false,
     state: 'SIGNED_IN',

@@ -29,6 +29,8 @@ import {
   clams_lost_v1,
   clams_select_v1,
 } from '../../../../components/App/App';
+import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
+import { updateUserAction } from '../../../../state/actions/newAuth.action';
 
 interface IProps {
   loadingBet?: boolean;
@@ -55,7 +57,12 @@ const ClamGame: React.FC<IProps> = ({
   multiplier = 49.748,
   profit = 0.00773,
 }) => {
-  const [{ auth }] = useStateValue();
+  const isAuthorized = useIsAuthorized();
+  const [
+    {
+      newAuth: { user },
+    },
+  ] = useStateValue();
   const { t } = useTranslation(['games']);
   const [state, dispatch] = useReducer<Reducer<ClamGameState, ClamGameAction>>(
     clamGameReducer,
@@ -77,12 +84,12 @@ const ClamGame: React.FC<IProps> = ({
   useEffect(() => {
     dispatch({
       type: 'SET_AMOUNT',
-      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
+      payload: { amount: isAuthorized ? appConfig.defaultBetAmount : 0 },
     });
   }, []);
 
   useEffect(() => {
-    if (auth.state !== 'SIGNED_IN') {
+    if (!isAuthorized) {
       dispatch({ type: 'RESET' });
       dispatch({
         type: 'SET_AMOUNT',
@@ -94,7 +101,7 @@ const ClamGame: React.FC<IProps> = ({
         payload: { amount: appConfig.defaultBetAmount },
       });
     }
-  }, [auth.state]);
+  }, [isAuthorized]);
 
   useEffect(() => {
     if (errorBet) {
@@ -143,7 +150,7 @@ const ClamGame: React.FC<IProps> = ({
   }
 
   const handlePlaceBet = async () => {
-    if (auth.state !== 'SIGNED_IN') {
+    if (!isAuthorized) {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
@@ -279,7 +286,7 @@ const ClamGame: React.FC<IProps> = ({
                 label={t('clam.amount')}
                 amount={state.amount}
                 min={0}
-                max={auth.user?.balance ?? 15}
+                max={user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
               />
             </div>
@@ -343,7 +350,7 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
     setProfit(data?.makeBetClams?.profit);
 
     setTimeout(() => {
-      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.makeBetClams?.balance } });
+      dispatch(updateUserAction({ balance: data.makeBetClams?.balance }));
       // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
       //   +data.makeBetClams?.profit
       // )}`;

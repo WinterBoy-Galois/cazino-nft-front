@@ -22,6 +22,7 @@ import BitcoinValue from '../../../../components/BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import { useTranslation } from 'react-i18next';
 import BetAmountControl from '../../../../components/BetAmountControl';
+import { updateUserAction } from '../../../../state/actions/newAuth.action';
 
 import useSound from 'use-sound';
 import {
@@ -32,6 +33,8 @@ import {
   dice_win_v1,
   dice_lost_v1,
 } from '../../../../components/App/App';
+import { UPDATE_USER } from '../../../../state/actions/newAuth.action';
+import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
 
 interface IProps {
   loadingBet?: boolean;
@@ -57,7 +60,12 @@ const DiceGame: React.FC<IProps> = ({
   he = 0.01,
   errorBet,
 }) => {
-  const [{ auth }] = useStateValue();
+  const isAuthorized = useIsAuthorized();
+  const [
+    {
+      newAuth: { user },
+    },
+  ] = useStateValue();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { t } = useTranslation(['games']);
@@ -79,12 +87,12 @@ const DiceGame: React.FC<IProps> = ({
   useEffect(() => {
     dispatch({
       type: 'SET_AMOUNT',
-      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
+      payload: { amount: isAuthorized ? appConfig.defaultBetAmount : 0 },
     });
   }, []);
 
   useEffect(() => {
-    if (auth.state !== 'SIGNED_IN') {
+    if (!isAuthorized) {
       dispatch({ type: 'RESET' });
       dispatch({
         type: 'SET_AMOUNT',
@@ -96,7 +104,7 @@ const DiceGame: React.FC<IProps> = ({
         payload: { amount: appConfig.defaultBetAmount },
       });
     }
-  }, [auth.state]);
+  }, [isAuthorized]);
 
   useEffect(() => {
     if (errorBet) {
@@ -132,7 +140,7 @@ const DiceGame: React.FC<IProps> = ({
   }, [result]);
 
   const handlePlaceBet = async () => {
-    if (auth.state !== 'SIGNED_IN') {
+    if (!isAuthorized) {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
@@ -218,7 +226,7 @@ const DiceGame: React.FC<IProps> = ({
               <BetAmountControl
                 amount={state.amount}
                 min={0}
-                max={auth.user?.balance ?? 15}
+                max={user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
               />
             </div>
@@ -245,7 +253,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation('games');
   const [, dispatch] = useStateValue();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_DICE);
-  const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE);
+  const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE, { errorPolicy: 'all' });
   const [result, setResult] = useState();
   const [error, setError] = useState();
 
@@ -278,7 +286,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
     setResult(data?.makeBetDice?.result);
 
     setTimeout(async () => {
-      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data?.makeBetDice?.balance } });
+      dispatch(updateUserAction({ balance: data?.makeBetDice?.balance }));
     }, appConfig.diceGameTimeout);
 
     setTimeout(async () => {

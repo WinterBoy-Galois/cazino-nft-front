@@ -40,7 +40,7 @@ import {
 } from './lib/reducer';
 import { GoalGameState as GameState } from '../../../../models/goalGameState.model';
 import { formatBitcoin } from '../../../../common/util/format.util';
-import { UpdateUserAction } from '../../../../state/actions/newAuth.action';
+import { UPDATE_USER } from '../../../../state/actions/newAuth.action';
 
 interface IProps {
   loadingSetup?: boolean;
@@ -588,7 +588,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     setProfitCut(goalsGameSetupObj.session?.profitCut || null);
 
     if (goalsGameSetupObj.balance)
-      dispatch({ type: UpdateUserAction, payload: { balance: goalsGameSetupObj.balance } });
+      dispatch({ type: UPDATE_USER, payload: { balance: goalsGameSetupObj.balance } });
   };
 
   const handleStartGame = async (betAmount: number, probability: string) => {
@@ -657,7 +657,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
         );
 
         if (data.advanceGoals.balance) {
-          dispatch({ type: UpdateUserAction, payload: { balance: data.advanceGoals.balance } });
+          dispatch({ type: UPDATE_USER, payload: { balance: data.advanceGoals.balance } });
 
           if (data.advanceGoals.profit.profit) {
             // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
@@ -698,7 +698,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     );
 
     if (data.cashoutGoals.balance) {
-      dispatch({ type: UpdateUserAction, payload: { balance: data.cashoutGoals.balance } });
+      dispatch({ type: UPDATE_USER, payload: { balance: data.cashoutGoals.balance } });
 
       if (data.cashoutGoals.profit.profit) {
         // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(

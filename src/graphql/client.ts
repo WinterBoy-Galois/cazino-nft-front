@@ -7,7 +7,7 @@ import { HttpLink, defaultDataIdFromObject } from '@apollo/client';
 import jwtDecode from 'jwt-decode';
 import { getEpoch } from '../common/util/date.util';
 import { setContext } from '@apollo/client/link/context';
-import { AuthType } from '../state/models/auth.model';
+import { AuthType } from '../state/models/newAuth.model';
 import { appConfig } from '../common/config';
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';

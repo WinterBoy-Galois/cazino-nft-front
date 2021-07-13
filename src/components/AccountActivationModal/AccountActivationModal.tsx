@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import ErrorSummary from '../ErrorSummary';
 import { useLocation, useNavigate } from '@reach/router';
+import { updateUserAction } from '../../state/actions/newAuth.action';
 
 interface IProps {
   show: boolean;
@@ -127,7 +128,7 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
     }
 
     dispatch({ type: 'MODAL_HIDE' });
-    dispatch({ type: 'AUTH_UPDATE_USER', payload: { isActivated: true } });
+    dispatch(updateUserAction({ isActivated: true }));
 
     success(t('accountActivation.success'));
     navigate(pathname);

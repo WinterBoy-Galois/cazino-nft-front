@@ -17,6 +17,7 @@ import Uppercase from '../Uppercase';
 import Link from '../Link';
 import { useStateValue } from '../../state';
 import { useLocation, useNavigate } from '@reach/router';
+import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
 interface IProps {
   show: boolean;
@@ -121,10 +122,10 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
   show,
   onClose,
 }: IWithDataProps) => {
+  const isAuthorized = useIsAuthorized();
   const { t } = useTranslation(['auth', 'common']);
   const [recoverPassword, { loading }] = useMutation(RECOVER_PASSWORD);
   const [errors, setErrors] = useState<ApplicationError[]>();
-  const [{ auth }] = useStateValue();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -154,7 +155,7 @@ const PasswordRecoveryModalWithData: React.FC<IWithDataProps> = ({
   const handleNavigateToSignIn = () => navigate(`${location.pathname}?dialog=sign-in`);
   const handleNavigateToSignUp = () => navigate(`${location.pathname}?dialog=sign-up`);
 
-  if (show && auth.state === 'SIGNED_IN') {
+  if (show && isAuthorized) {
     navigate(location.pathname);
     return null;
   }
