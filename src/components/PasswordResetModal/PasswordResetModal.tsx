@@ -15,6 +15,8 @@ import { validationSchema } from './lib/validationSchema';
 import SpinnerButton from '../SpinnerButton';
 import { useQueryParams } from '../../hooks/useQueryParams.hook';
 import { useLocation, useNavigate } from '@reach/router';
+import { loginAction, resetPasswordAction } from '../../state/actions/newAuth.action';
+import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
 interface IProps {
   show: boolean;
@@ -113,9 +115,10 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
   const [resetPassword, { loading }] = useMutation(RESET_PASSWORD);
   const params = useQueryParams();
   const [errors, setErrors] = useState<ApplicationError[]>();
+  const isAuthorized = useIsAuthorized();
   const [
     {
-      auth: { passwordResetToken: token, state },
+      newAuth: { passwordResetToken: token },
     },
     dispatch,
   ] = useStateValue();
@@ -133,7 +136,7 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
       return setErrors(getFromGenericErrors(data.resetPassword.errors, t));
     }
 
-    dispatch({ type: 'AUTH_SIGN_IN', payload: data.resetPassword });
+    dispatch(loginAction(data.resetPassword));
 
     navigate(location.pathname);
     success(t('passwordReset.success'));
@@ -149,11 +152,11 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
 
   useEffect(() => {
     if (params?.token) {
-      dispatch({ type: 'AUTH_ADD_PASSWORD_RESET_TOKEN', payload: params.token });
+      dispatch(resetPasswordAction(params.token));
     }
   }, [params, dispatch]);
 
-  if (show && (state === 'SIGNED_IN' || !params?.token)) {
+  if (show && (isAuthorized || !params?.token)) {
     navigate(location.pathname);
     return null;
   }

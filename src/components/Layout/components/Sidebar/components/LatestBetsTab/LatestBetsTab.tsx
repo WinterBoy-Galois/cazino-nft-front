@@ -17,7 +17,7 @@ interface IProps {
 const LatestBetsTab: React.FC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
   const [
     {
-      auth: { user },
+      newAuth: { user },
     },
   ] = useStateValue();
   const location = useLocation();

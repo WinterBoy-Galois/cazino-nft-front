@@ -19,6 +19,7 @@ import { BET_ADDED } from '../../../../graphql/subscriptions';
 import { ApolloError, useQuery, useSubscription } from '@apollo/client';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import chatWidget from '../../../../customerSupport/CustomerSupport';
+import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
 
 const activateScrollLock = (breakpoint: Breakpoint): boolean => {
   switch (breakpoint) {
@@ -63,11 +64,12 @@ const renderTab = (
 };
 
 const SideBar: React.FC = () => {
+  const isAuthorized = useIsAuthorized();
   const [
     {
       sidebar: { isOpen, selectedTab, isChatBot },
       modal: { type: modalType },
-      auth: { state, user },
+      newAuth: { user },
     },
   ] = useStateValue();
   const breakpoint = useBreakpoint();
@@ -174,7 +176,7 @@ const SideBar: React.FC = () => {
           <TabSelect />
         </div>
         <div className={`container-sm ${styles['tab-container']}`}>
-          {renderTab(selectedTab, latestBets, myBets, loading, error, state === 'SIGNED_IN')}
+          {renderTab(selectedTab, latestBets, myBets, loading, error, isAuthorized)}
         </div>
       </div>
     </CSSTransition>

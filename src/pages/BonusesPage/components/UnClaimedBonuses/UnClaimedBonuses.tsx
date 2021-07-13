@@ -14,6 +14,7 @@ import { useStateValue } from '../../../../state/index';
 import useSound from 'use-sound';
 import { useTranslation } from 'react-i18next';
 import { bonus_received_v1, bonus_claim_v1, toast_v1 } from '../../../../components/App/App';
+import { updateUserAction } from '../../../../state/actions/newAuth.action';
 
 interface IProps {
   bonusClaims?: any[];
@@ -54,7 +55,7 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
     success(
       `${t('games:your_ballance_has_been_updated')}: ${formatBitcoin(data.claimBonus.balance)}`
     );
-    dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.claimBonus.balance } });
+    dispatch(updateUserAction({ balance: data.claimBonus.balance }));
 
     onClaimBonusCompleted(bonusId);
   };

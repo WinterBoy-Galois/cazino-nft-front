@@ -15,15 +15,22 @@ import { FAUCET_INFO, RECENT_BETS } from '../../../../../../graphql/queries';
 import { error as errorToast } from '../../../../../../components/Toast';
 import Bet from '../../../../../../models/bet.model';
 import { BET_ADDED } from '../../../../../../graphql/subscriptions';
+import { useIsAuthorized } from '../../../../../../hooks/useIsAuthorized';
 interface IProps {
   hasUnclaimedBonus?: boolean;
 }
 
 const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
+  const isAuthorized = useIsAuthorized();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isGamePage, setGamePage] = useState(false);
-  const [{ auth }, dispatch] = useStateValue();
+  const [
+    {
+      newAuth: { user },
+    },
+    dispatch,
+  ] = useStateValue();
   const [isMenuOpened, setMenuOpened] = useState(false);
   const { refetch: refreshFaucetData } = useQuery(FAUCET_INFO);
   const [userLastBet, setUserLastBet] = useState<Bet | null>(null);
@@ -40,7 +47,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
     setMenuOpened(false);
   }, [isOpen]);
   const onOpenFaucetModal = async () => {
-    if (auth.state !== 'SIGNED_IN') {
+    if (!isAuthorized) {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
@@ -88,7 +95,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
     onSubscriptionData: data => {
       const betAdded: Bet = data?.subscriptionData?.data?.betAdded;
       if (betAdded) {
-        if (auth.user?.id === betAdded.userid.toString()) {
+        if (user?.id === betAdded.userid.toString()) {
           setUserLastBet(betAdded);
         }
       }
