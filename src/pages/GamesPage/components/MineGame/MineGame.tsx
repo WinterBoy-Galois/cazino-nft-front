@@ -448,9 +448,15 @@ export default MineGame;
 export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   const [, dispatch] = useStateValue();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_MINES);
-  const [makeBetMines, { loading: loadingBet }] = useMutation(MAKE_BET_MINES);
-  const [advanceMines, { loading: loadingAdvance }] = useMutation(ADVANCE_MINES);
-  const [cashoutMines, { loading: loadingCashOut }] = useMutation(CASH_OUT_MINES);
+  const [makeBetMines, { loading: loadingBet }] = useMutation(MAKE_BET_MINES, {
+    errorPolicy: 'all',
+  });
+  const [advanceMines, { loading: loadingAdvance }] = useMutation(ADVANCE_MINES, {
+    errorPolicy: 'all',
+  });
+  const [cashoutMines, { loading: loadingCashOut }] = useMutation(CASH_OUT_MINES, {
+    errorPolicy: 'all',
+  });
   const [error, setError] = useState();
   const [session, setSession] = useState<any>(null);
   const [profitCut, setProfitCut] = useState<any>(null);

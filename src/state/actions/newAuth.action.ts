@@ -17,11 +17,14 @@ export const RESET_PASSWORD: AuthActionTypeNew = 'auth/RESET_PASSWORD';
 export const UPDATE_USER: AuthActionTypeNew = 'auth/UPDATE_USER';
 export const TOGGLE_RELOGIN: AuthActionTypeNew = 'auth/TOGGLE_RELOGIN';
 
-export const loginAction = (payload: any) => ({ type: LOGIN, payload });
-export const registerAction = (payload: any) => ({ type: REGISTER, payload });
-export const logoutAction = (payload: any) => ({ type: LOGOUT, payload });
-export const loginWithModalAction = (payload: any) => ({ type: LOGIN_WITH_MODAL, payload });
-export const updateRefreshTokenAction = (payload: any) => ({ type: UPDATE_REFRESH_TOKEN, payload });
-export const resetPasswordAction = (payload: any) => ({ type: RESET_PASSWORD, payload });
-export const updateUserAction = (payload: any) => ({ type: UPDATE_USER, payload });
-export const toggleReloginAction = (payload: any) => ({ type: TOGGLE_RELOGIN, payload });
+export const loginAction = (payload?: any) => ({ type: LOGIN, payload });
+export const registerAction = (payload?: any) => ({ type: REGISTER, payload });
+export const logoutAction = (payload?: any) => ({ type: LOGOUT, payload });
+export const loginWithModalAction = (payload?: any) => ({ type: LOGIN_WITH_MODAL, payload });
+export const updateRefreshTokenAction = (payload?: any) => ({
+  type: UPDATE_REFRESH_TOKEN,
+  payload,
+});
+export const resetPasswordAction = (payload?: any) => ({ type: RESET_PASSWORD, payload });
+export const updateUserAction = (payload?: any) => ({ type: UPDATE_USER, payload });
+export const toggleReloginAction = (payload?: any) => ({ type: TOGGLE_RELOGIN, payload });

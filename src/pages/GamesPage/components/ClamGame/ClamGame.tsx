@@ -13,7 +13,7 @@ import { SETUP_CLAMS } from '../../../../graphql/queries';
 import { useStateValue } from '../../../../state';
 import { ClamGameAction, clamGameReducer, ClamGameState, getInitialState } from './lib/reducer';
 import { MAKE_BET_CLAMS } from '../../../../graphql/mutations';
-import { error as errorToast, success } from '../../../../components/Toast';
+import { error as errorToast } from '../../../../components/Toast';
 import { appConfig } from '../../../../common/config';
 import { ClamsGameState as GameState } from '../../../../models/clamsGameState.model';
 import Bitcoin from '../../../../components/icons/social/Bitcoin';
@@ -313,7 +313,9 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
   const [, dispatch] = useStateValue();
   const { t } = useTranslation(['games']);
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_CLAMS);
-  const [makeBetClams, { loading: loadingBet }] = useMutation(MAKE_BET_CLAMS);
+  const [makeBetClams, { loading: loadingBet }] = useMutation(MAKE_BET_CLAMS, {
+    errorPolicy: 'all',
+  });
   const [result, setResult] = useState<number>(-1);
   const [multiplier, setMultiplier] = useState();
   const [profit, setProfit] = useState();

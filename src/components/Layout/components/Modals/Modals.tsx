@@ -20,7 +20,7 @@ import { ProfitCutModalWithData } from '../../../ProfitCutModal/ProfitCutModal';
 import { FaucetModalWithData } from '../../../FaucetModal/FaucetModal';
 import DepositsDetailsModal from '../../../DepositsDetailsModal';
 import AffiliatesDetailsModal from '../../../AffiliatesDettailsModal';
-import { TOGGLE_RELOGIN } from '../../../../state/actions/newAuth.action';
+import { toggleReloginAction } from '../../../../state/actions/newAuth.action';
 
 const Modals: React.FC = () => {
   const [
@@ -34,7 +34,7 @@ const Modals: React.FC = () => {
   const navigate = useNavigate();
   const handleClose = useCallback(() => navigate(location.pathname), [location.pathname, navigate]);
   const handleCloseReLogin = () => {
-    dispatch({ type: TOGGLE_RELOGIN, payload: false });
+    dispatch(toggleReloginAction(false));
     return navigate('/');
   };
   const handleShow = useCallback((type: ModalType) => modal.type === type, [modal.type]);

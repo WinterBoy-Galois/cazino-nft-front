@@ -18,7 +18,7 @@ import ApplicationError from '../../models/applicationError.model';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { validationSchema } from './lib/validationSchema';
 import { useLocation, useNavigate } from '@reach/router';
-import { LOGIN } from '../../state/actions/newAuth.action';
+import { LOGIN, loginAction } from '../../state/actions/newAuth.action';
 
 interface IProps {
   show: boolean;
@@ -165,7 +165,7 @@ const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       return;
     }
 
-    dispatch({ type: LOGIN, payload: { ...data.signIn, remember } });
+    dispatch(loginAction({ ...data.signIn, remember }));
 
     await navigate(location.pathname);
     return;

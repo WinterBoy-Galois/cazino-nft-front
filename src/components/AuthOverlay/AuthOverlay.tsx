@@ -4,24 +4,28 @@ import { useStateValue } from '../../state';
 import { ME } from '../../graphql/queries';
 import styles from './AuthOverlay.module.scss';
 import Spinner from '../Spinner';
-import { LOGIN, LOGIN_WITH_MODAL } from '../../state/actions/newAuth.action';
+import { loginAction, loginWithModalAction } from '../../state/actions/newAuth.action';
+import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
 const AuthOverlay: React.FC = ({ children }) => {
-  const [{ newAuth }, dispatch] = useStateValue();
+  const isAuthorized = useIsAuthorized();
+  const [
+    {
+      newAuth: { user },
+    },
+    dispatch,
+  ] = useStateValue();
   const { data, error } = useQuery(ME, { fetchPolicy: 'network-only' });
 
   useEffect(() => {
-    if (error && newAuth.state === 'SIGNED_IN') {
-      dispatch({ type: LOGIN_WITH_MODAL });
-    } else if (!error && data && newAuth.state === 'SIGNED_IN' && !newAuth.user) {
-      dispatch({
-        type: LOGIN,
-        payload: { user: { ...data.me } },
-      });
+    if (error && isAuthorized) {
+      dispatch(loginWithModalAction());
+    } else if (!error && data && isAuthorized && !user) {
+      dispatch(loginAction({ user: data.me }));
     }
-  }, [dispatch, data, error, newAuth.state, newAuth.user]);
+  }, [dispatch, data, error, isAuthorized, user]);
 
-  return newAuth.state === 'SIGNED_IN' && !newAuth.user ? (
+  return isAuthorized && !user ? (
     <div className={styles.container}>
       <div className={styles.spinner}>
         <Spinner color={'WHITE'} />

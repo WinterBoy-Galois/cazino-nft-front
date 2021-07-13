@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react';
-import logger from 'use-reducer-logger';
 import { State } from './models';
 import { mainReducer } from './reducers';
 import { Action } from './actions';
@@ -50,8 +49,7 @@ interface IProps {
 export const StateProvider: React.FC<IProps> = ({ children, state }) => {
   const breakpoint = useBreakpoint();
   const initialState = state ?? getInitialState(isSidebarInitiallyOpen(breakpoint), true, true);
-  const reducer = process.env.NODE_ENV === 'development' ? logger(mainReducer) : mainReducer;
-  const mainState = useReducer(reducer, initialState);
+  const mainState = useReducer(mainReducer, initialState);
 
   return <StateContext.Provider value={mainState}>{children}</StateContext.Provider>;
 };

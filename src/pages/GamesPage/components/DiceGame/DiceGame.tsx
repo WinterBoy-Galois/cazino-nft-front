@@ -10,7 +10,7 @@ import { MAKE_BET_DICE } from '../../../../graphql/mutations';
 import { useStateValue } from '../../../../state';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
-import { error as errorToast, info, success } from '../../../../components/Toast';
+import { error as errorToast } from '../../../../components/Toast';
 import useTargetSliderMin from '../../../../hooks/useTargetSliderMin.hook';
 import useTargetSliderMax from '../../../../hooks/useTargetSliderMax.hook';
 import { DiceGameAction, diceGameReducer, DiceGameState, getInitialState } from './lib/reducer';
