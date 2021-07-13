@@ -10,12 +10,10 @@ import { useLocation, useNavigate } from '@reach/router';
 import styles from './BonusesPage.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useStateValue } from '../../state';
-import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
 type TimeAggregation = 'daily' | 'weekly' | 'monthly';
 
 const BonusesPage: React.FC<RouteComponentProps> = () => {
-  const isAuthorized = useIsAuthorized();
   const [selectedTime, setSelectedTime] = useState<TimeAggregation>('daily');
   const { loading, error, data, subscribeToMore } = useQuery(LEADERBOARDS);
   const { data: __bonusClaims, refetch: refreshBonusClaims } = useQuery(BONUSCLAIMS);
@@ -25,11 +23,7 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['bonuses']);
   const [bonus, setBonus] = useState<any>();
   const [position, setPosition] = useState<any>();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
+  const [{ auth }] = useStateValue();
 
   useEffect(() => {
     if (!subscribeToMore) return;
@@ -55,10 +49,10 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   useEffect(() => {
     if (data) {
       const _temp = data.leaderboards[selectedTime];
-      if (isAuthorized) {
+      if (auth.state === 'SIGNED_IN') {
         let flag_num = null;
         for (let k = 0; k < _temp.length; k++) {
-          if (user?.id === _temp[k].userid) {
+          if (auth?.user?.id === _temp[k].userid) {
             setBonus(_temp[k]);
             setPosition(k + 1);
             flag_num = k;
@@ -70,14 +64,16 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
         setPosition(null);
       }
     }
-  }, [data, selectedTime, isAuthorized]);
+  }, [data, selectedTime, auth.state]);
 
   return (
     <div className={styles.bonuses_page}>
-      <div className={styles.bonuses_title}>{isAuthorized ? t('title') : t('promo.title')}</div>
+      <div className={styles.bonuses_title}>
+        {auth.state === 'SIGNED_IN' ? t('title') : t('promo.title')}
+      </div>
 
       <div className={styles.body_p}>
-        {isAuthorized ? (
+        {auth.state === 'SIGNED_IN' ? (
           <>
             {bonusClaims && bonusClaims?.bonusClaims.length ? (
               <UnClaimedBonuses bonusClaims={bonusClaims.bonusClaims} onClaimBonus={onClaimBonus} />

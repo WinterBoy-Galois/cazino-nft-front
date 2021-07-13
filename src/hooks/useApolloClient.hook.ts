@@ -1,24 +1,29 @@
 import { useStateValue } from '../state';
 import { useMemo } from 'react';
 import getApolloClient from '../graphql/client';
-import { loginWithModalAction, updateRefreshTokenAction } from '../state/actions/newAuth.action';
+import { navigate } from '@reach/router';
 
 export function useApolloClient() {
   const [
     {
-      newAuth: { accessToken, state },
+      auth: { accessToken, state },
     },
     dispatch,
   ] = useStateValue();
 
-  return useMemo(
+  const client = useMemo(
     () =>
       getApolloClient(
-        t => dispatch(updateRefreshTokenAction({ accessToken: t })),
-        () => dispatch(loginWithModalAction()),
+        t => dispatch({ type: 'AUTH_TOKEN_REFRESH', payload: { accessToken: t } }),
+        () => {
+          dispatch({ type: 'AUTH_SIGN_OUT' });
+          navigate('/');
+        },
         state,
         accessToken
       ),
     [dispatch, accessToken, state]
   );
+
+  return client;
 }

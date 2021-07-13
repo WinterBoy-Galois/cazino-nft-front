@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, Reducer, useMemo } from 'react';
+import React, { useState, useEffect, useReducer, Reducer } from 'react';
 import GoalGameBoard from '../../../../components/GoalGameBoard';
 import GoalGameAdvances from '../../../../components/GoalGameAdvances';
 import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
@@ -40,7 +40,6 @@ import {
 } from './lib/reducer';
 import { GoalGameState as GameState } from '../../../../models/goalGameState.model';
 import { formatBitcoin } from '../../../../common/util/format.util';
-import { UPDATE_USER, updateUserAction } from '../../../../state/actions/newAuth.action';
 
 interface IProps {
   loadingSetup?: boolean;
@@ -71,7 +70,7 @@ const GoalGame: React.FC<IProps> = ({
   maxProfit,
   profitCut,
 }) => {
-  const [{ newAuth }] = useStateValue();
+  const [{ auth }] = useStateValue();
   const { t } = useTranslation(['games']);
   const [state, dispatch] = useReducer<Reducer<GoalGameState, GoalGameAction>>(
     goalGameReducer,
@@ -86,8 +85,6 @@ const GoalGame: React.FC<IProps> = ({
   const [isCashOut, setCashOut] = useState(false);
   const [isAlerted, setAlerted] = useState(false);
   const [isGameStartedBtnClicked, setGameStartBtnClicked] = useState(false);
-  const isAuthorized = useMemo(() => newAuth.state === 'SIGNED_IN', [newAuth.state]);
-  console.log(isAuthorized);
 
   const [play] = useSound(button_click_v1.default);
   const [playGoalSelect] = useSound(goal_select_v1.default);
@@ -121,7 +118,7 @@ const GoalGame: React.FC<IProps> = ({
     // init bet amount
     dispatch({
       type: 'SET_AMOUNT',
-      payload: { amount: isAuthorized ? appConfig.defaultBetAmount : 0 },
+      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
     });
 
     const checkDeviceSize = () => {
@@ -140,7 +137,7 @@ const GoalGame: React.FC<IProps> = ({
   }, []);
 
   useEffect(() => {
-    if (isAuthorized && profitCut && maxProfit && !isAlerted) {
+    if (auth.state === 'SIGNED_IN' && profitCut && maxProfit && !isAlerted) {
       if (session.profitCut === 'CUT') setAlerted(true);
 
       (async () =>
@@ -149,7 +146,7 @@ const GoalGame: React.FC<IProps> = ({
   }, [profitCut, maxProfit]);
 
   useEffect(() => {
-    if (!isAuthorized) {
+    if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET' });
       dispatch({
         type: 'SET_AMOUNT',
@@ -161,7 +158,7 @@ const GoalGame: React.FC<IProps> = ({
         payload: { amount: appConfig.defaultBetAmount },
       });
     }
-  }, [newAuth.state]);
+  }, [auth.state]);
 
   useEffect(() => {
     if (!errorBet) {
@@ -250,7 +247,7 @@ const GoalGame: React.FC<IProps> = ({
   }
 
   const handleStartGame = async () => {
-    if (!isAuthorized) {
+    if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
@@ -268,7 +265,7 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const handleCashOut = async () => {
-    if (!isAuthorized) {
+    if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
@@ -279,9 +276,10 @@ const GoalGame: React.FC<IProps> = ({
   };
 
   const handlePlaceBet = async (selection?: number) => {
-    if (!isAuthorized) {
+    if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
+
     if (
       lastSpot === null &&
       lastAdvanceStatus === null &&
@@ -503,7 +501,7 @@ const GoalGame: React.FC<IProps> = ({
                 label={t('goal.amount')}
                 amount={state.amount}
                 min={0}
-                max={newAuth.user?.balance ?? 15}
+                max={auth.user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT', payload: { amount } })}
                 readonly={state.gameState !== GameState.IDLE}
               />
@@ -544,15 +542,9 @@ export default GoalGame;
 export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
   const [, dispatch] = useStateValue();
-  const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS, {
-    errorPolicy: 'all',
-  });
-  const [advanceGoals, { loading: loadingAdvance }] = useMutation(ADVANCE_GOALS, {
-    errorPolicy: 'all',
-  });
-  const [cashoutGoals, { loading: loadingCashOut }] = useMutation(CASH_OUT_GOALS, {
-    errorPolicy: 'all',
-  });
+  const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS);
+  const [advanceGoals, { loading: loadingAdvance }] = useMutation(ADVANCE_GOALS);
+  const [cashoutGoals, { loading: loadingCashOut }] = useMutation(CASH_OUT_GOALS);
   const [error, setError] = useState<any>();
   const [session, setSession] = useState<any>(null);
   const [profitCut, setProfitCut] = useState<any>(null);
@@ -587,14 +579,14 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   };
 
   const initSession = (goalsGameSetupObj: any) => {
-    if (goalsGameSetupObj?.__typename !== 'GoalsGameSetup') return;
+    if (goalsGameSetupObj.__typename !== 'GoalsGameSetup') return;
 
     setSession(goalsGameSetupObj.session);
     setSelections(goalsGameSetupObj.session?.selections || []);
     setProfitCut(goalsGameSetupObj.session?.profitCut || null);
 
     if (goalsGameSetupObj.balance)
-      dispatch(updateUserAction({ balance: goalsGameSetupObj.balance }));
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: goalsGameSetupObj.balance } });
   };
 
   const handleStartGame = async (betAmount: number, probability: string) => {
@@ -663,7 +655,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
         );
 
         if (data.advanceGoals.balance) {
-          dispatch(updateUserAction({ balance: data.advanceGoals.balance }));
+          dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceGoals.balance } });
 
           if (data.advanceGoals.profit.profit) {
             // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(
@@ -704,7 +696,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     );
 
     if (data.cashoutGoals.balance) {
-      dispatch(updateUserAction({ balance: data.cashoutGoals.balance }));
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutGoals.balance } });
 
       if (data.cashoutGoals.profit.profit) {
         // const toast = `${t('your_ballance_has_been_updated')}: ${formatBitcoin(

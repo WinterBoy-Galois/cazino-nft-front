@@ -20,23 +20,12 @@ import { ProfitCutModalWithData } from '../../../ProfitCutModal/ProfitCutModal';
 import { FaucetModalWithData } from '../../../FaucetModal/FaucetModal';
 import DepositsDetailsModal from '../../../DepositsDetailsModal';
 import AffiliatesDetailsModal from '../../../AffiliatesDettailsModal';
-import { toggleReloginAction } from '../../../../state/actions/newAuth.action';
 
 const Modals: React.FC = () => {
-  const [
-    {
-      modal,
-      newAuth: { relogin },
-    },
-    dispatch,
-  ] = useStateValue();
+  const [{ modal }, dispatch] = useStateValue();
   const location = useLocation();
   const navigate = useNavigate();
   const handleClose = useCallback(() => navigate(location.pathname), [location.pathname, navigate]);
-  const handleCloseReLogin = () => {
-    dispatch(toggleReloginAction(false));
-    return navigate('/');
-  };
   const handleShow = useCallback((type: ModalType) => modal.type === type, [modal.type]);
   const params = useQueryParams();
 
@@ -55,14 +44,13 @@ const Modals: React.FC = () => {
       } else if (currentModalType === 'NONE' && !modal.isReplace) {
         showModal(dispatch, newModalType, { ...(location.state as any), key: undefined });
       }
-    } else if (currentModalType !== 'NONE') {
+    } else if (!params?.dialog && currentModalType !== 'NONE') {
       closeModal(dispatch);
     }
   }, [params, dispatch, modal.type, modal.isReplace, location.state]);
 
   return (
     <>
-      <SignInModalWithData show={relogin} onClose={handleCloseReLogin} />
       <UserInfoModalWithData
         show={handleShow('USER_INFO_MODAL')}
         onClose={handleClose}

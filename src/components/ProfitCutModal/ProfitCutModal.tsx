@@ -6,7 +6,6 @@ import { useNavigate, useLocation } from '@reach/router';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import Button from '../../components/Button';
-import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
 interface IProps {
   show: boolean;
@@ -55,11 +54,11 @@ const ProfitCutModal: React.FC<IProps> = ({
 export default ProfitCutModal;
 
 export const ProfitCutModalWithData: React.FC<IProps> = props => {
-  const isAuthorized = useIsAuthorized();
+  const [{ auth }] = useStateValue();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  if (props.show && !isAuthorized) {
+  if (props.show && auth.state !== 'SIGNED_IN') {
     navigate(pathname);
     return null;
   }

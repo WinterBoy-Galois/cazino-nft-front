@@ -7,7 +7,7 @@ import { HttpLink, defaultDataIdFromObject } from '@apollo/client';
 import jwtDecode from 'jwt-decode';
 import { getEpoch } from '../common/util/date.util';
 import { setContext } from '@apollo/client/link/context';
-import { AuthType } from '../state/models/newAuth.model';
+import { AuthType } from '../state/models/auth.model';
 import { appConfig } from '../common/config';
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
@@ -69,7 +69,6 @@ const getApolloClient = (
   const tokenLink = new TokenRefreshLink({
     accessTokenField: 'accessToken',
     isTokenValidOrUndefined: () => {
-      console.log('validating token');
       if (accessToken) {
         const { exp } = jwtDecode(accessToken);
 
@@ -88,17 +87,8 @@ const getApolloClient = (
         credentials: 'include',
       });
     },
-    handleFetch: accessToken => {
-      console.log('handle fetch', accessToken);
-      return onAccessTokenRefresh(accessToken);
-    },
-    handleError: err => {
-      console.log('handle error', err);
-      if (authType === 'SIGNED_IN') {
-        return onSignOut();
-      }
-      return;
-    },
+    handleFetch: accessToken => onAccessTokenRefresh(accessToken),
+    handleError: () => onSignOut(),
   });
 
   const link = split(
@@ -111,7 +101,6 @@ const getApolloClient = (
   );
 
   const errorLink = onError(({ graphQLErrors, operation, forward, networkError, response }) => {
-    console.log('error link');
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
         switch (err?.extensions?.code) {
@@ -138,9 +127,9 @@ const getApolloClient = (
             }
         }
       }
-      // graphQLErrors.map(({ message, locations, path }) =>
-      //   // console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
-      // );
+      graphQLErrors.map(({ message, locations, path }) =>
+        console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+      );
     }
     if (networkError) {
       if (networkError && 'statusCode' in networkError && networkError.statusCode === 503) {

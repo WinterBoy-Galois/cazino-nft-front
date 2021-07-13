@@ -22,7 +22,6 @@ import { WITHDRAW } from '../../graphql/mutations';
 import { success, error as errorToast } from '../../components/Toast';
 import clsx from 'clsx';
 import validate from 'bitcoin-address-validation';
-import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
 interface IProps {
   show: boolean;
@@ -214,12 +213,7 @@ const CashierModal: React.FC<IProps> = ({
 export default CashierModal;
 
 export const CashierModalWithData: React.FC<IProps> = props => {
-  const isAuthorized = useIsAuthorized();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
+  const [{ auth }] = useStateValue();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { data, loading, error, refetch } = useQuery(SETUP_CASHIER);
@@ -231,7 +225,7 @@ export const CashierModalWithData: React.FC<IProps> = props => {
     }
   }, [data, refetch, props.show, loading]);
 
-  if (props.show && !isAuthorized) {
+  if (props.show && auth.state !== 'SIGNED_IN') {
     navigate(pathname);
     return null;
   }
@@ -242,7 +236,7 @@ export const CashierModalWithData: React.FC<IProps> = props => {
       loading={loading}
       error={error}
       cashier={data?.setupCashier}
-      balance={user?.balance}
+      balance={auth.user?.balance}
       depositAddress={data?.me.depositAddress}
       onTransactionsLinkClick={handleTransactionsClick}
     />

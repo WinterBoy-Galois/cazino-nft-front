@@ -20,7 +20,7 @@ const getInitialState = (
   modal: {
     type: 'NONE',
   },
-  newAuth: { state: readAuthState(), relogin: false },
+  auth: { state: readAuthState() },
   referral: {
     id: readReferral(),
   },
@@ -49,9 +49,12 @@ interface IProps {
 export const StateProvider: React.FC<IProps> = ({ children, state }) => {
   const breakpoint = useBreakpoint();
   const initialState = state ?? getInitialState(isSidebarInitiallyOpen(breakpoint), true, true);
-  const mainState = useReducer(mainReducer, initialState);
 
-  return <StateContext.Provider value={mainState}>{children}</StateContext.Provider>;
+  return (
+    <StateContext.Provider value={useReducer(mainReducer, initialState)}>
+      {children}
+    </StateContext.Provider>
+  );
 };
 
 export const useStateValue = () => useContext(StateContext);

@@ -1,4 +1,4 @@
-import { AuthType } from '../../state/models/newAuth.model';
+import { AuthType } from '../../state/models/auth.model';
 
 const refName = 'ref';
 const stateName = 'authState';
