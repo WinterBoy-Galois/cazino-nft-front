@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { RouteComponentProps, useNavigate } from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 import { useTranslation } from 'react-i18next';
 import { ApolloError, useQuery, useMutation } from '@apollo/client';
 
@@ -20,6 +20,7 @@ import { ME_STATISTICS_PREFERENCES } from '../../graphql/queries';
 import { UPDATE_PASSWORD, UPDATE_PREFERENCES, UPDATE_AVATAR } from '../../graphql/mutations';
 
 import styles from './ProfilePage.module.scss';
+import { updateUserAction } from '../../state/actions/newAuth.action';
 
 interface IProps extends RouteComponentProps {
   userStatistic?: UserStatistic;
@@ -46,12 +47,10 @@ const ProfilePage: React.FC<IProps> = ({
   onAvatarChange,
 }) => {
   const { t } = useTranslation('profile');
-  const [{ auth }] = useStateValue();
-  const navigate = useNavigate();
+  const [{ newAuth }] = useStateValue();
 
-  if (!auth.user) {
-    navigate('/');
-    return null;
+  if (!newAuth.user) {
+    return <>Skeleton will be here</>;
   }
 
   return (
@@ -61,7 +60,7 @@ const ProfilePage: React.FC<IProps> = ({
         <div className="row">
           <div className={`col-12 col-lg-6 ${styles.column}`}>
             <UserInfo
-              user={auth.user}
+              user={newAuth.user}
               className={styles['user-info']}
               onAvatarChange={onAvatarChange}
             />
@@ -95,8 +94,7 @@ const ProfilePage: React.FC<IProps> = ({
 
 const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['auth', 'profile']);
-  const [, dispatch] = useStateValue();
-  const [{ auth }] = useStateValue();
+  const [{ newAuth }, dispatch] = useStateValue();
 
   const { data, loading: statisticsLoading, error: statisticsError } = useQuery(
     ME_STATISTICS_PREFERENCES
@@ -151,22 +149,16 @@ const ProfilePageWithData: React.FC<RouteComponentProps> = () => {
   );
 
   const onAvatarChange = async (index: number) => {
-    const oldAvatarUrl = auth?.user?.avatarUrl;
+    const oldAvatarUrl = newAuth?.user?.avatarUrl;
 
     const { data, errors } = await updateAvatar({
       variables: { index },
     });
 
-    dispatch({
-      type: 'AUTH_UPDATE_USER',
-      payload: { avatarUrl: appConfig.avatarUrls[index - 1] },
-    });
+    dispatch(updateUserAction({ avatarUrl: appConfig.avatarUrls[index - 1] }));
 
     if (errors || data?.modifyAvatar.errors) {
-      dispatch({
-        type: 'AUTH_UPDATE_USER',
-        payload: { avatarUrl: oldAvatarUrl },
-      });
+      dispatch(updateUserAction({ avatarUrl: oldAvatarUrl }));
       return error(t('profile:userInfo.errorToast'));
     }
 

@@ -11,14 +11,17 @@ import { useTranslation } from 'react-i18next';
 import { useStateValue } from '../../state';
 import clsx from 'clsx';
 import { success as successToast } from '../../components/Toast';
+import { useIsAuthorized } from '../../hooks/useIsAuthorized';
+import { loginAction } from '../../state/actions/newAuth.action';
 
 const AffiliatesPage: React.FC<RouteComponentProps> = () => {
+  const isAuthorized = useIsAuthorized();
   const { t } = useTranslation(['transactions']);
   const [{ sidebar }] = useStateValue();
   const { data: dataMe } = useQuery(ME);
   const { data: dataStats } = useQuery(AFF_STATS);
   const [claimCommissions, { loading: loadingSetup }] = useMutation(CLAIM_COMMISSION);
-  const [{ auth }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [commissionData, setCommissionData] = useState(dataMe?.me);
   const onTransferBalance = async () => {
     const { data, errors } = await claimCommissions();
@@ -27,11 +30,8 @@ const AffiliatesPage: React.FC<RouteComponentProps> = () => {
       successToast(t('affiliates:commissions_transferred_successfully'));
     }
     setCommissionData(data?.claimCommissions);
-    if (!errors && data && auth.state === 'SIGNED_IN') {
-      dispatch({
-        type: 'AUTH_SIGN_IN',
-        payload: { user: { ...data?.claimCommissions } },
-      });
+    if (!errors && data && isAuthorized) {
+      dispatch(loginAction({ user: { ...data?.claimCommissions } }));
     }
   };
 

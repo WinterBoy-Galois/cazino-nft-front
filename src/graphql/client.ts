@@ -7,7 +7,6 @@ import { HttpLink, defaultDataIdFromObject } from '@apollo/client';
 import jwtDecode from 'jwt-decode';
 import { getEpoch } from '../common/util/date.util';
 import { setContext } from '@apollo/client/link/context';
-import { AuthType } from '../state/models/auth.model';
 import { appConfig } from '../common/config';
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
@@ -29,7 +28,7 @@ let wsLink: WebSocketLink;
 const getApolloClient = (
   onAccessTokenRefresh: (accessToken: string) => void,
   onSignOut: () => void,
-  authType: AuthType,
+  isAuthorized: boolean,
   accessToken?: string
 ) => {
   cache.reset();
@@ -69,13 +68,14 @@ const getApolloClient = (
   const tokenLink = new TokenRefreshLink({
     accessTokenField: 'accessToken',
     isTokenValidOrUndefined: () => {
+      console.log('validating token');
       if (accessToken) {
         const { exp } = jwtDecode(accessToken);
 
         if (exp < getEpoch()) {
           return false;
         }
-      } else if (authType === 'SIGNED_IN') {
+      } else if (isAuthorized) {
         return false;
       }
 
@@ -87,8 +87,17 @@ const getApolloClient = (
         credentials: 'include',
       });
     },
-    handleFetch: accessToken => onAccessTokenRefresh(accessToken),
-    handleError: () => onSignOut(),
+    handleFetch: accessToken => {
+      console.log('handle fetch', accessToken);
+      return onAccessTokenRefresh(accessToken);
+    },
+    handleError: err => {
+      console.log('handle error', err);
+      if (isAuthorized) {
+        return onSignOut();
+      }
+      return;
+    },
   });
 
   const link = split(
@@ -101,6 +110,7 @@ const getApolloClient = (
   );
 
   const errorLink = onError(({ graphQLErrors, operation, forward, networkError, response }) => {
+    console.log('error link');
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
         switch (err?.extensions?.code) {
@@ -127,9 +137,9 @@ const getApolloClient = (
             }
         }
       }
-      graphQLErrors.map(({ message, locations, path }) =>
-        console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
-      );
+      // graphQLErrors.map(({ message, locations, path }) =>
+      //   // console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+      // );
     }
     if (networkError) {
       if (networkError && 'statusCode' in networkError && networkError.statusCode === 503) {

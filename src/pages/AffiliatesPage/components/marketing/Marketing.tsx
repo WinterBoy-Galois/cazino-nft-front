@@ -11,8 +11,14 @@ interface IProps {
 
 const Marketing: React.FC<IProps> = () => {
   const { t } = useTranslation(['affiliates']);
-  const [{ sidebar, auth }] = useStateValue();
-  const [link] = useState('https://staging.jinglebets.com/ref=' + auth?.user?.refCode);
+  const [
+    {
+      sidebar,
+      newAuth: { user },
+    },
+  ] = useStateValue();
+  // TODO: replace with useMemo
+  const [link] = useState('https://staging.jinglebets.com/ref=' + user?.refCode);
   const [bundle_link] = useState('https://staging.jinglebets.com/cazzzino_marketing_bundle_1.zip');
   const [file_name] = useState('cazzzino_marketing_bundle_1.zip');
 
