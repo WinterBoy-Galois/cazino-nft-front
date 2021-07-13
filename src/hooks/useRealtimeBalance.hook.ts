@@ -5,7 +5,6 @@ import { error, info, success } from '../components/Toast';
 import { BALANCE } from '../graphql/subscriptions';
 import { TransactionStatus } from '../models/transactionStatus.model';
 import { useStateValue } from '../state';
-import { updateUserAction } from '../state/actions/newAuth.action';
 
 export default function useRealtimeBalance() {
   const { data } = useSubscription(BALANCE);
@@ -14,7 +13,7 @@ export default function useRealtimeBalance() {
 
   useEffect(() => {
     if (data?.balance) {
-      dispatch(updateUserAction({ balance: data.balance.user.balance }));
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.balance.user.balance } });
 
       switch (data.balance.event) {
         case TransactionStatus.DEPOSIT_CONFIRMED:

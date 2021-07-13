@@ -12,8 +12,6 @@ import { error as errorToast, success } from '../../components/Toast';
 import { formatBitcoin } from '../../common/util/format.util';
 import { CLAIM_FAUCET } from '../../graphql/mutations';
 import { useMutation } from '@apollo/client';
-import { useIsAuthorized } from '../../hooks/useIsAuthorized';
-import { updateUserAction } from '../../state/actions/newAuth.action';
 
 interface IProps {
   show: boolean;
@@ -67,7 +65,7 @@ const FaucetModal: React.FC<IProps> = ({
     }
 
     if (data.claimFaucet.balance) {
-      dispatch(updateUserAction({ balance: data.claimFaucet.balance }));
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.claimFaucet.balance } });
       success(
         `${t('games:your_ballance_has_been_updated')}: ${formatBitcoin(+data.claimFaucet.balance)}`
       );
@@ -131,11 +129,11 @@ const FaucetModal: React.FC<IProps> = ({
 export default FaucetModal;
 
 export const FaucetModalWithData: React.FC<IProps> = props => {
-  const isAuthorized = useIsAuthorized();
+  const [{ auth }] = useStateValue();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  if (props.show && !isAuthorized) {
+  if (props.show && auth.state !== 'SIGNED_IN') {
     navigate(pathname);
     return null;
   }

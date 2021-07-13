@@ -57,18 +57,14 @@ const BetsTable: React.FC<IProps> = props => {
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
+  const [{ auth }] = useStateValue();
   const handleRowClicked = (row: TransactionsBet) => {
     navigate(`${pathname}?dialog=bet-details`, {
       state: {
         bet: {
           ...row,
-          userid: user?.id,
-          username: user?.username,
+          userid: auth.user?.id,
+          username: auth.user?.username,
           bet: row.amount,
           gameid: row.game,
         },

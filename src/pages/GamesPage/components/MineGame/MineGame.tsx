@@ -25,8 +25,6 @@ import {
   button_click_v1,
   mines_lost_v1,
 } from '../../../../components/App/App';
-import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
-import { updateUserAction } from '../../../../state/actions/newAuth.action';
 
 interface IProps {
   loadingBet?: boolean;
@@ -55,12 +53,7 @@ const MineGame: React.FC<IProps> = ({
   profitCut,
   onStartGame = () => null,
 }) => {
-  const isAuthorized = useIsAuthorized();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
+  const [{ auth }] = useStateValue();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { t } = useTranslation(['games']);
@@ -91,12 +84,12 @@ const MineGame: React.FC<IProps> = ({
   useEffect(() => {
     dispatch({
       type: 'SET_AMOUNT_MINES',
-      payload: { amount: isAuthorized ? appConfig.defaultBetAmount : 0 },
+      payload: { amount: auth.state === 'SIGNED_IN' ? appConfig.defaultBetAmount : 0 },
     });
   }, []);
 
   useEffect(() => {
-    if (!isAuthorized) {
+    if (auth.state !== 'SIGNED_IN') {
       dispatch({ type: 'RESET_MINES' });
       dispatch({
         type: 'SET_AMOUNT_MINES',
@@ -108,9 +101,9 @@ const MineGame: React.FC<IProps> = ({
         payload: { amount: appConfig.defaultBetAmount },
       });
     }
-  }, [isAuthorized]);
+  }, [auth.state]);
   useEffect(() => {
-    if (isAuthorized && profitCut && maxProfit && !isAlerted) {
+    if (auth.state === 'SIGNED_IN' && profitCut && maxProfit && !isAlerted) {
       if (session.profitCut === 'CUT') setAlerted(true);
       (async () =>
         await navigate(`${pathname}?dialog=profit-cut`, { state: { maxProfit, profitCut } }))();
@@ -209,7 +202,7 @@ const MineGame: React.FC<IProps> = ({
   //   return <Error />;
   // }
   const handleStartGame = async () => {
-    if (!isAuthorized) {
+    if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
     setGameStartBtnClicked(true);
@@ -223,7 +216,7 @@ const MineGame: React.FC<IProps> = ({
     setLastStatusTimer(null);
   };
   const handleCashOut = async () => {
-    if (!isAuthorized) {
+    if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
     if (session?.__typename !== 'MinesComplete') {
@@ -232,7 +225,7 @@ const MineGame: React.FC<IProps> = ({
     }
   };
   const handlePlaceBet = async (selection?: number) => {
-    if (!isAuthorized) {
+    if (auth.state !== 'SIGNED_IN') {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
     if (
@@ -276,13 +269,13 @@ const MineGame: React.FC<IProps> = ({
   // }, [errorBet]);
 
   const onMinus = () => {
-    if (state.mines > 1 && state.gameState === GameState.IDLE && isAuthorized) {
+    if (state.mines > 1 && state.gameState === GameState.IDLE && auth.state === 'SIGNED_IN') {
       const mines = state.mines - 1;
       dispatch({ type: 'SET_MINES', payload: { mines } });
     }
   };
   const onPlus = () => {
-    if (state.mines < 24 && state.gameState === GameState.IDLE && isAuthorized) {
+    if (state.mines < 24 && state.gameState === GameState.IDLE && auth.state === 'SIGNED_IN') {
       const mines = state.mines + 1;
       dispatch({ type: 'SET_MINES', payload: { mines } });
     }
@@ -419,7 +412,7 @@ const MineGame: React.FC<IProps> = ({
                 )}
                 amount={state.amount}
                 min={0}
-                max={user?.balance ?? 15}
+                max={auth.user?.balance ?? 15}
                 onChange={amount => dispatch({ type: 'SET_AMOUNT_MINES', payload: { amount } })}
                 readonly={state.gameState !== GameState.IDLE}
               />
@@ -448,15 +441,9 @@ export default MineGame;
 export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   const [, dispatch] = useStateValue();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_MINES);
-  const [makeBetMines, { loading: loadingBet }] = useMutation(MAKE_BET_MINES, {
-    errorPolicy: 'all',
-  });
-  const [advanceMines, { loading: loadingAdvance }] = useMutation(ADVANCE_MINES, {
-    errorPolicy: 'all',
-  });
-  const [cashoutMines, { loading: loadingCashOut }] = useMutation(CASH_OUT_MINES, {
-    errorPolicy: 'all',
-  });
+  const [makeBetMines, { loading: loadingBet }] = useMutation(MAKE_BET_MINES);
+  const [advanceMines, { loading: loadingAdvance }] = useMutation(ADVANCE_MINES);
+  const [cashoutMines, { loading: loadingCashOut }] = useMutation(CASH_OUT_MINES);
   const [error, setError] = useState();
   const [session, setSession] = useState<any>(null);
   const [profitCut, setProfitCut] = useState<any>(null);
@@ -499,7 +486,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     setProfitCut(minesGameSetupObj.session?.profitCut || null);
     setSession(minesGameSetupObj.session || null);
     if (minesGameSetupObj.balance)
-      dispatch(updateUserAction({ balance: minesGameSetupObj.balance }));
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: minesGameSetupObj.balance } });
   };
   const handleStartGame = async (betAmount: number, mines: number) => {
     const { data, errors } = await makeBetMines({
@@ -549,7 +536,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
         );
 
         if (data.advanceMines.balance) {
-          dispatch(updateUserAction({ balance: data.advanceMines.balance }));
+          dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.advanceMines.balance } });
           if (data.advanceMines.profit.profit) {
             // const toast = `${t('mines.msgBalance')} ${formatBitcoin(
             //   +data.advanceMines.profit.profit
@@ -584,7 +571,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     );
 
     if (data.cashoutMines.balance) {
-      dispatch(updateUserAction({ balance: data.cashoutMines.balance }));
+      dispatch({ type: 'AUTH_UPDATE_USER', payload: { balance: data.cashoutMines.balance } });
       if (data.cashoutMines.profit.profit) {
         // const toast = `${t('mines.msgBalance')} ${formatBitcoin(+data.cashoutMines.profit.profit)}`;
         if (+data.cashoutMines.profit.profit > 0) {

@@ -1,4 +1,4 @@
-import React, { ErrorInfo, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Router, LocationProvider } from '@reach/router';
 import HomePage from '../../pages/HomePage';
 import { ApolloProvider } from '@apollo/client';
