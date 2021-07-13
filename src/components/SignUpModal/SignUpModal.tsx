@@ -20,6 +20,7 @@ import ApplicationError from '../../models/applicationError.model';
 import styles from './SignUpModal.module.scss';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { useLocation, useNavigate } from '@reach/router';
+import { registerAction } from '../../state/actions/newAuth.action';
 
 interface IProps {
   show: boolean;
@@ -212,7 +213,7 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       return;
     }
 
-    dispatch({ type: 'AUTH_SIGN_UP', payload: { ...data.registerUser } });
+    dispatch(registerAction(data.registerUser));
 
     navigate(`${location.pathname}?dialog=activation`);
   };

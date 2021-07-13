@@ -5,6 +5,7 @@ import BetControl from '../BetControl';
 import { isValid } from '../BetControl/lib/util';
 import styles from './BetAmountControl.module.scss';
 import { useStateValue } from '../../state';
+import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
 interface IProps {
   className?: string;
@@ -18,6 +19,7 @@ interface IProps {
 }
 
 const BetAmountControl: React.FC<IProps> = props => {
+  const isAuthorized = useIsAuthorized();
   const {
     amount: initialAmount = 0.0004,
     isControlDisable,
@@ -30,14 +32,13 @@ const BetAmountControl: React.FC<IProps> = props => {
   } = props;
   const [amount, setAmount] = useState(initialAmount);
   useEffect(() => setAmount(initialAmount), [initialAmount]);
-  const [{ auth }] = useStateValue();
   const updateAmount = (value: number) => {
     setAmount(value);
     onChange && onChange(value);
   };
 
   const onHandleBlur = (value: number) => {
-    if (auth.state === 'SIGNED_OUT') {
+    if (!isAuthorized) {
       // if no auth, set value zero
       updateAmount(0);
     } else if (value === 0) {
@@ -48,7 +49,7 @@ const BetAmountControl: React.FC<IProps> = props => {
   };
 
   const handleHalve = () => {
-    if (!readonly && auth.state === 'SIGNED_IN') {
+    if (!readonly && isAuthorized) {
       const newValue = amount / 2;
       if (!isValid(newValue, min, max)) {
         return updateAmount(min);
@@ -59,7 +60,7 @@ const BetAmountControl: React.FC<IProps> = props => {
   };
 
   const handleDouble = () => {
-    if (!readonly && auth.state === 'SIGNED_IN') {
+    if (!readonly && isAuthorized) {
       const newValue = amount === 0 ? 10 ** -appConfig.bitcoinFractionDigits : amount * 2;
 
       if (!isValid(newValue, min, max)) {

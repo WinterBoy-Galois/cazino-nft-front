@@ -15,13 +15,14 @@ import useRealtimeBalance from '../../hooks/useRealtimeBalance.hook';
 import { BONUSCLAIMS } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
 import useRealtimeBonusNotification from '../../hooks/useRealtimeBonusNotification.hook';
+import { LOGOUT, logoutAction } from '../../state/actions/newAuth.action';
 
 const Layout: React.FC = ({ children }) => {
   useRealtimeBalance();
   useRealtimeBonusNotification();
 
   const [hasUnclaimedBonus, setHasUnclaimedBonus] = useState(false);
-  const [{ sidebar, modal, auth }, dispatch] = useStateValue();
+  const [{ sidebar, modal, newAuth }, dispatch] = useStateValue();
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
   const [signOut] = useMutation(SIGN_OUT);
@@ -35,13 +36,13 @@ const Layout: React.FC = ({ children }) => {
 
   const handleSignOutClick = async () => {
     await signOut();
-    dispatch({ type: 'AUTH_SIGN_OUT' });
+    dispatch(logoutAction());
     navigate('/');
   };
 
   const handleBalanceClick = useCallback(
-    () => auth.state === 'SIGNED_IN' && navigate(`${pathname}?dialog=cashier`),
-    [pathname, auth.state]
+    () => newAuth.state === 'SIGNED_IN' && navigate(`${pathname}?dialog=cashier`),
+    [pathname, newAuth.state]
   );
 
   useEffect(() => {
@@ -82,7 +83,7 @@ const Layout: React.FC = ({ children }) => {
           >
             <BottomBar
               hasUnclaimedBonus={hasUnclaimedBonus}
-              balance={auth.user?.balance}
+              balance={newAuth.user?.balance}
               onClick={handleBalanceClick}
             />
           </div>
