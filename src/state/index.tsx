@@ -50,7 +50,8 @@ interface IProps {
 export const StateProvider: React.FC<IProps> = ({ children, state }) => {
   const breakpoint = useBreakpoint();
   const initialState = state ?? getInitialState(isSidebarInitiallyOpen(breakpoint), true, true);
-  const mainState = useReducer(logger(mainReducer), initialState);
+  const reducer = process.env.NODE_ENV === 'development' ? logger(mainReducer) : mainReducer;
+  const mainState = useReducer(reducer, initialState);
 
   return <StateContext.Provider value={mainState}>{children}</StateContext.Provider>;
 };
