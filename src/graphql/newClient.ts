@@ -111,58 +111,6 @@ const newOperation = (operation: Operation) => {
   return operation;
 };
 
-const errorLink = onError(({ graphQLErrors, operation, forward, networkError, response }) => {
-  if (graphQLErrors) {
-    for (const err of graphQLErrors) {
-      switch (err?.extensions?.code) {
-        case 'FORBIDDEN':
-          let forward$;
-
-          if (!isRefreshing) {
-            isRefreshing = true;
-            forward$ = fromPromise(
-              getNewToken()
-                .then(({ accessToken }: any) => {
-                  localStorage.setItem('accessToken', accessToken);
-                  resolvePendingRequests();
-                  return accessToken;
-                })
-                .catch(() => {
-                  console.log('logout here');
-                  return forward(operation);
-                })
-                .finally(() => {
-                  isRefreshing = false;
-                })
-            ).filter(value => Boolean(value));
-          } else {
-            // Will only emit once the Promise is resolved
-            forward$ = fromPromise(
-              new Promise(resolve => {
-                pendingRequests.push(() => resolve());
-              })
-            );
-          }
-          return forward$.flatMap(() => {
-            return forward(newOperation(operation));
-          });
-      }
-    }
-    graphQLErrors.map(({ message, locations, path }) =>
-      console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
-    );
-    if (networkError) {
-      if (networkError && 'statusCode' in networkError && networkError.statusCode === 503) {
-        error(networkError.message);
-        if (response) {
-          response.errors = undefined;
-        }
-      }
-      console.log('Error--------------------', networkError);
-    }
-  }
-});
-
 const retryLink = new RetryLink({
   attempts: (count, operation, error) => {
     return !!error;
@@ -170,10 +118,65 @@ const retryLink = new RetryLink({
   delay: () => 500,
 });
 
-const apolloLink = from([errorLink, retryLink, link]);
+export const useApolloClient = (logout: any) => {
+  const errorLink = onError(({ graphQLErrors, operation, forward, networkError, response }) => {
+    if (graphQLErrors) {
+      for (const err of graphQLErrors) {
+        switch (err?.extensions?.code) {
+          case 'FORBIDDEN':
+            let forward$;
 
-export const apolloClient = new ApolloClient({
-  cache,
-  link: apolloLink,
-  queryDeduplication: false,
-});
+            if (!isRefreshing) {
+              isRefreshing = true;
+              forward$ = fromPromise(
+                getNewToken()
+                  .then(({ accessToken }: any) => {
+                    localStorage.setItem('accessToken', accessToken);
+                    resolvePendingRequests();
+                    return accessToken;
+                  })
+                  .catch(() => {
+                    logout?.();
+                    console.log('logout here');
+                    return forward(operation);
+                  })
+                  .finally(() => {
+                    isRefreshing = false;
+                  })
+              ).filter(value => Boolean(value));
+            } else {
+              // Will only emit once the Promise is resolved
+              forward$ = fromPromise(
+                new Promise(resolve => {
+                  pendingRequests.push(() => resolve());
+                })
+              );
+            }
+            return forward$.flatMap(() => {
+              return forward(newOperation(operation));
+            });
+        }
+      }
+      graphQLErrors.map(({ message, locations, path }) =>
+        console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+      );
+      if (networkError) {
+        if (networkError && 'statusCode' in networkError && networkError.statusCode === 503) {
+          error(networkError.message);
+          if (response) {
+            response.errors = undefined;
+          }
+        }
+        console.log('Error--------------------', networkError);
+      }
+    }
+  });
+
+  const apolloLink = from([errorLink, retryLink, link]);
+
+  return new ApolloClient({
+    cache,
+    link: apolloLink,
+    queryDeduplication: false,
+  });
+};

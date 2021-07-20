@@ -18,7 +18,9 @@ import Page500 from '../../pages/Page500';
 import LayoutPage from '../LayoutPage';
 
 import { UserLayer } from '../../user';
-import { apolloClient } from '../../graphql/newClient';
+import { useApolloClient } from '../../graphql/newClient';
+import { useUserState } from '../../user/UserProvider';
+import { logoutWithModalAction } from '../../user/user.actions';
 
 export const toast_v1 = require('../../sounds/toast-v1.mp3');
 export const balance_updated_v1 = require('../../sounds/balance-updated-v1.mp3');
@@ -45,9 +47,15 @@ export const bonus_claim_v1 = require('../../sounds/bonus-claim-v1.mp3');
 export const countdown_v1 = require('../../sounds/countdown-v1.mp3');
 
 const App: React.FC = () => {
-  // const client = useApolloClient();
+  const [{ accessToken }, userDispatch] = useUserState();
+  const logout = () => {
+    if (!accessToken) return;
+    return userDispatch(logoutWithModalAction());
+  };
+
+  const client = useApolloClient(logout);
   return (
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={client}>
       <GoogleReCaptchaProvider reCaptchaKey={appConfig.reCaptchaSiteKey}>
         <UserLayer>
           <LocationProvider>

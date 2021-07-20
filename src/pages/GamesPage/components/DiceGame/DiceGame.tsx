@@ -254,11 +254,12 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
       sidebar: { isSound },
     },
   ] = useStateValue();
-  const [{ user }, dispatch] = useUserState();
+  const [{ user, accessToken }, dispatch] = useUserState();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_DICE);
   const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE, { errorPolicy: 'all' });
   const [result, setResult] = useState();
   const [error, setError] = useState();
+  const [pendingBet, setPendingBet] = useState<any>();
 
   const [playButtonClick] = useSound(button_click_v1.default);
   const [playDiceWin] = useSound(dice_win_v1.default);
@@ -266,15 +267,22 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const [playToast] = useSound(toast_v1.default);
   const [playToastBalance] = useSound(balance_updated_v1.default);
 
+  useEffect(() => {
+    if (accessToken && pendingBet && !loadingBet) {
+      handlePlaceBet(pendingBet.betAmount, pendingBet.target, pendingBet.over);
+    }
+  }, [accessToken]);
+
   const handlePlaceBet = async (amount: number, target: number, over: boolean) => {
     if (isSound) {
       await playButtonClick();
     }
+    await setPendingBet(null);
+    const variables = { betAmount: amount, target, over };
     const { data, errors } = await makeBetDice({
-      variables: { betAmount: amount, target, over },
+      variables,
     });
     if (errors || data.makeBetDice?.errors) {
-      console.log(errors, 'errors');
       setError(errors ?? data.makeBetDice?.errors);
       if (isSound) {
         await playToast();
@@ -282,6 +290,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
       if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
         return errorToast(t('your_bet_may_reaches_the_profit_limit'));
       }
+      await setPendingBet(variables);
       return errorToast(t('your_bet_could_not_be_placed'));
     }
     setResult(data?.makeBetDice?.result);
