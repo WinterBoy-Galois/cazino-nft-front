@@ -7,7 +7,4 @@ export interface Action {
   payload?: any;
 }
 
-export type ActionType =
-  | SidebarActionType
-  | ModalActionType
-  | ReferralActionType;
+export type ActionType = SidebarActionType | ModalActionType | ReferralActionType;
