@@ -9,7 +9,6 @@ import signInIllustration from '../../assets/images/auth/sign-in.svg';
 import TextInput from '../TextInput';
 import PasswordInput from '../PasswordInput';
 import { SIGN_IN } from '../../graphql/mutations';
-import { useStateValue } from '../../state';
 import { ErrorSummary } from '..';
 import Uppercase from '../Uppercase';
 import Link from '../Link';
@@ -117,10 +116,10 @@ const SignInModal: React.FC<IProps> = ({
             <SpinnerButton
               color="SECONDARY"
               type="submit"
-              {...(formik.isValid ? {} : { disabled: true })}
               className={styles.spacing__bottom}
               loading={loading}
               loadingText={t('signIn.buttons.loading')}
+              disabled={formik.touched && !formik.isValid}
             >
               {t('signIn.buttons.signIn')}
             </SpinnerButton>

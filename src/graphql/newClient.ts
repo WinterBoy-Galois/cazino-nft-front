@@ -120,7 +120,6 @@ const retryLink = new RetryLink({
 
 export const useApolloClient = (logout: any) => {
   const errorLink = onError(({ graphQLErrors, operation, forward, networkError, response }) => {
-    console.log('what?', operation);
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
         switch (err?.extensions?.code) {
@@ -138,7 +137,6 @@ export const useApolloClient = (logout: any) => {
                   })
                   .catch(() => {
                     logout?.();
-                    console.log('logout here');
                     return forward(operation);
                   })
                   .finally(() => {
@@ -146,7 +144,6 @@ export const useApolloClient = (logout: any) => {
                   })
               ).filter(value => Boolean(value));
             } else {
-              // Will only emit once the Promise is resolved
               forward$ = fromPromise(
                 new Promise(resolve => {
                   pendingRequests.push(() => resolve());

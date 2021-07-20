@@ -290,7 +290,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
     if (errors || data.makeBetDice?.errors) {
       setError(errors ?? data.makeBetDice?.errors);
       if (isForbiddenError(errors)) {
-        await setPendingBet(variables);
+        return setPendingBet(variables);
       } else {
         if (isSound) {
           await playToast();
