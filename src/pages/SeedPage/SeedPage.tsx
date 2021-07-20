@@ -13,13 +13,19 @@ import { success, error } from '../../components/Toast';
 import { useUserState } from '../../user/UserProvider';
 
 const SeedPage: React.FC<RouteComponentProps> = () => {
-  console.log('seed page');
   const { t } = useTranslation(['seeds']);
-  const [getMe, { data }] = useLazyQuery(ME);
+  const [getMe, { data, called }] = useLazyQuery(ME);
   const [{ accessToken }] = useUserState();
-  const [seeds, setSeeds] = useState(data.me.seeds as ServerSeedMe);
-  const [activeGames] = useState(data.me.activeGames as GameTypes[]);
+  const [seeds, setSeeds] = useState<ServerSeedMe>();
+  const [activeGames, setActiveGames] = useState<GameTypes[]>([]);
   const [changeServerSeed, { loading }] = useMutation(CHANGE_SERVER_SEED);
+
+  useEffect(() => {
+    if (called && data) {
+      setSeeds(data.me.seeds as ServerSeedMe);
+      setActiveGames(data.me.activeGames as GameTypes[]);
+    }
+  }, [called, data]);
 
   const onClickChangeServerSeed = async (clientSeed: string) => {
     const { data, errors } = await changeServerSeed({
@@ -46,12 +52,14 @@ const SeedPage: React.FC<RouteComponentProps> = () => {
     <div className="container-md">
       <PageHeadline>{t('pageHeadline')}</PageHeadline>
       <PageContentContainer>
-        <ChangeServerSeed
-          seeds={seeds}
-          activeGames={activeGames}
-          onClickChangeSeed={onClickChangeServerSeed}
-          loading={loading}
-        />
+        {seeds && (
+          <ChangeServerSeed
+            seeds={seeds}
+            activeGames={activeGames}
+            onClickChangeSeed={onClickChangeServerSeed}
+            loading={loading}
+          />
+        )}
       </PageContentContainer>
     </div>
   );

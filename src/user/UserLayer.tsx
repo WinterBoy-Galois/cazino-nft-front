@@ -13,9 +13,7 @@ export const UserLayer: React.FC = ({ children }) => {
   const [getMe, { called, data, error, loading }] = useLazyQuery(ME);
 
   useEffect(() => {
-    console.log('should be called once', accessToken);
     if (accessToken) {
-      console.log('get me');
       getMe();
     }
   }, []);
