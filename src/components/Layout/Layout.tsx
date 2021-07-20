@@ -13,7 +13,6 @@ import Modals from './components/Modals';
 import { navigate, useLocation } from '@reach/router';
 import useRealtimeBalance from '../../hooks/useRealtimeBalance.hook';
 import { BONUSCLAIMS } from '../../graphql/queries';
-import { useQuery } from '@apollo/client';
 import useRealtimeBonusNotification from '../../hooks/useRealtimeBonusNotification.hook';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 import { logoutAction } from '../../user/user.actions';
@@ -34,7 +33,7 @@ const Layout: React.FC = ({ children }) => {
   const [fetchBonusClaim, { data: bonusClaims }] = useLazyQuery(BONUSCLAIMS);
 
   useEffect(() => {
-    if (accessToken) {
+    if (isAuthorized && accessToken) {
       fetchBonusClaim();
     }
   }, [accessToken]);
@@ -45,8 +44,12 @@ const Layout: React.FC = ({ children }) => {
   const handleSignInClick = useCallback(() => navigate(`${pathname}?dialog=sign-in`), [pathname]);
 
   const handleSignOutClick = async () => {
-    await signOut();
-    userDispatch(logoutAction());
+    try {
+      userDispatch(logoutAction());
+      await signOut();
+    } catch (error) {
+      console.log('logout', error);
+    }
   };
 
   const handleBalanceClick = useCallback(

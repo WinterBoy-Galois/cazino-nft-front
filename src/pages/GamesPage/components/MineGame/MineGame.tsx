@@ -29,6 +29,8 @@ import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
 import { useUserState } from '../../../../user/UserProvider';
 import User from '../../../../models/user.model';
 import { updateUserAction } from '../../../../user/user.actions';
+import { usePendingBetHook } from '../../../../hooks/usePendingBet.hook';
+import { isForbiddenError } from '../../../../common/util/error.util';
 
 interface IProps {
   loadingBet?: boolean;
@@ -442,6 +444,12 @@ const MineGame: React.FC<IProps> = ({
     </div>
   );
 };
+
+interface PlaceBetVariables {
+  betId: string;
+  selection: number;
+}
+
 export default MineGame;
 
 export const MineGameWithData: React.FC<RouteComponentProps> = () => {
@@ -469,6 +477,11 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
       sidebar: { isSound },
     },
   ] = useStateValue();
+
+  const [setPendingBet] = usePendingBetHook<PlaceBetVariables>({
+    loading: loadingBet,
+    action: ({ betId, selection }) => handlePlaceBet(betId, selection),
+  });
 
   const onPlayBalanceUpdated = () => {
     if (isSound) {
@@ -518,14 +531,20 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   };
 
   const handlePlaceBet = async (betId: string, selection: number) => {
-    const { data, errors } = await advanceMines({ variables: { betId, selection } });
+    await setPendingBet(null);
+    const variables: PlaceBetVariables = { betId, selection };
+    const { data, errors } = await advanceMines({ variables });
     if (errors || data.advanceMines?.errors) {
       setError(errors ?? data.advanceMines?.errors);
-      onPlayToast();
-      if (data.makeBetMines?.errors[0]?.code === 'MAX_PROFIT') {
-        return errorToast(t('mines.errorProfitLimit'));
+      if (isForbiddenError(errors)) {
+        await setPendingBet(variables);
+      } else {
+        onPlayToast();
+        if (data.makeBetMines?.errors[0]?.code === 'MAX_PROFIT') {
+          return errorToast(t('mines.errorProfitLimit'));
+        }
+        return errorToast(t('mines.errorTryAgain'));
       }
-      return errorToast(t('mines.errorTryAgain'));
     }
     switch (data.advanceMines.__typename) {
       case 'MinesStep':

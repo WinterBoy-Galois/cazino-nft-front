@@ -36,6 +36,8 @@ import {
 import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
 import User from '../../../../models/user.model';
 import { useUserState } from '../../../../user/UserProvider';
+import { isForbiddenError } from '../../../../common/util/error.util';
+import { usePendingBetHook } from '../../../../hooks/usePendingBet.hook';
 
 interface IProps {
   loadingBet?: boolean;
@@ -245,6 +247,12 @@ const DiceGame: React.FC<IProps> = ({
   );
 };
 
+interface PlaceBetVariables {
+  betAmount: number;
+  target: number;
+  over: boolean;
+}
+
 export default DiceGame;
 
 export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
@@ -254,12 +262,15 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
       sidebar: { isSound },
     },
   ] = useStateValue();
-  const [{ user, accessToken }, dispatch] = useUserState();
+  const [{ user }, dispatch] = useUserState();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_DICE);
   const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE, { errorPolicy: 'all' });
   const [result, setResult] = useState();
   const [error, setError] = useState();
-  const [pendingBet, setPendingBet] = useState<any>();
+  const [setPendingBet] = usePendingBetHook<PlaceBetVariables>({
+    loading: loadingBet,
+    action: ({ betAmount, target, over }) => handlePlaceBet(betAmount, target, over),
+  });
 
   const [playButtonClick] = useSound(button_click_v1.default);
   const [playDiceWin] = useSound(dice_win_v1.default);
@@ -267,31 +278,28 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const [playToast] = useSound(toast_v1.default);
   const [playToastBalance] = useSound(balance_updated_v1.default);
 
-  useEffect(() => {
-    if (accessToken && pendingBet && !loadingBet) {
-      handlePlaceBet(pendingBet.betAmount, pendingBet.target, pendingBet.over);
-    }
-  }, [accessToken]);
-
-  const handlePlaceBet = async (amount: number, target: number, over: boolean) => {
+  const handlePlaceBet = async (betAmount: number, target: number, over: boolean) => {
+    await setPendingBet(null);
+    const variables: PlaceBetVariables = { betAmount, target, over };
     if (isSound) {
       await playButtonClick();
     }
-    await setPendingBet(null);
-    const variables = { betAmount: amount, target, over };
     const { data, errors } = await makeBetDice({
       variables,
     });
     if (errors || data.makeBetDice?.errors) {
       setError(errors ?? data.makeBetDice?.errors);
-      if (isSound) {
-        await playToast();
+      if (isForbiddenError(errors)) {
+        await setPendingBet(variables);
+      } else {
+        if (isSound) {
+          await playToast();
+        }
+        if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
+          return errorToast(t('your_bet_may_reaches_the_profit_limit'));
+        }
+        return errorToast(t('your_bet_could_not_be_placed'));
       }
-      if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
-        return errorToast(t('your_bet_may_reaches_the_profit_limit'));
-      }
-      await setPendingBet(variables);
-      return errorToast(t('your_bet_could_not_be_placed'));
     }
     setResult(data?.makeBetDice?.result);
 

@@ -49,10 +49,12 @@ export const userReducer: Reducer<UserState, Action> = (state, action) => {
     case UPDATE_USER:
       return {
         ...state,
-        user: {
-          ...state.user,
-          ...action.payload,
-        },
+        user: state.user
+          ? {
+              ...state.user,
+              ...action.payload,
+            }
+          : undefined,
       };
     case TOGGLE_RELOGIN:
       return {

@@ -33,6 +33,8 @@ import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
 import { updateUserAction } from '../../../../user/user.actions';
 import { useUserState } from '../../../../user/UserProvider';
 import User from '../../../../models/user.model';
+import { usePendingBetHook } from '../../../../hooks/usePendingBet.hook';
+import { isForbiddenError } from '../../../../common/util/error.util';
 
 interface IProps {
   loadingBet?: boolean;
@@ -306,6 +308,11 @@ const ClamGame: React.FC<IProps> = ({
   );
 };
 
+interface PlaceBetVariables {
+  betAmount: number;
+  selection: number[];
+}
+
 export default ClamGame;
 
 export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
@@ -319,6 +326,10 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
   const [multiplier, setMultiplier] = useState();
   const [profit, setProfit] = useState();
   const [error, setError] = useState();
+  const [setPendingBet] = usePendingBetHook<PlaceBetVariables>({
+    loading: loadingBet,
+    action: ({ betAmount, selection }) => handlePlaceBet(betAmount, selection),
+  });
 
   const [playToast] = useSound(toast_v1.default);
   const [playToastBalanceUpdated] = useSound(balance_updated_v1.default);
@@ -329,21 +340,26 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
   ] = useStateValue();
 
   const handlePlaceBet = async (betAmount: number, selection: number[]) => {
-    const { data, errors } = await makeBetClams({ variables: { betAmount, selection } });
+    await setPendingBet(null);
+    const variables: PlaceBetVariables = { betAmount, selection };
+    const { data, errors } = await makeBetClams({ variables });
 
     if (errors || data.makeBetClams?.errors) {
       setError(errors ?? data.makeBetClams?.errors);
+      if (isForbiddenError(errors)) {
+        await setPendingBet(variables);
+      } else {
+        if (isSound) {
+          setTimeout(() => {
+            playToast();
+          }, 500);
+        }
+        if (data.makeBetClams?.errors[0]?.code === 'MAX_PROFIT') {
+          return errorToast(t('your_bet_may_reaches_the_profit_limit'));
+        }
 
-      if (isSound) {
-        setTimeout(() => {
-          playToast();
-        }, 500);
+        return errorToast(t('your_bet_could_not_be_placed'));
       }
-      if (data.makeBetClams?.errors[0]?.code === 'MAX_PROFIT') {
-        return errorToast(t('your_bet_may_reaches_the_profit_limit'));
-      }
-
-      return errorToast(t('your_bet_could_not_be_placed'));
     }
 
     setResult(data?.makeBetClams?.result);

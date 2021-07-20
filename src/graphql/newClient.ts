@@ -120,13 +120,14 @@ const retryLink = new RetryLink({
 
 export const useApolloClient = (logout: any) => {
   const errorLink = onError(({ graphQLErrors, operation, forward, networkError, response }) => {
+    console.log('what?', operation);
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
         switch (err?.extensions?.code) {
           case 'FORBIDDEN':
             let forward$;
 
-            if (!isRefreshing) {
+            if (!isRefreshing && operation.operationName !== 'SignOut') {
               isRefreshing = true;
               forward$ = fromPromise(
                 getNewToken()

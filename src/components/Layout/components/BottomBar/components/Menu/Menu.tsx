@@ -33,7 +33,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
   const [userLastBet, setUserLastBet] = useState<Bet | null>(null);
 
   useEffect(() => {
-    if (accessToken) {
+    if (isAuthorized && accessToken) {
       fetchFaucetInfo();
     }
   }, [accessToken]);
