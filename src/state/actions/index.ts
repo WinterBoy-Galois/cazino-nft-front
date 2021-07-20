@@ -1,6 +1,5 @@
 import { SidebarActionType } from './sidebar.action';
 import { ModalActionType } from './modal.action';
-import { AuthActionTypeNew } from './newAuth.action';
 import { ReferralActionType } from './referral.action';
 
 export interface Action {
@@ -8,8 +7,4 @@ export interface Action {
   payload?: any;
 }
 
-export type ActionType =
-  | SidebarActionType
-  | ModalActionType
-  | AuthActionTypeNew
-  | ReferralActionType;
+export type ActionType = SidebarActionType | ModalActionType | ReferralActionType;

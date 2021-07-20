@@ -15,7 +15,7 @@ import { MinesGameState as GameState } from '../../../../models/minesGameState.m
 import BetAmountControl from '../../../../components/BetAmountControl';
 import { useTranslation } from 'react-i18next';
 import { formatBitcoin } from '../../../../common/util/format.util';
-import { error as errorToast, success } from '../../../../components/Toast'; // error as errorToast, success, info
+import { error as errorToast } from '../../../../components/Toast'; // error as errorToast, success, info
 import { appConfig } from '../../../../common/config';
 
 import useSound from 'use-sound';
@@ -26,7 +26,9 @@ import {
   mines_lost_v1,
 } from '../../../../components/App/App';
 import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
-import { updateUserAction } from '../../../../state/actions/newAuth.action';
+import { useUserState } from '../../../../user/UserProvider';
+import User from '../../../../models/user.model';
+import { updateUserAction } from '../../../../user/user.actions';
 
 interface IProps {
   loadingBet?: boolean;
@@ -41,6 +43,7 @@ interface IProps {
   profitCut?: any;
   maxProfit?: number;
   result?: number;
+  user?: User;
 }
 
 const MineGame: React.FC<IProps> = ({
@@ -54,13 +57,9 @@ const MineGame: React.FC<IProps> = ({
   maxProfit,
   profitCut,
   onStartGame = () => null,
+  user,
 }) => {
   const isAuthorized = useIsAuthorized();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { t } = useTranslation(['games']);
@@ -446,7 +445,7 @@ const MineGame: React.FC<IProps> = ({
 export default MineGame;
 
 export const MineGameWithData: React.FC<RouteComponentProps> = () => {
-  const [, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useUserState();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_MINES);
   const [makeBetMines, { loading: loadingBet }] = useMutation(MAKE_BET_MINES, {
     errorPolicy: 'all',
@@ -608,6 +607,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   }, [data]);
   return (
     <MineGame
+      user={user}
       loadingSetup={loadingSetup}
       loadingBet={loadingBet || loadingAdvance || loadingCashOut}
       onPlaceBet={handlePlaceBet}

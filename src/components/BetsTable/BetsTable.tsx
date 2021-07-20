@@ -9,8 +9,8 @@ import { TableColumn } from '../TransactionsTable/lib/tableColumn';
 import BitcoinProfit from '../BitcoinProfit';
 import GameIcon from '../GameIcon';
 import styles from './BetsTable.module.scss';
-import { useStateValue } from '../../state';
 import { useTranslation } from 'react-i18next';
+import { useUserState } from '../../user/UserProvider';
 interface IProps {
   data: TransactionsBet[];
   paginationTotalRows?: number;
@@ -57,11 +57,7 @@ const BetsTable: React.FC<IProps> = props => {
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
+  const [{ user }] = useUserState();
   const handleRowClicked = (row: TransactionsBet) => {
     navigate(`${pathname}?dialog=bet-details`, {
       state: {

@@ -4,17 +4,17 @@ import { useTranslation } from 'react-i18next';
 import { error, info, success } from '../components/Toast';
 import { BALANCE } from '../graphql/subscriptions';
 import { TransactionStatus } from '../models/transactionStatus.model';
-import { useStateValue } from '../state';
-import { updateUserAction } from '../state/actions/newAuth.action';
+import { updateUserAction } from '../user/user.actions';
+import { useUserState } from '../user/UserProvider';
 
 export default function useRealtimeBalance() {
   const { data } = useSubscription(BALANCE);
-  const [, dispatch] = useStateValue();
+  const [, userDispatch] = useUserState();
   const { t } = useTranslation(['transactions']);
 
   useEffect(() => {
     if (data?.balance) {
-      dispatch(updateUserAction({ balance: data.balance.user.balance }));
+      userDispatch(updateUserAction({ balance: data.balance.user.balance }));
 
       switch (data.balance.event) {
         case TransactionStatus.DEPOSIT_CONFIRMED:
@@ -42,5 +42,5 @@ export default function useRealtimeBalance() {
           break;
       }
     }
-  }, [data, dispatch, t]);
+  }, [data, userDispatch, t]);
 }

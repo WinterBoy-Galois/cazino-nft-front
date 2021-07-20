@@ -8,25 +8,21 @@ import { useStateValue } from '../state';
 import useSound from 'use-sound';
 import { bonus_received_v1 } from '../components/App/App';
 import { useIsAuthorized } from './useIsAuthorized';
-import { updateUserAction } from '../state/actions/newAuth.action';
+import { updateUserAction } from '../user/user.actions';
+import { useUserState } from '../user/UserProvider';
 
 export default function useRealtimeBonusNotification() {
   const isAuthorized = useIsAuthorized();
   const { data } = useSubscription(BONUS_NOTIFICATION);
-  const [, dispatch] = useStateValue();
-  const { t } = useTranslation(['transactions']);
-  const [playBonusReceived] = useSound(bonus_received_v1.default);
-
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
   const [
     {
       sidebar: { isSound },
     },
   ] = useStateValue();
+  const { t } = useTranslation(['transactions']);
+  const [playBonusReceived] = useSound(bonus_received_v1.default);
+
+  const [{ user }, userDispatch] = useUserState();
 
   useEffect(() => {
     if (data?.bonusReceived && isAuthorized && data?.bonusReceived.userid === user?.id) {
@@ -35,9 +31,9 @@ export default function useRealtimeBonusNotification() {
           await playBonusReceived();
         })();
       }
-      dispatch(updateUserAction({ balance: data.bonusReceived.balance }));
+      userDispatch(updateUserAction({ balance: data.bonusReceived.balance }));
 
       success(t('bonusNotification'));
     }
-  }, [data, dispatch, t]);
+  }, [data, t, isAuthorized]);
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, Reducer, useMemo } from 'react';
+import React, { useState, useEffect, useReducer, Reducer } from 'react';
 import GoalGameBoard from '../../../../components/GoalGameBoard';
 import GoalGameAdvances from '../../../../components/GoalGameAdvances';
 import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
@@ -17,7 +17,7 @@ import { MAKE_BET_GOALS, CASH_OUT_GOALS, ADVANCE_GOALS } from '../../../../graph
 import { appConfig } from '../../../../common/config';
 import Loading from '../../../../components/Loading';
 import Error from '../../../../components/Error';
-import { error as errorToast, success, info } from '../../../../components/Toast';
+import { error as errorToast } from '../../../../components/Toast';
 
 import useSound from 'use-sound';
 import {
@@ -40,8 +40,10 @@ import {
 } from './lib/reducer';
 import { GoalGameState as GameState } from '../../../../models/goalGameState.model';
 import { formatBitcoin } from '../../../../common/util/format.util';
-import { UPDATE_USER, updateUserAction } from '../../../../state/actions/newAuth.action';
 import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
+import User from '../../../../models/user.model';
+import { updateUserAction } from '../../../../user/user.actions';
+import { useUserState } from '../../../../user/UserProvider';
 
 interface IProps {
   loadingSetup?: boolean;
@@ -55,6 +57,7 @@ interface IProps {
   onCashOut?: (betId: string) => void;
   maxProfit?: number;
   profitCut?: any;
+  user?: User;
 }
 
 const deviceSize = { xxl: 6, xl: 5, lg: 4, md: 3, sm: 2, xs: 1 };
@@ -71,13 +74,9 @@ const GoalGame: React.FC<IProps> = ({
   onCashOut = () => null,
   maxProfit,
   profitCut,
+  user,
 }) => {
   const isAuthorized = useIsAuthorized();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
   const { t } = useTranslation(['games']);
   const [state, dispatch] = useReducer<Reducer<GoalGameState, GoalGameAction>>(
     goalGameReducer,
@@ -547,7 +546,7 @@ export default GoalGame;
 
 export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_GOAL);
-  const [, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useUserState();
   const [makeBetGoals, { loading: loadingBet }] = useMutation(MAKE_BET_GOALS, {
     errorPolicy: 'all',
   });
@@ -741,6 +740,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
   return (
     <GoalGame
+      user={user}
       loadingSetup={loadingSetup}
       loadingBet={loadingBet || loadingAdvance || loadingCashOut}
       errorSetup={errorSetup}

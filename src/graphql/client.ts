@@ -1,6 +1,5 @@
 import { ApolloClient, InMemoryCache, from, split } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
-import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import possibleTypes from './possibleTypes.json';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { HttpLink, defaultDataIdFromObject } from '@apollo/client';
@@ -11,6 +10,7 @@ import { appConfig } from '../common/config';
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
 import { error } from '../components/Toast';
+import { fromPromise } from '@apollo/client';
 
 const cache = new InMemoryCache({
   dataIdFromObject(responseObject) {
@@ -24,6 +24,26 @@ const cache = new InMemoryCache({
 });
 
 let wsLink: WebSocketLink;
+
+let isRefreshing = false;
+let pendingRequests: any[] = [];
+
+const resolvePendingRequests = () => {
+  console.log('resolve');
+  pendingRequests.map(callback => {
+    console.log(callback);
+    return callback();
+  });
+  pendingRequests = [];
+};
+
+const getNewToken = () => {
+  console.log('get new token');
+  return fetch(`${appConfig.apiBasePath}/refresh_tokens`, {
+    method: 'POST',
+    credentials: 'include',
+  }).then(result => result.json());
+};
 
 const getApolloClient = (
   onAccessTokenRefresh: (accessToken: string) => void,
@@ -53,6 +73,7 @@ const getApolloClient = (
   });
 
   const authLink = setContext((_, { headers }) => {
+    const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       return {
         headers: {
@@ -65,41 +86,6 @@ const getApolloClient = (
     return headers;
   });
 
-  const tokenLink = new TokenRefreshLink({
-    accessTokenField: 'accessToken',
-    isTokenValidOrUndefined: () => {
-      console.log('validating token');
-      if (accessToken) {
-        const { exp } = jwtDecode(accessToken);
-
-        if (exp < getEpoch()) {
-          return false;
-        }
-      } else if (isAuthorized) {
-        return false;
-      }
-
-      return true;
-    },
-    fetchAccessToken: () => {
-      return fetch(`${appConfig.apiBasePath}/refresh_tokens`, {
-        method: 'POST',
-        credentials: 'include',
-      });
-    },
-    handleFetch: accessToken => {
-      console.log('handle fetch', accessToken);
-      return onAccessTokenRefresh(accessToken);
-    },
-    handleError: err => {
-      console.log('handle error', err);
-      if (isAuthorized) {
-        return onSignOut();
-      }
-      return;
-    },
-  });
-
   const link = split(
     ({ query }) => {
       const definition = getMainDefinition(query);
@@ -109,37 +95,66 @@ const getApolloClient = (
     authLink.concat(httpLink)
   );
 
+  const isTokenValidOrUndefined = () => {
+    if (accessToken) {
+      const { exp } = jwtDecode(accessToken);
+
+      if (exp < getEpoch()) {
+        return true;
+      }
+    } else if (isAuthorized) {
+      return true;
+    }
+
+    return false;
+  };
+
   const errorLink = onError(({ graphQLErrors, operation, forward, networkError, response }) => {
-    console.log('error link');
+    if (!accessToken) {
+      return;
+    }
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
+        console.log('err', err);
         switch (err?.extensions?.code) {
           case 'FORBIDDEN':
-            // error code is set to FORBIDDEN
-            // when AuthenticationError thrown in resolver
+            console.log('forbidden');
+            let forward$;
 
-            // if new accesstoken is valid
-            // retry request with it
-            if (accessToken) {
-              const { exp } = jwtDecode(accessToken);
-              if (exp > getEpoch()) {
-                // modify the operation context with a new token
-                const oldHeaders = operation.getContext().headers;
-                operation.setContext({
-                  headers: {
-                    ...oldHeaders,
-                    authorization: accessToken,
-                  },
-                });
-                // retry the request, returning the new observable
-                return forward(operation);
-              }
+            if (!isRefreshing && isTokenValidOrUndefined()) {
+              console.log('is refreshing');
+              isRefreshing = true;
+              forward$ = fromPromise(
+                getNewToken()
+                  .then(({ accessToken }) => {
+                    onAccessTokenRefresh(accessToken);
+                    console.log('get new token', accessToken);
+                    resolvePendingRequests();
+                    return accessToken;
+                  })
+                  .catch(() => {
+                    pendingRequests = [];
+                    onSignOut();
+                    return;
+                  })
+                  .finally(() => {
+                    isRefreshing = false;
+                  })
+              ).filter(value => Boolean(value));
             }
+            // Will only emit once the Promise is resolved
+            forward$ = fromPromise(
+              new Promise(resolve => {
+                pendingRequests.push(() => resolve());
+              })
+            );
+
+            return forward$.flatMap(() => forward(operation));
         }
       }
-      // graphQLErrors.map(({ message, locations, path }) =>
-      //   // console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
-      // );
+      graphQLErrors.map(({ message, locations, path }) =>
+        console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+      );
     }
     if (networkError) {
       if (networkError && 'statusCode' in networkError && networkError.statusCode === 503) {
@@ -166,7 +181,7 @@ const getApolloClient = (
 
   return new ApolloClient({
     cache,
-    link: from([errorLink, tokenLink, link, retryLink]),
+    link: from([errorLink, link, retryLink]),
   });
 };
 

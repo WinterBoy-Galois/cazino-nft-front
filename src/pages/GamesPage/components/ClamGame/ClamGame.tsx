@@ -30,7 +30,9 @@ import {
   clams_select_v1,
 } from '../../../../components/App/App';
 import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
-import { updateUserAction } from '../../../../state/actions/newAuth.action';
+import { updateUserAction } from '../../../../user/user.actions';
+import { useUserState } from '../../../../user/UserProvider';
+import User from '../../../../models/user.model';
 
 interface IProps {
   loadingBet?: boolean;
@@ -43,6 +45,7 @@ interface IProps {
   setResult?: (result: number) => void;
   multiplier?: number;
   profit?: number;
+  user?: User;
 }
 
 const ClamGame: React.FC<IProps> = ({
@@ -56,13 +59,9 @@ const ClamGame: React.FC<IProps> = ({
   setResult = () => null,
   multiplier = 49.748,
   profit = 0.00773,
+  user,
 }) => {
   const isAuthorized = useIsAuthorized();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
   const { t } = useTranslation(['games']);
   const [state, dispatch] = useReducer<Reducer<ClamGameState, ClamGameAction>>(
     clamGameReducer,
@@ -310,7 +309,7 @@ const ClamGame: React.FC<IProps> = ({
 export default ClamGame;
 
 export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
-  const [, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useUserState();
   const { t } = useTranslation(['games']);
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_CLAMS);
   const [makeBetClams, { loading: loadingBet }] = useMutation(MAKE_BET_CLAMS, {
@@ -376,6 +375,7 @@ export const ClamGameWithData: React.FC<RouteComponentProps> = () => {
 
   return (
     <ClamGame
+      user={user}
       he={data?.setupClams?.he}
       loadingSetup={loadingSetup}
       loadingBet={loadingBet}

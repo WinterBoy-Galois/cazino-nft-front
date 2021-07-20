@@ -9,12 +9,13 @@ import clsx from 'clsx';
 import { CLAIM_BONUS } from '../../../../graphql/mutations';
 import { useMutation } from '@apollo/client';
 import { success, error as errorToast } from '../../../../components/Toast';
-import { useStateValue } from '../../../../state/index';
+import { useStateValue } from '../../../../state';
 
 import useSound from 'use-sound';
 import { useTranslation } from 'react-i18next';
 import { bonus_received_v1, bonus_claim_v1, toast_v1 } from '../../../../components/App/App';
-import { updateUserAction } from '../../../../state/actions/newAuth.action';
+import { updateUserAction } from '../../../../user/user.actions';
+import { useUserState } from '../../../../user/UserProvider';
 
 interface IProps {
   bonusClaims?: any[];
@@ -37,13 +38,14 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
   onToastErrorSound = () => null,
 }) => {
   const [claimBonus, { loading }] = useMutation(CLAIM_BONUS);
-  const [, dispatch] = useStateValue();
-  const { t } = useTranslation(['bonuses', 'games', 'error']);
   const [
     {
       sidebar: { isOpen },
     },
+    dispatch,
   ] = useStateValue();
+  const [, userDispatch] = useUserState();
+  const { t } = useTranslation(['bonuses', 'games', 'error']);
 
   const onClaimBonus = async (bonusId: string) => {
     onSetClick(bonusId);
@@ -55,7 +57,7 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
     success(
       `${t('games:your_ballance_has_been_updated')}: ${formatBitcoin(data.claimBonus.balance)}`
     );
-    dispatch(updateUserAction({ balance: data.claimBonus.balance }));
+    userDispatch(updateUserAction({ balance: data.claimBonus.balance }));
 
     onClaimBonusCompleted(bonusId);
   };

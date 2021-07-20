@@ -7,7 +7,7 @@ import Footer from '../Footer';
 import { useStateValue } from '../../state';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { transitionTimeout } from '../Modal';
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { SIGN_OUT } from '../../graphql/mutations';
 import Modals from './components/Modals';
 import { navigate, useLocation } from '@reach/router';
@@ -15,8 +15,9 @@ import useRealtimeBalance from '../../hooks/useRealtimeBalance.hook';
 import { BONUSCLAIMS } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
 import useRealtimeBonusNotification from '../../hooks/useRealtimeBonusNotification.hook';
-import { logoutAction } from '../../state/actions/newAuth.action';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
+import { logoutAction } from '../../user/user.actions';
+import { useUserState } from '../../user/UserProvider';
 
 const Layout: React.FC = ({ children }) => {
   useRealtimeBalance();
@@ -24,12 +25,19 @@ const Layout: React.FC = ({ children }) => {
 
   const isAuthorized = useIsAuthorized();
   const [hasUnclaimedBonus, setHasUnclaimedBonus] = useState(false);
-  const [{ sidebar, modal, newAuth }, dispatch] = useStateValue();
+  const [{ sidebar, modal }] = useStateValue();
+  const [{ user, accessToken }, userDispatch] = useUserState();
   const mainWidth = document.getElementById('main')?.clientWidth;
   const breakpoint = useBreakpoint();
   const [signOut] = useMutation(SIGN_OUT);
   const { pathname } = useLocation();
-  const { data: bonusClaims } = useQuery(BONUSCLAIMS);
+  const [fetchBonusClaim, { data: bonusClaims }] = useLazyQuery(BONUSCLAIMS);
+
+  useEffect(() => {
+    if (accessToken) {
+      fetchBonusClaim();
+    }
+  }, [accessToken]);
 
   const hideContent = () =>
     breakpoint === 'xs' || breakpoint === 'sm' ? modal.type !== 'NONE' : false;
@@ -38,13 +46,12 @@ const Layout: React.FC = ({ children }) => {
 
   const handleSignOutClick = async () => {
     await signOut();
-    dispatch(logoutAction());
-    navigate('/');
+    userDispatch(logoutAction());
   };
 
   const handleBalanceClick = useCallback(
     () => isAuthorized && navigate(`${pathname}?dialog=cashier`),
-    [pathname, newAuth.state]
+    [pathname, isAuthorized]
   );
 
   useEffect(() => {
@@ -85,7 +92,7 @@ const Layout: React.FC = ({ children }) => {
           >
             <BottomBar
               hasUnclaimedBonus={hasUnclaimedBonus}
-              balance={newAuth.user?.balance}
+              balance={user?.balance}
               onClick={handleBalanceClick}
             />
           </div>

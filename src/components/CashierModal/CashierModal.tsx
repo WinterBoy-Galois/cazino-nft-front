@@ -2,9 +2,8 @@ import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import styles from './CashierModal.module.scss';
 import Modal from '../Modal';
 import SlideSelect from '../SlideSelect';
-import { useStateValue } from '../../state';
 import { useNavigate, useLocation } from '@reach/router';
-import { useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { SETUP_CASHIER } from '../../graphql/queries';
 import Cashier from '../../models/cashier.model';
 import CopyField from '../CopyField';
@@ -23,6 +22,7 @@ import { success, error as errorToast } from '../../components/Toast';
 import clsx from 'clsx';
 import validate from 'bitcoin-address-validation';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
+import { useUserState } from '../../user/UserProvider';
 
 interface IProps {
   show: boolean;
@@ -215,19 +215,21 @@ export default CashierModal;
 
 export const CashierModalWithData: React.FC<IProps> = props => {
   const isAuthorized = useIsAuthorized();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
+  const [{ user, accessToken }] = useUserState();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { data, loading, error, refetch } = useQuery(SETUP_CASHIER);
+  const [setupCashier, { data, loading, error, refetch }] = useLazyQuery(SETUP_CASHIER);
   const handleTransactionsClick = useCallback(() => navigate('/transactions/deposits'), [navigate]);
 
   useEffect(() => {
+    if (accessToken) {
+      setupCashier();
+    }
+  }, [accessToken]);
+
+  useEffect(() => {
     if (!data?.me.depositAddress && !loading && props.show) {
-      refetch();
+      refetch?.();
     }
   }, [data, refetch, props.show, loading]);
 

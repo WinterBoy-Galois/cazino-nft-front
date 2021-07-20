@@ -3,7 +3,7 @@ import { State } from './models';
 import { mainReducer } from './reducers';
 import { Action } from './actions';
 import { useBreakpoint, Breakpoint } from '../hooks/useBreakpoint.hook';
-import { readAuthState, readReferral } from '../common/util/storage.util';
+import { readReferral } from '../common/util/storage.util';
 
 const getInitialState = (
   isSidebarOpen: boolean,
@@ -20,7 +20,6 @@ const getInitialState = (
   modal: {
     type: 'NONE',
   },
-  newAuth: { state: readAuthState(), relogin: false },
   referral: {
     id: readReferral(),
   },

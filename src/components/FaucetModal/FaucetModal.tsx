@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './FaucetModal.module.scss';
 import Modal from '../Modal';
-import { useStateValue } from '../../state';
 import { useNavigate, useLocation } from '@reach/router';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
@@ -13,7 +12,8 @@ import { formatBitcoin } from '../../common/util/format.util';
 import { CLAIM_FAUCET } from '../../graphql/mutations';
 import { useMutation } from '@apollo/client';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
-import { updateUserAction } from '../../state/actions/newAuth.action';
+import { updateUserAction } from '../../user/user.actions';
+import { useUserState } from '../../user/UserProvider';
 
 interface IProps {
   show: boolean;
@@ -47,7 +47,7 @@ const FaucetModal: React.FC<IProps> = ({
   errMessage: defaultErrMessage = '',
 }) => {
   const { t } = useTranslation(['modals', 'games']);
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useUserState();
   const [claimFaucet] = useMutation(CLAIM_FAUCET);
   const [errMessage, setErrMessage] = useState(null);
 

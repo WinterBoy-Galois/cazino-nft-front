@@ -11,6 +11,7 @@ import Avatar from '../../../Avatar';
 import UserMenu from '../../../UserMenu';
 import { useBreakpoint } from '../../../../hooks/useBreakpoint.hook';
 import { useNavigate } from '@reach/router';
+import { useUserState } from '../../../../user/UserProvider';
 
 interface IProps {
   onSignInClick?: () => void;
@@ -20,7 +21,8 @@ interface IProps {
 
 const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLogo }) => {
   const { t } = useTranslation(['auth']);
-  const [{ sidebar, newAuth }] = useStateValue();
+  const [{ sidebar }] = useStateValue();
+  const [{ user }] = useUserState();
   const [showMenu, setShowMenu] = useState(false);
   const avatarRef = useRef(null);
   const breakpoint = useBreakpoint();
@@ -62,7 +64,7 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLo
                   !sidebar.isOpen || isMobileBreakpoint ? styles['details--spacing'] : ''
                 }`}
               >
-                {!newAuth.user ? (
+                {!user ? (
                   <Fragment>
                     <div className={styles.details__button}>
                       <SecondaryButton
@@ -79,10 +81,10 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLo
                   </Fragment>
                 ) : (
                   <Fragment>
-                    <span className={styles['details--spacing']}>{newAuth.user.username}</span>
+                    <span className={styles['details--spacing']}>{user.username}</span>
                     <Avatar
-                      avatarUrl={newAuth.user.avatarUrl}
-                      username={newAuth.user.username}
+                      avatarUrl={user.avatarUrl}
+                      username={user.username}
                       ref={avatarRef}
                       onClick={handleToggleMenu}
                     />
@@ -98,7 +100,7 @@ const TopBar: React.FC<IProps> = ({ onSignInClick, onSignOutClick, isOnlyLeaveLo
 
       <UserMenu
         show={showMenu}
-        username={newAuth.user?.username}
+        username={user?.username}
         onSignOutClick={onSignOutClick}
         onClose={handleCloseMenu}
         toggleRef={avatarRef}

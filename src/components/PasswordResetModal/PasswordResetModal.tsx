@@ -10,13 +10,14 @@ import { useTranslation } from 'react-i18next';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import ErrorSummary from '../ErrorSummary';
 import PasswordInput from '../PasswordInput';
-import { useFormik } from 'formik';
+import { replace, useFormik } from 'formik';
 import { validationSchema } from './lib/validationSchema';
 import SpinnerButton from '../SpinnerButton';
 import { useQueryParams } from '../../hooks/useQueryParams.hook';
 import { useLocation, useNavigate } from '@reach/router';
-import { loginAction, resetPasswordAction } from '../../state/actions/newAuth.action';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
+import { loginAction, resetPasswordAction } from '../../user/user.actions';
+import { useUserState } from '../../user/UserProvider';
 
 interface IProps {
   show: boolean;
@@ -116,18 +117,18 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
   const params = useQueryParams();
   const [errors, setErrors] = useState<ApplicationError[]>();
   const isAuthorized = useIsAuthorized();
-  const [
-    {
-      newAuth: { passwordResetToken: token },
-    },
-    dispatch,
-  ] = useStateValue();
+  const [{ passwordResetToken }, userDispatch] = useUserState();
+
   const location = useLocation();
   const navigate = useNavigate();
 
+  const closeModal = () => {
+    navigate(location.pathname, { replace: true }).then();
+  };
+
   const onPasswordReset = async (newPassword: string) => {
     const { data, errors: resetPasswordErrors } = await resetPassword({
-      variables: { token, newPassword },
+      variables: { token: passwordResetToken, newPassword },
     });
 
     if (resetPasswordErrors) {
@@ -136,9 +137,9 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
       return setErrors(getFromGenericErrors(data.resetPassword.errors, t));
     }
 
-    dispatch(loginAction(data.resetPassword));
+    userDispatch(loginAction(data.resetPassword));
 
-    navigate(location.pathname);
+    closeModal();
     success(t('passwordReset.success'));
   };
 
@@ -152,12 +153,12 @@ const PasswordResetModalWithData: React.FC<IWithDataProps> = ({
 
   useEffect(() => {
     if (params?.token) {
-      dispatch(resetPasswordAction(params.token));
+      userDispatch(resetPasswordAction(params.token));
     }
-  }, [params, dispatch]);
+  }, [params, userDispatch]);
 
   if (show && (isAuthorized || !params?.token)) {
-    navigate(location.pathname);
+    closeModal();
     return null;
   }
 
