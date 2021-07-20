@@ -20,21 +20,17 @@ import { ProfitCutModalWithData } from '../../../ProfitCutModal/ProfitCutModal';
 import { FaucetModalWithData } from '../../../FaucetModal/FaucetModal';
 import DepositsDetailsModal from '../../../DepositsDetailsModal';
 import AffiliatesDetailsModal from '../../../AffiliatesDettailsModal';
-import { toggleReloginAction } from '../../../../state/actions/newAuth.action';
+import { toggleShowModalAction } from '../../../../user/user.actions';
+import { useUserState } from '../../../../user/UserProvider';
 
 const Modals: React.FC = () => {
-  const [
-    {
-      modal,
-      newAuth: { relogin },
-    },
-    dispatch,
-  ] = useStateValue();
+  const [{ modal }, dispatch] = useStateValue();
+  const [{ showLoginModal }, userDispatch] = useUserState();
   const location = useLocation();
   const navigate = useNavigate();
   const handleClose = useCallback(() => navigate(location.pathname), [location.pathname, navigate]);
   const handleCloseReLogin = () => {
-    dispatch(toggleReloginAction(false));
+    userDispatch(toggleShowModalAction(false));
     return navigate('/');
   };
   const handleShow = useCallback((type: ModalType) => modal.type === type, [modal.type]);
@@ -62,7 +58,7 @@ const Modals: React.FC = () => {
 
   return (
     <>
-      <SignInModalWithData show={relogin} onClose={handleCloseReLogin} />
+      <SignInModalWithData show={showLoginModal} onClose={handleCloseReLogin} />
       <UserInfoModalWithData
         show={handleShow('USER_INFO_MODAL')}
         onClose={handleClose}

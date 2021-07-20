@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { useStateValue } from '../../../../state';
 import CopyField from '../../../../components/CopyField';
+import { useUserState } from '../../../../user/UserProvider';
 
 interface IProps {
   data?: any;
@@ -11,12 +12,8 @@ interface IProps {
 
 const Marketing: React.FC<IProps> = () => {
   const { t } = useTranslation(['affiliates']);
-  const [
-    {
-      sidebar,
-      newAuth: { user },
-    },
-  ] = useStateValue();
+  const [{ sidebar }] = useStateValue();
+  const [{ user }] = useUserState();
   // TODO: replace with useMemo
   const [link] = useState('https://staging.jinglebets.com/ref=' + user?.refCode);
   const [bundle_link] = useState('https://staging.jinglebets.com/cazzzino_marketing_bundle_1.zip');

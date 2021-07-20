@@ -1,10 +1,8 @@
-import React, { ErrorInfo, useEffect } from 'react';
-import { Router, LocationProvider } from '@reach/router';
+import React, { useCallback } from 'react';
+import { LocationProvider, Router } from '@reach/router';
 import HomePage from '../../pages/HomePage';
 import { ApolloProvider } from '@apollo/client';
 import { ToastContainer } from '../Toast';
-import AuthOverlay from '../AuthOverlay';
-import { useApolloClient } from '../../hooks/useApolloClient.hook';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { appConfig } from '../../common/config';
 import Referrals from '../Referrals';
@@ -18,6 +16,9 @@ import SeedPage from '../../pages/SeedPage';
 import Page404 from '../../pages/Page404';
 import Page500 from '../../pages/Page500';
 import LayoutPage from '../LayoutPage';
+
+import { UserLayer } from '../../user';
+import { apolloClient } from '../../graphql/newClient';
 
 export const toast_v1 = require('../../sounds/toast-v1.mp3');
 export const balance_updated_v1 = require('../../sounds/balance-updated-v1.mp3');
@@ -44,11 +45,11 @@ export const bonus_claim_v1 = require('../../sounds/bonus-claim-v1.mp3');
 export const countdown_v1 = require('../../sounds/countdown-v1.mp3');
 
 const App: React.FC = () => {
-  const client = useApolloClient();
+  // const client = useApolloClient();
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
       <GoogleReCaptchaProvider reCaptchaKey={appConfig.reCaptchaSiteKey}>
-        <AuthOverlay>
+        <UserLayer>
           <LocationProvider>
             <ScrollToTop />
 
@@ -70,7 +71,7 @@ const App: React.FC = () => {
             <ToastContainer />
             <Referrals />
           </LocationProvider>
-        </AuthOverlay>
+        </UserLayer>
       </GoogleReCaptchaProvider>
     </ApolloProvider>
   );

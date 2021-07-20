@@ -10,12 +10,13 @@ import Sound from '../../../../../icons/Sound';
 import { useStateValue } from '../../../../../../state';
 import clsx from 'clsx';
 import { useLocation, useNavigate } from '@reach/router';
-import { useQuery, useSubscription } from '@apollo/client';
+import { useLazyQuery, useQuery, useSubscription } from '@apollo/client';
 import { FAUCET_INFO, RECENT_BETS } from '../../../../../../graphql/queries';
 import { error as errorToast } from '../../../../../../components/Toast';
 import Bet from '../../../../../../models/bet.model';
 import { BET_ADDED } from '../../../../../../graphql/subscriptions';
 import { useIsAuthorized } from '../../../../../../hooks/useIsAuthorized';
+import { useUserState } from '../../../../../../user/UserProvider';
 interface IProps {
   hasUnclaimedBonus?: boolean;
 }
@@ -25,20 +26,23 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isGamePage, setGamePage] = useState(false);
-  const [
-    {
-      newAuth: { user },
-    },
-    dispatch,
-  ] = useStateValue();
+  const [{ user, accessToken }] = useUserState();
+
   const [isMenuOpened, setMenuOpened] = useState(false);
-  const { refetch: refreshFaucetData } = useQuery(FAUCET_INFO);
+  const [fetchFaucetInfo, { refetch: refreshFaucetData }] = useLazyQuery(FAUCET_INFO);
   const [userLastBet, setUserLastBet] = useState<Bet | null>(null);
+
+  useEffect(() => {
+    if (accessToken) {
+      fetchFaucetInfo();
+    }
+  }, [accessToken]);
 
   const [
     {
       sidebar: { isOpen, isSound },
     },
+    dispatch,
   ] = useStateValue();
   useEffect(() => {
     setGamePage(pathname.includes('/games'));
@@ -51,7 +55,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
       return await navigate(`${pathname}?dialog=sign-in`);
     }
 
-    refreshFaucetData()
+    refreshFaucetData?.()
       .then(async response => {
         const { amount, canClaim, every, errors } = response.data.faucetInfo;
 

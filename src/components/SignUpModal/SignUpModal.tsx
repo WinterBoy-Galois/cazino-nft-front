@@ -20,7 +20,8 @@ import ApplicationError from '../../models/applicationError.model';
 import styles from './SignUpModal.module.scss';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { useLocation, useNavigate } from '@reach/router';
-import { registerAction } from '../../state/actions/newAuth.action';
+import { registerAction } from '../../user/user.actions';
+import { useUserState } from '../../user/UserProvider';
 
 interface IProps {
   show: boolean;
@@ -86,7 +87,7 @@ const SignUpModal: React.FC<IProps> = ({
 
   return (
     <Modal show={show} onClose={handleClose} title={t('signUp.headline')}>
-      {show === true && (
+      {show && (
         <Helmet>
           <body data-recaptcha="true" />
         </Helmet>
@@ -194,7 +195,8 @@ interface IWithDataProps {
 const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
   const [signUp, { loading }] = useMutation(SIGN_UP);
-  const [{ referral }, dispatch] = useStateValue();
+  const [{ referral }] = useStateValue();
+  const [, userDispatch] = useUserState();
   const [errors, setErrors] = useState<ApplicationError[]>();
   const location = useLocation();
   const navigate = useNavigate();
@@ -213,7 +215,7 @@ const SignUpModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithD
       return;
     }
 
-    dispatch(registerAction(data.registerUser));
+    userDispatch(registerAction(data.registerUser));
 
     navigate(`${location.pathname}?dialog=activation`);
   };

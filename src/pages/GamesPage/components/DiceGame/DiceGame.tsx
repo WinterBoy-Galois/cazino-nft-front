@@ -22,7 +22,7 @@ import BitcoinValue from '../../../../components/BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
 import { useTranslation } from 'react-i18next';
 import BetAmountControl from '../../../../components/BetAmountControl';
-import { updateUserAction } from '../../../../state/actions/newAuth.action';
+import { updateUserAction } from '../../../../user/user.actions';
 
 import useSound from 'use-sound';
 import {
@@ -33,8 +33,9 @@ import {
   dice_win_v1,
   dice_lost_v1,
 } from '../../../../components/App/App';
-import { UPDATE_USER } from '../../../../state/actions/newAuth.action';
 import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
+import User from '../../../../models/user.model';
+import { useUserState } from '../../../../user/UserProvider';
 
 interface IProps {
   loadingBet?: boolean;
@@ -47,6 +48,7 @@ interface IProps {
   errorSetup?: any;
   errorBet?: any;
   over?: boolean;
+  user?: User;
 }
 
 const DiceGame: React.FC<IProps> = ({
@@ -59,13 +61,9 @@ const DiceGame: React.FC<IProps> = ({
   maxProbability = 100,
   he = 0.01,
   errorBet,
+  user,
 }) => {
   const isAuthorized = useIsAuthorized();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { t } = useTranslation(['games']);
@@ -251,7 +249,12 @@ export default DiceGame;
 
 export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation('games');
-  const [, dispatch] = useStateValue();
+  const [
+    {
+      sidebar: { isSound },
+    },
+  ] = useStateValue();
+  const [{ user }, dispatch] = useUserState();
   const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_DICE);
   const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE, { errorPolicy: 'all' });
   const [result, setResult] = useState();
@@ -262,18 +265,16 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const [playLoss] = useSound(dice_lost_v1.default);
   const [playToast] = useSound(toast_v1.default);
   const [playToastBalance] = useSound(balance_updated_v1.default);
-  const [
-    {
-      sidebar: { isSound },
-    },
-  ] = useStateValue();
 
   const handlePlaceBet = async (amount: number, target: number, over: boolean) => {
     if (isSound) {
       await playButtonClick();
     }
-    const { data, errors } = await makeBetDice({ variables: { betAmount: amount, target, over } });
+    const { data, errors } = await makeBetDice({
+      variables: { betAmount: amount, target, over },
+    });
     if (errors || data.makeBetDice?.errors) {
+      console.log(errors, 'errors');
       setError(errors ?? data.makeBetDice?.errors);
       if (isSound) {
         await playToast();
@@ -305,6 +306,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
 
   return (
     <DiceGame
+      user={user}
       loadingSetup={loadingSetup}
       loadingBet={loadingBet}
       minProbability={data?.setupDice?.minProbability}

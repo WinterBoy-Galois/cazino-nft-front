@@ -5,8 +5,8 @@ import { ViewMode } from '../../../../../LatestBetsTable/LatestBetsTable';
 import Bet from '../../../../../../models/bet.model';
 import { ApolloError } from '@apollo/client';
 import { navigate, useLocation } from '@reach/router';
-import { useStateValue } from '../../../../../../state';
 import { appConfig } from '../../../../../../common/config';
+import { useUserState } from '../../../../../../user/UserProvider';
 
 interface IProps {
   bets?: Bet[];
@@ -15,11 +15,8 @@ interface IProps {
 }
 
 const LatestBetsTab: React.FC<IProps> = ({ bets = [], isLoading = false, error }: IProps) => {
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
+  const [{ user }] = useUserState();
+
   const location = useLocation();
   const handleUsernameClick = useCallback(
     userId => navigate(`${location.pathname}?dialog=user-info`, { state: { userId } }),
@@ -32,7 +29,7 @@ const LatestBetsTab: React.FC<IProps> = ({ bets = [], isLoading = false, error }
         <LatestBetsTable
           bets={bets}
           isLoading={isLoading}
-          error={error ? true : false}
+          error={!!error}
           signInUserId={user?.id}
           viewMode={ViewMode.RESPONSIVE}
           reduceMotion={appConfig.reduceMotion}

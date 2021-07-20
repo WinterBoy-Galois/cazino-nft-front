@@ -9,8 +9,8 @@ import { LEADERBOARDS_SUBSCRIPTION } from '../../graphql/subscriptions';
 import { useLocation, useNavigate } from '@reach/router';
 import styles from './BonusesPage.module.scss';
 import { useTranslation } from 'react-i18next';
-import { useStateValue } from '../../state';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
+import { useUserState } from '../../user/UserProvider';
 
 type TimeAggregation = 'daily' | 'weekly' | 'monthly';
 
@@ -25,11 +25,7 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['bonuses']);
   const [bonus, setBonus] = useState<any>();
   const [position, setPosition] = useState<any>();
-  const [
-    {
-      newAuth: { user },
-    },
-  ] = useStateValue();
+  const [{ user }] = useUserState();
 
   useEffect(() => {
     if (!subscribeToMore) return;

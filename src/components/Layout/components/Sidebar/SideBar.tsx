@@ -20,6 +20,7 @@ import { ApolloError, useQuery, useSubscription } from '@apollo/client';
 import { GameTypes } from '../../../../models/gameTypes.model';
 import chatWidget from '../../../../customerSupport/CustomerSupport';
 import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
+import { useUserState } from '../../../../user/UserProvider';
 
 const activateScrollLock = (breakpoint: Breakpoint): boolean => {
   switch (breakpoint) {
@@ -69,9 +70,10 @@ const SideBar: React.FC = () => {
     {
       sidebar: { isOpen, selectedTab, isChatBot },
       modal: { type: modalType },
-      newAuth: { user },
     },
   ] = useStateValue();
+  const [{ user }] = useUserState();
+
   const breakpoint = useBreakpoint();
   useScrollLock(isOpen && activateScrollLock(breakpoint), false);
   const { t } = useTranslation(['sidebar']);

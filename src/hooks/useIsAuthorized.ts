@@ -1,7 +1,7 @@
-import { useStateValue } from '../state';
+import { useUserState } from '../user/UserProvider';
 
 export const useIsAuthorized = () => {
-  const [{ newAuth }] = useStateValue();
+  const [{ user }] = useUserState();
 
-  return newAuth.state === 'SIGNED_IN';
+  return !!user;
 };

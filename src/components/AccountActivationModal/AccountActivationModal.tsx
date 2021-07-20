@@ -14,7 +14,8 @@ import { useTranslation } from 'react-i18next';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import ErrorSummary from '../ErrorSummary';
 import { useLocation, useNavigate } from '@reach/router';
-import { updateUserAction } from '../../state/actions/newAuth.action';
+import { updateUserAction } from '../../user/user.actions';
+import { useUserState } from '../../user/UserProvider';
 
 interface IProps {
   show: boolean;
@@ -113,6 +114,7 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
   const [activateAccount, { loading }] = useMutation(ACTIVATE_ACCOUNT);
   const [resendActivationCode] = useMutation(RESEND_ACTIVATION_CODE);
   const [, dispatch] = useStateValue();
+  const [, userDispatch] = useUserState();
   const [errors, setErrors] = useState<ApplicationError[]>();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -128,7 +130,7 @@ const AccountActivationModalWithData: React.FC<IWithDataProps> = ({
     }
 
     dispatch({ type: 'MODAL_HIDE' });
-    dispatch(updateUserAction({ isActivated: true }));
+    userDispatch(updateUserAction({ isActivated: true }));
 
     success(t('accountActivation.success'));
     navigate(pathname);

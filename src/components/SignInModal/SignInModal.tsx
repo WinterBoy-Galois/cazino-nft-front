@@ -18,7 +18,8 @@ import ApplicationError from '../../models/applicationError.model';
 import { getFromGraphQLErrors, getFromGenericErrors } from '../../common/util/error.util';
 import { validationSchema } from './lib/validationSchema';
 import { useLocation, useNavigate } from '@reach/router';
-import { LOGIN, loginAction } from '../../state/actions/newAuth.action';
+import { loginAction } from '../../user/user.actions';
+import { useUserState } from '../../user/UserProvider';
 
 interface IProps {
   show: boolean;
@@ -148,7 +149,7 @@ interface IWithDataProps {
 const SignInModalWithData: React.FC<IWithDataProps> = ({ show, onClose }: IWithDataProps) => {
   const { t } = useTranslation(['auth', 'common']);
   const [signIn, { loading }] = useMutation(SIGN_IN);
-  const dispatch = useStateValue()[1];
+  const dispatch = useUserState()[1];
   const [errors, setErrors] = useState<ApplicationError[]>();
   const location = useLocation();
   const navigate = useNavigate();

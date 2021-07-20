@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { ME, AFF_STATS } from '../../graphql/queries';
-import { useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { CLAIM_COMMISSION } from '../../graphql/mutations';
 import styles from './AffiliatesPage.module.scss';
 import Commissions from './components/commissions';
@@ -12,16 +12,20 @@ import { useStateValue } from '../../state';
 import clsx from 'clsx';
 import { success as successToast } from '../../components/Toast';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
-import { loginAction } from '../../state/actions/newAuth.action';
+import { loginAction } from '../../user/user.actions';
+import { useUserState } from '../../user/UserProvider';
+
+// TODO: me
 
 const AffiliatesPage: React.FC<RouteComponentProps> = () => {
+  console.log('aff page');
   const isAuthorized = useIsAuthorized();
   const { t } = useTranslation(['transactions']);
   const [{ sidebar }] = useStateValue();
-  const { data: dataMe } = useQuery(ME);
+  const [getMe, { data: dataMe }] = useLazyQuery(ME);
   const { data: dataStats } = useQuery(AFF_STATS);
   const [claimCommissions, { loading: loadingSetup }] = useMutation(CLAIM_COMMISSION);
-  const [, dispatch] = useStateValue();
+  const [{ accessToken }, userDispatch] = useUserState();
   const [commissionData, setCommissionData] = useState(dataMe?.me);
   const onTransferBalance = async () => {
     const { data, errors } = await claimCommissions();
@@ -31,9 +35,15 @@ const AffiliatesPage: React.FC<RouteComponentProps> = () => {
     }
     setCommissionData(data?.claimCommissions);
     if (!errors && data && isAuthorized) {
-      dispatch(loginAction({ user: { ...data?.claimCommissions } }));
+      userDispatch(loginAction({ user: { ...data?.claimCommissions } }));
     }
   };
+
+  useEffect(() => {
+    if (accessToken) {
+      getMe();
+    }
+  }, [accessToken]);
 
   return (
     <div className={styles.affiliates_page}>

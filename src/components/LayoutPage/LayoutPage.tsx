@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useStateValue } from '../../state';
 import Layout from '../Layout/Layout';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
+import { useUserState } from '../../user/UserProvider';
 
 interface IProps extends RouteComponentProps {
   component: any;
@@ -11,13 +12,14 @@ interface IProps extends RouteComponentProps {
 
 const LayoutPage: React.FC<IProps> = ({ component: Component, isAuthNeeded, ...props }) => {
   const isAuthorized = useIsAuthorized();
-  const [, dispatch] = useStateValue();
   const [
     {
-      newAuth: { relogin },
       sidebar: { isChatBot },
     },
+    dispatch,
   ] = useStateValue();
+
+  const [{ showLoginModal }] = useUserState();
 
   useEffect(() => {
     if (!isChatBot) {
@@ -28,13 +30,7 @@ const LayoutPage: React.FC<IProps> = ({ component: Component, isAuthNeeded, ...p
   if (isAuthNeeded) {
     return (
       <Layout>
-        {isAuthorized ? (
-          <Component {...props} />
-        ) : relogin ? (
-          <div>skeleton</div>
-        ) : (
-          <Redirect to={`/`} noThrow />
-        )}
+        {isAuthorized && !showLoginModal ? <Component {...props} /> : <Redirect to={`/`} noThrow />}
       </Layout>
     );
   }

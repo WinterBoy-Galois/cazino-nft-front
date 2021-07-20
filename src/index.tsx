@@ -5,11 +5,14 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
 import { StateProvider } from './state';
+import { UserProvider } from './user';
 
 ReactDOM.render(
-  <StateProvider>
-    <App />
-  </StateProvider>,
+  <UserProvider>
+    <StateProvider>
+      <App />
+    </StateProvider>
+  </UserProvider>,
   document.getElementById('root')
 );
 
