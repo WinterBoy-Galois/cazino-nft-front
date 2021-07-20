@@ -44,6 +44,8 @@ import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
 import User from '../../../../models/user.model';
 import { updateUserAction } from '../../../../user/user.actions';
 import { useUserState } from '../../../../user/UserProvider';
+import { usePendingBetHook } from '../../../../hooks/usePendingBet.hook';
+import { isForbiddenError } from '../../../../common/util/error.util';
 
 interface IProps {
   loadingSetup?: boolean;
@@ -542,6 +544,12 @@ const GoalGame: React.FC<IProps> = ({
   );
 };
 
+interface PlaceBetVariables {
+  betId: string;
+  selection: number;
+  currentStep: number;
+}
+
 export default GoalGame;
 
 export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
@@ -570,6 +578,11 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
       sidebar: { isSound },
     },
   ] = useStateValue();
+
+  const [setPendingBet] = usePendingBetHook<PlaceBetVariables>({
+    loading: loadingBet,
+    action: ({ betId, selection, currentStep }) => handlePlaceBet(betId, selection, currentStep),
+  });
 
   const onPlayToast = async () => {
     if (isSound) {
@@ -619,14 +632,17 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
   };
 
   const handlePlaceBet = async (betId: string, selection: number, currentStep: number) => {
-    const { data, errors } = await advanceGoals({
-      variables: { betId, selection },
-    });
+    const variables: PlaceBetVariables = { betId, selection, currentStep };
+    const { data, errors } = await advanceGoals({ variables });
 
     if (errors || data.advanceGoals?.errors) {
       setError(errors ?? data.advanceGoals?.errors);
-      await onPlayToast();
-      return errorToast(t('your_bet_could_not_be_placed'));
+      if (isForbiddenError(errors)) {
+        await setPendingBet(variables);
+      } else {
+        await onPlayToast();
+        return errorToast(t('your_bet_could_not_be_placed'));
+      }
     }
 
     switch (data.advanceGoals.__typename) {

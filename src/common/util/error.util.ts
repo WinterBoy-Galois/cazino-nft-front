@@ -79,4 +79,7 @@ const getFromGenericErrors = (errors?: GenericError[] | readonly GraphQLError[],
   return result;
 };
 
-export { getMessageFromCode, getFromGraphQLErrors, getFromGenericErrors };
+const isForbiddenError = (errors?: readonly GraphQLError[]) =>
+  errors?.some(err => err?.extensions?.code === 'FORBIDDEN');
+
+export { isForbiddenError, getMessageFromCode, getFromGraphQLErrors, getFromGenericErrors };
