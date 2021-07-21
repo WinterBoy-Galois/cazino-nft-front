@@ -17,7 +17,7 @@ export const UserLayer: React.FC = ({ children }) => {
 
   const loading = isLoading || getMeLoading;
 
-  const blahFunc = async () => {
+  const initUser = async () => {
     try {
       const { accessToken } = await getNewToken();
       await setAccessToken(accessToken);
@@ -31,7 +31,7 @@ export const UserLayer: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (checkRt) {
-      blahFunc();
+      initUser();
     } else {
       setIsLoading(false);
     }
