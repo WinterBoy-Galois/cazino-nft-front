@@ -10,34 +10,40 @@ import {
   UPDATE_REFRESH_TOKEN,
 } from './user.actions';
 import { UserState, Action } from './user.types';
+import { setCheckRTFlag } from './UserProvider';
 
 export const initialState: UserState = {
   showLoginModal: false,
-  accessToken: localStorage.getItem('accessToken'),
+  accessToken: null,
   user: undefined,
   passwordResetToken: null,
 };
 
-const logoutAction = (state: UserState): UserState => ({
-  ...state,
-  accessToken: null,
-  user: undefined,
-  showLoginModal: false,
-});
+const logoutAction = (state: UserState): UserState => {
+  setCheckRTFlag(null);
+  return {
+    ...state,
+    accessToken: null,
+    user: undefined,
+    showLoginModal: false,
+  };
+};
 
 export const userReducer: Reducer<UserState, Action> = (state, action) => {
   switch (action.type) {
     case LOGIN:
+      setCheckRTFlag('true');
       return {
         ...state,
         ...action.payload,
         showLoginModal: false,
       };
     case REGISTER:
+      setCheckRTFlag('true');
       return {
         ...state,
         ...action.payload,
-        state: 'SIGNED_IN',
+        showLoginModal: false,
       };
     case LOGOUT:
       return logoutAction(state);

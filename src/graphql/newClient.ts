@@ -17,6 +17,7 @@ import { onError } from '@apollo/client/link/error';
 import { error } from '../components/Toast';
 import { GraphQLError } from 'graphql';
 import { RetryLink } from '@apollo/client/link/retry';
+import { getAccessToken, setAccessToken } from '../user/UserProvider';
 
 const cache = new InMemoryCache({
   dataIdFromObject(responseObject) {
@@ -34,7 +35,7 @@ const wsLink = new WebSocketLink({
   options: {
     reconnect: true,
     connectionParams: {
-      authToken: localStorage.getItem('accessToken') ?? undefined,
+      authToken: getAccessToken() ?? undefined,
     },
   },
 });
@@ -45,7 +46,7 @@ const httpLink = new HttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = getAccessToken();
   if (accessToken) {
     return {
       headers: {
@@ -79,7 +80,7 @@ const resolvePendingRequests = () => {
 
 let request: any;
 
-const getNewToken = () => {
+export const getNewToken = () => {
   if (!request) {
     request = fetch(`${appConfig.apiBasePath}/refresh_tokens`, {
       method: 'POST',
@@ -99,7 +100,7 @@ const getNewToken = () => {
 };
 
 const newOperation = (operation: Operation) => {
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = getAccessToken();
   if (accessToken) {
     operation.setContext({
       headers: {
@@ -131,7 +132,7 @@ export const useApolloClient = (logout: any) => {
               forward$ = fromPromise(
                 getNewToken()
                   .then(({ accessToken }: any) => {
-                    localStorage.setItem('accessToken', accessToken);
+                    setAccessToken(accessToken);
                     resolvePendingRequests();
                     return accessToken;
                   })
@@ -156,6 +157,7 @@ export const useApolloClient = (logout: any) => {
         }
       }
       graphQLErrors.map(({ message, locations, path }) =>
+        // eslint-disable-next-line no-console
         console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
       );
       if (networkError) {
@@ -165,6 +167,7 @@ export const useApolloClient = (logout: any) => {
             response.errors = undefined;
           }
         }
+        // eslint-disable-next-line no-console
         console.log('Error--------------------', networkError);
       }
     }
