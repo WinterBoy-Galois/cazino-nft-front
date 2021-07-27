@@ -8,6 +8,8 @@ COPY ava ./ava
 
 COPY build/ ./
 
+COPY underm.html ./
+
 EXPOSE 80
 
 # CMD ["npm", "start"]
