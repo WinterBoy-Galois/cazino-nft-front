@@ -47,9 +47,8 @@ const Layout: React.FC = ({ children }) => {
     try {
       userDispatch(logoutAction());
       await signOut();
-    } catch (error) {
-      console.log('logout', error);
-    }
+      // eslint-disable-next-line no-empty
+    } catch (error) {}
   };
 
   const handleBalanceClick = useCallback(

@@ -1,22 +1,39 @@
-import React, { useEffect } from 'react';
-import { useUserState } from './UserProvider';
+import React, { useEffect, useState } from 'react';
+import { getCheckRTFlag, setAccessToken, setCheckRTFlag, useUserState } from './UserProvider';
 import { useLazyQuery } from '@apollo/client';
 import { ME } from '../graphql/queries';
 import { loginAction } from './user.actions';
 import Spinner from '../components/Spinner';
 
 import styles from './user.module.scss';
+import { getNewToken } from '../graphql/newClient';
 
 export const UserLayer: React.FC = ({ children }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [{ accessToken }, dispatch] = useUserState();
+  const checkRt = getCheckRTFlag();
 
-  const [getMe, { called, data, error, loading }] = useLazyQuery(ME);
+  const [getMe, { called, data, error, loading: getMeLoading }] = useLazyQuery(ME);
+
+  const loading = isLoading || getMeLoading;
+
+  const initUser = async () => {
+    try {
+      const { accessToken } = await getNewToken();
+      await setAccessToken(accessToken);
+      getMe();
+    } catch (error) {
+      setCheckRTFlag(null);
+    } finally {
+      await setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    console.log('should be called once', accessToken);
-    if (accessToken) {
-      console.log('get me');
-      getMe();
+    if (checkRt) {
+      initUser();
+    } else {
+      setIsLoading(false);
     }
   }, []);
 
@@ -32,9 +49,9 @@ export const UserLayer: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (accessToken) {
-      localStorage.setItem('accessToken', accessToken);
+      setAccessToken(accessToken);
     } else {
-      localStorage.removeItem('accessToken');
+      setAccessToken(null);
     }
   }, [accessToken]);
 
