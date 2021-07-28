@@ -24,7 +24,7 @@ const WithdrawalsTable: React.FC<IProps> = props => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   // const [{ auth }] = useStateValue();
-  const handleRowClicked = (row: TransactionsWithdraw) => {
+  const handleRowClicked = () => {
     navigate(`${pathname}?dialog=withdraw-details`, {
       state: {},
     });

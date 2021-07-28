@@ -18,7 +18,6 @@ import { useUserState } from '../../user/UserProvider';
 // TODO: me
 
 const AffiliatesPage: React.FC<RouteComponentProps> = () => {
-  console.log('aff page');
   const isAuthorized = useIsAuthorized();
   const { t } = useTranslation(['transactions']);
   const [{ sidebar }] = useStateValue();

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { LocationProvider, Router } from '@reach/router';
 import HomePage from '../../pages/HomePage';
 import { ApolloProvider } from '@apollo/client';
