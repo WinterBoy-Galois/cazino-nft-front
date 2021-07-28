@@ -27,7 +27,7 @@ const LeaderboardTable: React.FC<IProps> = ({
   onUsernameClicked,
 }) => {
   const breakpoint = useBreakpoint();
-  const { t } = useTranslation(['sidebar']);
+  const { t } = useTranslation(['sidebar', 'common']);
 
   const renderBonusColumn = () => {
     switch (breakpoint) {
@@ -84,10 +84,10 @@ const LeaderboardTable: React.FC<IProps> = ({
       </table>
       {!error && isLoading && (leaderboard.length <= 0 || !leaderboard) && <Loading />}
       {error && !isLoading && (leaderboard.length <= 0 || !leaderboard) && (
-        <Error>Sorry, there was an unexpected error.</Error>
+        <Error>{t('common:errors.UNEXPECTED')}</Error>
       )}
       {!error && !isLoading && (leaderboard.length <= 0 || !leaderboard) && (
-        <Error>Sorry, received no data.</Error>
+        <Error>{t('common:errors.NO_DATA')}</Error>
       )}
     </div>
   );

@@ -74,7 +74,7 @@ const ChangeServerSeed: React.FC<IProps> = ({
   const renderPrevious = () => {
     return (
       <div className={`${styles.container} ${styles.marginTop1} h-100`}>
-        <h1 className={styles.title}>Previous</h1>
+        <h1 className={styles.title}>{t('capital_previous')}</h1>
         <CopyField
           label={t('serverSeed')}
           value={seeds.previous.serverSeed}

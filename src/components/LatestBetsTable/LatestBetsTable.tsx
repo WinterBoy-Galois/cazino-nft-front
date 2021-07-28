@@ -40,7 +40,7 @@ const LatestBetsTable: React.FC<IProps> = ({
   onUsernameClicked,
 }) => {
   const breakpoint = useBreakpoint();
-  const { t } = useTranslation(['sidebar']);
+  const { t } = useTranslation(['sidebar', 'common']);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -129,8 +129,12 @@ const LatestBetsTable: React.FC<IProps> = ({
         </tbody>
       </table>
       {!error && isLoading && (bets.length <= 0 || !bets) && <Loading />}
-      {error && !isLoading && (bets.length <= 0 || !bets) && <Error>Unexpected error</Error>}
-      {!error && !isLoading && (bets.length <= 0 || !bets) && <Error>No Data</Error>}
+      {error && !isLoading && (bets.length <= 0 || !bets) && (
+        <Error>{t('common:errors.UNEXPECTED')}</Error>
+      )}
+      {!error && !isLoading && (bets.length <= 0 || !bets) && (
+        <Error>{t('common:errors.NO_DATA')}</Error>
+      )}
     </div>
   );
 };

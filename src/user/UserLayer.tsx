@@ -7,8 +7,10 @@ import Spinner from '../components/Spinner';
 
 import styles from './user.module.scss';
 import { getNewToken } from '../graphql/newClient';
+import { useTranslation } from 'react-i18next';
 
 export const UserLayer: React.FC = ({ children }) => {
+  const { t } = useTranslation(['common']);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [{ accessToken }, dispatch] = useUserState();
   const checkRt = getCheckRTFlag();
@@ -60,7 +62,7 @@ export const UserLayer: React.FC = ({ children }) => {
       <div className={styles.spinner}>
         <Spinner color={'WHITE'} />
       </div>
-      <div>Just a moment</div>
+      <div>{t('justMoment')}</div>
     </div>
   ) : (
     <>{children}</>

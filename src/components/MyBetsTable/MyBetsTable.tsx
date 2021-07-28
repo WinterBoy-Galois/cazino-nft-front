@@ -37,7 +37,7 @@ const MyBetsTable: React.FC<IProps> = ({
   isSignedIn = false,
 }) => {
   const breakpoint = useBreakpoint();
-  const { t } = useTranslation(['sidebar', 'auth']);
+  const { t } = useTranslation(['sidebar', 'auth', 'common']);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -111,7 +111,7 @@ const MyBetsTable: React.FC<IProps> = ({
       </table>
       {!error && isLoading && (bets.length <= 0 || !bets) && <Loading />}
       {error && !isLoading && (bets.length <= 0 || !bets) && isSignedIn && (
-        <Error>Unexpected error</Error>
+        <Error>{t('common:errors.UNEXPECTED')}</Error>
       )}
       {!isLoading && !isSignedIn && (
         <Error>
@@ -120,7 +120,9 @@ const MyBetsTable: React.FC<IProps> = ({
           </Button>
         </Error>
       )}
-      {isSignedIn && !error && !isLoading && (bets.length <= 0 || !bets) && <Error>No Data</Error>}
+      {isSignedIn && !error && !isLoading && (bets.length <= 0 || !bets) && (
+        <Error>{t('common:errors.NO_DATA')}</Error>
+      )}
     </div>
   );
 };

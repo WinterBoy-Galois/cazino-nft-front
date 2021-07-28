@@ -71,7 +71,10 @@
     "requiredConfirmations": "Required Confirmation(s)",
     "transactionsLinkText": "Deposit Transactions",
     "withdraw_failed": "Withdraw is failed.",
-    "withdraw_completed": "Withdraw is completed."
+    "withdraw_completed": "Withdraw is completed.",
+    "balance": "Balance",
+    "blockchain_fee": "Blockchain Fee",
+    "min_withdraw_amount": "Minimum Withdraw Amount"
   },
   "profitCut": {
     "title": "Information",
@@ -84,5 +87,11 @@
     "every": "Every",
     "description": "Available only when balance is 0",
     "buttonText": "Claim"
+  },
+  "depositsDetails": {
+    "date_time": "Date / Time",
+    "amount": "Amount",
+    "status": "Status",
+    "transaction_hash": "Transaction hash"
   }
 }

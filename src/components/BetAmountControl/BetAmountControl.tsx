@@ -5,6 +5,7 @@ import BetControl from '../BetControl';
 import { isValid } from '../BetControl/lib/util';
 import styles from './BetAmountControl.module.scss';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   className?: string;
@@ -18,6 +19,7 @@ interface IProps {
 }
 
 const BetAmountControl: React.FC<IProps> = props => {
+  const { t } = useTranslation(['components']);
   const isAuthorized = useIsAuthorized();
   const {
     amount: initialAmount = 0.0004,
@@ -75,7 +77,11 @@ const BetAmountControl: React.FC<IProps> = props => {
       <BetControl
         {...props}
         className={clsx(className, styles.control)}
-        label={className?.includes('button_mine_game') ? 'Bet Amount' : label ?? 'Amount'}
+        label={
+          className?.includes('button_mine_game')
+            ? t('betAmountControl.betAmount')
+            : label ?? t('betAmountControl.amount')
+        }
         icon={'BITCOIN'}
         value={amount}
         decimalPlaces={appConfig.bitcoinFractionDigits}

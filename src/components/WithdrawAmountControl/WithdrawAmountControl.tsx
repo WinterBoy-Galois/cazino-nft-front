@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { appConfig } from '../../common/config';
 import BetControl from '../BetControl';
 import styles from './WithdrawAmountControl.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   className?: string;
@@ -12,6 +13,7 @@ interface IProps {
 }
 
 const WithdrawAmountControl: React.FC<IProps> = props => {
+  const { t } = useTranslation(['components']);
   const { amount: initialAmount = 0.0004, className, onChange, max = 9 } = props;
   const [amount, setAmount] = useState(initialAmount);
   useEffect(() => setAmount(initialAmount), [initialAmount]);
@@ -24,9 +26,7 @@ const WithdrawAmountControl: React.FC<IProps> = props => {
   };
 
   const handleMax = () => {
-    const newValue = max;
-
-    updateAmount(+newValue.toFixed(appConfig.bitcoinFractionDigits));
+    updateAmount(+max.toFixed(appConfig.bitcoinFractionDigits));
   };
 
   return (
@@ -34,14 +34,14 @@ const WithdrawAmountControl: React.FC<IProps> = props => {
       <BetControl
         {...props}
         className={clsx(className, styles.control)}
-        label={'Amount'}
+        label={t('withdrawAmountControl.amount')}
         icon={'BITCOIN'}
         value={amount}
         decimalPlaces={appConfig.bitcoinFractionDigits}
         onChange={v => updateAmount(v)}
       />
       <button type="button" className={styles.button} onClick={handleMax}>
-        Max
+        {t('withdrawAmountControl.max')}
       </button>
     </div>
   );

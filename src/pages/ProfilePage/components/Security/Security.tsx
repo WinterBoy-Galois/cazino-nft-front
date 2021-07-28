@@ -38,7 +38,7 @@ const Security: React.FC<IProps> = ({
 
       if (success) {
         formik.resetForm();
-        formik.validateForm();
+        await formik.validateForm();
       }
     },
   });

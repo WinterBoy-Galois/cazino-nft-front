@@ -6,6 +6,7 @@ import GoalBackground from '../icons/games/GoalBackground';
 import GoalKeeper from '../icons/games/GoalKeeper';
 import GoalMainBall from '../icons/games/GoalMainBall';
 import { GoalGameState as GameState } from '../../models/goalGameState.model';
+import { useTranslation } from 'react-i18next';
 
 interface IDefaultProps {
   handlePlaceBet?: (index: number) => void;
@@ -61,6 +62,7 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
     handlePlaceBet = () => null,
   } = props;
 
+  const { t } = useTranslation(['components']);
   const [goalKeeperPosition, setGKP] = useState(-1);
 
   const onSelectPlaceBet = (index: number) => {
@@ -84,7 +86,7 @@ const GoalGameBoard: React.FC<IGBBProps> = props => {
                 ballType={
                   lastSpot === (hideMiddleBall && index > 1 ? index - 1 : index)
                     ? lastAdvanceStatus
-                    : 'Idle'
+                    : t('goalGameBoard.idle')
                 }
               />
             )

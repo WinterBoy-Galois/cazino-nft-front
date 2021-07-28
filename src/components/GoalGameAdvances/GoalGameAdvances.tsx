@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import BitcoinValue from '../BitcoinValue';
 import { formatBitcoin } from '../../common/util/format.util';
 import { appConfig } from '../../common/config';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   className?: string;
@@ -22,6 +23,7 @@ const GoalGameAdvances: React.FC<IProps> = ({
   isEnded,
   hideMiddleBall = false,
 }) => {
+  const { t } = useTranslation(['components']);
   const getStatusClsx = (selection: any, index: number) => {
     if (isEnded || selection?.selected === index) {
       return clsx(
@@ -81,7 +83,7 @@ const GoalGameAdvances: React.FC<IProps> = ({
               />
             ) : (
               <div className={styles.single_advance__profit}>
-                <span>Unavailable</span>
+                <span>{t('goalGameAdvances.unavailable')}</span>
               </div>
             )}
           </div>
