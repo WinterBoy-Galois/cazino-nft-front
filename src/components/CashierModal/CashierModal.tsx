@@ -3,7 +3,7 @@ import styles from './CashierModal.module.scss';
 import Modal from '../Modal';
 import SlideSelect from '../SlideSelect';
 import { useNavigate, useLocation } from '@reach/router';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { SETUP_CASHIER } from '../../graphql/queries';
 import Cashier from '../../models/cashier.model';
 import CopyField from '../CopyField';

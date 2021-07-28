@@ -7,7 +7,7 @@ interface IProps {
   position?: number;
 }
 
-const BonusPosition: React.FC<IProps> = ({ className, position }) => {
+const BonusPosition: React.FC<IProps> = ({ position }) => {
   const getDigit = () => {
     switch (position) {
       case 1:

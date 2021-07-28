@@ -42,7 +42,6 @@ const UnClaimedBonus: React.FC<IUnclaimedBonusProps> = ({
     {
       sidebar: { isOpen },
     },
-    dispatch,
   ] = useStateValue();
   const [, userDispatch] = useUserState();
   const { t } = useTranslation(['bonuses', 'games', 'error']);

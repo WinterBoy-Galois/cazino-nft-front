@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './ProfitCutModal.module.scss';
 import Modal from '../Modal';
-import { useStateValue } from '../../state';
 import { useNavigate, useLocation } from '@reach/router';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
