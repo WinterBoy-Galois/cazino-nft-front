@@ -132,7 +132,7 @@ const SignInModal: React.FC<IProps> = ({
           </form>
         </div>
         <div className={`col-12 col-md-5 ${styles.illustration}`}>
-          <img src={signInIllustration} alt="Sign In Character" />
+          <img src={signInIllustration} alt={t('accountActivation.signInCharacter')} />
         </div>
       </div>
     </Modal>

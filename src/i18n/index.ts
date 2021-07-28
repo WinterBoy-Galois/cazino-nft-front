@@ -27,6 +27,7 @@ import seedsEN from './locales/seeds/en.json';
 import seedsDE from './locales/seeds/de.json';
 import errorEN from './locales/error/de.json';
 import errorDE from './locales/error/de.json';
+import componentsEN from './locales/components/en.json';
 
 i18n
   .use(LanguageDetector)
@@ -34,6 +35,7 @@ i18n
   .init({
     resources: {
       en: {
+        components: componentsEN,
         common: commonEN,
         home: homeEN,
         footer: footerEN,
@@ -49,6 +51,7 @@ i18n
         error: errorEN,
       },
       de: {
+        components: componentsEN,
         common: commonDE,
         home: homeDE,
         footer: footerDE,

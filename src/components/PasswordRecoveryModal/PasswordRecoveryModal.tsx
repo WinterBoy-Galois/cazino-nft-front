@@ -105,7 +105,7 @@ const PasswordRecoveryModal: React.FC<IProps> = ({
           </div>
         </div>
         <div className={`col-12 col-md-5 ${styles.illustration}`}>
-          <img src={passwordRecoveryIllustration} alt="Sign In Character" />
+          <img src={passwordRecoveryIllustration} alt={t('accountActivation.signInCharacter')} />
         </div>
       </div>
     </Modal>

@@ -93,7 +93,7 @@ const AccountActivationModal: React.FC<IProps> = ({
           </Uppercase>
         </div>
         <div className={`col-12 col-md-4 ${styles.illustration}`}>
-          <img src={activationIllustration} alt="Sign In Character" />
+          <img src={activationIllustration} alt={t('accountActivation.signInCharacter')} />
         </div>
       </div>
     </Modal>

@@ -178,7 +178,7 @@ const SignUpModal: React.FC<IProps> = ({
         <div className={`col-12 col-md-5 ${styles.illustration}`}>
           <img
             src={signUpIllustration}
-            alt="Sign Up Character"
+            alt={t('signUpCharacter')}
             className={styles.illustration__image}
           />
         </div>

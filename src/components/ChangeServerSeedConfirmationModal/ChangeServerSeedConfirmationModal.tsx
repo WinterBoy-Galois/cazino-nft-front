@@ -3,6 +3,7 @@ import ConfirmationModal from '../ConfirmationModal';
 import { useLocation, useNavigate } from '@reach/router';
 import { useMutation } from '@apollo/client';
 import { CHANGE_SERVER_SEED } from '../../graphql/mutations';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   show: boolean;
@@ -23,6 +24,7 @@ const ChangeServerSeedConfirmationModal: React.FC<IProps> = ({
   onChangeServerSeed = () => Promise.resolve(),
   loading = false,
 }: IProps) => {
+  const { t } = useTranslation(['seeds']);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -45,7 +47,7 @@ const ChangeServerSeedConfirmationModal: React.FC<IProps> = ({
   return (
     <ConfirmationModal
       show={show}
-      text={'Change server seed?'}
+      text={t('change_server_seed')}
       onConfirmed={handleConfirm}
       onCancelled={handleCancel}
       loading={loading}

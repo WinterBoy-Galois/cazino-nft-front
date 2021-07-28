@@ -10,5 +10,7 @@
   "activeGames": "active games",
   "changeServerSeed": "change server seed",
   "successUpdateMessage": "The seed is updated successfully",
-  "failedUpdateMessage": "The update has failed."
+  "failedUpdateMessage": "The update has failed.",
+  "capital_previous": "Previous",
+  "change_server_seed": "Change server seed?"
 }

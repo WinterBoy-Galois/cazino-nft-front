@@ -72,7 +72,7 @@ const CheckboxInput: React.FC<IProps> = ({
           onBlur={handleBlur}
         >
           <svg width="20px" height="17px" viewBox="0 0 12 9">
-            <polyline points="1 5 4 8 11 1"></polyline>
+            <polyline points="1 5 4 8 11 1" />
           </svg>
         </span>
         <span className={`${styles.cbx__label} ${className}`}>{label}</span>

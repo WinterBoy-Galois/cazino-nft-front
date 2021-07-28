@@ -124,7 +124,9 @@ const CashierModal: React.FC<IProps> = ({
                 <div className={clsx(styles.withdraw__container, 'row')}>
                   <div className="col-12">
                     <div className="row">
-                      <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>Balance</div>
+                      <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>
+                        {t('balance')}
+                      </div>
                       <div className={clsx(styles.withdraw__value, 'col-6 col-md-5')}>
                         <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
                         <span>{formatBitcoin(balance)}</span>
@@ -135,7 +137,7 @@ const CashierModal: React.FC<IProps> = ({
                   <div className="col-12">
                     <div className="row">
                       <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>
-                        Blockchain Fee
+                        {t('blockchain_fee')}
                       </div>
                       <div className={clsx(styles.withdraw__value, 'col-6 col-md-5')}>
                         <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
@@ -147,7 +149,7 @@ const CashierModal: React.FC<IProps> = ({
                   <div className="col-12">
                     <div className="row">
                       <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>
-                        Minimum Withdraw Amount
+                        {t('min_withdraw_amount')}
                       </div>
                       <div className={clsx(styles.withdraw__value, 'col-6 col-md-5')}>
                         <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />

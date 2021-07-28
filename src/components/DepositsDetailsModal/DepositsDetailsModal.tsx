@@ -10,6 +10,7 @@ import styles from './DepositsDetailsModal.module.scss';
 import TransactionStatus from '../TransactionStatus';
 import Title from './components/Title';
 import { DepositItem } from '../../models/depositItem.model';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   show: boolean;
@@ -18,6 +19,8 @@ interface IProps {
 }
 
 const DepositsDetailsModal: React.FC<IProps> = ({ show, item, onClose }) => {
+  const { t } = useTranslation(['modals']);
+
   if (!item) {
     return null;
   }
@@ -33,20 +36,20 @@ const DepositsDetailsModal: React.FC<IProps> = ({ show, item, onClose }) => {
         <DetailsContainer className={styles.details}>
           <DetailList
             details={[
-              { label: 'Date / Time', value: datetimeFromEpoch(item.time) },
+              { label: t('depositsDetails.date_time'), value: datetimeFromEpoch(item.time) },
               {
-                label: 'Amount',
+                label: t('depositsDetails.amount'),
                 value: <BitcoinValue value={formatBitcoin(item.amount)} className={styles.value} />,
               },
               {
-                label: 'Status',
+                label: t('depositsDetails.status'),
                 value: <TransactionStatus status={item.status} showText />,
               },
             ]}
           />
         </DetailsContainer>
 
-        <CopyField label={'Transaction hash'} value={item.hash} />
+        <CopyField label={t('depositsDetails.transaction_hash')} value={item.hash} />
       </div>
     </Modal>
   );

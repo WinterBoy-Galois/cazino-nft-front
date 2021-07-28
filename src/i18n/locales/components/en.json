@@ -1,0 +1,33 @@
+{
+  "betAmountControl": {
+    "betAmount": "Bet Amount",
+    "amount": "Amount"
+  },
+  "carousel": {
+    "firstSlide": {
+      "firstLine": "Your friends make",
+      "bets": "BETS",
+      "bits": "BITS",
+      "secondLine": "you get",
+      "subline": "Best referral program comissions you will ever find"
+    },
+    "secondSlide": "I'm second slide",
+    "thirdSlide": "I'm third slide",
+    "fourthSlide": "I'm fourth slide",
+    "fifthSlide": "I'm fifth slide"
+  },
+  "goalGameAdvances": {
+    "unavailable": "Unavailable"
+  },
+  "goalGameBoard": {
+    "idle": "Idle"
+  },
+  "latestBetsTable": {
+    "unexpected": "Unexpected error",
+    "no_data": "No Data"
+  },
+  "withdrawAmountControl": {
+    "amount": "Amount",
+    "max": "Max"
+  }
+}

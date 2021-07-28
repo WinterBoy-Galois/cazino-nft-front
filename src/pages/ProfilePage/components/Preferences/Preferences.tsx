@@ -24,7 +24,7 @@ const Preferences: React.FC<IProps> = ({
   loading,
   preferences: initialPreferences,
 }) => {
-  const { t } = useTranslation(['profile']);
+  const { t } = useTranslation(['profile', 'common']);
   const [preferences, setPreferences] = useState(initialPreferences);
 
   useMemo(() => setPreferences(initialPreferences), [initialPreferences]);
@@ -39,7 +39,7 @@ const Preferences: React.FC<IProps> = ({
       <CardHeadline>{t('preferences.headline')}</CardHeadline>
       {loading && <Loading />}
 
-      {!loading && !preferences && <Error>Unexpected error</Error>}
+      {!loading && !preferences && <Error>{t('common:errors.UNEXPECTED')}</Error>}
 
       {!loading && preferences && (
         <div className={styles.container}>
