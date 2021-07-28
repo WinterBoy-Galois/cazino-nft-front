@@ -15,7 +15,7 @@ const BottomBar: React.FC<IProps> = ({ hasUnclaimedBonus = true, balance = 0.0, 
     <div className={`container-fluid h-100`}>
       <div className={`row h-100`}>
         <div className={`col-12 ${styles.container}`}>
-          <div>
+          <div className="h-100">
             <BottomBarMenu hasUnclaimedBonus={hasUnclaimedBonus} />
           </div>
           <div className={styles.balance}>

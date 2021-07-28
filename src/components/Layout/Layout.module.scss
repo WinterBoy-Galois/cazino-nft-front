@@ -81,13 +81,13 @@ $slide-transition: all 200ms ease-in-out;
 
   @include media-breakpoint-up(lg) {
     &__bottom-bar {
-      height: $bar-height-lg;
+      height: $bottom-bar-height;
     }
   }
 
   @include media-breakpoint-up(md) {
     &__bottom-bar-open {
-      height: $bar-height-lg;
+      height: $bottom-bar-height;
     }
   }
 }

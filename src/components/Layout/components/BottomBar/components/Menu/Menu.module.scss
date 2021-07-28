@@ -2,6 +2,7 @@
 
 .container {
   display: flex;
+  align-items: center;
   margin: 0 0.5rem;
 }
 
@@ -19,61 +20,19 @@
   align-items: center;
 }
 
-.item {
-  @include media-breakpoint-up(md) {
-    width: 53px;
-    padding: 12px 6px;
-  }
-  &:last-child {
-    margin-right: 0;
-  }
-
-  &__icon {
-    width: 35px;
-    height: 35px;
-    fill: $orange;
-  }
-
-  &__badge {
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    bottom: 2px;
-    right: -1px;
-
-    @include media-breakpoint-up(md) {
-      width: 15px;
-      height: 15px;
-      bottom: 8px;
-      right: 7px;
-    }
-  }
-
-  &__hidden_md_down {
-    @include media-breakpoint-down(sm) {
-      display: none;
-    }
-  }
-
-  &__hidden_lg_up {
-    @include media-breakpoint-up(md) {
-      display: none;
-    }
-  }
-}
-
+.item,
 .item_open {
   @include media-breakpoint-up(lg) {
-    width: 53px;
-    padding: 12px 6px;
+    width: 34px;
+    padding: 0 6px;
   }
   &:last-child {
     margin-right: 0;
   }
 
   &__icon {
-    width: 35px;
-    height: 35px;
+    width: 100%;
+    height: 100%;
     fill: $orange;
   }
 
