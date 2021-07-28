@@ -22,10 +22,6 @@ $grid-breakpoints: (
 
 .advances {
   &__container {
-    position: absolute;
-    left: 0;
-    top: -5.5rem;
-    bottom: -3rem;
     display: flex;
 
     @include media-breakpoint-down(xl) {
@@ -35,6 +31,10 @@ $grid-breakpoints: (
       bottom: inherit;
     }
   }
+}
+
+.game_section_main_container {
+  display: flex;
 }
 
 .board {

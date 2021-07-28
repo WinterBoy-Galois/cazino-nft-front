@@ -420,31 +420,7 @@ const GoalGame: React.FC<IProps> = ({
         }
       }}
     >
-      <div className={styles.board__container}>
-        <div className="row">
-          <div className={clsx('col-12', styles.board__probability_text)}>
-            <span>
-              {
-                PROBABILITIES.filter(
-                  (probability: any) => probability.value === state.probability
-                )[0]?.summary
-              }
-            </span>
-          </div>
-          <GoalGameBoard
-            className="col-12"
-            handlePlaceBet={handlePlaceBet}
-            allowNext={session?.allowNext}
-            lastSpot={lastSpot}
-            lastAdvanceStatus={lastAdvanceStatus}
-            hideMiddleBall={state.probability === PROBABILITY_MIDDLE}
-            gameState={state.gameState}
-            isCashOut={isCashOut}
-          />
-        </div>
-
-        <div className="row">{renderGameProbability()}</div>
-
+      <div className={styles.game_section_main_container}>
         {state.gameState !== GameState.IDLE && device > deviceSize.xl ? (
           <GoalGameAdvances
             profits={session?.profits}
@@ -455,6 +431,30 @@ const GoalGame: React.FC<IProps> = ({
             hideMiddleBall={state.probability === PROBABILITY_MIDDLE}
           />
         ) : null}
+        <div className={styles.board__container}>
+          <div className="row">{renderGameProbability()}</div>
+          <div className="row">
+            <div className={clsx('col-12', styles.board__probability_text)}>
+              <span>
+                {
+                  PROBABILITIES.filter(
+                    (probability: any) => probability.value === state.probability
+                  )[0]?.summary
+                }
+              </span>
+            </div>
+            <GoalGameBoard
+              className="col-12"
+              handlePlaceBet={handlePlaceBet}
+              allowNext={session?.allowNext}
+              lastSpot={lastSpot}
+              lastAdvanceStatus={lastAdvanceStatus}
+              hideMiddleBall={state.probability === PROBABILITY_MIDDLE}
+              gameState={state.gameState}
+              isCashOut={isCashOut}
+            />
+          </div>
+        </div>
       </div>
 
       <div className={styles.controls__wrapper}>

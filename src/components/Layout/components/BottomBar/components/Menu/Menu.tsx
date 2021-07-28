@@ -118,7 +118,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, 'h-100')}>
       {isGamePage && isMenuOpened ? (
         <div className={clsx(isOpen ? styles.hamburger_menu_open : styles.hamburger_menu)}>
           <div

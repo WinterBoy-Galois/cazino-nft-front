@@ -1,6 +1,7 @@
 @import '../../../../../../styles/shared';
 
 $border: 4px;
+$finalHeight: calc(100% + (#{$border} * 2));
 
 .container,
 .container_open {
@@ -11,7 +12,7 @@ $border: 4px;
 .wrapper,
 .wrapper_open {
   margin-top: -$border;
-  height: calc(#{$bar-height} + (#{$border} * 2));
+  height: $finalHeight;
   // width: 190px;
   overflow: hidden;
   cursor: pointer;
@@ -19,7 +20,7 @@ $border: 4px;
 
 .border,
 .border_open {
-  height: calc(#{$bar-height} + (#{$border} * 2));
+  height: $finalHeight;
   width: 100%;
   border: $border solid $yellow;
   border-right: 0;
@@ -66,32 +67,10 @@ $border: 4px;
     border-bottom-left-radius: 60px;
   }
   .value {
-    font-size: 38px;
+    font-size: 27px;
   }
   .icon {
-    width: 31px;
-    margin: 0 1rem 0 1.5rem;
-  }
-}
-
-@include media-breakpoint-up(lg) {
-  .container_open {
-    height: $bar-height-lg;
-  }
-  .wrapper_open {
-    height: calc(#{$bar-height-lg} + (#{$border} * 2));
-    // width: 310px;
-  }
-  .border_open {
-    height: calc(#{$bar-height-lg} + (#{$border} * 2));
-    border-top-left-radius: 60px;
-    border-bottom-left-radius: 60px;
-  }
-  .value_open {
-    font-size: 38px;
-  }
-  .icon_open {
-    width: 31px;
+    width: 25px;
     margin: 0 1rem 0 1.5rem;
   }
 }

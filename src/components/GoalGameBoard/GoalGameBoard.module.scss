@@ -72,13 +72,13 @@
   &__main_ball {
     display: none;
     position: absolute;
-    width: 15%;
-    left: 42.5%;
-    bottom: -7.5rem;
+    width: 10%;
+    left: 45%;
+    bottom: -0.5rem;
 
     @include media-breakpoint-down(lg) {
-      width: 24%;
-      left: 38%;
+      width: 18%;
+      left: 41%;
     }
 
     @include media-breakpoint-up(xl) {
