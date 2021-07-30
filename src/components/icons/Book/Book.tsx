@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styles from './Book.module.scss';
+import { useLocation } from '@reach/router';
+import { useOpenGameModal } from '../../../pages/GamesPage/components/GameModal/useOpenGameModal';
+import { GameType } from '../../../pages/GamesPage/components/GameModal/GameModal.component';
 
 interface IProps {
   className?: string;
 }
 
+const allowedGames: GameType[] = ['goalGame', 'diceGame', 'clamGame', 'minesGame'];
+
 const VerifyLast: React.FC<IProps> = ({ className }) => {
+  const openModal = useOpenGameModal();
+  const { pathname } = useLocation();
+  const onClick = useCallback(() => {
+    if (pathname.includes('games')) {
+      const pieces = pathname.split('/');
+      const lastPiece = (pieces[pieces.length - 1] + 'Game') as GameType;
+      if (allowedGames.includes(lastPiece)) {
+        openModal(lastPiece);
+      }
+    }
+  }, [pathname, openModal]);
+
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 29.11" className={className}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 35 29.11"
+      className={className}
+      onClick={onClick}
+    >
       <g id="Layer_2" data-name="Layer 2">
         <g id="Слой_5" data-name="Слой 5">
           <path

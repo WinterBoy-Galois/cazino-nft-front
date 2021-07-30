@@ -8,7 +8,7 @@ export const modalReducer: Reducer<ModalState, Action> = (state, { type, payload
       return { type: payload.type, data: payload.data, isReplace: false };
 
     case 'MODAL_HIDE':
-      return { ...state, type: 'NONE', isReplace: payload?.isReplace };
+      return { ...state, type: 'NONE', isReplace: payload?.isReplace, data: {} };
 
     default:
       return state;

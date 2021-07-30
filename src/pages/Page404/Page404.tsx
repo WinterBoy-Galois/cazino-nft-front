@@ -6,7 +6,7 @@ import notfoundIcon from '../../assets/images/errors/error-not-found.svg';
 import { useTranslation } from 'react-i18next';
 import { useStateValue } from '../../state';
 
-const Page404: React.FC<RouteComponentProps> = () => {
+const Page404: React.FC<RouteComponentProps & { raw?: boolean }> = ({ raw }) => {
   const { t } = useTranslation(['error']);
   const [, dispatch] = useStateValue();
 
@@ -16,9 +16,11 @@ const Page404: React.FC<RouteComponentProps> = () => {
 
   return (
     <div className="">
-      <div className={styles.logo_container}>
-        <TopBar isOnlyLeaveLogo />
-      </div>
+      {!raw && (
+        <div className={styles.logo_container}>
+          <TopBar isOnlyLeaveLogo />
+        </div>
+      )}
       <div className={styles.error_container}>
         <div className="row">
           <div className="col-12 col-md-auto" style={{ textAlign: 'center' }}>
