@@ -93,5 +93,11 @@
     "amount": "Amount",
     "status": "Status",
     "transaction_hash": "Transaction hash"
+  },
+  "games": {
+    "goalGame": "Goal Game Title",
+    "diceGame": "Dice Game Title",
+    "clamGame": "Clam Game Title",
+    "minesGame": "Mines Game Title"
   }
 }

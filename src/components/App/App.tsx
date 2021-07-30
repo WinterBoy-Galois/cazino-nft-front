@@ -16,6 +16,7 @@ import SeedPage from '../../pages/SeedPage';
 import Page404 from '../../pages/Page404';
 import Page500 from '../../pages/Page500';
 import LayoutPage from '../LayoutPage';
+import { CustomPage } from '../../pages/CustomPage';
 
 import { UserLayer } from '../../user';
 import { useApolloClient } from '../../graphql/newClient';
@@ -69,6 +70,8 @@ const App: React.FC = () => {
               <Page404 default />
 
               {/* Protected Routes */}
+              <CustomPage path="/faq" fileName="faq" />
+              <CustomPage path="/another" fileName="another" />
               <LayoutPage path="/profile" isAuthNeeded component={ProfilePageWithData} />
               <LayoutPage path="/transactions/*" isAuthNeeded component={TransactionsPage} />
               <LayoutPage path="/seeds" isAuthNeeded component={SeedPage} />

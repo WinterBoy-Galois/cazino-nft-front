@@ -2,6 +2,8 @@ import { ModalType } from '../../../../../state/models/modal.model';
 
 export const mapQueryParamToModal = (param: string): ModalType | undefined => {
   switch (param) {
+    case 'game-modal':
+      return 'GAME_MODAL';
     case 'sign-in':
       return 'SIGN_IN_MODAL';
 

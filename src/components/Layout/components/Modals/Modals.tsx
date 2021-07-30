@@ -22,6 +22,7 @@ import DepositsDetailsModal from '../../../DepositsDetailsModal';
 import AffiliatesDetailsModal from '../../../AffiliatesDettailsModal';
 import { toggleShowModalAction } from '../../../../user/user.actions';
 import { useUserState } from '../../../../user/UserProvider';
+import { GameModal } from '../../../../pages/GamesPage/components/GameModal';
 
 const Modals: React.FC = () => {
   const [{ modal }, dispatch] = useStateValue();
@@ -58,6 +59,7 @@ const Modals: React.FC = () => {
 
   return (
     <>
+      <GameModal show={handleShow('GAME_MODAL')} onClose={handleClose} {...modal.data} />
       <SignInModalWithData show={showLoginModal} onClose={handleCloseReLogin} />
       <UserInfoModalWithData
         show={handleShow('USER_INFO_MODAL')}
