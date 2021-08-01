@@ -19,12 +19,9 @@ export const CustomPageComponent: React.FC<Props> = ({ fileName, raw }) => {
   const [error, setError] = useState<boolean>(false);
   const [text, setText] = useState<string | null>('');
 
-  const content = useMemo(() => <ReactMarkdown>{text || ''}</ReactMarkdown>, [text]);
-
   useEffect(() => {
     try {
       if (!fileName) {
-        setError(true);
         return;
       }
       setError(false);
@@ -42,7 +39,9 @@ export const CustomPageComponent: React.FC<Props> = ({ fileName, raw }) => {
     }
   }, [fileName, language]);
 
-  if (error || !fileName) {
+  const content = useMemo(() => <ReactMarkdown>{text || ''}</ReactMarkdown>, [text]);
+
+  if (error) {
     return <Page404 raw />;
   }
 
