@@ -69,9 +69,15 @@ const App: React.FC = () => {
               <Page500 path="/servererror" />
               <Page404 default />
 
-              {/* Protected Routes */}
+              {/* Custom Pages*/}
+              <CustomPage path="/bonuses-intro" fileName="bonusesIntro" />
+              <CustomPage path="/affiliates-intro" fileName="affiliatesIntro" />
+              <CustomPage path="/fairness" fileName="fairness" />
               <CustomPage path="/faq" fileName="faq" />
-              <CustomPage path="/another" fileName="another" />
+              <CustomPage path="/privacy-policy" fileName="privacyPolicy" />
+              <CustomPage path="/terms-of-use" fileName="termsOfUse" />
+
+              {/* Protected Routes */}
               <LayoutPage path="/profile" isAuthNeeded component={ProfilePageWithData} />
               <LayoutPage path="/transactions/*" isAuthNeeded component={TransactionsPage} />
               <LayoutPage path="/seeds" isAuthNeeded component={SeedPage} />

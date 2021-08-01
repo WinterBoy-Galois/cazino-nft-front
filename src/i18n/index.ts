@@ -69,6 +69,7 @@ i18n
     },
 
     fallbackLng: 'en',
+    whitelist: ['en', 'de'],
     debug: false,
 
     ns: [

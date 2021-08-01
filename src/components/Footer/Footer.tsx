@@ -15,6 +15,7 @@ import { TFunction } from 'i18next';
 import LanguageSelect from '../LanguageSelect';
 import { useStateValue } from '../../state';
 import { buildDate } from '../../common/util';
+import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
 const renderFooterLinks = (footer: FooterList[], isSidebarOpen: boolean) =>
   footer.map((f, i) => (
@@ -32,7 +33,7 @@ const renderFooterLinks = (footer: FooterList[], isSidebarOpen: boolean) =>
     </div>
   ));
 
-const getFooterData = (t: TFunction): FooterList[] => [
+const getFooterData = (t: TFunction, isAuthorized: boolean): FooterList[] => [
   {
     headline: t('links.games.headline'),
     items: [
@@ -63,15 +64,15 @@ const getFooterData = (t: TFunction): FooterList[] => [
       },
       {
         label: t('links.about.bonuses'),
-        path: '/bonuses',
+        path: isAuthorized ? '/bonuses' : '/bonuses-intro',
       },
       {
         label: t('links.about.affiliates'),
-        path: '/',
+        path: '/affiliates-intro',
       },
       {
         label: t('links.about.fairness'),
-        path: '/',
+        path: '/fairness',
       },
       {
         label: t('links.about.news'),
@@ -88,7 +89,7 @@ const getFooterData = (t: TFunction): FooterList[] => [
       },
       {
         label: t('links.support.faq'),
-        path: '/',
+        path: '/faq',
       },
     ],
   },
@@ -97,17 +98,18 @@ const getFooterData = (t: TFunction): FooterList[] => [
     items: [
       {
         label: t('links.legal.privacyPolicy'),
-        path: '/',
+        path: '/privacy-policy',
       },
       {
         label: t('links.legal.termsOfUse'),
-        path: '/',
+        path: '/terms-of-use',
       },
     ],
   },
 ];
 
 const Footer: React.FC = () => {
+  const isAuthorized = useIsAuthorized();
   const { t } = useTranslation(['footer']);
   const year = new Date().getFullYear();
   const [
@@ -130,7 +132,7 @@ const Footer: React.FC = () => {
             <div className={styles.copyright}>&copy; {year} cazzzino.com</div>
           </div>
 
-          {renderFooterLinks(getFooterData(t), isOpen)}
+          {renderFooterLinks(getFooterData(t, isAuthorized), isOpen)}
 
           <div className={`col-6 ${!isOpen ? 'col-lg-2' : 'col-xl-2'}`}>
             <ul className={`${styles.list} ${isOpen && styles['list--spacing']}`}>
