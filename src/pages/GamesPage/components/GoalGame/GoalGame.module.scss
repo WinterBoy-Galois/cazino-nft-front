@@ -12,12 +12,7 @@ $grid-breakpoints: (
 );
 
 .container {
-  padding-top: 5rem;
-  margin-top: -0.5rem;
   overflow: hidden;
-  @include media-breakpoint-down(sm) {
-    padding-top: 3rem;
-  }
 }
 
 .advances {
@@ -35,6 +30,8 @@ $grid-breakpoints: (
 
 .game_section_main_container {
   display: flex;
+  min-height: 576px;
+  position: relative;
 }
 
 .board {
@@ -44,7 +41,7 @@ $grid-breakpoints: (
   }
 
   &__probability_text {
-    padding-left: 27%;
+    padding-left: 30.5%;
 
     @include media-breakpoint-down(lg) {
       padding-left: 15%;
@@ -52,7 +49,7 @@ $grid-breakpoints: (
 
     & > span {
       font: normal normal 300 15px/20px Roboto;
-      letter-spacing: 0px;
+      letter-spacing: 0;
       color: #82a1cc;
       opacity: 1;
       text-transform: uppercase;
@@ -104,12 +101,6 @@ $grid-breakpoints: (
 .profit {
   display: flex;
 
-  &__row {
-    position: absolute;
-    width: 100%;
-    margin: -4.5rem 0 2rem;
-  }
-
   &__item {
     display: inline-flex;
     flex-direction: column;
@@ -143,12 +134,13 @@ $grid-breakpoints: (
 
 .controls {
   &__wrapper {
-    @include media-breakpoint-up(xl) {
-      margin-top: 3rem;
-    }
-
+    padding: 0 !important;
     &__container {
-      position: relative;
+      //noinspection Stylelint
+      :global .row {
+        margin-top: 24px;
+        margin-bottom: 24px;
+      }
     }
   }
 }
@@ -165,10 +157,9 @@ $grid-breakpoints: (
     border: 1px solid #505e6b;
     border-radius: 8px;
     min-width: 275px;
-    position: absolute;
 
     &__lost {
-      top: -4.85rem;
+      top: -1.85rem;
 
       &__title {
         font-size: 1.25rem;
@@ -183,7 +174,7 @@ $grid-breakpoints: (
     }
 
     &__won {
-      top: -4.85rem;
+      top: -1.85rem;
 
       &__title {
         font-size: 1.25rem;

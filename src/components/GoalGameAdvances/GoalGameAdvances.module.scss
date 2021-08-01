@@ -11,10 +11,15 @@ $grid-breakpoints: (
 );
 
 .container {
+  position: absolute;
   display: flex;
   flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 285px;
+  height: 100%;
+  left: 24px;
 
   @include media-breakpoint-down(xl) {
     max-width: 400px;
@@ -25,39 +30,31 @@ $grid-breakpoints: (
   }
 }
 
+.innerContainer {
+  background: #13223985;
+  z-index: 1;
+  border-radius: 12px;
+  max-height: 100%;
+  width: 100%;
+  border: 1px solid #283d5d;
+
+  @include media-breakpoint-down(xl) {
+    border: none;
+  }
+}
+
 .single_advance {
   display: flex;
   align-items: center;
-  padding: 0px 15px;
-  margin: 5px 0px;
+  padding: 0 15px;
+  margin: 10px 0;
   justify-content: space-between;
   width: 100%;
-
-  &:first-child {
-    margin-bottom: auto;
-  }
-
-  &:last-child {
-    margin-top: 7rem;
-
-    @include media-breakpoint-down(xl) {
-      margin-top: 2rem;
-    }
-  }
 
   &__current {
     background-color: rgba(255, 255, 255, 0.15);
     padding-top: 2px;
     padding-bottom: 2px;
-    margin: 3px 0px;
-
-    &:last-child {
-      margin-top: calc(2rem - 2px);
-
-      @include media-breakpoint-up(md) {
-        margin-top: calc(7rem - 2px);
-      }
-    }
   }
 
   & > div:not(:first-child) {
