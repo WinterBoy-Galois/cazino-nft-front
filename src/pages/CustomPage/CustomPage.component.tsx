@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { RouteComponentProps } from '@reach/router';
 import Layout from '../../components/Layout';
 import Page404 from '../Page404';
+import styles from './CustomPage.module.scss';
 
 const defaultLanguage = 'en';
 
@@ -39,7 +40,16 @@ export const CustomPageComponent: React.FC<Props> = ({ fileName, raw }) => {
     }
   }, [fileName, language]);
 
-  const content = useMemo(() => <ReactMarkdown>{text || ''}</ReactMarkdown>, [text]);
+  const content = useMemo(
+    () => (
+      <div className={styles.container}>
+        <div className={styles.innerContainer}>
+          <ReactMarkdown>{text || ''}</ReactMarkdown>
+        </div>
+      </div>
+    ),
+    [text]
+  );
 
   if (error) {
     return <Page404 raw />;

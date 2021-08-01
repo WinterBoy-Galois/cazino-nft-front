@@ -4,6 +4,10 @@
   position: relative;
   width: 100%;
 
+  @include media-breakpoint-up(xxl) {
+    transform: scale(0.85);
+  }
+
   > * {
     user-select: none;
   }

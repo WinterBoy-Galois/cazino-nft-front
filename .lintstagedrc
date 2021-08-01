@@ -1,5 +1,5 @@
 {
   "*.{ts,tsx,scss,json,md}": ["prettier --write"],
-  "*.{ts,tsx}": ["eslint '*/**/*.{js,ts,tsx}' --fix"],
+  "*.{ts,tsx}": ["eslint --fix"],
   "*.scss": ["stylelint"]
 }

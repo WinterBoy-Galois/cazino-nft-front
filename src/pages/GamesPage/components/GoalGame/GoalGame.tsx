@@ -382,29 +382,31 @@ const GoalGame: React.FC<IProps> = ({
   const renderGameProbability = () => (
     <div
       className={clsx(
-        'col-12 col-md-10 col-lg-6 col-xl-4',
-        styles.probability__container,
-        device <= deviceSize.lg ? styles.probability__container__mobile : null,
+        'row',
         state.gameState === GameState.IDLE
           ? null
           : styles.probability__container__visibility__hidden
       )}
     >
-      {device <= deviceSize.lg ? null : (
-        <div className={styles.probability__label}>{t('goal.probability')}</div>
-      )}
-
-      <ButtonGroup
-        name="probability"
-        items={PROBABILITIES.map((item: any) => ({
-          ...item,
-          onClick: () => {
-            dispatch({ type: 'SET_PROBABILITY', payload: { probability: item.value } });
-          },
-          checked: state.probability === item.value,
-        }))}
-        className={styles.probability__button_group}
-      />
+      <div
+        className={clsx(
+          'col-12 col-md-10 col-lg-6 col-xl-4',
+          styles.probability__container,
+          device <= deviceSize.lg ? styles.probability__container__mobile : null
+        )}
+      >
+        <ButtonGroup
+          name="probability"
+          items={PROBABILITIES.map((item: any) => ({
+            ...item,
+            onClick: () => {
+              dispatch({ type: 'SET_PROBABILITY', payload: { probability: item.value } });
+            },
+            checked: state.probability === item.value,
+          }))}
+          className={styles.probability__button_group}
+        />
+      </div>
     </div>
   );
 
@@ -432,17 +434,19 @@ const GoalGame: React.FC<IProps> = ({
           />
         ) : null}
         <div className={styles.board__container}>
-          <div className="row">{renderGameProbability()}</div>
+          {renderGameProbability()}
           <div className="row">
-            <div className={clsx('col-12', styles.board__probability_text)}>
-              <span>
-                {
-                  PROBABILITIES.filter(
-                    (probability: any) => probability.value === state.probability
-                  )[0]?.summary
-                }
-              </span>
-            </div>
+            {GameState.IN_PROGRESS && (
+              <div className={clsx('col-12', styles.board__probability_text)}>
+                <span>
+                  {
+                    PROBABILITIES.filter(
+                      (probability: any) => probability.value === state.probability
+                    )[0]?.summary
+                  }
+                </span>
+              </div>
+            )}
             <GoalGameBoard
               className="col-12"
               handlePlaceBet={handlePlaceBet}

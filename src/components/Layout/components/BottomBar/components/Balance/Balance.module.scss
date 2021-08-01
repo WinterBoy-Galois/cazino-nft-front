@@ -5,7 +5,7 @@ $finalHeight: calc(100% + (#{$border} * 2));
 
 .container,
 .container_open {
-  height: $bar-height;
+  height: calc(#{$bottom-bar-height} + 4px);
   position: relative;
 }
 
@@ -50,27 +50,5 @@ $finalHeight: calc(100% + (#{$border} * 2));
 
   &__inner {
     fill: $light-blue;
-  }
-}
-
-@include media-breakpoint-up(md) {
-  .container {
-    height: $bar-height-lg;
-  }
-  .wrapper {
-    height: calc(#{$bar-height-lg} + (#{$border} * 2));
-    // width: 310px;
-  }
-  .border {
-    height: calc(#{$bar-height-lg} + (#{$border} * 2));
-    border-top-left-radius: 60px;
-    border-bottom-left-radius: 60px;
-  }
-  .value {
-    font-size: 27px;
-  }
-  .icon {
-    width: 25px;
-    margin: 0 1rem 0 1.5rem;
   }
 }

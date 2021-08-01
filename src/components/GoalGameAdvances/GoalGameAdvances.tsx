@@ -38,57 +38,61 @@ const GoalGameAdvances: React.FC<IProps> = ({
     return clsx(styles.single_advance__status__spot);
   };
 
+  if (profits?.length === 0) return <div />;
+
   return (
     <div className={clsx(styles.container, className)}>
-      {profits.map((item, step) => {
-        const selection = selections?.filter(selection => selection.step === step)[0];
+      <div className={styles.innerContainer}>
+        {profits.map((item, step) => {
+          const selection = selections?.filter(selection => selection.step === step)[0];
 
-        let singleStatusClassName = null;
-        if (selection && selection?.selected !== null) {
-          singleStatusClassName = selection.luckySpots?.includes(selection.selected)
-            ? styles.single_advance__status__won
-            : styles.single_advance__status__lost;
-        }
+          let singleStatusClassName = null;
+          if (selection && selection?.selected !== null) {
+            singleStatusClassName = selection.luckySpots?.includes(selection.selected)
+              ? styles.single_advance__status__won
+              : styles.single_advance__status__lost;
+          }
 
-        return (
-          <div
-            className={clsx(
-              styles.single_advance,
-              currentStep === item.step && !isEnded ? styles.single_advance__current : null
-            )}
-            key={`advance-${step}`}
-          >
+          return (
             <div
               className={clsx(
-                styles.single_advance__status,
-                currentStep === item.step ? styles.single_advance__status__current : null,
-                singleStatusClassName
+                styles.single_advance,
+                currentStep === item.step && !isEnded ? styles.single_advance__current : null
               )}
+              key={`advance-${step}`}
             >
-              {step <= (isEnded && !selection ? currentStep - 1 : currentStep)
-                ? Array.from(Array(hideMiddleBall ? 2 : 3).keys()).map(index => (
-                    <span key={`status-${index}`} className={getStatusClsx(selection, index)} />
-                  ))
-                : null}
-            </div>
-
-            <div className={styles.single_advance__multiplier}>
-              &nbsp;&times;{item.multiplier.toFixed(appConfig.goalsMultiplierPrecision)}
-            </div>
-
-            {item.profit !== null ? (
-              <BitcoinValue
-                className={styles.single_advance__profit}
-                value={formatBitcoin(item.profit)}
-              />
-            ) : (
-              <div className={styles.single_advance__profit}>
-                <span>{t('goalGameAdvances.unavailable')}</span>
+              <div
+                className={clsx(
+                  styles.single_advance__status,
+                  currentStep === item.step ? styles.single_advance__status__current : null,
+                  singleStatusClassName
+                )}
+              >
+                {step <= (isEnded && !selection ? currentStep - 1 : currentStep)
+                  ? Array.from(Array(hideMiddleBall ? 2 : 3).keys()).map(index => (
+                      <span key={`status-${index}`} className={getStatusClsx(selection, index)} />
+                    ))
+                  : null}
               </div>
-            )}
-          </div>
-        );
-      })}
+
+              <div className={styles.single_advance__multiplier}>
+                &nbsp;&times;{item.multiplier.toFixed(appConfig.goalsMultiplierPrecision)}
+              </div>
+
+              {item.profit !== null ? (
+                <BitcoinValue
+                  className={styles.single_advance__profit}
+                  value={formatBitcoin(item.profit)}
+                />
+              ) : (
+                <div className={styles.single_advance__profit}>
+                  <span>{t('goalGameAdvances.unavailable')}</span>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
