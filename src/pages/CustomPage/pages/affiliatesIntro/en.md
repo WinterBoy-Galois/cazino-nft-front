@@ -15,4 +15,6 @@ Registered users can find their referral links in profile.
 
 
 Your friends make bets, you get bits*
-*A ‘bit’, also referred to as ‘bits’ or ‘microbitcoin’, is one-millionth part of a Bitcoin and equals 0.000001BTC or 100 satoshis.
+
+
+##### *A ‘bit’, also referred to as ‘bits’ or ‘microbitcoin’, is one-millionth part of a Bitcoin and equals 0.000001BTC or 100 satoshis.
