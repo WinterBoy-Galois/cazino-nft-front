@@ -437,17 +437,20 @@ const GoalGame: React.FC<IProps> = ({
         <div className={styles.board__container}>
           {renderGameProbability()}
           <div className="row">
-            {GameState.IN_PROGRESS && (
-              <div className={clsx('col-12', styles.board__probability_text)}>
-                <span>
-                  {
-                    PROBABILITIES.filter(
-                      (probability: any) => probability.value === state.probability
-                    )[0]?.summary
-                  }
-                </span>
-              </div>
-            )}
+            <div
+              className={clsx('col-12', styles.board__probability_text)}
+              style={{
+                visibility: state.gameState === GameState.IN_PROGRESS ? 'visible' : 'hidden',
+              }}
+            >
+              <span>
+                {
+                  PROBABILITIES.filter(
+                    (probability: any) => probability.value === state.probability
+                  )[0]?.summary
+                }
+              </span>
+            </div>
             <GoalGameBoard
               className="col-12"
               handlePlaceBet={handlePlaceBet}
