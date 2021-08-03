@@ -412,6 +412,7 @@ const GoalGame: React.FC<IProps> = ({
 
   return (
     <div
+      style={{ marginTop: 0 }}
       className={styles.container}
       onClick={() => {
         if (lastStatusTimer !== null) {
@@ -466,6 +467,7 @@ const GoalGame: React.FC<IProps> = ({
           <div
             className={clsx(
               'row',
+              styles.controls__wrapper__container__row,
               styles.profit__row,
               styles.margin__horizontal_auto,
               state.gameState === GameState.IN_PROGRESS ? null : styles.profit__visibility__hidden,

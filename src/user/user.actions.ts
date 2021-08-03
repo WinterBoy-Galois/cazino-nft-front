@@ -22,7 +22,7 @@ export const registerAction = (payload?: any) => ({ type: REGISTER, payload });
 export const logoutAction = (payload?: any) => ({ type: LOGOUT, payload });
 export const logoutWithModalAction = (payload?: any) => ({ type: LOGOUT_WITH_MODAL, payload });
 export const updateUserAction = (payload?: any) => ({ type: UPDATE_USER, payload });
-export const updateRefreshTokenAction = (payload?: any) => ({
+export const updateRefreshTokenAction = (payload?: string) => ({
   type: UPDATE_REFRESH_TOKEN,
   payload,
 });
