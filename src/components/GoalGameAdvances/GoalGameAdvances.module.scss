@@ -24,10 +24,6 @@ $grid-breakpoints: (
   @include media-breakpoint-down(xl) {
     max-width: 400px;
   }
-
-  @include media-breakpoint-down(lg) {
-    max-width: inherit;
-  }
 }
 
 .innerContainer {
