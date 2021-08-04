@@ -179,5 +179,6 @@ export const useApolloClient = (logout: any) => {
     cache,
     link: apolloLink,
     queryDeduplication: false,
+    connectToDevTools: process.env.NODE_ENV === 'development',
   });
 };

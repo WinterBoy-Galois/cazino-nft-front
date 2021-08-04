@@ -125,7 +125,7 @@ const CashierModal: React.FC<IProps> = ({
                   <div className="col-12">
                     <div className="row">
                       <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>
-                        {t('balance')}
+                        {t('cashier.balance')}
                       </div>
                       <div className={clsx(styles.withdraw__value, 'col-6 col-md-5')}>
                         <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
@@ -137,7 +137,7 @@ const CashierModal: React.FC<IProps> = ({
                   <div className="col-12">
                     <div className="row">
                       <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>
-                        {t('blockchain_fee')}
+                        {t('cashier.blockchain_fee')}
                       </div>
                       <div className={clsx(styles.withdraw__value, 'col-6 col-md-5')}>
                         <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
@@ -149,7 +149,7 @@ const CashierModal: React.FC<IProps> = ({
                   <div className="col-12">
                     <div className="row">
                       <div className={clsx(styles.withdraw__label, 'col-6 col-md-7')}>
-                        {t('min_withdraw_amount')}
+                        {t('cashier.min_withdraw_amount')}
                       </div>
                       <div className={clsx(styles.withdraw__value, 'col-6 col-md-5')}>
                         <Bitcoin className={styles.icon} innerClassName={styles.icon__inner} />
@@ -197,9 +197,9 @@ const CashierModal: React.FC<IProps> = ({
                       variables: { amount: amount, address: depositAddress },
                     });
 
-                    if (errors) errorToast(t('withdraw_failed'));
-                    else if (data?.withdraw?.result) success(t('withdraw_completed'));
-                    else errorToast(t('withdraw_failed'));
+                    if (errors) errorToast(t('cashier.withdraw_failed'));
+                    else if (data?.withdraw?.result) success(t('cashier.withdraw_completed'));
+                    else errorToast(t('cashier.withdraw_failed'));
                   }}
                 >
                   Withdraw

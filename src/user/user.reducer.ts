@@ -70,7 +70,7 @@ export const userReducer: Reducer<UserState, Action> = (state, action) => {
     case UPDATE_REFRESH_TOKEN:
       return {
         ...state,
-        accessToken: action.payload.accessToken,
+        accessToken: action.payload,
       };
     case RESET_PASSWORD:
       return {

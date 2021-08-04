@@ -13,7 +13,7 @@ $grid-breakpoints: (
 .container {
   position: absolute;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -24,10 +24,6 @@ $grid-breakpoints: (
   @include media-breakpoint-down(xl) {
     max-width: 400px;
   }
-
-  @include media-breakpoint-down(lg) {
-    max-width: inherit;
-  }
 }
 
 .innerContainer {
@@ -37,6 +33,8 @@ $grid-breakpoints: (
   max-height: 100%;
   width: 100%;
   border: 1px solid #283d5d;
+  display: flex;
+  flex-direction: column-reverse;
 
   @include media-breakpoint-down(xl) {
     border: none;

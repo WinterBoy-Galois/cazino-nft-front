@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getCheckRTFlag, setAccessToken, setCheckRTFlag, useUserState } from './UserProvider';
 import { useLazyQuery } from '@apollo/client';
 import { ME } from '../graphql/queries';
-import { loginAction } from './user.actions';
+import { loginAction, updateRefreshTokenAction } from './user.actions';
 import Spinner from '../components/Spinner';
 
 import styles from './user.module.scss';
@@ -21,8 +21,9 @@ export const UserLayer: React.FC = ({ children }) => {
 
   const initUser = async () => {
     try {
-      const { accessToken } = await getNewToken();
-      await setAccessToken(accessToken);
+      const { accessToken: newToken } = await getNewToken();
+      await setAccessToken(newToken);
+      dispatch(updateRefreshTokenAction(newToken));
       getMe();
     } catch (error) {
       setCheckRTFlag(null);

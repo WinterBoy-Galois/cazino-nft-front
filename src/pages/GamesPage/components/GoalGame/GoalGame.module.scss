@@ -30,8 +30,11 @@ $grid-breakpoints: (
 
 .game_section_main_container {
   display: flex;
-  min-height: 576px;
   position: relative;
+
+  @include media-breakpoint-up(xxl) {
+    min-height: 560px;
+  }
 }
 
 .board {
@@ -41,7 +44,11 @@ $grid-breakpoints: (
   }
 
   &__probability_text {
-    padding-left: 30.5%;
+    padding-left: 27%;
+
+    @include media-breakpoint-up(xxl) {
+      padding-left: 30.5%;
+    }
 
     @include media-breakpoint-down(lg) {
       padding-left: 15%;
@@ -59,7 +66,7 @@ $grid-breakpoints: (
 
 .probability {
   &__container {
-    margin: 1.5rem auto;
+    margin: 0.5rem auto;
 
     &__mobile {
       display: none;
@@ -134,12 +141,12 @@ $grid-breakpoints: (
 
 .controls {
   &__wrapper {
-    padding: 0 !important;
+    padding: 0 0 42px 0 !important;
+
     &__container {
-      //noinspection Stylelint
-      :global .row {
-        margin-top: 24px;
-        margin-bottom: 24px;
+      &__row {
+        margin-top: -19px;
+        margin-bottom: 19px;
       }
     }
   }
@@ -149,6 +156,7 @@ $grid-breakpoints: (
   &__row {
     position: relative;
     justify-content: center;
+    height: 0;
   }
 
   &__message_box {
@@ -158,14 +166,20 @@ $grid-breakpoints: (
     border-radius: 8px;
     min-width: 275px;
 
-    &__lost {
-      top: -1.85rem;
+    &__lost,
+    &__won {
+      top: -72px;
 
       &__title {
         font-size: 1.25rem;
         font-weight: bold;
-        color: #ec7778;
         text-transform: uppercase;
+      }
+    }
+
+    &__lost {
+      &__title {
+        color: #ec7778;
         min-height: 54px;
         display: flex;
         align-items: center;
@@ -174,13 +188,8 @@ $grid-breakpoints: (
     }
 
     &__won {
-      top: -1.85rem;
-
       &__title {
-        font-size: 1.25rem;
-        font-weight: bold;
         color: #7df380;
-        text-transform: uppercase;
       }
 
       &__multiplier {
