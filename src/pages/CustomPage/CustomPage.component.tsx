@@ -5,6 +5,7 @@ import { RouteComponentProps } from '@reach/router';
 import Layout from '../../components/Layout';
 import Page404 from '../Page404';
 import styles from './CustomPage.module.scss';
+import gfm from 'remark-gfm';
 
 const defaultLanguage = 'en';
 
@@ -44,7 +45,7 @@ export const CustomPageComponent: React.FC<Props> = ({ fileName, raw }) => {
     () => (
       <div className={styles.container}>
         <div className={styles.innerContainer}>
-          <ReactMarkdown>{text || ''}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[gfm]}>{text || ''}</ReactMarkdown>
         </div>
       </div>
     ),
