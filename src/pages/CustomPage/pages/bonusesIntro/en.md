@@ -16,8 +16,8 @@ Leaderboard bonuses are paid as following:
 |Type|Time of payment|
 |---|---|
 |Daily|Everyday at 00:00 GMT|
-|Weekly|Every Sunday night at 00:00 GMT|
-|Monthly|On last day of every month at 00:00 GMT|  
+|Weekly|Every Sunday at 00:00 GMT|
+|Monthly|Last day of a month at 00:00 GMT|  
 
 ​
 
