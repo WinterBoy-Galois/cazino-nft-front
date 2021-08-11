@@ -1,0 +1,554 @@
+type AffClaim {
+  id: ID
+  claimedAt: Date
+  amount: Float
+}
+
+type AffiliateClaims {
+  page: Int
+  limit: Int
+  total: Int
+  items: [AffClaim]
+}
+
+type AffStats {
+  bets: Int
+  refs: Int
+  wager: Float
+  commissions: Float
+}
+
+type Bet {
+  id: ID
+  time: Date
+  userid: Int
+  username: String
+  gameid: GameTypes
+  bet: Float
+  lucky: Boolean
+  profit: Float
+  multiplier: Float
+}
+
+type BetDetails {
+  bet: Float
+  lucky: Boolean
+  profit: Float
+  profitCut: Boolean
+  multiplier: Float
+  gameResult: GameResultUnion
+  seedDetails: SeedDetailsUnion
+}
+
+union BetDetailsOrError = BetDetails | GenericErrorArray
+type BetItem {
+  id: ID
+  time: Date
+  game: GameTypes
+  amount: Float
+  multiplier: Float
+  profit: Float
+}
+
+type BetResultClams {
+  id: ID
+  result: Int
+  lucky: Boolean
+  multiplier: Float
+  profit: Float
+  balance: Float
+}
+
+union BetResultClamsOrError = BetResultClams | GenericErrorArray
+type BetResultDice {
+  id: ID
+  result: Float
+  lucky: Boolean
+  multiplier: Float
+  profit: Float
+  balance: Float
+}
+
+union BetResultDiceOrError = BetResultDice | GenericErrorArray
+type BetResultGoals {
+  id: ID
+  lucky: Boolean
+  multiplier: Float
+  profit: Float
+  nextStep: Int
+}
+
+union BetResultGoalsOrError = BetResultGoals | GenericErrorArray
+type BetResultMines {
+  id: ID
+  lucky: Boolean
+  totalMultiplier: Float
+  totalProfit: Float
+  nextMultiplier: Float
+  nextProfit: Float
+}
+
+union BetResultMinesOrError = BetResultMines | GenericErrorArray
+type Bets {
+  page: Int
+  limit: Int
+  total: Int
+  items: [BetItem]
+}
+
+type BonusClaim {
+  id: ID
+  givenAt: Date
+  claimedAt: Date
+  expiresAt: Date
+  amount: Float
+  position: Int
+  type: BonusType
+  wager: Float
+}
+
+type BonusCountdown {
+  daily: Int
+  weekly: Int
+  monthly: Int
+}
+
+type Bonuses {
+  page: Int
+  limit: Int
+  total: Int
+  items: [BonusClaim]
+}
+
+type BonusNotification {
+  userid: ID
+  position: Int
+  amount: Float
+  type: BonusType
+}
+
+enum BonusType {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+union BooleanOrError = GenericBoolean | GenericErrorArray
+type BooleanWithError {
+  result: Boolean
+  error: GenericError
+}
+
+type Cashier {
+  networkFee: Float
+  depositConfirmations: Int
+  minWithdraw: Float
+}
+
+type CashierNotification {
+  user: User
+  amount: Float
+  event: TransactionStatus
+}
+
+type ClamsGameSetup {
+  he: Float
+}
+
+union ClamsGameSetupOrError = ClamsGameSetup | GenericErrorArray
+type ClamsResult {
+  selection: [Int]
+  resultInteger: Int
+}
+
+type CurrentSeeds {
+  serverSeedHash: String
+  clientSeed: String
+  nonce: Int
+}
+
+# Date custom scalar type
+scalar Date
+
+type DepositItem {
+  id: ID
+  status: TransactionStatus
+  time: Date
+  hash: String
+  amount: Float
+}
+
+type Deposits {
+  page: Int
+  limit: Int
+  total: Int
+  items: [DepositItem]
+}
+
+type DiceGameSetup {
+  minProbability: Float
+  maxProbability: Float
+  he: Float
+}
+
+union DiceGameSetupOrError = DiceGameSetup | GenericErrorArray
+type DiceResult {
+  target: Float
+  over: Boolean
+  winChance: Float
+  resultFloat: Float
+}
+
+type FaucetInfo {
+  amount: Float
+  every: Int
+  canClaim: Boolean
+}
+
+union FaucetInfoOrError = FaucetInfo | GenericErrorArray
+union GameResultUnion = DiceResult | MinesResult | GoalsResult | ClamsResult
+enum GameTypes {
+  DICE
+  GOALS
+  MINES
+  CLAMS
+}
+
+type GenericBoolean {
+  result: Boolean
+}
+
+type GenericError {
+  source: String
+  code: String
+  message: String
+  args: [String]
+}
+
+type GenericErrorArray {
+  errors: [GenericError]
+}
+
+union GoalsAdvanceResultUnion = GoalsStep | GoalsComplete | GenericErrorArray
+union GoalsCashoutResultUnion = GoalsComplete | GenericErrorArray
+type GoalsComplete {
+  id: ID
+  lucky: Boolean
+  balance: Float
+  profit: Profit
+  profitCut: ProfitCutState
+  result: [GoalsRow]
+}
+
+enum GoalsDifficulty {
+  GOALS2OUT3
+  GOALS1OUT2
+  GOALS1OUT3
+}
+
+type GoalsGameSessionSetup {
+  betId: ID
+  betAmount: Float
+  currentStep: Int
+  selections: [GoalsRow]
+  difficulty: GoalsDifficulty
+  profits: [GoalsProfitLine]
+  totalProfit: Profit
+  nextProfit: Profit
+  allowNext: Boolean
+  profitCut: ProfitCutState
+}
+
+type GoalsGameSetup {
+  session: GoalsGameSessionSetup
+  balance: Float
+  maxProfit: Float
+}
+
+union GoalsGameSetupOrError = GoalsGameSetup | GenericErrorArray
+type GoalsProfitLine {
+  step: Int
+  multiplier: Float
+  profit: Float
+}
+
+type GoalsResult {
+  difficulty: GoalsDifficulty
+  selections: [GoalsRow]
+}
+
+type GoalsRow {
+  step: Int
+  luckySpots: [Int]
+  selected: Int
+}
+
+type GoalsStep {
+  id: ID
+  totalProfit: Profit
+  nextProfit: Profit
+  nextStep: Int
+  profitCut: ProfitCutState
+  allowNext: Boolean
+}
+
+type LeaderboardItem {
+  username: String
+  userid: ID
+  wager: Float
+  bonus: Float
+}
+
+type Leaderboards {
+  daily: [LeaderboardItem]
+  weekly: [LeaderboardItem]
+  monthly: [LeaderboardItem]
+}
+
+type LoginResult {
+  accessToken: String
+  user: User
+}
+
+union LoginResultOrError = LoginResult | GenericErrorArray
+union MinesAdvanceResultUnion = MinesStep | MinesComplete | GenericErrorArray
+union MinesCashoutResultUnion = MinesComplete | GenericErrorArray
+type MinesComplete {
+  id: ID
+  lucky: Boolean
+  balance: Float
+  profit: Profit
+  minePositions: [Int]
+}
+
+type MinesGameSessionSetup {
+  betId: ID
+  betAmount: Float
+  mines: Int
+  open: [Int]
+  totalProfit: Profit
+  nextProfit: Profit
+  allowNext: Boolean
+  profitCut: ProfitCutState
+}
+
+type MinesGameSetup {
+  session: MinesGameSessionSetup
+  balance: Float
+  maxProfit: Float
+}
+
+union MinesGameSetupOrError = MinesGameSetup | GenericErrorArray
+type MinesResult {
+  mineCount: Int
+  minePositions: [Int]
+  open: [Int]
+}
+
+type MinesStep {
+  id: ID
+  totalProfit: Profit
+  nextProfit: Profit
+  profitCut: ProfitCutState
+  allowNext: Boolean
+  result: [Int]
+}
+
+type Mutation {
+  claimCommissions: UserOrError
+  claimBonus(bonusId: ID): UserOrError
+  makeBetClams(betAmount: Float, selection: [Int]): BetResultClamsOrError
+  makeBetDice(
+    betAmount: Float
+    over: Boolean
+    target: Float
+  ): BetResultDiceOrError
+  claimFaucet: UserOrError
+  makeBetGoals(
+    betAmount: Float
+    difficulty: GoalsDifficulty
+  ): GoalsGameSetupOrError
+  advanceGoals(betId: ID, selection: Int): GoalsAdvanceResultUnion
+  cashoutGoals(betId: ID): GoalsCashoutResultUnion
+  makeBetMines(betAmount: Float, mines: Int): MinesGameSetupOrError
+  advanceMines(betId: ID, selection: Int): MinesAdvanceResultUnion
+  cashoutMines(betId: ID): MinesCashoutResultUnion
+  changeServerSeed(clientSeed: String): SeedsOrError
+  registerUser(
+    username: String
+    email: String
+    password: String
+    captcha: String
+    ref: String
+  ): LoginResultOrError
+  activateAccount(code: String): UserOrError
+  resendActivationCode: BooleanOrError
+  modifyPassword(oldPassword: String, newPassword: String): UserOrError
+  modifyPreferences(
+    hideUsername: Boolean
+    hideTotalWager: Boolean
+    hideTotalProfit: Boolean
+  ): UserOrError
+  modifyAvatar(index: Int): UserOrError
+  signIn(
+    email: String
+    password: String
+    remember: Boolean
+  ): SignedInTokenOrError
+  signOut: Boolean
+  forgotPassword(email: String): BooleanOrError
+  resetPassword(uuid: String, newPassword: String): LoginResultOrError
+  withdraw(amount: Float, address: String): WithdrawResultOrError
+}
+
+type PreviousSeeds {
+  serverSeed: String
+  serverSeedHash: String
+}
+
+type Profit {
+  multiplier: Float
+  profit: Float
+}
+
+type ProfitCut {
+  location: ProfitCutMessage
+  messageKey: String
+}
+
+enum ProfitCutMessage {
+  TOTAL
+  NEXT
+}
+
+enum ProfitCutState {
+  WARNING
+  CUT
+}
+
+type PublicUser {
+  id: ID
+  username: String
+  email: String
+  avatarUrl: String
+  totalWager: Float
+  totalProfit: Float
+  mostPlayed: GameTypes
+  totalBets: Int
+  luckyBets: Int
+}
+
+union PublicUserOrError = PublicUser | GenericErrorArray
+type Query {
+  affStats: AffStats
+  transactionsAffiliate(page: Int, limit: Int): AffiliateClaims
+  recentBets: RecentBets
+  betDetails(id: ID): BetDetailsOrError
+  transactionsBet(page: Int, limit: Int): Bets
+  transactionsBonus(page: Int, limit: Int): Bonuses
+  bonusClaims: [BonusClaim]
+  bonusCountdown: BonusCountdown
+  setupCashier: Cashier
+  setupClams: ClamsGameSetupOrError
+  transactionsDeposit(page: Int, limit: Int): Deposits
+  setupDice: DiceGameSetupOrError
+  faucetInfo: FaucetInfoOrError
+  ping: String
+  setupGoals: GoalsGameSetupOrError
+  leaderboards: Leaderboards
+  setupMines: MinesGameSetupOrError
+  me: User
+  userInfo(id: ID): PublicUserOrError
+  transactionsWithdraw(page: Int, limit: Int): Withdrawals
+}
+
+type RecentBets {
+  allBets: [Bet]
+  myBets: [Bet]
+}
+
+type SeedDetailsOther {
+  serverSeedHash: String
+}
+
+type SeedDetailsOwn {
+  activeGames: [GameTypes]
+  serverSeedHash: String
+  serverSeed: String
+  clientSeed: String
+  nonce: Int
+  results: [String]
+  verificationUrl: String
+}
+
+union SeedDetailsUnion = SeedDetailsOther | SeedDetailsOwn
+type Seeds {
+  current: CurrentSeeds
+  previous: PreviousSeeds
+}
+
+union SeedsOrError = Seeds | GenericErrorArray
+union SignedInTokenOrError = LoginResult | GenericErrorArray
+type Subscription {
+  betAdded: Bet
+  myBetAdded: Bet
+  leaderboardChanged: Leaderboards
+  deposit: CashierNotification
+  withdraw: CashierNotification
+  bonusReceived: BonusNotification
+}
+
+enum TransactionStatus {
+  DEPOSIT_PENDING
+  DEPOSIT_CONFIRMED
+  WITHDRAW_SUBMITTED
+  WITHDRAW_PENDING
+  WITHDRAW_CONFIRMED
+  WITHDRAW_REJECTED
+}
+
+type User {
+  id: ID
+  username: String
+  email: String
+  balance: Float
+  hideUsername: Boolean
+  hideTotalProfit: Boolean
+  hideTotalWager: Boolean
+  isActivated: Boolean
+  avatarUrl: String
+  totalWager: Float
+  totalProfit: Float
+  mostPlayed: GameTypes
+  totalBets: Int
+  luckyBets: Int
+  depositAddress: String
+  refCode: String
+  refCommissions: Float
+  seeds: Seeds
+  activeGames: [GameTypes]
+}
+
+union UserOrError = User | GenericErrorArray
+type Withdrawals {
+  page: Int
+  limit: Int
+  total: Int
+  items: [WithdrawItem]
+}
+
+type WithdrawItem {
+  id: ID
+  status: TransactionStatus
+  time: Date
+  hash: String
+  address: String
+  amount: Float
+  fee: Float
+}
+
+type WithdrawResult {
+  balance: Float
+}
+
+union WithdrawResultOrError = WithdrawResult | GenericErrorArray

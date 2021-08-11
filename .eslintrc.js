@@ -4,6 +4,7 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
+    'react-app',
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
@@ -38,6 +39,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-case-declarations': 'off',
     '@typescript-eslint/no-var-requires': 0,
+    'react-hooks/exhaustive-deps': 1,
   },
   overrides: [
     // Override some TypeScript rules just for .js files

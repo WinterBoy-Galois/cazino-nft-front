@@ -1,5 +1,16 @@
 import gql from 'graphql-tag';
 
+const balanceFragment = gql`
+  fragment balanceFragment on CashierNotification {
+    user {
+      id
+      balance
+    }
+    amount
+    event
+  }
+`;
+
 export const LEADERBOARDS_SUBSCRIPTION = gql`
   subscription leaderboardChanged {
     leaderboardChanged {
@@ -40,15 +51,20 @@ export const BET_ADDED = gql`
   }
 `;
 
-export const BALANCE = gql`
-  subscription balance {
-    balance {
-      user {
-        id
-        balance
-      }
-      amount
-      event
+export const DEPOSIT = gql`
+  ${balanceFragment}
+  subscription deposit {
+    deposit {
+      ...balanceFragment
+    }
+  }
+`;
+
+export const WITHDRAW = gql`
+  ${balanceFragment}
+  subscription deposit {
+    withdraw {
+      ...balanceFragment
     }
   }
 `;
@@ -57,7 +73,7 @@ export const BONUS_NOTIFICATION = gql`
   subscription bonusReceived {
     bonusReceived {
       userid
-      balance
+      amount
     }
   }
 `;
