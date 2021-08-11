@@ -5,15 +5,12 @@
     },
     "about": {
       "headline": "Über",
-      "howToPlay": "Spielanleitung",
       "bonuses": "Prämien",
       "affiliates": "Partnerprogramm",
-      "fairness": "Fairness",
-      "news": "Neuigkeiten"
+      "fairness": "Fairness"
     },
     "support": {
       "headline": "Hilfe",
-      "contact": "Kontakt",
       "faq": "F.A.Q."
     },
     "legal": {
@@ -25,8 +22,7 @@
       "twitter": "Twitter",
       "facebook": "Facebook",
       "telegram": "Telegram",
-      "bitcoinTalk": "BitcoinTalk",
-      "instagram": "Instagram"
+      "bitcoinTalk": "BitcoinTalk"
     }
   }
 }
