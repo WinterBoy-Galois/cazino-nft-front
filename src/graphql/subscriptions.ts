@@ -62,7 +62,7 @@ export const DEPOSIT = gql`
 
 export const WITHDRAW = gql`
   ${balanceFragment}
-  subscription deposit {
+  subscription withdraw {
     withdraw {
       ...balanceFragment
     }
