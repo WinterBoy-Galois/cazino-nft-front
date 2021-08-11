@@ -486,6 +486,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   const onPlayBalanceUpdated = () => {
     if (isSound) {
       setTimeout(() => {
+        // eslint-disable-next-line no-restricted-globals
         stop();
         playBalanceUpdated();
       }, appConfig.mineGameTimeout / 7);
@@ -495,6 +496,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
   const onPlayToast = () => {
     if (isSound) {
       setTimeout(() => {
+        // eslint-disable-next-line no-restricted-globals
         stop();
         playToast();
       }, appConfig.mineGameTimeout / 7);

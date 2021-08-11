@@ -31,7 +31,7 @@ export default function useRealtimeBonusNotification() {
           await playBonusReceived();
         })();
       }
-      userDispatch(updateUserAction({ balance: data.bonusReceived.balance }));
+      userDispatch(updateUserAction({ balance: data.bonusReceived.amount }));
 
       success(t('bonusNotification'));
     }

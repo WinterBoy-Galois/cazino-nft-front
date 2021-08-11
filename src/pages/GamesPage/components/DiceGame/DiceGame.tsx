@@ -1,9 +1,9 @@
-import React, { Reducer, useEffect, useReducer, useState } from 'react';
+import React, { memo, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import DiceGameBoard from '../../../../components/DiceGameBoard';
 import SpinnerButton from '../../../../components/SpinnerButton';
 import { SETUP_DICE } from '../../../../graphql/queries';
 import styles from './DiceGame.module.scss';
-import { useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
 import clsx from 'clsx';
 import { MAKE_BET_DICE } from '../../../../graphql/mutations';
@@ -137,7 +137,7 @@ const DiceGame: React.FC<IProps> = ({
     }
 
     dispatch({ type: 'CALC_GAME_STATE' });
-  }, [result]);
+  }, [isSound, playDiceHit, result]);
 
   const handlePlaceBet = async () => {
     if (!isAuthorized) {
@@ -255,7 +255,7 @@ interface PlaceBetVariables {
 
 export default DiceGame;
 
-export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
+export const DiceGameWithData: React.FC<RouteComponentProps> = memo(() => {
   const { t } = useTranslation('games');
   const [
     {
@@ -263,7 +263,7 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
     },
   ] = useStateValue();
   const [{ user }, dispatch] = useUserState();
-  const { data, loading: loadingSetup, error: errorSetup } = useQuery(SETUP_DICE);
+  const [setupDice, { data, loading: loadingSetup, error: errorSetup }] = useLazyQuery(SETUP_DICE);
   const [makeBetDice, { loading: loadingBet }] = useMutation(MAKE_BET_DICE, { errorPolicy: 'all' });
   const [result, setResult] = useState();
   const [error, setError] = useState();
@@ -278,48 +278,68 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
   const [playToast] = useSound(toast_v1.default);
   const [playToastBalance] = useSound(balance_updated_v1.default);
 
-  const handlePlaceBet = async (betAmount: number, target: number, over: boolean) => {
-    await setPendingBet(null);
-    const variables: PlaceBetVariables = { betAmount, target, over };
-    if (isSound) {
-      await playButtonClick();
+  useEffect(() => {
+    if (user?.id) {
+      setupDice();
     }
-    const { data, errors } = await makeBetDice({
-      variables,
-    });
-    if (errors || data.makeBetDice?.errors) {
-      setError(errors ?? data.makeBetDice?.errors);
-      if (isForbiddenError(errors)) {
-        return setPendingBet(variables);
-      } else {
-        if (isSound) {
-          await playToast();
-        }
-        if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
-          return errorToast(t('your_bet_may_reaches_the_profit_limit'));
-        }
-        return errorToast(t('your_bet_could_not_be_placed'));
+  }, [setupDice, user?.id]);
+
+  const handlePlaceBet = useCallback(
+    async (betAmount: number, target: number, over: boolean) => {
+      await setPendingBet(null);
+      const variables: PlaceBetVariables = { betAmount, target, over };
+      if (isSound) {
+        await playButtonClick();
       }
-    }
-    setResult(data?.makeBetDice?.result);
-
-    setTimeout(async () => {
-      dispatch(updateUserAction({ balance: data?.makeBetDice?.balance }));
-    }, appConfig.diceGameTimeout);
-
-    setTimeout(async () => {
-      if (+data?.makeBetDice?.lucky) {
-        if (isSound) {
-          await playDiceWin();
-          await playToastBalance();
-        }
-      } else {
-        if (isSound) {
-          await playLoss();
+      const { data, errors } = await makeBetDice({
+        variables,
+      });
+      if (errors || data.makeBetDice?.errors) {
+        setError(errors ?? data.makeBetDice?.errors);
+        if (isForbiddenError(errors)) {
+          return setPendingBet(variables);
+        } else {
+          if (isSound) {
+            await playToast();
+          }
+          if (data.makeBetDice?.errors[0]?.code === 'MAX_PROFIT') {
+            return errorToast(t('your_bet_may_reaches_the_profit_limit'));
+          }
+          return errorToast(t('your_bet_could_not_be_placed'));
         }
       }
-    }, appConfig.diceGameTimeout);
-  };
+      setResult(data?.makeBetDice?.result);
+
+      setTimeout(async () => {
+        dispatch(updateUserAction({ balance: data?.makeBetDice?.balance }));
+      }, appConfig.diceGameTimeout);
+
+      setTimeout(async () => {
+        if (+data?.makeBetDice?.lucky) {
+          if (isSound) {
+            await playDiceWin();
+            await playToastBalance();
+          }
+        } else {
+          if (isSound) {
+            await playLoss();
+          }
+        }
+      }, appConfig.diceGameTimeout);
+    },
+    [
+      dispatch,
+      isSound,
+      makeBetDice,
+      playButtonClick,
+      playDiceWin,
+      playLoss,
+      playToast,
+      playToastBalance,
+      setPendingBet,
+      t,
+    ]
+  );
 
   return (
     <DiceGame
@@ -335,4 +355,4 @@ export const DiceGameWithData: React.FC<RouteComponentProps> = () => {
       errorBet={error}
     />
   );
-};
+});

@@ -4,12 +4,13 @@
     "rowsPerPage": "Rows per page",
     "rangeSeparator": "of"
   },
-  "depositConfirmed": "{{amount}} BTC Deposit credited.",
-  "depositPending": "Deposit of {{amount}} BTC has been registered. Awaiting confirmation...",
+  "depositConfirmed": "Your deposit with amount if {{amount}} BTC is now confirmed and added to your balance",
+  "depositPending": "Your deposit with amount of {{amount}} BTC is now pending",
   "depositRejected": "Deposit of {{amount}} BTC was rejected.",
-  "withdrawPending": "Your withdraw is pending.",
-  "withdrawConfirmed": "Your withdraw is confirmed.",
-  "withdrawRejected": "Your withdraw is rejected.",
+  "withdrawPending": "Withdraw transaction with amount of {{amount}} BTC is now pending",
+  "withdrawConfirmed": "Withdraw transaction with amount of {{amount}} BTC is now confirmed",
+  "withdrawRejected": "Withdraw transaction with amount of {{amount}} BTC is now rejected and amount credited back to your balance",
+  "withdrawSubmitted": "Withdraw transaction with amount of {{amount}} BTC is submitted to the network",
   "bonusNotification": "Congratulations! You won new bonus!",
   "notificationEnum": {
     "DAILY": "daily",
