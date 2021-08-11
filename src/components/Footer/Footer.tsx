@@ -59,10 +59,6 @@ const getFooterData = (t: TFunction, isAuthorized: boolean): FooterList[] => [
     headline: t('links.about.headline'),
     items: [
       {
-        label: t('links.about.howToPlay'),
-        path: '/',
-      },
-      {
         label: t('links.about.bonuses'),
         path: isAuthorized ? '/bonuses' : '/bonuses-intro',
       },
@@ -74,19 +70,11 @@ const getFooterData = (t: TFunction, isAuthorized: boolean): FooterList[] => [
         label: t('links.about.fairness'),
         path: '/fairness',
       },
-      {
-        label: t('links.about.news'),
-        path: '/',
-      },
     ],
   },
   {
     headline: t('links.support.headline'),
     items: [
-      {
-        label: t('links.support.contact'),
-        path: '/',
-      },
       {
         label: t('links.support.faq'),
         path: '/faq',
@@ -157,15 +145,6 @@ const Footer: React.FC = () => {
               </li>
               <li className={styles.list__item}>
                 <a
-                  href="https://telegram.org/"
-                  className={`${styles.list__item__link} ${styles.social__link}`}
-                >
-                  <Telegram className={styles.social__icon} />
-                  <span className={styles.social__label}>{t('links.social.telegram')}</span>
-                </a>
-              </li>
-              <li className={styles.list__item}>
-                <a
                   href="https://bitcointalk.org/"
                   className={`${styles.list__item__link} ${styles.social__link}`}
                 >
@@ -174,15 +153,6 @@ const Footer: React.FC = () => {
                     innerClassName={styles.social__icon__inner}
                   />
                   <span className={styles.social__label}>{t('links.social.bitcoinTalk')}</span>
-                </a>
-              </li>
-              <li className={styles.list__item}>
-                <a
-                  href="https://www.instagram.com/"
-                  className={`${styles.list__item__link} ${styles.social__link}`}
-                >
-                  <Instagram className={styles.social__icon} />
-                  <span className={styles.social__label}>{t('links.social.instagram')}</span>
                 </a>
               </li>
             </ul>
