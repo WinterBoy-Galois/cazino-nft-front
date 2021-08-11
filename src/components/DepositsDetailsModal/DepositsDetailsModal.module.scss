@@ -15,8 +15,4 @@
 
 .value {
   justify-content: flex-end;
-
-  @include media-breakpoint-up(md) {
-    justify-content: flex-start;
-  }
 }
