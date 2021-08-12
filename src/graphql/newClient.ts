@@ -113,10 +113,11 @@ const newOperation = (operation: Operation) => {
 };
 
 const retryLink = new RetryLink({
-  attempts: (count, operation, error) => {
-    return !!error;
+  attempts: {
+    retryIf: error => !!error,
+    max: 5,
   },
-  delay: () => 500,
+  delay: () => 1000,
 });
 
 export const useApolloClient = (logout: any) => {

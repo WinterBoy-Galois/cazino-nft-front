@@ -28,7 +28,7 @@ const DepositsDetailsModal: React.FC<IProps> = ({ show, item, onClose }) => {
   return (
     <Modal
       show={show}
-      title={<Title text={'Deposit Details'} />}
+      title={<Title text={t('depositsDetails.title')} />}
       modalClassName={styles.container}
       onClose={onClose}
     >

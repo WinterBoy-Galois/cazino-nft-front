@@ -92,7 +92,8 @@
     "date_time": "Date / Time",
     "amount": "Amount",
     "status": "Status",
-    "transaction_hash": "Transaction hash"
+    "transaction_hash": "Transaction hash",
+    "title": "Deposit Details"
   },
   "games": {
     "goalGame": "Goal Game Title",

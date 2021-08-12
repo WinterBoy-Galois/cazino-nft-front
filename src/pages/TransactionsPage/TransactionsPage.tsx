@@ -16,7 +16,7 @@ const TransactionsPage: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['transactions']);
 
   return (
-    <div className="container">
+    <div className={`container ${styles.container}`}>
       <PageHeadline>{t('pageHeadline')}</PageHeadline>
 
       <PageContentContainer>
