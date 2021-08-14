@@ -25,7 +25,7 @@ const LayoutPage: React.FC<IProps> = ({ component: Component, isAuthNeeded, ...p
     if (!isChatBot) {
       dispatch({ type: 'CHAT_BOT_SHOW', payload: true });
     }
-  }, []);
+  }, [dispatch, isChatBot]);
 
   if (isAuthNeeded) {
     return (

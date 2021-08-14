@@ -1,4 +1,4 @@
-import React, { Reducer, useEffect, useReducer, useState } from 'react';
+import React, { Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import MineGameBoard from '../../../../components/MineGameBoard';
 import SpinnerButton from '../../../../components/SpinnerButton';
 import { SETUP_MINES } from '../../../../graphql/queries';
@@ -94,7 +94,7 @@ const MineGame: React.FC<IProps> = ({
       type: 'SET_AMOUNT_MINES',
       payload: { amount: isAuthorized ? appConfig.defaultBetAmount : 0 },
     });
-  }, []);
+  }, [isAuthorized]);
 
   useEffect(() => {
     if (!isAuthorized) {
@@ -116,7 +116,7 @@ const MineGame: React.FC<IProps> = ({
       (async () =>
         await navigate(`${pathname}?dialog=profit-cut`, { state: { maxProfit, profitCut } }))();
     }
-  }, [profitCut, maxProfit]);
+  }, [profitCut, maxProfit, isAuthorized, isAlerted, session.profitCut, navigate, pathname]);
   useEffect(() => {
     if (!errorBet) {
       if (isGameStartedBtnClicked) {
@@ -135,7 +135,7 @@ const MineGame: React.FC<IProps> = ({
           },
         });
       })();
-  }, [errorBet]);
+  }, [errorBet, isGameStartedBtnClicked, navigate, pathname, t]);
   useEffect(() => {
     if (session?.betId && state.gameState === GameState.IDLE) {
       dispatch({
@@ -167,7 +167,16 @@ const MineGame: React.FC<IProps> = ({
     } else {
       setLucky(null);
     }
-  }, [session]);
+  }, [
+    isCashOut,
+    isSound,
+    lastAdvanceStatus,
+    lastStatusTimer,
+    playMinesLost,
+    session,
+    state.gameState,
+    stop,
+  ]);
   useEffect(() => {
     if (state.gameState === GameState.IN_PROGRESS || session?.open) {
       setIsSetBet(true);
@@ -507,14 +516,18 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     setSession(null);
     setProfitCut(null);
   };
-  const initSession = (minesGameSetupObj: any) => {
-    if (minesGameSetupObj.__typename !== 'MinesGameSetup') return;
-    setSession(minesGameSetupObj.session);
-    setProfitCut(minesGameSetupObj.session?.profitCut || null);
-    setSession(minesGameSetupObj.session || null);
-    if (minesGameSetupObj.balance)
-      dispatch(updateUserAction({ balance: minesGameSetupObj.balance }));
-  };
+  const initSession = useCallback(
+    (minesGameSetupObj: any) => {
+      if (minesGameSetupObj.__typename !== 'MinesGameSetup') return;
+      setSession(minesGameSetupObj.session);
+      setProfitCut(minesGameSetupObj.session?.profitCut || null);
+      setSession(minesGameSetupObj.session || null);
+      if (minesGameSetupObj.balance)
+        dispatch(updateUserAction({ balance: minesGameSetupObj.balance }));
+    },
+    [dispatch]
+  );
+
   const handleStartGame = async (betAmount: number, mines: number) => {
     const { data, errors } = await makeBetMines({
       variables: { betAmount, mines: mines },
@@ -625,7 +638,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
       initSession(data.setupMines);
       setMaxProfit(data.setupMines.maxProfit);
     }
-  }, [data]);
+  }, [data, initSession]);
   return (
     <MineGame
       user={user}

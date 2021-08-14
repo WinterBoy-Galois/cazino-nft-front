@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styles from '../../AffiliatesPage.module.scss';
 import BitcoinValue from '../../../../components/BitcoinValue/BitcoinValue';
 import { formatBitcoin } from '../../../../common/util/format.util';
@@ -13,18 +13,16 @@ interface IProps {
   loadingSetup?: boolean;
 }
 
-const Commissions: React.FC<IProps> = ({
-  data: data,
-  onTransferBalance = () => null,
-  loadingSetup,
-}) => {
+const Commissions: React.FC<IProps> = ({ data, onTransferBalance = () => null, loadingSetup }) => {
   const { t } = useTranslation(['affiliates']);
   const [{ sidebar }] = useStateValue();
-  const onTransfer = () => {
+  const refCommissions = useMemo(() => formatBitcoin(data?.refCommissions), [data?.refCommissions]);
+  const onTransfer = useCallback(() => {
     if (data?.refCommissions !== 0) {
       onTransferBalance();
     }
-  };
+  }, [data?.refCommissions, onTransferBalance]);
+
   return (
     <div>
       <div className={styles.sub_title}>{t('commissions')}</div>
@@ -34,7 +32,7 @@ const Commissions: React.FC<IProps> = ({
             <div className={styles.flex_amount}>
               <div className={styles.txt_color}>{t('amount')}</div>
               <div>
-                <BitcoinValue value={formatBitcoin(data?.refCommissions)} />
+                <BitcoinValue value={refCommissions} />
               </div>
             </div>
           </div>

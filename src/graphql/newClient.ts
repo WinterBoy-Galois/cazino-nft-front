@@ -141,12 +141,14 @@ export const useApolloClient = (logout: any) => {
                     logout?.();
                     return forward(operation);
                   })
+                  // eslint-disable-next-line no-loop-func
                   .finally(() => {
                     isRefreshing = false;
                   })
               ).filter(value => Boolean(value));
             } else {
               forward$ = fromPromise(
+                // eslint-disable-next-line no-loop-func
                 new Promise(resolve => {
                   pendingRequests.push(() => resolve());
                 })

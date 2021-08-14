@@ -7,7 +7,7 @@ import Footer from '../Footer';
 import { useStateValue } from '../../state';
 import { useBreakpoint } from '../../hooks/useBreakpoint.hook';
 import { transitionTimeout } from '../Modal';
-import { useLazyQuery, useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { SIGN_OUT } from '../../graphql/mutations';
 import Modals from './components/Modals';
 import { navigate, useLocation } from '@reach/router';
@@ -30,13 +30,9 @@ const Layout: React.FC = ({ children }) => {
   const breakpoint = useBreakpoint();
   const [signOut] = useMutation(SIGN_OUT);
   const { pathname } = useLocation();
-  const [fetchBonusClaim, { data: bonusClaims }] = useLazyQuery(BONUSCLAIMS);
-
-  useEffect(() => {
-    if (isAuthorized && accessToken) {
-      fetchBonusClaim();
-    }
-  }, [accessToken, fetchBonusClaim, isAuthorized]);
+  const { data: bonusClaims } = useQuery(BONUSCLAIMS, {
+    skip: !(isAuthorized && accessToken),
+  });
 
   const hideContent = () =>
     breakpoint === 'xs' || breakpoint === 'sm' ? modal.type !== 'NONE' : false;

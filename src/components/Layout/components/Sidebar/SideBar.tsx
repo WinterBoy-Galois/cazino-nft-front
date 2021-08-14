@@ -151,7 +151,7 @@ const SideBar: React.FC = () => {
       }
       chatWidget(user_info);
     }
-  }, []);
+  }, [isChatBot, user]);
   return (
     <CSSTransition
       in={isOpen}

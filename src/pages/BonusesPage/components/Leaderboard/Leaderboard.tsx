@@ -51,7 +51,7 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
         getCountData(temp - elapsedTime);
       }
     }
-  }, [data, selectedTime]);
+  }, [data, elapsedTime, refetch, selectedTime, timer]);
 
   useEffect(() => {
     clearInterval(timer);
@@ -75,7 +75,7 @@ const Leaderboard: React.FC<IProps> = ({ onType = () => null, bonus, position })
         setElapsedTime(0);
       }, 10000);
     }
-  }, [countDown]);
+  }, [countDown, elapsedTime, isSound, playCountDown, refetch, timer]);
 
   const getCountData = (t: number) => {
     setDays(Math.floor(t / (24 * 3600)));

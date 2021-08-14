@@ -14,7 +14,7 @@ export const usePendingBetHook = <T extends any>({ loading, action }: Props<T>) 
     if (accessToken && pendingBet && !loading) {
       action(pendingBet);
     }
-  }, [accessToken]);
+  }, [accessToken, action, loading, pendingBet]);
 
   return [setPendingBet];
 };

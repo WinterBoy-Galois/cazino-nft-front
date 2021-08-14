@@ -66,7 +66,7 @@ const BonusesPage: React.FC<RouteComponentProps> = () => {
         setPosition(null);
       }
     }
-  }, [data, selectedTime, isAuthorized]);
+  }, [data, selectedTime, isAuthorized, user?.id]);
 
   return (
     <div className={styles.bonuses_page}>

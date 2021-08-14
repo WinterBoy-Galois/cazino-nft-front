@@ -8,7 +8,7 @@ interface IProps {
   data: any;
 }
 
-const Stats: React.FC<IProps> = ({ data: data }) => {
+const Stats: React.FC<IProps> = ({ data }) => {
   const { t } = useTranslation(['affiliates']);
 
   return (

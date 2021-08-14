@@ -3,7 +3,7 @@ import DiceGameBoard from '../../../../components/DiceGameBoard';
 import SpinnerButton from '../../../../components/SpinnerButton';
 import { SETUP_DICE } from '../../../../graphql/queries';
 import styles from './DiceGame.module.scss';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
 import clsx from 'clsx';
 import { MAKE_BET_DICE } from '../../../../graphql/mutations';
@@ -89,7 +89,7 @@ const DiceGame: React.FC<IProps> = ({
       type: 'SET_AMOUNT',
       payload: { amount: isAuthorized ? appConfig.defaultBetAmount : 0 },
     });
-  }, []);
+  }, [isAuthorized]);
 
   useEffect(() => {
     if (!isAuthorized) {

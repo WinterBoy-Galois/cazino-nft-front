@@ -39,10 +39,14 @@ const AffiliatesPage: React.FC<RouteComponentProps> = () => {
   };
 
   useEffect(() => {
+    setCommissionData(dataMe?.me);
+  }, [dataMe]);
+
+  useEffect(() => {
     if (accessToken) {
       getMe();
     }
-  }, [accessToken]);
+  }, [accessToken, getMe]);
 
   return (
     <div className={styles.affiliates_page}>

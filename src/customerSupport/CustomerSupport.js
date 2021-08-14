@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function chatWidget(user_info) {
   if (user_info) {
     document.tidioIdentify = user_info;

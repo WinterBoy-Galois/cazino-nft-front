@@ -36,16 +36,17 @@ const Clam: React.FC<IClamProps> = ({
     if (isSound && selection?.length !== 0) {
       onSelectSound();
     }
-  }, [selection]);
+  }, [isSound, onSelectSound, selection]);
 
   const onClamClick = () => {
-    if (!isSelected && selection.length == 8) return;
+    if (!isSelected && selection.length === 8) return;
 
     onClickHandler(!isSelected);
   };
 
   if (isEnded) {
     return (
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <a
         className={clsx(styles.clam, className, isSelected ? null : styles.clam__fade)}
         onClick={() => {
@@ -58,6 +59,7 @@ const Clam: React.FC<IClamProps> = ({
   }
 
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <a
       className={clsx(styles.clam, isSelected ? null : styles.clam__idle, className)}
       onClick={onClamClick}

@@ -87,7 +87,7 @@ const ClamGame: React.FC<IProps> = ({
       type: 'SET_AMOUNT',
       payload: { amount: isAuthorized ? appConfig.defaultBetAmount : 0 },
     });
-  }, []);
+  }, [isAuthorized]);
 
   useEffect(() => {
     if (!isAuthorized) {
@@ -138,7 +138,7 @@ const ClamGame: React.FC<IProps> = ({
         clearTimeout(gameStateTimer);
       };
     }
-  }, [result]);
+  }, [isSound, playLost, playWin, result, state.selection]);
 
   if (loadingSetup) {
     return <Loading className={styles.loading} />;

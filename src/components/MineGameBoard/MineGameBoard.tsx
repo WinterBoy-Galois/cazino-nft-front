@@ -40,11 +40,35 @@ const MineGameBoard: React.FC<IProps> = ({
   ] = useStateValue();
 
   useEffect(() => {
-    const scoreArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     if (session?.allowNext) {
       setIsEndCut(false);
-      let tmp = [];
-      tmp = scoreArray;
+      const tmp: any[] = [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+      ];
       if (session.open) {
         for (let k = 0; k < session.open.length; k++) {
           tmp.splice(session.open[k], 1, 1);
@@ -105,7 +129,7 @@ const MineGameBoard: React.FC<IProps> = ({
       }
       setResults(tmp);
     }
-  }, [session]);
+  }, [isCashOut, isSound, playMinesWin, session]);
 
   useEffect(() => {
     const scoreArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

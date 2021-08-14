@@ -35,5 +35,5 @@ export default function useRealtimeBonusNotification() {
 
       success(t('bonusNotification'));
     }
-  }, [data, t, isAuthorized]);
+  }, [data, t, isAuthorized, user?.id, isSound, userDispatch, playBonusReceived]);
 }

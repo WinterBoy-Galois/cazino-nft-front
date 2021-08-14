@@ -10,7 +10,7 @@ export const useOpenGameModal = () => {
     if (search.includes('game-modal')) {
       navigate(`${pathname}`);
     }
-  }, []);
+  }, [navigate, pathname, search]);
 
   return (fileName: GameType) => {
     navigate(`${pathname}?dialog=game-modal`, { state: { fileName } });

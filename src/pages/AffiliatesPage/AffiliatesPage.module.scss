@@ -1,12 +1,12 @@
 @import '../../styles/shared.scss';
 
 $grid-breakpoints: (
-        xs: 0,
-        sm: 576px,
-        md: 768px,
-        lg: 992px,
-        xl: 1200px,
-        xxl: 1500px,
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1500px,
 );
 
 .affiliates_page {
@@ -73,7 +73,7 @@ $grid-breakpoints: (
     .sub_title,
     .marketing_title {
       padding-bottom: 2.5rem;
-      font-weight: Bold;
+      font-weight: bold;
       font-size: 1.25rem;
       color: #80a2cc;
       text-transform: uppercase;
@@ -150,7 +150,7 @@ $grid-breakpoints: (
     .bg_width_close {
       margin-left: 20px;
       width: 130px;
-      background-image: url("../../assets/images/affiliate/commissions.svg");
+      background-image: url('../../assets/images/affiliate/commissions.svg');
       background-size: 100%;
       background-position: center;
       background-repeat: no-repeat;
@@ -221,57 +221,16 @@ $grid-breakpoints: (
   @include media-breakpoint-down(xl) {
     padding-right: 0.9rem;
   }
-  .grid21,
-  .grid21_close {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-auto-rows: 1fr;
-    grid-column-gap: 6%;
-    transition: all 0.3s ease-out;
 
-    .bundles {
-      padding: 0 10px 5px;
-      color: #80a2cc;
-    }
-
-    .clipboard:hover {
-      opacity: 0.7;
-    }
-  }
-  @include media-breakpoint-down(lg) {
-    .grid21 {
-      grid-template-columns: 1fr;
-      grid-column-gap: 0;
-      grid-row-gap: 20px;
-      grid-auto-rows: auto;
-      word-break: break-all;
-    }
-  }
-  @include media-breakpoint-down(sm) {
-    .grid21_close {
-      grid-template-columns: 1fr;
-      grid-column-gap: 0;
-      grid-row-gap: 20px;
-      grid-auto-rows: auto;
-      word-break: break-all;
-    }
-  }
-  .btn_download {
-    margin: 0 auto;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 100%;
-    background-color: #152640;
-  }
-
-  .link_col {
-    font-size: 1rem;
-    color: #c4c9cf;
-  }
   .btn_download {
     display: flex;
     justify-content: space-between;
     background-color: #0a1a33;
+    height: 58px;
+    margin: 0 auto;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 100%;
     @include media-breakpoint-down(lg) {
       min-height: 50px;
     }
@@ -284,16 +243,49 @@ $grid-breakpoints: (
       border-bottom-right-radius: 8px;
       width: 34px;
       background-color: #f2a166;
-
       background-position: center;
       background-repeat: no-repeat;
       background-size: 12px;
-      background-image: url("../../assets/images/affiliate/download.svg");
+      background-image: url('../../assets/images/affiliate/download.svg');
       cursor: pointer;
     }
     .clipboard_btn:hover {
       opacity: 0.7;
     }
+  }
+
+  .new_grid {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    justify-content: space-between;
+
+    .referal_container {
+      flex: 2;
+      margin-right: 6%;
+      display: flex;
+      align-items: flex-end;
+    }
+    .download_container {
+      flex: 1;
+    }
+
+    @include media-breakpoint-down(lg) {
+      flex-direction: column;
+
+      .download_container {
+        margin-top: 24px;
+      }
+
+      .referal_container {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .link_col {
+    font-size: 1rem;
+    color: #c4c9cf;
   }
 }
 .upper_txt {

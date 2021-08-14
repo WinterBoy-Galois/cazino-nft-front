@@ -9,7 +9,7 @@ import Faucet from '../../../../../icons/Faucet';
 import Sound from '../../../../../icons/Sound';
 import { useStateValue } from '../../../../../../state';
 import clsx from 'clsx';
-import { useLocation, useNavigate } from '@reach/router';
+import { useLocation, useNavigate, Link } from '@reach/router';
 import { useLazyQuery, useQuery, useSubscription } from '@apollo/client';
 import { FAUCET_INFO, RECENT_BETS } from '../../../../../../graphql/queries';
 import { error as errorToast } from '../../../../../../components/Toast';
@@ -36,7 +36,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
     if (isAuthorized && accessToken) {
       fetchFaucetInfo();
     }
-  }, [accessToken]);
+  }, [accessToken, fetchFaucetInfo, isAuthorized]);
 
   const [
     {
@@ -185,10 +185,10 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
         </div>
       ) : null}
 
-      <a
+      <Link
         className={clsx(isOpen ? styles.item_open : styles.item)}
         onClick={onBonusLink}
-        href="/bonuses"
+        to="/bonuses"
       >
         <Present className={styles.item__icon} />
         {hasUnclaimedBonus ? (
@@ -196,7 +196,7 @@ const Menu: React.FC<IProps> = ({ hasUnclaimedBonus }) => {
             <Badge />
           </div>
         ) : null}
-      </a>
+      </Link>
 
       {isGamePage ? (
         <>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, Reducer } from 'react';
+import React, { useState, useEffect, useReducer, Reducer, useCallback } from 'react';
 import GoalGameBoard from '../../../../components/GoalGameBoard';
 import GoalGameAdvances from '../../../../components/GoalGameAdvances';
 import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
@@ -142,7 +142,7 @@ const GoalGame: React.FC<IProps> = ({
     window.addEventListener('resize', checkDeviceSize);
 
     return () => window.removeEventListener('resize', checkDeviceSize);
-  }, []);
+  }, [isAuthorized]);
 
   useEffect(() => {
     if (isAuthorized && profitCut && maxProfit && !isAlerted) {
@@ -151,7 +151,7 @@ const GoalGame: React.FC<IProps> = ({
       (async () =>
         await navigate(`${pathname}?dialog=profit-cut`, { state: { maxProfit, profitCut } }))();
     }
-  }, [profitCut, maxProfit]);
+  }, [profitCut, maxProfit, isAuthorized, isAlerted, session.profitCut, navigate, pathname]);
 
   useEffect(() => {
     if (!isAuthorized) {
@@ -184,7 +184,7 @@ const GoalGame: React.FC<IProps> = ({
           state: { errorMessage: errorBet[0].message },
         });
       })();
-  }, [errorBet]);
+  }, [errorBet, isGameStartedBtnClicked, navigate, pathname]);
 
   useEffect(() => {
     if (session?.betId && state.gameState === GameState.IDLE) {
@@ -217,7 +217,7 @@ const GoalGame: React.FC<IProps> = ({
         }, appConfig.goalsGameTimeout / 3)
       );
     }
-  }, [session]);
+  }, [isCashOut, lastAdvanceStatus, lastSpot, lastStatusTimer, session, state.gameState]);
 
   useEffect(() => {
     if (lastSpot !== null) return;
@@ -244,7 +244,15 @@ const GoalGame: React.FC<IProps> = ({
         })();
       }
     }
-  }, [lastSpot, lastAdvanceStatus, lastStatusTimer]);
+  }, [
+    lastSpot,
+    lastAdvanceStatus,
+    lastStatusTimer,
+    isSound,
+    playGoalSelect,
+    playGoalWin,
+    playLoss,
+  ]);
 
   if (loadingSetup) {
     return <Loading className={styles.loading} />;
@@ -509,7 +517,7 @@ const GoalGame: React.FC<IProps> = ({
               className={clsx(
                 'col-12 col-xl-5',
                 styles.amount__container,
-                state.gameState == GameState.IDLE ? null : styles.amount__disabled,
+                state.gameState === GameState.IDLE ? null : styles.amount__disabled,
                 styles.bet_amount_container
               )}
             >
@@ -611,16 +619,19 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
     setProfitCut(null);
   };
 
-  const initSession = (goalsGameSetupObj: any) => {
-    if (goalsGameSetupObj?.__typename !== 'GoalsGameSetup') return;
+  const initSession = useCallback(
+    (goalsGameSetupObj: any) => {
+      if (goalsGameSetupObj?.__typename !== 'GoalsGameSetup') return;
 
-    setSession(goalsGameSetupObj.session);
-    setSelections(goalsGameSetupObj.session?.selections || []);
-    setProfitCut(goalsGameSetupObj.session?.profitCut || null);
+      setSession(goalsGameSetupObj.session);
+      setSelections(goalsGameSetupObj.session?.selections || []);
+      setProfitCut(goalsGameSetupObj.session?.profitCut || null);
 
-    if (goalsGameSetupObj.balance)
-      dispatch(updateUserAction({ balance: goalsGameSetupObj.balance }));
-  };
+      if (goalsGameSetupObj.balance)
+        dispatch(updateUserAction({ balance: goalsGameSetupObj.balance }));
+    },
+    [dispatch]
+  );
 
   const handleStartGame = async (betAmount: number, probability: string) => {
     const { data, errors } = await makeBetGoals({
@@ -761,7 +772,7 @@ export const GoalGameWithData: React.FC<RouteComponentProps> = () => {
 
       setMaxProfit(data.setupGoals.maxProfit);
     }
-  }, [data]);
+  }, [data, initSession]);
 
   return (
     <GoalGame
