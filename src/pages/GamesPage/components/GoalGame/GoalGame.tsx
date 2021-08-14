@@ -199,7 +199,8 @@ const GoalGame: React.FC<IProps> = ({
       else if (session?.lucky === false) setLastAdvanceStatus('Lost');
       else {
         const isWon =
-          session.selections.filter(
+          session.selections &&
+          session?.selections?.filter(
             (selection: any) =>
               selection.step === session.currentStep - 1 &&
               selection.luckySpots.includes(selection.selected)
