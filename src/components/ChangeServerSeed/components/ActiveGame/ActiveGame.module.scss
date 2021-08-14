@@ -9,6 +9,10 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .icon {

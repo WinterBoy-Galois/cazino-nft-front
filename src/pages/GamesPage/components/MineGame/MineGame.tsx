@@ -116,7 +116,7 @@ const MineGame: React.FC<IProps> = ({
       (async () =>
         await navigate(`${pathname}?dialog=profit-cut`, { state: { maxProfit, profitCut } }))();
     }
-  }, [profitCut, maxProfit, isAuthorized, isAlerted, session.profitCut, navigate, pathname]);
+  }, [profitCut, maxProfit, isAuthorized, isAlerted, session?.profitCut, navigate, pathname]);
   useEffect(() => {
     if (!errorBet) {
       if (isGameStartedBtnClicked) {
@@ -520,7 +520,7 @@ export const MineGameWithData: React.FC<RouteComponentProps> = () => {
     (minesGameSetupObj: any) => {
       if (minesGameSetupObj.__typename !== 'MinesGameSetup') return;
       setSession(minesGameSetupObj.session);
-      setProfitCut(minesGameSetupObj.session?.profitCut || null);
+      setProfitCut(minesGameSetupObj?.session?.profitCut || null);
       setSession(minesGameSetupObj.session || null);
       if (minesGameSetupObj.balance)
         dispatch(updateUserAction({ balance: minesGameSetupObj.balance }));

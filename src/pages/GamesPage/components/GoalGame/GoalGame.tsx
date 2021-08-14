@@ -151,7 +151,7 @@ const GoalGame: React.FC<IProps> = ({
       (async () =>
         await navigate(`${pathname}?dialog=profit-cut`, { state: { maxProfit, profitCut } }))();
     }
-  }, [profitCut, maxProfit, isAuthorized, isAlerted, session.profitCut, navigate, pathname]);
+  }, [profitCut, maxProfit, isAuthorized, isAlerted, session?.profitCut, navigate, pathname]);
 
   useEffect(() => {
     if (!isAuthorized) {
