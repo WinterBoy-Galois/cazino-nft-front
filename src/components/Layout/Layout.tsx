@@ -36,7 +36,7 @@ const Layout: React.FC = ({ children }) => {
     if (isAuthorized && accessToken) {
       fetchBonusClaim();
     }
-  }, [accessToken]);
+  }, [accessToken, fetchBonusClaim, isAuthorized]);
 
   const hideContent = () =>
     breakpoint === 'xs' || breakpoint === 'sm' ? modal.type !== 'NONE' : false;

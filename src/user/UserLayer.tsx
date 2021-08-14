@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getCheckRTFlag, setAccessToken, setCheckRTFlag, useUserState } from './UserProvider';
 import { useLazyQuery } from '@apollo/client';
 import { ME } from '../graphql/queries';
@@ -19,7 +19,7 @@ export const UserLayer: React.FC = ({ children }) => {
 
   const loading = isLoading || getMeLoading;
 
-  const initUser = async () => {
+  const initUser = useCallback(async () => {
     try {
       const { accessToken: newToken } = await getNewToken();
       await setAccessToken(newToken);
@@ -30,7 +30,7 @@ export const UserLayer: React.FC = ({ children }) => {
     } finally {
       await setIsLoading(false);
     }
-  };
+  }, [dispatch, getMe]);
 
   useEffect(() => {
     if (checkRt) {
@@ -38,7 +38,7 @@ export const UserLayer: React.FC = ({ children }) => {
     } else {
       setIsLoading(false);
     }
-  }, []);
+  }, [checkRt, initUser]);
 
   useEffect(() => {
     if (called && !loading && !error && data) {
@@ -48,7 +48,7 @@ export const UserLayer: React.FC = ({ children }) => {
         })
       );
     }
-  }, [called, data, error, loading]);
+  }, [called, data, dispatch, error, loading]);
 
   useEffect(() => {
     if (accessToken) {

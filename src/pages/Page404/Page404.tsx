@@ -12,7 +12,7 @@ const Page404: React.FC<RouteComponentProps & { raw?: boolean }> = ({ raw }) => 
 
   useEffect(() => {
     dispatch({ type: 'CHAT_BOT_SHOW', payload: false });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="">

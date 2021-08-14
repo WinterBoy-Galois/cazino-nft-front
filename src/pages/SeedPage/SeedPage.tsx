@@ -46,7 +46,7 @@ const SeedPage: React.FC<RouteComponentProps> = () => {
     if (accessToken) {
       getMe();
     }
-  }, [accessToken]);
+  }, [accessToken, getMe]);
 
   return (
     <div className="container-md">

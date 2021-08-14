@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './BetControl.module.scss';
 import clsx from 'clsx';
 import { isValid, isNumber } from './lib/util';
@@ -32,7 +32,7 @@ const BetControl: React.FC<IProps> = ({
   onClick,
   onHandleBlur = () => null,
 }) => {
-  const formatValue = (v: number) => v.toFixed(decimalPlaces);
+  const formatValue = useCallback((v: number) => v.toFixed(decimalPlaces), [decimalPlaces]);
   const [value, setValue] = useState(defaultValue);
   const [internalValue, setInternalValue] = useState(formatValue(defaultValue));
   const [editing, setEditing] = useState(false);
@@ -42,7 +42,7 @@ const BetControl: React.FC<IProps> = ({
       setValue(defaultValue);
       setInternalValue(formatValue(defaultValue));
     }
-  }, [defaultValue]);
+  }, [defaultValue, editing, formatValue]);
 
   const handleChange = (newValue: string) => {
     if (!isNumber(newValue)) return;

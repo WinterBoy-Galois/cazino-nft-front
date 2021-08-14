@@ -19,7 +19,8 @@
     "ACCOUNT_AUTH_ERROR": "Your email or password is wrong",
     "SERVER_ERROR": "Unknown server error - administrators are notified",
     "NO_DATA": "There is no data to display.",
-    "UNEXPECTED": "Sorry, there was an unexpected error."
+    "UNEXPECTED": "Sorry, there was an unexpected error.",
+    "INVALID_UUID": "INVALID OR EXPIRED PASSWORD RESET LINK"
   },
   "justMoment": "Just a moment",
   "loading": "loading...",

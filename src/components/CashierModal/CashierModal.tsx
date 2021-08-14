@@ -227,7 +227,7 @@ export const CashierModalWithData: React.FC<IProps> = props => {
     if (accessToken) {
       setupCashier();
     }
-  }, [accessToken]);
+  }, [accessToken, setupCashier]);
 
   useEffect(() => {
     if (!data?.me.depositAddress && !loading && props.show) {

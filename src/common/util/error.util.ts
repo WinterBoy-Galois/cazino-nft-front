@@ -16,6 +16,8 @@ const getMessageFromCode = (t: TFunction, code: string) => {
       return t('errors.ALREADY_ACTIVATED');
     case 'SERVER_ERROR':
       return t('common:errors.SERVER_ERROR');
+    case 'INVALID_UUID':
+      return t('common:errors.INVALID_UUID');
     default:
       return undefined;
   }

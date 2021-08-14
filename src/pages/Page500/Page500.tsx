@@ -12,7 +12,7 @@ const Page500: React.FC<RouteComponentProps> = () => {
 
   useEffect(() => {
     dispatch({ type: 'CHAT_BOT_SHOW', payload: false });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="">
