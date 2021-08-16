@@ -30,13 +30,17 @@ const ChangeServerSeed: React.FC<IProps> = ({
     return (
       <div className={`${styles.spacing2}`}>
         <h1 className={`${styles.title} ${styles.spacing}`}>{t('activeGames')}</h1>
-        <div className="row">
-          {activeGames.map((game, i) => (
-            <div className="col-auto" key={i}>
-              <ActiveGame game={game} />
-            </div>
-          ))}
-        </div>
+        {activeGames.length === 0 ? (
+          <div className={styles.noActiveGames}>{t('noActiveGames')}</div>
+        ) : (
+          <div className="row">
+            {activeGames.map((game, i) => (
+              <div className="col-auto" key={i}>
+                <ActiveGame game={game} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     );
   };

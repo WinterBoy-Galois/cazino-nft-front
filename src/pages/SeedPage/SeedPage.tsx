@@ -6,7 +6,7 @@ import PageHeadline from '../../components/PageHeadline';
 import ChangeServerSeed from '../../components/ChangeServerSeed';
 import { SeedCurrent, SeedPrevious, ServerSeedMe } from '../../models/serverSeedMe';
 import { GameTypes } from '../../models/gameTypes.model';
-import { useLazyQuery, useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ME } from '../../graphql/queries';
 import { CHANGE_SERVER_SEED } from '../../graphql/mutations';
 import { success, error } from '../../components/Toast';
@@ -14,11 +14,17 @@ import { useUserState } from '../../user/UserProvider';
 
 const SeedPage: React.FC<RouteComponentProps> = () => {
   const { t } = useTranslation(['seeds']);
-  const [getMe, { data, called }] = useLazyQuery(ME);
   const [{ accessToken }] = useUserState();
+  const { data, called, refetch } = useQuery(ME, {
+    skip: !accessToken,
+  });
   const [seeds, setSeeds] = useState<ServerSeedMe>();
   const [activeGames, setActiveGames] = useState<GameTypes[]>([]);
   const [changeServerSeed, { loading }] = useMutation(CHANGE_SERVER_SEED);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   useEffect(() => {
     if (called && data) {
@@ -41,12 +47,6 @@ const SeedPage: React.FC<RouteComponentProps> = () => {
       error(t('failedUpdateMessage'));
     }
   };
-
-  useEffect(() => {
-    if (accessToken) {
-      getMe();
-    }
-  }, [accessToken, getMe]);
 
   return (
     <div className="container-md">

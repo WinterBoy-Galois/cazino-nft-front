@@ -3,7 +3,7 @@ import styles from './CashierModal.module.scss';
 import Modal from '../Modal';
 import SlideSelect from '../SlideSelect';
 import { useNavigate, useLocation } from '@reach/router';
-import { useLazyQuery, useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { SETUP_CASHIER } from '../../graphql/queries';
 import Cashier from '../../models/cashier.model';
 import CopyField from '../CopyField';
@@ -220,14 +220,10 @@ export const CashierModalWithData: React.FC<IProps> = props => {
   const [{ user, accessToken }] = useUserState();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [setupCashier, { data, loading, error, refetch }] = useLazyQuery(SETUP_CASHIER);
+  const { data, loading, error, refetch } = useQuery(SETUP_CASHIER, {
+    skip: !accessToken,
+  });
   const handleTransactionsClick = useCallback(() => navigate('/transactions/deposits'), [navigate]);
-
-  useEffect(() => {
-    if (accessToken) {
-      setupCashier();
-    }
-  }, [accessToken, setupCashier]);
 
   useEffect(() => {
     if (!data?.me.depositAddress && !loading && props.show) {
