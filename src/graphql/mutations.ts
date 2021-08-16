@@ -400,15 +400,15 @@ export const CASH_OUT_GOALS = gql`
 export const WITHDRAW = gql`
   mutation withdraw($amount: Float!, $address: String!) {
     withdraw(amount: $amount, address: $address) {
-      ... on GenericBoolean {
-        result
+      __typename
+      ... on WithdrawResult {
+        balance
       }
       ... on GenericErrorArray {
         errors {
           source
           code
           message
-          args
         }
       }
     }

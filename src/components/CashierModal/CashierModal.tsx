@@ -23,6 +23,7 @@ import clsx from 'clsx';
 import validate from 'bitcoin-address-validation';
 import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 import { useUserState } from '../../user/UserProvider';
+import { updateUserAction } from '../../user/user.actions';
 
 interface IProps {
   show: boolean;
@@ -42,17 +43,23 @@ const CashierModal: React.FC<IProps> = ({
   balance,
   loading,
   error,
-  depositAddress: defaultDepositAddress = '',
+  depositAddress = '',
   onTransactionsLinkClick,
 }) => {
   const { t } = useTranslation(['modals']);
   const [modalType, setModalType] = useState('deposit');
   const [amount, setAmount] = useState(0);
-  const [withdraw] = useMutation(WITHDRAW);
+  const [withdraw, { data }] = useMutation(WITHDRAW);
   const [isValidated, setValidated] = useState(false);
-  const [depositAddress, setDepositAddress] = useState(defaultDepositAddress);
   const [withdrawAddress, setWithdrawAddress] = useState('');
   const [isChangedAddress, setChangedAddress] = useState(false);
+  const [, userDispath] = useUserState();
+
+  useEffect(() => {
+    if (data?.withdraw?.balance) {
+      userDispath(updateUserAction({ balance: data?.withdraw?.balance }));
+    }
+  }, [data?.withdraw?.balance, userDispath]);
 
   useEffect(() => {
     if (validate(withdrawAddress)) setValidated(true);
@@ -67,8 +74,6 @@ const CashierModal: React.FC<IProps> = ({
       setChangedAddress(false);
     }
   }, [show]);
-
-  useEffect(() => setDepositAddress(defaultDepositAddress), [defaultDepositAddress]);
 
   return (
     <Modal show={show} onClose={onClose} title={t('cashier.title')}>
@@ -198,7 +203,7 @@ const CashierModal: React.FC<IProps> = ({
                     });
 
                     if (errors) errorToast(t('cashier.withdraw_failed'));
-                    else if (data?.withdraw?.result) success(t('cashier.withdraw_completed'));
+                    else if (data?.withdraw?.balance) success(t('cashier.withdraw_completed'));
                     else errorToast(t('cashier.withdraw_failed'));
                   }}
                 >
@@ -230,6 +235,8 @@ export const CashierModalWithData: React.FC<IProps> = props => {
       refetch?.();
     }
   }, [data, refetch, props.show, loading]);
+
+  console.log(data?.me);
 
   if (props.show && !isAuthorized) {
     navigate(pathname);
