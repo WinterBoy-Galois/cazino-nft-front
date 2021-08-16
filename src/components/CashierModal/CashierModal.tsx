@@ -231,12 +231,17 @@ export const CashierModalWithData: React.FC<IProps> = props => {
   const handleTransactionsClick = useCallback(() => navigate('/transactions/deposits'), [navigate]);
 
   useEffect(() => {
+    if (user?.id) {
+      refetch?.();
+    }
+    // eslint-disable-next-line
+  }, [user?.id]);
+
+  useEffect(() => {
     if (!data?.me.depositAddress && !loading && props.show) {
       refetch?.();
     }
   }, [data, refetch, props.show, loading]);
-
-  console.log(data?.me);
 
   if (props.show && !isAuthorized) {
     navigate(pathname);
