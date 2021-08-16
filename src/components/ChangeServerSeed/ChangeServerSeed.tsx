@@ -83,11 +83,13 @@ const ChangeServerSeed: React.FC<IProps> = ({
           label={t('serverSeed')}
           value={seeds.previous.serverSeed}
           className={`${styles.spacing} ${styles.textColor}`}
+          disabled={!seeds.previous.serverSeed}
         />
         <CopyField
           label={t('serverSeedHash')}
           value={seeds.previous.serverSeedHash}
           className={`${styles.spacing} ${styles.textColor}`}
+          disabled={!seeds.previous.serverSeed}
         />
       </div>
     );
