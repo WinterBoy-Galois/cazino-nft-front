@@ -1,6 +1,5 @@
 import React from 'react';
 import { formatProfit, formatBet } from '../../../../common/util/format.util';
-import { isPositive } from '../../../../common/util/sign.util';
 import Bet from '../../../../models/bet.model';
 import Dice from '../../../icons/games/Dice';
 import Clams from '../../../icons/games/Clams';
@@ -89,11 +88,7 @@ const BetRow: React.FC<IProps> = ({
         </>
       )}
 
-      <td
-        className={`${
-          isPositive(formatProfit(bet.profit)) ? styles['row--green'] : styles['row--red']
-        }`}
-      >
+      <td className={`${bet.lucky ? styles['row--green'] : styles['row--red']}`}>
         <BitcoinValue className="text--bold" value={formatProfit(bet.profit)} />
       </td>
     </tr>

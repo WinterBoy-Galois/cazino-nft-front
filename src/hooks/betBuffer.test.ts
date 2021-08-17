@@ -15,6 +15,7 @@ describe('addToArray', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
     ];
 
@@ -41,6 +42,7 @@ describe('countCurrentUserBets', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
     ];
 
@@ -65,6 +67,7 @@ describe('countCurrentUserBets', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
       {
         id: '1519',
@@ -75,6 +78,7 @@ describe('countCurrentUserBets', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
     ];
 

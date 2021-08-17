@@ -15,6 +15,7 @@ const bet = {
   bet: 0.00009425,
   profit: 0.00002852,
   multiplier: 1.3026315789473684,
+  lucky: true,
 };
 
 storiesOf('Components/BetDetailsModal/ServerSeedPage', module)

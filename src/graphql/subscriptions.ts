@@ -47,6 +47,7 @@ export const BET_ADDED = gql`
       bet
       profit
       multiplier
+      lucky
     }
   }
 `;

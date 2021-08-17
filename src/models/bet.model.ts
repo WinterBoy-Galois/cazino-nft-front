@@ -9,4 +9,5 @@ export default interface Bet {
   bet: number;
   profit: number;
   multiplier: number;
+  lucky: boolean;
 }

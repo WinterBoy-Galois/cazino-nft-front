@@ -20,6 +20,7 @@ storiesOf('Components/BetDetailsModal/BetDetailsPage', module)
         bet: 0.00009425,
         profit: 0.00002852,
         multiplier: 1.3026315789473684,
+        lucky: true,
       }}
       avatarUrl={`${appConfig.apiBasePath}/ava/m1.svg`}
       loading={false}

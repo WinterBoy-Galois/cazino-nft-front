@@ -28,6 +28,7 @@ describe('useBetBuffer hook', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
     ];
 
@@ -53,6 +54,7 @@ describe('useBetBuffer hook', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
       {
         id: '1518',
@@ -63,6 +65,7 @@ describe('useBetBuffer hook', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
       {
         id: '1518',
@@ -73,6 +76,7 @@ describe('useBetBuffer hook', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
     ];
 
@@ -99,6 +103,7 @@ describe('useBetBuffer hook', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
     ];
 
@@ -135,6 +140,7 @@ describe('useBetBuffer hook', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
       {
         id: '1519',
@@ -145,6 +151,7 @@ describe('useBetBuffer hook', () => {
         userid: 121,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
       {
         id: '1520',
@@ -155,6 +162,7 @@ describe('useBetBuffer hook', () => {
         userid: 122,
         username: 'martinezmark',
         multiplier: 0.123123,
+        lucky: true,
       },
     ];
 
@@ -194,6 +202,7 @@ describe('useBetBuffer hook', () => {
           userid: 121,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
         {
           id: '1519',
@@ -204,6 +213,7 @@ describe('useBetBuffer hook', () => {
           userid: 121,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
         {
           id: '1520',
@@ -214,6 +224,7 @@ describe('useBetBuffer hook', () => {
           userid: 122,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
         {
           id: '1521',
@@ -224,6 +235,7 @@ describe('useBetBuffer hook', () => {
           userid: 121,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
         {
           id: '1522',
@@ -234,6 +246,7 @@ describe('useBetBuffer hook', () => {
           userid: 122,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
       ];
 
@@ -296,6 +309,7 @@ describe('useBetBuffer hook', () => {
           userid: 121,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
         {
           id: '1519',
@@ -306,6 +320,7 @@ describe('useBetBuffer hook', () => {
           userid: 121,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
         {
           id: '1520',
@@ -316,6 +331,7 @@ describe('useBetBuffer hook', () => {
           userid: 122,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
         {
           id: '1521',
@@ -326,6 +342,7 @@ describe('useBetBuffer hook', () => {
           userid: 121,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
         {
           id: '1522',
@@ -336,6 +353,7 @@ describe('useBetBuffer hook', () => {
           userid: 122,
           username: 'martinezmark',
           multiplier: 0.123123,
+          lucky: true,
         },
       ];
 
