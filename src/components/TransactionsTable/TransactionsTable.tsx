@@ -41,7 +41,7 @@ function TransactionsTable<T>(props: IProps<T>) {
       pagination
       noHeader
       paginationServer
-      customStyles={styles}
+      customStyles={styles as any}
       striped
       columns={columns}
       paginationComponentOptions={{

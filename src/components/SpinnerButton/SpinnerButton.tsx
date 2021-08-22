@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import React, { cloneElement, CSSProperties } from 'react';
 import styles from './SpinnerButton.module.scss';
 import Button, { ButtonSize } from '../Button';
 import SecondaryButton from '../SecondaryButton';
@@ -14,6 +14,7 @@ interface IProps {
   color?: 'PRIMARY' | 'SECONDARY';
   loading?: boolean;
   loadingText?: string;
+  style?: CSSProperties;
 }
 
 const SpinnerButton: React.FC<IProps> = props => {

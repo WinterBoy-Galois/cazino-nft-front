@@ -24,6 +24,9 @@
   &__container {
     display: flex;
     justify-content: center;
+    @include media-breakpoint-down(sm) {
+      max-width: 100%;
+    }
   }
 }
 
