@@ -9,11 +9,12 @@ export const GameSection = styled.div`
   align-items: center;
   padding: 0 2rem 2rem;
   position: relative;
+  overflow: hidden;
 `;
 
-export const GameSectionInner = styled.div`
+export const GameSectionInner = styled.div<{ fullWidth?: boolean }>`
   width: 100%;
-  max-width: 500px;
+  ${({ fullWidth }) => !fullWidth && `max-width: 500px;`};
   position: relative;
 `;
 
@@ -24,7 +25,7 @@ export const ExtraInner = styled.div`
   width: 100%;
   height: 100%;
   background: #091b32d9;
-  z-index: 10;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +44,8 @@ export const ControlsAdditionalSection = styled.div`
   position: absolute;
   top: 0;
   transform: translateY(-50%);
+  min-height: 43px;
+  min-width: 360px;
 
   & > * {
     margin: 0 12px;

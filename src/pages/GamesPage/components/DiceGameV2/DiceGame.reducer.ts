@@ -1,6 +1,11 @@
 import { Reducer } from 'react';
 import { Action, DiceGameState, DiceGameStatus } from './DiceGame.types';
-import { SET_GAME_STATUS, TOGGLE_DICE_VALUE, UPDATE_DICE_VALUE } from './DiceGame.actions';
+import {
+  RESET_GAME,
+  SET_GAME_STATUS,
+  TOGGLE_DICE_VALUE,
+  UPDATE_DICE_VALUE,
+} from './DiceGame.actions';
 import { calcMultiplier, calcProbability, calcProfit } from '../../../../common/util/betCalc.util';
 
 export const initialState: DiceGameState = {
@@ -34,6 +39,12 @@ const updateTarget = (state: DiceGameState, action: Action): DiceGameState => {
 
 export const diceGameReducer: Reducer<DiceGameState, Action> = (state, action) => {
   switch (action.type) {
+    case RESET_GAME:
+      return {
+        ...state,
+        status: DiceGameStatus.IDLE,
+        result: 0,
+      };
     case SET_GAME_STATUS:
       return {
         ...state,
@@ -42,7 +53,10 @@ export const diceGameReducer: Reducer<DiceGameState, Action> = (state, action) =
     case TOGGLE_DICE_VALUE:
       return {
         ...state,
-        [action.payload]: !state[action.payload as keyof DiceGameState],
+        [action.payload]:
+          action.payload.payload !== undefined
+            ? action.payload.payload
+            : !state[action.payload.key as keyof DiceGameState],
       };
     case UPDATE_DICE_VALUE:
       if (action.payload.key === 'target') {

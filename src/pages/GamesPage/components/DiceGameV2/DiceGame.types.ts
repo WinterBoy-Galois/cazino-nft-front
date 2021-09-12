@@ -4,6 +4,7 @@ export type DiceGameBooleanKeys = 'isOver' | 'isLoading' | 'isInProgress';
 export type DiceGameActionType =
   | 'diceGame/UPDATE_DICE_VALUE'
   | 'diceGame/TOGGLE_DICE_VALUE'
+  | 'diceGame/RESET_GAME'
   | 'diceGame/SET_GAME_STATUS';
 
 interface PieceElementProps {
@@ -63,7 +64,7 @@ export interface PlaceBetVariables {
   over: boolean;
 }
 
-export type Action = { type: DiceGameActionType; payload: any };
+export type Action = { type: DiceGameActionType; payload?: any };
 
 export interface SetupDiceQuery {
   setupDice: {

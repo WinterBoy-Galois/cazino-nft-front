@@ -21,10 +21,12 @@ import { useOptionalSound } from '../../../../hooks/useOptionalSound.hook';
 import { isForbiddenError } from '../../../../common/util/error.util';
 import { error as errorToast } from '../../../../components/Toast';
 import { useTranslation } from 'react-i18next';
-import { setGameStatus, updateDiceValue } from './DiceGame.actions';
+import { setGameStatus, resetGame, updateDiceValue } from './DiceGame.actions';
 import { updateUserAction } from '../../../../user/user.actions';
 import { appConfig } from '../../../../common/config';
 import { useUserState } from '../../../../user/UserProvider';
+
+let isInProgress = false;
 
 export const DiceGameModuleC: React.FC = () => {
   const { t } = useTranslation('games');
@@ -83,14 +85,14 @@ export const DiceGameModuleC: React.FC = () => {
   );
 
   const handleMakeBetSuccess = useCallback(
-    async data => {
-      dispatch(updateDiceValue('result', data?.makeBetDice?.result));
-
+    data => {
+      setTimeout(async () => {
+        await dispatch(setGameStatus(DiceGameStatus.HITTING));
+        await playDiceHit();
+        await dispatch(updateDiceValue('result', data?.makeBetDice?.result));
+      }, appConfig.diceGameTimeout / 2);
       setTimeout(async () => {
         userDispatch(updateUserAction({ balance: data?.makeBetDice?.balance }));
-      }, appConfig.diceGameTimeout);
-
-      setTimeout(async () => {
         if (+data?.makeBetDice?.lucky) {
           await playDiceWin();
           await playToastBalance();
@@ -99,25 +101,27 @@ export const DiceGameModuleC: React.FC = () => {
           await playLoss();
           await dispatch(setGameStatus(DiceGameStatus.LOST));
         }
+        isInProgress = false;
       }, appConfig.diceGameTimeout);
     },
-    [dispatch, playDiceWin, playLoss, playToastBalance, userDispatch]
+    [dispatch, playDiceHit, playDiceWin, playLoss, playToastBalance, userDispatch]
   );
 
   const onPlaceBet = useCallback(
     async (betAmount: number, target: number, over: boolean) => {
-      await setPendingBet(null);
-      const variables: PlaceBetVariables = { betAmount, target, over };
-      await playButtonClick();
-      const { data, errors } = await makeBetDice({
-        variables,
-      });
       try {
+        isInProgress = true;
+        await setPendingBet(null);
+        const variables: PlaceBetVariables = { betAmount, target, over };
+        await playButtonClick();
+        const { data, errors } = await makeBetDice({
+          variables,
+        });
         await handleMakeBetError(errors, data, variables);
-        await playDiceHit();
-        await dispatch(setGameStatus(DiceGameStatus.HITTING));
+        await dispatch(resetGame());
         await handleMakeBetSuccess(data);
       } catch (error) {
+        isInProgress = false;
         // eslint-disable-next-line no-console
         console.error('Something went wrong', error);
       }
@@ -128,7 +132,6 @@ export const DiceGameModuleC: React.FC = () => {
       handleMakeBetSuccess,
       makeBetDice,
       playButtonClick,
-      playDiceHit,
       setPendingBet,
     ]
   );
@@ -142,8 +145,9 @@ export const DiceGameModuleC: React.FC = () => {
 
   const onStartGame = useCallback(async () => {
     if (!isAuthorized) return showLoginModal();
+    if (isInProgress) return;
     return onPlaceBet(state.amount, state.target, state.isOver);
-  }, [isAuthorized, showLoginModal, onPlaceBet, state.amount, state.target, state.isOver]);
+  }, [isAuthorized, showLoginModal, state.amount, state.target, state.isOver, onPlaceBet]);
 
   /*
     Util variables

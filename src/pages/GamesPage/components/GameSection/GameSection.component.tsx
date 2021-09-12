@@ -10,19 +10,23 @@ import {
 import Spinner from '../../../../components/Spinner';
 
 interface Props {
+  additionalData?: React.ReactNode;
   game: React.ReactNode;
   controls: React.ReactNode;
   controlsAdditional?: React.ReactNode;
   isError: boolean;
   isLoading: boolean;
+  fullWidth?: boolean;
 }
 
 export const GameSectionComponent: React.FC<Props> = ({
   isError,
   isLoading,
+  additionalData,
   game,
   controls,
   controlsAdditional,
+  fullWidth,
 }) => {
   const extraInner = useMemo(
     () =>
@@ -38,7 +42,8 @@ export const GameSectionComponent: React.FC<Props> = ({
     <Container>
       <GameSection>
         {extraInner}
-        <GameSectionInner>{game}</GameSectionInner>
+        {additionalData}
+        <GameSectionInner fullWidth={fullWidth}>{game}</GameSectionInner>
       </GameSection>
       <ControlsSection>
         {controlsAdditional && (

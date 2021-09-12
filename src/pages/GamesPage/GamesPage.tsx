@@ -5,11 +5,13 @@ import { ClamGameWithData } from './components/ClamGame/ClamGame';
 import { GoalGameWithData } from './components/GoalGame/GoalGame';
 import { MineGameWithData } from './components/MineGame/MineGame';
 import { DiceGameV2 } from './components/DiceGameV2';
+import { GoalGameV2 } from './components/GoalGameV2';
 const GamesPage: React.FC<RouteComponentProps> = () => {
   return (
     <Router>
       <DiceGameWithData path="dice" />
       <DiceGameV2 path="dice2" />
+      <GoalGameV2 path="goal2" />
       <ClamGameWithData path="clam" />
       <GoalGameWithData path="goal" />
       <MineGameWithData path="mines" />

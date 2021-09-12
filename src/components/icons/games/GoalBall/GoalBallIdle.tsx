@@ -7,9 +7,14 @@ interface IProps {
   className?: string;
 }
 
-const GoalBallIdle: React.FC<IProps> = ({ className }) => {
+const GoalBallIdle: React.FC<IProps> = ({ className, ...props }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165.08 165.64" className={clsx(className)}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 165.08 165.64"
+      className={clsx(className)}
+      {...props}
+    >
       <g id="Layer_2" data-name="Layer 2">
         <g id="balls">
           <g className={styles['cls-1']}>
