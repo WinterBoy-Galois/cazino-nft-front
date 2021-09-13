@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Direction } from './components/GoalKeeper/GoalKeeper';
 
 export const useGenerateBallsArray = (ballAmount: number) =>
@@ -15,3 +15,17 @@ export const useDirectionMap = (ballAmount = 2): { [k in number]: Direction } =>
 
 export const useKeeperStatus = (lastLucky: boolean | null) =>
   useMemo(() => (lastLucky === null ? null : lastLucky ? 'Won' : 'Lost'), [lastLucky]);
+
+let showGameTimeout: NodeJS.Timeout;
+export const useShowGame = (isLoading: boolean) => {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+      showGameTimeout = setTimeout(() => setShow(true), 100);
+    }
+    return () => clearTimeout(showGameTimeout);
+  }, [isLoading]);
+
+  return show;
+};

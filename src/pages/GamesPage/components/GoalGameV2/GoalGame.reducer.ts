@@ -6,21 +6,19 @@ import {
   TOGGLE_GOAL_VALUE,
   UPDATE_GOAL_VALUE,
 } from './GoalGame.actions';
+import { appConfig } from '../../../../common/config';
 
 export const initialState: GoalGameState = {
-  isLoading: false,
   status: GoalGameStatus.IDLE,
   session: null,
   lastSpot: null,
   lastLucky: null,
-  isCashOut: false,
   isAlerted: false,
   isGameStartedBtnClicked: false,
   maxProfit: 0,
   error: null,
-  amount: 0,
+  amount: appConfig.defaultBetAmount,
   probability: GoalsDifficulty.MIDDLE,
-  currentStep: 0,
   animationInProgress: false,
 };
 

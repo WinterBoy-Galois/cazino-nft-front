@@ -15,7 +15,7 @@ const GoalBallWon: React.FC<IProps> = ({ className, ...props }) => {
       className={clsx(className)}
       {...props}
     >
-      <g id="Layer_2" data-name="Layer 2">
+      <g id="ball_2" data-name="Ball">
         <g id="balls">
           <path
             className={styles['cls-1']}

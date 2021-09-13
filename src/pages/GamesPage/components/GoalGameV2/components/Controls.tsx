@@ -8,7 +8,6 @@ import { updateGoalValue } from '../GoalGame.actions';
 import { useGoalGameState } from '../GoalGame.provider';
 import { useTranslation } from 'react-i18next';
 import { withApollo } from '@apollo/client/react/hoc';
-import { SETUP_GOAL } from '../../../../../graphql/queries';
 
 const Amount: PieceElement = ({ state, dispatch, label }) => {
   const [{ user }] = useUserState();
@@ -28,7 +27,7 @@ const StartGame = withApollo<StartGameProps>(props => {
   const { t } = useTranslation('games');
   const [state] = useGoalGameState();
   const { lastLucky, status } = state;
-  const isLoading = useMemo(() => props.isLoading, [props.isLoading]);
+  const { isLoading, disabled } = props;
   const label = useMemo(() => {
     switch (status) {
       case GoalGameStatus.IDLE:
@@ -53,7 +52,12 @@ const StartGame = withApollo<StartGameProps>(props => {
 
   return (
     <ControlBlock>
-      <SpinnerButton style={{ height: '100%' }} onClick={onClick} loading={isLoading}>
+      <SpinnerButton
+        style={{ height: '100%' }}
+        onClick={onClick}
+        loading={isLoading}
+        disabled={disabled}
+      >
         {isLoading && <StartGameSpinner />} {label}
       </SpinnerButton>
     </ControlBlock>
@@ -67,6 +71,7 @@ export const Controls: React.FC<ControlsProps> = ({
   onCashOut,
   onTryAgain,
   isLoading,
+  disabled,
 }) => {
   const { t } = useTranslation('games');
   const [state, dispatch] = useGoalGameState();
@@ -84,8 +89,9 @@ export const Controls: React.FC<ControlsProps> = ({
       onCashOut,
       onTryAgain,
       isLoading,
+      disabled,
     }),
-    [isLoading, onCashOut, onStart, onTryAgain, reusableProps]
+    [disabled, isLoading, onCashOut, onStart, onTryAgain, reusableProps]
   );
 
   return (

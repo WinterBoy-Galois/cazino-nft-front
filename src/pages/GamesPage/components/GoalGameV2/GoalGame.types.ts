@@ -18,6 +18,7 @@ type StartGameOwnProps = {
   onCashOut: () => void;
   onTryAgain: () => void;
   isLoading: boolean;
+  disabled: boolean;
 };
 
 export type StartGameProps = PieceElementProps & StartGameOwnProps;
@@ -76,17 +77,14 @@ export interface GoalGameSession {
 export type GoalGameState = {
   status: GoalGameStatus;
   session: GoalGameSession | null;
-  isLoading: false;
   lastSpot: number | null;
   lastLucky: boolean | null;
-  isCashOut: boolean;
   isAlerted: boolean;
   isGameStartedBtnClicked: boolean;
   maxProfit: number;
   error: string | null;
   amount: number;
   probability: GoalsDifficulty;
-  currentStep: number;
   animationInProgress: boolean;
 };
 

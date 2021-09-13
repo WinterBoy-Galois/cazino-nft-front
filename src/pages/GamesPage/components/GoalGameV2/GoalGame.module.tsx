@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, useLocation, useNavigate } from '@reach/router';
 import { GoalGameProvider, useGoalGameState } from './GoalGame.provider';
 import { GameSectionComponent } from '../GameSection/GameSection.component';
 import { Controls } from './components/Controls';
@@ -28,6 +28,7 @@ import { appConfig } from '../../../../common/config';
 import { useDirectionMap } from './GoalGame.utils';
 import { updateUserAction } from '../../../../user/user.actions';
 import { useUserState } from '../../../../user/UserProvider';
+import { useIsAuthorized } from '../../../../hooks/useIsAuthorized';
 
 let animationTimeout: NodeJS.Timeout;
 
@@ -110,6 +111,10 @@ const cashOutUpdate: MutationUpdaterFunction<any, any, any, any> = (cache: any, 
 };
 
 const GoalGameModuleC: React.FC = () => {
+  const isAuthorized = useIsAuthorized();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const { t } = useTranslation(['games']);
   const [state, dispatch] = useGoalGameState();
   const [, userDispatch] = useUserState();
@@ -143,6 +148,10 @@ const GoalGameModuleC: React.FC = () => {
   );
   const isLoading = useMemo(() => setupLoading || loadingCashOut, [setupLoading, loadingCashOut]);
   const isError = useMemo(() => !!errorSetup, [errorSetup]);
+  const isActionButtonDisabled = useMemo(
+    () => session?.currentStep === 0 && state.status === GoalGameStatus.IN_PROGRESS,
+    [session?.currentStep, state.status]
+  );
 
   // Sounds section
   const playToast = useOptionalSound(toast_v1.default);
@@ -151,6 +160,11 @@ const GoalGameModuleC: React.FC = () => {
   const playGoalSelect = useOptionalSound(goal_select_v1.default);
   const playGoalWin = useOptionalSound(goal_win_v1.default);
   const playLoss = useOptionalSound(goal_lost_v1.default);
+
+  // utils
+  const callSignInModal = useCallback(() => {
+    void navigate(`${pathname}?dialog=sign-in`);
+  }, [navigate, pathname]);
 
   // Game Actions
   const jump = useCallback(() => {
@@ -181,6 +195,9 @@ const GoalGameModuleC: React.FC = () => {
 
   const handlePlaceBet = useCallback(
     async (betId: string, selection: number, currentStep: number) => {
+      if (!isAuthorized) {
+        return callSignInModal();
+      }
       if (advanceGoalsLoading || state.animationInProgress) {
         return null;
       }
@@ -211,18 +228,22 @@ const GoalGameModuleC: React.FC = () => {
 
       switch (data?.advanceGoals?.__typename) {
         case 'GoalsStep':
+          // eslint-disable-next-line
           return console.log('goal step');
         case 'GoalsComplete':
           playToastBalanceUpdated();
           dispatch(updateGoalValue('status', GoalGameStatus.GAME_ENDED));
           await onUpdateBalance(data?.advanceGoals);
+          // eslint-disable-next-line
           return console.log('goal compolete');
       }
     },
     [
       advanceGoals,
       advanceGoalsLoading,
+      callSignInModal,
       dispatch,
+      isAuthorized,
       jump,
       onUpdateBalance,
       playGoalSelect,
@@ -257,6 +278,9 @@ const GoalGameModuleC: React.FC = () => {
 
   const startGame = useCallback(
     async (betAmount: number, difficulty: GoalsDifficulty) => {
+      if (!isAuthorized) {
+        return callSignInModal();
+      }
       const { data, errors } = await makeBetGoals({
         variables: { betAmount, difficulty },
       });
@@ -270,7 +294,7 @@ const GoalGameModuleC: React.FC = () => {
 
       initGame(data.makeBetGoals);
     },
-    [dispatch, initGame, makeBetGoals, playToast, t]
+    [callSignInModal, dispatch, initGame, isAuthorized, makeBetGoals, playToast, t]
   );
 
   // Game Button Events
@@ -279,6 +303,12 @@ const GoalGameModuleC: React.FC = () => {
   }, [startGame, state.amount, state.probability]);
 
   const onCashOut = useCallback(async () => {
+    if (!isAuthorized) {
+      return callSignInModal();
+    }
+    if (!session?.currentStep) {
+      return;
+    }
     const { data, errors } = await cashoutGoals({ variables: { betId: session?.betId } });
     dispatch(resetGame());
     if (errors || data.cashoutGoals?.errors) {
@@ -287,7 +317,17 @@ const GoalGameModuleC: React.FC = () => {
       return errorToast(t('your_bet_could_not_be_placed'));
     }
     await onUpdateBalance(data?.cashoutGoals);
-  }, [cashoutGoals, dispatch, onUpdateBalance, playToast, session?.betId, t]);
+  }, [
+    callSignInModal,
+    cashoutGoals,
+    dispatch,
+    isAuthorized,
+    onUpdateBalance,
+    playToast,
+    session?.betId,
+    session?.currentStep,
+    t,
+  ]);
 
   const onTryAgain = useCallback(() => {
     dispatch(resetGame());
@@ -316,6 +356,7 @@ const GoalGameModuleC: React.FC = () => {
         direction={direction}
         animationInProgress={state.animationInProgress}
         lastLucky={state.lastLucky}
+        isLoading={setupLoading}
       />
     ),
     [
@@ -323,6 +364,7 @@ const GoalGameModuleC: React.FC = () => {
       direction,
       handlePlaceBet,
       session,
+      setupLoading,
       state.animationInProgress,
       state.lastLucky,
       state.status,
@@ -331,13 +373,14 @@ const GoalGameModuleC: React.FC = () => {
   const controls = useMemo(
     () => (
       <Controls
+        disabled={isActionButtonDisabled}
         onCashOut={onCashOut}
         onTryAgain={onTryAgain}
         isLoading={isLoading}
         onStart={onStart}
       />
     ),
-    [isLoading, onCashOut, onStart, onTryAgain]
+    [isActionButtonDisabled, isLoading, onCashOut, onStart, onTryAgain]
   );
   const controlsAdditional = useMemo(
     () => (

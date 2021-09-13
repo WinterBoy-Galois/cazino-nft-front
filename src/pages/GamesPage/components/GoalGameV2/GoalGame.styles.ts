@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import { mediaMaxWidth, mediaMinWidth } from '../../../../design-system/utils/mediaMaxWidth';
-import GoalBackground from '../../../../components/icons/games/GoalBackground';
+import { mediaMaxWidth } from '../../../../design-system/utils/mediaMaxWidth';
 import GoalMainBall from '../../../../components/icons/games/GoalMainBall';
 import { GoalBall } from './components/Ball';
+import { GoalBackground } from './components/GoalBackground';
 
 import { Direction, GoalKeeper } from './components/GoalKeeper/GoalKeeper';
 import { Props as KeeperProps } from './components/GoalKeeper/GoalKeeper';
@@ -56,6 +56,122 @@ export const StyledGoalBackground = styled(GoalBackground)`
   top: 0;
   width: 100%;
   height: 100%;
+
+  .cls-1,
+  .cls-2,
+  .cls-3,
+  .cls-4,
+  .cls-5,
+  .cls-6,
+  .cls-7,
+  .cls-8,
+  .cls-9,
+  .cls-10,
+  .cls-11,
+  .cls-12,
+  .cls-14,
+  .cls-15 {
+    z-index: 5;
+  }
+
+  .cls-1,
+  .cls-11,
+  .cls-12,
+  .cls-14,
+  .cls-15 {
+    fill: none;
+  }
+
+  .cls-2,
+  .cls-4,
+  .cls-6,
+  .cls-8 {
+    fill: #92ba24;
+  }
+
+  .cls-2,
+  .cls-3 {
+    opacity: 0.1;
+  }
+
+  .cls-3,
+  .cls-5,
+  .cls-7,
+  .cls-9 {
+    fill: #7ea004;
+  }
+
+  .cls-18,
+  .cls-4,
+  .cls-5 {
+    opacity: 0.35;
+  }
+
+  .cls-19,
+  .cls-6,
+  .cls-7 {
+    opacity: 0.7;
+  }
+
+  .cls-10 {
+    opacity: 0.3;
+  }
+
+  .cls-11,
+  .cls-12,
+  .cls-14,
+  .cls-15 {
+    stroke: #fff;
+    stroke-miterlimit: 10;
+  }
+
+  .cls-11 {
+    stroke-width: 2px;
+  }
+
+  .cls-12 {
+    stroke-width: 1.66px;
+  }
+
+  .cls-13 {
+    opacity: 0.5;
+  }
+
+  .cls-14 {
+    stroke-width: 0.99px;
+  }
+
+  .cls-15 {
+    stroke-width: 0.95px;
+  }
+
+  .cls-16 {
+    fill: #f39200;
+  }
+
+  .cls-17,
+  .cls-18,
+  .cls-19 {
+    fill: #fff;
+  }
+
+  .cls-20 {
+    fill: #c6c6c6;
+  }
+
+  .cls-21 {
+    fill: #b2b2b2;
+  }
+  .foreign {
+    width: 870px;
+    height: 624px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+  }
+  .goalSection {
+    position: relative;
+  }
 `;
 
 export const StyledGoalKeeper = styled(GoalKeeper)<KeeperProps>`
@@ -64,33 +180,18 @@ export const StyledGoalKeeper = styled(GoalKeeper)<KeeperProps>`
 `;
 
 export const StyledGoalMainBall = styled(GoalMainBall)`
-  display: none;
+  width: 20%;
+  bottom: 0;
+  left: 40%;
   position: absolute;
-  width: 10%;
-  left: 45%;
-  bottom: -0.5rem;
-
-  ${mediaMinWidth(
-    'lg',
-    css`
-      width: 18%;
-      left: 41%;
-    `
-  )};
-  ${mediaMaxWidth(
-    'xl',
-    css`
-      display: block;
-    `
-  )};
 `;
 
 export const GateSection = styled.div`
-  width: 30%;
+  width: 100%;
   height: 56%;
   position: absolute;
   z-index: 10;
-  top: 10%;
+  top: 20%;
 `;
 
 const justifyContent = {
@@ -116,19 +217,22 @@ export const GateInnerSection = styled.div<{ direction: Direction }>`
 
 export const Ball = styled(GoalBall)`
   cursor: pointer;
+  height: 100%;
 `;
 
 export const OuterGateSection = styled.div`
   position: absolute;
-  height: 72px;
-  width: 35%;
-  top: 5%;
+  height: 20%;
+  width: 95%;
+  top: 3%;
+  left: 2.5%;
 `;
 
 export const OuterGateSectionContent = styled.div`
   display: flex;
   height: 100%;
   justify-content: space-between;
+  position: relative;
 `;
 
 export const ProbabilityBlock = styled.div`
@@ -251,4 +355,15 @@ export const EventDetails = styled.div`
   display: flex;
   justify-content: space-between;
   width: 75%;
+`;
+
+export const GoalBackgroundContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+
+  svg {
+    z-index: 11;
+  }
 `;
