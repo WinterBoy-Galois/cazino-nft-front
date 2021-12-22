@@ -7,6 +7,7 @@ import {
   InMemoryCache,
   Operation,
   split,
+  to
 } from '@apollo/client';
 import possibleTypes from './possibleTypes.json';
 import { WebSocketLink } from '@apollo/client/link/ws';
